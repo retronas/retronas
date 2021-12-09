@@ -1,0 +1,75 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "MiSTer CIFS"
+    - my_file: "install_mister_cifs"
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Build OpenPS2Loader layout"
+    file:
+      path: "{{ retronas_path }}/mister/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+    with_items:
+      - "AcornAtom"
+      - "Amiga"
+      - "Amstrad"
+      - "Astrocade"
+      - "Atari2600"
+      - "Atari5200"
+      - "Atari7800"
+      - "AtariLynx"
+      - "AtariST"
+      - "AY-3-8500"
+      - "C64"
+      - "CoCo2"
+      - "GameBoy"
+      - "GBA"
+      - "Genesis"
+      - "Laser"
+      - "MegaCD"
+      - "NeoGeo"
+      - "NES"
+      - "Oric"
+      - "SMS"
+      - "SNES"
+      - "Spectrum"
+      - "TGFX16"
+      - "TGFX16-CD"
+      - "TRS-80"
+      - "WonderSwan"
+      - "x68000"
+      - "ZXNext"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure includes file"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: mister
+      option: "include"
+      value: "/etc/samba/retronas_mister.conf"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: "templates/{{ my_file }}/retronas_mister.conf.j2"
+      dest: /etc/samba/retronas_mister.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+      - smbd
+      - nmbd

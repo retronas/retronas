@@ -21,6 +21,7 @@ dialog \
   "1" "Exit RetroNAS" \
   "2" "Global configuration" \
   "3" "Install things" \
+  "4" "Check services" \
   2>${TDIR}/rn_main
 }
 
@@ -34,6 +35,9 @@ do
       ;;
     3)
       bash install.sh
+      ;;
+    4)
+      bash services.sh
       ;;
     *)
       clear
