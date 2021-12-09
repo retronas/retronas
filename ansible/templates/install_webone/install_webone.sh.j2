@@ -1,0 +1,35 @@
+#!/bin/bash
+
+export PATH={{ retronas_root }}/bin/dotnetcore3:{{ retronas_root }}/bin/dotnetcore3/tools:${PATH}
+export DOTNET_ROOT={{ retronas_root }}/bin/dotnetcore3
+export DOTNET_INSTALL_DIR={{ retronas_root }}/bin/dotnetcore3
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+# Clone the WebOne repo
+git clone https://github.com/atauenis/webone.git
+
+cd webone
+
+# Fix a case-sensitive file issue
+sed -i 's/webone.csproj/WebOne.csproj/g' WebOne.sln
+
+# Install the dotnet-tarball tool
+dotnet tool install --global dotnet-tarball
+
+# Follow build guide from WebOne README.md
+dotnet restore
+dotnet publish -c Release
+dotnet build -c Release
+
+# Move the binaries into the bindir
+mkdir -p "${BINDIR}/webone"
+mv -vf ${SRCDIR}/webone/bin/Release/netcoreapp3.1/* "${BINDIR}/webone/"
+
+# Cleanup
+rm -rf "${SRCDIR}"

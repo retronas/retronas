@@ -1,0 +1,20 @@
+﻿[Unit]
+Description=WebOne HTTP Proxy Server
+Documentation=https://github.com/atauenis/webone/wiki/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+#DynamicUser=yes
+Environment="HOME=/tmp/"
+Environment="DOTNET_ROOT={{ retronas_root }}/bin/dotnetcore3"
+Environment="DOTNET_INSTALL_DIR={{ retronas_root }}/bin/dotnetcore3"
+Environment="PATH={{ retronas_root }}/bin/dotnetcore3:{{ retronas_root }}/bin/dotnetcore3/tools:$PATH"
+ExecStart={{ retronas_root }}/bin/webone/webone --daemon
+ReadWriteDirectories=-/var/log/
+TimeoutStopSec=10
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

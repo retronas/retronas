@@ -1,0 +1,89 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "lighttpd"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install from repos"
+    apt:
+       name: lighttpd
+       state: latest
+
+  - name: "{{ my_name }} - configure server.document-root"
+    ini_file:
+      path: /etc/lighttpd/lighttpd.conf
+      section: null
+      option: server.document-root
+      state: absent
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure server.username"
+    ini_file:
+      path: /etc/lighttpd/lighttpd.conf
+      section: null
+      option: server.username
+      state: absent
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure server.groupname"
+    ini_file:
+      path: /etc/lighttpd/lighttpd.conf
+      section: null
+      option: server.groupname
+      state: absent
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: templates/install_lighttpd/99-retronas.conf.j2
+      dest: /etc/lighttpd/conf-available/99-retronas.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable retro shares"
+    file:
+      src: /etc/lighttpd/conf-available/99-retronas.conf
+      dest: /etc/lighttpd/conf-enabled/99-retronas.conf
+      owner: root
+      group: root
+      state: link
+
+  - name: "{{ my_name }} - set logfile permissions"
+    file:
+      path: /var/log/lighttpd
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      recurse: yes
+
+  - name: "{{ my_name }} - configure server.errorlog"
+    ini_file:
+      path: /etc/lighttpd/lighttpd.conf
+      section: null
+      option: server.errorlog
+      state: absent
+    notify: "{{ my_name }} - Restart service"
+
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    with_items:
+      - lighttpd
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+      - lighttpd

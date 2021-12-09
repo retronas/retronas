@@ -1,0 +1,49 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Cockpit"
+    - my_file: "install_cockpit"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Configure APT repo"
+    apt_repository:
+      repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
+      state: present
+      filename: debian-backports
+      update_cache: yes
+
+  - name: "{{ my_name }} - Install from repo"
+    apt:
+       name: "{{ item }}"
+       state: latest
+       default_release: "{{ ansible_distribution_release }}-backports"
+    with_items:
+      - cockpit
+      - cockpit-storaged
+      - cockpit-networkmanager
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - cockpit
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - cockpit
+
+    

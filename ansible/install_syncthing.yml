@@ -1,0 +1,68 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Syncthing"
+    - my_file: "install_syncthing"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Package signing key"
+    get_url:
+      url: https://syncthing.net/release-key.gpg
+      dest: /etc/apt/trusted.gpg.d/syncthing-archive-keyring.gpg
+      owner: root
+      group: root
+      mode: "0644"
+
+  - name: "{{ my_name }} - Configure APT repo"
+    apt_repository:
+      repo: deb https://apt.syncthing.net/ syncthing stable
+      state: present
+      filename: syncthing
+      update_cache: yes
+
+  - name: "{{ my_name }} - Install Syncthing from repo"
+    apt:
+       name: syncthing
+       state: latest
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - Web config http://{{ ansible_default_ipv4.address }}:8384"
+    ini_file:
+      path: /usr/lib/systemd/system/syncthing@.service
+      section: Service
+      option: ExecStart
+      value: "/usr/bin/syncthing serve --no-browser --no-restart --logflags=0 --gui-address=0.0.0.0:8384"
+    notify: "{{ my_name }} - Restart service"
+
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - syncthing@{{ retronas_user }}
+
+#  - name: "{{ my_name }} - Web config http://{{ ansible_default_ipv4.address }}:8384"
+#    xml:
+#      path: /home/{{ retronas_user }}/.config/syncthing/config.xml
+#      xpath: /configuration/options/listenAddress
+#      value: 0.0.0.0:8384
+#    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - syncthing@{{ retronas_user }}
+
+    

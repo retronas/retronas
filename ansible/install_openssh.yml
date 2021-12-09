@@ -1,0 +1,32 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "OpenSSH"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install from repos"
+    apt:
+       name:
+         - openssh-client
+         - openssh-server
+         - openssh-sftp-server
+       state: latest
+    notify:
+    - Restart ssh
+
+  - name: "{{ my_name }} - Enable startup services"
+    service:
+      name: ssh
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart openssh-server"
+    service:
+      name: ssh
+      state: restarted

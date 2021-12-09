@@ -1,0 +1,36 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "ProFTPd"
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - install from repos"
+    apt:
+       name: proftpd-core
+       state: latest
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: templates/install_proftpd/retronas.conf.j2
+      dest: /etc/proftpd/conf.d/retronas.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: proftpd
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: proftpd
+      state: restarted

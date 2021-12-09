@@ -1,0 +1,64 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "WebOne proxy"
+    - my_file: "install_webone"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - git
+      - imagemagick-6.q16
+      - imagemagick-6-common
+      - ffmpeg
+
+  - name: "{{ my_name }} - Prepare installer script"
+    template:
+      src: templates/{{ my_file }}/install_webone.sh.j2
+      dest: "{{ retronas_root }}/scripts/install_webone.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Run installer"
+    shell:
+      cmd: "./{{ my_file }}.sh"
+      chdir: "{{ retronas_root }}/scripts"
+      executable: /bin/bash
+      creates: "{{ retronas_root }}/bin/webone/webone"
+
+  - name: "{{ my_name }} - create startup service"
+    template:
+      src: templates/{{ my_file }}/webone.service.j2
+      dest: /usr/lib/systemd/system/webone.service
+      owner: root
+      group: root
+      mode: 0644
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup service"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - webone
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - webone
+

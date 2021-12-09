@@ -1,0 +1,36 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "tftpd-hpa"
+    - my_file: "install_tftpd-hpa"
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - install from repos"
+    apt:
+       name: tftpd-hpa
+       state: latest
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: templates/{{ my_file }}/tftpd-hpa.j2
+      dest: /etc/default/tftpd-hpa
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: tftpd-hpa
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: tftpd-hpa
+      state: restarted

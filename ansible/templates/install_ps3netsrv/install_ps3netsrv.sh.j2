@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+
+#echo "Installing prerequisite packages..."
+#apt install -y curl wget make gcc g++ automake autoconf build-essential unzip libmbedtls-dev libmbedtls12 meson ninja-build
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading ps3netsrv source code..."
+
+REDIRECT=$( curl -k -s 'https://github.com/aldostools/webMAN-MOD/releases/latest' | awk -F '"' '{print $2}' )
+echo $REDIRECT
+SOURCECODE=$( curl -k -s "${REDIRECT}" | grep href.*ps3netsrv.*zip | awk -F '"' '{print $2}' )
+echo $SOURCECODE
+wget --content-disposition "https://github.com/${SOURCECODE}"
+unzip ps3netsrv*.zip
+cd ps3netsrv*/ps3netsrv
+meson buildrelease --buildtype=release
+ninja -C buildrelease
+
+echo "Moving binary to RetroNAS bin dir..."
+mkdir -p "${BINDIR}" 2>/dev/null
+mv -vf buildrelease/ps3netsrv "${BINDIR}"/
+
+echo "Cleaning up..."
+rm -rf "${SRCDIR}"
+
+echo "All done!"

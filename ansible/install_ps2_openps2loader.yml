@@ -1,0 +1,56 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "PS2 OpenPS2Loader"
+    - my_file: "install_ps2_openps2loader"
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Build OpenPS2Loader layout"
+    file:
+      path: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+    with_items:
+      - "APPS"
+      - "ART"
+      - "CD"
+      - "CFG"
+      - "CHT"
+      - "DVD"
+      - "LNG"
+      - "POPS"
+      - "THM"
+      - "VMC"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure includes file"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: ps2
+      option: "include"
+      value: "/etc/samba/retronas_ps2.conf"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: "templates/{{ my_file }}/retronas_ps2.conf.j2"
+      dest: /etc/samba/retronas_ps2.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+      - smbd
+      - nmbd

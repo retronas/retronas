@@ -1,0 +1,44 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "DotNet Core 3.X SDK"
+    - my_file: "install_dotnetcore3"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - wget
+      - curl
+      - aria2
+
+  - name: "{{ my_name }} - create build dirs"
+    file:
+      path: "{{ retronas_root }}/src/{{ my_file }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+  - name: "{{ my_name }} - Download SDK installer"
+    get_url:
+      url: https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
+      dest: "{{ retronas_root }}/src/{{ my_file }}"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Install DotNet SDK"
+    shell:
+      cmd: ./dotnet-install.sh --version 3.1.415
+      chdir: "{{ retronas_root }}/src/{{ my_file }}"
+      executable: /bin/bash
+    environment:
+      DOTNET_ROOT: "{{ retronas_root }}/bin/dotnetcore3"
+      DOTNET_INSTALL_DIR: "{{ retronas_root }}/bin/dotnetcore3"

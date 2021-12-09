@@ -1,0 +1,6 @@
+# /etc/default/tftpd-hpa
+
+TFTP_USERNAME="{{ retronas_user }}"
+TFTP_DIRECTORY="{{ retronas_path }}"
+TFTP_ADDRESS=":69"
+TFTP_OPTIONS="--secure --create --permissive --umask 0000"

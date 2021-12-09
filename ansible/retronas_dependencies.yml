@@ -1,0 +1,17 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "RetroNAS dependencies"
+    - my_file: "retronas_dependencies"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - configure top level directory"
+    file:
+      path: "{{ retronas_path }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory

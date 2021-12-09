@@ -1,0 +1,22 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "RetroNAS filesystems"
+    - my_file: "install_filesystems"
+
+  tasks:
+
+  - name: "{{ my_name }} - install packages"
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - btrfs-progs
+      - ntfs-3g
+      - exfat-utils
+      - exfat-fuse
+      - hfsplus
+      - hfsprogs
+      - xfsprogs
+      - nfs-common
+      - e2fsprogs

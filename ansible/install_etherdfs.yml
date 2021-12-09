@@ -1,0 +1,67 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "EtherDFS"
+    - my_file: "install_etherdfs"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - make
+      - automake
+      - autoconf
+      - gcc
+      - g++
+      - git
+      - build-essential
+
+  - name: "{{ my_name }} - create MS-DOS directory"
+    file:
+      path: "{{ retronas_path }}/dos"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "0775"
+      state: directory
+
+  - name: "{{ my_name }} - Install from source code"
+    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+    args:
+      creates: "{{ retronas_root }}/bin/ethersrv"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - create startup service"
+    template:
+      src: templates/{{ my_file }}/etherdfs.service.j2
+      dest: /usr/lib/systemd/system/etherdfs.service
+      owner: root
+      group: root
+      mode: 0644
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup service"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - etherdfs
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - etherdfs
+
+    

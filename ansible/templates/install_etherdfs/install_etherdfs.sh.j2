@@ -1,0 +1,28 @@
+#!/bin/bash
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading EtherDFS source..."
+git clone 'https://github.com/BrianHoldsworth/etherdfs-server.git'
+
+cd etherdfs-server
+make
+
+echo "Moving binary to bindir..."
+mv -vf ethersrv-linux "${BINDIR}"/
+
+echo "Setting binary sticky bit..."
+chmod -v u+s "${BINDIR}"/ethersrv-linux
+
+echo "Cleaning up..."
+
+rm -rf "${SRCDIR}"
+
+echo 'All done!'
+
