@@ -14,7 +14,7 @@ You will generally need to have some sort of home TCP/IP based network with the 
 
 Future options are planned to integrate dial-up modem, PPP or SLIP connected systems.  This is currently work in progress.
 
-For a complete guide and list of supported systems and protocols, see the [How To](How-To] section.
+For a complete guide and list of supported systems and protocols, see the [How To](#How-To) section.
 
 # WARNING Security
 
@@ -60,7 +60,7 @@ Some of the extra services include:
 * Commandline and FTP clients to push files to FTP-enabled devices
 * Many more to be added!
 
-Please see the [How To](How-To) section for a comprehensive list of all protocols, supported systems and features.
+Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
 
 # WARNING Filenames
 
@@ -77,7 +77,7 @@ RetroNAS is merely a small set of scripts that utilise Ansible to install and co
 
 The true heroes are the people behind each of these open source projects, all of whom have done the hard work, either reverse engineering proprietary code/protocols, or creating new code/protocols and giving them away under permissive licenses.
 
-See the [How To](How-To) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist. 
+See the [How To](#How-To) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist. 
 
 # How To
 
