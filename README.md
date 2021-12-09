@@ -81,5 +81,4 @@ See the [How To](#How-To) section for a list of all the tools included, and ackn
 
 # How To
 
-TBA: Link to wiki
-
+Full howto in the wiki: [https://github.com/danmons/retronas/wiki](https://github.com/danmons/retronas/wiki)

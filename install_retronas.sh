@@ -1,5 +1,15 @@
 #!/bin/bash
 
+MYID=$( whoami )
+
+if [ "${MYID}" != "root" ]
+then
+  echo "This script needs to be run as sudo/root"
+  echo "Please re-run:"
+  echo "sudo $0"
+  exit 1
+fi
+
 echo
 echo "Updating repo cache..."
 apt update
