@@ -19,8 +19,8 @@ echo "Installing prerequisits packages..."
 apt install -y ansible git dialog
 
 echo "Fetching latest RetroNAS scripts..."
-echo "git reset --hard HEAD"
-echo "git pull"
+git reset --hard HEAD
+git pull
 
 echo "Running RetroNAS..."
 cd dialog

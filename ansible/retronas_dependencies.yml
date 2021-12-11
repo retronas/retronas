@@ -9,9 +9,22 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - configure top level directory"
+  - name: "{{ my_name }} - configure program directories"
+    file:
+      path: "{{ retronas_root }}/{{ item }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    with_items:
+      - bin
+      - scripts
+
+
+  - name: "{{ my_name }} - configure top level share directory"
     file:
       path: "{{ retronas_path }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
+      mode: 0775
       state: directory
