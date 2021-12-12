@@ -107,7 +107,7 @@ do
   50)
     # Syncthing file sync tool
     clear
-    CMD="systemctl status syncthing"
+    CMD="systemctl status syncthing@${OLDRNUSER}"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
