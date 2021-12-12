@@ -1,6 +1,6 @@
 # RetroNAS
 
-[About](#About) | [WARNING Security](#WARNING-Security) | [Supported Systems](#Supported-Systems) | [WARNING Filenames](#WARNING-Filenames) | [Authors](#Authors) | [How To](#How-To) 
+[About](#About) | [WARNING Security](#WARNING-Security) | [Supported Systems](#Supported-Systems) | [WARNING Filenames](#WARNING-Filenames) | [Thanks and Credits](#Thanks-and-Credits) | [How To](#How-To) 
 
 # About
 
