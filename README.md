@@ -69,7 +69,7 @@ Due to the retro nature of computing, it's strongly advised to follow some basig
 * Linux is case sensitive, but most old computers and operating systems are not. It's strongly recommended to name all files and folders **lower case** in Linux where possible.
 * Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is stronly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**.
 
-# Authors
+# Thanks and Credits
 
 "If I have seen further it is by standing on the shoulders of Giants" -- Sir Isaac Newton
 
