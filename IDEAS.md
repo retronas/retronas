@@ -42,6 +42,11 @@
   * Mount real floppy disks
   * Copy from RetroNAS to Floppy
 
+## Bulletin Board / BBS tools
+* Native Hosted, DOS VM maybe, expose local file system for file downloads
+* Dialup integration via DreamPi
+* IP based for ppp connections. telnet connections
+
 ## Dialup modem
 * DreamPi - https://github.com/Kazade/dreampi
   * Test with other devices/OSes that can do dialup
