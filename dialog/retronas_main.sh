@@ -10,7 +10,9 @@ dialog \
   --backtitle "RetroNAS" \
   --title "RetroNAS Main Menu" \
   --clear \
-  --menu "Please select an option. \
+  --menu "My IP addresses: ${MY_IPS} \
+  \n
+  \nPlease select an option. \
   \n
   \nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools. \
   \n

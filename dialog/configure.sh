@@ -10,7 +10,9 @@ dialog \
   --backtitle "RetroNAS" \
   --title "RetroNAS Configuration Menu" \
   --clear \
-  --menu "Please select a configuration\
+  --menu "My IP addresses: ${MY_IPS}
+  \n
+  \nPlease select a configuration\
   \n
   \nCurrent RetroNAS user: \"${OLDRNUSER}\" \
   \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\" " ${MG} 4 \

@@ -10,7 +10,9 @@ dialog \
   --backtitle "RetroNAS" \
   --title "RetroNAS Services menu" \
   --clear \
-  --menu "Please select an service to check" ${MG} 10 \
+  --menu "My IP addresses: ${MY_IPS} \
+  \n
+  \nPlease select an service to check" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba" \
   "03" "Netatalk" \

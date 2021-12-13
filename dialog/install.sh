@@ -10,7 +10,9 @@ dialog \
   --backtitle "RetroNAS" \
   --title "RetroNAS Installation menu" \
   --clear \
-  --menu "Please select an option to install" ${MG} 10 \
+  --menu "My IP addresses: ${MY_IPS}
+  \n
+  \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba - LANMan, NetBIOS, NetBEUI, SMB, CIFS file sharing" \
   "03" "Netatalk - AppleTalk, AFP file sharing" \
