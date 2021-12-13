@@ -9,6 +9,7 @@
 * Push tape images over audio to compatible systems
   * Sega SC-3000 "bit" format
   * MSX "cas" format
+  * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
 
 ## FTP client
 * Something web based preferably
