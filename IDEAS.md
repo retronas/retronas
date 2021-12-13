@@ -36,6 +36,8 @@
 * RPi GPIO to RS232/DB9
 * ppp support with dhcp
   * Test with null-modem compatible OSes - DOS, Win3.x, Win9x, Amiga, etc
+  * RetroPi access over serial
+  * Internet access over serial (via WebOne)
 
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
