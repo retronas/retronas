@@ -44,4 +44,4 @@
   * Floppy imager to build iPXE floppy
 
 ## Torrent client
-* deluge-web
+* deluge-web https://deluge-torrent.org/
