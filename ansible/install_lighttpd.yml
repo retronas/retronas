@@ -62,6 +62,14 @@
       state: directory
       recurse: yes
 
+  - name: "{{ my_name }} - set run dir permissions"
+    file:
+      path: /var/run/lighttpd
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      recurse: yes
+
   - name: "{{ my_name }} - configure server.errorlog"
     ini_file:
       path: /etc/lighttpd/lighttpd.conf
