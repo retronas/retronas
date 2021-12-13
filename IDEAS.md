@@ -23,7 +23,7 @@
 * PiForce - https://github.com/travistyoj/piforcetools
   * Supports Sega NAOMI, Chihiro, Triforce arcade hardware
 
-## ISO tools
+## ISO / CHD
 * ISO checksum tool
 * ISO <-> CHD converter
 * ISO CD/DVD burner (via USB CD-R/DVD-R)
