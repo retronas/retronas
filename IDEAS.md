@@ -6,11 +6,12 @@
 
 ## ROM auditing
 * https://github.com/frederic-mahe/Hardware-Target-Game-Database
-* Symlinks/Reflinks (BtrFS) to MiSTer file system
+* Symlinks/Hardlinks for deduplication (filesystem specific)
 
 ## ISO tools
 * ISO checksum tool
-* ISO - CHD converter
+* ISO <-> CHD converter
+* ISO CD/DVD burner (via USB CD-R/DVD-R)
 
 ## File copying
 * Good file copy/management tool
@@ -20,7 +21,7 @@
 ## DOS
 * Build a floppy builder
   * Take ideas from ISOify - https://github.com/danmons/isoify
-  * Build 512*80*20*18 FAT12 floppy image files, lookback mount, copy data
+  * Build 512x20x18x2 (1.44MB) FAT12 floppy image files, lookback mount, copy data
   * Include tools for FlashFloppy export - https://github.com/keirf/FlashFloppy
 * Add USB floppy disk support
   * Mount real floppy disks
@@ -39,9 +40,14 @@
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
 * PXE / iPXE support + menus
-  * OS installers
+  * OS installers (e.g.: FreeDOS via memdisk) 
   * iSCSI support
   * Floppy imager to build iPXE floppy
 
-## Torrent client
+## Torrent server with client install instructions
 * deluge-web https://deluge-torrent.org/
+
+## Advanced file systems
+* MDRAID
+* LVM
+* BtrFS + deduplication / compression / snapshots
