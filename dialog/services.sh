@@ -40,6 +40,11 @@ do
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
+    clear
+    CMD="smbstatus -vv"
+    echo "$CMD"
+    echo ; $CMD ; echo
+    echo "${PAUSEMSG}"
     read -s
     ;;
   03)
