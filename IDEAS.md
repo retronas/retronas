@@ -1,5 +1,15 @@
 # Ideas to implement by somebody brave
 
+## Commodore 64
+* WiFi access point for C64-WiFi
+* Disk emulator - Pi1541 - https://cbm-pi1541.firebaseapp.com/
+* Tape emulator
+
+## Audio player for tape based computers
+* Push tape images over audio to compatible systems
+  * Sega SC-3000 "bit" format
+  * MSX "cas" format
+
 ## FTP client
 * Something web based preferably
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
@@ -7,6 +17,10 @@
 ## ROM auditing
 * https://github.com/frederic-mahe/Hardware-Target-Game-Database
 * Symlinks/Hardlinks for deduplication (filesystem specific)
+
+## Arcade Netboot
+* PiForce - https://github.com/travistyoj/piforcetools
+  * Supports Sega NAOMI, Chihiro, Triforce arcade hardware
 
 ## ISO tools
 * ISO checksum tool
@@ -27,9 +41,11 @@
   * Mount real floppy disks
   * Copy from RetroNAS to Floppy
 
-## Dialup
+## Dialup modem
 * DreamPi - https://github.com/Kazade/dreampi
-  * Test with other devices that expect dialup
+  * Test with other devices/OSes that can do dialup
+  * RetroNAS access over modem
+  * Internet access over modem (optionally via WebOne)
 
 ## Serial port
 * USB to RS232/DB9
@@ -37,7 +53,7 @@
 * ppp support with dhcp
   * Test with null-modem compatible OSes - DOS, Win3.x, Win9x, Amiga, etc
   * RetroPi access over serial
-  * Internet access over serial (via WebOne)
+  * Internet access over serial (optionally via WebOne)
 
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
@@ -53,3 +69,4 @@
 * MDRAID
 * LVM
 * BtrFS + deduplication / compression / snapshots
+
