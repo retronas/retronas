@@ -15,6 +15,10 @@
 * Something web based preferably
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
 
+## GOG sync
+* Sync all GOG games to NAS on cron schedule
+  * https://github.com/eddie3/gogrepo
+
 ## ROM auditing
 * https://github.com/frederic-mahe/Hardware-Target-Game-Database
 * Symlinks/Hardlinks for deduplication (filesystem specific)
