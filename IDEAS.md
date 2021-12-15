@@ -16,7 +16,7 @@
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
 
 ## GOG sync
-* Sync all GOG games to NAS on cron schedule
+* Sync all GOG purchases to NAS on cron schedule
   * https://github.com/eddie3/gogrepo
 
 ## ROM auditing
