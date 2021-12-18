@@ -26,7 +26,8 @@
       - build-essential
       - unzip
       - libmbedtls-dev
-      - libmbedtls12 
+      - libmbedtls12
+      - coreutils
 
   - name: "{{ my_name }} - create ps3/ps3netsrv directory"
     file:
@@ -53,7 +54,7 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install from source code"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh" | tee "{{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} /bin/ps3netsrv"
     notify: "{{ my_name }} - Restart service"

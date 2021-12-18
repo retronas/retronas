@@ -18,6 +18,7 @@
       - imagemagick-6.q16
       - imagemagick-6-common
       - ffmpeg
+      - coreutils
 
   - name: "{{ my_name }} - Prepare installer script"
     template:
@@ -29,7 +30,7 @@
 
   - name: "{{ my_name }} - Run installer"
     shell:
-      cmd: "./{{ my_file }}.sh"
+      cmd: "./{{ my_file }}.sh" | tee "{{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
       creates: "{{ retronas_root }}/bin/webone/webone"
