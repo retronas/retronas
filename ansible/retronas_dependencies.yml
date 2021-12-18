@@ -19,6 +19,7 @@
     with_items:
       - bin
       - scripts
+      - log
 
 
   - name: "{{ my_name }} - configure top level share directory"
