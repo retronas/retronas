@@ -79,7 +79,7 @@ The true heroes are the people behind each of these open source projects, all of
 
 See the [How To](#How-To) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
 
-Thanks to the kind humans on the OverClockers Australia forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
+Thanks to the kind humans on the OCAU (Overclockers Australia) forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
 
 Thanks to Bob from RetroRGB for being excited about every dumb idea I come up with, and constantly reminding me that real people need better UX. 
 
