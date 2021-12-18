@@ -34,23 +34,22 @@ Some of the projects/protocols include are:
 * Samba - LANMan, NetBIOS, NetBEUI, CIFS, SMB
 * Netatalk - AppleTalk, AFP
 * EtherDFS - layer 2 file sharing for MS-DOS
-* NFS
 * FTP
 * TFTP
 * lighttpd HTTP - Web server for all HTTP clients and web browsers
 * ps3netsrv - File streaming for PlayStation 3 + CFW/HEN + webMAN MOD
+* WebOne proxy for Web 1.0 machines in a Web 2.0 world
+* Syncthing secure personal file sharing
 
 Some of the supported systems include:
 * MS-DOS and clones such as PC-DOS and FreeDOS
-* Microsoft Windows 95 and up (legacy SMBv1 support enabled)
+* Microsoft Windows 95 and up
 * Apple Mac OS8, OS9, OS X 10.0 and up
 * Atari ST
 * Amiga Workbench 3.X and up
-* Nintendo 3DS with FBI installer
+* Nintendo 3DS with Homebrew Channel and FBI installer
 * Sony PlayStation 2 with OpenPS2Loader
-* Sony PlayStation 3 with CFW/HEN
-* Microsoft XBox (original) modded with FTP (File push only)
-* Microsoft XBox 360 modded with FTP/SMB (File push only)
+* Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * MiSTer FPGA
 * Many more to be added!
 
