@@ -38,8 +38,6 @@ Some of the projects/protocols include are:
 * TFTP
 * lighttpd HTTP - Web server for all HTTP clients and web browsers
 * ps3netsrv - File streaming for PlayStation 3 + CFW/HEN + webMAN MOD
-* WebOne proxy for Web 1.0 machines in a Web 2.0 world
-* Syncthing secure personal file sharing
 
 Some of the supported systems include:
 * MS-DOS and clones such as PC-DOS and FreeDOS
@@ -56,7 +54,7 @@ Some of the supported systems include:
 Some of the extra services include:
 * Nintendo 3DS with FBI - QR code auto generation for CIA installs over WiFi
 * WebOne HTTP proxy for legacy web browsers without SSL/TLS or Web2.0 support to browse the modern Internet
-* Commandline and FTP clients to push files to FTP-enabled devices
+* Syncthing secure personal file sharing with no cloud services needed
 * Many more to be added!
 
 Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
