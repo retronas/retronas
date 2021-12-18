@@ -81,7 +81,7 @@ See the [How To](#How-To) section for a list of all the tools included, and ackn
 
 Thanks to the kind humans on the OverClockers Australia forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
 
-Thanks to Bob from RetroRGB for being excited about every dumb idea I come up with. 
+Thanks to Bob from RetroRGB for being excited about every dumb idea I come up with, and constantly reminding me that real people need better UX. 
 
 # How To
 
