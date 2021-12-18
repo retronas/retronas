@@ -37,7 +37,7 @@
 
   - name: "{{ my_name }} - Install DotNet SDK"
     shell:
-      cmd: "./dotnet-install.sh --version 3.1.415 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+      cmd: "./dotnet-install.sh --version 3.1.415 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/src/{{ my_file }}"
       executable: /bin/bash
     environment:

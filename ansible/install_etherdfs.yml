@@ -40,7 +40,7 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install from source code"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root }}/bin/ethersrv"
     notify: "{{ my_name }} - Restart service"
