@@ -67,6 +67,7 @@
 
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
+* Option to choose WiFi Bridge mode or secure "RetroLAN" NAT/Firewall mode
 * PXE / iPXE support + menus
   * OS installers (e.g.: FreeDOS via memdisk) 
   * iSCSI support
