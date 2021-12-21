@@ -11,6 +11,9 @@
   * MSX "cas" format
   * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
 
+## AppleTalk
+* Non-TCP/IP Apple Filer Protocol over AppleTalk / EtherTalk / LocalTalk
+
 ## FTP client
 * Something web based preferably
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
