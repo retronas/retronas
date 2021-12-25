@@ -21,6 +21,7 @@ dialog \
   "06" "ProFTPd - FTP, File Transfer Protocol file sharing" \
   "07" "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing" \
   "08" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
+  "09" "Telnet - unencrypted remote access shell" \
   "30" "Nintendo 3DS QR code generator for FBI Homebrew" \
   "31" "Sony PS2 OpenPS2Loader SMB config" \
   "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
@@ -103,6 +104,14 @@ do
     clear
     rn_install_deps
     YAML=install_openssh.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  09)
+    # Telnet
+    clear
+    rn_install_deps
+    YAML=install_telnet.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
