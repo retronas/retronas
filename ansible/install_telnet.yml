@@ -19,7 +19,7 @@
 
   - name: "{{ my_name }} - Enable startup services"
     service:
-      name: telnet
+      name: inetd
       state: started
       enabled: yes
 
@@ -27,5 +27,5 @@
 
   - name: "{{ my_name }} - Restart services"
     service:
-      name: telnet
+      name: inetd
       state: restarted
