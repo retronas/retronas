@@ -1,0 +1,31 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Telnet"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install from repos"
+    apt:
+       name:
+         - telnet
+         - telnetd
+       state: latest
+    notify:
+    - "{{ my_name }} - Restart services"
+
+  - name: "{{ my_name }} - Enable startup services"
+    service:
+      name: telnet
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart services"
+    service:
+      name: telnet
+      state: restarted
