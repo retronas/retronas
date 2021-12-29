@@ -2,3 +2,4 @@ bin
 scripts
 src
 log
+ansible/retronas_vars.yml

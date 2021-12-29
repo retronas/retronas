@@ -12,6 +12,16 @@ fi
 
 cd /opt/retronas
 
+CF="ansible/retronas_vars.yml"
+
+if [ -f "${CF}" ]
+then
+  echo "Config file exists, not creating it"
+else
+  echo "Config file missing, creating it"
+  cp "${CF}.default" "${CF}"
+fi
+
 echo "Syncing repos..."
 apt update
 
