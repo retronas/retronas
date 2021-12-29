@@ -6,7 +6,7 @@ apt update
 
 echo
 echo "Installing necessary tools..."
-apt install -y git
+apt install -y ansible git dialog
 
 echo
 echo "Downloading RetroNAS..."
