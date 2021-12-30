@@ -10,8 +10,11 @@
 
   - name: "{{ my_name }} - install from repos"
     apt:
-       name: samba
+       name: "{{ item }}"
        state: latest
+    with_items:
+      - avahi-daemon
+      - samba
 
   - name: "{{ my_name }} - configure retro protocols"
     ini_file: 
@@ -92,6 +95,7 @@
       state: started
       enabled: yes
     with_items:
+      - avahi-daemon
       - smbd
       - nmbd
 
@@ -102,5 +106,6 @@
       name: "{{ item }}"
       state: restarted
     with_items:
+      - avahi-daemon
       - smbd
       - nmbd

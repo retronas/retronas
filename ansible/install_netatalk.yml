@@ -10,8 +10,11 @@
 
   - name: "{{ my_name }}  - install from repos"
     apt:
-       name: netatalk
+       name: "{{ item }}"
        state: latest
+    with_items:
+       - avahi-daemon
+       - netatalk
 
   - name: "{{ my_name }}  - configure retro protocols"
     ini_file: 
@@ -64,13 +67,19 @@
 
   - name: "{{ my_name }} - enable startup services"
     service:
-      name: netatalk
+      name: "{{ item }}
       state: started
       enabled: yes
+    with_items:
+      - avahi-daemon
+      - netatalk
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
     service:
-      name: netatalk
+      name: "{{ item }}"
       state: restarted
+    with_items:
+      - avahi-daemon
+      - netatalk
