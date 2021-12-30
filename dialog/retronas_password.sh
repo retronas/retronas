@@ -28,11 +28,21 @@ case ${CHOICE} in
   0)
     # Yes, change the password
     clear
-    echo ; echo
-    echo "Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
+    echo
+    echo
+    echo "Changing the system password for ${OLDRNUSER} :"
+    echo
+    passwd ${OLDRNUSER}
+    echo
+    if [ -f "/usr/lib/systemd/system/smbd.service" ]
+    then
+    echo "Samba detected. Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
     echo
     smbpasswd -a ${OLDRNUSER}
     echo
+    systemctl restart avahi-daemon smbd nmbd
+    echo
+    fi
     echo "${PAUSEMSG}"
     read -s
     exit 0
