@@ -20,12 +20,47 @@
       option: "min protocol"
       value: "CORE"
 
-  - name: "{{ my_name }} - configure guest account"
+  - name: "{{ my_name }} - lanman auth"
     ini_file:
       path: /etc/samba/smb.conf
       section: global
-      option: "guest account"
-      value: "{{ retronas_user }}"
+      option: "lanman auth"
+      value: "yes"
+
+  - name: "{{ my_name }} - client lanman auth"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "client lanman auth"
+      value: "yes"
+
+  - name: "{{ my_name }} - ntlm auth"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "ntlm auth"
+      value: "yes"
+
+  - name: "{{ my_name }} - client ntlm auth"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "client ntlm auth"
+      value: "yes"
+
+  - name: "{{ my_name }} - ntlmv2 auth"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "ntlmv2 auth"
+      value: "yes"
+
+  - name: "{{ my_name }} - client ntlmv2 auth"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "client ntlmv2 auth"
+      value: "yes"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
