@@ -20,6 +20,13 @@
       option: "min protocol"
       value: "CORE"
 
+  - name: "{{ my_name }} - netbios name"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "netbios name"
+      value: "retronas"
+
   - name: "{{ my_name }} - lanman auth"
     ini_file:
       path: /etc/samba/smb.conf
