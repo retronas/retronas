@@ -32,6 +32,25 @@ echo "Fetching latest RetroNAS scripts..."
 git reset --hard HEAD
 git pull
 
+clear
+echo
+echo "Please choose your terminal encoding:"
+echo
+echo "1) Current - ${TERM} [DEFAULT]"
+echo "2) vt100 (best for telnet and retro computers)"
+echo
+read TCHOICE
+
+case "${TCHOICE}" in
+  2*)
+    echo "Setting TERM to vt100"
+    export TERM=vt100
+    ;;
+  *)
+    echo "Leaving TERM as ${TERM}"
+    ;;
+esac
+
 echo "Running RetroNAS..."
 cd dialog
 bash retronas_main.sh
