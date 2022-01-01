@@ -21,7 +21,7 @@ dialog \
   "06" "ProFTPd" \
   "07" "tftpd-hpa" \
   "08" "OpenSSH" \
-  "09" "Telnet" \n
+  "09" "Telnet" \
   "50" "Syncthing" \
   "51" "Cockpit" \
   "52" "WebOne" \
