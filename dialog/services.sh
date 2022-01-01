@@ -21,6 +21,7 @@ dialog \
   "06" "ProFTPd" \
   "07" "tftpd-hpa" \
   "08" "OpenSSH" \
+  "09" "Telnet" \n
   "50" "Syncthing" \
   "51" "Cockpit" \
   "52" "WebOne" \
@@ -98,6 +99,15 @@ do
     # OpenSSH
     clear
     CMD="systemctl status ssh"
+    echo "$CMD"
+    echo ; $CMD ; echo
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  09)
+    # Telnet
+    clear
+    CMD="systemctl status inetd"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
