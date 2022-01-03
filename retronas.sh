@@ -34,6 +34,7 @@ then
 fi
 
 echo "Fetching latest RetroNAS scripts..."
+git config pull.rebase false
 git reset --hard HEAD
 git pull
 
