@@ -22,11 +22,16 @@ else
   cp "${CF}.default" "${CF}"
 fi
 
-echo "Syncing repos..."
-apt update
+REPODATE=$( find /var/cache/apt -type f -mtime -1 | head -n1 )
 
-echo "Installing prerequisits packages..."
-apt install -y ansible git dialog
+if [ "${REPODATE}" == "" ]
+then
+  echo "APT repositories are old, syncing..."
+  apt update
+
+  echo "Checking prerequisits packages..."
+  apt install -y ansible git dialog
+fi
 
 echo "Fetching latest RetroNAS scripts..."
 git reset --hard HEAD
