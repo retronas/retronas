@@ -13,6 +13,7 @@
 
 ## AppleTalk
 * Non-TCP/IP Apple Filer Protocol over AppleTalk / EtherTalk / LocalTalk
+  * Requires Netatalk 2.X compiled from source 
 
 ## FTP client
 * Something web based preferably
