@@ -48,6 +48,7 @@ Some of the supported systems include:
 * Nintendo 3DS with Homebrew Channel and FBI installer
 * Sony PlayStation 2 with OpenPS2Loader
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
+* Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
 * MiSTer FPGA
 * Many more to be added!
 
