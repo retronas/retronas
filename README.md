@@ -31,8 +31,8 @@ The services RetroNAS installs will attempt to run as unprivileged user accounts
 RetroNAS aims to support as many legacy and retro systems as possible. If a system has some sort of network capabilities and an open source service exists to serve that capability, RetroNAS can attempt to integrate it.
 
 Some of the projects/protocols include are:
-* Samba - LANMan, NetBIOS, NetBEUI, CIFS, SMB
-* Netatalk - AppleTalk, AFP
+* Samba - LANMan (NTLMv1, NTLMv2), NetBIOS, CIFS, SMB
+* Netatalk - AFP / Apple Filing Protocol
 * EtherDFS - layer 2 file sharing for MS-DOS
 * FTP
 * TFTP
