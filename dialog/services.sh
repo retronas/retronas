@@ -15,7 +15,7 @@ dialog \
   \nPlease select an service to check" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba" \
-  "03" "Netatalk" \
+  "03" "Netatalk3" \
   "04" "EtherDFS" \
   "05" "lighttpd" \
   "06" "ProFTPd" \
@@ -50,7 +50,7 @@ do
     read -s
     ;;
   03)
-    # Netatalk
+    # Netatalk3
     clear
     CMD="systemctl status netatalk"
     echo "$CMD"

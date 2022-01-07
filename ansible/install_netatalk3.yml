@@ -1,7 +1,8 @@
 - hosts: localhost
 
   vars:
-    - my_name: "Netatalk"
+    - my_name: "Netatalk3"
+    - my_file: "install_netatalk3"
 
   tasks:
 
@@ -74,7 +75,7 @@
 
   - name: "{{ my_name }} - configure retro shares"
     template:
-      src: templates/install_netatalk/retronas.conf.j2
+      src: "templates/{{ my_file }}/retronas.conf.j2"
       dest: /etc/netatalk/retronas.conf
       owner: root
       group: root

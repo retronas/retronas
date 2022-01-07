@@ -15,7 +15,7 @@ dialog \
   \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba - LANMan, NetBIOS, NetBEUI, SMB, CIFS file sharing" \
-  "03" "Netatalk - AppleTalk, AFP file sharing" \
+  "03" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
   "04" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
   "05" "lighttpd - HTTP/Web server" \
   "06" "ProFTPd - FTP, File Transfer Protocol file sharing" \
@@ -59,10 +59,10 @@ do
     read -s
     ;;
   03)
-    # Netatalk
+    # Netatalk3
     clear
     rn_install_deps
-    YAML=install_netatalk.yml rn_install_execute
+    YAML=install_netatalk3.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
