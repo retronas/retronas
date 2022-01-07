@@ -64,7 +64,7 @@ Please see the [How To](#How-To) section for a comprehensive list of all protoco
 
 Due to the retro nature of computing, it's strongly advised to follow some basig guidelines when using RetroNAS:
 
-* Linux is case sensitive, but most old computers and operating systems are not. It's strongly recommended to name all files and folders **lower case** in Linux where possible. Files like "filename.txt" and "Filename.txt" will appear identical to some legacy operating systems, and confuse them. 
+* Linux filesystems are case sensitive, but most old computers and operating systems are not (some new ones aren't either). It's strongly recommended to name all files and folders **lower case** in Linux where possible. Files like "filename.txt" and "Filename.txt" will appear identical to some legacy operating systems, and may confuse them. 
 * Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is stronly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**. 
 * If wanting to share files with very old operating systems, it's strongly recommended to name them in an "8.3" format (8 charcters or fewer for the filename, 3 characters or fewer for the file extension). 
 * Some operating systems can handle all sorts of interesting special characters and spaces in file names, some cannot.  It's strongly recommended to avoid any characters outside of regular English characters ("a-z"), numbers ("0-9") hyphen ("-") and underscore ("_ ") and stick with character encodings such as ASCII or UTF-8.
@@ -73,9 +73,9 @@ Due to the retro nature of computing, it's strongly advised to follow some basig
 
 "If I have seen further it is by standing on the shoulders of Giants" -- Sir Isaac Newton
 
-RetroNAS is merely a small set of scripts that utilise Ansible to install and configure a wide array of open source tools.
+RetroNAS is merely a small set of scripts that utilise Ansible to install and configure a wide array of open source tools written by others.
 
-The true heroes are the people behind each of these open source projects, all of whom have done the hard work, either reverse engineering proprietary code/protocols, or creating new code/protocols and giving them away under permissive licenses.
+The true heroes are the people behind each of these open source projects, all of whom have done the hard work, either reverse engineering proprietary code/protocols, or creating new code/protocols and giving them away under permissive licenses.  This project would not exist without their work. 
 
 See the [How To](#How-To) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
 
