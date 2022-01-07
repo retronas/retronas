@@ -24,6 +24,22 @@
       value="uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so"
     notify: "{{ my_name }} - Restart service"
 
+  - name: "{{ my_name }}  - configure hostname"
+    ini_file: 
+      dest=/etc/netatalk/afp.conf
+      section=Global
+      option="hostname"
+      value="retronas"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }}  - configure mimic"
+    ini_file: 
+      dest=/etc/netatalk/afp.conf
+      section=Global
+      option="mimic model"
+      value="PowerMac"
+    notify: "{{ my_name }} - Restart service"
+
   - name: "{{ my_name }}  - configure log level"
     ini_file:
       dest=/etc/netatalk/afp.conf
