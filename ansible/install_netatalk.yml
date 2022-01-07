@@ -32,12 +32,12 @@
       value="retronas"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }}  - configure mimic"
+  - name: "{{ my_name }}  - configure Bonjour"
     ini_file: 
       dest=/etc/netatalk/afp.conf
       section=Global
-      option="mimic model"
-      value="PowerMac"
+      option="zeroconf"
+      value="yes"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }}  - configure log level"
