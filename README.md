@@ -22,9 +22,9 @@ Due to the nature of retro computing, many of the tools and protocols used in th
 
 Most of these offer little to no encryption of either data or passwords, some offer access to your system without any authentication at all, and some of the protocols have known exploits that cannot be fixed due to their legacy design.
 
-Please consider using this software only on a private network, and at the very leased behind a firewall that denies inbound traffic from the Internet.
+Please consider using this software only on a private network, and at the very least behind a firewall that denies inbound traffic from the Internet.
 
-The services RetroNAS installs will attempt to run as unprivileged user accounts where possible, but the RetroNAS installer scripts themselves all run as root/sudo. These have the power to dramatically change and break working systems, so please ensure you either review the code first, or run this only on a test system you don't care about.
+The services RetroNAS installs will attempt to run as unprivileged user accounts where possible, but the RetroNAS installer scripts themselves all run as root/sudo (the "Adminstrator" account in Linux). These have the power to dramatically change and break working systems, so please ensure you either review the code first, or run this only on a system dedicated to the purpose.
 
 # Supported systems
 
