@@ -1,0 +1,182 @@
+# Netatalk 2.x afp volume cofiguration
+
+#
+# volume format:
+# :DEFAULT: [all of the default options except volume name]
+# path [name] [casefold:x] [options:z,l,j] \
+#   [allow:a,@b,c,d] [deny:a,@b,c,d] [dbpath:path] [password:p] \
+#   [rwlist:a,@b,c,d] [rolist:a,@b,c,d] [limitsize:value in bytes] \
+#   [preexec:cmd] [root_preexec:cmd] [postexec:cmd]  [root_postexec:cmd] \
+#   [allowed_hosts:IPv4 address[/IPv4 netmask bits]] \
+#   [denied_hosts:IPv4 address[/IPv4 netmask bits]] \
+#   ... more, see below ...
+#   
+# name:      volume name. it can't include the ':' character
+#
+
+#
+# variable substitutions:
+# you can use variables for both <path> and <name> now. here are the
+# rules:
+#     1) if you specify an unknown variable, it will not get converted. 
+#     2) if you specify a known variable, but that variable doesn't have
+#        a value, it will get ignored.
+#
+# the variables:
+# $b   -> basename of path
+# $c   -> client's ip or appletalk address
+# $d   -> volume pathname on server    
+# $f   -> full name (whatever's in the gecos field)
+# $g   -> group
+# $h   -> hostname 
+# $i   -> client ip without tcp port or appletalk network   
+# $s   -> server name (can be the hostname)
+# $u   -> username (if guest, it's whatever user guest is running as)
+# $v   -> volume name (either ADEID_NAME or basename of path)
+# $z   -> zone (may not exist)
+# $$   -> $
+#
+
+#
+# casefold options [syntax: casefold:option]:
+# tolower    -> lowercases names in both directions
+# toupper    -> uppercases names in both directions
+# xlatelower -> client sees lowercase, server sees uppercase
+# xlateupper -> client sees uppercase, server sees lowercase
+#
+# allow/deny/rwlist/rolist format [syntax: allow:user1,@group]:
+# user1,@group,user2  -> allows/denies access from listed users/groups
+#                        rwlist/rolist control whether or not the
+#                        volume is ro for those users.
+# allowed_hosts       -> Only listed hosts and networks are allowed,
+#                        all others are rejected. Example:
+#                        allowed_hosts:10.1.0.0/16,10.2.1.100
+# denied_hosts        -> Listed hosts and nets are rejected,
+#                        all others are allowed. Example:
+#                        denied_hosts: 192.168.100/24,10.1.1.1
+# preexec             -> command to be run when the volume is mounted,
+#                        ignore for user defined volumes
+# root_preexec        -> command to be run as root when the volume is mounted,
+#                        ignore for user defined volumes
+# postexec            -> command to be run when the volume is closed,
+#                        ignore for user defined volumes
+# root_postexec       -> command to be run as root when the volume is closed,
+#                        ignore for user defined volumes
+# veto                -> hide files and directories,where the path matches
+#                        one of the "/" delimited vetoed names. Matches are
+#                        partial, e.g. path is /abc/def/file and veto:/abc/
+#                        will hide the file.
+# adouble             -> specify the format of the metadata files.
+#                        default is "v2". netatalk 1.x used "v1".
+#                        "osx" cannot be treated normally any longer.
+# volsizelimit        -> size in MiB.  Useful for TimeMachine: limits the
+#                         reported volume size, thus preventing TM from using
+#                         the whole real disk space for backup.
+#                         Example: "volsizelimit:1000" would limit the
+#                         reported disk space to 1 GB.
+
+
+#
+# codepage options [syntax: options:charsetname]
+# volcharset          -> specifies the charset to be used
+#                        as the volume codepage
+#                        e.g. "UTF8", "UTF8-MAC", "ISO-8859-15"
+# maccharset          -> specifies the charset to be used
+#                        as the legacy client (<=Mac OS 9) codepage
+#                        e.g. "MAC_ROMAN", "MAC_CYRILLIC"
+#
+# perm                -> default permission value
+#                        OR with the client requested perm
+#                        Use with options:upriv
+# dperm               -> default permission value for directories
+#                        OR with the client requested perm
+#                        Use with options:upriv
+# fperm               -> default permission value for files
+#                        OR with the client requested perm
+#                        Use with options:upriv
+# umask               -> set perm mask
+#                        Use with options:upriv
+# dbpath:path         -> store the database stuff in the following path.
+# cnidserver:server[:port]
+#                     -> Query this servername or IP address
+#                        (default:localhost) and port (default: 4700)
+#                        for CNIDs. Only used with CNID backend "dbd".
+#                        This option here overrides any setting from
+#                        afpd.conf:cnidserver.
+# password:password   -> set a volume password (8 characters max)
+# cnidscheme:scheme   -> set the cnid scheme for the volume,
+#                        default is [dbd]
+#                        available schemes: [dbd last tdb]
+# ea                  -> none|auto|sys|ad
+#                        Specify how Extended Attributes are stores. default
+#                        is auto.
+#                        auto: try "sys" (by setting an EA on the shared
+#                              directory itself), fallback to "ad".  Requires
+#                              writable volume for performing the test.
+#                              Note: options:ro overwrites "auto" with "none."
+#                        sys:  Use filesystem EAs
+#                        ad:   Use files in AppleDouble directories
+#                        none: No EA support
+#
+
+#
+# miscellaneous options [syntax: options:option1,option2]:
+# tm                  -> enable TimeMachine support
+# prodos              -> make compatible with appleII clients.
+# crlf                -> enable crlf translation for TEXT files.
+# noadouble           -> don't create .AppleDouble unless a resource
+#                        fork needs to be created.
+# ro                  -> mount the volume as read-only.
+# mswindows           -> enforce filename restrictions imposed by MS
+#                        Windows. this will also invoke a default
+#                        codepage (iso8859-1) if one isn't already 
+#                        specified.
+# nohex               -> don't do :hex translations for anything
+#                        except dot files. specify usedots as well if
+#                        you want that turned off. note: this option
+#                         makes the / character illegal.
+# usedots             -> don't do :hex translation for dot files. note: when 
+#                        this option gets set, certain file names
+#                        become illegal. these are .Parent and
+#                        anything that starts with .Apple.
+# invisibledots       -> don't do :hex translation for dot files. note: when 
+#                        this option gets set, certain file names
+#                        become illegal. these are .Parent and
+#                        anything that starts with .Apple. also, dot
+#                        files created on the unix side are marked invisible. 
+# limitsize           -> limit disk size reporting to 2GB. this is
+#                        here for older macintoshes using newer
+#                        appleshare clients. yucko.
+# nofileid            -> don't advertise createfileid, resolveid, deleteid 
+#                        calls
+# root_preexec_close  -> a non-zero return code from root_preexec close the 
+#                        volume being mounted.
+# preexec_close       -> a non-zero return code from preexec close the 
+#                        volume being mounted.
+# nostat              -> don't stat volume path when enumerating volumes list
+# upriv               -> use unix privilege.  
+# illegalseq          -> encode illegal sequence in filename asis,
+#                        ex "\217-", which is not a valid SHIFT-JIS char,
+#                        is encoded  as U\217 -
+# nocnidcache         -> Don't store and read CNID to/from AppleDouble file.
+#                        This should not be used as it also prevents a CNID
+#                        database rebuild with `dbd`!
+# caseinsensitive     -> The underlying FS is case insensitive (only 
+#                        test with JFS in OS2 mode)
+# dropbox             -> Allows a volume to be declared as being a "dropbox."
+#                        Note that netatalk must be compiled with dropkludge
+#                        support for this to function. Warning: This option
+#                        is deprecated and might not work as expected.
+# dropkludge          -> same as "dropbox"
+# nodev               -> always use 0 for device number, helps when the
+#                        device number is not constant across a reboot,
+#                        cluster, ...
+#
+
+# The line below sets some DEFAULT, starting with Netatalk 2.1.
+:DEFAULT: options:upriv,usedots
+
+# By default all users have access to their home directories.
+{{ retronas_path }}			"retronas"
+
+# End of File

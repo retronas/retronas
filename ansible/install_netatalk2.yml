@@ -1,0 +1,118 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Netatalk2"
+    - my_file: "install_netatalk2"
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - unhold netatalk package"
+    shell: "/usr/bin/apt-mark unhold netatalk"
+
+  - name: "{{ my_name }}  - install dependencies"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+       - libacl1
+       - libattr1
+       - libavahi-client3
+       - libavahi-common3
+       - libc6
+       - libcomerr2
+       - libcrack2
+       - libcups2
+       - libdb5.3,
+       - libgcrypt20
+       - libgssapi-krb5-2
+       - libk5crypto3
+       - libkrb5-3
+       - libldap-2.4-2
+       - libpam0g
+       - libpam-modules
+       - libwrap0
+       - netbase
+       - perl
+       - aria2
+       - avahi-daemon
+
+  - name: "{{ my_name }} - download package for arm64"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb"
+    when: ansible_architecture == "aarch64"
+
+  - name: "{{ my_name }} - download package for armhf"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb"
+    when: ansible_architecture == "armhf"
+
+  - name: "{{ my_name }} - download package for x86_64"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb"
+    when: ansible_architecture == "x86_64"
+
+  - name: "{{ my_name }} - download package for x86"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb"
+    when: ansible_architecture == "i386"
+
+  - name: "{{ my_name }} - install package"
+    shell:
+      chdir: "/tmp"
+      cmd: "dpkg -i netatalk_2.2.5*.deb"
+
+  - name: "{{ my_name }}  - hold netatalk package"
+    shell: "/usr/bin/apt-mark hold netatalk"
+
+  - name: "{{ my_name }} - configure /etc/default/netatalk"
+    template:
+      src: "templates/{{ my_file }}/default.j2"
+      dest: /etc/default/netatalk
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure AppleVolumes.default"
+    template:
+      src: "templates/{{ my_file }}/AppleVolumes.default.j2"
+      dest: /etc/netatalk/AppleVolumes.default.j2
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure afpd.conf"
+    template:
+      src: "templates/{{ my_file }}/afpd.conf.js"
+      dest: /etc/netatalk/afpd.conf.js
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    with_items:
+      - avahi-daemon
+      - netatalk
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+      - avahi-daemon
+      - netatalk
