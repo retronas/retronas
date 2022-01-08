@@ -9,6 +9,12 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+  - name: "{{ my_name }} - Install Debian Signing Keys 1"
+    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138"
+
+  - name: "{{ my_name }} - Install Debian Signing Keys 2"
+    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9"
+
   - name: "{{ my_name }} - Configure APT repo"
     apt_repository:
       repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
