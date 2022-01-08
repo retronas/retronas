@@ -9,6 +9,9 @@
   - name: "{{ my_name }}  - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+  - name: "{{ my_name }}  - unhold netatalk package"
+    shell: "/usr/bin/apt-mark unhold netatalk"
+
   - name: "{{ my_name }}  - install from repos"
     apt:
        name: "{{ item }}"
