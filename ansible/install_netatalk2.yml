@@ -83,7 +83,7 @@
   - name: "{{ my_name }} - configure AppleVolumes.default"
     template:
       src: "templates/{{ my_file }}/AppleVolumes.default.j2"
-      dest: /etc/netatalk/AppleVolumes.default.j2
+      dest: /etc/netatalk/AppleVolumes.default
       owner: root
       group: root
       mode: '0644'
