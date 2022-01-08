@@ -44,7 +44,7 @@ case ${CHOICE} in
     # Delete the old value
     sed -i '/retronas_etherdfs_interface:/d' "${ANCFG}"
     # Add the new value and re-source
-    echo "retronas_etherdfs_interface: \"${NEWRNUSER}\"" >> "${ANCFG}"
+    echo "retronas_etherdfs_interface: \"${NEWETHERDFSIF}\"" >> "${ANCFG}"
     source /opt/retronas/dialog/retronas.cfg
     exit 0
     ;;
