@@ -25,7 +25,7 @@
        - libcomerr2
        - libcrack2
        - libcups2
-       - libdb5.3,
+       - libdb5.3
        - libgcrypt20
        - libgssapi-krb5-2
        - libk5crypto3
