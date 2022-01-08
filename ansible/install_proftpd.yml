@@ -10,13 +10,25 @@
 
   - name: "{{ my_name }}  - install from repos"
     apt:
-       name: proftpd-core
+       name: "{{ item }}"
        state: latest
+    with_items:
+       - avahi-daemon
+       - proftpd-core
 
   - name: "{{ my_name }} - configure retro shares"
     template:
       src: templates/install_proftpd/retronas.conf.j2
       dest: /etc/proftpd/conf.d/retronas.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure avahi"
+    template:
+      src: templates/install_proftpd/ftp.service.j2
+      dest: /etc/avahi/services/ftp.service
       owner: root
       group: root
       mode: '0644'
@@ -32,5 +44,8 @@
 
   - name: "{{ my_name }} - Restart service"
     service:
-      name: proftpd
+      name: "{{ item }}"
       state: restarted
+    with_items:
+      - avahi-daemon
+      - proftpd
