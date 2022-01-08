@@ -6,6 +6,8 @@
 
 RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
 
+You can use it as a central file store or backup server for your old and new computers and consoles, a NAS with far more space than your old systems can natively attach, or as a file drop between various computers that may not be compatible with each other's various network file sharing tools. It also offers some interesting tools like proxies to help very old web browsers read and download information from the modern Internet. 
+
 It uses a number of open source tools to configure services and network protocols compatible with a large variety of retro systems.
 
 In general, most of these services require a client with some sort of TCP/IP stack. There are exceptions however (e.g.: EtherDFS, as a dedicated Layer 2 protocol for MS-DOS machines with a packet driver and matching client software).
