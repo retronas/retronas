@@ -16,11 +16,12 @@ dialog \
   \n
   \nCurrent RetroNAS user: \"${OLDRNUSER}\" \
   \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\" " ${MG} 4 \
-  "1" "Back" \
-  "2" "Configure RetroNAS user" \
-  "3" "Configure RetroNAS password" \
-  "4" "Configure RetroNAS top level directory" \
-  "5" "Fix on-disk permissions" \
+  "01" "Back" \
+  "02" "Configure RetroNAS user" \
+  "03" "Configure RetroNAS password" \
+  "04" "Configure RetroNAS top level directory" \
+  "05" "Fix on-disk permissions" \
+  "06" "Set EtherDFS network interface" \
   2> ${TDIR}/rn_config
 }
 
@@ -29,17 +30,20 @@ do
   rn_config
   CHOICE=$(cat ${TDIR}/rn_config)
   case ${CHOICE} in
-    2)
+    02)
       bash retronas_user.sh
       ;;
-    3)
+    03)
       bash retronas_password.sh
       ;;
-    4)
+    04)
       bash retronas_path.sh
       ;;
-    5)
+    05)
       bash retronas_fixperms.sh
+      ;;
+    06))
+      bash retronas_etherdfs_interface.sh
       ;;
     *)
       clear
