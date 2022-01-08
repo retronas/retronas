@@ -15,13 +15,14 @@ dialog \
   \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba - LANMan, NetBIOS, NetBEUI, SMB, CIFS file sharing" \
-  "03" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
-  "04" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
-  "05" "lighttpd - HTTP/Web server" \
-  "06" "ProFTPd - FTP, File Transfer Protocol file sharing" \
-  "07" "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing" \
-  "08" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
-  "09" "Telnet - unencrypted remote access shell" \
+  "03" "Netatalk2 - AppleTalk and AppleShare file sharing" \
+  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
+  "05" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
+  "06" "lighttpd - HTTP/Web server" \
+  "07" "ProFTPd - FTP, File Transfer Protocol file sharing" \
+  "08" "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing" \
+  "09" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
+  "10" "Telnet - unencrypted remote access shell" \
   "30" "Nintendo 3DS QR code generator for FBI Homebrew" \
   "31" "Sony PS2 OpenPS2Loader SMB config" \
   "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
@@ -59,6 +60,14 @@ do
     read -s
     ;;
   03)
+    # Netatalk2
+    clear
+    rn_install_deps
+    YAML=install_netatalk2.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  04)
     # Netatalk3
     clear
     rn_install_deps
@@ -66,7 +75,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  04)
+  05)
     # EtherDFS
     clear
     rn_install_deps
@@ -74,8 +83,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-
-  05)
+  06)
     # lighttpd
     clear
     rn_install_deps
@@ -83,7 +91,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  06)
+  07)
     # ProFTPd
     clear
     rn_install_deps
@@ -91,7 +99,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  07)
+  08)
     # tftpd-hpa
     clear
     rn_install_deps
@@ -99,7 +107,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  08)
+  09)
     # OpenSSH
     clear
     rn_install_deps
@@ -107,7 +115,7 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  09)
+  10)
     # Telnet
     clear
     rn_install_deps
