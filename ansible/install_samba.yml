@@ -28,7 +28,7 @@
       path: /etc/samba/smb.conf
       section: global
       option: "netbios name"
-      value: "retronas"
+      value: "retrosmb"
 
   - name: "{{ my_name }} - lanman auth"
     ini_file:
