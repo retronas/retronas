@@ -42,7 +42,7 @@ do
     05)
       bash retronas_fixperms.sh
       ;;
-    06))
+    06)
       bash retronas_etherdfs_interface.sh
       ;;
     *)
