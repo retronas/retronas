@@ -29,7 +29,7 @@
        - libgcrypt20
        - libgssapi-krb5-2
        - libk5crypto3
-       - libkrb5.3
+       - libkrb5-3
        - libldap-2.4-2
        - libpam0g
        - libpam-modules
