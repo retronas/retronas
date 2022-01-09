@@ -34,19 +34,20 @@ RetroNAS aims to support as many legacy and retro systems as possible. If a syst
 
 Some of the projects/protocols include are:
 * Samba 4.X - LANMan (NTLMv1, NTLMv2), NetBIOS, CIFS, SMB
-* Netatalk 3.X - AFP / Apple Filing Protocol
+* Netatalk 2.X - AppleShare over AppleTalk
+* Netatalk 3.X - AFP / Apple Filing Protocol over TCP
 * EtherDFS - layer 2 file sharing for MS-DOS
-* FTP
-* TFTP
+* FTP - Common file transfer protocol
+* TFTP - Lightweight trivial file transfer protocol
 * lighttpd HTTP - Web server for all HTTP clients and web browsers
-* ps3netsrv - File streaming for PlayStation 3 + CFW/HEN + webMAN MOD
+* ps3netsrv - File streaming for PlayStation 3 + CFW/HEN + MultiMan or webMAN MOD
 
 Some of the supported systems include:
 * MS-DOS and clones such as PC-DOS and FreeDOS
 * Microsoft Windows 95 and up
 * Apple Mac OS8, OS9, OS X 10.0 and up
-* Atari ST
-* Amiga Workbench 3.X and up
+* Atari ST with FTP client or HTTP browser
+* Amiga Workbench 3.X and up with FTP client or HTTP browser
 * Nintendo 3DS with Homebrew Channel and FBI installer
 * Sony PlayStation 2 with OpenPS2Loader
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
