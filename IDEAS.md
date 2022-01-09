@@ -11,7 +11,7 @@
   * MSX "cas" format
   * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
 
-## AppleTalk
+## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
   * https://github.com/rdmark/Netatalk
 * Implement/test timelord and tardis:
