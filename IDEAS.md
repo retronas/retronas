@@ -12,8 +12,8 @@
   * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
 
 ## AppleTalk
-* Non-TCP/IP Apple Filer Protocol over AppleTalk / EtherTalk / LocalTalk
-  * Requires Netatalk 2.X compiled from source 
+* Switch Netatalk2 from binary distribution to modern fork
+  * https://github.com/rdmark/Netatalk
 
 ## FTP client
 * Something web based preferably
