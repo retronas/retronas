@@ -1,4 +1,4 @@
-# Ideas to implement by somebody brave
+# Ideas to implement "one day"
 
 ## Commodore 64
 * WiFi access point for C64-WiFi
