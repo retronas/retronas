@@ -14,10 +14,10 @@
 ## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
   * https://github.com/rdmark/Netatalk
-* Implement/test timelord and tardis:
+*  timelord and tardis:
   * https://macintoshgarden.org/apps/tardis-and-timelord
-* Impelemnt A2BOOT (network boot Apple IIGS)
-* Investigate ADTPro style serial boot for Apple II family machines
+* A2BOOT (network boot Apple IIGS)
+* ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
 
 ## FTP client
