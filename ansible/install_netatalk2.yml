@@ -42,25 +42,25 @@
   - name: "{{ my_name }} - download package for arm64"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb"
+      cmd: "aria2c --allow-overwrite true http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_arm64.deb"
     when: ansible_architecture == "aarch64"
 
   - name: "{{ my_name }} - download package for armhf"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb"
+      cmd: "aria2c --allow-overwrite true http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_armhf.deb"
     when: ansible_architecture == "armhf"
 
   - name: "{{ my_name }} - download package for x86_64"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb"
+      cmd: "aria2c --allow-overwrite true http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_amd64.deb"
     when: ansible_architecture == "x86_64"
 
   - name: "{{ my_name }} - download package for x86"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb"
+      cmd: "aria2c --allow-overwrite true http://mirror.aarnet.edu.au/pub/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb http://ftp.debian.org/debian/pool/main/n/netatalk/netatalk_2.2.5-2+deb9u1_i386.deb"
     when: ansible_architecture == "i386"
 
   - name: "{{ my_name }} - install package"
