@@ -20,3 +20,4 @@
       - xfsprogs
       - nfs-common
       - e2fsprogs
+      - dosfstools
