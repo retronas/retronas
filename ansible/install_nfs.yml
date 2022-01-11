@@ -2,6 +2,7 @@
 
   vars:
     - my_name: "NFS"
+    - my_file: "install_nfs"
 
   tasks:
 
@@ -16,9 +17,9 @@
       - nfs-common
       - nfs-kernel-server
 
-  - name: "{{ my_name }} - enable NFSv2"
+  - name: "{{ my_name }} - enable NFS v2 v3 v4"
     template:
-      src: templates/install_samba/default.j2
+      src: "templates/{{ my_file }}/default.j2"
       dest: /etc/default/nfs-kernel-server
       owner: root
       group: root
@@ -27,7 +28,7 @@
 
   - name: "{{ my_name }} - enable NFS exports"
     template:
-      src: templates/install_samba/exports.j2
+      src: "templates/{{ my_file }}/exports.j2"
       dest: /etc/exports
       owner: root
       group: root
