@@ -28,6 +28,8 @@ dialog \
   2> ${TDIR}/rn_services
 }
 
+SC="systemctl --no-pager --full"
+
 while true
 do
   rn_services
@@ -37,7 +39,7 @@ do
   02)
     # Samba
     clear
-    CMD="systemctl status smbd"
+    CMD="${SC} status smbd"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -52,7 +54,7 @@ do
   03)
     # Netatalk3
     clear
-    CMD="systemctl status netatalk"
+    CMD="${SC} status netatalk"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -61,7 +63,7 @@ do
   04)
     # EtherDFS
     clear
-    CMD="systemctl status etherdfs"
+    CMD="${SC} status etherdfs"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -71,7 +73,7 @@ do
   05)
     # lighttpd
     clear
-    CMD="systemctl status lighttpd"
+    CMD="${SC} status lighttpd"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -80,7 +82,7 @@ do
   06)
     # ProFTPd
     clear
-    CMD="systemctl status proftpd"
+    CMD="${SC} status proftpd"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -89,7 +91,7 @@ do
   07)
     # tftpd-hpa
     clear
-    CMD="systemctl status tftpd-hpa"
+    CMD="${SC} status tftpd-hpa"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -98,7 +100,7 @@ do
   08)
     # OpenSSH
     clear
-    CMD="systemctl status ssh"
+    CMD="${SC} status ssh"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -107,7 +109,7 @@ do
   09)
     # Telnet
     clear
-    CMD="systemctl status inetd"
+    CMD="${SC} status inetd"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -116,7 +118,7 @@ do
   32)
     # ps3netsrv
     clear
-    CMD="systemctl status ps3netsrv"
+    CMD="${SC} status ps3netsrv"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -125,7 +127,7 @@ do
   50)
     # Syncthing file sync tool
     clear
-    CMD="systemctl status syncthing@${OLDRNUSER}"
+    CMD="${SC} status syncthing@${OLDRNUSER}"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -134,7 +136,7 @@ do
   51)
     # Cockpit
     clear
-    CMD="systemctl status cockpit"
+    CMD="${SC} status cockpit"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
@@ -143,7 +145,7 @@ do
   52)
     # WebOne
     clear
-    CMD="systemctl status webone"
+    CMD="${SC} status webone"
     echo "$CMD"
     echo ; $CMD ; echo
     echo "${PAUSEMSG}"
