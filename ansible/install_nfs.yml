@@ -1,0 +1,52 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "NFS"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install from repos"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - nfs-common
+      - nfs-kernel-server
+
+  - name: "{{ my_name }} - enable NFSv2"
+    template:
+      src: templates/install_samba/default.j2
+      dest: /etc/default/nfs-kernel-server
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable NFS exports"
+    template:
+      src: templates/install_samba/exports.j2
+      dest: /etc/exports
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    with_items:
+      - nfs-kernel-server
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+      - nfs-kernel-server
