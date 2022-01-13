@@ -17,6 +17,8 @@
 * timelord and tardis
   * https://macintoshgarden.org/apps/tardis-and-timelord
 * A2BOOT (network boot Apple IIGS)
+* MacIP
+  * https://www.macip.net/
 * ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
 
