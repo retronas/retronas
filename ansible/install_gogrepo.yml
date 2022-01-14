@@ -17,6 +17,7 @@
       - python3
       - python-is-python3
       - git
+      - sudo
 
   - name: "{{ my_name }} - create GOG dir"
     file:
