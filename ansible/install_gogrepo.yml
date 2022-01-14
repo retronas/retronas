@@ -32,7 +32,7 @@
     shell:
       chdir: "{{ retronas_root }}/bin"
       cmd: "git clone https://github.com/eddie3/gogrepo.git"
-      creates: ""{{ retronas_root }}/bin/gogrepo"
+      creates: "{{ retronas_root }}/bin/gogrepo"
 
   - name: "{{ my_name }} - update gogrepo"
     shell: 
