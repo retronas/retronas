@@ -29,6 +29,7 @@ dialog \
   "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
   "33" "MiSTer FPGA CIFS config" \
   "34" "Microsoft XBox360 SMB config" \
+  "35" "gogrepo - Download your GOG game installers" \
   "50" "Syncthing file sync tool" \
   "51" "Cockpit web based Linux system manager" \
   "52" "WebOne - HTTP 1.x proxy for a HTTP 2.x world" \
@@ -174,6 +175,14 @@ do
     rn_install_deps
     YAML=install_samba.yml rn_install_execute
     YAML=install_xbox360.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  35)
+    # gogrepo
+    clear
+    rn_install_deps
+    YAML=install_gogrepo.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
