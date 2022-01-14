@@ -24,6 +24,7 @@ dialog \
   "2" "Global configuration" \
   "3" "Install things" \
   "4" "Check services" \
+  "5" "Run tools and scripts" \
   2>${TDIR}/rn_main
 }
 
@@ -40,6 +41,9 @@ do
       ;;
     4)
       bash services.sh
+      ;;
+    5)
+      bash tools.sh
       ;;
     *)
       clear
