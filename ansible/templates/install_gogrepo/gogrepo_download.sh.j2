@@ -37,8 +37,8 @@ else
   ${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update -os "${1}"
 fi
 
-echo "Downloadin games"
+echo "Downloading games..."
 
-${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update -os "${1}" "{{ retronas_path }}/gog"
+${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py download "{{ retronas_path }}/gog"
 
 echo "All done"
