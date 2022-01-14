@@ -1,0 +1,49 @@
+#!/bin/bash
+
+case "${1}" in
+  windows)
+    echo "Downloading ${1} titles only..."
+    ;;
+  linux)
+    echo "Downloading ${1} titles only..."
+    ;;
+  mac)
+    echo "Downloading ${1} titles only..."
+    ;;
+  all)
+    echo "Downloading all windows, linux and mac titles..."
+    ;;
+  *)
+    echo "Must supply an OS - windows, linux, mac, or all"
+    exit 1
+    ;;
+esac
+
+if [ "${USER}" == "root" ]
+then
+  SUCOMMAND="su {{ retronas_user }} -c"
+else
+  SUCOMMAND=""
+fi
+
+PAUSEMSG='Press [Enter] to continue...'
+
+cd {{ retronas_path }}/gog || exit 1
+
+echo "Refreshing GOG manifest..."
+
+if [ "${1}" == "all" ]
+then
+  ${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update
+else
+  ${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update -os "${1}"
+fi
+
+echo "Downloadin games"
+
+${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update -os "${1}" "{{ retronas_path }}/gog"
+
+echo "All done"
+
+echo "${PAUSEMSG}"
+read -s
