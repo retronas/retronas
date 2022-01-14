@@ -1,0 +1,40 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "gogrepo"
+    - my_file: "install_gogrepo"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install dependencies"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - python3
+      - python-is-python3
+      - git
+
+  - name: "{{ my_name }} - create GOG dir"
+    file:
+      path: "{{ retronas_path }}/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "0775"
+      state: directory
+    with_items:
+      - gog
+
+  - name: "{{ my_name }} - download gogrepo"
+    shell:
+      chdir: "{{ retronas_root }}/bin"
+      cmd: "git clone https://github.com/eddie3/gogrepo.git"
+      creates: ""{{ retronas_root }}/bin/gogrepo"
+
+  - name: "{{ my_name }} - update gogrepo"
+    shell: 
+      chdir: "{{ retronas_root }}/bin/gogrepo"
+      cmd: "git pull"
