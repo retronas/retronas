@@ -45,6 +45,12 @@
 * ISO <-> CHD converter
 * ISO CD/DVD burner (via USB CD-R/DVD-R)
 
+## Cloud drives, cloud sync
+* rclone cloud sync / cloud drive mount
+  * https://rclone.org/docs/
+* Test stability/performance of cloud drives accessed from retro systems 
+* Backup tools to push from RetroNAS to cloud
+
 ## File copying
 * Good file copy/management tool
   * Midnight Commander? Something web based?
