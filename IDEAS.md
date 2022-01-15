@@ -10,6 +10,7 @@
   * Sega SC-3000 "bit" format
   * MSX "cas" format
   * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
+* Test with cheap 3.5mm audio jack to tape player hardware
 
 ## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
