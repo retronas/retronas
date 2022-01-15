@@ -2,6 +2,10 @@
 
 [About](#About) | [WARNING Security](#WARNING-Security) | [Supported Systems](#Supported-Systems) | [WARNING Filenames](#WARNING-Filenames) | [Thanks and Credits](#Thanks-and-Credits) | [How To](#How-To) 
 
+# Status
+
+This project is currently in alpha status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly.  
+
 # About
 
 RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
