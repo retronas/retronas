@@ -85,7 +85,7 @@ RetroNAS is merely a small set of scripts that utilise Ansible to install and co
 
 The true heroes are the people behind each of these open source projects, all of whom have done the hard work, either reverse engineering proprietary code/protocols, or creating new code/protocols and giving them away under permissive licenses.  This project would not exist without their work. 
 
-See the [How To](#How-To) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
+See the [wiki](https://github.com/danmons/retronas/wiki) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
 
 Thanks to the kind humans on the OCAU (Overclockers Australia) forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
 
@@ -93,4 +93,4 @@ Thanks to Bob from RetroRGB for being excited about every dumb idea I come up wi
 
 # How To
 
-Full howto in the wiki: [https://github.com/danmons/retronas/wiki](https://github.com/danmons/retronas/wiki)
+Full howto in the wiki: https://github.com/danmons/retronas/wiki
