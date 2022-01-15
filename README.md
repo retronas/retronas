@@ -38,8 +38,8 @@ RetroNAS aims to support as many legacy and retro systems as possible. If a syst
 
 Some of the projects/protocols include are:
 * Samba 4.X - LANMan (NTLMv1, NTLMv2), NetBIOS, CIFS, SMB
-* Netatalk 2.X - AppleShare over AppleTalk
-* Netatalk 3.X - AFP / Apple Filing Protocol over TCP
+* Netatalk 2.X - Older AppleShare over AppleTalk (and TCP/IP too)
+* Netatalk 3.X - More modern AFP / Apple Filing Protocol over TCP/IP only
 * EtherDFS - layer 2 file sharing for MS-DOS
 * FTP - Common file transfer protocol
 * TFTP - Lightweight trivial file transfer protocol
