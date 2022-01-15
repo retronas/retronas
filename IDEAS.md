@@ -92,3 +92,7 @@
 * LVM
 * BtrFS + deduplication / compression / snapshots
 
+## GUI remote access
+* VNC and RDP access for tools that don't have web interfaces
+  * FileZilla (FTP push to devices like classic XBox)
+  * ADT Pro for Linux (Apple II serial boot)
