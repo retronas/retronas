@@ -49,6 +49,7 @@ Some of the projects/protocols include are:
 Some of the supported systems include:
 * MS-DOS and clones such as PC-DOS and FreeDOS
 * Microsoft Windows 95 and up
+* Apple GS/OS, Classic Mac System 6 and System 7
 * Apple Mac OS8, OS9, OS X 10.0 and up
 * Atari ST with FTP client or HTTP browser
 * Amiga Workbench 3.X and up with FTP client or HTTP browser
@@ -57,14 +58,14 @@ Some of the supported systems include:
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
 * MiSTer FPGA
-* Many more to be added!
+* [Many more planned](https://github.com/danmons/retronas/blob/main/README.md)
 
 Some of the extra services include:
 * Nintendo 3DS with FBI - QR code auto generation for CIA installs over WiFi
 * WebOne HTTP proxy for legacy web browsers without SSL/TLS or Web2.0 support to browse the modern Internet
 * Syncthing secure personal file sharing with no cloud services needed
 * gogrepo - back up your entire GOG library for DRM-free offline installs
-* Many more to be added!
+* [Many more planned](https://github.com/danmons/retronas/blob/main/README.md)
 
 Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
 
