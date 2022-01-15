@@ -42,7 +42,7 @@
 
 ## ISO / CHD
 * ISO checksum tool
-* ISO <-> CHD converter
+* ISO <-> CHD converter (MAME chdman)
 * ISO CD/DVD burner (via USB CD-R/DVD-R)
 * Redump BIN/CUE optical drive ripper
   * http://wiki.redump.org/index.php?title=Dumping_Guides
