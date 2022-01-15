@@ -66,7 +66,7 @@
   * Include tools for FlashFloppy export - https://github.com/keirf/FlashFloppy
 * Add USB floppy disk support
   * Mount real floppy disks
-  * Copy from RetroNAS to Floppy
+  * Copy from RetroNAS to Floppy (individual files or raw image)
 
 ## Bulletin Board / BBS tools
 * Native Hosted, DOS VM maybe, expose local file system for file downloads
