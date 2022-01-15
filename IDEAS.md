@@ -33,6 +33,7 @@
 ## ROM auditing
 * https://github.com/frederic-mahe/Hardware-Target-Game-Database
 * Symlinks/Hardlinks for deduplication (filesystem specific)
+  * https://github.com/markfasheh/duperemove
 
 ## Arcade Netboot
 * PiForce - https://github.com/travistyoj/piforcetools
@@ -91,6 +92,7 @@
 * MDRAID
 * LVM
 * BtrFS + deduplication / compression / snapshots
+  * https://github.com/markfasheh/duperemove
 
 ## GUI remote access
 * VNC and RDP access for tools that don't have web interfaces
