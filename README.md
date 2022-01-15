@@ -10,7 +10,7 @@ You can use it as a central file store or backup server for your old and new com
 
 It uses a number of open source tools to configure services and network protocols compatible with a large variety of retro systems.
 
-In general, most of these services require a client with some sort of TCP/IP stack. There are exceptions however (e.g.: EtherDFS, as a dedicated Layer 2 protocol for MS-DOS machines with a packet driver and matching client software).
+In general, most of these services require a client with some sort of TCP/IP stack. There are exceptions however. e.g.: EtherDFS, as a dedicated Layer 2 protocol for MS-DOS machines with a packet driver and matching client software, or AppleTalk, Apple's pre-TCP protocol for AppleShare and AFP (Apple Filer Protocol) file sharing (although RetroNAS also supports AFP over TCP for newer Macs). 
 
 You will generally need to have some sort of home TCP/IP based network with the correct hubs/switches, cables and NICs (Network Interface Cards) for this to work. 
 
