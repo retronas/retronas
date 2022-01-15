@@ -59,6 +59,7 @@ Some of the extra services include:
 * Nintendo 3DS with FBI - QR code auto generation for CIA installs over WiFi
 * WebOne HTTP proxy for legacy web browsers without SSL/TLS or Web2.0 support to browse the modern Internet
 * Syncthing secure personal file sharing with no cloud services needed
+* gogrepo - back up your entire GOG library for DRM-free offline installs
 * Many more to be added!
 
 Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
