@@ -6,4 +6,4 @@ echo ""
 mkdir -p ~/.gogrepo 2>/dev/null
 cd ~/.gogrepo
 
-/opt/retronas/bin/gogrepo/gogrepo.py download ${@} "/data/retronas/gog"
+/opt/retronas/bin/gogrepo/gogrepo.py download ${@} "{{ retronas_path }}/gog"
