@@ -90,7 +90,7 @@
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
 * Option to choose WiFi Bridge mode or secure "RetroLAN" NAT/Firewall mode
-* PLOP boot manager for retro OS installs, utilities, etc
+* PLOP boot manager for retro OS installs, utilities, add USB boot to retro PCs, etc
   * https://www.plop.at/en/bootmanager/index.html
 * PXE / iPXE support + menus
   * OS installers (e.g.: FreeDOS via memdisk) 
