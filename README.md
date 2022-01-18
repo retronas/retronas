@@ -22,6 +22,8 @@ Future options are planned to integrate dial-up modem, PPP or SLIP connected sys
 
 For a complete guide and list of supported systems and protocols, see the [Wiki](https://github.com/danmons/retronas/wiki) section.
 
+If you want to chat about RetroNAS, come say hi on [Twitter](https://twitter.com/_daemons).
+
 # WARNING Security
 
 Due to the nature of retro computing, many of the tools and protocols used in this project are **COMPLETELY INSECURE**.
