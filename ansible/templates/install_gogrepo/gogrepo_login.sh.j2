@@ -1,11 +1,10 @@
 #!/bin/bash
+echo ""
+echo "Initiating GOG login"
+echo "Have your GOG username and password ready"
+echo ""
 
-if [ "${USER}" == "root" ]
-then
-  SUCOMMAND="sudo -u {{ retronas_user }}"
-else
-  SUCOMMAND=""
-fi
+mkdir -p ~/.gogrepo 2>/dev/null
+cd ~/.gogrepo
 
-cd {{ retronas_path }}/gog || exit 1
-${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py login
+/opt/retronas/bin/gogrepo/gogrepo.py login

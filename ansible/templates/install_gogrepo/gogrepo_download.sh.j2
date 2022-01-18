@@ -1,44 +1,9 @@
 #!/bin/bash
+echo ""
+echo "Downloading/updating games..."
+echo ""
 
-case "${1}" in
-  windows)
-    echo "Downloading ${1} titles only..."
-    ;;
-  linux)
-    echo "Downloading ${1} titles only..."
-    ;;
-  mac)
-    echo "Downloading ${1} titles only..."
-    ;;
-  all)
-    echo "Downloading all windows, linux and mac titles..."
-    ;;
-  *)
-    echo "Must supply an OS - windows, linux, mac, or all"
-    exit 1
-    ;;
-esac
+mkdir -p ~/.gogrepo 2>/dev/null
+cd ~/.gogrepo
 
-if [ "${USER}" == "root" ]
-then
-  SUCOMMAND="sudo -u {{ retronas_user }}"
-else
-  SUCOMMAND=""
-fi
-
-cd {{ retronas_path }}/gog || exit 1
-
-echo "Refreshing GOG manifest..."
-
-if [ "${1}" == "all" ]
-then
-  ${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update
-else
-  ${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py update -os "${1}"
-fi
-
-echo "Downloading games..."
-
-${SUCOMMAND} {{ retronas_root }}/bin/gogrepo/gogrepo.py download "{{ retronas_path }}/gog"
-
-echo "All done"
+/opt/retronas/bin/gogrepo/gogrepo.py download ${@} "/data/retronas/gog"

@@ -41,7 +41,7 @@
       chdir: "{{ retronas_root }}/bin/gogrepo"
       cmd: "git pull"
 
-  - name: "{{ my_name }} - login scripts"
+  - name: "{{ my_name }} - login script"
     template:
       src: "templates/{{ my_file }}/gogrepo_login.sh.j2"
       dest: "{{ retronas_root }}/scripts/gogrepo_login.sh"
@@ -49,10 +49,18 @@
       group: root
       mode: 0755
 
-  - name: "{{ my_name }} - download scripts"
+  - name: "{{ my_name }} - download script"
     template:   
       src: "templates/{{ my_file }}/gogrepo_download.sh.j2"
       dest: "{{ retronas_root }}/scripts/gogrepo_download.sh"
       owner: root
       group: root
       mode: 0755 
+
+  - name: "{{ my_name }} - update script"
+    template:
+      src: "templates/{{ my_file }}/gogrepo_update.sh.j2"
+      dest: "{{ retronas_root }}/scripts/gogrepo_update.sh"
+      owner: root
+      group: root
+      mode: 0755
