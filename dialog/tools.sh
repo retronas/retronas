@@ -15,7 +15,7 @@ dialog \
   \nPlease select an service to check" ${MG} 10 \
   "01" "Main Menu" \
   "02" "GOG - Download your GOG installers and extras" \
-  "03" "Nintendo 3DS QR code generate" \
+  "03" "Nintendo 3DS QR code generator for FBI homebrew" \
   2> ${TDIR}/rn_tools
 }
 
