@@ -19,6 +19,15 @@ dialog \
   2> ${TDIR}/rn_tools
 }
 
+## If this is run as root, switch to our RetroNAS user
+## Manifests and cookies stored in ~/.gogrepo
+if [ "${USER}" == "root" ]
+then
+  SUCOMMAND="sudo -u ${OLDRNUSER}"
+else
+  SUCOMMAND=""
+fi
+
 SC="systemctl --no-pager --full"
 
 while true
@@ -33,7 +42,8 @@ do
     ;;
   03)
     # 3DS QR
-    echo "3DS QR TBA"
+    clear
+    ${SUCOMMAND} ../scripts/3ds_qr.sh
     echo "${PAUSEMSG}"
     read -s
     ;;
