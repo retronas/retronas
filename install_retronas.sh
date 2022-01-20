@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MYID=$( whoami )
+
 if [ "${MYID}" != "root" ]
 then
   echo "This script needs to be run as sudo/root"
