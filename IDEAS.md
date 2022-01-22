@@ -115,3 +115,12 @@
 * VNC and RDP access for tools that don't have web interfaces
   * FileZilla (FTP push to devices like classic XBox)
   * ADT Pro for Linux (Apple II serial boot)
+
+## Cockpit extensions
+* SMB
+  * https://github.com/enira/cockpit-smb-plugin
+  * https://github.com/45Drives/cockpit-file-sharing
+* File manager:
+  * https://github.com/45Drives/cockpit-navigator
+* ZFS manager
+  * https://github.com/45Drives/cockpit-zfs-manager 
