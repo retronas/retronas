@@ -30,6 +30,7 @@
 ## GOG sync
 * Sync all GOG purchases to NAS on cron schedule
   * https://github.com/eddie3/gogrepo
+  * Mostly done, need multi-game select menu
 
 ## ROM auditing
 * https://github.com/frederic-mahe/Hardware-Target-Game-Database
@@ -67,6 +68,10 @@
 * Add USB floppy disk support
   * Mount real floppy disks
   * Copy from RetroNAS to Floppy (individual files or raw image)
+* PLIP (IP over Parallel port)
+  * https://tldp.org/HOWTO/PLIP-1.html
+* ethflop, floppy block device over L2 ethernet
+  * http://ethflop.sourceforge.net/
 
 ## Bulletin Board / BBS tools
 * Native Hosted, DOS VM maybe, expose local file system for file downloads
