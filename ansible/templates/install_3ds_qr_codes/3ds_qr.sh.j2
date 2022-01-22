@@ -34,7 +34,7 @@ do
   BASEDIR=$( dirname "${QRFILE}" )
   RELDIR=$( echo "${BASEDIR}" | sed 's#{{ retronas_path }}/3ds/qr##g' )
   CIADIR="{{ retronas_path }}/3ds/cia/${RELDIR}"
-  test -f "${QRDIR}/${BARENAME}".cia || test -f "${QRDIR}/${BARENAME}".cia || rm -vf "${BASEDIR}/${BARENAME}.png" "${BASEDIR}/${BARENAME}.html"
+  test -f "${CIADIR}/${BARENAME}".cia || test -f "${CIADIR}/${BARENAME}".CIA || rm -vf "${BASEDIR}/${BARENAME}.png" "${BASEDIR}/${BARENAME}.html"
 done
 
 ## Find CIA files to scan
