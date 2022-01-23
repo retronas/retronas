@@ -79,7 +79,7 @@ Please see the [How To](#How-To) section for a comprehensive list of all protoco
 
 # WARNING Filenames
 
-Due to the retro nature of computing, it's strongly advised to follow some basig guidelines when using RetroNAS:
+Due to the retro nature of computing, it's strongly advised to follow some basic guidelines when using RetroNAS:
 
 * Linux filesystems are case sensitive, but most old computers and operating systems are not (some new ones aren't either). It's strongly recommended to name all files and folders **lower case** in Linux where possible. Files like "filename.txt" and "Filename.txt" will appear identical to some legacy operating systems, and may confuse them. 
 * Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is stronly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**. 
