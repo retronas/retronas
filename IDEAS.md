@@ -41,6 +41,13 @@
 * PiForce - https://github.com/travistyoj/piforcetools
   * Supports Sega NAOMI, Chihiro, Triforce arcade hardware
 
+## Nintendo GameCube
+* Swiss + Broadband Adaptor for SMB/network game loading
+  * GC serial port is 27 Mbit/s (3 MB/s)
+  * GC optical inner is 2 MB/s reads
+  * GC optical outer is 3.7 MB/s reads
+  * Broadband adaptor limited by serial port.  Bandwidth about the same as an optical disc, but latency/seek would be much lower in theory. 
+
 ## ISO / CHD
 * ISO checksum tool
 * ISO <-> CHD converter (MAME chdman)
