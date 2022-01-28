@@ -137,4 +137,6 @@
 * Extend ansible playbooks for other distros (not just Debian 11 Bullseye)
 * Flashable image for RPi
 * Docker container
-* VM images
+  * Target UnRAID, TruNAS/FreeNAS, etc
+* Pre-baked VM images
+* WSL2 distribution for Windows10/11 users
