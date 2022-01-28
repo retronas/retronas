@@ -131,3 +131,10 @@
   * https://github.com/45Drives/cockpit-navigator
 * ZFS manager
   * https://github.com/45Drives/cockpit-zfs-manager 
+
+## General stuff
+* Non-crap GUI / web interface (mobile compatible)
+* Extend ansible playbooks for other distros (not just Debian 11 Bullseye)
+* Flashable image for RPi
+* Docker container
+* VM images
