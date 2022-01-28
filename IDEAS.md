@@ -142,5 +142,7 @@
 * Flashable image for RPi
 * Docker container
   * Target UnRAID, TruNAS/FreeNAS, etc
-* Pre-baked VM images
+* Pre-baked VM images for popular VM tools (VirtualBox, VMWare, QEmu, etc) 
 * WSL2 distribution for Windows10/11 users
+  * "debian" distro exists, confirmed Debian 11 Bullseye
+  * Waiting on Microsoft to allow WSL2 virtual switch in bridged mode for IPv4
