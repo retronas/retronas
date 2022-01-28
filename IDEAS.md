@@ -9,8 +9,12 @@
 * Push tape images over audio to compatible systems
   * Sega SC-3000 "bit" format
   * MSX "cas" format
+  * Generic "wav" / "flac" formats
   * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
 * Test with cheap 3.5mm audio jack to tape player hardware
+* Linux mpd + web interface to play audio files (mobile compatible), e.g.:
+  * https://github.com/jcorporation/myMPD
+  * https://github.com/rain0r/ampd 
 
 ## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
