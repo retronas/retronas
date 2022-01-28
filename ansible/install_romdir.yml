@@ -1,0 +1,70 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Generic ROM dir"
+    - my_file: "install_romdir"
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Build ROM dir layout"
+    file:
+      path: "{{ retronas_path }}/roms/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+    with_items:
+      - "amiga"
+      - "amstrad"
+      - "appleii"
+      - "atari2600"
+      - "atari5200"
+      - "atari7800"
+      - "atari800"
+      - "atarilynx"
+      - "atarist"
+      - "bbcmicro"
+      - "c16"
+      - "c64"
+      - "colecovision"
+      - "gameboy"
+      - "gamecube"
+      - "gba"
+      - "intellivision"
+      - "mame"
+      - "mastersystem"
+      - "megacd"
+      - "megadrive"
+      - "msx"
+      - "neogeo"
+      - "nes"
+      - "pcengine"
+      - "pcenginecd"
+      - "playstation1"
+      - "playstation2"
+      - "saturn"
+      - "snes"
+      - "spectrum"
+      - "vextrex"
+      - "vic20"
+      - "wii"
+      - "wonderswan"
+      - "x68000"
+
+  - name: "{{ my_name }} - Build ROM dir symlinks"
+    file:
+      src: "{{ retronas_path }}/roms/{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: link
+    with_items:
+      - { src: "megadrive", dest: "genesis" }
+      - { src: "megacd", dest: "segacd" }
+      - { src: "pcengine", dest: "turbografx16" }
+      - { src: "pcenginecd", dest: "turbografxcd" }
+      - { src: "playstation1", dest: "psx" }
+      - { src: "playstation1", dest: "ps1" }
+      - { src: "playstation2", dest: "ps2" }
