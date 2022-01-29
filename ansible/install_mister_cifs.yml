@@ -54,7 +54,7 @@
       - { src: "../roms/tandy/trs80colorcomputer2", dest: "CoCo2" }
       - { src: "../roms/tandy/trs80colorcomputer3", dest: "COCO3" }
       - { src: "../roms/other/coleco_colecovision", dest: "Coleco" }
-      - { src: "../roms/cambridge_edsac", dest: "EDSAC" }
+      - { src: "../roms/other/cambridge_edsac", dest: "EDSAC" }
       - { src: "../roms/other/antonic_galaksija", dest: "Galaksija" }
       - { src: "../roms/nintendo/gameboy", dest: "GAMEBOY" }
       - { src: "../roms/nintendo/gameboy", dest: "GAMEBOY2P" }
