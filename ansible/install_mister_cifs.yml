@@ -26,9 +26,6 @@
       state: link
     with_items:
       - { src: "../roms/acorn/atom", dest: "AcornAtom" }
-      - { src: "../roms/sega/megadrive", dest: "Genesis" }
-
-      - { src: "../roms/acorn/atom", dest: "AcornAtom" }
       - { src: "../roms/acorn/electron", dest: "AcornElectron" }
       - { src: "../roms/tandy/trs80mc10", dest: "AliceMC10" }
       - { src: "../roms/other/mits_altair8800", dest: "Altair8800" }
