@@ -48,8 +48,8 @@
       - { src: "../roms/other/generalinstrument_ay38500", dest: "AY-3-8500" }
       - { src: "../roms/acorn/bbcmicro", dest: "BBCMicro" }
       - { src: "../roms/other/electronika_bk", dest: "BK0011M" }
-      - { src: "../roms/commodore/c16", dest: "C16" }
-      - { src: "../roms/commodore/c64", dest: "C64" }
+      - { src: "../roms/commodore/commodore16", dest: "C16" }
+      - { src: "../roms/commodore/commodore64", dest: "C64" }
       - { src: "../roms/other/fairchild_channelf", dest: "ChannelF" }
       - { src: "../roms/tandy/trs80colorcomputer2", dest: "CoCo2" }
       - { src: "../roms/tandy/trs80colorcomputer3", dest: "COCO3" }
