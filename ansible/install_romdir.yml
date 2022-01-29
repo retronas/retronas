@@ -59,7 +59,7 @@
 
   - name: "{{ my_name }} - Build ROM dir symlinks"
     file:
-      src: "{{ retronas_path }}/roms/{{ item.src }}"
+      src: "{{ item.src }}"
       dest: "{{ retronas_path }}/roms/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
