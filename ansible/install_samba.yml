@@ -72,6 +72,20 @@
       option: "client ntlmv2 auth"
       value: "yes"
 
+  - name: "{{ my_name }} - unix extensions"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "unix extensions"
+      value: "no"
+
+  - name: "{{ my_name }} - allow insecure wide links"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      option: "allow insecure wide links"
+      value: "yes"
+
   - name: "{{ my_name }} - configure includes file"
     ini_file:
       path: /etc/samba/smb.conf
