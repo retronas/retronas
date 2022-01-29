@@ -41,8 +41,8 @@
       - { src: "../roms/bally/astrocade", dest: "Astrocade" }
       - { src: "../roms/atari/2600", dest: "ATARI2600" }
       - { src: "../roms/atari/5200", dest: "ATARI5200" }
-      - { src: "../roms/atari7800", dest: "ATARI7800" }
-      - { src: "../roms/atari800", dest: "ATARI800" }
+      - { src: "../roms/atari/7800", dest: "ATARI7800" }
+      - { src: "../roms/atari/800", dest: "ATARI800" }
       - { src: "../roms/atari/lynx", dest: "AtariLynx" }
       - { src: "../roms/atari/st", dest: "AtariST" }
       - { src: "../roms/other/generalinstrument_ay38500", dest: "AY-3-8500" }
