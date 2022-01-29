@@ -113,17 +113,35 @@
       - "tandy/trs80colorcomputer3"
       - "tandy/trs80mc10"
 
-  - name: "{{ my_name }} - build symlinks"
+  - name: "{{ my_name }} - build Nintendo symlinks"
     file:
       src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/roms/{{ item.dest }}"
+      dest: "{{ retronas_path }}/roms/nintendo/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
-    loop:
-      - { src: "nintendo/famicom", dest: "nintendo/nes" }
-      - { src: "nintendo/superfamicom", dest: "nintendo/snes" }
-      - { src: "sega/megadrive", dest: "sega/genesis" }
-      - { src: "sega/megacd", dest: "sega/segacd" }
-      - { src: "nec/pcengine", dest: "nec/turbografx16" }
-      - { src: "nec/pcenginecd", dest: "nec/turbografxcd" }
+    with_items:
+      - { src: "famicom", dest: "nes" }
+      - { src: "superfamicom", dest: "snes" }
+
+  - name: "{{ my_name }} - build Sega symlinks"
+    file:
+      src: "{{ item.src }}"
+      dest: "{{ retronas_path }}/roms/sega/{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: link
+    with_items:
+      - { src: "megadrive", dest: "genesis" }
+      - { src: "megacd", dest: "segacd" }
+
+  - name: "{{ my_name }} - build NEC symlinks"
+    file:
+      src: "{{ item.src }}"
+      dest: "{{ retronas_path }}/roms/nec/{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: link
+    with_items:
+      - { src: "pcengine", dest: "turbografx16" }
+      - { src: "pcenginecd", dest: "turbografxcd" }
