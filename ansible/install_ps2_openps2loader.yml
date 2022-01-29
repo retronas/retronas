@@ -32,8 +32,8 @@
       dest: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item.dest }}"
       state: link
     with_items:
-      - { src: "../roms/sony/playstation2/cd", dest: "CD" }
-      - { src: "../roms/sony/playstation2/dvd", dest: "DVD" }
+      - { src: "../../roms/sony/playstation2/cd", dest: "CD" }
+      - { src: "../../roms/sony/playstation2/dvd", dest: "DVD" }
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure includes file"
