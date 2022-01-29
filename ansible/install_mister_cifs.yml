@@ -94,7 +94,7 @@
       - { src: "../roms/other/spectravideo_sv328", dest: "SVI328" }
       - { src: "../roms/other/tatung_einstein", dest: "TatungEinstein" }
       - { src: "../roms/nec/pcengine", dest: "TGFX16" }
-      - { src: "../roms/nec/pecenginecd", dest: "TGFX16-CD" }
+      - { src: "../roms/nec/pcenginecd", dest: "TGFX16-CD" }
       - { src: "../roms/other/texasinstruments_ti994a", dest: "TI-99_4A" }
       - { src: "../roms/tandy/trs80", dest: "TRS-80" }
       - { src: "../roms/other/zxevolution", dest: "TSConf" }
