@@ -18,40 +18,44 @@
     with_items:
       - "amiga"
       - "amstrad"
-      - "appleii"
-      - "atari2600"
-      - "atari5200"
-      - "atari7800"
-      - "atari800"
-      - "atarilynx"
-      - "atarist"
-      - "bbcmicro"
-      - "c16"
-      - "c64"
+      - "apple_ii"
+      - "atari_2600"
+      - "atari_5200"
+      - "atari_7800"
+      - "atari_800"
+      - "atari_jaguar"
+      - "atari_lynx"
+      - "atari_st"
+      - "bbc_micro"
       - "colecovision"
-      - "gameboy"
-      - "gamecube"
-      - "gba"
+      - "commodore_16"
+      - "commodore_64"
+      - "commodore_vic20"
       - "intellivision"
       - "mame"
-      - "mastersystem"
-      - "megacd"
-      - "megadrive"
       - "msx"
+      - "nec_pc88"
+      - "nec_pc98"
       - "neogeo"
-      - "nes"
+      - "nintendo_famicom"
+      - "nintendo_gameboy"
+      - "nintendo_gameboyadvance"
+      - "nintendo_gamecube"
+      - "nintendo_superfamicom"
+      - "nintendo_wii"
       - "pcengine"
       - "pcenginecd"
-      - "playstation1"
-      - "playstation2"
       - "saturn"
-      - "snes"
-      - "spectrum"
+      - "sega_mastersystem"
+      - "sega_megacd"
+      - "sega_megadrive"
+      - "sony_ps1"
+      - "sony_ps2"
+      - "sony_psp"
       - "vextrex"
-      - "vic20"
-      - "wii"
       - "wonderswan"
       - "x68000"
+      - "zx_spectrum"
 
   - name: "{{ my_name }} - Build ROM dir symlinks"
     file:
@@ -60,11 +64,10 @@
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
-    with_items:
-      - { src: "megadrive", dest: "genesis" }
-      - { src: "megacd", dest: "segacd" }
+    loop:
+      - { src: "nintendo_famicom", dest: "nintendo_nes" }
+      - { src: "nintendo_superfamicom", dest: "nintendo_snes" }
+      - { src: "sega_megadrive", dest: "sega_genesis" }
+      - { src: "sega_megacd", dest: "sega_segacd" }
       - { src: "pcengine", dest: "turbografx16" }
       - { src: "pcenginecd", dest: "turbografxcd" }
-      - { src: "playstation1", dest: "psx" }
-      - { src: "playstation1", dest: "ps1" }
-      - { src: "playstation2", dest: "ps2" }
