@@ -148,6 +148,7 @@ do
     clear
     rn_install_deps
     YAML=install_samba.yml rn_install_execute
+    YAML=install_romdir.yml rn_install_execute
     YAML=install_ps2_openps2loader.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
@@ -165,6 +166,7 @@ do
     clear
     rn_install_deps
     YAML=install_samba.yml rn_install_execute
+    YAML=install_romdir.yml rn_install_execute
     YAML=install_mister_cifs.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
