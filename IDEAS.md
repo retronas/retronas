@@ -66,6 +66,16 @@
 * Test stability/performance of cloud drives accessed from retro systems 
 * Backup tools to push from RetroNAS to cloud
 
+## Speed test
+* https://github.com/librespeed/speedtest
+* Something for disk too
+
+## Scheduled downloader
+* Open source tools autodownloaded
+  * 240p test suite images
+  * FreeDOS
+  * GParted
+
 ## File copying
 * Good file copy/management tool
   * Midnight Commander? Something web based?
