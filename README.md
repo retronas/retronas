@@ -1,6 +1,6 @@
 # RetroNAS
 
-[About](#About) | [WARNING Security](#WARNING-Security) | [Supported Systems](#Supported-Systems) | [WARNING Filenames](#WARNING-Filenames) | [Thanks and Credits](#Thanks-and-Credits) | [How To](#How-To) 
+[About](#About) | [WARNING Security](#WARNING-Security) | [Supported Systems](#Supported-Systems) | [WARNING Filenames](#WARNING-Filenames) | [Help Wanted](#Help-Wanted) | [Thanks and Credits](#Thanks-and-Credits) | [How To](#How-To) 
 
 # Status
 
@@ -85,6 +85,14 @@ Due to the retro nature of computing, it's strongly advised to follow some basic
 * Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is stronly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**. 
 * If wanting to share files with very old operating systems, it's strongly recommended to name them in an "8.3" format (8 charcters or fewer for the filename, 3 characters or fewer for the file extension). 
 * Some operating systems can handle all sorts of interesting special characters and spaces in file names, some cannot.  It's strongly recommended to avoid any characters outside of regular English characters ("a-z"), numbers ("0-9") hyphen ("-") and underscore ("_ ") and stick with character encodings such as ASCII or UTF-8.
+
+# Help Wanted
+
+This project is in early development, but already there are a lot of people asking for it to be available as a Docker container for Synology/QNAP/UnRAID style setups.
+
+I don't have access to these, but if you do and have experience with Docker and especially complex networking and would like to contribute, please contact me.
+
+There will be limitations with this method (port conflicts with internal SMB/CIFS, non-IP traffic like AppleTalk/EtherDFS probably won't work, etc).  But for simple SMB/CIFS things like MiSTer and OpenPS2Loader, there could be options to integrate in with these devices. 
 
 # Thanks and Credits
 
