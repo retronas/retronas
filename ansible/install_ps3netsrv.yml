@@ -29,21 +29,23 @@
       - libmbedtls12
       - coreutils
 
-  - name: "{{ my_name }} - create ps3/ps3netsrv directory"
+  - name: "{{ my_name }} - build layout"
     file:
-      path: "{{ retronas_path }}/ps3/ps3netsrv/{{ item }}"
+      src: "{{ item.src }}"
+      dest: "{{ retronas_path }}/ps3/ps3netsrv/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
-      mode: "0775"
-      state: directory
+      state: link
     with_items:
-      - GAMES
-      - PS3ISO
-      - PS2ISO
-      - PSXISO
-      - PSPISO
-      - BDISO
-      - DVDISO
+      - { src: "../../roms/sony/playstation3/games", dest: "GAMES" }
+      - { src: "../../roms/sony/playstation3/iso", dest: "PS3ISO" }
+      - { src: "../../roms/sony/playstation2/dvd", dest: "PS2ISO" }
+      - { src: "../../roms/sony/playstation1/iso", dest: "PSXISO" }
+      - { src: "../../roms/sony/playstationportable/iso", dest: "PSPISO" }
+      - { src: "../../roms/videos/bdiso", dest: "BDISO" }
+      - { src: "../../roms/videos/dvdiso", dest: "DVDISO" }
+    notify: "{{ my_name }} - Restart service"
+
 
   - name: "{{ my_name }} - Generate scripts"
     template:
