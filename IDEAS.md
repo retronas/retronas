@@ -27,6 +27,12 @@
 * ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
 
+## ZX Spectrum
+* TNFS / Fujinet
+  * https://github.com/danmons/retronas/discussions/3
+  * http://spectrum.alioth.net/doc/index.php/TNFS_server
+  * https://fujinet.online/
+
 ## FTP client
 * Something web based preferably
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
@@ -98,6 +104,11 @@
 * Native Hosted, DOS VM maybe, expose local file system for file downloads
 * Dialup integration via DreamPi
 * IP based for ppp connections. telnet connections
+
+## DECnet
+* PDP-11 / DEC / OpenVMS network sharing
+* https://en.wikipedia.org/wiki/DECnet
+* https://www.kernel.org/doc/html/latest/networking/decnet.html
 
 ## Dialup modem
 * DreamPi - https://github.com/Kazade/dreampi
