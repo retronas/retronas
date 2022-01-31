@@ -14,7 +14,7 @@ dialog \
   \n
   \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
-  "02" "Samba - LANMan, NetBIOS, NetBEUI, SMB, CIFS file sharing" \
+  "02" "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing" \
   "03" "Netatalk2 - AppleTalk and AppleShare file sharing" \
   "04" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
   "05" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
