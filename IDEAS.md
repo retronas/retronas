@@ -89,6 +89,11 @@
   * Midnight Commander? Something web based?
   * Copy between RetroNAS and external media or mounted filesystems
 
+## IPX / NCPFS
+* https://github.com/pasis/ipx
+* https://ftp.disconnected-by-peer.at/ncpfs/
+* https://github.com/cml37/dos-utils/blob/master/network/novell/servers/mars_nwe/mars_nwe_setup.txt
+
 ## DOS
 * Build a floppy builder
   * Take ideas from ISOify - https://github.com/danmons/isoify
