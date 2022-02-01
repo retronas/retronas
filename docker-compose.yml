@@ -1,0 +1,22 @@
+version: "3"
+services:
+  retronas:
+    build: .
+    volumes:
+      - /data:/data/retronas
+  filebrowser:
+    image: filebrowser/filebrowser
+    volumes:
+      - /data:/srv
+    user: 1000:1000
+    ports:
+      - 8090:80
+    command: --database /tmp/filebrowser.db
+  samba:
+    image: elswork/samba
+    volumes:
+      - /data:/share/data
+    ports:
+      - 139:139
+      - 445:445
+    command: -u "1000:1000:pi:pi:pi" -s "retrosmb:/share/data:rw:pi"
