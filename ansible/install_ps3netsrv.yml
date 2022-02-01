@@ -29,6 +29,15 @@
       - libmbedtls12
       - coreutils
 
+  - name: "{{ my_name }} - build top level"
+    file:
+      path: "{{ retronas_path }}/ps3/ps3netsrv"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+    notify: "{{ my_name }} - Restart service"
+      
   - name: "{{ my_name }} - build layout"
     file:
       src: "{{ item.src }}"
