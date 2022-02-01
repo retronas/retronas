@@ -8,6 +8,13 @@
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
+    
+  - name: "{{ my_name }} - install gnupg for keys"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - gnupg
 
   - name: "{{ my_name }} - Install Debian Signing Keys 1"
     shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138"
