@@ -16,7 +16,6 @@
       - exfat-utils
       - exfat-fuse
       - hfsplus
-      - hfsprogs
       - xfsprogs
       - nfs-common
       - e2fsprogs
