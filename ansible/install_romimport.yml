@@ -15,7 +15,7 @@
        state: latest
     with_items:
       - python3
-      - pythonispython3
+      - python-is-python3
       - git
 
   - name: "{{ my_name }} - build top level"
