@@ -1,0 +1,39 @@
+#!/bin/bash
+
+export TDIR="{{retronas_root}}/bin/Hardware-Target-Game-Database"
+
+auditsystem () {
+case $1 in
+  nes)
+    export ODIR={{retronas_path}}/roms/nintendo/nes
+    export SMDB='./EverDrive Pack SMDBs/EverDrive N8 & PowerPak SMDB.txt'
+    ;;
+  snes)
+    export ODIR={{retronas_path}}/roms/nintendo/snes
+    export SMDB='EverDrive Pack SMDBs/Super EverDrive & SD2SNES SMDB.txt'
+    ;;
+  megadrive)
+    export ODIR={{retronas_path}}/roms/sega/megadrive
+    export SMDB='EverDrive Pack SMDBs/Mega EverDrive SMDB.txt'
+   ;;
+  *)
+    echo "Unknown system"
+    exit 1
+    ;;
+esac
+echo '------------------------'
+echo "Analysing with ${SMDB}"
+echo "Outputting to ${ODIR}"
+python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory
+echo '------------------------'
+}
+
+echo "Refreshing SMBDs..."
+cd ${TDIR}
+git reset --hard HEAD
+git pull
+
+for SYSTEM in nes snes megadrive
+do
+  auditsystem ${SYSTEM}
+done
