@@ -15,7 +15,6 @@
       group: "{{ retronas_user }}"
       state: directory
       mode: "0775"
-      ignore_errors: yes
     with_items:
       - "acorn/archimedes"
       - "acorn/atom"
@@ -153,7 +152,6 @@
 
   - name: "{{ my_name }} - build NEC symlinks"
     file:
-      ignore_errors: yes
       src: "{{ item.src }}"
       dest: "{{ retronas_path }}/roms/nec/{{ item.dest }}"
       owner: "{{ retronas_user }}"
