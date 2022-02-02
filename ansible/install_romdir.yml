@@ -15,6 +15,7 @@
       group: "{{ retronas_user }}"
       state: directory
       mode: "0775"
+      ignore_errors: yes
     with_items:
       - "acorn/archimedes"
       - "acorn/atom"
@@ -34,6 +35,7 @@
       - "bally/astrocade"
       - "bandai/rx78"
       - "bandai/wonderswan"
+      = "bandai/wonderswancolor"
       - "commodore/amiga"
       - "commodore/amigacd32"
       - "commodore/commodore16"
@@ -54,8 +56,8 @@
       - "videos/dvdiso"
       - "nec/pc88"
       - "nec/pc98"
-      - "nec/pcengine"
-      - "nec/pcenginecd"
+      - "nec/pcengine/iso"
+      - "nec/pcengine/supergrafx"
       - "nec/pcfx"
       - "nintendo/3ds"
       - "nintendo/ds"
@@ -100,6 +102,8 @@
       - "other/vector06c"
       - "other/vectrex"
       - "other/zxevolution"
+      - "sega/32x"
+      - "sega/gamegear"
       - "sega/dreamcast"
       - "sega/mastersystem"
       - "sega/megacd"
@@ -112,6 +116,7 @@
       - "sinclair/zxspectrum"
       - "snk/neogeo"
       - "snk/neogeopocket"
+      - "snk/neogeopocketcolor"
       - "sony/playstation1/iso"
       - "sony/playstation2/cd"
       - "sony/playstation2/dvd"
@@ -148,6 +153,7 @@
 
   - name: "{{ my_name }} - build NEC symlinks"
     file:
+      ignore_errors: yes
       src: "{{ item.src }}"
       dest: "{{ retronas_path }}/roms/nec/{{ item.dest }}"
       owner: "{{ retronas_user }}"
@@ -155,4 +161,5 @@
       state: link
     with_items:
       - { src: "pcengine", dest: "turbografx16" }
-      - { src: "pcenginecd", dest: "turbografxcd" }
+      - { src: "pcengine/iso", dest: "pcenginecd" }
+      - { src: "pcengine/iso", dest: "turbografxcd" }
