@@ -1,0 +1,43 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "ROM Import"
+    - my_file: "install_romimport"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - python3
+      - pythonispython3
+      - git
+
+  - name: "{{ my_name }} - build top level"
+    file:
+      path: "{{ retronas_path }}/romimport"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+
+  - name: "{{ my_name }} - Generate scripts"
+    template:
+      src: "templates/{{ my_file }}/romimport.sh.j2"
+      dest: "{{ retronas_root }}/scripts/romimport.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Install from source code"
+    shell: "git clone https://github.com/frederic-mahe/Hardware-Target-Game-Database.git"
+    args:
+      chdir: "{{ retronas_root}}/bin"
+      creates: "{{ retronas_root}}/bin/Hardware-Target-Game-Database"
+
+    
