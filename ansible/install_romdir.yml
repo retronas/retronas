@@ -35,7 +35,7 @@
       - "bally/astrocade"
       - "bandai/rx78"
       - "bandai/wonderswan"
-      = "bandai/wonderswancolor"
+      - "bandai/wonderswancolor"
       - "commodore/amiga"
       - "commodore/amigacd32"
       - "commodore/commodore16"
