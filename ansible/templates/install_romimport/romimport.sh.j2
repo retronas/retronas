@@ -4,17 +4,81 @@ export TDIR="{{retronas_root}}/bin/Hardware-Target-Game-Database"
 
 auditsystem () {
 case $1 in
-  nes)
+  atari_lynx)
+    export ODIR={{retronas_path}}/roms/atari/lynx
+    export SMDB='./EverDrive Pack SMDBs/Atari Lynx SMDB.txt'
+    ;;
+  atari_2600)
+    export export ODIR={{retronas_path}}/roms/atari/2600
+    export SMDB='./EverDrive Pack SMDBs/Atari 2600 SMDB.txt'
+    ;;
+  atari_5200)
+    export export ODIR={{retronas_path}}/roms/atari/5200
+    export SMDB='./EverDrive Pack SMDBs/Atari 5200 SMDB.txt'
+    ;;
+  atari_7800)
+    export export ODIR={{retronas_path}}/roms/atari/7800
+    export SMDB='./EverDrive Pack SMDBs/Atari 7800 SMDB.txt'
+    ;;
+  other_coleco_colecovision)
+    export ODIR={{retronas_path}}/roms/other/coleco_colecovision
+    export SMDB='./EverDrive Pack SMDBs/Atari Lynx SMDB.txt'
+    ;;
+  nec_pcengine)
+    export ODIR={{retronas_path}}/roms/nec/pcengine
+    export SMDB='./EverDrive Pack SMDBs/Turbo EverDrive & Super SD System 3 SMDB.txt'
+    ;;
+  nec_pcenginecd)
+    export ODIR={{retronas_path}}/roms/nec/pcenginecd
+    export SMDB='./EverDrive Pack SMDBs/PC Engine CD Redump Supplement.txt'
+    ;;
+  nintendo_famicom_disk)
+    export ODIR={{retronas_path}}/roms/nintendo/famicom/disk
+    export SMDB='./EverDrive Pack SMDBs/Famicom Disk System SMDB.txt'
+    ;;
+  nintendo_gameboy)
+    export ODIR={{retronas_path}}/roms/nintendo/gameboy
+    export SMDB='./EverDrive Pack SMDBs/Game Boy SMDB.txt'
+    ;;
+  nintendo_gameboyadvance)
+    export ODIR={{retronas_path}}/roms/nintendo/gameboyadvance
+    export SMDB='./EverDrive Pack SMDBs/EverDrive GBA SMDB.txt'
+    ;;
+  nintendo_gameboycolor)
+    export ODIR={{retronas_path}}/roms/nintendo/gameboycolor
+    export SMDB='./EverDrive Pack SMDBs/Game Boy Color SMDB.txt'
+    ;;
+  nintenodo_nes)
     export ODIR={{retronas_path}}/roms/nintendo/nes
     export SMDB='./EverDrive Pack SMDBs/EverDrive N8 & PowerPak SMDB.txt'
     ;;
-  snes)
+  nintendo_nintendo64)
+    export ODIR={{retronas_path}}/roms/nintendo/nintendo64
+    export SMDB='./EverDrive Pack SMDBs/EverDrive 64 & 64drive SMDB.txt'
+    ;;
+  nintendo_snes)
     export ODIR={{retronas_path}}/roms/nintendo/snes
     export SMDB='EverDrive Pack SMDBs/Super EverDrive & SD2SNES SMDB.txt'
     ;;
-  megadrive)
+  sega_gamegear)
+    export ODIR={{retronas_path}}/roms/sega/gamegear
+    export SMDB='EverDrive Pack SMDBs/EverDrive GG SMDB.txt'
+    ;;
+  sega_mastersystem)
+    export ODIR={{retronas_path}}/roms/sega/mastersystem
+    export SMDB='EverDrive Pack SMDBs/Master EverDrive SMDB.txt'
+    ;;
+  sega_megacd)
+    export ODIR={{retronas_path}}/roms/sega/megacd
+    export SMDB='EverDrive Pack SMDBs/SegaCD.txt'
+   ;;
+  sega_megadrive)
     export ODIR={{retronas_path}}/roms/sega/megadrive
     export SMDB='EverDrive Pack SMDBs/Mega EverDrive SMDB.txt'
+   ;;
+  sega_saturn)
+    export ODIR={{retronas_path}}/roms/sega/saturn
+    export SMDB='EverDrive Pack SMDBs/Saturn Redump Supplement.txt'
    ;;
   *)
     echo "Unknown system"
@@ -33,7 +97,7 @@ cd ${TDIR}
 git reset --hard HEAD
 git pull
 
-for SYSTEM in nes snes megadrive
+for SYSTEM in atari_2600 atari_5200 atari_7800 atari_lynx nec_pcengine nec_pcenginecd nintendo_famicom_disk nintendo_gameboy nintendo_gameboyadvance nintendo_gameboycolor nintendo_nintendo64 nintendo_snes nintenodo_nes other_coleco_colecovision sega_gamegear sega_mastersystem sega_megacd sega_megadrive sega_saturn
 do
   auditsystem ${SYSTEM}
 done
