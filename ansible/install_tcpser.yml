@@ -40,3 +40,9 @@
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "{{ retronas_root }}/bin/tcpser"
 
+  - name: "{{ my_name }} - create config dir"
+    file:
+      path: "{{ retronas_root }}/etc/{{ my_name }}"
+      state: directory
+      mode: '0755'
+
