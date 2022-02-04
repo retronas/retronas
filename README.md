@@ -92,9 +92,11 @@ Due to the retro nature of computing, it's strongly advised to follow some basic
 
 This project is in early development, but already there are a lot of people asking for it to be available as a Docker container for Synology/QNAP/UnRAID style setups.
 
-I don't have access to these, but if you do and have experience with Docker and especially complex networking and would like to contribute, please contact me.
+I don't have access to these, but if you do and have experience with Docker and especially complex networking and service management and would like to contribute, please contact me.
 
-There will be limitations with this method (port conflicts with internal SMB/CIFS, non-IP traffic like AppleTalk/EtherDFS probably won't work, etc).  But for simple SMB/CIFS things like MiSTer and OpenPS2Loader, there could be options to integrate in with these devices. 
+There will be limitations with this method (port conflicts with internal SMB/CIFS, non-IP traffic like AppleTalk/EtherDFS probably won't work, etc), and likewise managing the numerous services that all need to start (and currently rely on systemd).  But for simple SMB/CIFS things like MiSTer and OpenPS2Loader, there could be options to integrate in with these devices.
+
+Client-side documentation is also quite limited.  Making videos showing how to use RetroNAS with retro computers and consoles is time consuming, so if you have done so, please let me know about your videos in the "Discussion" pages.
 
 # Thanks and Credits
 
