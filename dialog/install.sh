@@ -33,6 +33,7 @@ dialog \
   "50" "Syncthing file sync tool" \
   "51" "Cockpit web based Linux system manager" \
   "52" "WebOne - HTTP 1.x proxy for a HTTP 2.x world" \
+  "99" "TCPSER - Hayes compatible software modem setup files" \
   2> ${TDIR}/rn_install
 }
 
@@ -212,6 +213,14 @@ do
     rn_install_deps
     YAML=install_dotnetcore3.yml rn_install_execute
     YAML=install_webone.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  99)
+    # TCPSER
+    clear
+    rn_install_deps
+    YAML=install_tcpser.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;

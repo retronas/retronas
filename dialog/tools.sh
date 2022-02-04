@@ -16,6 +16,7 @@ dialog \
   "01" "Main Menu" \
   "02" "GOG - Download your GOG installers and extras" \
   "03" "Nintendo 3DS QR code generator for FBI homebrew" \
+  "04" "Configure a TCPServ Software Modem" \
   2> ${TDIR}/rn_tools
 }
 
@@ -47,6 +48,11 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
+  04)
+    # TCPSer Setup
+    bash tcpser.sh
+    ;;
+
   *)
     exit 1
     ;;

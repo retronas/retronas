@@ -1,0 +1,42 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "tcpser"
+    - my_file: "install_tcpser"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - make
+      - gcc
+      - coreutils
+      - git
+
+  - name: "{{ my_name }} - Generate scripts"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - create startup service"
+    template:
+      src: templates/{{ my_file }}/tcpser@.service.j2
+      dest: /usr/lib/systemd/system/tcpser@.service
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "{{ retronas_root }}/bin/tcpser"
+

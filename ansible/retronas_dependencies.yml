@@ -18,6 +18,7 @@
       state: directory
     with_items:
       - bin
+      - etc
       - scripts
       - log
 
