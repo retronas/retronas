@@ -19,17 +19,20 @@ dialog \
   --backtitle "RetroNAS" \
   --title "ROM Import" \
   --clear \
-  --defaultno
+  --defaultno \
   --yesno "Import from: ${OLDRNPATH}/romimport \
+  \n
   \nOutput to: ${OLDRNPATH}/roms
   \n
-  \nThis tool uses Smokemonster\'s SMDB databases to import ROMs. \
+  \nThis tool uses Smokemonster's SMDB databases to import ROMs. \
+  \n
   \nROMs are matched by checksum, renamed and placed into the matching directory structure. \
+  \n
   \nExisting ROMs will never be overwritten. \
+  \n
   \nIf ROMs fail to import, it means you have a ROM not in the database (maybe the file is bad?) \
   \n
-  \nDo you wish to proceed?
-  "
+  \nDo you wish to proceed?"  ${MG}
 }
 
 # Confirm the input
