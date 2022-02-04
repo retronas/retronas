@@ -28,12 +28,13 @@ rn_tcpser_edit() {
     --backtitle "RetroNAS" \
     --title "RetroNAS TCPServ menu" \
     --clear \
-    --form "TCPServ Device Config" 10 50 6 \
+    --form "TCPServ Device Config" 15 50 8 \
     "Device:"      1 5 "$DEVICE"  1 20 20 20 \
     "Port:"        2 5 "$LISTEN"  2 20 20 20 \
     "Speed:"       3 5 "$SPEED"   3 20 20 20 \
     "Init String:" 4 5 "$INIT"    4 20 20 20 \
-    "Mode"         5 5 "$MODE" 5 20 20 20 \
+    "Additional"   5 5 ""         5 20 20 20 \
+    "Mode"         6 5 "$MODE"    6 20 20 20 \
     2>$TCPSER_TMP
 
 }
@@ -47,12 +48,13 @@ rn_tcpser_write_envfile() {
     local TCPSER_CONFIG=/opt/retronas/etc/tcpser/tcpser-${DATA[1]}
 
     DEVSTR="d"
-    [ ${DATA[4]} == "VIRTUAL" ] && DEVSTR="v"
+    [ ${DATA[5]} == "VIRTUAL" ] && DEVSTR="v"
 
-    echo "DEVICE=-${DEVSTR} ${DATA[0]}" >  "${TCPSER_CONFIG}"
-    echo "LISTEN=-p ${DATA[1]}" >> "${TCPSER_CONFIG}"
-    echo "SPEED=-s ${DATA[2]}"  >> "${TCPSER_CONFIG}"
-    echo "INIT=-i ${DATA[3]}"   >> "${TCPSER_CONFIG}"
+    echo "DEVICE=-${DEVSTR}${DATA[0]}" >  "${TCPSER_CONFIG}"
+    echo "LISTEN=-p${DATA[1]}" >> "${TCPSER_CONFIG}"
+    echo "SPEED=-s${DATA[2]}"  >> "${TCPSER_CONFIG}"
+    echo "INIT=-i${DATA[3]}"   >> "${TCPSER_CONFIG}"
+    echo "ADDN=${DATA[4]}"     >> "${TCPSER_CONFIG}"
   else
     echo "No data available for LISTEN port, so we won't be writing a file"
   fi
