@@ -96,6 +96,7 @@ echo '------------------------'
 if [ -d "${TDIR}" ]
 then
   echo "Refreshing SMBDs..."
+  umask 0002
   cd ${TDIR}
   git config pull.rebase false
   git reset --hard HEAD
