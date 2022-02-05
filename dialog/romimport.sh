@@ -24,15 +24,15 @@ dialog \
   \n
   \nOutput to: ${OLDRNPATH}/roms
   \n
-  \nThis tool uses Smokemonster's SMDB databases to import ROMs. \
+  \nThis uses Frédéric Mahé's Python scripts and Smokemonster's SMDB databases to import ROMs. \
   \n
-  \nROMs are matched by checksum, renamed and placed into the matching directory structure. \
+  \nROMs are matched by checksum, renamed and placed into the matching directory structure via space-saving hard links. \
   \n
   \nExisting ROMs will never be overwritten. \
   \n
-  \nIf ROMs fail to import, it means you have a ROM not in the database (maybe the file is bad?) \
+  \nIf ROMs fail to import, it means you have a ROM with a checksum not in the database (or maybe the file is bad?), or the system type is not yet added. \
   \n
-  \nDo you wish to proceed?"  ${MG}
+  \nPlace ROMs in the import directory above (use SMB/CIFS/AFP/FTP/SCP/SFTP/whatever) first. Do you wish to proceed?"  ${MG}
 }
 
 # Confirm the input
