@@ -63,7 +63,7 @@ rn_services() {
     "07" "tftpd-hpa" \
     "08" "OpenSSH" \
     "09" "Telnet" \
-    "12" "TNFS for ZX Spectrum" \
+    "12" "TNFS for Atari 8-bit and ZX Spectrum" \
     "50" "Syncthing" \
     "51" "Cockpit" \
     "52" "WebOne" \

@@ -1,7 +1,7 @@
 - hosts: localhost
 
   vars:
-    - my_name: "TNFS ZX Spectrum"
+    - my_name: "TNFS Atari 8-bit and ZX Spectrum"
     - my_file: "install_tnfs"
 
   tasks:
