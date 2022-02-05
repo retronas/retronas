@@ -2,7 +2,7 @@
 
   vars:
     - my_name: "FSP for Swiss"
-    - my_file: "install_fsp.yml"
+    - my_file: "install_fsp"
 
   tasks:
 
