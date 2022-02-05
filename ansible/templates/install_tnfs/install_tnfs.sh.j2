@@ -17,5 +17,6 @@ git clone https://github.com/FujiNetWIFI/spectranet.git
 cd spectranet/tnfs/tnfsd
 
 # Build and install
-make
+rm -rvf bin/*
+make OS=LINUX
 cp -vf bin/tnfsd "${IDIR}/"
