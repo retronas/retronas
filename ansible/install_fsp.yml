@@ -35,12 +35,12 @@
   - name: "{{ my_name }} - build layout"
     file:
       src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/gamecube/swiss{{ item.dest }}"
+      dest: "{{ retronas_path }}/gamecube/swiss/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
     with_items:
-      - { src: "../../roms/nintendo/gamecube/iso", dest: "GAMES" }
+      - { src: "../../roms/nintendo/gamecube/iso", dest: "games" }
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Generate install scripts"
