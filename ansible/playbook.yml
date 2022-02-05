@@ -1,0 +1,9 @@
+- hosts: localhost
+  roles:
+    - role: dependencies
+      become: true
+      tags: [dependencies]
+
+    - role: romdir
+      become: true
+      tags: [romdir]
