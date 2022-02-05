@@ -92,12 +92,20 @@ python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_fold
 echo '------------------------'
 }
 
-echo "Refreshing SMBDs..."
-cd ${TDIR}
-git reset --hard HEAD
-git pull
 
-for SYSTEM in atari_2600 atari_5200 atari_7800 atari_lynx nec_pcengine nec_pcenginecd nintendo_famicom_disk nintendo_gameboy nintendo_gameboyadvance nintendo_gameboycolor nintendo_nintendo64 nintendo_snes nintenodo_nes other_coleco_colecovision sega_gamegear sega_mastersystem sega_megacd sega_megadrive sega_saturn
-do
-  auditsystem ${SYSTEM}
-done
+if [ -d "${TDIR}" ]
+then
+  echo "Refreshing SMBDs..."
+  cd ${TDIR}
+  git config pull.rebase false
+  git reset --hard HEAD
+  git pull
+
+  for SYSTEM in atari_2600 atari_5200 atari_7800 atari_lynx nec_pcengine nec_pcenginecd nintendo_famicom_disk nintendo_gameboy nintendo_gameboyadvance nintendo_gameboycolor nintendo_nintendo64 nintendo_snes nintenodo_nes other_coleco_colecovision sega_gamegear sega_mastersystem sega_megacd sega_megadrive sega_saturn
+  do
+    auditsystem ${SYSTEM}
+  done
+else
+  echo "Cannot locate ROM import SMBD directory. Please add it from the Install Things menu."
+  exit 1
+fi

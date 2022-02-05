@@ -38,11 +38,20 @@ dialog \
 # Confirm the input
 rn_romimport
 CHOICE="$?"
+PAUSEMSG='Press [Enter] to continue...'
 
 case ${CHOICE} in
   0)
     # Yes, run it
-    ${SUCOMMAND} ${RNDIR}/scripts/romimport.sh
+    clear
+    if [ -f "${RNDIR}/scripts/romimport.sh" ]
+    then
+      ${SUCOMMAND} ${RNDIR}/scripts/romimport.sh
+    else
+      echo "Cannot find ROM import tool. Please install it from the Install Things menu."
+    fi
+    echo "${PAUSEMSG}"
+    read -s
     ;;
   *)
     # No, exit
