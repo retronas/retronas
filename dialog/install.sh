@@ -24,6 +24,7 @@ dialog \
   "09" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
   "10" "Telnet - unencrypted remote access shell" \
   "11" "NFS - NFS versions 2, 3 and 4" \
+  "12" "TNFS for ZX Spectrum" \
   "30" "Nintendo 3DS QR code generator for FBI Homebrew" \
   "31" "Sony PS2 OpenPS2Loader SMB config" \
   "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
@@ -132,6 +133,14 @@ do
     clear
     rn_install_deps
     YAML=install_nfs.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  12)
+    # TNFS ZX Spectrum
+    clear
+    rn_install_deps
+    YAML=install_tnfs.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
