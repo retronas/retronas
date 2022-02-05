@@ -65,7 +65,7 @@
       - "nintendo/gameboy"
       - "nintendo/gameboyadvance"
       - "nintendo/gameboycolor"
-      - "nintendo/gamecube"
+      - "nintendo/gamecube/iso"
       - "nintendo/nintendo64"
       - "nintendo/superfamicom"
       - "nintendo/virtualboy" 
