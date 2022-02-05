@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/tnfs"
+mkdir -p "${IDIR}"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf spectranet
+
+# Clone the source
+git clone https://github.com/FujiNetWIFI/spectranet.git
+cd spectranet/tnfs/tnfsd
+
+# Build and install
+make
+cp -vf bin/tnfsd "${IDIR}/"
