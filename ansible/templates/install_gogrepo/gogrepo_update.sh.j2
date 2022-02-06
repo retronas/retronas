@@ -6,4 +6,9 @@ echo ""
 mkdir -p ~/.gogrepo 2>/dev/null
 cd ~/.gogrepo
 
-/opt/retronas/bin/gogrepo/gogrepo.py update ${@}
+if [ "${@}" == "" ]
+then
+  /opt/retronas/bin/gogrepo/gogrepo.py update -skipknown
+else
+  /opt/retronas/bin/gogrepo/gogrepo.py update ${@}
+fi
