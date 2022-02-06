@@ -5,6 +5,7 @@ StartLimitIntervalSec=60
 StartLimitBurst=4
 
 [Service]
+User={{ retronas_user }}
 EnvironmentFile={{ retronas_root }}/etc/tcpser/tcpser-%i
 ExecStart={{ retronas_root }}/bin/tcpser ${DEVICE} ${SPEED} ${LISTEN} ${ADDN}
 Restart=on-failure

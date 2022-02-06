@@ -46,3 +46,8 @@
       state: directory
       mode: '0755'
 
+  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
+    user:
+      name: "{{ retronas_user }}"
+      groups: dialout
+      append: yes

@@ -31,13 +31,15 @@ tcpser_service() {
     --backtitle "RetroNAS" \
     --title "RetroNAS TCPSer $1 menu" \
     --clear \
-    --form "TCPServ Manage Modem ($1 Mode)" 10 50 6 \
-    "Port:"        2 5 "" 2 20 20 20 \
+    --form "TCPServ Manage Modem \
+    \n\nEnter the listen port to $1 the modem" \
+    15 55 6 \
+    "Listen Port:"        2 5 "" 2 20 20 20 \
     2> ${TDIR}/rn_tcpser_service
 
   LISTEN=$(cat ${TDIR}/rn_tcpser_service)
       
-  if [ -f /opt/retronas/etc/tcpser/tcpser-$LISTEN ]
+  if [ !-z $LISTEN && -f /opt/retronas/etc/tcpser/tcpser-$LISTEN ]
   then
     local SERVICE=tcpser@$LISTEN.service
     clear
