@@ -20,7 +20,7 @@
   - name: "{{ my_name }} - symlinks"
     file:
       src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/xbox360{{ item.dest }}"
+      dest: "{{ retronas_path }}/xbox360/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
