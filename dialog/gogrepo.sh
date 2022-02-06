@@ -128,7 +128,7 @@ do
   04)
     # sync games list
     clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${OLDGOGOS}
+    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
     echo "${PAUSEMSG}"
     read -s
     ;;

@@ -4,13 +4,15 @@
 
 # Status
 
-This project is currently in alpha status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly. 
+This project is currently in alpha status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly.
+
+Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. 
 
 Please read the [Wiki](https://github.com/danmons/retronas/wiki) to see what's going on.
 
 # About
 
-RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
+RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi, old computer or even Viritual Machine into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
 
 You can use it as a central file store or backup server for your old and new computers and consoles, a NAS with far more space than your old systems can natively attach, or as a file drop between various computers that may not be compatible with each other's various network file sharing tools. It also offers some interesting tools like proxies to help very old web browsers read and download information from the modern Internet. 
 
@@ -90,9 +92,11 @@ Due to the retro nature of computing, it's strongly advised to follow some basic
 
 This project is in early development, but already there are a lot of people asking for it to be available as a Docker container for Synology/QNAP/UnRAID style setups.
 
-I don't have access to these, but if you do and have experience with Docker and especially complex networking and would like to contribute, please contact me.
+I don't have access to these, but if you do and have experience with Docker and especially complex networking and service management and would like to contribute, please contact me.
 
-There will be limitations with this method (port conflicts with internal SMB/CIFS, non-IP traffic like AppleTalk/EtherDFS probably won't work, etc).  But for simple SMB/CIFS things like MiSTer and OpenPS2Loader, there could be options to integrate in with these devices. 
+There will be limitations with this method (port conflicts with internal SMB/CIFS, non-IP traffic like AppleTalk/EtherDFS probably won't work, etc), and likewise managing the numerous services that all need to start (and currently rely on systemd).  But for simple SMB/CIFS things like MiSTer and OpenPS2Loader, there could be options to integrate in with these devices.
+
+Client-side documentation is also quite limited.  Making videos showing how to use RetroNAS with retro computers and consoles is time consuming, so if you have done so, please let me know about your videos in the "Discussion" pages.
 
 # Thanks and Credits
 

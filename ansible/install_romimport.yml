@@ -40,4 +40,7 @@
       chdir: "{{ retronas_root}}/bin"
       creates: "{{ retronas_root}}/bin/Hardware-Target-Game-Database"
 
-    
+  - name: "{{ my_name }} - set SMBD permissions"
+    shell: "chown -R {{ retronas_user}}:{{ retronas_user }} Hardware-Target-Game-Database"
+    args:
+      chdir: "{{ retronas_root}}/bin"
