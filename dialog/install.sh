@@ -187,6 +187,7 @@ do
     clear
     rn_install_deps
     YAML=install_samba.yml rn_install_execute
+    YAML=install_romdir.yml rn_install_execute
     YAML=install_xbox360.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
