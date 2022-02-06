@@ -39,7 +39,7 @@ tcpser_service() {
 
   LISTEN=$(cat ${TDIR}/rn_tcpser_service)
       
-  if [ !-z $LISTEN && -f /opt/retronas/etc/tcpser/tcpser-$LISTEN ]
+  if [ ! -z $LISTEN ] && [ -f /opt/retronas/etc/tcpser/tcpser-$LISTEN ]
   then
     local SERVICE=tcpser@$LISTEN.service
     clear
