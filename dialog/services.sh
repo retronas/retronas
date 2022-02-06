@@ -63,6 +63,7 @@ rn_services() {
     "07" "tftpd-hpa" \
     "08" "OpenSSH" \
     "09" "Telnet" \
+    "12" "TNFS for Atari 8-bit and ZX Spectrum" \
     "50" "Syncthing" \
     "51" "Cockpit" \
     "52" "WebOne" \
@@ -109,6 +110,10 @@ do
   09)
     # Telnet
     rn_systemd_status "inetd"
+    ;;
+  12)
+    # TNFS ZX Spectrum
+    rn_systemd_status "tnfsd"
     ;;
   32)
     # ps3netsrv
