@@ -1,11 +1,13 @@
 #!/bin/bash
 
+_CONFIG=/opt/retronas/dialog/retronas.cfg
+source $_CONFIG
+
 DISABLE_GITOPS=0
-RN_BASE=/opt/retronas
-CF="$RN_BASE/ansible/retronas_vars.yml"
+CF="$RNDIR/ansible/retronas_vars.yml"
 
+# Check ROOT
 MYID=$( whoami )
-
 if [ "${MYID}" != "root" ]
 then
   echo "This script needs to be run as sudo/root"
@@ -17,12 +19,13 @@ fi
 _usage() {
   echo "Usage $0" 
   echo "-h this help"
+  echo "-d show disclaimer"
   echo "-g disable git operations"
   echo "-t terminal choice (current|vterm)"
   exit 0
 }
 
-OPTSTRING="hgt:"
+OPTSTRING="hdgt:"
 while getopts $OPTSTRING ARG
 do
   case $ARG in
@@ -33,20 +36,31 @@ do
       DISABLE_GITOPS=1
       ;;
     t)
-      TCHOICE=${OPTARG}
+      TCHOICE=${"":-OPTARG}
+      ;;
+    d)
+      # redisplay agreement
+      [ -f $AGREEMENT ] && rm -f $AGREEMENT
       ;;
   esac
 done
 
-cd $RN_BASE
-if [ -f "${CF}" ]
+#### DO NOT TOUCH THE SYSTEM UNTIL USER AGREES TO DISCLAIMER
+bash $RNDIR/dialog/disclaimer.sh
+[ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && exit 1
+
+
+### Setup the ansible_vars file
+cd $RNDIR
+if [ -f "${ANCFG}" ]
 then
   echo "Config file exists, not creating it"
 else
   echo "Config file missing, creating it"
-  cp "${CF}.default" "${CF}"
+  cp "${ANCFG}.default" "${ANCFG}"
 fi
 
+### Check apt cache
 REPODATE=$( find /var/cache/apt -type f -mtime -1 | head -n1 )
 if [ "${REPODATE}" == "" ]
 then
@@ -57,6 +71,7 @@ then
   apt install -y ansible git dialog
 fi
 
+### Manage install through git
 if [ $DISABLE_GITOPS -eq 0 ]
 then
   echo "Fetching latest RetroNAS scripts..."
@@ -67,6 +82,7 @@ else
   echo "Skipping script updates, git operations were disabled"
 fi
 
+### Set term emulation
 if [ -z $TCHOICE ]
 then
   clear
@@ -91,6 +107,7 @@ case "${TCHOICE}" in
     ;;
 esac
 
+### Start RetroNAS
 echo "Running RetroNAS..."
 cd dialog
 bash retronas_main.sh
