@@ -21,6 +21,7 @@ _usage() {
   echo "-h this help"
   echo "-d show disclaimer"
   echo "-g disable git operations"
+  echo "-l show license"
   echo "-t terminal choice (current|vterm)"
   exit 0
 }
@@ -41,6 +42,10 @@ do
     d)
       # redisplay agreement
       [ -f $AGREEMENT ] && rm -f $AGREEMENT
+      ;;
+    l)
+      # display license
+      cat $RNDIR/LICENSE
       ;;
   esac
 done

@@ -4,13 +4,17 @@ _CONFIG=/opt/retronas/dialog/retronas.cfg
 source $_CONFIG
 
 [ -f $AGREEMENT ] && exit 0
+clear
 
 cat << EOF
 =============================================================================
-                          WARNING / TERMS OF USE
+                    WARNING / TERMS OF USE / LICENSE
 =============================================================================
 
           RetroNAS is a compilation of existing opensource products. 
+
+              RetroNAS is made available under the MIT license
+            https://github.com/danmons/retronas/blob/main/LICENSE
 
 Due to the nature of retro computing, many of the tools and protocols used in 
 this project are COMPLETELY INSECURE. It is at the users behest which tools
@@ -51,7 +55,6 @@ first, or run this only on a system dedicated to the purpose.
 
                      https://github.com/danmons/retronas
 
-
               The RetroNAS team are retro computing ENTHUSIASTS 
 
 The RetroNAS team should not be considered computer, networking nor security 
@@ -61,12 +64,16 @@ and/or risks associated with the tools in this project.
           This is NOT A NAS project for use with modern computing
 
 If you understand the above fully and accept all subsequent liabilties as your
-own in use of this project type AGREE at the prompt other wise cease use of this
+own in use of this project type AGREE at the prompt otherwise cease use of this
 project immediately.
 
 EOF
 
-read -p "type AGREE to accept all liabilities in use of this product: " INPUT
+read -p "LICENSE will follow, press Enter"
+echo ""
+cat $RNDIR/LICENSE
+echo ""
+read -p "type AGREE to accept the above in use of this project: " INPUT
 
 case $INPUT in
   "AGREE")
