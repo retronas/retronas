@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DISABLE_GITOPS=0
+RN_BASE=/opt/retronas
+CF="$RN_BASE/ansible/retronas_vars.yml"
+
 MYID=$( whoami )
 
 if [ "${MYID}" != "root" ]
@@ -10,10 +14,31 @@ then
   exit 1
 fi
 
-cd /opt/retronas
+_usage() {
+  echo "Usage $0" 
+  echo "-h this help"
+  echo "-g disable git operations"
+  echo "-t terminal choice (current|vterm)"
+  exit 0
+}
 
-CF="ansible/retronas_vars.yml"
+OPTSTRING="hgt:"
+while getopts $OPTSTRING ARG
+do
+  case $ARG in
+    h)
+      _usage
+      ;;
+    g)
+      DISABLE_GITOPS=1
+      ;;
+    t)
+      TCHOICE=${OPTARG}
+      ;;
+  esac
+done
 
+cd $RN_BASE
 if [ -f "${CF}" ]
 then
   echo "Config file exists, not creating it"
@@ -21,6 +46,7 @@ else
   echo "Config file missing, creating it"
   cp "${CF}.default" "${CF}"
 fi
+
 
 # check if apt was updated in the last 24 hours
 if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
@@ -32,22 +58,32 @@ then
   apt install -y ansible git dialog
 fi
 
-echo "Fetching latest RetroNAS scripts..."
-git config pull.rebase false
-git reset --hard HEAD
-git pull
+if [ $DISABLE_GITOPS -eq 0 ]
+then
+  echo "Fetching latest RetroNAS scripts..."
+  git config pull.rebase false
+  git reset --hard HEAD
+  git pull
+else
+  echo "Skipping script updates, git operations were disabled"
+fi
 
-clear
-echo
-echo "Please choose your terminal encoding:"
-echo
-echo "1) Current - ${TERM} [DEFAULT]"
-echo "2) vt100 (best for telnet and retro computers)"
-echo
-read TCHOICE
+if [ -z $TCHOICE ]
+then
+  clear
+  echo
+  echo "Please choose your terminal encoding:"
+  echo
+  echo "1) Current - ${TERM} [DEFAULT]"
+  echo "2) vt100 (best for telnet and retro computers)"
+  echo
+  read TCHOICE
+else
+  echo "We already know your TERM so moving on"
+fi
 
 case "${TCHOICE}" in
-  2*)
+  VT100|vt100|2*)
     echo "Setting TERM to vt100"
     export TERM=vt100
     ;;

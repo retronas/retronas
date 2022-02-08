@@ -34,6 +34,7 @@
       - "bally/astrocade"
       - "bandai/rx78"
       - "bandai/wonderswan"
+      - "bandai/wonderswancolor"
       - "commodore/amiga"
       - "commodore/amigacd32"
       - "commodore/commodore16"
@@ -49,13 +50,14 @@
       - "mattel/intellivision"
       - "microsoft/msx"
       - "microsoft/xbox"
-      - "microsoft/xbox360"
+      - "microsoft/xbox360/games"
+      - "microsoft/xbox360/iso"
       - "videos/bdiso"
       - "videos/dvdiso"
       - "nec/pc88"
       - "nec/pc98"
-      - "nec/pcengine"
-      - "nec/pcenginecd"
+      - "nec/pcengine/iso"
+      - "nec/pcengine/supergrafx"
       - "nec/pcfx"
       - "nintendo/3ds"
       - "nintendo/ds"
@@ -64,11 +66,12 @@
       - "nintendo/gameboy"
       - "nintendo/gameboyadvance"
       - "nintendo/gameboycolor"
-      - "nintendo/gamecube"
+      - "nintendo/gamecube/iso"
       - "nintendo/nintendo64"
       - "nintendo/superfamicom"
       - "nintendo/virtualboy" 
       - "nintendo/wii"
+      - "other/3do"
       - "other/antonic_galaksija"
       - "other/cambridge_edsac"
       - "other/coleco_colecovision"
@@ -100,6 +103,8 @@
       - "other/vector06c"
       - "other/vectrex"
       - "other/zxevolution"
+      - "sega/32x"
+      - "sega/gamegear"
       - "sega/dreamcast"
       - "sega/mastersystem"
       - "sega/megacd"
@@ -112,6 +117,7 @@
       - "sinclair/zxspectrum"
       - "snk/neogeo"
       - "snk/neogeopocket"
+      - "snk/neogeopocketcolor"
       - "sony/playstation1/iso"
       - "sony/playstation2/cd"
       - "sony/playstation2/dvd"
@@ -155,4 +161,5 @@
       state: link
     with_items:
       - { src: "pcengine", dest: "turbografx16" }
-      - { src: "pcenginecd", dest: "turbografxcd" }
+      - { src: "pcengine/iso", dest: "pcenginecd" }
+      - { src: "pcengine/iso", dest: "turbografxcd" }

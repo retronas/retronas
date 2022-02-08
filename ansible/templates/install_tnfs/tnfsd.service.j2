@@ -1,0 +1,14 @@
+﻿[Unit]
+Description=TNFS for Atari 8-bit and ZX Spectrum
+Documentation=https://github.com/FujiNetWIFI/spectranet
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart={{ retronas_root }}/bin/tnfs/tnfsd {{ retronas_path }} -c {{ retronas_user }}
+TimeoutStopSec=10
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

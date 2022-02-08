@@ -16,6 +16,7 @@ dialog \
   "01" "Main Menu" \
   "02" "GOG - Download your GOG installers and extras" \
   "03" "Nintendo 3DS QR code generator for FBI homebrew" \
+  "05" "ROM import tool via Smokemonster SMDBs" \
   2> ${TDIR}/rn_tools
 }
 
@@ -46,6 +47,11 @@ do
     ${SUCOMMAND} ../scripts/3ds_qr.sh
     echo "${PAUSEMSG}"
     read -s
+    ;;
+  05)
+    # ROM import SMDB
+    clear
+    bash romimport.sh
     ;;
   *)
     exit 1
