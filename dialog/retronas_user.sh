@@ -1,11 +1,12 @@
 #!/bin/bash
 
 clear
-source /opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/dialog/retronas.cfg
+source $_CONFIG
 cd ${DIDIR}
 
 rn_retronas_user() {
-source /opt/retronas/dialog/retronas.cfg
+source $_CONFIG
 dialog \
   --backtitle "RetroNAS" \
   --title "RetroNAS User Configuration" \
@@ -39,12 +40,12 @@ CHOICE="$?"
 
 case ${CHOICE} in
   0)
+    source $_CONFIG
     # Yes, change the value
     # Delete the old value
     sed -i '/retronas_user:/d' "${ANCFG}"
     # Add the new value and re-source
     echo "retronas_user: \"${NEWRNUSER}\"" >> "${ANCFG}"
-    source /opt/retronas/dialog/retronas.cfg
     exit 0
     ;;
   *)
