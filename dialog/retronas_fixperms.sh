@@ -43,6 +43,6 @@ case ${CHOICE} in
   *)
     clear
     chown -Rc ${OLDRNUSER}:${OLDRNUSER} "${OLDRNPATH}/${CHOICE}"
-    chmod -Rc u+rwX "${OLDRNPATH}/${CHOICE}"
+    chmod -Rc a-st,u+rwX,g+rwX,o+rX "${OLDRNPATH}/${CHOICE}"
     ;;
 esac
