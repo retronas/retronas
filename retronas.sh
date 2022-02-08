@@ -53,9 +53,6 @@ if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
 then
   echo "APT repositories are old, syncing..."
   apt update
-
-  echo "Checking prerequisits packages..."
-  apt install -y ansible git dialog
 fi
 
 if [ $DISABLE_GITOPS -eq 0 ]
