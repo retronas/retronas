@@ -121,7 +121,10 @@ do
     ;;
   50)
     # Syncthing file sync tool
-    rn_systemd_status "syncthing@${OLDRNUSER}"
+    #rn_systemd_status "syncthing@${OLDRNUSER}"
+
+    # report on ALL possible syncthing services, see issue #18
+    rn_systemd_status "syncthing*"
     ;;
   51)
     # Cockpit
