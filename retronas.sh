@@ -47,8 +47,9 @@ else
   cp "${CF}.default" "${CF}"
 fi
 
-REPODATE=$( find /var/cache/apt -type f -mtime -1 | head -n1 )
-if [ "${REPODATE}" == "" ]
+
+# check if apt was updated in the last 24 hours
+if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
 then
   echo "APT repositories are old, syncing..."
   apt update
