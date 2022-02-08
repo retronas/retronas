@@ -3,6 +3,96 @@
   vars:
     - my_name: "MiSTer CIFS"
     - my_file: "install_mister_cifs"
+
+    - top_level_paths:
+      - "games"
+      - "saves"
+      - "savestates"
+
+    - system_map:
+      - { src: "acorn/atom", dest: "AcornAtom" }
+      - { src: "acorn/electron", dest: "AcornElectron" }
+      - { src: "tandy/trs80mc10", dest: "AliceMC10" }
+      - { src: "other/mits_altair8800", dest: "Altair8800" }
+      - { src: "commodore/amiga", dest: "Amiga" }
+      - { src: "amstrad/cpc", dest: "Amstrad" }
+      - { src: "amstrad/pcw", dest: "Amstrad PCW" }
+      - { src: "other/intel_x86", dest: "AO486" }
+      - { src: "other/radio_86rk", dest: "APOGEE" }
+      - { src: "apple/appleii", dest: "Apple-II" }
+      - { src: "mattel/aquarius", dest: "AQUARIUS" }
+      - { src: "other/emerson_arcadia2001", dest: "Arcadia" }
+      - { src: "acorn/archimedes", dest: "ARCHIE" }
+      - { src: "bally/astrocade", dest: "Astrocade" }
+      - { src: "atari/2600", dest: "ATARI2600" }
+      - { src: "atari/5200", dest: "ATARI5200" }
+      - { src: "atari/7800", dest: "ATARI7800" }
+      - { src: "atari/800", dest: "ATARI800" }
+      - { src: "atari/lynx", dest: "AtariLynx" }
+      - { src: "atari/st", dest: "AtariST" }
+      - { src: "other/generalinstrument_ay38500", dest: "AY-3-8500" }
+      - { src: "acorn/bbcmicro", dest: "BBCMicro" }
+      - { src: "other/electronika_bk", dest: "BK0011M" }
+      - { src: "commodore/commodore16", dest: "C16" }
+      - { src: "commodore/commodore64", dest: "C64" }
+      - { src: "other/fairchild_channelf", dest: "ChannelF" }
+      - { src: "tandy/trs80colorcomputer2", dest: "CoCo2" }
+      - { src: "tandy/trs80colorcomputer3", dest: "COCO3" }
+      - { src: "other/coleco_colecovision", dest: "Coleco" }
+      - { src: "other/cambridge_edsac", dest: "EDSAC" }
+      - { src: "other/antonic_galaksija", dest: "Galaksija" }
+      - { src: "nintendo/gameboy", dest: "GAMEBOY" }
+      - { src: "nintendo/gameboy", dest: "GAMEBOY2P" }
+      - { src: "nintendo/gameboyadvance", dest: "GBA" }
+      - { src: "nintendo/gameboyadvance", dest: "GBA2P" }
+      - { src: "sega/megadrive", dest: "Genesis" }
+      - { src: "mame/hbmame", dest: "hbmame" }
+      - { src: "mattel/intellivision", dest: "Intellivision" }
+      - { src: "other/interact_homecomputer", dest: "Interact" }
+      - { src: "other/jupiter_ace", dest: "Jupiter" }
+      - { src: "other/videotechnology_vtechlaser", dest: "Laser" }
+      - { src: "apple/macintosh", dest: "MACPLUS" }
+      - { src: "mame/mame", dest: "mame" }
+      - { src: "sega/megacd", dest: "MegaCD" }
+      - { src: "microsoft/msx", dest: "MSX" }
+      - { src: "other/searle_multicomp", dest: "MultiComp" }
+      - { src: "snk/neogeo", dest: "NEOGEO" }
+      - { src: "nintendo/famicom", dest: "NES" }
+      - { src: "other/magnavox_odyssey2", dest: "ODYSSEY2" }
+      - { src: "other/tesla_ondraspo186", dest: "Ondra_SPO186" }
+      - { src: "other/pelvarazdin_orao", dest: "ORAO" }
+      - { src: "other/tangerine_oric", dest: "Oric" }
+      - { src: "nec/pc88", dest: "PC8801" }
+      - { src: "commodore/pet", dest: "PET2001" }
+      - { src: "other/tesla_pmd85", dest: "PMD85" }
+      - { src: "sony/playstation1", dest: "PSX" }
+      - { src: "sinclair/ql", dest: "QL" }
+      - { src: "bandai/rx78", dest: "RX78" }
+      - { src: "other/milesgordon_samcoupe", dest: "SAMCOUPE" }
+      - { src: "sega/saturn", dest: "Saturn" }
+      - { src: "sharp/mz", dest: "SharpMZ" }
+      - { src: "sega/mastersystem", dest: "SMS" }
+      - { src: "nintendo/superfamicom", dest: "SNES" }
+      - { src: "other/sord_m5", dest: "Sord M5" }
+      - { src: "sinclair/zxspectrum", dest: "Spectrum" }
+      - { src: "other/specialist_mx", dest: "SPMX" }
+      - { src: "other/spectravideo_sv328", dest: "SVI328" }
+      - { src: "other/tatung_einstein", dest: "TatungEinstein" }
+      - { src: "nec/pcengine", dest: "TGFX16" }
+      - { src: "nec/pcenginecd", dest: "TGFX16-CD" }
+      - { src: "other/texasinstruments_ti994a", dest: "TI-99_4A" }
+      - { src: "tandy/trs80", dest: "TRS-80" }
+      - { src: "other/zxevolution", dest: "TSConf" }
+      - { src: "other/compukit_uk101", dest: "UK101" }
+      - { src: "other/interton_vc4000", dest: "VC4000" }
+      - { src: "other/vector06c", dest: "VECTOR06" }
+      - { src: "other/vectrex", dest: "VECTREX" }
+      - { src: "commodore/vic20", dest: "VIC20" }
+      - { src: "bandai/wonderswan", dest: "WonderSwan" }
+      - { src: "sharp/x68000", dest: "X68000" }
+      - { src: "sinclair/zx81", dest: "ZX81" }
+      - { src: "sinclair/zxspectrum", dest: "ZXNext" }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -17,96 +107,46 @@
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - build layout"
+  - name: "{{ my_name }} - build top level share paths"
     file:
-      src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/mister/{{ item.dest }}"
+      path: "{{ retronas_path }}/mister/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+      mode: "0775"
+    with_items:
+      "{{ top_level_paths }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - build games layout"
+    file:
+      src: "../../roms/{{ item.src }}"
+      dest: "{{ retronas_path }}/mister/games/{{ item.dest }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
     with_items:
-      - { src: "../roms/acorn/atom", dest: "AcornAtom" }
-      - { src: "../roms/acorn/electron", dest: "AcornElectron" }
-      - { src: "../roms/tandy/trs80mc10", dest: "AliceMC10" }
-      - { src: "../roms/other/mits_altair8800", dest: "Altair8800" }
-      - { src: "../roms/commodore/amiga", dest: "Amiga" }
-      - { src: "../roms/amstrad/cpc", dest: "Amstrad" }
-      - { src: "../roms/amstrad/pcw", dest: "Amstrad PCW" }
-      - { src: "../roms/other/intel_x86", dest: "AO486" }
-      - { src: "../roms/other/radio_86rk", dest: "APOGEE" }
-      - { src: "../roms/apple/appleii", dest: "Apple-II" }
-      - { src: "../roms/mattel/aquarius", dest: "AQUARIUS" }
-      - { src: "../roms/other/emerson_arcadia2001", dest: "Arcadia" }
-      - { src: "../roms/acorn/archimedes", dest: "ARCHIE" }
-      - { src: "../roms/bally/astrocade", dest: "Astrocade" }
-      - { src: "../roms/atari/2600", dest: "ATARI2600" }
-      - { src: "../roms/atari/5200", dest: "ATARI5200" }
-      - { src: "../roms/atari/7800", dest: "ATARI7800" }
-      - { src: "../roms/atari/800", dest: "ATARI800" }
-      - { src: "../roms/atari/lynx", dest: "AtariLynx" }
-      - { src: "../roms/atari/st", dest: "AtariST" }
-      - { src: "../roms/other/generalinstrument_ay38500", dest: "AY-3-8500" }
-      - { src: "../roms/acorn/bbcmicro", dest: "BBCMicro" }
-      - { src: "../roms/other/electronika_bk", dest: "BK0011M" }
-      - { src: "../roms/commodore/commodore16", dest: "C16" }
-      - { src: "../roms/commodore/commodore64", dest: "C64" }
-      - { src: "../roms/other/fairchild_channelf", dest: "ChannelF" }
-      - { src: "../roms/tandy/trs80colorcomputer2", dest: "CoCo2" }
-      - { src: "../roms/tandy/trs80colorcomputer3", dest: "COCO3" }
-      - { src: "../roms/other/coleco_colecovision", dest: "Coleco" }
-      - { src: "../roms/other/cambridge_edsac", dest: "EDSAC" }
-      - { src: "../roms/other/antonic_galaksija", dest: "Galaksija" }
-      - { src: "../roms/nintendo/gameboy", dest: "GAMEBOY" }
-      - { src: "../roms/nintendo/gameboy", dest: "GAMEBOY2P" }
-      - { src: "../roms/nintendo/gameboyadvance", dest: "GBA" }
-      - { src: "../roms/nintendo/gameboyadvance", dest: "GBA2P" }
-      - { src: "../roms/sega/megadrive", dest: "Genesis" }
-      - { src: "../roms/mame/hbmame", dest: "hbmame" }
-      - { src: "../roms/mattel/intellivision", dest: "Intellivision" }
-      - { src: "../roms/other/interact_homecomputer", dest: "Interact" }
-      - { src: "../roms/other/jupiter_ace", dest: "Jupiter" }
-      - { src: "../roms/other/videotechnology_vtechlaser", dest: "Laser" }
-      - { src: "../roms/apple/macintosh", dest: "MACPLUS" }
-      - { src: "../roms/mame/mame", dest: "mame" }
-      - { src: "../roms/sega/megacd", dest: "MegaCD" }
-      - { src: "../roms/microsoft/msx", dest: "MSX" }
-      - { src: "../roms/other/searle_multicomp", dest: "MultiComp" }
-      - { src: "../roms/snk/neogeo", dest: "NEOGEO" }
-      - { src: "../roms/nintendo/famicom", dest: "NES" }
-      - { src: "../roms/other/magnavox_odyssey2", dest: "ODYSSEY2" }
-      - { src: "../roms/other/tesla_ondraspo186", dest: "Ondra_SPO186" }
-      - { src: "../roms/other/pelvarazdin_orao", dest: "ORAO" }
-      - { src: "../roms/other/tangerine_oric", dest: "Oric" }
-      - { src: "../roms/nec/pc88", dest: "PC8801" }
-      - { src: "../roms/commodore/pet", dest: "PET2001" }
-      - { src: "../roms/other/tesla_pmd85", dest: "PMD85" }
-      - { src: "../roms/sony/playstation1", dest: "PSX" }
-      - { src: "../roms/sinclair/ql", dest: "QL" }
-      - { src: "../roms/bandai/rx78", dest: "RX78" }
-      - { src: "../roms/other/milesgordon_samcoupe", dest: "SAMCOUPE" }
-      - { src: "../roms/sega/saturn", dest: "Saturn" }
-      - { src: "../roms/sharp/mz", dest: "SharpMZ" }
-      - { src: "../roms/sega/mastersystem", dest: "SMS" }
-      - { src: "../roms/nintendo/superfamicom", dest: "SNES" }
-      - { src: "../roms/other/sord_m5", dest: "Sord M5" }
-      - { src: "../roms/sinclair/zxspectrum", dest: "Spectrum" }
-      - { src: "../roms/other/specialist_mx", dest: "SPMX" }
-      - { src: "../roms/other/spectravideo_sv328", dest: "SVI328" }
-      - { src: "../roms/other/tatung_einstein", dest: "TatungEinstein" }
-      - { src: "../roms/nec/pcengine", dest: "TGFX16" }
-      - { src: "../roms/nec/pcenginecd", dest: "TGFX16-CD" }
-      - { src: "../roms/other/texasinstruments_ti994a", dest: "TI-99_4A" }
-      - { src: "../roms/tandy/trs80", dest: "TRS-80" }
-      - { src: "../roms/other/zxevolution", dest: "TSConf" }
-      - { src: "../roms/other/compukit_uk101", dest: "UK101" }
-      - { src: "../roms/other/interton_vc4000", dest: "VC4000" }
-      - { src: "../roms/other/vector06c", dest: "VECTOR06" }
-      - { src: "../roms/other/vectrex", dest: "VECTREX" }
-      - { src: "../roms/commodore/vic20", dest: "VIC20" }
-      - { src: "../roms/bandai/wonderswan", dest: "WonderSwan" }
-      - { src: "../roms/sharp/x68000", dest: "X68000" }
-      - { src: "../roms/sinclair/zx81", dest: "ZX81" }
-      - { src: "../roms/sinclair/zxspectrum", dest: "ZXNext" }
+      "{{ system_map }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - build saves layout"
+    file:
+      dest: "{{ retronas_path }}/mister/saves/{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+    with_items:
+      "{{ system_map }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - build savestates layout"
+    file:
+      dest: "{{ retronas_path }}/mister/savestates/{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      state: directory
+    with_items:
+      "{{ system_map }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure includes file"
