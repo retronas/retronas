@@ -15,8 +15,8 @@ dialog \
   \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing" \
-  "03" "Netatalk2 - AppleTalk and AppleShare file sharing" \
-  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
+  "03" "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)" \
+  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)" \
   "05" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
   "06" "lighttpd - HTTP/Web server" \
   "07" "ProFTPd - FTP, File Transfer Protocol file sharing" \
