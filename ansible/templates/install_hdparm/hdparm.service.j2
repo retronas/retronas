@@ -1,0 +1,11 @@
+﻿[Unit]
+Description=HDPARM HDD No Sleep
+
+[Service]
+Type=simple
+ExecStart={{ retronas_root }}/scripts/hdparm/hdparm-nosleep.sh
+TimeoutStopSec=10
+Restart=never
+
+[Install]
+WantedBy=default.target

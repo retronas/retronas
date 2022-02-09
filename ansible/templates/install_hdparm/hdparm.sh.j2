@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Prevent a disk going to sleep by reading a sector
+#
+
+# list the drives that need to be punished
+NOSLEEP=(
+  /dev/sda
+)
+
+
+# REQUIREMENTS
+REQFAIL=0
+[ ! -x /usr/sbin/hdparm ] && echo "hdparm not executable" && REQFAIL=1
+[ ! -x /usr/bin/shuf ] && echo "shuf not executable" && REQFAIL=1
+[ $REQFAIL -ne 0 ] && echo "Failed requiements, check previous messages" && exit $REQFAIL
+
+
+for DISK in ${NOSLEEP[@]}
+do
+        MAXSECTOR=$(hdparm -I $DISK | awk '/LBA48/{print $5}')
+        RANDSECTOR=$(shuf -i 1-${MAXSECTOR} -n 1)
+        echo "Reading ${RANDSECTOR} (max:${MAXSECTOR}) from ${DISK}"
+        hdparm --readsector $RANDSECTOR $DISK &>/dev/null
+done
