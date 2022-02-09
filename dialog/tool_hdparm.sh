@@ -94,7 +94,7 @@ do
       ;;
     21)
       # Query Service
-      RN_SYSTEMD_STATUS ${SERVICE}.${UNITTYPE}
+      RN_SYSTEMD_STATUS ${SERVICE}*
       ;;
     22)
       # Stop Service
