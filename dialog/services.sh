@@ -63,6 +63,7 @@ rn_services() {
     "07" "tftpd-hpa" \
     "08" "OpenSSH" \
     "09" "Telnet" \
+    "12" "TNFS for Atari 8-bit and ZX Spectrum" \
     "50" "Syncthing" \
     "51" "Cockpit" \
     "52" "WebOne" \
@@ -110,13 +111,20 @@ do
     # Telnet
     rn_systemd_status "inetd"
     ;;
+  12)
+    # TNFS ZX Spectrum
+    rn_systemd_status "tnfsd"
+    ;;
   32)
     # ps3netsrv
     rn_systemd_status "ps3netsrv"
     ;;
   50)
     # Syncthing file sync tool
-    rn_systemd_status "syncthing@${OLDRNUSER}"
+    #rn_systemd_status "syncthing@${OLDRNUSER}"
+
+    # report on ALL possible syncthing services, see issue #18
+    rn_systemd_status "syncthing*"
     ;;
   51)
     # Cockpit

@@ -15,8 +15,8 @@ dialog \
   \nPlease select an option to install" ${MG} 10 \
   "01" "Main Menu" \
   "02" "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing" \
-  "03" "Netatalk2 - AppleTalk and AppleShare file sharing" \
-  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only" \
+  "03" "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)" \
+  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)" \
   "05" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
   "06" "lighttpd - HTTP/Web server" \
   "07" "ProFTPd - FTP, File Transfer Protocol file sharing" \
@@ -24,12 +24,14 @@ dialog \
   "09" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
   "10" "Telnet - unencrypted remote access shell" \
   "11" "NFS - NFS versions 2, 3 and 4" \
+  "12" "TNFS for Atari 8-bit and ZX Spectrum" \
   "30" "Nintendo 3DS QR code generator for FBI Homebrew" \
   "31" "Sony PS2 OpenPS2Loader SMB config" \
   "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
   "33" "MiSTer FPGA CIFS config" \
   "34" "Microsoft XBox360 SMB config" \
   "35" "gogrepo - Download your GOG game installers" \
+  "36" "ROM import from Smokemonster SMDBs" \
   "50" "Syncthing file sync tool" \
   "51" "Cockpit web based Linux system manager" \
   "52" "WebOne - HTTP 1.x proxy for a HTTP 2.x world" \
@@ -135,6 +137,14 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
+  12)
+    # TNFS ZX Spectrum
+    clear
+    rn_install_deps
+    YAML=install_tnfs.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
   30)
     # Nintendo 3DS QR Codes
     clear
@@ -178,6 +188,7 @@ do
     clear
     rn_install_deps
     YAML=install_samba.yml rn_install_execute
+    YAML=install_romdir.yml rn_install_execute
     YAML=install_xbox360.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
@@ -187,6 +198,15 @@ do
     clear
     rn_install_deps
     YAML=install_gogrepo.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  36)
+    # romimport smbd
+    clear
+    rn_install_deps
+    YAML=install_romdir.yml rn_install_execute
+    YAML=install_romimport.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;

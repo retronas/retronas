@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/fsp"
+mkdir -p "${IDIR}/etc"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf fsp
+
+# Clone the source code from SourceForge
+git clone https://git.code.sf.net/p/fsp/code fsp
+cd fsp
+
+# Build and install as per fsp documentation 
+scons prefix="${IDIR}" install
