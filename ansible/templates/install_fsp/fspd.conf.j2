@@ -7,10 +7,10 @@ listenaddress 0.0.0.0
 # MTU 1500 - 40 byte IP/UDP overhead
 packetsize 1460
 # Top level dir for anon connections
-homedir {{ retronas_path }}/gamecube/swiss/games
+homedir {{ retronas_path }}/gamecube/swiss
 # Don't allow clients outside of top level dir
 homedir_restricted yes
-tmpdir /tmp
+tmpdir tmp
 pidlogname /tmp/fspd.pid
 grabcommand on
 vercommand on
