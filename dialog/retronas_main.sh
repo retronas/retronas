@@ -25,6 +25,7 @@ dialog \
   "3" "Install things" \
   "4" "Check services" \
   "5" "Run tools and scripts" \
+  "6" "Advanced Tools" \
   2>${TDIR}/rn_main
 }
 
@@ -44,6 +45,9 @@ do
       ;;
     5)
       bash tools.sh
+      ;;
+    6)
+      bash advanced.sh
       ;;
     *)
       clear
