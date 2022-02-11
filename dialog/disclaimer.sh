@@ -22,7 +22,7 @@ echo ""
 read -p "type AGREE to accept the above in use of this project: " INPUT
 
 case $INPUT in
-  "AGREE")
+  "agree"|"AGREE")
     touch $AGREEMENT
     exit 0
     ;;
