@@ -2,137 +2,95 @@
 
 _CONFIG=/opt/retronas/dialog/retronas.cfg
 source $_CONFIG
+source ${DIDIR}/common.sh
 cd ${DIDIR}
 
-#
-# GENERIC function to call a command format output
-#
-rn_service_status() {
-  source $_CONFIG
-  local CMD="$1"
-
-  clear
-  echo "${CMD}"
-  echo ; $CMD ; echo
-  echo "${PAUSEMSG}"
-  read -s
-}
-
-#
-# SYSTEMD status checks
-#
-rn_systemd_status() {
-  source $_CONFIG
-  local SERVICE="$1"
-  local SC="systemctl --no-pager --full"
-
-  rn_service_status "${SC} status ${SERVICE}"
-
-}
-
-#
-# DIRECTLY call a status command, and pass args
-#
-rn_direct_status() {
-  source $_CONFIG
-  local SERVICE="$1"
-  local ARGS="$2"
-
-  if [ -x "$(which $SERVICE)" ]
-  then
-    rn_service_status "${SERVICE} ${ARGS}"
-  fi
-
-}
-
 rn_services() {
-  source $_CONFIG
-  dialog \
-    --backtitle "RetroNAS" \
-    --title "RetroNAS Services menu" \
-    --clear \
-    --menu "My IP addresses: ${MY_IPS} \
-    \n
-    \nPlease select an service to check" ${MG} 10 \
-    "01" "Main Menu" \
-    "02" "Samba" \
-    "03" "Netatalk3" \
-    "04" "EtherDFS" \
-    "05" "lighttpd" \
-    "06" "ProFTPd" \
-    "07" "tftpd-hpa" \
-    "08" "OpenSSH" \
-    "09" "Telnet" \
-    "12" "TNFS for Atari 8-bit and ZX Spectrum" \
-    "50" "Syncthing" \
-    "51" "Cockpit" \
-    "52" "WebOne" \
-    2> ${TDIR}/rn_services
+
+  local MENU_ARRAY=(
+    01 "Main Menu"
+    02 "Samba"
+    03 "Netatalk3"
+    04 "EtherDFS"
+    05 "lighttpd"
+    06 "ProFTPd"
+    07 "tftpd-hpa"
+    08 "OpenSSH"
+    09 "Telnet"
+    12 "TNFS for Atari 8-bit and ZX Spectrum"
+    32 "ps3netsrv"
+    50 "Syncthing"
+    51 "Cockpit"
+    52 "WebOne"
+  )
+
+  local MENU_BLURB="Please select an service to check"
+
+  DLG_MENU "Services Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+
 }
 
-clear
+CLEAR
 while true
 do
   rn_services
-  CHOICE=$( cat ${TDIR}/rn_services )
-  PAUSEMSG='Press [Enter] to continue...'
   case ${CHOICE} in
   02)
     # Samba
-    rn_systemd_status "smbd"
-    rn_direct_status "smbstatus" "-vv"
+    RN_SYSTEMD_STATUS "smbd"
+    RN_DIRECT_STATUS "smbstatus" "-vv"
     ;;
   03)
     # Netatalk3
-    rn_systemd_status "netatalk"
+    RN_SYSTEMD_STATUS "netatalk"
     ;;
   04)
     # EtherDFS
-    rn_systemd_status "etherdfs"
+    RN_SYSTEMD_STATUS "etherdfs"
     ;;
 
   05)
     # lighttpd
-    rn_systemd_status "lighttpd"
+    RN_SYSTEMD_STATUS "lighttpd"
     ;;
   06)
     # ProFTPd
-    rn_systemd_status "proftpd"
+    RN_SYSTEMD_STATUS "proftpd"
     ;;
   07)
     # tftpd-hpa
-    rn_systemd_status "tftpd-hpa"
+    RN_SYSTEMD_STATUS "tftpd-hpa"
     ;;
   08)
     # OpenSSH
-    rn_systemd_status "ssh"
+    RN_SYSTEMD_STATUS "ssh"
     ;;
   09)
     # Telnet
-    rn_systemd_status "inetd"
+    RN_SYSTEMD_STATUS "inetd"
     ;;
   12)
     # TNFS ZX Spectrum
-    rn_systemd_status "tnfsd"
+    RN_SYSTEMD_STATUS "tnfsd"
     ;;
   32)
     # ps3netsrv
-    rn_systemd_status "ps3netsrv"
+    RN_SYSTEMD_STATUS "ps3netsrv"
     ;;
   50)
     # Syncthing file sync tool
-    #rn_systemd_status "syncthing@${OLDRNUSER}"
+    #RN_SYSTEMD_STATUS "syncthing@${OLDRNUSER}"
 
     # report on ALL possible syncthing services, see issue #18
-    rn_systemd_status "syncthing*"
+    RN_SYSTEMD_STATUS "syncthing*"
     ;;
   51)
     # Cockpit
-    rn_systemd_status "cockpit"
+    RN_SYSTEMD_STATUS "cockpit"
     ;;
   52)
     # WebOne
-    rn_systemd_status "webone"
+    RN_SYSTEMD_STATUS "webone"
     ;;
   *)
     exit 1
