@@ -3,3 +3,4 @@ scripts
 src
 log
 ansible/retronas_vars.yml
+user_agreement
