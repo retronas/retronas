@@ -7,17 +7,16 @@ source ${DIDIR}/common.sh
 cd ${DIDIR}
 
 rn_advanced() {
-source $_CONFIG
-dialog \
-  --backtitle "RetroNAS" \
-  --title "RetroNAS Advanced Tools menu" \
-  --clear \
-  --menu "My IP addresses: ${MY_IPS} \
-  \n
-  \nPlease select an tool to install" ${MG} 10 \
-  "01" "Main Menu" \
-  "02" "hdparm - manage hdd standy mode etc" \
-  2> ${TDIR}/rn_advanced
+  
+  local MENU_ARRAY=(
+    01 "Main Menu"
+    02 "hdparm - manage hdd standy mode etc"
+  )
+
+  local MENU_BLURB="\nPlease select an tool to install"
+
+  DLG_MENU "Advanced Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+
 }
 
 DROP_ROOT
@@ -25,7 +24,6 @@ CLEAR
 while true
 do
   rn_advanced
-  CHOICE=$( cat ${TDIR}/rn_advanced )
   case ${CHOICE} in
   01)
     EXEC_SCRIPT retronas_main.sh
