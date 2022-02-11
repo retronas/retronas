@@ -30,8 +30,6 @@ rn_retronas_path_confirm() {
   DLG_YN "Confirm" "${MENU_BLURB}"
 
   local CHOICE=$?
-  echo $CHOICE
-  PAUSE
   case ${CHOICE} in
     0)
       source $_CONFIG
