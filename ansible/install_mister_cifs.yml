@@ -6,95 +6,15 @@
 
     - top_level_paths:
       - { name: "games", enabled: "yes" }
-      - { name: "saves", enabled: "yes" }
-      - { name: "savestates", enabled: "yes" }
+      - { name: "saves", enabled: "no" }
+      - { name: "savestates", enabled: "no" }
       - { name: "BIOS", enabled: "no" }
 
-    - system_map:
-      - { src: "acorn/atom", dest: "AcornAtom" }
-      - { src: "acorn/electron", dest: "AcornElectron" }
-      - { src: "tandy/trs80mc10", dest: "AliceMC10" }
-      - { src: "other/mits_altair8800", dest: "Altair8800" }
-      - { src: "commodore/amiga", dest: "Amiga" }
-      - { src: "amstrad/cpc", dest: "Amstrad" }
-      - { src: "amstrad/pcw", dest: "Amstrad PCW" }
-      - { src: "other/intel_x86", dest: "AO486" }
-      - { src: "other/radio_86rk", dest: "APOGEE" }
-      - { src: "apple/appleii", dest: "Apple-II" }
-      - { src: "mattel/aquarius", dest: "AQUARIUS" }
-      - { src: "other/emerson_arcadia2001", dest: "Arcadia" }
-      - { src: "acorn/archimedes", dest: "ARCHIE" }
-      - { src: "bally/astrocade", dest: "Astrocade" }
-      - { src: "atari/2600", dest: "ATARI2600" }
-      - { src: "atari/5200", dest: "ATARI5200" }
-      - { src: "atari/7800", dest: "ATARI7800" }
-      - { src: "atari/800", dest: "ATARI800" }
-      - { src: "atari/lynx", dest: "AtariLynx" }
-      - { src: "atari/st", dest: "AtariST" }
-      - { src: "other/generalinstrument_ay38500", dest: "AY-3-8500" }
-      - { src: "acorn/bbcmicro", dest: "BBCMicro" }
-      - { src: "other/electronika_bk", dest: "BK0011M" }
-      - { src: "commodore/commodore16", dest: "C16" }
-      - { src: "commodore/commodore64", dest: "C64" }
-      - { src: "other/fairchild_channelf", dest: "ChannelF" }
-      - { src: "tandy/trs80colorcomputer2", dest: "CoCo2" }
-      - { src: "tandy/trs80colorcomputer3", dest: "COCO3" }
-      - { src: "other/coleco_colecovision", dest: "Coleco" }
-      - { src: "other/cambridge_edsac", dest: "EDSAC" }
-      - { src: "other/antonic_galaksija", dest: "Galaksija" }
-      - { src: "nintendo/gameboy", dest: "GAMEBOY" }
-      - { src: "nintendo/gameboy", dest: "GAMEBOY2P" }
-      - { src: "nintendo/gameboyadvance", dest: "GBA" }
-      - { src: "nintendo/gameboyadvance", dest: "GBA2P" }
-      - { src: "sega/megadrive", dest: "Genesis" }
-      - { src: "mame/hbmame", dest: "hbmame" }
-      - { src: "mattel/intellivision", dest: "Intellivision" }
-      - { src: "other/interact_homecomputer", dest: "Interact" }
-      - { src: "other/jupiter_ace", dest: "Jupiter" }
-      - { src: "other/videotechnology_vtechlaser", dest: "Laser" }
-      - { src: "apple/macintosh", dest: "MACPLUS" }
-      - { src: "mame/mame", dest: "mame" }
-      - { src: "sega/megacd", dest: "MegaCD" }
-      - { src: "microsoft/msx", dest: "MSX" }
-      - { src: "other/searle_multicomp", dest: "MultiComp" }
-      - { src: "snk/neogeo", dest: "NEOGEO" }
-      - { src: "nintendo/famicom", dest: "NES" }
-      - { src: "other/magnavox_odyssey2", dest: "ODYSSEY2" }
-      - { src: "other/tesla_ondraspo186", dest: "Ondra_SPO186" }
-      - { src: "other/pelvarazdin_orao", dest: "ORAO" }
-      - { src: "other/tangerine_oric", dest: "Oric" }
-      - { src: "nec/pc88", dest: "PC8801" }
-      - { src: "commodore/pet", dest: "PET2001" }
-      - { src: "other/tesla_pmd85", dest: "PMD85" }
-      - { src: "sony/playstation1", dest: "PSX" }
-      - { src: "sinclair/ql", dest: "QL" }
-      - { src: "bandai/rx78", dest: "RX78" }
-      - { src: "other/milesgordon_samcoupe", dest: "SAMCOUPE" }
-      - { src: "sega/saturn", dest: "Saturn" }
-      - { src: "sharp/mz", dest: "SharpMZ" }
-      - { src: "sega/mastersystem", dest: "SMS" }
-      - { src: "nintendo/superfamicom", dest: "SNES" }
-      - { src: "other/sord_m5", dest: "Sord M5" }
-      - { src: "sinclair/zxspectrum", dest: "Spectrum" }
-      - { src: "other/specialist_mx", dest: "SPMX" }
-      - { src: "other/spectravideo_sv328", dest: "SVI328" }
-      - { src: "other/tatung_einstein", dest: "TatungEinstein" }
-      - { src: "nec/pcengine", dest: "TGFX16" }
-      - { src: "nec/pcenginecd", dest: "TGFX16-CD" }
-      - { src: "other/texasinstruments_ti994a", dest: "TI-99_4A" }
-      - { src: "tandy/trs80", dest: "TRS-80" }
-      - { src: "other/zxevolution", dest: "TSConf" }
-      - { src: "other/compukit_uk101", dest: "UK101" }
-      - { src: "other/interton_vc4000", dest: "VC4000" }
-      - { src: "other/vector06c", dest: "VECTOR06" }
-      - { src: "other/vectrex", dest: "VECTREX" }
-      - { src: "commodore/vic20", dest: "VIC20" }
-      - { src: "bandai/wonderswan", dest: "WonderSwan" }
-      - { src: "sharp/x68000", dest: "X68000" }
-      - { src: "sinclair/zx81", dest: "ZX81" }
-      - { src: "sinclair/zxspectrum", dest: "ZXNext" }
 
   tasks:
+
+  - name: "{{ my_name }} - Include systems map"
+    include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
@@ -110,7 +30,7 @@
 
   - name: "{{ my_name }} - removing old symlink layout see issue #21"
     file:
-      path:  "{{ retronas_path }}/mister/{{ item.dest }}"
+      path:  "{{ retronas_path }}/mister/{{ item.mister }}"
       state: absent
     with_items:
       - "{{ system_map }}"
@@ -132,7 +52,7 @@
   - name: "{{ my_name }} - build directory layout"
     file:
       src: "../../roms/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.dest }}"
+      dest: "{{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
