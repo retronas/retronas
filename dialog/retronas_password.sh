@@ -34,12 +34,12 @@ case ${CHOICE} in
     echo
     passwd ${OLDRNUSER}
     echo
-    SMB_SYSTEMD="/lib/systemd/system/smbd.service"
-    if [ -f "/usr/${SMB_SYSTEMD}" ] || [ -f "${SMB_SYSTEMD}" ]
+    SMB_SYSTEMD=$(systemctl show smbd.service --full --property FragmentPath --value)
+    if [ ! -z "${SMB_SYSTEMD}" ] && [ -f "${SMB_SYSTEMD}" ]
     then
     echo "Samba detected. Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
     echo
-    smbpasswd -a ${OLDRNUSER}
+    smbpasswd -a ${OLDRNUSER} 2>/dev/null
     echo
     systemctl restart avahi-daemon smbd nmbd
     echo
