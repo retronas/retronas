@@ -5,7 +5,6 @@ set -u
 _CONFIG=/opt/retronas/dialog/retronas.cfg
 source $_CONFIG
 
-export IFS=$'\n'
 export SC="systemctl --no-pager --full"
 
 ## If this is run as root, switch to our RetroNAS user
@@ -117,7 +116,7 @@ RN_SYSTEMD() {
   local SERVICE="$1"
   local COMMAND="${2:-status}"
 
-  RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
+  RN_SERVICE_STATUS ${SC} ${COMMAND} ${SERVICE}
 
 }
 
@@ -144,6 +143,8 @@ RN_DIRECT_STATUS() {
 # MENU
 #
 DLG_MENU() {
+
+    local IFS=$'\n'
     local TITLE="$1"
     local -n MENU_ARRAY=$2
     local MENU_H=$3
@@ -165,6 +166,7 @@ DLG_MENU() {
 # YES/NO
 #
 DLG_YN() {
+    local IFS=$'\n'
     local TITLE="$1"
     local MENU_BLURB=$2
 
@@ -185,6 +187,7 @@ DLG_YN() {
 # DIRECTORY SELECTOR
 #
 DLG_DSELECT() {
+    local IFS=$'\n'
     local TITLE="$1"
     local MENU_BLURB=$2
 
@@ -204,6 +207,7 @@ DLG_DSELECT() {
 # DIRECTORY SELECTOR
 #
 DLG_INPUTBOX() {
+    local IFS=$'\n'
     local TITLE="$1"
     local MENU_BLURB=$2
     local MENU_INIT=$3
