@@ -1,10 +1,11 @@
-﻿[Unit]
+[Unit]
 Description=FSP File Service Protocol
 Documentation=http://fsp.sourceforge.net
 Requires=network-online.target
 After=network-online.target
 
 [Service]
+User={{ retronas_user }}
 Type=simple
 Environment="PATH={{ retronas_root }}/bin/fsp:$PATH"
 ExecStart={{ retronas_root }}/bin/fsp/bin/fspd

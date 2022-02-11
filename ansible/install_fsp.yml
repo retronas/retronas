@@ -29,7 +29,8 @@
       state: directory
       mode: "0775"
     with_items:
-      - saves
+      - swiss
+      - tmp
     notify: "{{ my_name }} - Restart service"
       
   - name: "{{ my_name }} - build layout"
@@ -64,6 +65,34 @@
       owner: root
       group: root
       mode: 0755 
+
+  - name: "{{ my_name }} - Set write permissions top level"
+    copy:
+      content: ""
+      dest: "{{ retronas_path }}/gamecube/swiss/{{ item }}"
+      force: no
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: 0644
+    with_items: 
+      - .FSP_OK_ADD
+      - .FSP_OK_DEL
+      - .FSP_OK_MKDIR
+      - .FSP_OK_RENAME
+
+  - name: "{{ my_name }} - Set write permissions swiss subdir"
+    copy:
+      content: ""
+      dest: "{{ retronas_path }}/gamecube/swiss/swiss/{{ item }}"
+      force: no
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: 0644
+    with_items:
+      - .FSP_OK_ADD
+      - .FSP_OK_DEL
+      - .FSP_OK_MKDIR
+      - .FSP_OK_RENAME
 
   - name: "{{ my_name }} - create startup service"
     template:

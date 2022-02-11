@@ -34,7 +34,8 @@ case ${CHOICE} in
     echo
     passwd ${OLDRNUSER}
     echo
-    if [ -f "/usr/lib/systemd/system/smbd.service" ]
+    SMB_SYSTEMD="/lib/systemd/system/smbd.service"
+    if [ -f "/usr/${SMB_SYSTEMD}" ] || [ -f "${SMB_SYSTEMD}" ]
     then
     echo "Samba detected. Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
     echo

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -u
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+REPO=https://github.com/FozzTexx/tcpser.git
+
+
+if [ ! -x "${BINDIR}/tcpser" ]
+then
+    echo "tcpser not found, so we'll build it!"
+
+    echo "Configuring build directories..."
+    [ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+    mkdir -p "${SRCDIR}"
+    cd "${SRCDIR}"
+
+    echo "Downloading git source ..."
+    git clone $REPO
+    cd "${SRCDIR}/$(basename $REPO .git)"
+
+    echo "Patching Makefile to build for pthread"
+    sed -i 's/^LDFLAGS\s=.*$/LDFLAGS = -pthread -lpthread/' Makefile
+
+    echo "Building"
+    make
+
+    echo "Moving binary to RetroNAS bin dir..."
+    mkdir -p "${BINDIR}" 2>/dev/null
+    mv -vf tcpser "${BINDIR}/"
+
+    echo "Cleaning up..."
+    [ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+
+    echo "All done!"
+fi
+

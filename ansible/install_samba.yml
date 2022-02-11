@@ -15,6 +15,7 @@
     with_items:
       - avahi-daemon
       - samba
+      - samba-vfs-modules
 
   - name: "{{ my_name }} - configure retro protocols"
     ini_file: 
