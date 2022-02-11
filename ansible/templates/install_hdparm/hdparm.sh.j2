@@ -14,11 +14,10 @@ REQFAIL=0
 [ ! -x /usr/bin/shuf ] && echo "shuf not executable" && REQFAIL=1
 [ $REQFAIL -ne 0 ] && echo "Failed requiements, check previous messages" && exit $REQFAIL
 
-
 for DISK in ${NOSLEEP[@]}
 do
         [ ! -r $DISK ] && echo "$DISK is not readable, exiting" && exit 1
-        MAXSECTOR=$(hdparm -I $DISK | awk '/LBA48/{print $5}')
+        MAXSECTOR=$(cat /sys/class/block/sda/size)
         [ -z $MAXSECTOR ] && echo "Cannot obtain MAXSECTORS from $DISK, exiting" && exit 1
         RANDSECTOR=$(shuf -i 1-${MAXSECTOR} -n 1)
         echo "Reading ${RANDSECTOR} (max:${MAXSECTOR}) from ${DISK}"
