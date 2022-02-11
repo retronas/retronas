@@ -8,12 +8,12 @@ cd ${DIDIR}
 rn_main() {
 
   local MENU_ARRAY=(
-    1 "Exit RetroNAS"
-    2 "Global configuration"
-    3 "Install things"
-    4 "Check services"
-    5 "Run tools and scripts"
-    6 "Advanced"
+    01 "Exit RetroNAS"
+    02 "Global configuration"
+    03 "Install things"
+    04 "Check services"
+    05 "Run tools and scripts"
+    06 "Advanced"
   )
 
   local MENU_BLURB="\
@@ -32,19 +32,19 @@ while true
 do
   rn_main
   case ${CHOICE} in
-    2)
+    02)
       bash configure.sh
       ;;
-    3)
+    03)
       bash install.sh
       ;;
-    4)
+    04)
       bash services.sh
       ;;
-    5)
+    05)
       bash tools.sh
       ;;
-    6)
+    06)
       bash advanced.sh
       ;;
     *)
