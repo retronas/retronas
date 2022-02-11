@@ -178,7 +178,7 @@ DLG_YN() {
     --defaultno \
     --yesno "${MENU_DESC}" ${MW} ${MH})
 
-    export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
+    "${DIALOG[@]}" 2>&1 >/dev/tty
 
 }
 

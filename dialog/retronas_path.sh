@@ -7,21 +7,19 @@ cd ${DIDIR}
 
 rn_retronas_path() {
   DLG_DSELECT "Please type in the RetroNAS top level directory" "${OLDRNPATH}"
-}
 
-# Show the ugly path chooser
-rn_retronas_path
-case $CHOICE in
-  0)
+  # Show the ugly path chooser
+  if [ "${CHOICE}" != "${OLDRNPATH}" ]
+  then
     NEWRNPATH=$CHOICE
-    unset ${CHOICE}
     # Confirm the input because the path chooser sucks
     rn_retronas_path_confirm "${NEWRNPATH}"
-    ;;
-  *)
-    exit ${CHOICE}
-    ;;
-esac
+  else
+    source $_CONFIG
+    echo "Nothing to change"
+    exit
+  fi
+}
 
 rn_retronas_path_confirm() {
   local NEWRNPATH="${1}"
@@ -30,20 +28,28 @@ rn_retronas_path_confirm() {
   \nNewRetroNAS top level directory: \"${NEWRNPATH}\""
 
   DLG_YN "Confirm" "${MENU_BLURB}"
+
+  local CHOICE=$?
+  echo $CHOICE
+  PAUSE
+  case ${CHOICE} in
+    0)
+      source $_CONFIG
+      # Yes, change the value
+      # Delete the old value
+      sed -i '/retronas_path:/d' "${ANCFG}"
+      # Add the new value and re-source
+      echo "retronas_path: \"${NEWRNPATH}\"" >> "${ANCFG}"
+      source $_CONFIG
+      exit 0
+      ;;
+    *)
+      # No, the path chooser sucks probably, so just bail
+      exit ${CHOICE}
+      ;;
+  esac
+
+
 }
 
-case ${CHOICE} in
-  0)
-    # Yes, change the value
-    # Delete the old value
-    sed -i '/retronas_path:/d' "${ANCFG}"
-    # Add the new value and re-source
-    echo "retronas_path: \"${NEWRNPATH}\"" >> "${ANCFG}"
-    source $_CONFIG
-    exit 0
-    ;;
-  *)
-    # No, the path chooser sucks probably, so just bail
-    exit ${CHOICE}
-    ;;
-esac
+rn_retronas_path
