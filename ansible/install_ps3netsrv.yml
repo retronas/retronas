@@ -4,16 +4,19 @@
     - my_name: "ps3netsrv"
     - my_file: "install_ps3netsrv"
 
-  tasks:
+    - system_map:
+      - { src: "../../roms/sony/playstation3/games", dest: "GAMES" }
+      - { src: "../../roms/sony/playstation3/iso", dest: "PS3ISO" }
+      - { src: "../../roms/sony/playstation2/dvd", dest: "PS2ISO" }
+      - { src: "../../roms/sony/playstation1/iso", dest: "PSXISO" }
+      - { src: "../../roms/sony/playstationportable/iso", dest: "PSPISO" }
+      - { src: "../../roms/videos/bdiso", dest: "BDISO" }
+      - { src: "../../roms/videos/dvdiso", dest: "DVDISO" }
 
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    - systemd_units:
+      - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-  - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
+    - packages:
       - make
       - automake
       - autoconf
@@ -28,6 +31,18 @@
       - libmbedtls-dev
       - libmbedtls12
       - coreutils
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      "{{ packages }}"
 
   - name: "{{ my_name }} - build top level"
     file:
@@ -46,17 +61,9 @@
       group: "{{ retronas_user }}"
       state: link
     with_items:
-      - { src: "../../roms/sony/playstation3/games", dest: "GAMES" }
-      - { src: "../../roms/sony/playstation3/iso", dest: "PS3ISO" }
-      - { src: "../../roms/sony/playstation2/dvd", dest: "PS2ISO" }
-      - { src: "../../roms/sony/playstation1/iso", dest: "PSXISO" }
-      - { src: "../../roms/sony/playstationportable/iso", dest: "PSPISO" }
-      - { src: "../../roms/videos/bdiso", dest: "BDISO" }
-      - { src: "../../roms/videos/dvdiso", dest: "DVDISO" }
-    notify: "{{ my_name }} - Restart service"
+      "{{ system_map }}"
 
-
-  - name: "{{ my_name }} - Generate scripts"
+  - name: "{{ my_name }} - Generate {{ my_file }} script"
     template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
@@ -68,34 +75,62 @@
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} /bin/ps3netsrv"
-    notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - create startup service"
+  - name: "{{ my_name }} - create startup service(s)"
     template:
-      src: templates/{{ my_file }}/ps3netsrv.service.j2
-      dest: /usr/lib/systemd/system/ps3netsrv.service
+      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+      dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
       owner: root
       group: root
       mode: 0644
+    with_items:
+      "{{ systemd_units }}"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - enable startup service"
+  - name: "{{ my_name }} - enable service(s)"
     service:
-      name: "{{ item }}"
-      state: started
-      enabled: yes
+      name: "{{ item.name }}.{{ item.type }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
       daemon_reload: yes
     with_items:
-      - ps3netsrv
+      "{{ systemd_units }}"
+    when:
+      - item.instance == 'no'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable service(s)"
+    service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
+      daemon_reload: yes
+    with_items:
+      "{{ systemd_units }}"
+    when:
+      - item.instance == 'no'
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
     service:
-      name: "{{ item }}"
+      name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
     with_items:
-      - ps3netsrv
+      "{{ systemd_units }}"
+    when: 
+      - item.restart == 'yes'
+      - item.instance == 'no'
 
-    
+  - name: "{{ my_name }} - Restart instances"
+    service:
+      name: "{{ item.1.name }}{{ item.0.dest }}.{{ item.1.type }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - "{{ system_map }}"
+      - "{{ systemd_units }}"
+    when: 
+      - item.1.restart == 'yes'
+      - item.1.instance == 'yes'
