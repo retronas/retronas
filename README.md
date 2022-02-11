@@ -4,7 +4,7 @@
 
 # Status
 
-This project is currently in alpha status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly.
+This project is currently in **ALPHA** status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly.
 
 Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. 
 
