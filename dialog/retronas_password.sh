@@ -1,29 +1,21 @@
 #!/bin/bash
 
-clear
-source /opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/dialog/retronas.cfg
+source $_CONFIG
+source ${DIDIR}/common.sh
 cd ${DIDIR}
 
 rn_retronas_password() {
-source /opt/retronas/dialog/retronas.cfg
-dialog \
-  --backtitle "RetroNAS" \
-  --title "RetroNAS Password Configuration" \
-  --clear \
-  --defaultno \
-  --yesno \
-  "Configure the RetroNAS password. \
-  \n
-  \nThe current RetroNAS user is \"${OLDRNUSER}\" \
-  \n
-  \nIf you are having problems with CIFS/SMB shares, you can reset their password here.
-  \n
-  \nProceed?" ${MG}
+  local MENU_BLURB="\nThe current RetroNAS user is \"${OLDRNUSER}\" \
+    \n\nIf you are having problems with CIFS/SMB shares, you can reset their password here.
+    \n\nProceed?"
+
+  DLG_YN "Password Menu" "${MENU_BLURB}"
 }
 
+CLEAR
 rn_retronas_password
-CHOICE="$?"
-
+CHOICE=$?
 case ${CHOICE} in
   0)
     # Yes, change the password
@@ -37,12 +29,12 @@ case ${CHOICE} in
     SMB_SYSTEMD=$(systemctl show smbd.service --full --property FragmentPath --value)
     if [ ! -z "${SMB_SYSTEMD}" ] && [ -f "${SMB_SYSTEMD}" ]
     then
-    echo "Samba detected. Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
-    echo
-    smbpasswd -a ${OLDRNUSER} 2>/dev/null
-    echo
-    systemctl restart avahi-daemon smbd nmbd
-    echo
+      echo "Samba detected. Changing the Samba/SMB/CIFS password for user ${OLDRNUSER} :"
+      echo
+      smbpasswd -a ${OLDRNUSER}
+      echo
+      systemctl restart avahi-daemon smbd nmbd
+      echo
     fi
     echo "${PAUSEMSG}"
     read -s
