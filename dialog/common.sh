@@ -112,11 +112,10 @@ RN_SYSTEMD_STOP() {
 #
 RN_SYSTEMD() {
   source $_CONFIG
-  loca SC="systemctl"
   local SERVICE="$1"
   local COMMAND="${2:-status}"
 
-  RN_SERVICE_STATUS ${SC} ${COMMAND} ${SERVICE}
+  RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
 
 }
 
