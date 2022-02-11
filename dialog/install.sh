@@ -1,62 +1,59 @@
 #!/bin/bash
 
 clear
-source /opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/dialog/retronas.cfg
+source $_CONFIG
+source ${DIDIR}/common.sh
 cd ${DIDIR}
 
 rn_install_chooser() {
-source /opt/retronas/dialog/retronas.cfg
-dialog \
-  --backtitle "RetroNAS" \
-  --title "RetroNAS Installation menu" \
-  --clear \
-  --menu "My IP addresses: ${MY_IPS}
-  \n
-  \nPlease select an option to install" ${MG} 10 \
-  "01" "Main Menu" \
-  "02" "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing" \
-  "03" "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)" \
-  "04" "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)" \
-  "05" "EtherDFS - lightweight layer 2 network file sharing for DOS" \
-  "06" "lighttpd - HTTP/Web server" \
-  "07" "ProFTPd - FTP, File Transfer Protocol file sharing" \
-  "08" "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing" \
-  "09" "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer" \
-  "10" "Telnet - unencrypted remote access shell" \
-  "11" "NFS - NFS versions 2, 3 and 4" \
-  "12" "TNFS for Atari 8-bit and ZX Spectrum" \
-  "30" "Nintendo 3DS QR code generator for FBI Homebrew" \
-  "31" "Sony PS2 OpenPS2Loader SMB config" \
-  "32" "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD" \
-  "33" "MiSTer FPGA CIFS config" \
-  "34" "Microsoft XBox360 SMB config" \
-  "35" "gogrepo - Download your GOG game installers" \
-  "36" "ROM import from Smokemonster SMDBs" \
-  "37" "Nintendo GameCube + Swiss FSP server" \
-  "50" "Syncthing file sync tool" \
-  "51" "Cockpit web based Linux system manager" \
-  "52" "WebOne - HTTP 1.x proxy for a HTTP 2.x world" \
-  "99" "TCPSER - Hayes compatible software modem setup files" \
-  2> ${TDIR}/rn_install
+  source $_CONFIG
+
+  local MENU_ARRAY=(
+    01 "Main Menu"
+    02 "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing"
+    03 "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)"
+    04 "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)"
+    05 "EtherDFS - lightweight layer 2 network file sharing for DOS"
+    06 "lighttpd - HTTP/Web server"
+    07 "ProFTPd - FTP, File Transfer Protocol file sharing"
+    08 "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing"
+    09 "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer"
+    10 "Telnet - unencrypted remote access shell"
+    11 "NFS - NFS versions 2, 3 and 4"
+    12 "TNFS for Atari 8-bit and ZX Spectrum"
+    30 "Nintendo 3DS QR code generator for FBI Homebrew"
+    31 "Sony PS2 OpenPS2Loader SMB config"
+    32 "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD"
+    33 "MiSTer FPGA CIFS config"
+    34 "Microsoft XBox360 SMB config"
+    35 "gogrepo - Download your GOG game installers"
+    36 "ROM import from Smokemonster SMDBs"
+    50 "Syncthing file sync tool"
+    51 "Cockpit web based Linux system manager"
+    52 "WebOne - HTTP 1.x proxy for a HTTP 2.x world"
+  )
+
+  local MENU_BLURB="\nPlease select an option to install"
+
+  DLG_MENU "Main Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
 }
 
 rn_install_deps() {
-cd ${ANDIR}
-export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-ansible-playbook retronas_dependencies.yml
+  cd ${ANDIR}
+  export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
+  ansible-playbook retronas_dependencies.yml
 }
 
 rn_install_execute() {
-cd ${ANDIR}
-export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-ansible-playbook ${YAML}
+  cd ${ANDIR}
+  export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
+  ansible-playbook ${YAML}
 }
 
 while true
 do
   rn_install_chooser
-  CHOICE=$( cat ${TDIR}/rn_install )
-  PAUSEMSG='Press [Enter] to continue...'
   case ${CHOICE} in
   02)
     # Samba
@@ -211,15 +208,6 @@ do
     echo "${PAUSEMSG}"
     read -s
     ;;
-  37)
-    # gcn + swiss fspd
-    clear
-    rn_install_deps
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_fsp.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
   50)
     # Syncthing file sync tool
     clear
@@ -243,14 +231,6 @@ do
     rn_install_deps
     YAML=install_dotnetcore3.yml rn_install_execute
     YAML=install_webone.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  99)
-    # TCPSER
-    clear
-    rn_install_deps
-    YAML=install_tcpser.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
