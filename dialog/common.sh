@@ -5,6 +5,7 @@ set -u
 _CONFIG=/opt/retronas/dialog/retronas.cfg
 source $_CONFIG
 
+export IFS=$'\n'
 export SC="systemctl --no-pager --full"
 
 ## If this is run as root, switch to our RetroNAS user
@@ -132,5 +133,89 @@ RN_DIRECT_STATUS() {
   then
     RN_SERVICE_STATUS "${SERVICE} ${ARGS}"
   fi
+
+}
+
+# Dialog builder functions
+# based on: https://stackoverflow.com/questions/4889187/dynamic-dialog-menu-box-in-bash
+#
+
+#
+# MENU
+#
+DLG_MENU() {
+    local TITLE="$1"
+    local -n MENU_ARRAY=$2
+    local MENU_H=$3
+    local MENU_BLURB=$4
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+            --backtitle "RetroNAS" \
+            --title "RetroNAS ${TITLE}" \
+            --clear \
+            --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
+
+    export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
+
+}
+
+#
+# YES/NO
+#
+DLG_YN() {
+    local TITLE="$1"
+    local MENU_BLURB=$2
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+    --backtitle "RetroNAS" \
+    --title "RetroNAS ${TITLE}" \
+    --clear \
+    --defaultno \
+    --yesno "${MENU_DESC}" ${MW} ${MH})
+
+    export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
+
+}
+
+#
+# DIRECTORY SELECTOR
+#
+DLG_DSELECT() {
+    local TITLE="$1"
+    local MENU_BLURB=$2
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+    --backtitle "RetroNAS" \
+    --title "RetroNAS ${TITLE}" \
+    --clear \
+    --dselect "${MENU_BLURB}" ${MW} ${MH})
+
+    export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
+
+}
+
+#
+# DIRECTORY SELECTOR
+#
+DLG_INPUTBOX() {
+    local TITLE="$1"
+    local MENU_BLURB=$2
+    local MENU_INIT=$3
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+    --backtitle "RetroNAS" \
+    --title "RetroNAS ${TITLE}" \
+    --clear \
+    --inputbox "${MENU_BLURB}" ${MW} ${MH} $MENU_INIT)
+
+    export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
 
 }
