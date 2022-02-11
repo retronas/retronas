@@ -14,6 +14,7 @@ REQFAIL=0
 [ $REQFAIL -ne 0 ] && "Required information could not be found, see previous errors" && exit $REQFAIL
 
 cat $RNDIR/SECURITY
+echo -e "\n"
 read -p "LICENSE will follow, press Enter"
 echo ""
 cat $RNDIR/LICENSE
