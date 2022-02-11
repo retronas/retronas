@@ -44,6 +44,9 @@ do
     5)
       bash tools.sh
       ;;
+    6)
+      bash advanced.sh
+      ;;
     *)
       #clear
       exit 0
