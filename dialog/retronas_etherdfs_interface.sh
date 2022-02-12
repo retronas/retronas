@@ -47,9 +47,6 @@ NEWETHERDFSIF="${1}"
   \nNew EtherDFS interface: \"${NEWETHERDFSIF}\""
 
   DLG_YN "Confirm" "${MENU_BLURB}"
-
-  CHOICE="$?"
-
   case ${CHOICE} in
     0)
       source $_CONFIG

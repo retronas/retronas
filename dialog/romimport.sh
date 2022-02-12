@@ -20,26 +20,26 @@ rn_romimport() {
   \n\nPlace ROMs in the import directory above (use SMB/CIFS/AFP/FTP/SCP/SFTP/whatever) first. Do you wish to proceed?"
 
   DLG_YN "Confirm" "${MENU_BLURB}"
+
+  # Confirm the input
+  case ${CHOICE} in
+    0)
+      # Yes, run it
+      clear
+      if [ -f "${RNDIR}/scripts/romimport.sh" ]
+      then
+        ${SUCOMMAND} ${RNDIR}/scripts/romimport.sh
+      else
+        echo "Cannot find ROM import tool. Please install it from the Install Things menu."
+      fi
+      PAUSE
+      ;;
+    *)
+      # No, exit
+      exit ${CHOICE}
+      ;;
+  esac
+
 }
 
-# Confirm the input
 rn_romimport
-CHOICE="$?"
-
-case ${CHOICE} in
-  0)
-    # Yes, run it
-    clear
-    if [ -f "${RNDIR}/scripts/romimport.sh" ]
-    then
-      ${SUCOMMAND} ${RNDIR}/scripts/romimport.sh
-    else
-      echo "Cannot find ROM import tool. Please install it from the Install Things menu."
-    fi
-    PAUSE
-    ;;
-  *)
-    # No, exit
-    exit ${CHOICE}
-    ;;
-esac

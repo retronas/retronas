@@ -9,15 +9,27 @@ rn_retronas_path() {
   DLG_DSELECT "Please type in the RetroNAS top level directory" "${OLDRNPATH}"
 
   # Show the ugly path chooser
-  if [ "${CHOICE}" != "${OLDRNPATH}" ]
+  if [ ! -z "${CHOICE}" ]
   then
-    NEWRNPATH=$CHOICE
-    # Confirm the input because the path chooser sucks
-    rn_retronas_path_confirm "${NEWRNPATH}"
-  else
-    source $_CONFIG
-    echo "Nothing to change"
-    exit
+    if [ "${CHOICE}" != "${OLDRNPATH}" ]
+    then
+      NEWRNPATH=$CHOICE
+      # if the path the user has entered, dont save it and give them a continue
+      if [ ! -d "${CHOICE}"]
+      then
+        echo "The path ${CHOICE} does not exist"
+        PAUSE
+        rn_retronas_path
+      fi
+      # Confirm the input because the path chooser sucks
+      rn_retronas_path_confirm "${NEWRNPATH}"
+    else
+      source $_CONFIG
+      echo "Nothing to change"
+      exit
+    fi
+      echo "User cancelled dialog"
+      exit
   fi
 }
 
@@ -29,7 +41,6 @@ rn_retronas_path_confirm() {
 
   DLG_YN "Confirm" "${MENU_BLURB}"
 
-  local CHOICE=$?
   case ${CHOICE} in
     0)
       source $_CONFIG
@@ -46,7 +57,6 @@ rn_retronas_path_confirm() {
       exit ${CHOICE}
       ;;
   esac
-
 
 }
 

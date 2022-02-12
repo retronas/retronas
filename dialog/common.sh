@@ -179,6 +179,7 @@ DLG_YN() {
     --yesno "${MENU_DESC}" ${MW} ${MH})
 
     "${DIALOG[@]}" 2>&1 >/dev/tty
+    export CHOICE=$?
 
 }
 

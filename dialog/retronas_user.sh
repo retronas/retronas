@@ -36,7 +36,6 @@ rn_retronas_user() {
     fi
   fi
 
-
 }
 
 rn_retronas_user_confirm() {
@@ -46,35 +45,34 @@ rn_retronas_user_confirm() {
 
   DLG_YN "Confirm" "${MENU_BLURB}"
 
- while true
- do
-  CHOICE=$?
-  case ${CHOICE} in
-    0)
-      source $_CONFIG
-      # Test the value
-      getent passwd ${NEWRNUSER} &> /dev/null
-      if [ $? -ne 0 ] 
-      then 
-        echo "Username does not exist, create it first"
-        PAUSE
-        rn_retronas_user
-      else
-        # Yes, change the value
-        # Delete the old value
-        sed -i '/retronas_user:/d' "${ANCFG}"
-        # Add the new value and re-source
-        echo "retronas_user: \"${NEWRNUSER}\"" >> "${ANCFG}"
+  while true
+  do
+    case ${CHOICE} in
+      0)
         source $_CONFIG
-        exit 0
-      fi
-      ;;
-    *)
-      # No, exit
-      exit
-      ;;
-  esac
-done
+        # Test the value
+        getent passwd ${NEWRNUSER} &> /dev/null
+        if [ $? -ne 0 ] 
+        then 
+          echo "Username does not exist, create it first"
+          PAUSE
+          rn_retronas_user
+        else
+          # Yes, change the value
+          # Delete the old value
+          sed -i '/retronas_user:/d' "${ANCFG}"
+          # Add the new value and re-source
+          echo "retronas_user: \"${NEWRNUSER}\"" >> "${ANCFG}"
+          source $_CONFIG
+          exit 0
+        fi
+        ;;
+      *)
+        # No, exit
+        exit
+        ;;
+    esac
+  done
 }
 
 # Choose the user
