@@ -68,6 +68,7 @@
       - "{{ top_level_paths }}"
     when: 
       - item.1.enabled == "yes"
+      - item.0.mister | length > 0
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure includes file"
