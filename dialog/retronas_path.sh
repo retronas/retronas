@@ -13,16 +13,21 @@ rn_retronas_path() {
   then
     if [ "${CHOICE}" != "${OLDRNPATH}" ]
     then
-      NEWRNPATH=$CHOICE
+
       # if the path the user has entered, dont save it and give them a continue
-      if [ ! -d "${CHOICE}"]
+      if [ ! -d ${CHOICE} ]
       then
         echo "The path ${CHOICE} does not exist"
         PAUSE
         rn_retronas_path
+      else 
+        echo "Everything is OK bloke"
       fi
+
+      NEWRNPATH=$CHOICE
       # Confirm the input because the path chooser sucks
       rn_retronas_path_confirm "${NEWRNPATH}"
+
     else
       source $_CONFIG
       echo "Nothing to change"
@@ -50,6 +55,7 @@ rn_retronas_path_confirm() {
       # Add the new value and re-source
       echo "retronas_path: \"${NEWRNPATH}\"" >> "${ANCFG}"
       source $_CONFIG
+      export OLDRNPATH="${NEWRNPATH}"
       exit 0
       ;;
     *)
