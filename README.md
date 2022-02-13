@@ -64,6 +64,7 @@ Some of the supported systems include:
 * Atari ST with FTP client or HTTP browser
 * Amiga Workbench 3.X and up with FTP client or HTTP browser
 * Nintendo 3DS with Homebrew Channel and FBI installer
+* Nintendo GameCube with BroadBand Adaptor and Swiss homebrew
 * Sony PlayStation 2 with OpenPS2Loader
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
