@@ -2,7 +2,7 @@
 
 set -u
 
-_CONFIG=/opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 
 export SC="systemctl --no-pager --full"
