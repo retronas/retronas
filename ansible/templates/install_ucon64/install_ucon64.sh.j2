@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+
+VERSION=2.2.2
+OUTPATH=/tmp/ucon64
+OUTFILE=ucon64-${VERSION}-src.tar.gz
+URL=https://sourceforge.net/projects/ucon64/files/ucon64/ucon64-${VERSION}
+XC=ucon64
+CONFIGURE_ARGS=""
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+[ ! -x /usr/bin/gmake ] && _log "GMAKE not found" && REQFAIL=1
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+### MAKE directory
+_log "Checking for ${OUTPATH}"
+[ ! -d ${OUTPATH} ] && mkdir -p "${OUTPATH}"
+[ -f ${OUTPATH}/${OUTFILE} ] && rm -f ${OUTPATH}/${OUTFILE}
+
+### DOWNLOAD ucon64
+RESULT="FAILURE"
+_log "Attempting to download ucon64 ${VERSION} from ${URL}"
+curl -sqL -o${OUTPATH}/${OUTFILE} "${URL}/${OUTFILE}/"
+[ $? -eq 0 ] && RESULT="SUCCESS"
+_log "Download result: ${RESULT}"
+
+### UNPACK
+if [ -f "${OUTPATH}/${OUTFILE}" ]
+then
+	cd ${OUTPATH}
+	tar xzvf ${OUTFILE}
+  cd ucon64-${VERSION}-src/src/
+fi
+
+### CHECK parallel port support
+PARALLEL_H=/usr/include/x86_64-linux-gnu/sys/io.h
+
+# RPI is missing sys/io.h headers so parallel devices can't be supported (part of libc6-dev)
+[ ! -f ${PARALLEL_H} ] && CONFIGURE_ARGS += "--disable-parallel "
+
+# CONFIGURE
+./configure ${CONFIGURE_ARGS}
+
+# MAKE
+gmake
+
+[ -x ${XC} ] && mv ${XC} "${RN_BIN}/"
+chmod 755 ${RN_BIN}/${XC}
+
+# CLEAN UP
+rm -Rf ${OUTPATH}/

@@ -13,7 +13,8 @@ rn_main() {
     03 "Install things"
     04 "Check services"
     05 "Run tools and scripts"
-    06 "Advanced"
+    06 "On-Device Management Tools"
+    07 "Advanced"
   )
 
   local MENU_BLURB="\
@@ -45,6 +46,9 @@ do
       bash tools.sh
       ;;
     06)
+      bash odman.sh
+      ;;
+    07)
       bash advanced.sh
       ;;
     *)
