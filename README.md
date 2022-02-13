@@ -38,9 +38,7 @@ Please consider using this software only on a private network, and at the very l
 
 The services RetroNAS installs will attempt to run as unprivileged user accounts where possible, but the RetroNAS installer scripts themselves all run as root/sudo (the "Adminstrator" account in Linux). These have the power to dramatically change and break working systems, so please ensure you either review the code first, or run this only on a system dedicated to the purpose.
 
-If you want a modern, secure, open source NAS for Raspberry Pi, please look at something like "Open Media Vault" instead.
-* https://www.openmediavault.org/
-* https://github.com/OpenMediaVault-Plugin-Developers/installScript/
+If you want a modern, secure, open source NAS and have no interest in retro systems, projects like Open Media Vault, TrueNAS/FreeNAS, UnRAID or vendor supplied devices like QNAP and Synology NAS devices might be a better fit.
 
 # Supported systems
 
@@ -64,6 +62,7 @@ Some of the supported systems include:
 * Atari ST with FTP client or HTTP browser
 * Amiga Workbench 3.X and up with FTP client or HTTP browser
 * Nintendo 3DS with Homebrew Channel and FBI installer
+* Nintendo GameCube with BroadBand Adaptor and Swiss homebrew
 * Sony PlayStation 2 with OpenPS2Loader
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
@@ -84,7 +83,7 @@ Please see the [How To](#How-To) section for a comprehensive list of all protoco
 Due to the retro nature of computing, it's strongly advised to follow some basic guidelines when using RetroNAS:
 
 * Linux filesystems are case sensitive, but most old computers and operating systems are not (some new ones aren't either). It's strongly recommended to name all files and folders **lower case** in Linux where possible. Files like "filename.txt" and "Filename.txt" will appear identical to some legacy operating systems, and may confuse them. 
-* Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is stronly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**. 
+* Linux can read filenames up to 255 characters in length, but most old computers and operating systems cannot.  It is strongly recommmended to keep the main RetroNAS top level directory and the main directories below it to **8 characters or fewer**. 
 * If wanting to share files with very old operating systems, it's strongly recommended to name them in an "8.3" format (8 charcters or fewer for the filename, 3 characters or fewer for the file extension). 
 * Some operating systems can handle all sorts of interesting special characters and spaces in file names, some cannot.  It's strongly recommended to avoid any characters outside of regular English characters ("a-z"), numbers ("0-9") hyphen ("-") and underscore ("_ ") and stick with character encodings such as ASCII or UTF-8.
 
@@ -104,13 +103,15 @@ Client-side documentation is also quite limited.  Making videos showing how to u
 
 RetroNAS is merely a small set of scripts that utilise Ansible to install and configure a wide array of open source tools written by others.
 
-The true heroes are the people behind each of these open source projects, all of whom have done the hard work, either reverse engineering proprietary code/protocols, or creating new code/protocols and giving them away under permissive licenses.  This project would not exist without their work. 
+The true heroes are the people behind each of these open source projects, all of whom have done the hard work - reverse engineering proprietary code/protocols, creating new code/protocols, writing homebrew tools and new code for old consoles and computers, and giving them all away under permissive licenses.  This project would not exist without their work. 
 
 See the [Wiki](https://github.com/danmons/retronas/wiki) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
 
 Thanks to the kind humans on the OCAU (Overclockers Australia) forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
 
 Thanks to Bob from RetroRGB for being excited about every dumb idea I come up with, and constantly reminding me that real people need better UX. 
+
+Thanks to Sairuk for not only cleaning up my garbage code, but also for extending the project much further than I ever could. 
 
 # How To
 
