@@ -9,6 +9,7 @@
       - { name: "saves", enabled: "no" }
       - { name: "savestates", enabled: "no" }
       - { name: "BIOS", enabled: "no" }
+      - { name: "wallpapers", enabled: "no" }
 
   tasks:
 
