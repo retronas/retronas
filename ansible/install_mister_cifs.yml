@@ -5,11 +5,11 @@
     - my_file: "install_mister_cifs"
 
     - top_level_paths:
-      - { name: "games", enabled: "yes" }
-      - { name: "saves", enabled: "no" }
-      - { name: "savestates", enabled: "no" }
-      - { name: "BIOS", enabled: "no" }
-      - { name: "wallpapers", enabled: "no" }
+      - { name: "games", enabled: "yes",  generic: "roms", systems: "yes" }
+      - { name: "saves", enabled: "no",  generic: "saves", systems: "yes"  }
+      - { name: "savestates", enabled: "no",  generic: "savestates", systems: "yes"  }
+      - { name: "BIOS", enabled: "no",  generic: "bios", systems: "yes"  }
+      - { name: "wallpapers", enabled: "no",  generic: "wallpapers", systems: "no"  }
 
   tasks:
 
@@ -28,7 +28,7 @@
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
 
-  - name: ""
+  - name: "get facts for path"
     stat:
       path: "{{ retronas_path }}/mister/{{ item.mister }}"
     with_items:
@@ -57,9 +57,9 @@
       - item.enabled == "yes"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - build directory layout"
+  - name: "{{ my_name }} - build systems directory layout"
     file:
-      src: "../../roms/{{ item.0.src }}"
+      src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
       dest: "{{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
@@ -70,6 +70,7 @@
     when: 
       - item.1.enabled == "yes"
       - item.0.mister | length > 0
+      - item.1.systems == "yes"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure includes file"
