@@ -65,8 +65,8 @@ system_bandai:
   - { src: "bandai/rx78", mister: "RX78", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
   - { src: "bandai/wonderswan", mister: "WonderSwan", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
 system_commodore:
-  - { src: "commodore/amiga", mister: "Amiga", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
-  - { src: "commodore/amiga/iso", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
+  - { src: "commodore/amiga", mister: "Minimig", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
+  - { src: "commodore/amiga/iso", mister: "Minimig", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
   - { src: "commodore/commodore16", mister: "C16", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
   - { src: "commodore/commodore64", mister: "C64", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
   - { src: "commodore/pet", mister: "PET2001", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "" }
