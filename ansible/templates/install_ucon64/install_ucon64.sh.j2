@@ -44,7 +44,7 @@ fi
 PARALLEL_H=/usr/include/x86_64-linux-gnu/sys/io.h
 
 # RPI is missing sys/io.h headers so parallel devices can't be supported (part of libc6-dev)
-[ ! -f ${PARALLEL_H} ] && CONFIGURE_ARGS += "--disable-parallel "
+[ ! -f ${PARALLEL_H} ] && CONFIGURE_ARGS+="--disable-parallel "
 
 # CONFIGURE
 ./configure ${CONFIGURE_ARGS}
