@@ -29,4 +29,4 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "{{ retronas_root }}/bin/tcpser"
+      creates: "/usr/local/bin/ucon64"
