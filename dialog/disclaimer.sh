@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_CONFIG=/opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 
 # User has already agreed, thanks all

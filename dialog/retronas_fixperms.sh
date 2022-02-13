@@ -2,9 +2,9 @@
 
 set -u
 
-_CONFIG=/opt/retronas/dialog/retronas.cfg
+_CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
-source ${DIDIR}/common.sh
+source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
 rn_get_dirs() {

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-_CONFIG=/opt/retronas/dialog/retronas.cfg
-PAUSEMSG='Press [Enter] to continue...'
-clear
+_CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
+source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
+CLEAR
 rn_tcpser() {
 source $_CONFIG
 dialog \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-source /opt/retronas/dialog/retronas.cfg
+source /opt/retronas/config/retronas.cfg
 cd ${DIDIR}
 
 ## If this is run as root, switch to our RetroNAS user
@@ -15,7 +15,7 @@ fi
 
 
 rn_gog_chooser() {
-source /opt/retronas/dialog/retronas.cfg
+source /opt/retronas/config/retronas.cfg
 dialog \
   --backtitle "RetroNAS" \
   --title "gogrepo chooser" \
@@ -34,7 +34,7 @@ dialog \
 }
 
 rn_gog_setos() {
-source /opt/retronas/dialog/retronas.cfg
+source /opt/retronas/config/retronas.cfg
 dialog \
   --backtitle "RetroNAS" \
   --title "gogrepo configure OS" \
@@ -109,7 +109,7 @@ dialog \
 
 while true
 do
-  source /opt/retronas/dialog/retronas.cfg
+  source /opt/retronas/config/retronas.cfg
   rn_gog_chooser
   CHOICE=$( cat ${TDIR}/rn_gog_chooser )
   PAUSEMSG='Press [Enter] to continue...'
