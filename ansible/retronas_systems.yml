@@ -13,8 +13,6 @@ system_map:
   - { src: "atari/800", mister: "ATARI800", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "atari/lynx", mister: "AtariLynx", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "atari/st", mister: "AtariST", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
-  - { src: "fujitsu/fmtowns", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
-  - { src: "fujitsu/fmtownsmarty", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "bally/astrocade", mister: "Astrocade", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "bandai/rx78", mister: "RX78", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "bandai/wonderswan", mister: "WonderSwan", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
@@ -23,6 +21,8 @@ system_map:
   - { src: "commodore/commodore64", mister: "C64", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "commodore/pet", mister: "PET2001", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "commodore/vic20", mister: "VIC20", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
+  - { src: "fujitsu/fmtowns", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
+  - { src: "fujitsu/fmtownsmarty", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "mame/hbmame", mister: "hbmame", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "mame/mame", mister: "mame", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
   - { src: "mattel/aquarius", mister: "AQUARIUS", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3setsrv: "" }
