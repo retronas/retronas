@@ -38,9 +38,7 @@ Please consider using this software only on a private network, and at the very l
 
 The services RetroNAS installs will attempt to run as unprivileged user accounts where possible, but the RetroNAS installer scripts themselves all run as root/sudo (the "Adminstrator" account in Linux). These have the power to dramatically change and break working systems, so please ensure you either review the code first, or run this only on a system dedicated to the purpose.
 
-If you want a modern, secure, open source NAS for Raspberry Pi, please look at something like "Open Media Vault" instead.
-* https://www.openmediavault.org/
-* https://github.com/OpenMediaVault-Plugin-Developers/installScript/
+If you want a modern, secure, open source NAS and have no interest in retro systems, projects like Open Media Vault, TrueNAS/FreeNAS, UnRAID or vendor supplied devices like QNAP and Synology NAS devices might be a better fit.
 
 # Supported systems
 
