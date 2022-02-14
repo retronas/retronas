@@ -27,7 +27,7 @@
 
   - name: "{{ my_name }} - install cockpit packages inplace"
     copy:
-      src: "templates/{{ my_file }}/{{ item }}.j2"
+      src: "templates/{{ my_file }}/{{ item }}"
       dest: "{{ package_dir }}/{{ my_name }}/{{ item }}"
       owner: root
       group: root
