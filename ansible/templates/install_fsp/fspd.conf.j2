@@ -13,12 +13,12 @@ tmpdir tmp
 pidlogname /tmp/fspd.pid
 grabcommand on
 vercommand on
-dircache 100
-statcache 30
-statcache_timeout 20
-filecache 30
-setuid {{ retronas_user }}
-setgid {{ retronas_user }}
+#dircache 100
+#statcache 30
+#statcache_timeout 20
+#filecache 30
+#setuid {{ retronas_user }}
+#setgid {{ retronas_user }}
 umask 0002
 # Don't background. systemd needs this
 daemonize off
