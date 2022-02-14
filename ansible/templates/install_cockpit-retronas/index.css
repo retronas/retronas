@@ -78,6 +78,13 @@ body {
 	text-align:center;
 }
 
+#team {
+	left:30%;
+	right:30%;
+	bottom:0;
+	position: absolute;
+}
+
 #log-area {
 	text-align: left;
 	width:100%;
