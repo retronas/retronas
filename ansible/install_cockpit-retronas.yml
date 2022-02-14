@@ -1,0 +1,36 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "retronas"
+    - my_file: "install_cockpit-retronas"
+    - package_dir: "/usr/share/cockpit"
+
+    - package_data:
+      - retronas.js
+      - retronas-logo.png
+      - manifest.json
+      - index.html
+      - index.css
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - create package directory"
+    file:
+      path: "{{ package_dir }}/{{ my_name }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+  - name: "{{ my_name }} - install cockpit packages inplace"
+    copy:
+      src: "templates/{{ my_file }}/{{ item }}.j2"
+      dest: "{{ package_dir }}/{{ my_name }}/{{ item }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items:
+      "{{ package_data }}"
