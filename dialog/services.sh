@@ -19,6 +19,7 @@ rn_services() {
     09 "Telnet"
     12 "TNFS for Atari 8-bit and ZX Spectrum"
     32 "ps3netsrv"
+    37 "FSP for GameCube"
     50 "Syncthing"
     51 "Cockpit"
     52 "WebOne"
@@ -76,6 +77,10 @@ do
   32)
     # ps3netsrv
     RN_SYSTEMD_STATUS "ps3netsrv"
+    ;;
+  37)
+    # fspd gamecube
+    RN_SYSTEMD_STATUS "fspd"
     ;;
   50)
     # Syncthing file sync tool
