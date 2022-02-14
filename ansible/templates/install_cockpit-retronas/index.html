@@ -11,137 +11,136 @@
 </head>
 <body id="retronas-page" class="pf-m-redhat-font">
 	<div id="retronas" class="ct-page-fill">
-	<section class="pf-c-page__main-nav">
-	<nav id="retronas-nav pf-c-nav pf-m-horizontal pf-m-tertiary">
-	<ul class="retronas-menu pf-c-nav__list">
-		<li id="rn-about" class="rn-menu-item pf-c-nav__item"><a href="#"><img src="retronas-logo.png"></img></li>
-		<li id="rn-config"   class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Config</a></li>
-		<li id="rn-install"  class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Install</a></li>
-		<li id="rn-scripts"  class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Scripts</a></li>
-		<li id="rn-ondevice" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">On-Device</a></li>
-		<li id="rn-advanced" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Advanced</a></li>
-		<li id="rn-update" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Update</a></li>
-		<li id="rn-log" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Log</a></li>
-	</ul>
-	</nav>
-	</section>
-	<section class="pf-c-page__main-section">
-	<div class="container-fluid centerme">
-		<!-- ABOUT PAGE -->
-		<div id="rn-about-page" class="rn-page-container rn-about centerme rn-show">
-			<img src="retronas-logo.png" alt="RetroNAS Logo"></img>
-			<h2>Welcome to RetroNAS</h2>
-			<ul>
-				<li><a href="https://github.com/danmons/retronas" title="RetroNAS on Github">github</a></li> | 
-				<li><a href="https://github.com/danmons/retronas/wiki" title="RetroNAS on Github">wiki</a></li> | 
-				<li><a href="#" title="RetroNAS on irc">#retronas</a></li>
-			</ul>
-			<div id="team">
-			<ul>
-				<li>\_ <a href="https://twitter.com/_daemons" title="@_daemons">@_daemons</a></li> _/-\_ 
-				<li><a href="https://twitter.com/sairukau" title="@sairukau">@sairukau</a></li> _/
-			</ul>
+		<section class="pf-c-page__main-nav">
+			<nav id="retronas-nav pf-c-nav pf-m-horizontal pf-m-tertiary">
+				<ul class="retronas-menu pf-c-nav__list">
+					<li id="rn-about" class="rn-menu-item pf-c-nav__item"><a href="#"><img src="retronas-logo.png"></img></li>
+					<li id="rn-config"   class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Config</a></li>
+					<li id="rn-install"  class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Install</a></li>
+					<li id="rn-scripts"  class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Scripts</a></li>
+					<li id="rn-ondevice" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">On-Device</a></li>
+					<li id="rn-advanced" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Advanced</a></li>
+					<li id="rn-update" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Update</a></li>
+					<li id="rn-log" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Log</a></li>
+				</ul>
+			</nav>
+		</section>
+		<section class="pf-c-page__main-section">
+			<div class="container-fluid centerme">
+				<!-- ABOUT PAGE -->
+				<div id="rn-about-page" class="rn-page-container rn-about centerme rn-show">
+					<img src="retronas-logo.png" alt="RetroNAS Logo"></img>
+					<h2>Welcome to RetroNAS</h2>
+					<ul>
+						<li><a href="https://github.com/danmons/retronas" title="RetroNAS on Github">Github</a></li> | 
+						<li><a href="https://github.com/danmons/retronas/wiki" title="Read the Wiki">Wiki</a></li> | 
+						<li><a href="https://raw.githubusercontent.com/danmons/retronas/main/LICENSE" title="License">License</a></li> | 
+						<li class="important"><a href="https://raw.githubusercontent.com/danmons/retronas/main/SECURITY" title="Security Information">Security</a></li>
+					</ul>
+					<div id="team">
+						<ul>
+							<li>\_ <a href="https://twitter.com/_daemons" title="@_daemons">@_daemons</a></li> _/-\_ 
+							<li><a href="https://twitter.com/sairukau" title="@sairukau">@sairukau</a></li> _/
+						</ul>
+					</div>
+				</div>
+
+
+				<!-- CONFIG PAGE -->
+				<div id="rn-config-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Configuration</h1>
+					<div class="warning">This page is a work in progress</div>
+					<h3>RetroNAS</h3>
+					<!-- <div id="rn-user">Username:
+						<input id="user-name" placeholder="Username"></input>
+						<button id="set-user-name" class="rn-value-updater">Update</button>
+					</div>
+					-->
+					<div id="rn-password" class="rn-faux-form">Password:
+						<input id="s-update-passwd-input" type="password"></input>
+						<button id="s-update-passwd" class="rn-value-updater">Update</button></div>
+					<div id="rn-directory" class="rn-faux-form">Top level Directory:
+						<input id="set-top-level-dir-input"></input>
+						<button id="set-top-level-dir" placeholder="e.g. /data/retronas" class="rn-value-updater">Update</button></div>
+
+					<h3>Other</h3>
+					<div id="rn-config-etherdfs" class="rn-faux-form">Set EtherDFS network interface
+						<input id="etherdfs-nic"></input>
+						<button id="set-etherdfs-nic" class="rn-value-updater">Update</button></div>
+				</div>
+
+				<!-- INSTALL PAGE -->
+				<div id="rn-install-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Install Services</h1>
+					<div class="info">This page is partially implemented</div>
+					<div>EtherDFS<button id="etherdfs" class="rn-installer">Install</button></div>
+					<div><b>Netatalk</b></div>
+					<ul>
+						<li><div>Netatalk2<button id="netatalk2" class="rn-installer">Install</button></div></li>
+						<li><div>Netatalk3<button id="netatalk3" class="rn-installer">Install</button></div></li>
+					</ul>
+					<div>NFS<button id="nfs" class="rn-installer">Install</button></div>
+					<div>Nintendo 3DS QR Code Generator<button id="3ds_qr_codes" class="rn-installer">Install</button></div>
+					<div>Nintendo GameCube + Swiss FSP Server<button id="fsp" class="rn-installer">Install</button></div>
+					<div>OpenSSH<button id="openssh" class="rn-installer">Install</button></div>
+					<div>ProFTPd<button id="proftpd" class="rn-installer">Install</button></div>
+					<div>ROM import<button id="romimport" class="rn-installer">Install</button></div>
+					<div><b>Samba</b></div>
+					<ul>
+						<li><div>Generic<button id="samba" class="rn-installer">Install</button></div></li>
+						<li><div>OpenPS2Loader<button id="ps2_openps2loader" class="rn-installer">Install</button></div></li>
+						<li><div>MiSTer FPGA<button id="mister_cifs" class="rn-installer">Install</button></div></li>
+						<li><div>Microsoft XBOX360<button id="xbox360" class="rn-installer">Install</button></div></li>
+					</ul>
+					<div>Syncthing<button id="syncthing" class="rn-installer">Install</button></div>
+					<div>TNFS<button id="tnfs" class="rn-installer">Install</button></div>
+					<div>Telnet<button id="telnet" class="rn-installer">Install</button></div>
+					<div>WebOne<button id="webone" class="rn-installer">Install</button></div>
+					<div>gogrepo<button id="gogrepo" class="rn-installer">Install</button></div>
+					<div>lighttpd<button id="lighttpd" class="rn-installer">Install</button></div>
+					<div>ps3netsrv for CFW/HEN+webMAN MOD<button id="ps3netsrv" class="rn-installer">Install</button></div>
+					<div>tftpd-hpa<button id="tftpd-hpa" class="rn-installer">Install</button></div>
+				</div>
+
+				<!-- SCRIPTS PAGE -->
+				<div id="rn-scripts-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Scripts</h1>
+					<div class="warning">This page is a work in progress</div>
+					<div>Fix on disk permissions<button id="s-fix-disk-perms" class="rn-script">Run</button></div>
+
+					<div>GOG Repo<button id="gogrepo" class="rn-modal">Run</button></div>
+					<div>Nintendo 3DS QR Code (FBI Homebrew)<button id="3ds_qr" class="rn-script">Run</button></div>
+					<div>ROM Importer (Smokemonster SMDBs)<button id="romimport" class="rn-script">Run</button></div>
+
+				</div>
+				<!-- ONDEVICE PAGE -->
+				<div id="rn-ondevice-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>On-Device Management</h1>
+					<div class="info">This page is partially implemented</div>
+					<div>uCON64<button id="ucon64" class="rn-installer">Install</button></div>
+				</div>
+
+				<!-- ADVANCED PAGE -->
+				<div id="rn-advanced-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Advanced</h1>
+					<div class="warning">This page is a work in progress</div>
+					<div>hdparm<button id="hdparm" class="rn-modal">Setup</button></div>
+					<div>tcpser<button id="tcpser" class="rn-modal">Setup</button></div>
+				</div>
+
+				<!-- UPDATE PAGE -->
+				<div id="rn-update-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Update</h1>
+					<div>RetroNAS<button id="s-update-retronas" class="rn-script">Update</button></div>
+					<div>Rom Dirs<button id="romdir" class="rn-installer">Update</button></div>
+				</div>
+
+				<!-- LOG PAGE -->
+				<div id="rn-log-page" class="rn-page-container rn-wide-view rn-hidden">
+					<h1>Log</h1>
+					<div id="log-area"></div>
+				</div>
 			</div>
-		</div>
-
-		<!-- CONFIG PAGE -->
-		<div id="rn-config-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Configuration</h1>
-			<div class="warning">This page is a work in progress</div>
-			<h3>RetroNAS</h3>
-			<!-- <div id="rn-user">Username:
-				<input id="user-name" placeholder="Username"></input>
-				<button id="set-user-name" class="rn-value-updater">Update</button>
-			</div>
-			-->
-			<div id="rn-password">Password:
-				<input id="s-update-passwd-input" type="password"></input>
-				<button id="s-update-passwd" class="rn-value-updater">Update</button></div>
-			<div id="rn-directory">Top level Directory:
-				<input id="set-top-level-dir-input"></input>
-				<button id="set-top-level-dir" placeholder="e.g. /data/retronas" class="rn-value-updater">Update</button></div>
-
-			<h3>Other</h3>
-			<div id="rn-config-etherdfs">Set EtherDFS network interface
-				<input id="etherdfs-nic"></input>
-				<button id="set-etherdfs-nic" class="rn-value-updater">Update</button></div>
-		</div>
-
-		<!-- INSTALL PAGE -->
-		<div id="rn-install-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Install Services</h1>
-			<div class="info">This page is partially implemented</div>
-			<div>EtherDFS<button id="etherdfs" class="rn-installer">Install</button></div>
-			<div><b>Netatalk</b></div>
-			<ul>
-				<li><div>Netatalk2<button id="netatalk2" class="rn-installer">Install</button></div></li>
-				<li><div>Netatalk3<button id="netatalk3" class="rn-installer">Install</button></div></li>
-			</ul>
-			<div>NFS<button id="nfs" class="rn-installer">Install</button></div>
-			<div>Nintendo 3DS QR Code Generator<button id="3ds_qr_codes" class="rn-installer">Install</button></div>
-			<div>Nintendo GameCube + Swiss FSP Server<button id="fsp" class="rn-installer">Install</button></div>
-			<div>OpenSSH<button id="openssh" class="rn-installer">Install</button></div>
-			<div>ProFTPd<button id="proftpd" class="rn-installer">Install</button></div>
-			<div>ROM import<button id="romimport" class="rn-installer">Install</button></div>
-			<div><b>Samba</b></div>
-			<ul>
-				<li><div>Generic<button id="samba" class="rn-installer">Install</button></div></li>
-				<li><div>OpenPS2Loader<button id="ps2_openps2loader" class="rn-installer">Install</button></div></li>
-				<li><div>MiSTer FPGA<button id="mister_cifs" class="rn-installer">Install</button></div></li>
-				<li><div>Microsoft XBOX360<button id="xbox360" class="rn-installer">Install</button></div></li>
-			</ul>
-			<div>Syncthing<button id="syncthing" class="rn-installer">Install</button></div>
-			<div>TNFS<button id="tnfs" class="rn-installer">Install</button></div>
-			<div>Telnet<button id="telnet" class="rn-installer">Install</button></div>
-			<div>WebOne<button id="webone" class="rn-installer">Install</button></div>
-			<div>gogrepo<button id="gogrepo" class="rn-installer">Install</button></div>
-			<div>lighttpd<button id="lighttpd" class="rn-installer">Install</button></div>
-			<div>ps3netsrv for CFW/HEN+webMAN MOD<button id="ps3netsrv" class="rn-installer">Install</button></div>
-			<div>tcpser<button id="tcpser" class="rn-installer">Install</button></div>
-			<div>tftpd-hpa<button id="tftpd-hpa" class="rn-installer">Install</button></div>
-		</div>
-
-		<!-- SCRIPTS PAGE -->
-		<div id="rn-scripts-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Scripts</h1>
-			<div class="warning">This page is a work in progress</div>
-			<div>Fix on disk permissions<button id="s-fix-disk-perms" class="rn-script">Run</button></div>
-
-			<div>GOG Repo<button id="gogrepo" class="rn-modal">Run</button></div>
-			<div>Nintendo 3DS QR Code (FBI Homebrew)<button id="3ds_qr" class="rn-script">Run</button></div>
-			<div>ROM Importer (Smokemonster SMDBs)<button id="romimport" class="rn-script">Run</button></div>
-
-		</div>
-		<!-- ONDEVICE PAGE -->
-		<div id="rn-ondevice-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>On-Device Management</h1>
-			<div class="info">This page is partially implemented</div>
-			<div>uCON64<button id="ucon64" class="rn-installer">Install</button></div>
-		</div>
-
-		<!-- ADVANCED PAGE -->
-		<div id="rn-advanced-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Advanced</h1>
-			<div class="warning">This page is a work in progress</div>
-			<div>hdparm<button id="hdparm" class="rn-modal">Setup</button></div>
-		</div>
-
-		<!-- UPDATE PAGE -->
-		<div id="rn-update-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Update</h1>
-			<div class="warning">This page is a work in progress</div>
-			<div>RetroNAS<button id="s-update-retronas" class="rn-script">Update</button></div>
-			<div>Rom Dirs<button id="romdir" class="rn-installer">Update</button></div>
-		</div>
-
-		<!-- LOG PAGE -->
-		<div id="rn-log-page" class="rn-page-container rn-wide-view rn-hidden">
-			<h1>Log</h1>
-			<div class="warning">This page is a work in progress</div>
-			<div id="log-area"></div>
-
-		</div>
-	</div>
-	</section>
+		</section>
 	</div>
 </body></html>
