@@ -3,12 +3,9 @@
     <title translate="yes">RetroNAS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../base1/patternfly.css" type="text/css" rel="stylesheet">
     <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="../base1/jquery.js"></script>
     <script type="text/javascript" src="../base1/cockpit.js"></script>
-	<script type="text/javascript" src="../manifests.js"></script>
     <script type="text/javascript" src="../*/po.js"></script>
     <script type="text/javascript" src="retronas.js"></script>
 </head>
@@ -23,6 +20,8 @@
 		<li id="rn-scripts"  class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Scripts</a></li>
 		<li id="rn-ondevice" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">On-Device</a></li>
 		<li id="rn-advanced" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Advanced</a></li>
+		<li id="rn-update" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Update</a></li>
+		<li id="rn-log" class="rn-menu-item rn-menu-hover pf-c-nav__item"><a href="#">Log</a></li>
 	</ul>
 	</nav>
 	</section>
@@ -38,20 +37,22 @@
 				<li><a href="#" title="RetroNAS on irc">#retronas</a></li>
 			</ul>
 		</div>
+
 		<!-- CONFIG PAGE -->
 		<div id="rn-config-page" class="rn-page-container rn-wide-view rn-hidden">
 			<h1>Configuration</h1>
 			<div class="warning">This page is a work in progress</div>
 			<h3>RetroNAS</h3>
-			<div id="rn-user">Username:
+			<!-- <div id="rn-user">Username:
 				<input id="user-name" placeholder="Username"></input>
 				<button id="set-user-name" class="rn-value-updater">Update</button>
 			</div>
+			-->
 			<div id="rn-password">Password:
-				<input id="password" type="password"></input>
-				<button id="set-user-password" class="rn-value-updater">Update</button></div>
+				<input id="s-update-passwd-input" type="password"></input>
+				<button id="s-update-passwd" class="rn-value-updater">Update</button></div>
 			<div id="rn-directory">Top level Directory:
-				<input id="top-level-dir"></input>
+				<input id="set-top-level-dir-input"></input>
 				<button id="set-top-level-dir" placeholder="e.g. /data/retronas" class="rn-value-updater">Update</button></div>
 
 			<h3>Other</h3>
@@ -59,6 +60,7 @@
 				<input id="etherdfs-nic"></input>
 				<button id="set-etherdfs-nic" class="rn-value-updater">Update</button></div>
 		</div>
+
 		<!-- INSTALL PAGE -->
 		<div id="rn-install-page" class="rn-page-container rn-wide-view rn-hidden">
 			<h1>Install Services</h1>
@@ -87,21 +89,20 @@
 			<div>Telnet<button id="telnet" class="rn-installer">Install</button></div>
 			<div>WebOne<button id="webone" class="rn-installer">Install</button></div>
 			<div>gogrepo<button id="gogrepo" class="rn-installer">Install</button></div>
-			<div>hdparm<button id="hdparm" class="rn-installer">Install</button></div>
 			<div>lighttpd<button id="lighttpd" class="rn-installer">Install</button></div>
 			<div>ps3netsrv for CFW/HEN+webMAN MOD<button id="ps3netsrv" class="rn-installer">Install</button></div>
 			<div>tcpser<button id="tcpser" class="rn-installer">Install</button></div>
 			<div>tftpd-hpa<button id="tftpd-hpa" class="rn-installer">Install</button></div>
 		</div>
+
 		<!-- SCRIPTS PAGE -->
 		<div id="rn-scripts-page" class="rn-page-container rn-wide-view rn-hidden">
 			<h1>Scripts</h1>
 			<div class="warning">This page is a work in progress</div>
-			<div>Update RetroNAS<button id="rn-script" class="rn-script">Run</button></div>
-			<div>Fix on disk permissions<button id="fix-disk-perms" class="rn-script">Run</button></div>
+			<div>Fix on disk permissions<button id="s-fix-disk-perms" class="rn-script">Run</button></div>
 
-			<div>GOG Repo<button id="gogrepo" class="rn-script">Run</button></div>
-			<div>Nintendo 3DS QR Code (FBI Homebrew)<button id="3ds-qr-code" class="rn-script">Run</button></div>
+			<div>GOG Repo<button id="gogrepo" class="rn-modal">Run</button></div>
+			<div>Nintendo 3DS QR Code (FBI Homebrew)<button id="3ds_qr" class="rn-script">Run</button></div>
 			<div>ROM Importer (Smokemonster SMDBs)<button id="romimport" class="rn-script">Run</button></div>
 
 		</div>
@@ -111,11 +112,27 @@
 			<div class="info">This page is partially implemented</div>
 			<div>uCON64<button id="ucon64" class="rn-installer">Install</button></div>
 		</div>
+
 		<!-- ADVANCED PAGE -->
 		<div id="rn-advanced-page" class="rn-page-container rn-wide-view rn-hidden">
 			<h1>Advanced</h1>
 			<div class="warning">This page is a work in progress</div>
-			<div>hdparm<button id="hdparm" class="rn-menu">Setup</button></div>
+			<div>hdparm<button id="hdparm" class="rn-modal">Setup</button></div>
+		</div>
+
+		<!-- UPDATE PAGE -->
+		<div id="rn-update-page" class="rn-page-container rn-wide-view rn-hidden">
+			<h1>Update</h1>
+			<div class="warning">This page is a work in progress</div>
+			<div>RetroNAS<button id="s-update-retronas" class="rn-script">Update</button></div>
+			<div>Rom Dirs<button id="romdir" class="rn-installer">Update</button></div>
+		</div>
+
+		<!-- LOG PAGE -->
+		<div id="rn-log-page" class="rn-page-container rn-wide-view rn-hidden">
+			<h1>Log</h1>
+			<div class="warning">This page is a work in progress</div>
+			<div id="log-area"></div>
 
 		</div>
 	</div>

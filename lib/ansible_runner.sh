@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 

@@ -1,5 +1,6 @@
 bin
-scripts
+scripts/*.sh
+!scripts/static/*.sh
 src
 log
 ansible/retronas_vars.yml

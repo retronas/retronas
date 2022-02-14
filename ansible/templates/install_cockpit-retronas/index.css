@@ -74,6 +74,21 @@ body {
 	display:inline;
 }
 
+#rn-log-page {
+	text-align:center;
+}
+
+#log-area {
+	text-align: left;
+	width:100%;
+	height:80%;
+	border:1px solid black;
+	overflow:scroll;
+	font-family: monospace;
+    white-space: pre;
+	line-height: normal;
+}
+
 .info {
 	background-color: rgb(152, 175, 251);
 	color: white;
