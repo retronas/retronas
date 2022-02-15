@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Clone down additional Cockpit Packages
+#
+
+RNTMP=/tmp/rn_cpack
+COCKPIT=/usr/share/cockpit/
+
+# make out temp dir
+[ ! -d ${RNTMP} ] && mkdir ${RNTMP}
+
+function get_github {
+
+    local ACCOUNT=$1
+    local REPO=$2
+
+    cd $RNTMP
+    git clone https://github.com/${ACCOUNT}/${REPO}.git
+
+}
+
+
+### there'll be a better way to approach this
+function get_45drives {
+
+    PACKAGES=(
+        cockpit-navigator
+    )
+
+    for PACKAGE in ${PACKAGES}
+    do
+        get_github 45Drives $PACKAGE
+        [ ! -d "${RNTMP}/${PACKAGE}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
+        cd "${RNTMP}/${PACKAGE}"
+
+        RELEASE=$(git tag | tail -n1)
+        git checkout $RELEASE
+
+        FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
+        cp -R "${FOLDER}" "${COCKPIT}/"
+        rm -Rf "${COCKPIT}/${PACKAGE}/"
+    done
+
+}
+
+get_45drives

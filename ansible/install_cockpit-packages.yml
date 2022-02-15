@@ -1,0 +1,27 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "cockpit-packages"
+    - my_file: "install_cockpit-packages"
+
+    - package_data:
+      - cockpit-packages.sh
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install cockpit packages inplace"
+    copy:
+      src: "templates/{{ my_file }}/{{ item }}.j2"
+      dest: "{{ retronas_root }}/scripts/{{ item }}"
+      owner: root
+      group: root
+      mode: 0750
+    with_items:
+      "{{ package_data }}"
+
+  - name: "{{ my_name }} - get packages"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
