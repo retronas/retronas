@@ -23,8 +23,10 @@ function exec_su(cmd_os, dolog=true) {
             if ( dolog ) { _log(returned); };
             alert("Successful");
         }).fail(function(error){
-        console.log(error);
-        alert(error.message);
+            returned = new String(error);
+            //console.log(error);
+            alert("Failed, please check log screen");
+            if ( dolog ) { _log(returned); };
         }
     );
 };
@@ -40,8 +42,10 @@ function exec_n(cmd_os, dolog=true) {
             if ( dolog ) { _log(returned); };
             alert("Successful");
         }).fail(function(error){
-        console.log(error);
-        alert(error.message);
+            returned = new String(error);
+            //console.log(error);
+            alert("Failed, please check log screen");
+            if ( dolog ) { _log(returned); };
         }
     );
 };
@@ -50,7 +54,7 @@ function exec_n(cmd_os, dolog=true) {
 function install_options() {
 
     var rn_cmd_request = this.id;
-    this.disabled = true;
+    //this.disabled = true;
     var rn_cmd = '/opt/retronas/lib/ansible_runner.sh';
     var cmd_os = [rn_cmd, rn_cmd_request];
 
@@ -58,23 +62,21 @@ function install_options() {
     var results = exec_su(cmd_os);
 };
 
-// scripts
 function run_script() {
 
     var rn_cmd_request = this.id;
-    this.disabled = true;
+    //this.disabled = true;
     var rn_cmd = '/opt/retronas/lib/script_runner.sh';
     var cmd_os = [rn_cmd, rn_cmd_request];
     //console.log(cmd_os)
     var results = exec_n(cmd_os);
 };
 
-// scripts
 function run_script_values() {
 
     var rn_cmd_request = this.id;
     var rn_value = document.getElementById(this.id +"-input").value
-    this.disabled = true;
+    //this.disabled = true;
     var rn_cmd = '/opt/retronas/lib/script_runner.sh';
     var cmd_os = [rn_cmd, rn_cmd_request, rn_value];
     
