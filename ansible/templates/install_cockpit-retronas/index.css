@@ -19,6 +19,14 @@ h1::after {
     border:2px solid #c7c7c7;
 }
 
+.group-header::after {
+	content:' ';
+    display:block;
+	margin-top: 0.2em;
+    border:1px solid #ececec;
+}
+
+
 .centerme {
 	text-align:center !important;
 }
@@ -98,7 +106,7 @@ h1::after {
 	color: white;
 	border:1px solid red;
 	width: 100%;
-	height: 2em;
+	/* height: 2em; */
 	font-size: 0.8em;
 	font-weight: bold;
 	vertical-align: middle;
@@ -106,12 +114,14 @@ h1::after {
 	text-transform:uppercase;
 	margin-top:1em;
 	margin-bottom:1em;
+	line-height: -20px;
 }
 
 .important, .important a {
 	color:rgb(240, 142, 142);
 	font-weight: bold;
 	text-transform: uppercase;
+
 }
 
 
@@ -149,4 +159,10 @@ h1::after {
     white-space: pre;
 	line-height: normal;
 	background: rgb(246, 246, 246);
+}
+
+#version {
+	position: absolute;
+	right: 0;
+	bottom:0;
 }

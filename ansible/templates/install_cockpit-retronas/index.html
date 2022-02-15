@@ -32,24 +32,26 @@
 					<img src="retronas-logo.png" alt="RetroNAS Logo"></img>
 					<h2>Welcome to RetroNAS</h2>
 					<ul>
-						<li><a href="https://github.com/danmons/retronas" title="RetroNAS on Github">Github</a></li> | 
-						<li><a href="https://github.com/danmons/retronas/wiki" title="Read the Wiki">Wiki</a></li> | 
-						<li><a href="https://raw.githubusercontent.com/danmons/retronas/main/LICENSE" title="License">License</a></li> | 
-						<li class="important"><a href="https://raw.githubusercontent.com/danmons/retronas/main/SECURITY" title="Security Information">Security</a></li>
+						<li><a href="https://github.com/danmons/retronas" title="RetroNAS on Github" target="_blank">Github</a></li> | 
+						<li><a href="https://github.com/danmons/retronas/wiki" title="Read the Wiki" target="_blank">Wiki</a></li> | 
+						<li><a href="https://raw.githubusercontent.com/danmons/retronas/main/LICENSE" title="License" target="_blank">License</a></li> | 
+						<li class="important"><a href="https://raw.githubusercontent.com/danmons/retronas/main/SECURITY" title="Security Information" target="_blank">Security</a></li>
 					</ul>
+					
 					<div id="team">
+						<div class="warning">This interface is a work in progress</div>
 						<ul>
-							<li>\_ <a href="https://twitter.com/_daemons" title="@_daemons">@_daemons</a></li> _/-\_ 
-							<li><a href="https://twitter.com/sairukau" title="@sairukau">@sairukau</a></li> _/
+							<li>\_ <a href="https://twitter.com/_daemons" title="@_daemons" target="_blank">@_daemons</a></li> _/-\_ 
+							<li><a href="https://twitter.com/sairukau" title="@sairukau" target="_blank">@sairukau</a></li> _/
 						</ul>
 					</div>
+					<div id="version">alpha-0x.2022</div>
 				</div>
 
 
 				<!-- CONFIG PAGE -->
 				<div id="rn-config-page" class="rn-page-container rn-wide-view rn-hidden">
 					<h1>Configuration</h1>
-					<div class="warning">This page is a work in progress</div>
 					<h3>RetroNAS</h3>
 					<!-- <div id="rn-user">Username:
 						<input id="user-name" placeholder="Username"></input>
@@ -60,55 +62,58 @@
 						<input id="s-update-passwd-input" type="password"></input>
 						<button id="s-update-passwd" class="rn-value-updater">Update</button></div>
 					<div id="rn-directory" class="rn-faux-form">Top level Directory:
-						<input id="set-top-level-dir-input"></input>
-						<button id="set-top-level-dir" placeholder="e.g. /data/retronas" class="rn-value-updater">Update</button></div>
+						<input id="s-set-top-level-dir-input"></input>
+						<button id="s-set-top-level-dir" class="rn-value-updater">Update</button></div>
 
 					<h3>Other</h3>
 					<div id="rn-config-etherdfs" class="rn-faux-form">Set EtherDFS network interface
-						<input id="etherdfs-nic"></input>
-						<button id="set-etherdfs-nic" class="rn-value-updater">Update</button></div>
+						<input id="s-set-etherdfs-nic-input"></input>
+						<button id="s-set-etherdfs-nic" class="rn-value-updater">Update</button></div>
 				</div>
 
 				<!-- INSTALL PAGE -->
 				<div id="rn-install-page" class="rn-page-container rn-wide-view rn-hidden">
 					<h1>Install Services</h1>
-					<div class="info">This page is partially implemented</div>
-					<div>EtherDFS<button id="etherdfs" class="rn-installer">Install</button></div>
-					<div><b>Netatalk</b></div>
+					<div class="group-header"><b>Netatalk</b></div>
 					<ul>
-						<li><div>Netatalk2<button id="netatalk2" class="rn-installer">Install</button></div></li>
-						<li><div>Netatalk3<button id="netatalk3" class="rn-installer">Install</button></div></li>
+						<li><div>Netatalk2 (OS8.0+)<button id="netatalk2" class="rn-installer">Install</button></div></li>
+						<li><div>Netatalk3 (OS10.2+)<button id="netatalk3" class="rn-installer">Install</button></div></li>
 					</ul>
-					<div>NFS<button id="nfs" class="rn-installer">Install</button></div>
-					<div>Nintendo 3DS QR Code Generator<button id="3ds_qr_codes" class="rn-installer">Install</button></div>
-					<div>Nintendo GameCube + Swiss FSP Server<button id="fsp" class="rn-installer">Install</button></div>
-					<div>OpenSSH<button id="openssh" class="rn-installer">Install</button></div>
-					<div>ProFTPd<button id="proftpd" class="rn-installer">Install</button></div>
-					<div>ROM import<button id="romimport" class="rn-installer">Install</button></div>
-					<div><b>Samba</b></div>
+					<div class="group-header"><b>Samba</b></div>
 					<ul>
-						<li><div>Generic<button id="samba" class="rn-installer">Install</button></div></li>
+						<li><div>Service<button id="samba" class="rn-installer">Install</button></div></li>
 						<li><div>OpenPS2Loader<button id="ps2_openps2loader" class="rn-installer">Install</button></div></li>
 						<li><div>MiSTer FPGA<button id="mister_cifs" class="rn-installer">Install</button></div></li>
 						<li><div>Microsoft XBOX360<button id="xbox360" class="rn-installer">Install</button></div></li>
 					</ul>
-					<div>Syncthing<button id="syncthing" class="rn-installer">Install</button></div>
-					<div>TNFS<button id="tnfs" class="rn-installer">Install</button></div>
-					<div>Telnet<button id="telnet" class="rn-installer">Install</button></div>
-					<div>WebOne<button id="webone" class="rn-installer">Install</button></div>
-					<div>gogrepo<button id="gogrepo" class="rn-installer">Install</button></div>
-					<div>lighttpd<button id="lighttpd" class="rn-installer">Install</button></div>
-					<div>ps3netsrv for CFW/HEN+webMAN MOD<button id="ps3netsrv" class="rn-installer">Install</button></div>
-					<div>tftpd-hpa<button id="tftpd-hpa" class="rn-installer">Install</button></div>
+					<div class="group-header"><b>Other</b></div>
+					<ul>
+						<li><div>EtherDFS<button id="etherdfs" class="rn-installer">Install</button></div></li>
+						<li><div>hdparm<button id="hdparm" class="rn-installer">Install</button></div></li>
+						<li><div>NFS<button id="nfs" class="rn-installer">Install</button></div></li>
+						<li><div>Nintendo 3DS QR Code Generator<button id="3ds_qr_codes" class="rn-installer">Install</button></div></li>
+						<li><div>Nintendo GameCube + Swiss FSP Server<button id="fsp" class="rn-installer">Install</button></div></li>
+						<li><div>OpenSSH<button id="openssh" class="rn-installer">Install</button></div></li>
+						<li><div>ProFTPd<button id="proftpd" class="rn-installer">Install</button></div></li>
+						<li><div>ROM import<button id="romimport" class="rn-installer">Install</button></div></li>
+						<li><div>Syncthing<button id="syncthing" class="rn-installer">Install</button></div></li>
+						<li><div>TNFS<button id="tnfs" class="rn-installer">Install</button></div></li>
+						<li><div>Telnet<button id="telnet" class="rn-installer">Install</button></div></li>
+						<li><div>WebOne<button id="webone" class="rn-installer">Install</button></div></li>
+						<li><div>gogrepo<button id="gogrepo" class="rn-installer">Install</button></div></li>
+						<li><div>lighttpd<button id="lighttpd" class="rn-installer">Install</button></div></li>
+						<li><div>ps3netsrv for CFW/HEN+webMAN MOD<button id="ps3netsrv" class="rn-installer">Install</button></div></li>
+						<li><div>tcpser<button id="tcpser" class="rn-installer">Install</button></div></li>
+						<li><div>tftpd-hpa<button id="tftpd-hpa" class="rn-installer">Install</button></div></li>				
+					</ul>
 				</div>
 
 				<!-- SCRIPTS PAGE -->
 				<div id="rn-scripts-page" class="rn-page-container rn-wide-view rn-hidden">
 					<h1>Scripts</h1>
-					<div class="warning">This page is a work in progress</div>
-					<div>Fix on disk permissions<button id="s-fix-disk-perms" class="rn-script">Run</button></div>
+					<div>Fix on disk permissions<button id="s-fix-on-disk-perms" class="rn-script">Run</button></div>
 
-					<div>GOG Repo<button id="gogrepo" class="rn-modal">Run</button></div>
+					<div>GOG Repo<button id="gogrepo" class="rn-modal" disabled>Run</button></div>
 					<div>Nintendo 3DS QR Code (FBI Homebrew)<button id="3ds_qr" class="rn-script">Run</button></div>
 					<div>ROM Importer (Smokemonster SMDBs)<button id="romimport" class="rn-script">Run</button></div>
 
@@ -116,7 +121,6 @@
 				<!-- ONDEVICE PAGE -->
 				<div id="rn-ondevice-page" class="rn-page-container rn-wide-view rn-hidden">
 					<h1>On-Device Management</h1>
-					<div class="info">This page is partially implemented</div>
 					<div>uCON64<button id="ucon64" class="rn-installer">Install</button></div>
 				</div>
 
@@ -124,13 +128,14 @@
 				<div id="rn-advanced-page" class="rn-page-container rn-wide-view rn-hidden">
 					<h1>Advanced</h1>
 					<div class="warning">This page is a work in progress</div>
-					<div><b>hdparm</b> (/dev/sda only atm)</div>
+					<div class="group-header"><b>hdparm</b> (/dev/sda)</div>
 					<ul>
-						<li><div>Disable Advanced Power Management<button id="hdparm-manager-disable-apm" class="u-rn-script">Run</button></div></li>
-						<li><div>Disable Standby<button id="hdparm-manager-disable-standby" class="u-rn-script">Run</button></div></li>
-						<li><div>Start RetroNAS Custom Service<button id="hdparm-manager" class="u-rn-script">Start</button></div></li>
+
+						<li><div>Disable Advanced Power Management<button id="hdparm-manager-disable-apm" class="rn-script">Run</button></div></li>
+						<li><div>Disable Standby<button id="hdparm-manager-disable-standby" class="rn-script">Run</button></div></li>
+						<li><div>Start RetroNAS Custom Service<button id="hdparm-manager-start-service" class="rn-script">Start</button></div></li>
 					</ul>
-					<div>tcpser<button id="tcpser" class="rn-modal">Setup</button></div>
+					
 				</div>
 
 				<!-- UPDATE PAGE -->

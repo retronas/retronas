@@ -19,8 +19,8 @@ case $(basename $0 .sh) in
     ;;
     hdparm-manager-start-service)
       # Start Service
-        sudo RN_SYSTEMD ${SERVICE}* "reset-failed"
-        sudo RN_SYSTEMD_START ${SERVICE}.${UNITTYPE}
+        sudo systemctl reset-failed ${SERVICE}.*
+        sudo systemctl restart ${SERVICE}.${UNITTYPE}
     ;;
     *)
     exit 1

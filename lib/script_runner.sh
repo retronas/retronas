@@ -8,9 +8,9 @@
 
 #set -u -x
 
-
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
+source ${LIBDIR}/common.sh
 
 PREFIX=
 SUFFIX=.sh
@@ -33,8 +33,8 @@ cd "${SCDIR}"
 [ ! -f ${SCRIPT} ] && echo "Failed to find script for $1" && exit 1
 
 
-[ -z ${SCDIR} ] && echo "SCDIR cannot be empty, something is terrible wrong" && exit 1
+[ -z ${SCDIR} ] && echo "SCDIR cannot be empty, something is terribly wrong" && exit 2
 
 shift
 # this can be abused, find a better option
-${SCDIR}/${SCRIPT} $*
+${SCDIR}/${SCRIPT} $* 2>&1
