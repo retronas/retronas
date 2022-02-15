@@ -81,14 +81,18 @@
 #      mode: '0644'
 #    notify: "{{ my_name }} - Restart service"
 
-#  - name: "{{ my_name }} - enable startup services"
-#    service:
-#      name: "{{ item }}"
-#      state: started
-#      enabled: yes
-#    with_items:
-#      - avahi-daemon
-#      - netatalk
+  - name: "{{ my_name }} - enable startup services"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    with_items:
+      - avahi-daemon
+      - atalkd
+      - afpd
+      - papd
+      - timelord
+      - a2boot
 
   handlers:
 
@@ -98,4 +102,8 @@
       state: restarted
     with_items:
       - avahi-daemon
-      - netatalk
+      - atalkd
+      - afpd
+      - papd
+      - timelord
+      - a2boot
