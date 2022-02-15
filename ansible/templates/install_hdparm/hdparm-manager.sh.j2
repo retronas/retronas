@@ -1,0 +1,28 @@
+#!/bin/bash
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+#CHECK_ROOT
+HDPARM=/usr/sbin/hdparm
+SERVICE="hdparm"
+UNITTYPE="timer"
+DRIVE=/dev/sda
+
+case $(basename $0 .sh) in
+    hdparm-manager-disable-apm)
+        sudo ${HDPARM} -B 255 $DRIVE
+    ;;
+    hdparm-manager-disable-standby)
+        sudo ${HDPARM} -S 0 $DRIVE
+    ;;
+    hdparm-manager-start-service)
+      # Start Service
+        sudo RN_SYSTEMD ${SERVICE}* "reset-failed"
+        sudo RN_SYSTEMD_START ${SERVICE}.${UNITTYPE}
+    ;;
+    *)
+    exit 1
+    ;;
+esac
