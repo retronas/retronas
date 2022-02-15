@@ -1,6 +1,13 @@
 # Ideas to implement "one day"
 
-# Systems
+# Table of Contents
+1. [Systems](#systems)
+2. [Media](#media)
+3. [Tools](#tools)
+4. [GUI](#gui)
+5. [General](#general)
+
+# Systems <a name="systems"></a>
 
 ## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
@@ -13,12 +20,10 @@
 * ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
 
-
 ## Commodore 64
 * WiFi access point for C64-WiFi
 * Disk emulator - Pi1541 - https://cbm-pi1541.firebaseapp.com/
 * Tape emulator
-
 
 ## Netboot - Arcade
 * PiForce - https://github.com/travistyoj/piforcetools
@@ -52,7 +57,7 @@
 * ethflop, floppy block device over L2 ethernet
   * http://ethflop.sourceforge.net/
 
-# Media
+# Media <a name="media"></a>
 
 ## Audio player for tape based computers
 * Push tape images over audio to compatible systems
@@ -73,7 +78,7 @@
   * http://wiki.redump.org/index.php?title=Dumping_Guides
   * https://github.com/SabreTools/MPF/
 
-# Tools
+# Tools <a name="tools"></a>
 
 ## GOG sync
 * Sync all GOG purchases to NAS on cron schedule
@@ -105,10 +110,14 @@
   * FreeDOS
   * GParted
 
-## File copying
+## File copying (on device)
 * Good file copy/management tool
   * Midnight Commander? Something web based?
   * Copy between RetroNAS and external media or mounted filesystems
+
+## Older PC file protocols/services
+  * Kermit
+  * Gopher
 
 ## IPX / NCPFS
 * https://github.com/pasis/ipx
@@ -151,7 +160,8 @@
   * Floppy imager to build iPXE floppy
 
 ## Torrent server with client install instructions
-* deluge-web https://deluge-torrent.org/
+* deluge-web https://deluge-torrent.org/ 
+* rtorrent
 
 ## Advanced file systems
 * MDRAID
@@ -159,7 +169,7 @@
 * BtrFS + deduplication / compression / snapshots
   * https://github.com/markfasheh/duperemove
 
-# GUI
+# GUI <a name="gui"></a>
 
 ## GUI remote access
 * VNC and RDP access for tools that don't have web interfaces
@@ -175,7 +185,7 @@
 * ZFS manager
   * https://github.com/45Drives/cockpit-zfs-manager
 
-# General stuff
+# General stuff <a name="general"></a>
 * Non-crap GUI / web interface (mobile compatible)
 * Extend ansible playbooks for other distros (not just Debian 11 Bullseye)
 * Flashable image for RPi
