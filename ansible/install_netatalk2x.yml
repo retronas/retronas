@@ -44,7 +44,7 @@
 
   - name: "{{ my_name }} - create install script"
     template:
-      src: "templates/{{ my_file }}/{{ myfile }}.sh.j2"
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
       group: root
