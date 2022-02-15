@@ -1,0 +1,25 @@
+#!/bin/bash
+
+## RetroNAS Netatalk-2.x install script
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/netatalk2x"
+mkdir -p "${IDIR}"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf Netatalk-2.x
+
+# Clone the source code from SourceForge
+git clone https://github.com/rdmark/Netatalk-2.x.git
+cd Netatalk-2.x
+
+./bootstrap
+./configure --prefix=${IDIR} --enable-systemd --enable-ddp --enable-a2boot --enable-cups --enable-timelord --enable-zeroconf
+make -j{{ansible_processor_vcpus}}
+make install
+

@@ -1,0 +1,61 @@
+# Netatalk 2.x configuration
+
+#########################################################################
+# Global configuration
+#########################################################################
+
+#### machine's AFPserver/AppleTalk name.
+ATALK_NAME=retroafp
+
+#### server (unix) and legacy client (<= Mac OS 9) charsets
+ATALK_UNIX_CHARSET='LOCALE'
+ATALK_MAC_CHARSET='MAC_ROMAN'
+
+#### Don't Edit. export the charsets, read form ENV by apps
+export ATALK_UNIX_CHARSET
+export ATALK_MAC_CHARSET
+
+#########################################################################
+# AFP specific configuration
+#########################################################################
+
+#### Set which daemons to run.
+#### If you use AFP file server, run both cnid_metad and afpd.
+CNID_METAD_RUN=yes
+AFPD_RUN=yes
+
+#### maximum number of clients that can connect:
+#AFPD_MAX_CLIENTS=20
+
+#### UAMs (User Authentication Modules)
+#### available options: uams_dhx.so, uams_dhx2.so, uams_guest.so,
+####                    uams_clrtxt.so(legacy), uams_randnum.so(legacy)
+AFPD_UAMLIST="-U uams_dhx2.so,uams_clrtxt.so,uams_dhx.so,uams_guest.so,uams_randnum.so"
+
+#### Set the id of the guest user when using uams_guest.so
+#AFPD_GUEST=nobody
+
+#### config for cnid_metad. Default log config:
+#CNID_CONFIG="-l log_note"
+
+#########################################################################
+# AppleTalk specific configuration (legacy)
+#########################################################################
+
+#### Set which legacy daemons to run.
+#### If you need AppleTalk, run atalkd.
+#### papd, timelord and a2boot are dependent upon atalkd.
+ATALKD_RUN=yes
+PAPD_RUN=yes
+TIMELORD_RUN=yes
+A2BOOT_RUN=yes
+
+#### Control whether the daemons are started in the background.
+#### If it is dissatisfied that legacy atalkd starts slowly, set "yes".
+#### In case using systemd/systemctl, this is not so significant.
+ATALK_BGROUND=yes
+
+#### Set the AppleTalk Zone name.
+#### NOTE: if your zone has spaces in it, you're better off specifying
+####       it in atalkd.conf
+#ATALK_ZONE=@zone
