@@ -28,11 +28,16 @@ rn_main() {
 
 }
 
+
 #clear
 while true
 do
   rn_main
   case ${CHOICE} in
+    01)
+      clear
+      exit 0
+      ;;
     02)
       bash configure.sh
       ;;
@@ -52,7 +57,7 @@ do
       bash advanced.sh
       ;;
     *)
-      #clear
-      exit 0
+      clear
+      exit
   esac
 done

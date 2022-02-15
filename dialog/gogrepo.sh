@@ -23,7 +23,7 @@ dialog \
   --menu "Current OS: ${OLDGOGOS} \
   \n
   \nPlease choose a task" ${MG} 10 \
-  "01" "Exit to previous menu" \
+  "01" "Back" \
   "02" "Configure my GOG credentials" \
   "03" "Change my GOG Operating System setting" \
   "04" "Synchronise my games list" \
@@ -42,7 +42,7 @@ dialog \
   --menu "Current Operating Systems: ${OLDGOGOS} \
   \n
   \nPlease set the Operating System(s) you would like to download GOG games for." ${MG} 10 \
-  "01" "Exit to previous menu" \
+  "01" "Back" \
   "02" "Windows only" \
   "03" "Mac only" \
   "04" "Linux only" \
@@ -114,6 +114,9 @@ do
   CHOICE=$( cat ${TDIR}/rn_gog_chooser )
   PAUSEMSG='Press [Enter] to continue...'
   case ${CHOICE} in
+    01)
+      exit 0
+    ;;
   02)
     # login
     clear

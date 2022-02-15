@@ -8,7 +8,7 @@ cd ${DIDIR}
 rn_services() {
 
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "Samba"
     03 "Netatalk3"
     04 "EtherDFS"
@@ -36,6 +36,9 @@ while true
 do
   rn_services
   case ${CHOICE} in
+  01)
+    exit 0
+    ;;
   02)
     # Samba
     RN_SYSTEMD_STATUS "smbd"

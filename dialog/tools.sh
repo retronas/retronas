@@ -10,7 +10,7 @@ rn_tools() {
   source $_CONFIG
 
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "GOG - Download your GOG installers and extras"
     03 "Nintendo 3DS QR code generator for FBI homebrew"
     05 "ROM import tool via Smokemonster SMDBs"
@@ -27,6 +27,10 @@ while true
 do
   rn_tools
   case ${CHOICE} in
+  01)
+    clear
+    exit 0
+    ;;
   02)
     # gogrepo
     bash gogrepo.sh

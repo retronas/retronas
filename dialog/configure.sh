@@ -31,6 +31,10 @@ while true
 do
   rn_config
   case ${CHOICE} in
+    01)
+      clear
+      exit 0
+      ;;
     02)
       bash retronas_user.sh
       ;;
@@ -48,6 +52,6 @@ do
       ;;
     *)
       clear
-      exit 0
+      exit 1
   esac
 done

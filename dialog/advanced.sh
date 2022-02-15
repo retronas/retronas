@@ -3,14 +3,15 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
-
 cd ${DIDIR}
+CHOICE=""
 
 rn_advanced() {
   
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "hdparm - manage hdd standy mode etc"
+    03 "tcpser - Hayes modem emulator"
     99 "webui - experimental retronas webui (cockpit)"
   )
 
@@ -27,11 +28,15 @@ do
   rn_advanced
   case ${CHOICE} in
   01)
-    EXEC_SCRIPT retronas_main.sh
+    exit 0
     ;;
   02)
     # hdparm
     EXEC_SCRIPT tool_hdparm.sh
+    ;;
+  03)
+    # hdparm
+    EXEC_SCRIPT tcpser.sh
     ;;
   99)
     # experimental webui

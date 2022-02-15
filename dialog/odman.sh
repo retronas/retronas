@@ -12,7 +12,7 @@ rn_hdparm() {
   source $_CONFIG
 
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "uCON64"
   )
 
@@ -30,7 +30,8 @@ do
   rn_hdparm
   case ${CHOICE} in
     01)
-      EXEC_SCRIPT retronas_main.sh
+      clear
+      exit 0
       ;;
     02)
       # uCON64

@@ -15,7 +15,7 @@ dialog \
   --menu "My IP addresses: ${MY_IPS} \
   \n
   \nPlease select an option" ${MG} 10 \
-  "01" "Main Menu" \
+  "01" "Back" \
   "02" "Create/Edit Device" \
   "03" "Create/Edit Virtual Device (VICE RS232)" \
   "04" "Start Modem" \
@@ -76,6 +76,10 @@ do
   rn_tcpser
   CHOICE=$( cat ${TDIR}/rn_tcpser )
   case ${CHOICE} in
+  01)
+    clear
+    exit 0
+    ;;
   02)
     # create new modem
     bash tcpser_edit.sh

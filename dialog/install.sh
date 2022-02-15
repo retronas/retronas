@@ -10,7 +10,7 @@ rn_install_chooser() {
   source $_CONFIG
 
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing"
     03 "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)"
     04 "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)"
@@ -56,6 +56,10 @@ while true
 do
   rn_install_chooser
   case ${CHOICE} in
+  01)
+    clear
+    exit 0
+    ;;
   02)
     # Samba
     clear

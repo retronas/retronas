@@ -12,7 +12,7 @@ rn_hdparm() {
   source $_CONFIG
 
   local MENU_ARRAY=(
-    01 "Main Menu"
+    01 "Back"
     02 "Install ${SERVICE}"
     10 "Disable Advanced Power Management (APM)"
     11 "Disable Drive Standby"
@@ -64,7 +64,7 @@ do
   rn_hdparm
   case ${CHOICE} in
     01)
-      EXEC_SCRIPT retronas_main.sh
+      exit 0
       ;;
     02)
       # install

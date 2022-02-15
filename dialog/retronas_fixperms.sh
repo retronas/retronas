@@ -21,7 +21,7 @@ rn_fix_perms() {
   cd ${DIDIR}
 
   local MENU_ARRAY=(
-    1 "Exit to main menu"
+    1 "Back"
     $(rn_get_dirs)
   )
 
@@ -36,7 +36,8 @@ CLEAR
 rn_fix_perms
 case ${CHOICE} in
   1)
-    exit 1
+    clear
+    exit 0
     ;;
   *)
     CLEAR
