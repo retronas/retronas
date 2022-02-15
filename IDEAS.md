@@ -1,20 +1,6 @@
 # Ideas to implement "one day"
 
-## Commodore 64
-* WiFi access point for C64-WiFi
-* Disk emulator - Pi1541 - https://cbm-pi1541.firebaseapp.com/
-* Tape emulator
-
-## Audio player for tape based computers
-* Push tape images over audio to compatible systems
-  * Sega SC-3000 "bit" format
-  * MSX "cas" format
-  * Generic "wav" / "flac" formats
-  * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
-* Test with cheap 3.5mm audio jack to tape player hardware
-* Linux mpd + web interface to play audio files (mobile compatible), e.g.:
-  * https://github.com/jcorporation/myMPD
-  * https://github.com/rain0r/ampd 
+# Systems
 
 ## Apple, AppleTalk, Mac, Apple II
 * Switch Netatalk2 from binary distribution to modern fork
@@ -27,27 +13,14 @@
 * ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
 
-## ZX Spectrum
-* TNFS / Fujinet
-  * https://github.com/danmons/retronas/discussions/3
-  * http://spectrum.alioth.net/doc/index.php/TNFS_server
-  * https://fujinet.online/
 
-## FTP client
-* Something web based preferably
-  * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
+## Commodore 64
+* WiFi access point for C64-WiFi
+* Disk emulator - Pi1541 - https://cbm-pi1541.firebaseapp.com/
+* Tape emulator
 
-## GOG sync
-* Sync all GOG purchases to NAS on cron schedule
-  * https://github.com/eddie3/gogrepo
-  * Mostly done, need multi-game select menu
 
-## ROM auditing
-* https://github.com/frederic-mahe/Hardware-Target-Game-Database
-* Symlinks/Hardlinks for deduplication (filesystem specific)
-  * https://github.com/markfasheh/duperemove
-
-## Arcade Netboot
+## Netboot - Arcade
 * PiForce - https://github.com/travistyoj/piforcetools
   * Supports Sega NAOMI, Chihiro, Triforce arcade hardware
 
@@ -60,6 +33,38 @@
   * GC optical outer is 3.7 MB/s reads
   * Broadband adaptor limited by serial port.  Bandwidth about the same as an optical disc, but latency/seek would be much lower in theory. 
 
+## ZX Spectrum
+* TNFS / Fujinet
+  * https://github.com/danmons/retronas/discussions/3
+  * http://spectrum.alioth.net/doc/index.php/TNFS_server
+  * https://fujinet.online/
+
+## DOS
+* Build a floppy builder
+  * Take ideas from ISOify - https://github.com/danmons/isoify
+  * Build 512x20x18x2 (1.44MB) FAT12 floppy image files, lookback mount, copy data
+  * Include tools for FlashFloppy export - https://github.com/keirf/FlashFloppy
+* Add USB floppy disk support
+  * Mount real floppy disks
+  * Copy from RetroNAS to Floppy (individual files or raw image)
+* PLIP (IP over Parallel port)
+  * https://tldp.org/HOWTO/PLIP-1.html
+* ethflop, floppy block device over L2 ethernet
+  * http://ethflop.sourceforge.net/
+
+# Media
+
+## Audio player for tape based computers
+* Push tape images over audio to compatible systems
+  * Sega SC-3000 "bit" format
+  * MSX "cas" format
+  * Generic "wav" / "flac" formats
+  * MAME castool frontend - https://docs.mamedev.org/tools/castool.html
+* Test with cheap 3.5mm audio jack to tape player hardware
+* Linux mpd + web interface to play audio files (mobile compatible), e.g.:
+  * https://github.com/jcorporation/myMPD
+  * https://github.com/rain0r/ampd 
+
 ## ISO / CHD
 * ISO checksum tool
 * ISO <-> CHD converter (MAME chdman)
@@ -67,6 +72,22 @@
 * Redump BIN/CUE optical drive ripper
   * http://wiki.redump.org/index.php?title=Dumping_Guides
   * https://github.com/SabreTools/MPF/
+
+# Tools
+
+## GOG sync
+* Sync all GOG purchases to NAS on cron schedule
+  * https://github.com/eddie3/gogrepo
+  * Mostly done, need multi-game select menu
+
+## FTP client
+* Something web based preferably
+  * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
+
+## ROM auditing
+* https://github.com/frederic-mahe/Hardware-Target-Game-Database
+* Symlinks/Hardlinks for deduplication (filesystem specific)
+  * https://github.com/markfasheh/duperemove
 
 ## Cloud drives, cloud sync
 * rclone cloud sync / cloud drive mount
@@ -94,18 +115,6 @@
 * https://ftp.disconnected-by-peer.at/ncpfs/
 * https://github.com/cml37/dos-utils/blob/master/network/novell/servers/mars_nwe/mars_nwe_setup.txt
 
-## DOS
-* Build a floppy builder
-  * Take ideas from ISOify - https://github.com/danmons/isoify
-  * Build 512x20x18x2 (1.44MB) FAT12 floppy image files, lookback mount, copy data
-  * Include tools for FlashFloppy export - https://github.com/keirf/FlashFloppy
-* Add USB floppy disk support
-  * Mount real floppy disks
-  * Copy from RetroNAS to Floppy (individual files or raw image)
-* PLIP (IP over Parallel port)
-  * https://tldp.org/HOWTO/PLIP-1.html
-* ethflop, floppy block device over L2 ethernet
-  * http://ethflop.sourceforge.net/
 
 ## Bulletin Board / BBS tools
 * Native Hosted, DOS VM maybe, expose local file system for file downloads
@@ -150,6 +159,8 @@
 * BtrFS + deduplication / compression / snapshots
   * https://github.com/markfasheh/duperemove
 
+# GUI
+
 ## GUI remote access
 * VNC and RDP access for tools that don't have web interfaces
   * FileZilla (FTP push to devices like classic XBox)
@@ -162,9 +173,9 @@
 * File manager:
   * https://github.com/45Drives/cockpit-navigator
 * ZFS manager
-  * https://github.com/45Drives/cockpit-zfs-manager 
+  * https://github.com/45Drives/cockpit-zfs-manager
 
-## General stuff
+# General stuff
 * Non-crap GUI / web interface (mobile compatible)
 * Extend ansible playbooks for other distros (not just Debian 11 Bullseye)
 * Flashable image for RPi
