@@ -232,6 +232,8 @@ do
     rn_install_deps
     YAML=install_filesystems.yml rn_install_execute
     YAML=install_cockpit.yml rn_install_execute
+    YAML=install_cockpit-packages.yml rn_install_execute
+    #YAML=install_cockpit-retronas.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;

@@ -18,6 +18,10 @@ DROP_ROOT() {
     fi
 }
 
+### Check if we have the correct privs for op
+CHECK_ROOT() {
+    [ $UID -ne 0 ] && echo "You must run this as root" && exit 1
+}
 
 ### Get LANG file
 GET_LANG() {

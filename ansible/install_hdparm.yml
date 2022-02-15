@@ -4,6 +4,15 @@
     - my_name: "hdparm"
     - my_file: "install_{{ my_name }}"
 
+    - scripts:
+      - "{{ my_name }}.sh"
+      - "{{ my_name }}-manager.sh"
+
+    - symlinks:
+      - hdparm-manager-disable-apm
+      - hdparm-manager-disable-standby
+      - hdparm-manager-start-service
+
     - systemd_units:
       - { name: "{{ my_name }}", type: "timer", state: "stopped", instance: "no", enabled: "no", restart: "no" }
       - { name: "{{ my_name }}", type: "service", state: "stopped", instance: "no", enabled: "no", restart: "no" }
@@ -23,11 +32,13 @@
 
   - name: "{{ my_name }} - install script"
     template:
-      src: "templates/{{ my_file }}/{{ my_name }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
+      src: "templates/{{ my_file }}/{{ item }}.j2"
+      dest: "{{ retronas_root }}/scripts/{{ item }}"
       owner: root
       group: root
-      mode: '0750'
+      mode: '0755'
+    with_items:
+      - "{{ scripts }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - create startup service"
@@ -39,6 +50,17 @@
       mode: 0644
     with_items:
       - "{{ systemd_units }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - create symlinks for webui"
+    file:
+      src: "{{ retronas_root }}/scripts/{{ my_name }}-manager.sh"
+      dest: "{{ retronas_root }}/scripts/{{ item }}.sh"
+      owner: root
+      group: root
+      state: link
+    with_items:
+      - "{{ symlinks }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup service"
