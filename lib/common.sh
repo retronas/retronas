@@ -42,6 +42,7 @@ GET_LANG() {
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
     bash "${SCRIPT}"
+    unset SCRIPT
 }
 
 ### Clear function, standardised
@@ -73,6 +74,7 @@ RN_INSTALL_EXECUTE() {
 
     cd ${ANDIR}
     ansible-playbook "${PLAYBOOK}"
+    unset PLAYBOOK
 }
 
 #
