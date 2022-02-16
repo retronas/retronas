@@ -20,3 +20,5 @@
       - nfs-common
       - e2fsprogs
       - dosfstools
+      - curlftpfs
+      - sshfs
