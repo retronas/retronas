@@ -30,13 +30,13 @@
   * Supports Sega NAOMI, Chihiro, Triforce arcade hardware
 
 ## Nintendo GameCube
-* Swiss + FSP
-  * http://fsp.sourceforge.net/
-* Swiss + Broadband Adaptor for network game loading
-  * GC serial port is 27 Mbit/s (3 MB/s)
-  * GC optical inner is 2 MB/s reads
-  * GC optical outer is 3.7 MB/s reads
-  * Broadband adaptor limited by serial port.  Bandwidth about the same as an optical disc, but latency/seek would be much lower in theory. 
+* ~~Swiss + FSP~~
+  * ~~http://fsp.sourceforge.net/~~
+* ~~Swiss + Broadband Adaptor for network game loading~~
+  * ~~GC serial port is 27 Mbit/s (3 MB/s)~~
+  * ~~GC optical inner is 2 MB/s reads~~
+  * ~~GC optical outer is 3.7 MB/s reads~~
+  * ~~Broadband adaptor limited by serial port.  Bandwidth about the same as an optical disc, but latency/seek would be much lower in theory.~~
 
 ## ZX Spectrum
 * TNFS / Fujinet
