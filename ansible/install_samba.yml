@@ -52,27 +52,6 @@
       option: "ntlm auth"
       value: "yes"
 
-  - name: "{{ my_name }} - client ntlm auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "client ntlm auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - ntlmv2 auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "ntlmv2 auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - client ntlmv2 auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "client ntlmv2 auth"
-      value: "yes"
-
   - name: "{{ my_name }} - unix extensions"
     ini_file:
       path: /etc/samba/smb.conf
