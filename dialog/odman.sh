@@ -14,6 +14,7 @@ rn_hdparm() {
   local MENU_ARRAY=(
     01 "Back"
     02 "uCON64"
+    03 "extract-xiso"
   )
 
   local MENU_BLURB="\nChoose an item to install"
@@ -37,6 +38,12 @@ do
       # uCON64
       CLEAR
       RN_INSTALL_EXECUTE install_ucon64.yml 
+      PAUSE
+      ;;
+    03)
+      # uCON64
+      CLEAR
+      RN_INSTALL_EXECUTE install_extract-xiso.yml 
       PAUSE
       ;;
     *)

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+
+APP=extract-xiso
+OUTPATH=/tmp/$APP
+REPO=https://github.com/XboxDev/extract-xiso.git
+XC=$APP
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+### CLONE 
+RESULT="FAILURE"
+_log "Attempting to clone ${REPO}"
+[ ! -d ] && mkdir -p $OUTPATH
+cd $OUTPATH
+git clone $REPO
+
+### COMPILE
+cd $APP
+mkdir build
+cd build
+cmake ..
+
+# MAKE
+make
+
+[ -x ${XC} ] && mv ${XC} "${RN_BIN}/"
+chmod 755 ${RN_BIN}/${XC}
+
+# CLEAN UP
+rm -Rf ${OUTPATH}/
