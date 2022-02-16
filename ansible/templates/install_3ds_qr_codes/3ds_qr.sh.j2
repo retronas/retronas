@@ -27,7 +27,7 @@ echo "\
 
 ## Clean QR codes
 echo "Cleaning out stale QR codes..."
-find "{{ retronas_path }}/3ds/qr" -type f -iname '*.png' | while read QRFILE
+find "{{ retronas_path }}/3ds/qr/" -type f -iname '*.png' | while read QRFILE
 do
   BASENAME=$( basename "${QRFILE}" )
   BARENAME="${BASENAME%.*}"
@@ -39,7 +39,7 @@ done
 
 ## Find CIA files to scan
 echo "Scanning for new CIA files, generating QR codes..."
-find "{{ retronas_path }}/3ds/cia" -type f -iname '*.cia' | while read CIAFILE
+find "{{ retronas_path }}/3ds/cia/" -type f -iname '*.cia' | while read CIAFILE
 do
   BASENAME=$( basename "${CIAFILE}" )
   BARENAME="${BASENAME%.*}"
