@@ -15,6 +15,7 @@ rn_main() {
     05 "Run tools and scripts"
     06 "On-Device Management Tools"
     07 "Advanced"
+    50 "Experimental (there be dragons here!)"
   )
 
   local MENU_BLURB="\
@@ -55,6 +56,9 @@ do
       ;;
     07)
       bash advanced.sh
+      ;;
+    50)
+      bash experimental.sh
       ;;
     *)
       clear
