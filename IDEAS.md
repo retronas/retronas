@@ -39,7 +39,7 @@
   * ~~Broadband adaptor limited by serial port.  Bandwidth about the same as an optical disc, but latency/seek would be much lower in theory.~~
 
 ## ZX Spectrum
-* TNFS / Fujinet
+* ~~TNFS / Fujinet~~
   * https://github.com/danmons/retronas/discussions/3
   * http://spectrum.alioth.net/doc/index.php/TNFS_server
   * https://fujinet.online/
@@ -86,13 +86,17 @@
   * Mostly done, need multi-game select menu
 
 ## FTP client
-* Something web based preferably
+* Something web based preferably (curlftpfs+frontend?)
   * Allow push from RetroNAS to devices like modded Classic XBox, XBox 360
+  * https://github.com/sairuk/cockpit-xboxmanager
 
 ## ROM auditing
-* https://github.com/frederic-mahe/Hardware-Target-Game-Database
+* ~~SmokeMonster SMDB~~
+  * https://github.com/frederic-mahe/Hardware-Target-Game-Database
+* ~~SabreTools~~
+  * https://github.com/SabreTools/SabreTools
 * Symlinks/Hardlinks for deduplication (filesystem specific)
-  * https://github.com/markfasheh/duperemove
+  * https://github.com/markfasheh/duperemov
 
 ## Cloud drives, cloud sync
 * rclone cloud sync / cloud drive mount
@@ -111,9 +115,10 @@
   * GParted
 
 ## File copying (on device)
-* Good file copy/management tool
-  * Midnight Commander? Something web based?
-  * Copy between RetroNAS and external media or mounted filesystems
+* ~~Good file copy/management tool~~
+  * ~~Midnight Commander? Something web based?~~
+  * ~~Copy between RetroNAS and external media or mounted filesystems~~
+  * ~~See cockpit-navigator~~
 
 ## Older PC file protocols/services
   * Kermit
@@ -180,7 +185,7 @@
 * SMB
   * https://github.com/enira/cockpit-smb-plugin
   * https://github.com/45Drives/cockpit-file-sharing
-* File manager:
+* ~~File manager:~~
   * https://github.com/45Drives/cockpit-navigator
 * ZFS manager
   * https://github.com/45Drives/cockpit-zfs-manager
