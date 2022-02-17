@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Clone down additional Cockpit Packages
+#
+# eventually combine with cockpit-packages
+
+RNTMP=/tmp/rn_cpack
+COCKPIT=/usr/share/cockpit
+
+# make out temp dir
+[ ! -d ${RNTMP} ] && mkdir ${RNTMP}
+
+function get_github {
+
+    local ACCOUNT=$1
+    local REPO=$2
+    local FOLDER=$3
+
+    cd $RNTMP
+    git clone https://github.com/${ACCOUNT}/${REPO}.git $FOLDER
+
+}
+
+
+### there'll be a better way to approach this
+function get_retronas {
+
+    PACKAGES=(
+        cockpit-retronas
+    )
+
+    for PACKAGE in ${PACKAGES}
+    do
+        FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
+        get_github danmons $PACKAGE $FOLDER
+        [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
+        cd "${RNTMP}/${PACKAGE}"
+
+        RELEASE=$(git tag | tail -n1)
+        git checkout $RELEASE
+
+        cd ..
+  
+        cp -R "${FOLDER}" "${COCKPIT}/"
+        rm -Rf "${RNTMP}/${FOLDER}/"
+    done
+
+}
+
+get_retronas

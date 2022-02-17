@@ -5,13 +5,6 @@
     - my_file: "install_cockpit-retronas"
     - package_dir: "/usr/share/cockpit"
 
-    - package_data:
-      - retronas.js
-      - retronas-logo.png
-      - manifest.json
-      - index.html
-      - index.css
-
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -25,12 +18,15 @@
       mode: 0755
       state: directory
 
-  - name: "{{ my_name }} - install cockpit packages inplace"
-    copy:
-      src: "templates/{{ my_file }}/{{ item }}"
-      dest: "{{ package_dir }}/{{ my_name }}/{{ item }}"
+
+  - name: "{{ my_name }} - Generate scripts"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
       group: root
-      mode: 0644
-    with_items:
-      "{{ package_data }}"
+      mode: 0755
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
