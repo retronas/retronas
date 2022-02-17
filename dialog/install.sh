@@ -30,6 +30,7 @@ rn_install_chooser() {
     35 "gogrepo - Download your GOG game installers"
     36 "ROM import from Smokemonster SMDBs"
     37 "Nintendo GameCube + Swiss FSP server"
+    38 "SabreTools - Dat Manager (x86_64 only)"
     50 "Syncthing file sync tool"
     51 "Cockpit web based Linux system manager"
     52 "WebOne - HTTP 1.x proxy for a HTTP 2.x world"
@@ -219,6 +220,15 @@ do
     rn_install_deps
     YAML=install_romdir.yml rn_install_execute
     YAML=install_fsp.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  38)
+    # sabretools
+    clear
+    rn_install_deps
+    YAML=install_dotnetcore3.yml rn_install_execute
+    YAML=install_sabretools.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
