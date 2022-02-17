@@ -19,6 +19,7 @@
   * https://www.macip.net/
 * ADTPro style serial boot for Apple II family machines
   * https://github.com/ADTPro/adtpro
+  * https://www.adtpro.com/
 
 ## Commodore 64
 * WiFi access point for C64-WiFi
@@ -153,6 +154,8 @@
   * Test with null-modem compatible OSes - DOS, Win3.x, Win9x, Amiga, etc
   * RetroPi access over serial
   * Internet access over serial (optionally via WebOne)
+* ~~TCPSer~~
+  * ~~Hayes compatible software mode~~
 
 ## DHCP / DNS / PXE
 * dnsmasq or something similar and simple
@@ -178,7 +181,7 @@
 
 ## GUI remote access
 * VNC and RDP access for tools that don't have web interfaces
-  * FileZilla (FTP push to devices like classic XBox)
+  * ~~FileZilla (FTP push to devices like classic XBox)~~
   * ADT Pro for Linux (Apple II serial boot)
 
 ## Cockpit extensions
@@ -192,6 +195,7 @@
 
 # General stuff <a name="general"></a>
 * Non-crap GUI / web interface (mobile compatible)
+  * https://github.com/danmons/cockpit-retronas
 * Extend ansible playbooks for other distros (not just Debian 11 Bullseye)
 * Flashable image for RPi
 * Docker container
