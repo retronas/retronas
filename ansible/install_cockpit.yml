@@ -16,11 +16,21 @@
     with_items:
       - gnupg
 
-  - name: "{{ my_name }} - Install Debian Signing Keys 1"
-    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138"
+#  - name: "{{ my_name }} - Install Debian Signing Keys 1"
+#    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138"
+#
+#  - name: "{{ my_name }} - Install Debian Signing Keys 2"
+#    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9"
 
-  - name: "{{ my_name }} - Install Debian Signing Keys 2"
-    shell: "/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9"
+  - name: "{{ my_name }} - download Debian signing keys"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb"
+
+  - name: "{{ my_name }} - install Debian signing keys"
+    shell:
+      chdir: "/tmp"
+      cmd: "dpkg -i debian-archive-keyring*.deb"
 
   - name: "{{ my_name }} - Configure APT repo"
     apt_repository:
