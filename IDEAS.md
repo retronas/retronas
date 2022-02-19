@@ -81,10 +81,17 @@
 
 # Tools <a name="tools"></a>
 
+## macproxy
+* https://github.com/rdmark/macproxy
+* Legacy proxy for old browsers, similar to WebOne, but another option
+* Not Mac specific, despite name
+* listens on TCP/5000 by default, no conflicts
+
 ## GOG sync
 * Sync all GOG purchases to NAS on cron schedule
   * https://github.com/eddie3/gogrepo
   * Mostly done, need multi-game select menu
+  * Convert to Cockpit GUI
 
 ## FTP client
 * Something web based preferably (curlftpfs+frontend?)
