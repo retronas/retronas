@@ -16,7 +16,7 @@ detach = no
 # If you want gopherd to write a PID file, set this to the location
 # where you want it.  Otherwise, comment out this line.
 
-# pidfile = /var/run/pygopherd.pid
+pidfile = /var/run/pygopherd.pid
 
 ##################################################
 # Network
@@ -224,7 +224,7 @@ mapping = [['text/html', 'h'],
 	['application/gopher\\+-menu', '1'],
         ['multipart/mixed', 'M'],
         ['application/.+', '9'],
-        ['.*', '0']
+        ['.*', '0'],
         ]
 
 # This is used by the system to generate Extended Attribute (EA), aka
