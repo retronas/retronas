@@ -13,8 +13,9 @@ rn_hdparm() {
 
   local MENU_ARRAY=(
     01 "Back"
-    02 "uCON64"
-    03 "extract-xiso"
+    02 "uCON64 - Multipurpose Swiss Army Knife Backup/Copier tool"
+    03 "extract-xiso - XISO Tool"
+    04 "hdl-dump - PS2 HDD Game management"
   )
 
   local MENU_BLURB="\nChoose an item to install"
@@ -41,9 +42,15 @@ do
       PAUSE
       ;;
     03)
-      # uCON64
+      # extract-xiso
       CLEAR
       RN_INSTALL_EXECUTE install_extract-xiso.yml 
+      PAUSE
+      ;;
+    04)
+      # hdl-dump
+      CLEAR
+      RN_INSTALL_EXECUTE install_hdldump.yml 
       PAUSE
       ;;
     *)

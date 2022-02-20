@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+
+APP=hdl-dump
+REPO=https://github.com/ps2homebrew/${APP}.git
+OUTPATH=/tmp
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+#[ ! -x /usr/bin/gmake ] && _log "GMAKE not found" && REQFAIL=1
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
+
+cd ${OUTPATH}/${APP}
+
+make RELEASE=yes
+
+mv ${OUTPATH}/${APP}/hdl_dump $RN_BIN/
+
+
+# CLEAN UP
+rm -Rf ${OUTPATH}/${APP}
