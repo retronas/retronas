@@ -32,4 +32,4 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "/opt/pfsshell/pfsshell"
+      creates: "/usr/local/bin/pfsfuse"
