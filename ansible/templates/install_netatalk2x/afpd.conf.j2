@@ -99,7 +99,7 @@
 #
 #   Authentication Methods:
 #     -uampath <path>  Use this path to look for User Authentication Modules.
-#                      (default: /usr/lib/netatalk)
+#                      (default: /opt/retronas/bin/netatalk2x/etc/netatalk/uams)
 #     -uamlist <a,b,c> Comma-separated list of UAMs.
 #                      (default: uams_dhx.so,uams_dhx2.so)
 #
@@ -125,7 +125,7 @@
 #   Password Options:
 #     -[no]savepassword   [Don't] Allow clients to save password locally
 #     -passwdfile <path>  Use this path to store Randnum passwords.
-#                         (Default: /etc/netatalk/afppasswd. The only other
+#                         (Default: /opt/retronas/bin/netatalk2x/etc/netatalk/afppasswd. The only other
 #                         useful value is ~/.passwd. See 'man afppasswd'
 #                         for details.)
 #     -passwdminlen <#>   minimum password length. may be ignored.
@@ -135,14 +135,14 @@
 #
 #   AppleVolumes files:
 #     -defaultvol <path>  Specifies path to AppleVolumes.default file
-#                         (default /etc/netatalk/AppleVolumes.default,
+#                         (default /opt/retronas/bin/netatalk2x/etc/netatalk/AppleVolumes.default,
 #                         same as -f on command line)
 #     -systemvol <path>   Specifies path to AppleVolumes.system file
-#                         (default /etc/netatalk/AppleVolumes.system,
+#                         (default /opt/retronas/bin/netatalk2x/etc/netatalk/AppleVolumes.system,
 #                         same as -s on command line)
 #     -[no]uservolfirst   [Don't] read the user's ~/AppleVolumes or
 #                         ~/.AppleVolumes before reading
-#                         /etc/netatalk/AppleVolumes.default
+#                         /opt/retronas/bin/netatalk2x/etc/netatalk/AppleVolumes.default
 #                         (same as -u on command line)
 #     -[no]uservol        [Don't] Read the user's volume file
 #     -closevol           Immediately unmount volumes removed from
@@ -175,6 +175,7 @@
 #                         Note, this defaults to 30 seconds, and really 
 #                         shouldn't be changed.  If you want to control
 #                         the server idle timeout, use the -timeout option.
+#                         A value of 0 disables session timer tickles.
 #     -timeout <number>   Specify the number of tickles to send before
 #                         timing out a connection.
 #                         The default is 4, therefore a connection will
@@ -221,7 +222,7 @@
 #     -signature { user:<text> | auto }
 #                         Specify a server signature. This option is useful
 #                         while running multiple independent instances of
-#                         afpd on one machine (e.g. in clustered environments,
+#                         afpd on one machine (eg. in clustered environments,
 #                         to provide fault isolation etc.).
 #                         Default is "auto".
 #                         "auto" signature type allows afpd generating
@@ -253,10 +254,10 @@
 #                         Kerberos 5 authentication
 #     -ntdomain
 #     -ntseparator
-#                         Use for e.g. winbind authentication, prepends
+#                         Use for eg. winbind authentication, prepends
 #                         both strings before the username from login and
 #                         then tries to authenticate with the result
-#                         through the available and active UAM authentication
+#                         through the availabel and active UAM authentication
 #                         modules.
 #     -dircachesize entries
 #                         Maximum possible entries in the directory cache.
@@ -360,4 +361,4 @@
 
 # default:
 # - -tcp -noddp -uamlist uams_dhx.so,uams_dhx2.so
-- -transall -icon -mimicmodel PowerMac
+- -transall -hostname "retroafp" -uamlist uams_guest.so,uams_clrtxt.so,uams_randnum.so,uams_dhx.so,uams_dhx2.so

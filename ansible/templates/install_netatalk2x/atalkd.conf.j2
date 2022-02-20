@@ -1,0 +1,38 @@
+#
+# Format of lines in this file:
+#
+#    interface [ -seed ] [ -router | -dontroute ] 
+#       [ -phase { 1 | 2 } ] [ -addr net.node ]
+#	[ -net first[-last] ] [ -zone ZoneName ] ...
+#
+# -seed only works if you have multi-interfaces.  Any missing arguments are
+# automatically configured from the network.  Note: lines can't actually be
+# split, tho it's a good idea.
+#
+# -router is like -seed but it allows single-interface routing. -dontroute 
+# disables routing for the specified interface.
+#
+# Some examples:
+#
+#	The simplest case is no atalkd.conf.  This works on most platforms
+#	(notably not Solaris), since atalkd can discover the local interfaces
+#	on the machine.
+#
+#	Very slightly more complicated:
+#
+#		le0
+#	or
+#		eth0
+#
+#	for Solaris/SunOS or Linux.
+#
+#	A much more complicated example:
+#
+#		le0 -phase 1
+#		le1 -seed -phase 2 -addr 66.6 -net 66-67 -zone "No Parking"
+#
+#	This turns on transition routing between the le0 and le1
+#	interfaces on a Sun.  It also causes atalkd to fail if other
+#	routers disagree about it's configuration of le1.
+#
+{{ ansible_default_ipv4.interface }} -router -phase 2 -net 1 -zone "retroafp"
