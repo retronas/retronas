@@ -1,4 +1,7 @@
 # Netatalk 2.x afp volume cofiguration
+# This file looks empty when viewed with "vi".  In fact, there is one
+# '~', so users with no AppleVolumes file in their home directory get
+# their home directory by default.
 
 #
 # volume format:
@@ -176,7 +179,11 @@
 # The line below sets some DEFAULT, starting with Netatalk 2.1.
 :DEFAULT: options:upriv,usedots
 
-# By default all users have access to their home directories.
-{{ retronas_path }}			"retronas"
+# The "~" below indicates that Home directories are visible by default.
+# If you do not wish to have people accessing their Home directories,
+# please put a pound sign in front of the tilde or delete it.
+#~
+
+{{ retronas_path }}	retroafp	options:prodos,upriv,usedots
 
 # End of File
