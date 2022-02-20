@@ -12,7 +12,7 @@ rn_install_chooser() {
   local MENU_ARRAY=(
     01 "Back"
     02 "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing"
-    03 "Netatalk2 - AppleTalk and AppleShare file sharing (OS8+)"
+    03 "Netatalk2 - AppleTalk and AppleShare file sharing (System6/OS8+)"
     04 "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)"
     05 "EtherDFS - lightweight layer 2 network file sharing for DOS"
     06 "lighttpd - HTTP/Web server"
@@ -73,7 +73,7 @@ do
     # Netatalk2
     clear
     rn_install_deps
-    YAML=install_netatalk2.yml rn_install_execute
+    YAML=install_netatalk2x.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;
