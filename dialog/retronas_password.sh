@@ -32,6 +32,19 @@ rn_retronas_password() {
         systemctl restart avahi-daemon smbd nmbd
         echo
       fi
+      echo
+      ATALK_SYSTEMD=$(systemctl show atalkd.service --full --property FragmentPath --value)
+      if [ ! -z "${ATALK_SYSTEMD}" ] && [ -f "${ATALK_SYSTEMD}" ]
+      then
+        echo "AppleTalk detected. Changing the AppleTalk password for user ${OLDRNUSER} :"
+        echo
+        touch /opt/retronas/bin/netatalk2x/etc/netatalk/afppasswd
+        /opt/retronas/bin/netatalk2x/bin/afppasswd -a ${OLDRNUSER}
+        echo
+        systemctl restart avahi-daemon smbd nmbd
+        echo
+      fi
+      echo
       echo "${PAUSEMSG}"
       read -s
       exit 0
