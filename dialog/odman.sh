@@ -17,6 +17,7 @@ rn_hdparm() {
     03 "extract-xiso - XISO Tool"
     04 "hdl-dump - PS2 HDD Game management"
     05 "NBD client - Network Block Device Client"
+    06 "pfsshell/pfsfuse - PS2 HDD filesystem tools"
   )
 
   local MENU_BLURB="\nChoose an item to install"
@@ -58,6 +59,12 @@ do
       # hdl-dump
       CLEAR
       RN_INSTALL_EXECUTE install_nbd-client.yml 
+      PAUSE
+      ;;
+    06)
+      # psfshell
+      CLEAR
+      RN_INSTALL_EXECUTE install_pfsshell.yml 
       PAUSE
       ;;
     *)

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+
+APP=pfsshell
+REPO=https://github.com/ps2homebrew/${APP}.git
+OUTPATH=/tmp
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+#[ ! -x /usr/bin/gmake ] && _log "GMAKE not found" && REQFAIL=1
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
+
+cd ${OUTPATH}/${APP}
+
+ mkdir build
+ cd build
+ meson -Denable_pfsfuse=true ..
+ ninja
+
+mv ${OUTPATH}/${APP}/build/pfsshell $RN_BIN/
+mv ${OUTPATH}/${APP}/build/pfsfuse $RN_BIN/
+mv ${OUTPATH}/${APP}/build/libps2hdd.so $RN_BIN/
+
+
+# CLEAN UP
+rm -Rf ${OUTPATH}/${APP}
