@@ -63,23 +63,32 @@
 #      mode: '0644'
 #    notify: "{{ my_name }} - Restart service"
 
-#  - name: "{{ my_name }} - configure AppleVolumes.default"
-#    template:
-#      src: "templates/{{ my_file }}/AppleVolumes.default.j2"
-#      dest: /etc/netatalk/AppleVolumes.default
-#      owner: root
-#      group: root
-#      mode: '0644'
-#    notify: "{{ my_name }} - Restart service"
+  - name: "{{ my_name }} - AppleVolumes.default"
+    template:
+      src: "templates/{{ my_file }}/AppleVolumes.default.j2"
+      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/AppleVolumes.default"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
 
-#  - name: "{{ my_name }} - configure afpd.conf"
-#    template:
-#      src: "templates/{{ my_file }}/afpd.conf.j2"
-#      dest: /etc/netatalk/afpd.conf
-#      owner: root
-#      group: root
-#      mode: '0644'
-#    notify: "{{ my_name }} - Restart service"
+  - name: "{{ my_name }} - afpd.conf"
+    template:
+      src: "templates/{{ my_file }}/afpd.conf.j2"
+      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/afpd.conf"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - atalkd.conf"
+    template:
+      src: "templates/{{ my_file }}/atalkd.conf.j2"
+      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/atalkd.conf"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
     service:
