@@ -41,7 +41,7 @@ rn_retronas_password() {
         touch /opt/retronas/bin/netatalk2x/etc/netatalk/afppasswd
         /opt/retronas/bin/netatalk2x/bin/afppasswd -a ${OLDRNUSER}
         echo
-        systemctl restart avahi-daemon smbd nmbd
+        systemctl restart avahi-daemon atalkd afpd
         echo
       fi
       echo
