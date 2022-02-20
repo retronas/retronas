@@ -1,0 +1,15 @@
+[Unit]
+Description=Pygopherd
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDir=/opt/{{ my_name }}
+Environment=PYTHONPATH=/opt/{{ my_name }}
+ExecStart=/opt/pygopherd/bin/{{ my_name }} {{ retronas_root}}/etc/{{ my_name }}.conf
+TimeoutStartSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -22,6 +22,7 @@ rn_install_chooser() {
     10 "Telnet - unencrypted remote access shell"
     11 "NFS - NFS versions 2, 3 and 4"
     12 "TNFS for Atari 8-bit and ZX Spectrum"
+    20 "pygopherd - Gopher protocol server"
     30 "Nintendo 3DS QR code generator for FBI Homebrew"
     31 "Sony PS2 OpenPS2Loader SMB config"
     32 "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD"
@@ -146,6 +147,14 @@ do
     clear
     rn_install_deps
     YAML=install_tnfs.yml rn_install_execute
+    echo "${PAUSEMSG}"
+    read -s
+    ;;
+  20)
+    # pygopherd
+    clear
+    rn_install_deps
+    YAML=install_pygopherd.yml rn_install_execute
     echo "${PAUSEMSG}"
     read -s
     ;;

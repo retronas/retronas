@@ -1,0 +1,514 @@
+######################################################################
+# LOCAL DEVELOPMENT QUICKSTART SETTINGS
+######################################################################
+
+[pygopherd]
+
+##################################################
+# Operating System / Overall Behavior
+##################################################
+
+# Set this to true if you want the server to "detach" itself; that is,
+# to go into the background after it starts.
+
+detach = no
+
+# If you want gopherd to write a PID file, set this to the location
+# where you want it.  Otherwise, comment out this line.
+
+# pidfile = /var/run/pygopherd.pid
+
+##################################################
+# Network
+##################################################
+
+# The server name to present to the world.  If you do not specify it
+# here, Pygopherd will attempt to figure it out automatically.
+# This is used only to present to clients.  It does not control
+# where the server listens.
+#
+servername = retronas
+
+# The interface on which to listen.  It should be an IP address or
+# a domain name.  If specified, pygopherd will attempt to listen to
+# the specified port on only this interface -- useful if you are doing
+# virtual hosting.  If not specified, pygopherd will listen on all
+# interfaces the OS provides.  If in doubt, do not specify this.
+#
+# interface = gopher.example.com
+
+# What port to listen on.  If not running as root, this must be
+# greater than 1024.
+
+port = 70
+
+# Type of server to run.  Valid options are ForkingTCPServer
+# and ThreadingTCPServer.  ForkingTCPServer is highly recommended
+# for now.
+
+servertype = ThreadingTCPServer
+
+# What port to *say* we're listening on.  Most people should NOT
+# specify this.  You might want to if you are using firewalling or
+# port forwarding and the port number is different to the world than
+# it is locally.
+
+# advertisedport = 70
+
+# Do we timeout on client conections?  HIGHLY RECOMMENDED!
+# Value is given in seconds.  If given, any read or write that makes
+# no progress in this number of seconds will time out.
+
+timeout = 60
+
+##################################################
+# Data Handling
+##################################################
+
+# You can add a header to every directory by creating a
+# .abstract file in that directory and filling it with the
+# information you like.  This will then be rendered as a header
+# for the directory.  This option controls this feature.  Note:
+# for this to work, you must define a mapping to ABSTRACT in eaexts
+# below.
+
+abstract_headers = on
+
+# Individual files and folders can also have abstracts.  You can
+# choose to have pygopherd render these abstracts in the directory
+# listing itself -- they'll appear beneath the menu name for the file.
+# You can set this option to any of three values:
+#
+# always -- always render these abstracts.
+# unsupported -- render them only for protocols that do not natively
+# support abstracts.  Gopher+ is the only protocol that natively
+# supports them currently.
+# never -- never render these abstracts.
+
+abstract_entries = always
+
+##################################################
+# Error handling
+##################################################
+
+# If there is an error, you can decide whether or not to log a full
+# backtrace.  A full backtrace will usually be needed to find the
+# problem.
+
+tracebacks = yes
+
+##################################################
+# Security
+##################################################
+
+## Whether or not to use chroot.
+# This option is only valid if you are running pygopherd as root!
+
+usechroot = yes
+
+## Username and groupname to setreuid/setregid to.  Valid only if
+## starting pygopherd as root.  Comment out if you don't want this
+## functionality.  NOTE: DO NOT RUN AS ROOT UNLESS YOU USE THESE!  BAD BAD BAD!
+
+setuid = {{ retronas_user }}
+setgid = {{ retronas_user }}
+
+##################################################
+# TLS
+##################################################
+
+# Enable TLS by sniffing the first byte of the client request for the start of
+# a TLS handshake. This allows both TLS and plaintext requests to be served
+# over the same port.
+
+enable_tls = no
+
+# File paths to the server certificate and keyfile in PEM format. These are
+# required if TLS is enabled. When using chroot, the certificates will be
+# loaded while root privileges are still active.
+
+tls_certfile = ./testdata/demo.crt
+tls_keyfile = ./testdata/demo.key
+
+##################################################
+# Filesystem and MIME
+##################################################
+
+# Where the documents are stored.
+
+root = {{ retronas_path }}
+
+# Location of a file to use to figure out MIME types.  You can
+# specify multiple files here -- just separate them with a colon.
+# ALL of them that are found will be read.
+
+mimetypes = ./conf/mime.types:/etc/pygopherd/mime.types:/etc/mime.types
+
+# Encodings.  You can use the default with the following syntax.  The
+# mimetypex.encodings_map is {'.Z': 'compress', '.gz': 'gzip'}.
+#
+# For ease of use in the config file, we specify this as a list of
+# tuples.  You can convert any hash to a list of tuples by using .items()
+
+# encoding = mimetypes.encodings_map.items()
+
+# You can override the default entirely (ie, to remove those) like this:
+
+# encoding = {'.bz2' : 'bzip2', '.gz' : 'gzip'}.items()
+# Or the same thing:
+# encoding = [('.bz2', 'bzip2'), ('.gz', 'gzip')]
+
+# Or, you can extend the default like so:
+
+encoding = list(mimetypes.encodings_map.items()) + \
+          list({'.bz2' : 'bzip2',
+           '.tal': 'tal.TALFileHandler'
+          }.items())
+
+######################################################################
+# Logging
+######################################################################
+
+[logger]
+
+# Log method to use.  One of:
+#  syslog -- use Unix syslog facility
+#  file -- log to standard output (future capability for logging to other
+#          files)
+#  none   -- no logging
+
+logmethod = file
+
+# If you enable syslog, you will need to define these as well:
+
+# priority -- one of the following (listed in order of high to low):
+# LOG_EMERG, LOG_ALERT, LOG_CRIT, LOG_ERR, LOG_WARNING, LOG_NOTICE,
+# LOG_INFO, LOG_DEBUG
+
+priority = LOG_INFO
+
+# Facility -- one of the following:
+# LOG_KERN, LOG_USER, LOG_MAIL, LOG_DAEMON, LOG_AUTH, LOG_LPR, LOG_NEWS,
+# LOG_UUCP, LOG_CRON, LOG_LOCAL0 - LOG_LOCAL7
+
+facility = LOG_LOCAL3
+
+
+
+######################################################################
+# GOPHER OBJECTS
+######################################################################
+
+# Settings for gopher objects
+
+[GopherEntry]
+
+# Use this MIME type if no other type is found.
+defaultmimetype = text/plain
+
+# Mapping from MIME types to gopher0 single-character types.
+# This is a list of lists.  The first entry in each list is a
+# regexp to match and the second is the result.
+# 
+# Please have a .* at the end to map all unknown types to a certain
+# character.  For best results, that character should be nicely
+# corresponding to the defaultmimetype.
+
+mapping = [['text/html', 'h'],
+        ['text/.+', '0'],
+        ['application/mac-binhex40', '4'],
+        ['audio/.+', 's'],
+        ['image/gif', 'g'],
+        ['image/.+', 'I'],
+	['application/gopher-menu', '1'],
+	['application/gopher\\+-menu', '1'],
+        ['multipart/mixed', 'M'],
+        ['application/.+', '9'],
+        ['.*', '0']
+        ]
+
+# This is used by the system to generate Extended Attribute (EA), aka
+# Gopher+ blocks for a file.  Basically, with the setup shown below,
+# you can create "filename.txt.abstract" to define the abstract
+# property for filename.txt.  If you do that, you will probably want
+# to add these properties to ignorepatt below.  The list is a mapping
+# from an extension to a block name.
+#
+# Sample for UMN compatibility:
+#
+eaexts = {'.abstract' : 'ABSTRACT',
+          '.keywords' : 'KEYWORDS',
+          '.ask' : 'ASK',
+          '.3d' : '3D'}
+#
+# If you want to disable this capability, use this:
+#
+
+# eaexts = {}
+
+
+######################################################################
+# HANDLERS
+######################################################################
+
+##################################################
+# Handler multiplexer
+##################################################
+
+[handlers.HandlerMultiplexer]
+
+# A list of the handlers to consider.  The handlers
+# are tried in the order listed.
+#
+#
+### Suggested settings:
+# Note: the UMNDirHandler will handle all directories, even if they
+# do not have UMN-specific files, so you do not need to list the
+# dirhandler in this case.
+#
+# Warning: scriptexec and pyg can execute arbitrary code stored in
+# your path.  Don't enable unless you know what you're doing!
+#
+# For UMN emulation:  (full UMN featureset excluding scriptexec, no others)
+#
+# handlers = [url.HTMLURLHandler, UMN.UMNDirHandler,
+#             html.HTMLFileTitleHandler, 
+#             mbox.MBoxMessageHandler, mbox.MBoxFolderHandler,
+#             file.CompressedFileHandler, file.FileHandler]
+#
+# For Bucktooth emulation:  (full Buck featureset excluding scriptexec)
+#
+#handlers = [gophermap.BuckGophermapHandler, url.HTMLURLHandler,
+#             file.FileHandler, dir.DirHandler]
+#
+# For full Pygopherd featureset excluding scripts, compression, and PYG.
+# Supports both UMN and Bucktooth featuresets.  This is the default
+# configuration for Pygopherd because it is secure yet versatile.
+#
+
+# handlers = [url.HTMLURLHandler, gophermap.BuckGophermapHandler,
+#             mbox.MaildirFolderHandler, mbox.MaildirMessageHandler,
+#             UMN.UMNDirHandler, html.HTMLFileTitleHandler,
+#             mbox.MBoxMessageHandler, mbox.MBoxFolderHandler,
+#             file.FileHandler]
+
+# For full Pygopherd featureset including scripts and PYG.  Same as
+# above but adds scripts, decompression, and PYG execution.
+
+handlers = [url.HTMLURLHandler, gophermap.BuckGophermapHandler,
+            mbox.MaildirFolderHandler, mbox.MaildirMessageHandler,
+            UMN.UMNDirHandler,
+            tal.TALFileHandler,
+            html.HTMLFileTitleHandler,
+            mbox.MBoxMessageHandler, mbox.MBoxFolderHandler,
+            pyg.PYGHandler, scriptexec.ExecHandler,
+            ZIP.ZIPHandler,
+            file.CompressedFileHandler, file.FileHandler,
+            url.URLTypeRewriter]
+
+##################################################
+# Decompressing file handler
+##################################################
+
+[handlers.file.CompressedFileHandler]
+
+# Decompressors is a map from an encoding (as specified in the
+# pygopherd section above) to a decompression program.
+# The decompression program must
+# accept the input in its stdin and write the decompressed output
+# to stdout.
+#
+# If you do not want to decompress things automatically for your
+# clients, you might wish to NOT use this handler.
+#
+# Note: this feature is probably NOT compatible with chroot unless
+# you take extra precautions.
+
+# We enable no decompressors by default... you'll need to do that.
+
+# decompressors = {}
+
+decompressors = {'bzip2': 'bzcat',
+              'gzip' : 'zcat',
+              'compress' : 'zcat'}
+
+# Regexp to match against filenames pending decompression.
+# The default will let ALL files be decompressed.
+
+decompresspatt = .*
+
+# You can be more restrictive:
+
+# decompresspatt = \.txt\.(bz2|gz|Z)$
+
+
+##################################################
+# Directory handler
+##################################################
+           
+[handlers.dir.DirHandler]
+# A regular expression of files to ignore.  These files
+# will not be presented in lists of files to clients,
+# but if clients know the exact path to the files, they can
+# still be requested.
+#
+# This pattern is matched against the requested selector.
+# Selectors are guaranteed to begin with a slash by this point.
+# and never end with a slash unless they consist solely of a slash.
+#
+# By default, we ignore files starting with a period, gophermap
+# files, and files ending with a tilde.
+#
+# The default emulates UMN's default plus buck.  Please note:
+# UMNDirHandler implicitly will keep all files starting with a dot out of
+# directory listings.  If you exclude these files explicitly in ignorepatt,
+# then not only will they not show up, but the handler will also not scan
+# them for links and the like.
+#
+# A buck-only server might like:
+#
+# ignorepatt = ~$|/\.|/gophermap$
+
+ignorepatt = /.cap$|/lost\+found$|/lib$|/bin$|/etc$|/dev$|~$|/\.cache|/\.forward$|/\.message$|/\.hushlogin$|/\.kermrc$|/\.notar$|/\.where$|/veronica.ctl$|/robots.txt$|/nohup.out$|/gophermap$|\.abstract$|\.keyboards$|\.ask|\.3d$|~$
+
+# Expiration time, in seconds, for the cache.
+# Set to 0 to disable caching entirely.
+
+cachetime = 0
+
+# Name of the cahe file.  Must be set to something even if the cachetime
+# is zero.  In that case, this filename will not be used but for the conf
+# file to parse, it must still be set.
+
+cachefile = .cache.pygopherd.dir
+
+##################################################
+# UMN Directory Handler
+##################################################
+
+[handlers.UMN.UMNDirHandler]
+
+# Extension stripping behavior.  When a file from a directory
+# is presented in a menu, and no name is given, what to do?
+# For instance, given a file Welcome.txt and pygopherd.tar.gz:
+#
+# If extstrip is none, present Welcome.txt and pygopherd.tar.gz in the
+# menu.
+#
+# If extstrip is nonencoded, modify only those files that do not
+# have encodings.  (If CompressedFileHandler is used, modify only
+# those files that to not have *HANDLED* encodings.)
+# If gzip is NOT a handled encoding, you'd get names Welcome and
+# pygopherd.tar.gz.  If gzip IS a handled encoding, you'd get
+# Welcome and pygopherd.
+#
+# If extstrip is full, modify all modifyable names.  Welcome.txt ->
+# Welcome and pygopherd.tar.gz -> pygopherd.
+
+# extstrip = none
+extstrip = nonencoded
+# extstrip = full
+
+[handlers.ZIP.ZIPHandler]
+##################################################
+# ZIP file handler
+##################################################
+
+# Even if it's listed in the available handlers, it's disabled here by
+# default.
+
+enabled = true
+
+pattern = \.zip$
+
+######################################################################
+# PROTOCOLS
+######################################################################
+
+##################################################
+# Protocol Multiplexer
+##################################################
+
+[protocols.ProtocolMultiplexer]
+
+# A list of the protocols to consider for each request.
+# The protocols are tried in the order listed.
+
+protocols = [wap.WAPProtocol, gemini.GeminiProtocol,
+             http.HTTPProtocol, http.HTTPSProtocol,
+             spartan.SpartanProtocol,
+             gopherp.GopherPlusProtocol, gopherp.SecureGopherPlusProtocol,
+             rfc1436.GopherProtocol, rfc1436.SecureGopherProtocol]
+
+##################################################
+# Gopher+ Protocol
+##################################################
+
+[protocols.gopherp.GopherPlusProtocol]
+# The name and e-mail of the administrator
+admin = retronas <retronas@retro.nas>
+
+##################################################
+# HTTP Protocol
+##################################################
+
+[protocols.http.HTTPProtocol]
+iconmapping = {'h' : 'text.gif',
+            '0' : 'text.gif',
+            '4' : 'binhex.gif',
+            's' : 'sound1.gif',
+            'g' : 'image3.gif',
+            'I' : 'image3.gif',
+            'M' : 'text.gif',
+            '9' : 'binary.gif',
+            '1' : 'folder.gif',
+            '7' : 'folder.gif',
+            'i' : 'blank.gif'}
+
+# You can use this option to put something at the top of each HTML
+# page generated.
+# 
+# The following tokens will be interpolated:
+#
+# GOPHERURL          -- the Gopher URL for this page.
+#
+
+pagetopper = Welcome to RetroNAS!  You are browsing Gopher through
+   a Web interface right now.  You can use most browsers or Gopher
+   clients to browse Gopher natively.  If your browser supports it,
+   <A HREF="GOPHERURL">try clicking here</A> to see this page
+   in Gopher directly.  To find Gopher browsers,
+   <A HREF="https://en.wikipedia.org/wiki/Gopher_(protocol)#Client_software">click
+   here</A>.<HR>
+
+##################################################
+# WAP Protocol
+##################################################
+
+[protocols.wap.WAPProtocol]
+
+# waptop is the URL to access with WAP devices.  The default, /wap, means
+# that accessing http://sitename.com/wap will bring up your site in WAP
+# mode.
+#
+# PyGopherd can autodetect WAP from some phones, so this is not always
+# necessary.
+
+waptop = /wap
+
+##################################################
+# Gemini Protocol
+##################################################
+
+[protocols.gemini.GeminiProtocol]
+# Note that the gemini protocol *requires* the TLS section to also be enabled.
+
+footer = => https://www.github.com/michael-lazar/pygopherd Generated by PyGopherd
+
+##################################################
+# Spartan Protocol
+##################################################
+
+[protocols.gemini.SpartanProtocol]
+
+footer = => https://www.github.com/michael-lazar/pygopherd Generated by PyGopherd

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -u
+
+APP=pygopherd
+REPO=https://github.com/michael-lazar/${APP}.git
+OUTPATH=/opt
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
