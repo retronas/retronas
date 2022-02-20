@@ -23,3 +23,16 @@
       owner: root
       group: root
       mode: '0644'
+
+  - name: "{{ my_name }} - check module loaded"
+    shell: "lsmod | grep nbd"
+    args:
+      warn: no 
+    register: module_loaded
+
+  - name: "{{ my_name }} - enable ndb kernel module"
+    command:
+      args: 
+        cmd: "modprobe nbd"
+    when:
+      module_loaded.failed != false
