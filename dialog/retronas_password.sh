@@ -41,6 +41,7 @@ rn_retronas_password() {
         touch /opt/retronas/bin/netatalk2x/etc/netatalk/afppasswd
         /opt/retronas/bin/netatalk2x/bin/afppasswd -a ${OLDRNUSER}
         echo
+        echo "Restarting AppleTalk, this can take 45 seconds or longer..."
         systemctl restart avahi-daemon atalkd afpd
         echo
       fi
