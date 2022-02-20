@@ -1,0 +1,25 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "nbd-client"
+    - my_file: "install_nbd-client"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install from repos"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - nbd-client
+
+  - name: "{{ my_name }} - enable ndb kernel module"
+    template:
+      src: "templates/{{ my_file }}/nbd.conf.j2"
+      dest: /etc/modules-load.d/nbd.conf
+      owner: root
+      group: root
+      mode: '0644'

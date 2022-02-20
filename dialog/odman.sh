@@ -16,6 +16,7 @@ rn_hdparm() {
     02 "uCON64 - Multipurpose Swiss Army Knife Backup/Copier tool"
     03 "extract-xiso - XISO Tool"
     04 "hdl-dump - PS2 HDD Game management"
+    05 "NBD client - Network Block Device Client"
   )
 
   local MENU_BLURB="\nChoose an item to install"
@@ -51,6 +52,12 @@ do
       # hdl-dump
       CLEAR
       RN_INSTALL_EXECUTE install_hdldump.yml 
+      PAUSE
+      ;;
+    05)
+      # hdl-dump
+      CLEAR
+      RN_INSTALL_EXECUTE install_nbd-client.yml 
       PAUSE
       ;;
     *)
