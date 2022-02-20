@@ -1,112 +1,129 @@
 #!/bin/bash
 
-export TDIR="{{retronas_root}}/bin/Hardware-Target-Game-Database"
+set -u
 
-auditsystem () {
-case $1 in
-  atari_lynx)
-    export ODIR={{retronas_path}}/roms/atari/lynx
-    export SMDB='./EverDrive Pack SMDBs/Atari Lynx SMDB.txt'
-    ;;
-  atari_2600)
-    export export ODIR={{retronas_path}}/roms/atari/2600
-    export SMDB='./EverDrive Pack SMDBs/Atari 2600 SMDB.txt'
-    ;;
-  atari_5200)
-    export export ODIR={{retronas_path}}/roms/atari/5200
-    export SMDB='./EverDrive Pack SMDBs/Atari 5200 SMDB.txt'
-    ;;
-  atari_7800)
-    export export ODIR={{retronas_path}}/roms/atari/7800
-    export SMDB='./EverDrive Pack SMDBs/Atari 7800 SMDB.txt'
-    ;;
-  other_coleco_colecovision)
-    export ODIR={{retronas_path}}/roms/other/coleco_colecovision
-    export SMDB='./EverDrive Pack SMDBs/Colecovision SMDB.txt'
-    ;;
-  nec_pcengine)
-    export ODIR={{retronas_path}}/roms/nec/pcengine
-    export SMDB='./EverDrive Pack SMDBs/Turbo EverDrive & Super SD System 3 SMDB.txt'
-    ;;
-  nec_pcenginecd)
-    export ODIR={{retronas_path}}/roms/nec/pcenginecd
-    export SMDB='./EverDrive Pack SMDBs/PC Engine CD Redump Supplement.txt'
-    ;;
-  nintendo_famicom_disk)
-    export ODIR={{retronas_path}}/roms/nintendo/famicom/disk
-    export SMDB='./EverDrive Pack SMDBs/Famicom Disk System SMDB.txt'
-    ;;
-  nintendo_gameboy)
-    export ODIR={{retronas_path}}/roms/nintendo/gameboy
-    export SMDB='./EverDrive Pack SMDBs/Game Boy SMDB.txt'
-    ;;
-  nintendo_gameboyadvance)
-    export ODIR={{retronas_path}}/roms/nintendo/gameboyadvance
-    export SMDB='./EverDrive Pack SMDBs/EverDrive GBA SMDB.txt'
-    ;;
-  nintendo_gameboycolor)
-    export ODIR={{retronas_path}}/roms/nintendo/gameboycolor
-    export SMDB='./EverDrive Pack SMDBs/Game Boy Color SMDB.txt'
-    ;;
-  nintenodo_nes)
-    export ODIR={{retronas_path}}/roms/nintendo/nes
-    export SMDB='./EverDrive Pack SMDBs/EverDrive N8 & PowerPak SMDB.txt'
-    ;;
-  nintendo_nintendo64)
-    export ODIR={{retronas_path}}/roms/nintendo/nintendo64
-    export SMDB='./EverDrive Pack SMDBs/EverDrive 64 & 64drive SMDB.txt'
-    ;;
-  nintendo_snes)
-    export ODIR={{retronas_path}}/roms/nintendo/snes
-    export SMDB='EverDrive Pack SMDBs/Super EverDrive & SD2SNES SMDB.txt'
-    ;;
-  sega_gamegear)
-    export ODIR={{retronas_path}}/roms/sega/gamegear
-    export SMDB='EverDrive Pack SMDBs/EverDrive GG SMDB.txt'
-    ;;
-  sega_mastersystem)
-    export ODIR={{retronas_path}}/roms/sega/mastersystem
-    export SMDB='EverDrive Pack SMDBs/Master EverDrive SMDB.txt'
-    ;;
-  sega_megacd)
-    export ODIR={{retronas_path}}/roms/sega/megacd
-    export SMDB='EverDrive Pack SMDBs/SegaCD.txt'
-   ;;
-  sega_megadrive)
-    export ODIR={{retronas_path}}/roms/sega/megadrive
-    export SMDB='EverDrive Pack SMDBs/Mega EverDrive SMDB.txt'
-   ;;
-  sega_saturn)
-    export ODIR={{retronas_path}}/roms/sega/saturn
-    export SMDB='EverDrive Pack SMDBs/Saturn Redump Supplement.txt'
-   ;;
-  *)
-    echo "Unknown system"
-    exit 1
-    ;;
-esac
-echo '------------------------'
-echo "Analysing with ${SMDB}"
-echo "Outputting to ${ODIR}"
-python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory
-echo '------------------------'
+TDIR="{{retronas_root}}/bin/Hardware-Target-Game-Database"
+MANIPULATE=0
+FORCE=0
+XTERMINATE=0
+TARGET=""
+
+declare -A SYSTEMS
+
+SYSTEMS=(
+  [atari/2600]="Atari 2600 SMDB.txt"
+  [atari/5200]="Atari 5200 SMDB.txt"
+  [atari/7800]="Atari 7800 SMDB.txt"
+  [atari/lynx]="Atari Lynx SMDB.txt"
+  [nec/pcengine]="Turbo EverDrive & Super SD System 3 SMDB.txt"
+  [nec/pcenginecd]="PC Engine CD Redump Supplement.txt"
+  [nintendo/famicom_disk]="Famicom Disk System SMDB.txt"
+  [nintendo/gameboy]="Game Boy SMDB.txt"
+  [nintendo/gameboyadvance]="EverDrive GBA SMDB.txt"
+  [nintendo/gameboycolor]="Game Boy Color SMDB.txt"
+  [nintendo/nintendo64]="EverDrive 64 & 64drive SMDB.txt"
+  [nintendo/snes]="Super EverDrive & SD2SNES SMDB.txt"
+  [nintendo/nes]="EverDrive N8 & PowerPak SMDB.txt"
+  [other/coleco_colecovision]="Colecovision SMDB.txt"
+  [sega/gamegear]="EverDrive GG SMDB.txt"
+  [sega/mastersystem]="Master EverDrive SMDB.txt"
+  [sega/megacd]="SegaCD.txt"
+  [sega/megadrive]="Mega EverDrive SMDB.txt"
+  [sega/saturn]="Saturn Redump Supplement.txt"
+)
+
+
+## REQUIREMENTS
+[ ! -d "${TDIR}" ] &&  echo "Cannot locate ROM import SMBD directory. Please add it from the Install Things menu." && exit 1
+
+## hacky af
+list_targets() {
+  echo "Use id with -t to run a single system"
+  echo "-------------------------------------"
+
+  ### dump to screen
+  for SYSTEM in ${!SYSTEMS[@]}
+  do
+    echo "id: ${SYSTEM}, ${SYSTEMS[$SYSTEM]}"
+  done | column -s"," -t
+  exit 0
 }
 
+_usage() {
+  echo "Usage $0" 
+  echo "-h this help"
+  echo "-t target system"
+  echo "-l list available targets"
+  exit 0
+}
 
-if [ -d "${TDIR}" ]
-then
+OPTSTRING="hlt:"
+while getopts $OPTSTRING ARG
+do
+  case $ARG in
+    h)
+      _usage
+      ;;
+    l)
+      # list targets
+      list_targets
+      ;;
+    t)
+      TARGET=${OPTARG}
+      ;;
+  esac
+done
+
+run_buildpack() {
+  local ODIR="${1}"
+  local SMDB="${2}"
+
+  # UNARMED FOR TESTING
+  cd "${TDIR}"
+  python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory
+
+}
+
+updateSMDB() {
+  cd ${TDIR}
   echo "Refreshing SMBDs..."
   umask 0002
-  cd ${TDIR}
   git config pull.rebase false
   git reset --hard HEAD
   git pull
+}
 
-  for SYSTEM in atari_2600 atari_5200 atari_7800 atari_lynx nec_pcengine nec_pcenginecd nintendo_famicom_disk nintendo_gameboy nintendo_gameboyadvance nintendo_gameboycolor nintendo_nintendo64 nintendo_snes nintenodo_nes other_coleco_colecovision sega_gamegear sega_mastersystem sega_megacd sega_megadrive sega_saturn
+auditsystem() {
+
+  local SYSTEM="${1:-IAMNOTFOUND}"
+
+  if [ ${SYSTEMS[${SYSTEM}]+_} ]
+  then
+    ODIR="{{retronas_path}}/roms/${SYSTEM}"
+    SMDB="./EverDrive Pack SMDBs/${SYSTEMS[${SYSTEM}]}"
+
+    if [ -d "${ODIR}" ]
+    then 
+      echo '------------------------'
+      echo "Analysing with ${SMDB}"
+      echo "Outputting to ${ODIR}"
+      run_buildpack "${ODIR}" "${SMDB}"
+      echo -e '------------------------\n'
+    else
+      echo "Failed to file output directory ${ODIR}"
+    fi
+  else 
+    _usage
+  fi
+}
+
+if [ -z "${TARGET}" ]
+then
+  updateSMDB
+  for SYSTEM in ${!SYSTEMS[@]}
   do
     auditsystem ${SYSTEM}
   done
 else
-  echo "Cannot locate ROM import SMBD directory. Please add it from the Install Things menu."
-  exit 1
+  auditsystem ${TARGET}
 fi
