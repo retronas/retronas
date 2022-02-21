@@ -38,6 +38,15 @@ GET_LANG() {
 
 }
 
+READ_MENU_JSON() {
+    local MENU_TITLE="${1:-main}"
+
+    #local IFS=";"
+    declare -a MENU_ARRAY_TMP
+    export MENU_DATA=$(</opt/retronas/config/retronas.json jq -r ".menus.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
+
+}
+
 ### Run a script
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
@@ -147,6 +156,45 @@ RN_DIRECT_STATUS() {
 #
 # MENU
 #
+DLG_MENUJ() {
+
+    local IFS=$'\n'
+    local TITLE="$1"
+    local MENU_H=$2
+    local MENU_BLURB=$3
+
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+            --backtitle "RetroNAS" \
+            --title "RetroNAS ${TITLE}" \
+            --clear \
+            --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
+
+    declare -a MENU_ARRAY
+    while IFS=";" read -r ITEM
+    do
+
+        INDEX=$(echo $ITEM    | cut -d"|" -f1 | tr -d "\n" | sed 's/\s$//') 
+        TITLE=$(echo $ITEM    | cut -d"|" -f2 | tr -d "\n" | sed 's/\s$//') 
+        DESC=$(echo $ITEM     | cut -d"|" -f3 | tr -d "\n" | sed 's/\s$//') 
+        #COMMAND=$(echo $ITEM | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
+
+        MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
+
+
+    done < <(echo "${MENU_DATA[@]}")
+
+    export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
+    unset MENU_ARRAY
+
+}
+
+
+#
+# MENU
+#
 DLG_MENU() {
 
     local IFS=$'\n'
@@ -154,6 +202,7 @@ DLG_MENU() {
     local -n MENU_ARRAY=$2
     local MENU_H=$3
     local MENU_BLURB=$4
+
 
     local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
 
