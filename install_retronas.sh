@@ -51,7 +51,7 @@ apt update
 
 echo
 echo "Installing necessary tools..."
-apt install -y ansible git dialog
+apt install -y ansible git dialog jq
 
 if [ ! -f ${TARGET}/.git/config ]
 then
