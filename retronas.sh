@@ -72,6 +72,9 @@ then
   apt update
 fi
 
+### check for jq, needed for new menu system
+[ ! -f /usr/bin/jq ] && apt-get -y install jq
+
 ### Manage install through git
 if [ $DISABLE_GITOPS -eq 0 ]
 then
