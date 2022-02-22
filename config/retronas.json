@@ -563,7 +563,7 @@
                 },
                 {
                     "index":"02",
-                    "title": "GO",
+                    "title": "GOG",
                     "description": "Download your GOG installers and extras",
                     "command": "EXEC_SCRIPT gogrepo.sh"
                 },
