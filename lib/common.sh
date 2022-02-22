@@ -71,7 +71,7 @@ PAUSE() {
 RN_INSTALL_DEPS() {
     source $_CONFIG
     cd ${ANDIR}
-    ansible-playbook retronas_dependencies.yml
+    ansible-playbook -vv retronas_dependencies.yml
 }
 
 #
@@ -82,7 +82,7 @@ RN_INSTALL_EXECUTE() {
     local PLAYBOOK=$1
 
     cd ${ANDIR}
-    ansible-playbook "${PLAYBOOK}"
+    ansible-playbook -vv "${PLAYBOOK}"
     unset PLAYBOOK
 }
 

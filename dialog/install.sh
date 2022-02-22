@@ -16,13 +16,13 @@ rn_install_chooser() {
 rn_install_deps() {
   cd ${ANDIR}
   export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-  ansible-playbook retronas_dependencies.yml
+  ansible-playbook -vv retronas_dependencies.yml
 }
 
 rn_install_execute() {
   cd ${ANDIR}
   export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-  ansible-playbook ${YAML}
+  ansible-playbook -vv ${YAML}
 }
 
 while true
