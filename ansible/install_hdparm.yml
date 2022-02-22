@@ -28,7 +28,7 @@
          - hdparm
        state: latest
     notify:
-    - "{{ my_name }} - Restart services"
+    - "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - install script"
     template:
