@@ -95,6 +95,13 @@ else
   echo "Skipping script updates, git operations were disabled"
 fi
 
+### Make sure log dir exists
+if [ ! -d $LOGDIR ] 
+then
+  mkdir $LOGDIR
+  chmod 755 $LOGDIR
+fi
+
 ### Set term emulation
 if [ -z $TCHOICE ]
 then
