@@ -32,8 +32,6 @@ NOSLEEP=(
 
 # REQUIREMENTS
 REQFAIL=0
-[ ! -x /usr/sbin/hdparm ] && echo "hdparm not executable" && REQFAIL=1
-[ ! -x /usr/bin/shuf ] && echo "shuf not executable" && REQFAIL=1
 [ $REQFAIL -ne 0 ] && echo "Failed requiements, check previous messages" && exit $REQFAIL
 
 for DISK in ${NOSLEEP[@]}
