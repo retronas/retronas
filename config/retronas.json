@@ -308,7 +308,7 @@
                     "index": "03",
                     "title": "xboxmanager",
                     "description": "experimental xbox manager (cockpit)", 
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_extract-xiso.yml;RN_INSTALL_EXECUTE install_xbox-manager.yml;PAUSE"
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_extract-xiso.yml;RN_INSTALL_EXECUTE install_xboxmanager.yml;PAUSE"
                 }
             ]
         },
@@ -528,7 +528,7 @@
                     "index":"04",
                     "title": "Virtual Device",
                     "description": "Create/Edit Virtual Device (VICE RS232)",
-                    "command": " CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
+                    "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
                 },
                 {
                     "index":"05",
@@ -547,6 +547,37 @@
                     "title": "Stop",
                     "description": "Stop tcpser device",
                     "command": "tcpser_service STOP"
+                }
+            ]
+        },
+        "tools": 
+        {
+            "title": "Tools",
+            "desc": "\nPlease select an option to install",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "GO",
+                    "description": "Download your GOG installers and extras",
+                    "command": "EXEC_SCRIPT gogrepo.sh"
+                },
+                {
+                    "index":"03",
+                    "title": "3DS QR code",
+                    "description": "Nintendo 3DS FBI homebrew",
+                    "command": "CLEAR;${SUCOMMAND} ../scripts/3ds_qr.sh;PAUSE"
+                },
+                {
+                    "index":"04",
+                    "title": "ROM import",
+                    "description": "Import roms via Smokemonster SMDBs",
+                    "command": "EXEC_SCRIPT romimport.sh"
                 }
             ]
         },

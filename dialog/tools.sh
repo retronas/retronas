@@ -9,14 +9,9 @@ cd ${DIDIR}
 rn_tools() {
   source $_CONFIG
 
-  READ_MENU_JSON "advanced"
-
-  echo "${MENU_ARRAY[@]}" | xxd
-  PAUSE
-
+  READ_MENU_JSON "tools"
   local MENU_BLURB="Please select an option to install"
-
-  DLG_MENU "Tools Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  DLG_MENUJ "Tools Menu" 10 "${MENU_BLURB}"
 
 }
 
