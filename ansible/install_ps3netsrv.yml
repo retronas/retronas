@@ -7,7 +7,7 @@
     - system_map:
       - { src: "../../roms/sony/playstation3/games", dest: "GAMES" }
       - { src: "../../roms/sony/playstation3/iso", dest: "PS3ISO" }
-      - { src: "../../roms/sony/playstation2/dvd", dest: "PS2ISO" }
+      - { src: "../../roms/sony/playstation2", dest: "PS2ISO" }
       - { src: "../../roms/sony/playstation1/iso", dest: "PSXISO" }
       - { src: "../../roms/sony/playstationportable/iso", dest: "PSPISO" }
       - { src: "../../roms/videos/bdiso", dest: "BDISO" }
