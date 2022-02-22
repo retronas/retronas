@@ -60,12 +60,18 @@ then
   cd /opt
   git clone "$GITREPO"
   chmod a+x /opt/retronas/retronas.sh
+
   if [ $? -eq 0 ]
   then
+
+    #installing a simple starup script
+    echo -e '!#/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
+    chmod a+x /usr/local/bin/retronas
+
     echo
     echo "All done.  You can now run the RetroNAS config tool with the following command:"
     echo
-    echo "sudo /opt/retronas/retronas.sh"
+    echo "retronas"
     echo
   else
     echo "Installation FAILED, check previous messages"

@@ -111,6 +111,18 @@ case "${TCHOICE}" in
     ;;
 esac
 
+### Checking for new startup, old installs wont have it
+if [ ! -x /usr/local/bin/retronas ]
+then
+    clear
+    #installing a simple starup script
+    echo -e '!#/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
+    chmod a+x /usr/local/bin/retronas
+    echo -e "We have upgraded your RetroNAS, to get to the menu you can now type:\n\nretronas\n\nThis message will appear only once\n"
+    echo "Press enter to continue"
+    read -s
+fi
+
 ### Start RetroNAS
 echo "Running RetroNAS..."
 cd dialog
