@@ -1,0 +1,37 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Disable Laptop Lid"
+    - my_file: "install_disable-laptop-lid"
+    - my_path: "/etc/systemd/logind.conf.d"
+    - service: "systemd-logind.service"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - create directory"
+    file:
+      path: "{{ my_path }}"
+      owner: 'root'
+      group: 'root'
+      mode: '0755'
+      state: directory
+
+
+  - name: "{{ my_name }} - install config"
+    template:
+      src: templates/{{ my_file }}/retronas.conf.j2
+      dest: "{{ my_path }}/retronas.conf"
+      owner: 'root'
+      group: 'root'
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ service }}"
+      state: restarted

@@ -78,6 +78,12 @@
                     "title": "tcpser",
                     "description": "Hayes modem emulator",
                     "command": "EXEC_SCRIPT tcpser.sh"
+                },
+                {
+                    "index": "04",
+                    "title": "laptop-ao",
+                    "description": "Disable hibernate/monitoring of laptop lid",
+                    "command": "RN_EXECUTE_INSTALL install_disable-laptop-lid.yml"
                 }
             ]
         },

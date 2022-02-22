@@ -31,11 +31,11 @@ do
     # hdparm
     EXEC_SCRIPT tcpser.sh
     ;;
-  99)
-    # experimental webui
+  04)
+    # laptopo lid
     CLEAR
     RN_INSTALL_DEPS
-    RN_INSTALL_EXECUTE install_cockpit-retronas.yml
+    RN_INSTALL_EXECUTE install_disable-laptop-lid.yml
     PAUSE
     ;;
   *)
