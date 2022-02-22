@@ -118,7 +118,7 @@ then
     #installing a simple starup script
     echo -e '#!/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
     chmod a+x /usr/local/bin/retronas
-    echo -e "We have upgraded your RetroNAS, to get to the menu you can now type:\n\nretronas\n\nThis message will appear only once\n"
+    echo -e "We have upgraded your RetroNAS, You can now run the RetroNAS config tool with the following command:\n\nretronas\n\nThis message will appear only once\n"
     echo "Press enter to continue"
     read -s
 fi
