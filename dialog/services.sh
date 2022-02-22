@@ -7,27 +7,9 @@ cd ${DIDIR}
 
 rn_services() {
 
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "Samba"
-    03 "Netatalk3"
-    04 "EtherDFS"
-    05 "lighttpd"
-    06 "ProFTPd"
-    07 "tftpd-hpa"
-    08 "OpenSSH"
-    09 "Telnet"
-    12 "TNFS for Atari 8-bit and ZX Spectrum"
-    32 "ps3netsrv"
-    37 "FSP for GameCube"
-    50 "Syncthing"
-    51 "Cockpit"
-    52 "WebOne"
-  )
-
+  READ_MENU_JSON "services"
   local MENU_BLURB="Please select an service to check"
-
-  DLG_MENU "Services Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  DLG_MENUJ "Services Menu" 10 "${MENU_BLURB}"
 
 }
 

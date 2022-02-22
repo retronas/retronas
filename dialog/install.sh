@@ -8,38 +8,9 @@ cd ${DIDIR}
 
 rn_install_chooser() {
   source $_CONFIG
-
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "Samba - LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing"
-    03 "Netatalk2 - AppleTalk and AppleShare file sharing (System6/OS8+)"
-    04 "Netatalk3 - Apple AFP file sharing TCP/IP only (OSX10.2+)"
-    05 "EtherDFS - lightweight layer 2 network file sharing for DOS"
-    06 "lighttpd - HTTP/Web server"
-    07 "ProFTPd - FTP, File Transfer Protocol file sharing"
-    08 "tftpd-hpa - TFTP, Trivial File Transfer Protocol file sharing"
-    09 "OpenSSH - SSH/SFTP/SCP Secure Shell command line and file transfer"
-    10 "Telnet - unencrypted remote access shell"
-    11 "NFS - NFS versions 2, 3 and 4"
-    12 "TNFS for Atari 8-bit and ZX Spectrum"
-    20 "pygopherd - Gopher protocol server"
-    30 "Nintendo 3DS QR code generator for FBI Homebrew"
-    31 "Sony PS2 OpenPS2Loader SMB config"
-    32 "Sony PS3 ps3netsrv for CFW/HEN + webMAN-MOD"
-    33 "MiSTer FPGA CIFS config"
-    34 "Microsoft XBox360 SMB config"
-    35 "gogrepo - Download your GOG game installers"
-    36 "ROM import from Smokemonster SMDBs"
-    37 "Nintendo GameCube + Swiss FSP server"
-    38 "SabreTools - Dat Manager (x86_64 only)"
-    50 "Syncthing file sync tool"
-    51 "Cockpit web based Linux system manager"
-    52 "WebOne - HTTP 1.x proxy for a HTTP 2.x world"
-  )
-
+  READ_MENU_JSON "install"
   local MENU_BLURB="\nPlease select an option to install"
-
-  DLG_MENU "Main Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  DLG_MENUJ "Main Menu" 10 "${MENU_BLURB}"
 }
 
 rn_install_deps() {

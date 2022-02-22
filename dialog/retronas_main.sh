@@ -7,16 +7,7 @@ cd ${DIDIR}
 
 rn_main() {
 
-  local MENU_ARRAY=(
-    01 "Exit RetroNAS"
-    02 "Global configuration"
-    03 "Install things"
-    04 "Check services"
-    05 "Run tools and scripts"
-    06 "On-Device Management Tools"
-    07 "Advanced"
-    50 "Experimental (there be dragons here!)"
-  )
+  READ_MENU_JSON "main"
 
   local MENU_BLURB="\
   \nPlease select an option. \
@@ -25,7 +16,7 @@ rn_main() {
   \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\" \
   \n\nChanging either of these options will require tools to be reinstalled."
 
-  DLG_MENU "Main Menu" $MENU_ARRAY 3 "${MENU_BLURB}"
+  DLG_MENUJ "Main Menu" 3 "${MENU_BLURB}"
 
 }
 

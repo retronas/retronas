@@ -9,21 +9,14 @@ cd ${DIDIR}
 rn_config() {
   source $_CONFIG
 
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "Configure RetroNAS user"
-    03 "Configure RetroNAS password"
-    04 "Configure RetroNAS top level directory"
-    05 "Fix on-disk permissions"
-    06 "Set EtherDFS network interface"
-  )
+  READ_MENU_JSON "configuration"
 
   local MENU_BLURB="\nPlease select a configuration\
   \n
   \nCurrent RetroNAS user: \"${OLDRNUSER}\" \
   \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\""
 
-  DLG_MENU "Configuration Menu" $MENU_ARRAY 4 "${MENU_BLURB}"
+  DLG_MENUJ "Configuration Menu" 4 "${MENU_BLURB}"
 
 }
 

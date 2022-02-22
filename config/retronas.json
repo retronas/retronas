@@ -1,0 +1,570 @@
+{
+    "version": 0,
+    "menus": {
+        "main": 
+        {
+            "title": "Main Menu",
+            "desc": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Exit",
+                    "description": "So long and thanks for all the bits", 
+                    "command": "CLEAR;exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Config",
+                    "description": "Change Global Settings",
+                    "command": "EXEC_SCRIPT configure.sh"
+                },
+                {
+                    "index": "03",
+                    "title": "Install",
+                    "description": "The fun place, for things",
+                    "command": "EXEC_SCRIPT install.sh"
+                },
+                {
+                    "index": "04",
+                    "title": "Services",
+                    "description": "See if things are OK", 
+                    "command": "EXEC_SCRIPT services.sh"
+                },
+                {
+                    "index": "05",
+                    "title": "Scripts",
+                    "description": "Run tools and scripts", 
+                    "command": "EXEC_SCRIPT tools.sh"
+                },
+                {
+                    "index": "06",
+                    "title": "Device",
+                    "description": "On-Device Management Tools", 
+                    "command": "EXEC_SCRIPT odman.sh"
+                },
+                {
+                    "index": "07",
+                    "title": "Advanced",
+                    "description": "bd/eLiTe", 
+                    "command": "EXEC_SCRIPT advanced.sh"
+                },
+                {
+                    "index": "50",
+                    "title": "Experimental",
+                    "description": "there be dragons here!", 
+                    "command": "EXEC_SCRIPT experimental.sh"
+                }
+            ]
+        },
+        "advanced": 
+        {
+            "title": "Advanced Menu",
+            "desc": "\nPlease select an tool to install",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "hdparm",
+                    "description": "manage hdd standby mode",
+                    "command": "EXEC_SCRIPT tool_hdparm.sh"
+                },
+                {
+                    "index": "03",
+                    "title": "tcpser",
+                    "description": "Hayes modem emulator",
+                    "command": "EXEC_SCRIPT tcpser.sh"
+                }
+            ]
+        },
+        "configuration": 
+        {
+            "title": "Configuration",
+            "desc": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Username",
+                    "description": "Configure RetroNAS user",
+                    "command": "EXEC_SCRIPT retronas_user.sh"
+                },
+                {
+                    "index":"03",
+                    "title": "Password",
+                    "description": "Configure RetroNAS password",
+                    "command": "EXEC_SCRIPT retronas_password.sh"
+                },
+                {
+                    "index":"04",
+                    "title": "Data Directory",
+                    "description": "Configure RetroNAS top level directory",
+                    "command": "EXEC_SCRIPT retronas_path.sh"
+                },
+                {
+                    "index":"05",
+                    "title": "Permissions",
+                    "description": "Fix on-disk permissions",
+                    "command": "EXEC_SCRIPT retronas_fixperms.sh"
+                },
+                {
+                    "index":"06",
+                    "title": "EtherDFS",
+                    "description": "Set EtherDFS network interface",
+                    "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
+                }
+            ]
+        },
+        "install": 
+        {
+            "title": "Install",
+            "desc": "\nPlease select an option to install",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index": "02",
+                    "title": "Samba",
+                    "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;PAUSE"
+                },                
+                {
+                    "index": "03",
+                    "title": "Netatalk2",
+                    "description": "AppleTalk and AppleShare file sharing (System6/OS8+)", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk2x.yml;PAUSE"
+                },
+                {
+                    "index": "04",
+                    "title": "Netatalk3",
+                    "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk3.yml;PAUSE"
+                },                
+                {
+                    "index": "05",
+                    "title": "EtherDFS",
+                    "description": "lightweight layer 2 network file sharing for DOS", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_etherdfs.yml;PAUSE"
+                },
+                {
+                    "index": "06",
+                    "title": "lighttpd",
+                    "description": "HTTP/Web server", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;PAUSE"
+                },                
+                {
+                    "index": "07",
+                    "title": "ProFTPd",
+                    "description": "FTP, File Transfer Protocol file sharing", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_proftpd.yml;PAUSE"
+                },
+                {
+                    "index": "08",
+                    "title": "tftpd-hpa",
+                    "description": "TFTP, Trivial File Transfer Protocol file sharing", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tftpd-hpa.yml;PAUSE"
+                },                
+                {
+                    "index": "09",
+                    "title": "OpenSSH",
+                    "description": "SSH/SFTP/SCP Secure Shell command line and file transfer", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_openssh.yml;PAUSE"
+                },
+                {
+                    "index": "10",
+                    "title": "Telnet",
+                    "description": "unencrypted remote access shell", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_telnet.yml;PAUSE"
+                },
+                {
+                    "index": "11",
+                    "title": "NFS",
+                    "description": "NFS versions 2, 3 and 4", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nfs.yml;PAUSE"
+                }
+                ,
+                {
+                    "index": "12",
+                    "title": "TNFS",
+                    "description": "Atari 8-bit and ZX Spectrum", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tnfs.yml;PAUSE"
+                },
+                {
+                    "index": "20",
+                    "title": "pygopherd",
+                    "description": "Gopher protocol server", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pygopherd.yml;PAUSE"
+                },
+                {
+                    "index": "30",
+                    "title": "3DS QR codes",
+                    "description": "Nintendo 3DS FBI Homebrew installer", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;RN_INSTALL_EXECUTE install_3ds_qr_codes.yml;PAUSE"
+                },                
+                {
+                    "index": "31",
+                    "title": "Samba for PS2",
+                    "description": "OpenPS2Loader SMB config", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps2_openps2loader.yml;PAUSE"
+                },                
+                {
+                    "index": "32",
+                    "title": "Samba for PS3",
+                    "description": "ps3netsrv for CFW/HEN + webMAN-MOD", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps3netsrv.yml;PAUSE"
+                },                
+                {
+                    "index": "33",
+                    "title": "Samba for MiSTer",
+                    "description": "MiSTer FPGA CIFS config", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_mister_cifs.yml;PAUSE"
+                },                
+                {
+                    "index": "34",
+                    "title": "Samba for X360",
+                    "description": "Microsoft XBox360 SMB config", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_xbox360.yml;PAUSE"
+                },                
+                {
+                    "index": "35",
+                    "title": "gogrepo",
+                    "description": "Download your GOG game installers", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_gogrepo.yml;PAUSE"
+                },                
+                {
+                    "index": "36",
+                    "title": "ROM import",
+                    "description": "ROM import from Smokemonster SMDBs", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_romimport.yml;PAUSE"
+                },                
+                {
+                    "index": "37",
+                    "title": "FSP server",
+                    "description": "Nintendo GameCube + Swiss FSP server", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_fsp.yml;PAUSE"
+                },                
+                {
+                    "index": "38",
+                    "title": "SabreTools",
+                    "description": "Dat Manager (x86_64 only)", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_sabretools.yml;PAUSE"
+                },
+                {
+                    "index": "50",
+                    "title": "Syncthing",
+                    "description": "File sync tool", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_syncthing.yml;PAUSE"
+                },
+                {
+                    "index": "51",
+                    "title": "Cockpit",
+                    "description": "Web based Linux system manager", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_cockpit.yml;RN_INSTALL_EXECUTE install_cockpit-packages.yml;PAUSE"
+                },
+                {
+                    "index": "52",
+                    "title": "WebOne",
+                    "description": "HTTP 1.x proxy for a HTTP 2.x world", 
+                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_webone.yml;PAUSE"
+                }
+            ]
+        },
+        "experimental": 
+        {
+            "title": "EXPERIMENTAL",
+            "desc": "\nWARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index": "02",
+                    "title": "webui",
+                    "description": "experimental retronas webui (cockpit)", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_cockpit-retronas.yml;PAUSE"
+                }
+            ]
+        },
+        "ondevice": 
+        {
+            "title": "On-Device Management",
+            "desc": "\nChoose an item to install",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index": "02",
+                    "title": "uCON64",
+                    "description": "Multipurpose Swiss Army Knife Backup/Copier tool", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_ucon64.yml;PAUSE"
+                },
+                {
+                    "index": "03",
+                    "title": "extract-xiso",
+                    "description": "XISO Tool", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_extract-xiso.yml;PAUSE"
+                },
+                {
+                    "index": "04",
+                    "title": "hdl-dump",
+                    "description": "Sony PS2 HDD Game management", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdldump.yml;PAUSE"
+                },
+                {
+                    "index": "05",
+                    "title": "NBD client",
+                    "description": "Network Block Device Client", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nbd-client.yml;PAUSE"
+                },
+                {
+                    "index": "06",
+                    "title": "pfsshell/pfsfuse",
+                    "description": "PS2 HDD filesystem tools", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pfsshell.yml;PAUSE"
+                }
+            ]
+        },
+        "services": 
+        {
+            "title": "Services",
+            "desc": "\nPlease select an service to check",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index": "02",
+                    "title": "Samba",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS smbd;RN_DIRECT_STATUS \"smbstatus\" \"-vv\""
+                },
+                {
+                    "index": "03",
+                    "title": "Netatalk3",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS netatalk"
+                },
+                {
+                    "index": "04",
+                    "title": "EtherDFS",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS etherdfs"
+                },
+                {
+                    "index": "05",
+                    "title": "lighttpd",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS lighttpd"
+                },
+                {
+                    "index": "06",
+                    "title": "ProFTPd",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS proftpd"
+                },
+                {
+                    "index": "07",
+                    "title": "tftpd-hpa",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS tftpd-hpa"
+                },
+                {
+                    "index": "08",
+                    "title": "OpenSSH",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS ssh"
+                },
+                {
+                    "index": "09",
+                    "title": "Telnet",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS inetd"
+                },
+                {
+                    "index": "12",
+                    "title": "TNFS",
+                    "description": "Atari 8-bit and ZX Spectrum", 
+                    "command": "RN_SYSTEMD_STATUS tnfsd"
+                },
+                {
+                    "index": "32",
+                    "title": "ps3netsrv",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS ps3netsrv"
+                },
+                {
+                    "index": "37",
+                    "title": "FSP",
+                    "description": "for GameCube", 
+                    "command": "RN_SYSTEMD_STATUS fspd"
+                },
+                {
+                    "index": "50",
+                    "title": "Syncthing",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS syncthing*"
+                },
+                {
+                    "index": "51",
+                    "title": "Cockpit",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS cockpit"
+                },
+                {
+                    "index": "52",
+                    "title": "WebOne",
+                    "description": "", 
+                    "command": "RN_SYSTEMD_STATUS webone"
+                }
+            ]
+        },
+        "hdparm": 
+        {
+            "title": "hdparm",
+            "desc": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "TOOL_DESCRIPTION",
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_${SERVICE}.yml;PAUSE"
+                },
+                {
+                    "index":"10",
+                    "title": "APM",
+                    "description": "Disable Advanced Power Management (APM)",
+                    "command": " CLEAR;DRIVE=$(SELECT_DRIVE \"Disable APM\");hdparm -B 255 $DRIVE;PAUSE"
+                },
+                {
+                    "index":"11",
+                    "title": "Standby",
+                    "description": "Disable drive Standy",
+                    "command": "RN_SYSTEMD ${SERVICE}* \"reset-failed\";RN_SYSTEMD_START ${SERVICE}.timer"
+                },
+                {
+                    "index":"20",
+                    "title": "Start",
+                    "description": "Start hdparm service",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"21",
+                    "title": "Status",
+                    "description": "Query hdparm service status",
+                    "command": "RN_SYSTEMD_STATUS ${SERVICE}*"
+                },
+                {
+                    "index":"22",
+                    "title": "Stop",
+                    "description": "Stop the hdparm service",
+                    "command": "RN_SYSTEMD_STOP ${SERVICE}.timer;RN_SYSTEMD_STOP ${SERVICE}.service"
+                }
+            ]
+        },
+        "tcpser": 
+        {
+            "title": "tcpser",
+            "desc": "\nPlease select an option",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Serial Device",
+                    "description": "Create/Edit Serial Device",
+                    "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh;PAUSE"
+                },
+                {
+                    "index":"03",
+                    "title": "Virtual Device",
+                    "description": "Create/Edit Virtual Device (VICE RS232)",
+                    "command": " CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start tcpser device",
+                    "command": "tcpser_service STAR"
+                },
+                {
+                    "index":"05",
+                    "title": "Status",
+                    "description": "Query tcpser device",
+                    "command": "tcpser_service STATUS"
+                },
+                {
+                    "index":"06",
+                    "title": "Stop",
+                    "description": "Stop tcpser device",
+                    "command": "tcpser_service STOP"
+                }
+            ]
+        },
+        "example": 
+        {
+            "title": "MENU_TITLE",
+            "desc": "\nINSERT_TEXT",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "TOOL_NAME",
+                    "description": "TOOL_DESCRIPTION",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"03",
+                    "title": "TOOL_NAME",
+                    "description": "TOOL_DESCRIPTION",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"04",
+                    "title": "TOOL_NAME",
+                    "description": "TOOL_DESCRIPTION",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        }
+    }
+
+}
+  

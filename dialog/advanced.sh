@@ -7,17 +7,10 @@ cd ${DIDIR}
 CHOICE=""
 
 rn_advanced() {
-  
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "hdparm - manage hdd standy mode etc"
-    03 "tcpser - Hayes modem emulator"
-    99 "webui - experimental retronas webui (cockpit)"
-  )
 
-  local MENU_BLURB="\nPlease select an tool to install"
-
-  DLG_MENU "Advanced Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  READ_MENU_JSON "advanced"
+  local MENU_BLURB="\nPlease select an tool to install" 
+  DLG_MENUJ "Advanced Menu" 10 "${MENU_BLURB}"
 
 }
 

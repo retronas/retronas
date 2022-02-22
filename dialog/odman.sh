@@ -11,18 +11,9 @@ cd ${DIDIR}
 rn_hdparm() {
   source $_CONFIG
 
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "uCON64 - Multipurpose Swiss Army Knife Backup/Copier tool"
-    03 "extract-xiso - XISO Tool"
-    04 "hdl-dump - PS2 HDD Game management"
-    05 "NBD client - Network Block Device Client"
-    06 "pfsshell/pfsfuse - PS2 HDD filesystem tools"
-  )
-
+  READ_MENU_JSON "ondevice"
   local MENU_BLURB="\nChoose an item to install"
-
-  DLG_MENU "On-Device Management Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  DLG_MENUJ "On-Device Management Menu" 10 "${MENU_BLURB}"
 
 }
 

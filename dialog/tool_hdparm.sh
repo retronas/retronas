@@ -11,15 +11,7 @@ cd ${DIDIR}
 rn_hdparm() {
   source $_CONFIG
 
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "Install ${SERVICE}"
-    10 "Disable Advanced Power Management (APM)"
-    11 "Disable Drive Standby"
-    20 "Start Service"
-    21 "Query Service"
-    22 "Stop Service"
-  )
+  READ_MENU_JSON "hdparm"
 
   local MENU_BLURB="\n
   \nWARNING: These changes are irreversable, USE AT YOUR OWN RISK \
@@ -27,7 +19,7 @@ rn_hdparm() {
   \nAPM -> Standby -> Custom service !! LAST RESORT !! <- \
   \n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive."
 
-  DLG_MENU "Services Menu" $MENU_ARRAY 10 "${MENU_BLURB}"
+  DLG_MENUJ "Services Menu" 10 "${MENU_BLURB}"
 
 }
 

@@ -9,12 +9,10 @@ cd ${DIDIR}
 rn_tools() {
   source $_CONFIG
 
-  local MENU_ARRAY=(
-    01 "Back"
-    02 "GOG - Download your GOG installers and extras"
-    03 "Nintendo 3DS QR code generator for FBI homebrew"
-    05 "ROM import tool via Smokemonster SMDBs"
-  )
+  READ_MENU_JSON "advanced"
+
+  echo "${MENU_ARRAY[@]}" | xxd
+  PAUSE
 
   local MENU_BLURB="Please select an option to install"
 
