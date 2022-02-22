@@ -455,7 +455,7 @@
                 {
                     "index":"02",
                     "title": "Install",
-                    "description": "TOOL_DESCRIPTION",
+                    "description": "Install the hdparm application",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_${SERVICE}.yml;PAUSE"
                 },
                 {
@@ -503,30 +503,36 @@
                 },
                 {
                     "index":"02",
+                    "title": "Install",
+                    "description": "Install tcpser application",
+                    "command": "CLEAR;RN_INSTALL_EXEC install_tcpser.yml;PAUSE"
+                },
+                {
+                    "index":"03",
                     "title": "Serial Device",
                     "description": "Create/Edit Serial Device",
                     "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh;PAUSE"
                 },
                 {
-                    "index":"03",
+                    "index":"04",
                     "title": "Virtual Device",
                     "description": "Create/Edit Virtual Device (VICE RS232)",
                     "command": " CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
                 },
                 {
-                    "index":"04",
+                    "index":"05",
                     "title": "Start",
                     "description": "Start tcpser device",
                     "command": "tcpser_service STAR"
                 },
                 {
-                    "index":"05",
+                    "index":"06",
                     "title": "Status",
                     "description": "Query tcpser device",
                     "command": "tcpser_service STATUS"
                 },
                 {
-                    "index":"06",
+                    "index":"07",
                     "title": "Stop",
                     "description": "Stop tcpser device",
                     "command": "tcpser_service STOP"

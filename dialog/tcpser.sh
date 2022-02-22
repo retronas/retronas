@@ -16,11 +16,12 @@ dialog \
   \n
   \nPlease select an option" ${MG} 10 \
   "01" "Back" \
-  "02" "Create/Edit Device" \
-  "03" "Create/Edit Virtual Device (VICE RS232)" \
-  "04" "Start Modem" \
-  "05" "Query Modem" \
-  "06" "Stop Modem" \
+  "02" "Install tcpser service" \
+  "03" "Create/Edit Device" \
+  "04" "Create/Edit Virtual Device (VICE RS232)" \
+  "05" "Start Modem" \
+  "06" "Query Modem" \
+  "07" "Stop Modem" \
   2> ${TDIR}/rn_tcpser
 }
 
@@ -81,22 +82,29 @@ do
     exit 0
     ;;
   02)
+    # tcpser
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_tcpser.yml
+    PAUSE
+    ;;
+  03)
     # create new modem
     bash tcpser_edit.sh
     ;;
-  03)
+  04)
     # create new virtual modem
     bash tcpser_edit.sh VIRTUAL
     ;;
-  04)
+  05)
     # start modem
     tcpser_service START
     ;;
-  05)
+  06)
     # query modem
     tcpser_service STATUS
     ;;
-  06)
+  07)
     # start modem
     tcpser_service STOP
     ;;
