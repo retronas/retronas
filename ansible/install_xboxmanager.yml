@@ -1,0 +1,47 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "xboxmanager"
+    - my_file: "install_xboxmanager"
+    - my_path: "/opt"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - clone repo"
+    git:
+      repo: 'https://github.com/sairuk/cockpit-xboxmanager.git'
+      dest: "{{ my_path }}/xboxmanager"
+      clone: yes
+      update: yes
+      version: "main"
+
+  - name: "{{ my_name }} create device mounts dir"
+    file: 
+      path: "{{ retronas_path }}/device-mounts"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "0755"
+      state: directory
+
+  - name: "{{ my_name }} create device mount xbox dir"
+    file: 
+      path: "{{ retronas_path }}/device-mounts/xbox"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "0755"
+      state: directory
+
+  - name: "{{ my_name }} - run installer"
+    command:
+      cmd: "{{ my_path }}/xboxmanager/xboxmanager-install.sh"
+
+  - name: "{{ my_name }} config file"
+    template: 
+      src: templates/{{ my_file }}/xboxmanager.cfg.j2
+      dest: /opt/xboxmanager/xboxmanager.cfg
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: '0644'
