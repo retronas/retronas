@@ -92,7 +92,6 @@ while true
 do
   rn_tcpser_edit
   CHOICE=""
-  PAUSEMSG='Press [Enter] to continue...'
   case ${CHOICE} in
   *)
     rn_tcpser_write_envfile $TCPSER_TMP 

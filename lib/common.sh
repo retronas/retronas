@@ -50,7 +50,8 @@ READ_MENU_JSON() {
 ### Run a script
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
-    bash "${SCRIPT}"
+    shift
+    bash "${SCRIPT}" $*
     unset SCRIPT
 }
 

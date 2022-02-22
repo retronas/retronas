@@ -29,19 +29,19 @@ do
       exit 0
       ;;
     02)
-      bash retronas_user.sh
+      EXEC_SCRIPT retronas_user.sh
       ;;
     03)
-      bash retronas_password.sh
+      EXEC_SCRIPT retronas_password.sh
       ;;
     04)
-      bash retronas_path.sh
+      EXEC_SCRIPT retronas_path.sh
       ;;
     05)
-      bash retronas_fixperms.sh
+      EXEC_SCRIPT retronas_fixperms.sh
       ;;
     06)
-      bash retronas_etherdfs_interface.sh
+      EXEC_SCRIPT retronas_etherdfs_interface.sh
       ;;
     *)
       clear

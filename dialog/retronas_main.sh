@@ -31,25 +31,25 @@ do
       exit 0
       ;;
     02)
-      bash configure.sh
+      EXEC_SCRIPT configure.sh
       ;;
     03)
-      bash install.sh
+      EXEC_SCRIPT install.sh
       ;;
     04)
-      bash services.sh
+      EXEC_SCRIPT services.sh
       ;;
     05)
-      bash tools.sh
+      EXEC_SCRIPT tools.sh
       ;;
     06)
-      bash odman.sh
+      EXEC_SCRIPT odman.sh
       ;;
     07)
-      bash advanced.sh
+      EXEC_SCRIPT advanced.sh
       ;;
     50)
-      bash experimental.sh
+      EXEC_SCRIPT experimental.sh
       ;;
     *)
       clear

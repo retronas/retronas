@@ -78,7 +78,7 @@ do
   CHOICE=$( cat ${TDIR}/rn_tcpser )
   case ${CHOICE} in
   01)
-    clear
+    CLEAR
     exit 0
     ;;
   02)
@@ -90,11 +90,11 @@ do
     ;;
   03)
     # create new modem
-    bash tcpser_edit.sh
+    EXEC_SCRIPT tcpser_edit.sh
     ;;
   04)
     # create new virtual modem
-    bash tcpser_edit.sh VIRTUAL
+    EXEC_SCRIPT tcpser_edit.sh VIRTUAL
     ;;
   05)
     # start modem

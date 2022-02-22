@@ -36,7 +36,7 @@ CLEAR
 rn_fix_perms
 case ${CHOICE} in
   1)
-    clear
+    CLEAR
     exit 0
     ;;
   *)

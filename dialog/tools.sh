@@ -26,7 +26,7 @@ do
     ;;
   02)
     # gogrepo
-    bash gogrepo.sh
+    EXEC_SCRIPT gogrepo.sh
     ;;
   03)
     # 3DS QR
@@ -34,7 +34,7 @@ do
     ${SUCOMMAND} ../scripts/3ds_qr.sh
     PAUSE
     ;;
-  05)
+  04)
     # ROM import SMDB
     CLEAR
     bash romimport.sh
