@@ -1,0 +1,23 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "XBOX Manager"
+    - my_file: "install_xbox-manager"
+    - my_path: "/usr/share/cockpit"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - clone repo"
+    git:
+      repo: 'https://github.com/sairuk/cockpit-xboxmanager.git'
+      dest: "{{ my_path }}/xboxmanager"
+      clone: yes
+      update: yes
+      version: "main"
+
+  - name: "{{ my_name }} - run installer"
+    command:
+      cmd: "{{ my_path }}/xboxmanager/xboxmanager-install.sh"

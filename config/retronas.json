@@ -303,6 +303,12 @@
                     "title": "webui",
                     "description": "experimental retronas webui (cockpit)", 
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_cockpit-retronas.yml;PAUSE"
+                },
+                {
+                    "index": "03",
+                    "title": "xboxmanager",
+                    "description": "experimental xbox manager (cockpit)", 
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_extract-xiso.yml;RN_INSTALL_EXECUTE install_xbox-manager.yml;PAUSE"
                 }
             ]
         },

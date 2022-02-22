@@ -29,6 +29,15 @@ do
     RN_INSTALL_EXECUTE install_cockpit-retronas.yml
     PAUSE
     ;;
+  03)
+    # xboxmanager
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_filesystems.yml
+    RN_INSTALL_EXECUTE install_extract-xiso.yml
+    RN_INSTALL_EXECUTE install_xbox-manager.yml
+    PAUSE
+    ;;
   *)
     exit 1
     ;;
