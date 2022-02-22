@@ -65,7 +65,7 @@ then
   then
 
     #installing a simple starup script
-    echo -e '!#/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
+    echo -e '#!/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
     chmod a+x /usr/local/bin/retronas
 
     echo
