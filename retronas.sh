@@ -75,6 +75,15 @@ fi
 ### check for jq, needed for new menu system
 [ ! -f /usr/bin/jq ] && apt-get -y install jq
 
+### check default user exists
+id $OLDRNUSER &>/dev/null
+if [ $? -ne 0 ]
+then
+  echo -e "User $OLDRNUSER does not exist on this system\n opening the user config dialog"
+  cd $DIDIR
+  bash retronas_user.sh
+fi
+
 ### Manage install through git
 if [ $DISABLE_GITOPS -eq 0 ]
 then
@@ -118,12 +127,12 @@ then
     #installing a simple starup script
     echo -e '#!/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
     chmod a+x /usr/local/bin/retronas
-    echo -e "We have upgraded your RetroNAS, You can now run the RetroNAS config tool with the following command:\n\nretronas\n\nThis message will appear only once\n"
+    echo -e "We have upgraded your RetroNAS, you can now run the RetroNAS config tool with the following command:\n\nretronas\n\nThis message will appear only once\n"
     echo "Press enter to continue"
     read -s
 fi
 
 ### Start RetroNAS
 echo "Running RetroNAS..."
-cd dialog
+cd $DIDIR
 bash retronas_main.sh

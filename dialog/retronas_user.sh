@@ -29,9 +29,11 @@ rn_retronas_user() {
         CONFIRM=1
         rn_retronas_user_confirm $NEWRNUSER
       else
+        CLEAR
         echo "Username not changed"
       fi
     else 
+      CLEAR
       echo "User cancelled dialog"
     fi
   fi
@@ -54,10 +56,12 @@ rn_retronas_user_confirm() {
         getent passwd ${NEWRNUSER} &> /dev/null
         if [ $? -ne 0 ] 
         then 
+          CLEAR
           echo "Username does not exist, create it first"
           PAUSE
           rn_retronas_user
         else
+          CLEAR
           # Yes, change the value
           # Delete the old value
           sed -i '/retronas_user:/d' "${ANCFG}"
