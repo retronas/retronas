@@ -74,7 +74,7 @@ fi
 
 ### check for jq, needed for new menu system
 [ ! -f /usr/bin/jq ] && apt-get -y install jq
-[ $? -ne 0 ] PAUSE
+[ $? -ne 0 ] && PAUSE
 
 ### check default user exists
 id $OLDRNUSER &>/dev/null
