@@ -27,7 +27,7 @@ do
     # update RetroNAS
     CLEAR
     EXEC_SCRIPT ../scripts/static/update-retronas.sh
-    EXEC_SCRIPT retronas.main.sh
+    EXEC_SCRIPT retronas_main.sh
     ;;
   03)
     # update ROM DIRS
