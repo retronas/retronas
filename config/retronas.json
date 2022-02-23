@@ -12,6 +12,7 @@
                     "title": "Exit",
                     "description": "So long and thanks for all the bits",
                     "prompt": "",
+                    "type": "menu",
                     "command": "CLEAR;exit 0"
                 },
                 {
@@ -19,6 +20,7 @@
                     "title": "Config",
                     "description": "Change Global Settings",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT configure.sh"
                 },
                 {
@@ -26,6 +28,7 @@
                     "title": "Install",
                     "description": "The fun place, for things",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT install.sh"
                 },
                 {
@@ -33,6 +36,7 @@
                     "title": "Services",
                     "description": "See if things are OK",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT services.sh"
                 },
                 {
@@ -40,6 +44,7 @@
                     "title": "Tools",
                     "description": "Run tools and scripts",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT tools.sh"
                 },
                 {
@@ -47,6 +52,7 @@
                     "title": "OnDevice",
                     "description": "On-Device Management Tools",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT odman.sh"
                 },
                 {
@@ -54,6 +60,7 @@
                     "title": "Advanced",
                     "description": "bd/eLiTe",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT advanced.sh"
                 },
                 {
@@ -61,6 +68,7 @@
                     "title": "Experimental",
                     "description": "there be dragons here!",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT experimental.sh"
                 },
                 {
@@ -68,6 +76,7 @@
                     "title": "Update",
                     "description": "Update core RetroNAS features",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT update.sh"
                 }
             ]
@@ -83,6 +92,7 @@
                     "title": "Back",
                     "description": "Return to previous menu",
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -90,6 +100,7 @@
                     "title": "hdparm",
                     "description": "manage hdd standby mode",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT tool_hdparm.sh"
                 },
                 {
@@ -97,6 +108,7 @@
                     "title": "tcpser",
                     "description": "Hayes modem emulator",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT tcpser.sh"
                 },
                 {
@@ -104,6 +116,7 @@
                     "title": "laptop-ao",
                     "description": "Disable hibernate/monitoring of laptop lid",
                     "prompt": "Install",
+                    "type": "install",
                     "command": "RN_EXECUTE_INSTALL install_disable-laptop-lid.yml"
                 }
             ]
@@ -119,6 +132,7 @@
                     "title": "Back",
                     "description": "Return to previous menu",
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -126,6 +140,7 @@
                     "title": "Username",
                     "description": "Configure RetroNAS user",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT retronas_user.sh"
                 },
                 {
@@ -133,6 +148,7 @@
                     "title": "Password",
                     "description": "Configure RetroNAS password",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT retronas_password.sh"
                 },
                 {
@@ -140,6 +156,7 @@
                     "title": "Data Directory",
                     "description": "Configure RetroNAS top level directory",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT retronas_path.sh"
                 },
                 {
@@ -147,6 +164,7 @@
                     "title": "Permissions",
                     "description": "Fix on-disk permissions",
                     "prompt": "Run",
+                    "type": "script",
                     "command": "EXEC_SCRIPT retronas_fixperms.sh"
                 },
                 {
@@ -154,6 +172,7 @@
                     "title": "EtherDFS",
                     "description": "Set EtherDFS network interface",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
                 }
             ]
@@ -169,6 +188,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -176,6 +196,7 @@
                     "title": "Samba",
                     "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing",
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;PAUSE"
                 },                
                 {
@@ -183,6 +204,7 @@
                     "title": "Netatalk2",
                     "description": "AppleTalk and AppleShare file sharing (System6/OS8+)", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk2x.yml;PAUSE"
                 },
                 {
@@ -190,6 +212,7 @@
                     "title": "Netatalk3",
                     "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk3.yml;PAUSE"
                 },                
                 {
@@ -197,6 +220,7 @@
                     "title": "EtherDFS",
                     "description": "lightweight layer 2 network file sharing for DOS", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_etherdfs.yml;PAUSE"
                 },
                 {
@@ -204,6 +228,7 @@
                     "title": "lighttpd",
                     "description": "HTTP/Web server", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;PAUSE"
                 },                
                 {
@@ -211,6 +236,7 @@
                     "title": "ProFTPd",
                     "description": "FTP, File Transfer Protocol file sharing", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_proftpd.yml;PAUSE"
                 },
                 {
@@ -218,6 +244,7 @@
                     "title": "tftpd-hpa",
                     "description": "TFTP, Trivial File Transfer Protocol file sharing", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tftpd-hpa.yml;PAUSE"
                 },                
                 {
@@ -225,6 +252,7 @@
                     "title": "OpenSSH",
                     "description": "SSH/SFTP/SCP Secure Shell command line and file transfer",
                     "prompt": "", 
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_openssh.yml;PAUSE"
                 },
                 {
@@ -232,6 +260,7 @@
                     "title": "Telnet",
                     "description": "unencrypted remote access shell", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_telnet.yml;PAUSE"
                 },
                 {
@@ -239,6 +268,7 @@
                     "title": "NFS",
                     "description": "NFS versions 2, 3 and 4", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nfs.yml;PAUSE"
                 },
                 {
@@ -246,6 +276,7 @@
                     "title": "TNFS",
                     "description": "Atari 8-bit and ZX Spectrum", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tnfs.yml;PAUSE"
                 },
                 {
@@ -253,6 +284,7 @@
                     "title": "pygopherd",
                     "description": "Gopher protocol server", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pygopherd.yml;PAUSE"
                 },
                 {
@@ -260,6 +292,7 @@
                     "title": "3DS QR codes",
                     "description": "Nintendo 3DS FBI Homebrew installer", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;RN_INSTALL_EXECUTE install_3ds_qr_codes.yml;PAUSE"
                 },                
                 {
@@ -267,6 +300,7 @@
                     "title": "Samba for PS2",
                     "description": "OpenPS2Loader SMB config", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps2_openps2loader.yml;PAUSE"
                 },                
                 {
@@ -274,6 +308,7 @@
                     "title": "Samba for PS3",
                     "description": "ps3netsrv for CFW/HEN + webMAN-MOD", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps3netsrv.yml;PAUSE"
                 },                
                 {
@@ -281,6 +316,7 @@
                     "title": "Samba for MiSTer",
                     "description": "MiSTer FPGA CIFS config", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_mister_cifs.yml;PAUSE"
                 },                
                 {
@@ -288,6 +324,7 @@
                     "title": "Samba for X360",
                     "description": "Microsoft XBox360 SMB config", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_xbox360.yml;PAUSE"
                 },                
                 {
@@ -295,6 +332,7 @@
                     "title": "gogrepo",
                     "description": "Download your GOG game installers", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_gogrepo.yml;PAUSE"
                 },                
                 {
@@ -302,6 +340,7 @@
                     "title": "ROM import",
                     "description": "ROM import from Smokemonster SMDBs", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_romimport.yml;PAUSE"
                 },                
                 {
@@ -309,6 +348,7 @@
                     "title": "FSP server",
                     "description": "Nintendo GameCube + Swiss FSP server", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_fsp.yml;PAUSE"
                 },                
                 {
@@ -316,6 +356,7 @@
                     "title": "SabreTools",
                     "description": "Dat Manager (x86_64 only)", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_sabretools.yml;PAUSE"
                 },
                 {
@@ -323,6 +364,7 @@
                     "title": "Syncthing",
                     "description": "File sync tool", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_syncthing.yml;PAUSE"
                 },
                 {
@@ -330,6 +372,7 @@
                     "title": "Cockpit",
                     "description": "Web based Linux system manager", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_cockpit.yml;RN_INSTALL_EXECUTE install_cockpit-packages.yml;PAUSE"
                 },
                 {
@@ -337,6 +380,7 @@
                     "title": "WebOne",
                     "description": "HTTP 1.x proxy for a HTTP 2.x world", 
                     "prompt": "",
+                    "type": "install",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_webone.yml;PAUSE"
                 }
             ]
@@ -352,6 +396,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menus",
                     "command": "exit 0"
                 },
                 {
@@ -359,6 +404,7 @@
                     "title": "webui",
                     "description": "experimental retronas webui (cockpit)", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_cockpit-retronas.yml;PAUSE"
                 },
                 {
@@ -366,6 +412,7 @@
                     "title": "xboxmanager",
                     "description": "experimental xbox manager (cockpit)", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_extract-xiso.yml;RN_INSTALL_EXECUTE install_xboxmanager.yml;PAUSE"
                 }
             ]
@@ -381,6 +428,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -388,6 +436,7 @@
                     "title": "uCON64",
                     "description": "Multipurpose Swiss Army Knife Backup/Copier tool", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_ucon64.yml;PAUSE"
                 },
                 {
@@ -395,6 +444,7 @@
                     "title": "extract-xiso",
                     "description": "XISO Tool", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_extract-xiso.yml;PAUSE"
                 },
                 {
@@ -402,6 +452,7 @@
                     "title": "hdl-dump",
                     "description": "Sony PS2 HDD Game management", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdldump.yml;PAUSE"
                 },
                 {
@@ -409,6 +460,7 @@
                     "title": "NBD client",
                     "description": "Network Block Device Client", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nbd-client.yml;PAUSE"
                 },
                 {
@@ -416,6 +468,7 @@
                     "title": "pfsshell/pfsfuse",
                     "description": "PS2 HDD filesystem tools", 
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pfsshell.yml;PAUSE"
                 }
             ]
@@ -431,6 +484,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -438,6 +492,7 @@
                     "title": "Samba",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS smbd;RN_DIRECT_STATUS \"smbstatus\" \"-vv\""
                 },
                 {
@@ -445,6 +500,7 @@
                     "title": "Netatalk3",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS netatalk"
                 },
                 {
@@ -452,6 +508,7 @@
                     "title": "EtherDFS",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS etherdfs"
                 },
                 {
@@ -459,6 +516,7 @@
                     "title": "lighttpd",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS lighttpd"
                 },
                 {
@@ -466,6 +524,7 @@
                     "title": "ProFTPd",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS proftpd"
                 },
                 {
@@ -473,6 +532,7 @@
                     "title": "tftpd-hpa",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS tftpd-hpa"
                 },
                 {
@@ -480,6 +540,7 @@
                     "title": "OpenSSH",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS ssh"
                 },
                 {
@@ -487,6 +548,7 @@
                     "title": "Telnet",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS inetd"
                 },
                 {
@@ -494,6 +556,7 @@
                     "title": "TNFS",
                     "description": "Atari 8-bit and ZX Spectrum", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS tnfsd"
                 },
                 {
@@ -501,6 +564,7 @@
                     "title": "ps3netsrv",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS ps3netsrv"
                 },
                 {
@@ -508,6 +572,7 @@
                     "title": "FSP",
                     "description": "for GameCube", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS fspd"
                 },
                 {
@@ -515,6 +580,7 @@
                     "title": "Syncthing",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS syncthing*"
                 },
                 {
@@ -522,6 +588,7 @@
                     "title": "Cockpit",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS cockpit"
                 },
                 {
@@ -529,6 +596,7 @@
                     "title": "WebOne",
                     "description": "", 
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS webone"
                 }
             ]
@@ -544,6 +612,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -551,6 +620,7 @@
                     "title": "Install",
                     "description": "Install the hdparm application",
                     "prompt": "",
+                    "type":"service_status",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_${SERVICE}.yml;PAUSE"
                 },
                 {
@@ -558,6 +628,7 @@
                     "title": "APM",
                     "description": "Disable Advanced Power Management (APM)",
                     "prompt": "",
+                    "type": "script",
                     "command": " CLEAR;DRIVE=$(SELECT_DRIVE \"Disable APM\");hdparm -B 255 $DRIVE;PAUSE"
                 },
                 {
@@ -565,20 +636,23 @@
                     "title": "Standby",
                     "description": "Disable drive Standy",
                     "prompt": "",
-                    "command": "RN_SYSTEMD ${SERVICE}* \"reset-failed\";RN_SYSTEMD_START ${SERVICE}.timer"
+                    "type": "script",
+                    "command": ""
                 },
                 {
                     "index":"20",
                     "title": "Start",
                     "description": "Start hdparm service",
                     "prompt": "",
-                    "command": "TOOL COMMAND"
+                    "type": "service_start",
+                    "command": "RN_SYSTEMD ${SERVICE}* \"reset-failed\";RN_SYSTEMD_START ${SERVICE}.timer"
                 },
                 {
                     "index":"21",
                     "title": "Status",
                     "description": "Query hdparm service status",
                     "prompt": "",
+                    "type":"service_status",
                     "command": "RN_SYSTEMD_STATUS ${SERVICE}*"
                 },
                 {
@@ -586,6 +660,7 @@
                     "title": "Stop",
                     "description": "Stop the hdparm service",
                     "prompt": "",
+                    "type": "service_stop",
                     "command": "RN_SYSTEMD_STOP ${SERVICE}.timer;RN_SYSTEMD_STOP ${SERVICE}.service"
                 }
             ]
@@ -601,6 +676,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -608,6 +684,7 @@
                     "title": "Install",
                     "description": "Install tcpser application",
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_EXEC install_tcpser.yml;PAUSE"
                 },
                 {
@@ -615,6 +692,7 @@
                     "title": "Serial Device",
                     "description": "Create/Edit Serial Device",
                     "prompt": "",
+                    "type": "script",
                     "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh;PAUSE"
                 },
                 {
@@ -622,6 +700,7 @@
                     "title": "Virtual Device",
                     "description": "Create/Edit Virtual Device (VICE RS232)",
                     "prompt": "",
+                    "type": "script",
                     "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
                 },
                 {
@@ -629,13 +708,15 @@
                     "title": "Start",
                     "description": "Start tcpser device",
                     "prompt": "",
-                    "command": "tcpser_service STAR"
+                    "type": "service_start",
+                    "command": "tcpser_service START"
                 },
                 {
                     "index":"06",
                     "title": "Status",
                     "description": "Query tcpser device",
                     "prompt": "",
+                    "type": "service_status",
                     "command": "tcpser_service STATUS"
                 },
                 {
@@ -643,6 +724,7 @@
                     "title": "Stop",
                     "description": "Stop tcpser device",
                     "prompt": "",
+                    "type": "service_stop",
                     "command": "tcpser_service STOP"
                 }
             ]
@@ -658,6 +740,7 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -665,6 +748,7 @@
                     "title": "GOG",
                     "description": "Download your GOG installers and extras",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT gogrepo.sh"
                 },
                 {
@@ -672,6 +756,7 @@
                     "title": "3DS QR code",
                     "description": "Nintendo 3DS FBI homebrew",
                     "prompt": "",
+                    "type": "script",
                     "command": "CLEAR;${SUCOMMAND} ../scripts/3ds_qr.sh;PAUSE"
                 },
                 {
@@ -679,6 +764,7 @@
                     "title": "ROM import",
                     "description": "Import roms via Smokemonster SMDBs",
                     "prompt": "",
+                    "type": "script",
                     "command": "EXEC_SCRIPT romimport.sh"
                 }
             ]
@@ -694,6 +780,7 @@
                     "title": "Back",
                     "description": "Return to previous menu",
                     "prompt": "", 
+                    "type": "menu",
                     "command": "exit 0"
                 },
                 {
@@ -701,6 +788,7 @@
                     "title": "RetroNAS",
                     "description": "Update RetroNAS and return to the main menu",
                     "prompt": "",
+                    "type": "script",
                     "command": "CLEAR;EXEC_SCRIPT ../scripts/static/update-retronas.sh;EXEC_SCRIPT retronas.main.sh"
                 },
                 {
@@ -708,6 +796,7 @@
                     "title": "RomDirs",
                     "description": "Update core RetroNAS rom directories",
                     "prompt": "",
+                    "type": "install",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;PAUSE"
                 }
             ]
@@ -723,27 +812,15 @@
                     "title": "Back",
                     "description": "Return to previous menu", 
                     "prompt": "",
+                    "type": "",
                     "command": "exit 0"
                 },
                 {
                     "index":"02",
                     "title": "TOOL_NAME",
                     "description": "TOOL_DESCRIPTION",
-                    "prompt": "",
-                    "command": "TOOL COMMAND"
-                },
-                {
-                    "index":"03",
-                    "title": "TOOL_NAME",
-                    "description": "TOOL_DESCRIPTION",
-                    "prompt": "",
-                    "command": "TOOL COMMAND"
-                },
-                {
-                    "index":"04",
-                    "title": "TOOL_NAME",
-                    "description": "TOOL_DESCRIPTION",
-                    "prompt": "",
+                    "prompt": "TOOL_PROMPT",
+                    "type": "TOOL_TYPE",
                     "command": "TOOL COMMAND"
                 }
             ]
