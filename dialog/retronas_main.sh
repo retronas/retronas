@@ -51,6 +51,9 @@ do
     50)
       EXEC_SCRIPT experimental.sh
       ;;
+    99)
+      EXEC_SCRIPT update.sh
+      ;;
     *)
       clear
       exit

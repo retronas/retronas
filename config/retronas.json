@@ -53,6 +53,12 @@
                     "title": "Experimental",
                     "description": "there be dragons here!", 
                     "command": "EXEC_SCRIPT experimental.sh"
+                },
+                {
+                    "index": "99",
+                    "title": "Update",
+                    "description": "Update core RetroNAS features", 
+                    "command": "EXEC_SCRIPT update.sh"
                 }
             ]
         },
@@ -578,6 +584,31 @@
                     "title": "ROM import",
                     "description": "Import roms via Smokemonster SMDBs",
                     "command": "EXEC_SCRIPT romimport.sh"
+                }
+            ]
+        },
+        "update": 
+        {
+            "title": "Update",
+            "desc": "\nPlease select a tool to update",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "RetroNAS",
+                    "description": "Update RetroNAS and return to the main menu",
+                    "command": "CLEAR;EXEC_SCRIPT ../scripts/static/update-retronas.sh;EXEC_SCRIPT retronas.main.sh"
+                },
+                {
+                    "index":"03",
+                    "title": "RomDirs",
+                    "description": "Update core RetroNAS rom directories",
+                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;PAUSE"
                 }
             ]
         },
