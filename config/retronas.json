@@ -3,7 +3,7 @@
     "menus": {
         "main": 
         {
-            "title": "Main Menu",
+            "title": "Main",
             "desc": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
             "items": [
                 {
@@ -32,13 +32,13 @@
                 },
                 {
                     "index": "05",
-                    "title": "Scripts",
+                    "title": "Tools",
                     "description": "Run tools and scripts", 
                     "command": "EXEC_SCRIPT tools.sh"
                 },
                 {
                     "index": "06",
-                    "title": "Device",
+                    "title": "OnDevice",
                     "description": "On-Device Management Tools", 
                     "command": "EXEC_SCRIPT odman.sh"
                 },
@@ -64,7 +64,7 @@
         },
         "advanced": 
         {
-            "title": "Advanced Menu",
+            "title": "Advanced",
             "desc": "\nPlease select an tool to install",
             "items": [
                 {
@@ -93,7 +93,7 @@
                 }
             ]
         },
-        "configuration": 
+        "config": 
         {
             "title": "Configuration",
             "desc": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
@@ -320,7 +320,7 @@
         },
         "ondevice": 
         {
-            "title": "On-Device Management",
+            "title": "OnDevice",
             "desc": "\nChoose an item to install",
             "items": [
                 {

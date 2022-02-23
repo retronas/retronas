@@ -9,7 +9,7 @@ cd ${DIDIR}
 rn_config() {
   source $_CONFIG
 
-  READ_MENU_JSON "configuration"
+  READ_MENU_JSON "config"
 
   local MENU_BLURB="\nPlease select a configuration\
   \n
