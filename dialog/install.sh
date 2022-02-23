@@ -13,232 +13,196 @@ rn_install_chooser() {
   DLG_MENUJ "Main Menu" 10 "${MENU_BLURB}"
 }
 
-rn_install_deps() {
-  cd ${ANDIR}
-  export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-  ansible-playbook -vv retronas_dependencies.yml
-}
-
-rn_install_execute() {
-  cd ${ANDIR}
-  export ANSIBLE_CONFIG=${ANDIR}/ansible.cfg
-  ansible-playbook -vv ${YAML}
-}
-
 while true
 do
   rn_install_chooser
   case ${CHOICE} in
   01)
-    clear
+    CLEAR
     exit 0
     ;;
   02)
     # Samba
-    clear
-    rn_install_deps
-    YAML=install_samba.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_samba.yml
+    PAUSE
     ;;
   03)
     # Netatalk2
-    clear
-    rn_install_deps
-    YAML=install_netatalk2x.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_netatalk2x.yml
+    PAUSE
     ;;
   04)
     # Netatalk3
-    clear
-    rn_install_deps
-    YAML=install_netatalk3.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_netatalk3x.yml
+    PAUSE
     ;;
   05)
     # EtherDFS
-    clear
-    rn_install_deps
-    YAML=install_etherdfs.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_etherdfs.yml
+    PAUSE
     ;;
   06)
     # lighttpd
-    clear
-    rn_install_deps
-    YAML=install_lighttpd.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_lighttpd.yml
+    PAUSE
     ;;
   07)
     # ProFTPd
-    clear
-    rn_install_deps
-    YAML=install_proftpd.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_proftpd.yml
+    PAUSE
     ;;
   08)
     # tftpd-hpa
-    clear
-    rn_install_deps
-    YAML=install_tftpd-hpa.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_tftpd-hpa.yml
+    PAUSE
     ;;
   09)
     # OpenSSH
-    clear
-    rn_install_deps
-    YAML=install_openssh.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_openssh.yml
+    PAUSE
     ;;
   10)
     # Telnet
-    clear
-    rn_install_deps
-    YAML=install_telnet.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_telnet.yml
+    PAUSE
     ;;
   11)
     # NFS
-    clear
-    rn_install_deps
-    YAML=install_nfs.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_nfs.yml
+    PAUSE
     ;;
   12)
     # TNFS ZX Spectrum
-    clear
-    rn_install_deps
-    YAML=install_tnfs.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_tnfs.yml
+    PAUSE
     ;;
   20)
     # pygopherd
-    clear
-    rn_install_deps
-    YAML=install_pygopherd.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_pygopherd.yml
+    PAUSE
     ;;
   30)
     # Nintendo 3DS QR Codes
-    clear
-    rn_install_deps
-    YAML=install_lighttpd.yml rn_install_execute
-    YAML=install_3ds_qr_codes.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_lighttpd.yml
+    RN_INSTALL_EXECUTE install_3ds_qr_codes.yml
+    PAUSE
     ;;
   31)
     # Sony PS2 OpenPS2Loader
-    clear
-    rn_install_deps
-    YAML=install_samba.yml rn_install_execute
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_ps2_openps2loader.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_samba.yml
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_ps2_openps2loader.yml
+    PAUSE
     ;;
   32)
     # ps3netsrv
-    clear
-    rn_install_deps
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_ps3netsrv.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_ps3netsrv.yml
+    PAUSE
     ;;
   33)
     # MiSTer FPGA CIFS
-    clear
-    rn_install_deps
-    YAML=install_samba.yml rn_install_execute
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_mister_cifs.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_samba.yml
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_mister_cifs.yml
+    PAUSE
     ;;
   34)
     # Microsoft XBox360
-    clear
-    rn_install_deps
-    YAML=install_samba.yml rn_install_execute
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_xbox360.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_samba.yml
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_xbox360.yml
+    PAUSE
     ;;
   35)
     # gogrepo
-    clear
-    rn_install_deps
-    YAML=install_gogrepo.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_gogrepo.yml
+    PAUSE
     ;;
   36)
     # romimport smbd
-    clear
-    rn_install_deps
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_romimport.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_romimport.yml
+    PAUSE
     ;;
   37)
     # gcn + swiss fspd
-    clear
-    rn_install_deps
-    YAML=install_romdir.yml rn_install_execute
-    YAML=install_fsp.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_romdir.yml
+    RN_INSTALL_EXECUTE install_fsp.yml
+    PAUSE
     ;;
   38)
     # sabretools
-    clear
-    rn_install_deps
-    YAML=install_dotnetcore3.yml rn_install_execute
-    YAML=install_sabretools.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_dotnetcore3.yml
+    RN_INSTALL_EXECUTE install_sabretools.yml
+    PAUSE
     ;;
   50)
     # Syncthing file sync tool
-    clear
-    rn_install_deps
-    YAML=install_syncthing.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_syncthing.yml
+    PAUSE
     ;;
   51)
     # Cockpit
-    clear
-    rn_install_deps
-    YAML=install_filesystems.yml rn_install_execute
-    YAML=install_cockpit.yml rn_install_execute
-    YAML=install_cockpit-packages.yml rn_install_execute
-    #YAML=install_cockpit-retronas.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_filesystems.yml
+    RN_INSTALL_EXECUTE install_cockpit.yml
+    RN_INSTALL_EXECUTE install_cockpit-packages.yml
+    #RN_INSTALL_EXECUTE install_cockpit-retronas.yml
+    PAUSE
     ;;
   52)
     # WebOne
-    clear
-    rn_install_deps
-    YAML=install_dotnetcore3.yml rn_install_execute
-    YAML=install_webone.yml rn_install_execute
-    echo "${PAUSEMSG}"
-    read -s
+    CLEAR
+    RN_INSTALL_DEPS
+    RN_INSTALL_EXECUTE install_dotnetcore3.yml
+    RN_INSTALL_EXECUTE install_webone.yml
+    PAUSE
     ;;
   *)
     exit 1
