@@ -880,7 +880,7 @@
                 },
                 {
                     "index":"03",
-                    "title": "RomDirs",
+                    "title": "RomDir",
                     "description": "Update core RetroNAS rom directories",
                     "prompt": "",
                     "type": "install",
