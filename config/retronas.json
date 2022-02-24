@@ -51,7 +51,7 @@
                     "index": "05",
                     "title": "Tools",
                     "description": "Run tools and scripts",
-                    "id":"",
+                    "id":"tools",
                     "prompt": "",
                     "type": "script",
                     "group":"",
@@ -958,7 +958,7 @@
                 },
                 {
                     "index":"02",
-                    "title": "Update-RetroNAS",
+                    "title": "RetroNAS",
                     "description": "Update RetroNAS and return to the main menu",
                     "id":"update-retronas",
                     "prompt": "",
