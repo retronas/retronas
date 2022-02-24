@@ -154,7 +154,7 @@
                     "title": "Username",
                     "description": "Configure RetroNAS user",
                     "prompt": "",
-                    "type": "script",
+                    "type": "script-static-values",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_user.sh"
                 },
@@ -163,7 +163,7 @@
                     "title": "Password",
                     "description": "Configure RetroNAS password",
                     "prompt": "",
-                    "type": "script",
+                    "type": "script-static-values",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_password.sh"
                 },
@@ -172,7 +172,7 @@
                     "title": "Data Directory",
                     "description": "Configure RetroNAS top level directory",
                     "prompt": "",
-                    "type": "script",
+                    "type": "script-static-values",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_path.sh"
                 },
@@ -181,7 +181,7 @@
                     "title": "Permissions",
                     "description": "Fix on-disk permissions",
                     "prompt": "Run",
-                    "type": "script",
+                    "type": "script-static",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_fixperms.sh"
                 },
@@ -190,7 +190,7 @@
                     "title": "EtherDFS",
                     "description": "Set EtherDFS network interface",
                     "prompt": "",
-                    "type": "script",
+                    "type": "script-static-values",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
                 }
@@ -871,9 +871,10 @@
                 },
                 {
                     "index":"02",
-                    "title": "Update RetroNAS",
+                    "title": "Update-RetroNAS",
                     "description": "Update RetroNAS and return to the main menu",
                     "prompt": "",
+                    "type": "script-static",
                     "group":"",
                     "command": "CLEAR;EXEC_SCRIPT ../scripts/static/update-retronas.sh;EXEC_SCRIPT retronas.main.sh"
                 },
