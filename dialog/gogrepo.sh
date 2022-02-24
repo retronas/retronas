@@ -22,7 +22,8 @@ dialog \
   --clear \
   --menu "Current OS: ${OLDGOGOS} \
   \n
-  \nPlease choose a task" ${MG} 10 \
+  \nWARNING: There is currently known issues with this tool,\nsee https://github.com/eddie3/gogrepo/issues/63
+  \n\nPlease choose a task" ${MG} 10 \
   "01" "Back" \
   "02" "Configure my GOG credentials" \
   "03" "Change my GOG Operating System setting" \
