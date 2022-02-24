@@ -217,7 +217,7 @@
                     "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing",
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"samba",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;PAUSE"
                 },                
                 {
@@ -226,7 +226,7 @@
                     "description": "AppleTalk and AppleShare file sharing (System6/OS8+)", 
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"netatalk",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk2x.yml;PAUSE"
                 },
                 {
@@ -235,7 +235,7 @@
                     "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)", 
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"netatalk",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk3.yml;PAUSE"
                 },                
                 {
@@ -334,7 +334,7 @@
                     "description": "OpenPS2Loader SMB config", 
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"samba",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps2_openps2loader.yml;PAUSE"
                 },                
                 {
@@ -352,7 +352,7 @@
                     "description": "MiSTer FPGA CIFS config", 
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"samba",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_mister_cifs.yml;PAUSE"
                 },                
                 {
@@ -361,7 +361,7 @@
                     "description": "Microsoft XBox360 SMB config", 
                     "prompt": "",
                     "type": "install",
-                    "group":"",
+                    "group":"samba",
                     "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_xbox360.yml;PAUSE"
                 },                
                 {
