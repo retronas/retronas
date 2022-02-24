@@ -871,10 +871,9 @@
                 },
                 {
                     "index":"02",
-                    "title": "RetroNAS",
+                    "title": "Update RetroNAS",
                     "description": "Update RetroNAS and return to the main menu",
                     "prompt": "",
-                    "type": "script",
                     "group":"",
                     "command": "CLEAR;EXEC_SCRIPT ../scripts/static/update-retronas.sh;EXEC_SCRIPT retronas.main.sh"
                 },
