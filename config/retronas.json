@@ -5,7 +5,7 @@
         {
             "title": "Main",
             "description": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
-            "id":"",
+            "id":"main",
             "prompt": "",
             "type": "menu",
             "items": [
@@ -105,7 +105,7 @@
         {
             "title": "Advanced",
             "description": "\nPlease select an tool to install",
-            "id":"",
+            "id":"advanced",
             "prompt": "Setup",
             "type": "menu",
             "items": [
@@ -155,7 +155,7 @@
         {
             "title": "Configuration",
             "description": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
-            "id":"",
+            "id":"config",
             "prompt": "Change",
             "type": "menu",
             "items": [
@@ -225,7 +225,7 @@
         {
             "title": "Install",
             "description": "\nPlease select an option to install",
-            "id":"",
+            "id":"install",
             "prompt": "Install",
             "type": "menu",
             "items": [
@@ -485,7 +485,7 @@
         {
             "title": "EXPERIMENTAL",
             "description": "\nWARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
-            "id":"",
+            "id":"experimental",
             "prompt": "Install",
             "type": "menu",
             "items": [
@@ -525,7 +525,7 @@
         {
             "title": "OnDevice",
             "description": "\nChoose an item to install",
-            "id":"",
+            "id":"ondevice",
             "prompt": "Install",
             "type": "menu",
             "items": [
@@ -595,7 +595,7 @@
         {
             "title": "Services",
             "description": "\nPlease select an service to check",
-            "id":"",
+            "id":"services",
             "prompt": "Check",
             "type": "menu",
             "items": [
@@ -754,7 +754,7 @@
         {
             "title": "hdparm",
             "description": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
-            "id":"",
+            "id":"hdparm-menu",
             "prompt": "",
             "type": "form",
             "items": [
@@ -834,7 +834,7 @@
         {
             "title": "tcpser",
             "description": "\nPlease select an option",
-            "id":"",
+            "id":"tcpser-ment",
             "prompt": "",
             "type": "form",
             "items": [
@@ -914,7 +914,7 @@
         {
             "title": "Tools",
             "description": "\nPlease select an option to install",
-            "id":"",
+            "id":"tools",
             "prompt": "Run",
             "type": "menu",
             "items": [
@@ -964,7 +964,7 @@
         {
             "title": "Update",
             "description": "\nPlease select a tool to update",
-            "id":"",
+            "id":"update",
             "prompt": "Update",
             "type": "menu",
             "items": [
