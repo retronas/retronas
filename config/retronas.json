@@ -1,11 +1,13 @@
 {
     "version": 0,
-    "menus": {
+    "dialog": {
         "main": 
         {
             "title": "Main",
-            "desc": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
+            "description": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
+            "id":"",
             "prompt": "",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -102,8 +104,10 @@
         "advanced": 
         {
             "title": "Advanced",
-            "desc": "\nPlease select an tool to install",
+            "description": "\nPlease select an tool to install",
+            "id":"",
             "prompt": "Setup",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -121,7 +125,7 @@
                     "description": "manage hdd standby mode",
                     "id":"hdparm-menu",
                     "prompt": "",
-                    "type": "script",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT tool_hdparm.sh"
                 },
@@ -131,7 +135,7 @@
                     "description": "Hayes modem emulator",
                     "id":"tcpser-menu",
                     "prompt": "",
-                    "type": "script",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT tcpser.sh"
                 },
@@ -150,8 +154,10 @@
         "config": 
         {
             "title": "Configuration",
-            "desc": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
+            "description": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
+            "id":"",
             "prompt": "Change",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -218,8 +224,10 @@
         "install": 
         {
             "title": "Install",
-            "desc": "\nPlease select an option to install",
+            "description": "\nPlease select an option to install",
+            "id":"",
             "prompt": "Install",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -476,8 +484,10 @@
         "experimental": 
         {
             "title": "EXPERIMENTAL",
-            "desc": "\nWARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
+            "description": "\nWARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
+            "id":"",
             "prompt": "Install",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -514,8 +524,10 @@
         "ondevice": 
         {
             "title": "OnDevice",
-            "desc": "\nChoose an item to install",
+            "description": "\nChoose an item to install",
+            "id":"",
             "prompt": "Install",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -582,8 +594,10 @@
         "services": 
         {
             "title": "Services",
-            "desc": "\nPlease select an service to check",
+            "description": "\nPlease select an service to check",
+            "id":"",
             "prompt": "Check",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -739,8 +753,10 @@
         "hdparm": 
         {
             "title": "hdparm",
-            "desc": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
+            "description": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
+            "id":"",
             "prompt": "",
+            "type": "form",
             "items": [
                 {
                     "index": "01",
@@ -817,8 +833,10 @@
         "tcpser": 
         {
             "title": "tcpser",
-            "desc": "\nPlease select an option",
+            "description": "\nPlease select an option",
+            "id":"",
             "prompt": "",
+            "type": "form",
             "items": [
                 {
                     "index": "01",
@@ -895,8 +913,10 @@
         "tools": 
         {
             "title": "Tools",
-            "desc": "\nPlease select an option to install",
+            "description": "\nPlease select an option to install",
+            "id":"",
             "prompt": "Run",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -943,8 +963,10 @@
         "update": 
         {
             "title": "Update",
-            "desc": "\nPlease select a tool to update",
+            "description": "\nPlease select a tool to update",
+            "id":"",
             "prompt": "Update",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",
@@ -981,8 +1003,10 @@
         "example": 
         {
             "title": "MENU_TITLE",
-            "desc": "\nINSERT_TEXT",
+            "description": "\nINSERT_TEXT",
+            "id":"MENU_ID",
             "prompt": "",
+            "type": "menu",
             "items": [
                 {
                     "index": "01",

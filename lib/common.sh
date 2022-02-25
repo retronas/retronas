@@ -43,7 +43,7 @@ READ_MENU_JSON() {
 
     #local IFS=";"
     declare -a MENU_ARRAY_TMP
-    export MENU_DATA=$(</opt/retronas/config/retronas.json jq -r ".menus.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
+    export MENU_DATA=$(</opt/retronas/config/retronas.json jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
 
 }
 
