@@ -773,7 +773,7 @@
                     "title": "Install",
                     "description": "Install the hdparm application",
                     "id":"hdparm",
-                    "prompt": "",
+                    "prompt": "Install",
                     "type":"install",
                     "group":"",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdparm.yml;PAUSE"
@@ -783,7 +783,7 @@
                     "title": "APM",
                     "description": "Disable Advanced Power Management (APM)",
                     "id":"hdparm-disable-apm",
-                    "prompt": "",
+                    "prompt": "Disable",
                     "type": "script",
                     "group":"",
                     "command": " CLEAR;DRIVE=$(SELECT_DRIVE \"Disable APM\");hdparm -B 255 $DRIVE;PAUSE"
@@ -793,7 +793,7 @@
                     "title": "Standby",
                     "description": "Disable drive Standy",
                     "id":"hdparm-disable-standby",
-                    "prompt": "",
+                    "prompt": "Disable",
                     "type": "script",
                     "group":"",
                     "command": ""
@@ -853,7 +853,7 @@
                     "title": "Install",
                     "description": "Install tcpser application",
                     "id":"tcpser",
-                    "prompt": "",
+                    "prompt": "Install",
                     "type": "install",
                     "group":"",
                     "command": "CLEAR;RN_INSTALL_EXEC install_tcpser.yml;PAUSE"
