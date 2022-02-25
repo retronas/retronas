@@ -21,7 +21,6 @@ function get_github {
 
 }
 
-
 ### there'll be a better way to approach this
 function get_retronas {
 
@@ -34,7 +33,7 @@ function get_retronas {
         FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
         get_github danmons $PACKAGE $FOLDER
         [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
-        cd "${RNTMP}/${PACKAGE}"
+        cd "${RNTMP}/${FOLDER}"
 
         RELEASE=$(git tag | tail -n1)
         git checkout $RELEASE
