@@ -123,7 +123,7 @@
                     "index":"02",
                     "title": "hdparm",
                     "description": "manage hdd standby mode",
-                    "id":"hdparm-menu",
+                    "id":"hdparm",
                     "prompt": "",
                     "type": "menu",
                     "group":"",
@@ -133,7 +133,7 @@
                     "index": "03",
                     "title": "tcpser",
                     "description": "Hayes modem emulator",
-                    "id":"tcpser-menu",
+                    "id":"tcpser",
                     "prompt": "",
                     "type": "menu",
                     "group":"",
@@ -175,7 +175,7 @@
                     "description": "Configure RetroNAS user",
                     "id":"update-user",
                     "prompt": "",
-                    "type": "script-static-values",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_user.sh"
                 },
@@ -185,7 +185,7 @@
                     "description": "Configure RetroNAS password",
                     "id":"update-password",
                     "prompt": "",
-                    "type": "script-static-values",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_password.sh"
                 },
@@ -195,7 +195,7 @@
                     "description": "Configure RetroNAS top level directory",
                     "id":"set-top-level-dir",
                     "prompt": "",
-                    "type": "script-static-values",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_path.sh"
                 },
@@ -215,7 +215,7 @@
                     "description": "Set EtherDFS network interface",
                     "id":"set-etherdfs-nic",
                     "prompt": "",
-                    "type": "script-static-values",
+                    "type": "menu",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
                 }
@@ -774,7 +774,7 @@
                     "description": "Install the hdparm application",
                     "id":"hdparm",
                     "prompt": "",
-                    "type":"service_status",
+                    "type":"install",
                     "group":"",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdparm.yml;PAUSE"
                 },
