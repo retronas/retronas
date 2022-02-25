@@ -125,7 +125,7 @@
                     "description": "manage hdd standby mode",
                     "id":"hdparm",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT tool_hdparm.sh"
                 },
@@ -135,7 +135,7 @@
                     "description": "Hayes modem emulator",
                     "id":"tcpser",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT tcpser.sh"
                 },
@@ -175,7 +175,7 @@
                     "description": "Configure RetroNAS user",
                     "id":"update-user",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_user.sh"
                 },
@@ -185,7 +185,7 @@
                     "description": "Configure RetroNAS password",
                     "id":"update-password",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_password.sh"
                 },
@@ -195,7 +195,7 @@
                     "description": "Configure RetroNAS top level directory",
                     "id":"set-top-level-dir",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_path.sh"
                 },
@@ -215,7 +215,7 @@
                     "description": "Set EtherDFS network interface",
                     "id":"set-etherdfs-nic",
                     "prompt": "",
-                    "type": "menu",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
                 }
@@ -756,7 +756,7 @@
             "description": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
             "id":"hdparm-menu",
             "prompt": "",
-            "type": "form",
+            "type": "modal",
             "items": [
                 {
                     "index": "01",
@@ -834,9 +834,9 @@
         {
             "title": "tcpser",
             "description": "\nPlease select an option",
-            "id":"tcpser-ment",
+            "id":"tcpser-menu",
             "prompt": "",
-            "type": "form",
+            "type": "modal",
             "items": [
                 {
                     "index": "01",
@@ -864,7 +864,7 @@
                     "description": "Create/Edit Serial Device",
                     "id":"tcpser-edit-serial",
                     "prompt": "",
-                    "type": "script",
+                    "type": "modal",
                     "group":"",
                     "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh;PAUSE"
                 },
@@ -874,7 +874,7 @@
                     "description": "Create/Edit Virtual Device (VICE RS232)",
                     "id":"tcpser-edit-virtual",
                     "prompt": "",
-                    "type": "script",
+                    "type": "modal",
                     "group":"",
                     "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
                 },
@@ -933,8 +933,8 @@
                     "title": "GOG",
                     "description": "Download your GOG installers and extras",
                     "id":"gogrepo-menu",
-                    "prompt": "",
-                    "type": "script",
+                    "prompt": "Open",
+                    "type": "modal",
                     "group":"",
                     "command": "EXEC_SCRIPT gogrepo.sh"
                 },
@@ -997,6 +997,216 @@
                     "type": "install",
                     "group":"",
                     "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;PAUSE"
+                }
+            ]
+        },
+        "update-user": 
+        {
+            "title": "Update User",
+            "description": "\nINSERT_TEXT",
+            "id":"update-user-menu",
+            "prompt": "Update",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Update User",
+                    "description": "Update the Username",
+                    "id":"update-user",
+                    "prompt": "",
+                    "type": "input",
+                    "group":"retronas",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "update-password": 
+        {
+            "title": "Update Password",
+            "description": "\nINSERT_TEXT",
+            "id":"update-password-menu",
+            "prompt": "Update",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Update Password",
+                    "description": "Update the user Systems/Samba password",
+                    "id":"update-password",
+                    "prompt": "",
+                    "type": "input",
+                    "group":"retronas",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "set-top-level-dir": 
+        {
+            "title": "Set Top Level Directory",
+            "description": "\nINSERT_TEXT",
+            "id":"set-top-level-dir-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Directory Name",
+                    "description": "Set top Level Dir",
+                    "id":"set-top-level-dir",
+                    "prompt": "",
+                    "type": "input",
+                    "group":"retronas",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "set-etherdfs-nic": 
+        {
+            "title": "Set EtherDFS NIC",
+            "description": "\nEnter NIC Device",
+            "id":"set-etherdfs-nic-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Set Device",
+                    "description": "Set EtherDFS device",
+                    "id":"set-etherdfs-nic",
+                    "prompt": "",
+                    "type": "dropdown",
+                    "group":"etherdfs",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "tcpser-edit-serial": 
+        {
+            "title": "Serial",
+            "description": "tcpser edit serial device",
+            "id":"tcpser-edit-serial-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Edit",
+                    "description": "Edit Serial Device",
+                    "id":"tcpser-edit-serial-input",
+                    "prompt": "",
+                    "type": "input",
+                    "group":"tcpser",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "tcpser-edit-virtual": 
+        {
+            "title": "Virtual",
+            "description": "tcpser edit virtual device",
+            "id":"tcpser-edit-virtual-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "Edit",
+                    "description": "Edit Virtual Device",
+                    "id":"virtual-device-config",
+                    "prompt": "",
+                    "type": "input",
+                    "group":"tcpser",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "gogrepo-menu": 
+        {
+            "title": "tcpser edit virtual device",
+            "description": "\nINSERT_TEXT",
+            "id":"gogrepo-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "",
+                    "group":"",
+                    "command": "exit 0"
+                },
+                {
+                    "index":"02",
+                    "title": "GOG",
+                    "description": "",
+                    "id":"gog-password-menu",
+                    "prompt": "",
+                    "type": "modal",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
                 }
             ]
         },
