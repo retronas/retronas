@@ -12,7 +12,7 @@ Please read the [Wiki](https://github.com/danmons/retronas/wiki) to see what's g
 
 # About
 
-RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi, old computer or even Viritual Machine into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
+RetroNAS is a suite of tools designed to turn a low cost Raspberry Pi, old computer or even Virtual Machine into a NAS (Network Attached Storage) device for retro PCs, microcomputers and consoles.
 
 You can use it as a central file store or backup server for your old and new computers and consoles, a NAS with far more space than your old systems can natively attach (far exceeding the 2TB limit of solutions like FAT32 formatted direct-attached drives), or as a file drop between various computers that may not be compatible with each other's various network file sharing tools. It also offers some interesting tools like proxies to help very old web browsers read and download information from the modern Internet. 
 
