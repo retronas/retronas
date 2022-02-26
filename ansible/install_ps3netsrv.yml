@@ -15,7 +15,7 @@
 
     - systemd_units:
       - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
-      - { name: "ps3netsrv-perms", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+      - { name: "ps3netsrv-perms", type: 'service', state: "started", enabled: "no", restart: "no", instance: "no" }
       - { name: "ps3netsrv-perms", type: 'timer', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
     - packages:
