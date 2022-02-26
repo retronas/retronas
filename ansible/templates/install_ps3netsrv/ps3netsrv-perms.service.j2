@@ -4,5 +4,5 @@ Description=ps3netsrv for PlayStation3 permissions fix
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/chown -RLc {{ retronas_user }}:{{ retronas_user }} "{{ retronas_path }}/ps3/ps3netsrv"
-ExecStart=/usr/bin/chmod -Rc a-st,u+rwX,g+rwX,o+rX "{{ retronas_path }}/roms/videos/"
-ExecStart=/usr/bin/chmod -Rc a-st,u+rwX,g+rwX,o+rX "{{ retronas_path }}/roms/sony/"
+ExecStart=/usr/bin/chmod -R a-st,u+rw-x,g+rw-x,o+r-wx "{{ retronas_path }}/roms/videos/"
+ExecStart=/usr/bin/chmod -R a-st,u+rw-x,g+rw-x,o+r-wx "{{ retronas_path }}/roms/sony/"
