@@ -4,7 +4,7 @@
         "main": 
         {
             "title": "Main",
-            "description": "\nPlease select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
+            "description": "Please select an option.\n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools.\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"\n\nChanging either of these options will require tools to be reinstalled.",
             "id":"main",
             "prompt": "",
             "type": "menu",
@@ -104,7 +104,7 @@
         "advanced": 
         {
             "title": "Advanced",
-            "description": "\nPlease select an tool to install",
+            "description": "Please select an tool to install",
             "id":"advanced",
             "prompt": "Setup",
             "type": "menu",
@@ -154,7 +154,7 @@
         "config": 
         {
             "title": "Configuration",
-            "description": "\nPlease select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
+            "description": "Please select a configuration\n\nCurrent RetroNAS user: \"${OLDRNUSER}\"\nCurrent RetroNAS top level directory: \"${OLDRNPATH}\"",
             "id":"config",
             "prompt": "Change",
             "type": "menu",
@@ -224,7 +224,7 @@
         "install": 
         {
             "title": "Install",
-            "description": "\nPlease select an option to install",
+            "description": "Please select an option to install",
             "id":"install",
             "prompt": "Install",
             "type": "menu",
@@ -484,7 +484,7 @@
         "experimental": 
         {
             "title": "EXPERIMENTAL",
-            "description": "\nWARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
+            "description": "WARNING these tools are very EXPERIMENTAL and could break your system or destroy your data! Do not use these unless you are comfortable with losing everthing",
             "id":"experimental",
             "prompt": "Install",
             "type": "menu",
@@ -524,7 +524,7 @@
         "ondevice": 
         {
             "title": "OnDevice",
-            "description": "\nChoose an item to install",
+            "description": "Choose an item to install",
             "id":"ondevice",
             "prompt": "Install",
             "type": "menu",
@@ -594,7 +594,7 @@
         "services": 
         {
             "title": "Services",
-            "description": "\nPlease select an service to check",
+            "description": "Please select an service to check",
             "id":"services",
             "prompt": "Check",
             "type": "menu",
@@ -753,7 +753,7 @@
         "hdparm": 
         {
             "title": "hdparm",
-            "description": "\n\nWARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
+            "description": "WARNING: These changes are irreversable, USE AT YOUR OWN RISK\n\nTry in ORDER:\nAPM -> Standby -> Custom service !! LAST RESORT !! <-\n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
             "id":"hdparm-menu",
             "prompt": "",
             "type": "modal",
@@ -833,7 +833,7 @@
         "tcpser": 
         {
             "title": "tcpser",
-            "description": "\nPlease select an option",
+            "description": "Please select an option",
             "id":"tcpser-menu",
             "prompt": "",
             "type": "modal",
@@ -913,7 +913,7 @@
         "tools": 
         {
             "title": "Tools",
-            "description": "\nPlease select an option to install",
+            "description": "Please select an option to install",
             "id":"tools",
             "prompt": "Run",
             "type": "menu",
@@ -963,7 +963,7 @@
         "update": 
         {
             "title": "Update",
-            "description": "\nPlease select a tool to update",
+            "description": "Please select a tool to update",
             "id":"update",
             "prompt": "Update",
             "type": "menu",
@@ -1003,7 +1003,7 @@
         "update-user": 
         {
             "title": "Update User",
-            "description": "\nPlease enter the username for all RetroNAS services to run as\n\nThis will normally default to \"pi\" on Raspberry Pi OS Install\n\nIt is recommended you leave it as default unless you know what you are doing.",
+            "description": "Please enter the username for all RetroNAS services to run as\n\nThis will normally default to \"pi\" on Raspberry Pi OS Install\n\nIt is recommended you leave it as default unless you know what you are doing.",
             "id":"update-user-menu",
             "prompt": "Update",
             "type": "menu",
@@ -1033,7 +1033,7 @@
         "update-password": 
         {
             "title": "Update Password",
-            "description": "\nIf you are having problems with CIFS/SMB shares, you can reset their password here",
+            "description": "If you are having problems with CIFS/SMB shares, you can reset their password here",
             "id":"update-password-menu",
             "prompt": "Update",
             "type": "menu",
@@ -1063,7 +1063,7 @@
         "set-top-level-dir": 
         {
             "title": "Set Top Level Directory",
-            "description": "\nPlease type in the RetroNAS top level directory",
+            "description": "Please type in the RetroNAS top level directory",
             "id":"set-top-level-dir-menu",
             "prompt": "",
             "type": "menu",
@@ -1093,7 +1093,7 @@
         "set-etherdfs-nic": 
         {
             "title": "Set EtherDFS NIC",
-            "description": "\nPlease enter the interface name for EtherDFS to bind to.\n\nNormally this is something like eth0 fir wired Ethernet.\n\nIf EtherDFS is installed, you will need to re-run the installer to apply the change.",
+            "description": "Please enter the interface name for EtherDFS to bind to.\n\nNormally this is something like eth0 fir wired Ethernet.\n\nIf EtherDFS is installed, you will need to re-run the installer to apply the change.",
             "id":"set-etherdfs-nic-menu",
             "prompt": "",
             "type": "menu",
@@ -1263,7 +1263,7 @@
         "gogrepo-menu": 
         {
             "title": "GOG",
-            "description": "\nPlease choose a task",
+            "description": "Please choose a task",
             "id":"gogrepo-menu",
             "prompt": "",
             "type": "menu",
@@ -1343,7 +1343,7 @@
         "example": 
         {
             "title": "MENU_TITLE",
-            "description": "\nINSERT_TEXT",
+            "description": "INSERT_TEXT",
             "id":"MENU_ID",
             "prompt": "",
             "type": "menu",
