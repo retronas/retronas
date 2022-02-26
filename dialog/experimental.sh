@@ -39,7 +39,6 @@ do
     RN_INSTALL_EXECUTE install_filesystems.yml
     RN_INSTALL_EXECUTE install_cockpit.yml
     RN_INSTALL_EXECUTE install_cockpit-packages.yml
-    RN_INSTALL_EXECUTE install_filesystems.yml
     RN_INSTALL_EXECUTE install_extract-xiso.yml
     RN_INSTALL_EXECUTE install_xboxmanager.yml
     PAUSE
