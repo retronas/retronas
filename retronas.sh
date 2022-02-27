@@ -2,6 +2,7 @@
 
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
+source ${LIBDIR}/common.sh
 
 DISABLE_GITOPS=0
 CF="$RNDIR/ansible/retronas_vars.yml"
@@ -133,7 +134,7 @@ if [ ! -x /usr/local/bin/retronas ]
 then
     clear
     #installing a simple starup script
-    echo -e '#!/bin/bash\n\nsudo /opt/retronas/retronas.sh $*' > /usr/local/bin/retronas
+    cp /opt/retronas/dist/retronas /usr/local/bin/retronas
     chmod a+x /usr/local/bin/retronas
     echo -e "We have upgraded your RetroNAS, you can now run the RetroNAS config tool with the following command:\n\nretronas\n\nThis message will appear only once\n"
     echo "Press enter to continue"
