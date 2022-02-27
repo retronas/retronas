@@ -10,8 +10,11 @@
 /tmp/install_retronas.sh
 
 cd /opt/retronas/ansible
+
+cp retronas_vars.yml.default retronas_vars.yml
+
 /usr/bin/ansible-playbook -vv retronas_dependencies.yml
 /usr/bin/ansible-playbook -vv install_filesystems.yml
 /usr/bin/ansible-playbook -vv install_cockpit.yml
 /usr/bin/ansible-playbook -vv install_cockpit-packages.yml
-/usr/bin/ansible-playbook -vv install_cockpit-retronas.yml
+#/usr/bin/ansible-playbook -vv install_cockpit-retronas.yml
