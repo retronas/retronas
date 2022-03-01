@@ -27,7 +27,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT configure.sh"
+                    "command": "configure"
                 },
                 {
                     "index": "03",
@@ -37,7 +37,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT install.sh"
+                    "command": "install"
                 },
                 {
                     "index": "04",
@@ -47,7 +47,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT services.sh"
+                    "command": "services"
                 },
                 {
                     "index": "05",
@@ -57,7 +57,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT tools.sh"
+                    "command": "tools"
                 },
                 {
                     "index": "06",
@@ -67,7 +67,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT odman.sh"
+                    "command": "odman"
                 },
                 {
                     "index": "07",
@@ -77,7 +77,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT advanced.sh"
+                    "command": "advanced"
                 },
                 {
                     "index": "50",
@@ -87,7 +87,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT experimental.sh"
+                    "command": "experimental"
                 },
                 {
                     "index": "99",
@@ -97,7 +97,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "EXEC_SCRIPT update.sh"
+                    "command": "update"
                 }
             ]
         },
@@ -147,7 +147,7 @@
                     "prompt": "Install",
                     "type": "install",
                     "group":"",
-                    "command": "RN_EXECUTE_INSTALL install_disable-laptop-lid.yml"
+                    "command": "disable-laptop-lid"
                 }
             ]
         },
@@ -207,7 +207,7 @@
                     "prompt": "Run",
                     "type": "script-static",
                     "group":"",
-                    "command": "EXEC_SCRIPT retronas_fixperms.sh"
+                    "command": "retronas_fixperms"
                 },
                 {
                     "index":"06",
@@ -247,7 +247,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;PAUSE"
+                    "command": "samba.yml"
                 },                
                 {
                     "index": "03",
@@ -257,7 +257,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"netatalk",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk2x.yml;PAUSE"
+                    "command": "netatalk2x"
                 },
                 {
                     "index": "04",
@@ -267,7 +267,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"netatalk",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_netatalk3.yml;PAUSE"
+                    "command": "netatalk3"
                 },                
                 {
                     "index": "05",
@@ -277,7 +277,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_etherdfs.yml;PAUSE"
+                    "command": "etherdfs"
                 },
                 {
                     "index": "06",
@@ -287,7 +287,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;PAUSE"
+                    "command": "lighttpd"
                 },                
                 {
                     "index": "07",
@@ -297,7 +297,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_proftpd.yml;PAUSE"
+                    "command": "proftpd"
                 },
                 {
                     "index": "08",
@@ -307,7 +307,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tftpd-hpa.yml;PAUSE"
+                    "command": "tftpd-hpa"
                 },                
                 {
                     "index": "09",
@@ -317,7 +317,7 @@
                     "prompt": "", 
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_openssh.yml;PAUSE"
+                    "command": "openssh"
                 },
                 {
                     "index": "10",
@@ -327,7 +327,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_telnet.yml;PAUSE"
+                    "command": "telnet"
                 },
                 {
                     "index": "11",
@@ -337,7 +337,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nfs.yml;PAUSE"
+                    "command": "nfs"
                 },
                 {
                     "index": "12",
@@ -347,7 +347,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_tnfs.yml;PAUSE"
+                    "command": "tnfs"
                 },
                 {
                     "index": "20",
@@ -357,7 +357,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pygopherd.yml;PAUSE"
+                    "command": "pygopherd"
                 },
                 {
                     "index": "30",
@@ -367,7 +367,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_lighttpd.yml;RN_INSTALL_EXECUTE install_3ds_qr_codes.yml;PAUSE"
+                    "command": "lighttpd;3ds_qr_codes"
                 },                
                 {
                     "index": "31",
@@ -377,7 +377,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps2_openps2loader.yml;PAUSE"
+                    "command": "samba;romdir;ps2_openps2loader"
                 },                
                 {
                     "index": "32",
@@ -387,7 +387,7 @@
                     "prompt": "ps3netsrv",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_ps3netsrv.yml;PAUSE"
+                    "command": "romdir;ps3netsrv"
                 },                
                 {
                     "index": "33",
@@ -397,7 +397,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_mister_cifs.yml;PAUSE"
+                    "command": "samba;romdir;mister_cifs"
                 },                
                 {
                     "index": "34",
@@ -407,7 +407,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_samba.yml;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_xbox360.yml;PAUSE"
+                    "command": "samba;romdir;xbox360"
                 },                
                 {
                     "index": "35",
@@ -417,7 +417,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_gogrepo.yml;PAUSE"
+                    "command": "gogrepo.yml"
                 },                
                 {
                     "index": "36",
@@ -427,7 +427,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_romimport.yml;PAUSE"
+                    "command": "romdir;romimport"
                 },                
                 {
                     "index": "37",
@@ -437,7 +437,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;RN_INSTALL_EXECUTE install_fsp.yml;PAUSE"
+                    "command": "romdir;fsp.yml"
                 },                
                 {
                     "index": "38",
@@ -447,7 +447,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_sabretools.yml;PAUSE"
+                    "command": "dotnetcore3;sabretools"
                 },
                 {
                     "index": "50",
@@ -457,7 +457,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_syncthing.yml;PAUSE"
+                    "command": "syncthing"
                 },
                 {
                     "index": "51",
@@ -467,7 +467,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_filesystems.yml;RN_INSTALL_EXECUTE install_cockpit.yml;RN_INSTALL_EXECUTE install_cockpit-packages.yml;PAUSE"
+                    "command": "filesystems;cockpit;cockpit-packages"
                 },
                 {
                     "index": "52",
@@ -477,7 +477,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_dotnetcore3.yml;RN_INSTALL_EXECUTE install_webone.yml;PAUSE"
+                    "command": "dotnetcore3;webone"
                 }
             ]
         },
@@ -507,7 +507,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_cockpit-retronas.yml;PAUSE"
+                    "command": "cockpit;cockpit-packages;cockpit-retronas"
                 },
                 {
                     "index": "03",
@@ -547,7 +547,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_ucon64.yml;PAUSE"
+                    "command": "ucon64"
                 },
                 {
                     "index": "03",
@@ -557,7 +557,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_extract-xiso.yml;PAUSE"
+                    "command": "extract-xiso"
                 },
                 {
                     "index": "04",
@@ -567,7 +567,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdldump.yml;PAUSE"
+                    "command": "hdldump"
                 },
                 {
                     "index": "05",
@@ -577,7 +577,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_nbd-client.yml;PAUSE"
+                    "command": "nbd-client"
                 },
                 {
                     "index": "06",
@@ -587,7 +587,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_pfsshell.yml;PAUSE"
+                    "command": "pfsshell"
                 }
             ]
         },
@@ -776,7 +776,7 @@
                     "prompt": "Install",
                     "type":"install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_hdparm.yml;PAUSE"
+                    "command": "hdparm"
                 },
                 {
                     "index":"10",
@@ -856,7 +856,7 @@
                     "prompt": "Install",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_EXEC install_tcpser.yml;PAUSE"
+                    "command": "tcpser"
                 },
                 {
                     "index":"03",
@@ -996,7 +996,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "CLEAR;RN_INSTALL_DEPS;RN_INSTALL_EXECUTE install_romdir.yml;PAUSE"
+                    "command": "romdir"
                 }
             ]
         },
