@@ -51,10 +51,22 @@ READ_MENU_COMMAND() {
     local MENU_NAME=$1
     local MENU_CHOICE=$2
 
-    MENU_SELECT=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.command)\"")
+    MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    
+    local MENU_TYPE=$(echo $MENU_DATA | cut -d"|" -f1)
+    local MENU_SELECT=$(echo $MENU_DATA | cut -d"|" -f2)
+
     if [ ! -z "${MENU_SELECT}" ] && [ $MENU_SELECT != "null" ]
     then 
-        RN_INSTALL_EXECUTE $MENU_SELECT
+        case $MENU_TYPE in
+            install)
+                RN_INSTALL_EXECUTE $MENU_SELECT
+                ;;
+            *)
+                echo "Not supported, why are you here?"
+                PAUSE
+                ;;
+        esac
     else
         echo "Failed to select item for $MENU_CHOICE"
         PAUSE
