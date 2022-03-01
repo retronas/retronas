@@ -38,15 +38,23 @@ GET_LANG() {
 
 }
 
+#
+# Read menu items from the json config
+# export the data for use in dialogs
+#
 READ_MENU_JSON() {
     local MENU_TITLE="${1:-main}"
 
-    #local IFS=";"
     declare -a MENU_ARRAY_TMP
     export MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
 
 }
 
+#
+# Looks up the menu item in the json file. returns both type and command values
+# type determines the action taken
+# command is a colon separated list of actions taken by helper functions
+#
 READ_MENU_COMMAND() {
     local MENU_NAME=$1
     local MENU_CHOICE=$2
