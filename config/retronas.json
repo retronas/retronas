@@ -367,7 +367,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "lighttpd;3ds_qr_codes"
+                    "command": "lighttpd:3ds_qr_codes"
                 },                
                 {
                     "index": "31",
@@ -377,7 +377,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba;romdir;ps2_openps2loader"
+                    "command": "samba:romdir:ps2_openps2loader"
                 },                
                 {
                     "index": "32",
@@ -387,7 +387,7 @@
                     "prompt": "ps3netsrv",
                     "type": "install",
                     "group":"",
-                    "command": "romdir;ps3netsrv"
+                    "command": "romdir:ps3netsrv"
                 },                
                 {
                     "index": "33",
@@ -397,7 +397,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba;romdir;mister_cifs"
+                    "command": "samba:romdir:mister_cifs"
                 },                
                 {
                     "index": "34",
@@ -407,7 +407,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba;romdir;xbox360"
+                    "command": "samba:romdir:xbox360"
                 },                
                 {
                     "index": "35",
@@ -427,7 +427,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "romdir;romimport"
+                    "command": "romdir:romimport"
                 },                
                 {
                     "index": "37",
@@ -437,7 +437,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "romdir;fsp.yml"
+                    "command": "romdir:fsp.yml"
                 },                
                 {
                     "index": "38",
@@ -447,7 +447,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "dotnetcore3;sabretools"
+                    "command": "dotnetcore3:sabretools"
                 },
                 {
                     "index": "50",
@@ -467,7 +467,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "filesystems;cockpit;cockpit-packages"
+                    "command": "filesystems:cockpit:cockpit-packages"
                 },
                 {
                     "index": "52",
@@ -477,7 +477,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "dotnetcore3;webone"
+                    "command": "dotnetcore3:webone"
                 }
             ]
         },
@@ -507,7 +507,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "cockpit;cockpit-packages;cockpit-retronas"
+                    "command": "cockpit:cockpit-packages:cockpit-retronas"
                 },
                 {
                     "index": "03",
@@ -517,7 +517,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "filesystems;extract-xiso;xboxmanager"
+                    "command": "filesystems:extract-xiso:xboxmanager"
                 }
             ]
         },
