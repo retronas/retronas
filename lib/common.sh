@@ -43,8 +43,23 @@ READ_MENU_JSON() {
 
     #local IFS=";"
     declare -a MENU_ARRAY_TMP
-    export MENU_DATA=$(</opt/retronas/config/retronas.json jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
+    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
 
+}
+
+READ_MENU_COMMAND() {
+    local MENU_NAME=$1
+    local MENU_CHOICE=$2
+
+    MENU_SELECT=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.command)\"")
+    if [ ! -z "${MENU_SELECT}" ] && [ $MENU_SELECT != "null" ]
+    then 
+        RN_INSTALL_EXECUTE $MENU_SELECT
+    else
+        echo "Failed to select item for $MENU_CHOICE"
+        PAUSE
+    fi
+    unset MENU_SELECT
 }
 
 ### Run a script
@@ -69,6 +84,8 @@ PAUSE() {
 #
 # Install Ansible Dependencies, runs with every installer
 #
+# !!! this function will be deprecated
+#
 RN_INSTALL_DEPS() {
     source $_CONFIG
     cd ${ANDIR}
@@ -82,8 +99,12 @@ RN_INSTALL_EXECUTE() {
     source $_CONFIG
     local PLAYBOOK=$1
 
-    cd ${ANDIR}
-    ansible-playbook -vv "${PLAYBOOK}"
+    CLEAR
+    /opt/retronas/lib/ansible_runner.sh "${PLAYBOOK}"
+    PAUSE
+
+    #cd ${ANDIR}
+    #ansible-playbook -vv "${PLAYBOOK}"
     unset PLAYBOOK
 }
 

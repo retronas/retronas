@@ -247,7 +247,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba.yml"
+                    "command": "samba"
                 },                
                 {
                     "index": "03",
@@ -417,7 +417,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "gogrepo.yml"
+                    "command": "gogrepo"
                 },                
                 {
                     "index": "36",
@@ -437,7 +437,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "romdir:fsp.yml"
+                    "command": "romdir:fsp"
                 },                
                 {
                     "index": "38",
