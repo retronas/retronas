@@ -80,6 +80,8 @@ then
   [ $? -ne 0 ] && PAUSE && exit 1
 fi
 
+### resource the config to update vars on first run
+source $_CONFIG
 ### check default user exists
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
