@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -u
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="/usr/local/bin"
+REPO=https://github.com/sgan81/apfs-fuse.git
+
+
+if [ ! -x "${BINDIR}/apfs-fuse" ]
+then
+    echo "apfs-fuse not found, so we'll build it!"
+
+    echo "Configuring build directories..."
+    [ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+    mkdir -p "${SRCDIR}"
+    cd "${SRCDIR}"
+
+    echo "Downloading git source ..."
+    git clone $REPO
+    cd "${SRCDIR}/$(basename $REPO .git)"
+
+    echo "Processing submodules"
+    git submodule init
+    git submodule update
+
+    echo "Building"
+    mkdir build
+    cd build
+    cmake ..
+    ccmake . # Only if you want to change build options
+    make
+
+    echo "Moving binary to RetroNAS bin dir..."
+    mkdir -p "${BINDIR}" 2>/dev/null
+    mv -vf apfs-fuse "${BINDIR}/"
+
+    echo "Cleaning up..."
+    [ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+
+    echo "All done!"
+fi
+

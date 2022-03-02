@@ -518,6 +518,16 @@
                     "type": "install",
                     "group":"",
                     "command": "filesystems:extract-xiso:xboxmanager"
+                },
+                {
+                    "index": "04",
+                    "title": "apfs-fuse",
+                    "description": "Apple File System fuse library", 
+                    "id":"apfs-fuse",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "apfs-fuse"
                 }
             ]
         },
