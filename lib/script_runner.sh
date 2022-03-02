@@ -36,7 +36,7 @@ case ${TYPE} in
 esac
 
 ## make this better
-SANITIZED=$(echo "${SCRIPT}" | sed 's/;\.;]//g')
+SANITIZED=$(echo "${SCRIPT}" | sed 's/[\.;]//g')
 
 # build script name
 SCRIPT="${PREFIX}${SANITIZED}${SUFFIX}"
