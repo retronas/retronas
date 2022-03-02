@@ -25,7 +25,7 @@
                     "description": "Change Global Settings",
                     "id":"config",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "configure"
                 },
@@ -35,7 +35,7 @@
                     "description": "The fun place, for things",
                     "id":"install",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "install"
                 },
@@ -45,7 +45,7 @@
                     "description": "See if things are OK",
                     "id":"services",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "services"
                 },
@@ -55,7 +55,7 @@
                     "description": "Run tools and scripts",
                     "id":"tools",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "tools"
                 },
@@ -65,7 +65,7 @@
                     "description": "On-Device Management Tools",
                     "id":"ondevice",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "odman"
                 },
@@ -75,7 +75,7 @@
                     "description": "bd/eLiTe",
                     "id":"advanced",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "advanced"
                 },
@@ -85,7 +85,7 @@
                     "description": "there be dragons here!",
                     "id":"experimental",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "experimental"
                 },
@@ -95,7 +95,7 @@
                     "description": "Update core RetroNAS features",
                     "id":"update",
                     "prompt": "",
-                    "type": "script",
+                    "type": "dialog",
                     "group":"",
                     "command": "update"
                 }
@@ -127,7 +127,7 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT tool_hdparm.sh"
+                    "command": "tool_hdparm"
                 },
                 {
                     "index": "03",
@@ -137,7 +137,7 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT tcpser.sh"
+                    "command": "tcpser"
                 },
                 {
                     "index": "04",
@@ -177,7 +177,7 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT retronas_user.sh"
+                    "command": "retronas_user"
                 },
                 {
                     "index":"03",
@@ -187,7 +187,7 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT retronas_password.sh"
+                    "command": "retronas_password"
                 },
                 {
                     "index":"04",
@@ -197,17 +197,17 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT retronas_path.sh"
+                    "command": "retronas_path"
                 },
                 {
                     "index":"05",
                     "title": "Permissions",
-                    "description": "Fix on-disk permissions",
+                    "description": "Fix ALL on-disk permissions",
                     "id":"permissions",
                     "prompt": "Run",
                     "type": "script-static",
                     "group":"",
-                    "command": "retronas_fixperms"
+                    "command": "permissions"
                 },
                 {
                     "index":"06",
@@ -217,7 +217,7 @@
                     "prompt": "",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT retronas_etherdfs_interface.sh"
+                    "command": "retronas_etherdfs_interface"
                 }
             ]
         },
@@ -956,7 +956,7 @@
                     "prompt": "Open",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT romimport.sh"
+                    "command": "romimport"
                 }
             ]
         },
@@ -981,12 +981,12 @@
                 {
                     "index":"02",
                     "title": "RetroNAS",
-                    "description": "Update RetroNAS and return to the main menu",
+                    "description": "Update RetroNAS",
                     "id":"update-retronas",
                     "prompt": "",
                     "type": "script-static",
                     "group":"",
-                    "command": "CLEAR;EXEC_SCRIPT ../scripts/static/update-retronas.sh;EXEC_SCRIPT retronas.main.sh"
+                    "command": "update-retronas"
                 },
                 {
                     "index":"03",

@@ -19,10 +19,24 @@ VALUE="${2:-}"
 
 # check for static type
 TYPE=$(echo $SCRIPT | cut -c1-2)
-[ "${TYPE}" == "s-" ] && SCDIR="${SCDIR}/static" && SCRIPT=$( echo $SCRIPT | cut -c3-)
+case ${TYPE} in
+    s-)
+        # STATIC
+        SCDIR="${SCDIR}/static"
+        SCRIPT=$( echo $SCRIPT | cut -c3-)
+        ;;
+    d-)
+        # DIALOGS
+        SCDIR="${DIDIR}"
+        SCRIPT=$( echo $SCRIPT | cut -c3-)
+        ;;
+    *)
+        # EVERYTHING ELSE
+        ;;
+esac
 
 ## make this better
-SANITIZED=$(echo "${SCRIPT}" | sed 's/\.//g')
+SANITIZED=$(echo "${SCRIPT}" | sed 's/;\.;]//g')
 
 # build script name
 SCRIPT="${PREFIX}${SANITIZED}${SUFFIX}"
@@ -31,10 +45,8 @@ cd "${SCDIR}"
 
 [ -z "${1}" ] && echo "No options passed" && exit 1
 [ ! -f ${SCRIPT} ] && echo "Failed to find script for $1" && exit 1
-
-
 [ -z ${SCDIR} ] && echo "SCDIR cannot be empty, something is terribly wrong" && exit 2
 
 shift
 # this can be abused, find a better option
-${SCDIR}/${SCRIPT} $* 2>&1
+bash ${SCDIR}/${SCRIPT} $* 2>&1

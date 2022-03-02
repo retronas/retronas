@@ -4,12 +4,13 @@ clear
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=tools
 cd ${DIDIR}
 
 rn_tools() {
   source $_CONFIG
 
-  READ_MENU_JSON "tools"
+  READ_MENU_JSON "${MENU_NAME}"
   local MENU_BLURB="Please select an option to install"
   DLG_MENUJ "Tools Menu" 10 "${MENU_BLURB}"
 
@@ -26,7 +27,7 @@ do
     ;;
   02)
     # gogrepo
-    EXEC_SCRIPT gogrepo.sh
+    EXEC_SCRIPT "d-gogrepo"
     ;;
   03)
     # 3DS QR
@@ -37,7 +38,7 @@ do
   04)
     # ROM import SMDB
     CLEAR
-    bash romimport.sh
+    EXEC_SCRIPT "d-romimport"
     ;;
   *)
     exit 1

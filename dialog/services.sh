@@ -3,6 +3,7 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=services
 cd ${DIDIR}
 
 rn_services() {

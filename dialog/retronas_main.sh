@@ -3,11 +3,12 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=main
 cd ${DIDIR}
 
 rn_main() {
 
-  READ_MENU_JSON "main"
+  READ_MENU_JSON "${MENU_NAME}"
 
   local MENU_BLURB="\
   \nPlease select an option. \
@@ -20,42 +21,13 @@ rn_main() {
 
 }
 
-
-#clear
 while true
 do
   rn_main
-  case ${CHOICE} in
-    01)
-      clear
-      exit 0
-      ;;
-    02)
-      EXEC_SCRIPT configure.sh
-      ;;
-    03)
-      EXEC_SCRIPT install.sh
-      ;;
-    04)
-      EXEC_SCRIPT services.sh
-      ;;
-    05)
-      EXEC_SCRIPT tools.sh
-      ;;
-    06)
-      EXEC_SCRIPT odman.sh
-      ;;
-    07)
-      EXEC_SCRIPT advanced.sh
-      ;;
-    50)
-      EXEC_SCRIPT experimental.sh
-      ;;
-    99)
-      EXEC_SCRIPT update.sh
-      ;;
-    *)
-      clear
-      exit
-  esac
+  if [ ! -z "${CHOICE}" ] && [ "${CHOICE}" != "01" ]
+  then
+    READ_MENU_COMMAND ${MENU_NAME} ${CHOICE} 
+  else
+    exit 1
+  fi
 done

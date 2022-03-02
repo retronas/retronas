@@ -70,13 +70,17 @@ READ_MENU_COMMAND() {
             install)
                 RN_INSTALL_EXECUTE $MENU_SELECT
                 ;;
-            script|modal)
+            dialog|modal)
+                EXEC_SCRIPT "d-${MENU_SELECT}"
+                ;;
+            script)
                 EXEC_SCRIPT $MENU_SELECT
                 ;;
             #service_*)
             #    ;;
-            #script-static)
-            #    ;;
+            script-static)
+                EXEC_SCRIPT "s-${MENU_SELECT}"
+                ;;
             *)
                 echo "Not supported, why are you here?"
                 PAUSE
@@ -92,8 +96,11 @@ READ_MENU_COMMAND() {
 ### Run a script
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
+
+    CLEAR
     shift
-    bash "${SCRIPT}" $*
+    /opt/retronas/lib/script_runner.sh "${SCRIPT}" $*
+
     unset SCRIPT
 }
 

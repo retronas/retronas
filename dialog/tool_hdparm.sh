@@ -3,6 +3,7 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=hdparm
 SERVICE="hdparm"
 UNITTYPE="timer"
 
@@ -11,7 +12,7 @@ cd ${DIDIR}
 rn_hdparm() {
   source $_CONFIG
 
-  READ_MENU_JSON "hdparm"
+  READ_MENU_JSON "${MENU_NAME}"
 
   local MENU_BLURB="\n
   \nWARNING: These changes are irreversable, USE AT YOUR OWN RISK \

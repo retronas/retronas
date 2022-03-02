@@ -3,6 +3,7 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=tcpser
 cd ${DIDIR}
 
 CLEAR
@@ -10,7 +11,7 @@ rn_tcpser() {
 source $_CONFIG
 dialog \
   --backtitle "RetroNAS" \
-  --title "RetroNAS TCPServ menu" \
+  --title "RetroNAS TCPSer menu" \
   --clear \
   --menu "My IP addresses: ${MY_IPS} \
   \n
