@@ -70,6 +70,13 @@ READ_MENU_COMMAND() {
             install)
                 RN_INSTALL_EXECUTE $MENU_SELECT
                 ;;
+            script|modal)
+                EXEC_SCRIPT $MENU_SELECT
+                ;;
+            #service_*)
+            #    ;;
+            #script-static)
+            #    ;;
             *)
                 echo "Not supported, why are you here?"
                 PAUSE
