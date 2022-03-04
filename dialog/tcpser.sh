@@ -86,16 +86,16 @@ do
     # tcpser
     CLEAR
     RN_INSTALL_DEPS
-    RN_INSTALL_EXECUTE install_tcpser.yml
+    RN_INSTALL_EXECUTE tcpser
     PAUSE
     ;;
   03)
     # create new modem
-    EXEC_SCRIPT tcpser_edit.sh
+    bash tcpser_edit.sh
     ;;
   04)
     # create new virtual modem
-    EXEC_SCRIPT tcpser_edit.sh VIRTUAL
+    bash tcpser_edit.sh VIRTUAL
     ;;
   05)
     # start modem

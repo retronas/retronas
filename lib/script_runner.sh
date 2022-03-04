@@ -35,7 +35,7 @@ case ${TYPE} in
         ;;
 esac
 
-## make this better
+## make this better, its a hail mary anyway since the script is called from client-side
 SANITIZED=$(echo "${SCRIPT}" | sed 's/[\.;]//g')
 
 # build script name

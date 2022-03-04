@@ -63,7 +63,7 @@ do
       # install
       CLEAR
       RN_INSTALL_DEPS
-      RN_INSTALL_EXECUTE install_${SERVICE}.yml 
+      RN_INSTALL_EXECUTE ${SERVICE}
       PAUSE
       ;;
     10)
