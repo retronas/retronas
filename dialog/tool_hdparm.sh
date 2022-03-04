@@ -13,14 +13,8 @@ rn_hdparm() {
   source $_CONFIG
 
   READ_MENU_JSON "${MENU_NAME}"
-
-  local MENU_BLURB="\n
-  \nWARNING: These changes are irreversable, USE AT YOUR OWN RISK \
-  \n\nTry in ORDER: \
-  \nAPM -> Standby -> Custom service !! LAST RESORT !! <- \
-  \n\nThe custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive."
-
-  DLG_MENUJ "Services Menu" 10 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
 }
 

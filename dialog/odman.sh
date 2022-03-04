@@ -11,9 +11,9 @@ cd ${DIDIR}
 
 rn_odman() {
   source $_CONFIG
-  READ_MENU_JSON "ondevice"
-  local MENU_BLURB="\nChoose an item to install"
-  DLG_MENUJ "On-Device Management Menu" 10 "${MENU_BLURB}"
+  READ_MENU_JSON "${MENU_NAME}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 }
 
 DROP_ROOT

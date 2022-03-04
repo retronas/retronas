@@ -10,8 +10,8 @@ CHOICE=""
 rn_advanced() {
 
   READ_MENU_JSON "${MENU_NAME}"
-  local MENU_BLURB="\nPlease select an tool to install" 
-  DLG_MENUJ "Advanced Menu" 10 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
 }
 

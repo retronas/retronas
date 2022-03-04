@@ -8,9 +8,9 @@ cd ${DIDIR}
 
 rn_services() {
 
-  READ_MENU_JSON "services"
-  local MENU_BLURB="Please select an service to check"
-  DLG_MENUJ "Services Menu" 10 "${MENU_BLURB}"
+  READ_MENU_JSON "${MENU_NAME}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
 }
 

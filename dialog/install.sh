@@ -10,8 +10,8 @@ cd ${DIDIR}
 rn_install_chooser() {
   source $_CONFIG
   READ_MENU_JSON "${MENU_NAME}"
-  local MENU_BLURB="\nPlease select an option to install"
-  DLG_MENUJ "Main Menu" 10 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 }
 
 while true

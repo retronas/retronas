@@ -11,13 +11,8 @@ rn_config() {
   source $_CONFIG
 
   READ_MENU_JSON "${MENU_NAME}"
-
-  local MENU_BLURB="\nPlease select a configuration\
-  \n
-  \nCurrent RetroNAS user: \"${OLDRNUSER}\" \
-  \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\""
-
-  DLG_MENUJ "Configuration Menu" 4 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 4 "${MENU_BLURB}"
 
 }
 

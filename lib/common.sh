@@ -42,9 +42,14 @@ GET_LANG() {
 # Read menu items from the json config
 # export the data for use in dialogs
 #
-READ_MENU_DESC() {
+READ_MENU_TDESC() {
     local MENU_TITLE="${1:-main}"
-    export MENU_BLURB=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE} | \"\(.description)\"")    
+    local MENU_TDESC_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE} | \"\(.title);\(.description)\"")
+    local IFS=$'\n'
+
+    export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
+    # eval ... yes i'm so terribly sorry
+    export MENU_BLURB=$(eval "echo $(echo $MENU_TDESC_DATA | cut -d";" -f2- | sed 's/|/\\\\n/g')")
 }
 
 #
@@ -243,11 +248,11 @@ DLG_MENUJ() {
     local MENU_BLURB=$3
 
 
-    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "RetroNAS" \
-            --title "RetroNAS ${TITLE}" \
+            --title "RetroNAS ${TITLE} Menu" \
             --clear \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
@@ -287,7 +292,7 @@ DLG_MENU() {
 
     DIALOG=(dialog \
             --backtitle "RetroNAS" \
-            --title "RetroNAS ${TITLE}" \
+            --title "RetroNAS ${TITLE} Menu" \
             --clear \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
@@ -307,7 +312,7 @@ DLG_YN() {
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \
-    --title "RetroNAS ${TITLE}" \
+    --title "RetroNAS ${TITLE} Menu" \
     --clear \
     --defaultno \
     --yesno "${MENU_DESC}" ${MW} ${MH})
@@ -329,7 +334,7 @@ DLG_DSELECT() {
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \
-    --title "RetroNAS ${TITLE}" \
+    --title "RetroNAS ${TITLE} Menu" \
     --clear \
     --dselect "${MENU_BLURB}" ${MW} ${MH})
 
@@ -350,7 +355,7 @@ DLG_INPUTBOX() {
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \
-    --title "RetroNAS ${TITLE}" \
+    --title "RetroNAS ${TITLE} Menu" \
     --clear \
     --inputbox "${MENU_BLURB}" ${MW} ${MH} $MENU_INIT)
 

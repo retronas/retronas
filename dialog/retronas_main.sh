@@ -9,15 +9,8 @@ cd ${DIDIR}
 rn_main() {
 
   READ_MENU_JSON "${MENU_NAME}"
-
-  local MENU_BLURB="\
-  \nPlease select an option. \
-  \n\nPlease ensure that you have configured your RetroNAS user and top level directory in the \"Global configration\" section before installing any tools. \
-  \n\nCurrent RetroNAS user: \"${OLDRNUSER}\" \
-  \nCurrent RetroNAS top level directory: \"${OLDRNPATH}\" \
-  \n\nChanging either of these options will require tools to be reinstalled."
-
-  DLG_MENUJ "Main Menu" 3 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 3 "${MENU_BLURB}"
 
 }
 

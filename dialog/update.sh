@@ -10,8 +10,8 @@ CHOICE=""
 rn_update() {
 
   READ_MENU_JSON "${MENU_NAME}"
-  local MENU_BLURB="\nPlease select a tool to update" 
-  DLG_MENUJ "Update Menu" 10 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
 }
 

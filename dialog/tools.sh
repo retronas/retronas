@@ -11,8 +11,8 @@ rn_tools() {
   source $_CONFIG
 
   READ_MENU_JSON "${MENU_NAME}"
-  local MENU_BLURB="Please select an option to install"
-  DLG_MENUJ "Tools Menu" 10 "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
 }
 
