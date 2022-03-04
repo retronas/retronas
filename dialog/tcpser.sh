@@ -87,7 +87,6 @@ do
     CLEAR
     RN_INSTALL_DEPS
     RN_INSTALL_EXECUTE tcpser
-    PAUSE
     ;;
   03)
     # create new modem
