@@ -40,7 +40,7 @@ do
     EXEC_SCRIPT "d-romimport"
     ;;
   *)
-    exit 1
+    EXIT_CANCEL
     ;;
   esac
 done

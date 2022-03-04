@@ -108,7 +108,7 @@ do
     tcpser_service STOP
     ;;
   *)
-    exit 1
+    EXIT_CANCEL
     ;;
   esac
 done

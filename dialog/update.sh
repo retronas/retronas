@@ -25,6 +25,6 @@ do
   then
     READ_MENU_COMMAND ${MENU_NAME} ${CHOICE} 
   else
-    exit 1
+    EXIT_CANCEL
   fi
 done

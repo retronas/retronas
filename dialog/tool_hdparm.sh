@@ -95,7 +95,7 @@ do
       RN_SYSTEMD_STOP ${SERVICE}.service
       ;;
     *)
-      exit 1
+      EXIT_CANCEL
       ;;
   esac
 done

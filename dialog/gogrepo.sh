@@ -163,7 +163,7 @@ do
     read -s
     ;;
   *)
-    exit 1
+    EXIT_CANCEL
     ;;
   esac
 done

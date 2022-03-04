@@ -84,7 +84,7 @@ do
     RN_SYSTEMD_STATUS "webone"
     ;;
   *)
-    exit 1
+    EXIT_CANCEL
     ;;
   esac
 done

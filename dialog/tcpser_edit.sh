@@ -95,7 +95,7 @@ do
   case ${CHOICE} in
   *)
     rn_tcpser_write_envfile $TCPSER_TMP 
-    exit 1
+    EXIT_CANCEL
     ;;
   esac
 done

@@ -42,12 +42,18 @@ GET_LANG() {
 # Read menu items from the json config
 # export the data for use in dialogs
 #
+READ_MENU_DESC() {
+    local MENU_TITLE="${1:-main}"
+    export MENU_BLURB=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE} | \"\(.description)\"")    
+}
+
+#
+# Read menu items from the json config
+# export the data for use in dialogs
+#
 READ_MENU_JSON() {
     local MENU_TITLE="${1:-main}"
-
-    declare -a MENU_ARRAY_TMP
-    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")    
-
+    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")
 }
 
 #
@@ -99,6 +105,12 @@ READ_MENU_COMMAND() {
 EXIT_OK() {
     CLEAR
     exit 0
+}
+
+
+EXIT_CANCEL() {
+    CLEAR
+    exit 1
 }
 
 ### Run a script
