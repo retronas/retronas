@@ -41,10 +41,9 @@ rn_retronas_path() {
 rn_retronas_path_confirm() {
   local NEWRNPATH="${1}"
 
-  local MENU_BLURB="\nDo you want to save this setting? \
-  \nNewRetroNAS top level directory: \"${NEWRNPATH}\""
-
-  DLG_YN "Confirm" "${MENU_BLURB}"
+  local MENU_NAME=set-top-level-dir-confirm
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_YN "${MENU_TNAME}" "${MENU_BLURB}"
 
   case ${CHOICE} in
     0)

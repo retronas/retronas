@@ -3,14 +3,12 @@
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
+MENU_NAME=update-password
 cd ${DIDIR}
 
 rn_retronas_password() {
-  local MENU_BLURB="\nThe current RetroNAS user is \"${OLDRNUSER}\" \
-    \n\nIf you are having problems with CIFS/SMB shares, you can reset their password here.
-    \n\nProceed?"
-
-  DLG_YN "Password Menu" "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_YN "${MENU_TNAME}" "${MENU_BLURB}"
 
   case ${CHOICE} in
     0)

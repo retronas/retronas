@@ -394,7 +394,7 @@ DLG_YN() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \

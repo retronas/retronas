@@ -9,13 +9,9 @@ CLEAR
 
 rn_etherdfs_if() {
   source $_CONFIG 
-
-  local MENU_BLURB="Please enter the interface name for EtherDFS to bind to. \
-  \n\nThis is currently \"${OLDETHERDFSIF}\" \
-  \n\nNormally this is something like eth0 for wired Ethernet. \
-  \n\nIf EtherDFS is installed, you will need to re-run the installer to apply the change."
-
-  DLG_INPUTBOX "EtherDFS Interface" "${MENU_BLURB}" ${OLDETHERDFSIF}
+  local MENU_NAME=set-etherdfs-nic
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_INPUTBOX "${MENU_TNAME}" "${MENU_BLURB}" ${OLDETHERDFSIF}
 
   NEWETHERDFSIF=$CHOICE
   CHOICE=""
@@ -41,12 +37,10 @@ rn_etherdfs_if() {
 }
 
 rn_etherdfs_if_confirm() {
-NEWETHERDFSIF="${1}"
-
-  local MENU_BLURB="\nDo you want to save this setting? \
-  \nNew EtherDFS interface: \"${NEWETHERDFSIF}\""
-
-  DLG_YN "Confirm" "${MENU_BLURB}"
+  NEWETHERDFSIF="${1}"
+  local MENU_NAME=set-etherdfs-nic-confirm
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_YN "${MENU_TNAME}" "${MENU_BLURB}"
   case ${CHOICE} in
     0)
       source $_CONFIG

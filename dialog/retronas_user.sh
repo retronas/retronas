@@ -4,17 +4,14 @@ _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
 cd ${DIDIR}
+
 CONFIRM=0
 
 rn_retronas_user() {
   source $_CONFIG
-
-  local MENU_BLURB="Please enter the username for all RetroNAS services to run as. \
-  \n\nThis is currently \"${OLDRNUSER}\" \
-  \n\nThis will normally default to \"pi\" on a default Rasberry Pi OS install. \
-  \n\nIt is recommended you leave it as default unless you know what you are doing."
-
-  DLG_INPUTBOX "User Configuration" "${MENU_BLURB}" ${OLDRNUSER}
+  local MENU_NAME=update-user
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_INPUTBOX "${MENU_TNAME}" "${MENU_BLURB}" ${OLDRNUSER}
 
   NEWRNUSER=${CHOICE}
   CHOICE=""
@@ -41,11 +38,10 @@ rn_retronas_user() {
 }
 
 rn_retronas_user_confirm() {
+  local MENU_NAME=update-user-confim
   local NEWRNUSER="${1}"
-  local MENU_BLURB="\nDo you want to save this setting? \
-  \nNewRetroNAS user: \"${NEWRNUSER}\""
-
-  DLG_YN "Confirm" "${MENU_BLURB}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_YN "${MENU_TNAME}" "${MENU_BLURB}"
 
   while true
   do

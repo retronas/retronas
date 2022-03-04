@@ -1040,10 +1040,19 @@
                 }
             ]
         },
+        "update-user-confim": 
+        {
+            "title": "Confirm User",
+            "description": "Do you want to save this setting?|NewRetroNAS user: \"${NEWRNUSER}\"",
+            "id":"update-user-confirm-menu",
+            "prompt": "Confirm",
+            "type": "dialog-yn",
+            "items": []
+        },
         "update-password": 
         {
             "title": "Update Password",
-            "description": "If you are having problems with CIFS/SMB shares, you can reset their password here",
+            "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here",
             "id":"update-password-menu",
             "prompt": "Update",
             "type": "menu",
@@ -1100,6 +1109,15 @@
                 }
             ]
         },
+        "set-top-level-dir-confirm": 
+        {
+            "title": "Confirm EtherDFS NIC",
+            "description": "Do you want to save this setting?|New RetroNAS top level directory: \"${NEWRNPATH}\"",
+            "id":"set-top-level-dir-confirm",
+            "prompt": "Confirm",
+            "type": "dialog-yn",
+            "items": []
+        },
         "set-etherdfs-nic": 
         {
             "title": "Set EtherDFS NIC",
@@ -1129,6 +1147,15 @@
                     "command": "TOOL COMMAND"
                 }
             ]
+        },
+        "set-etherdfs-nic-confirm": 
+        {
+            "title": "Confirm EtherDFS NIC",
+            "description": "Do you want to save this setting?|New EtherDFS interface: \"${NEWETHERDFSIF}\"",
+            "id":"set-etherdfs-nic-confirm",
+            "prompt": "Confirm",
+            "type": "dialog-yn",
+            "items": []
         },
         "tcpser-edit-serial": 
         {
