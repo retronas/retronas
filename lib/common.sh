@@ -106,7 +106,7 @@ GET_LANG() {
 #
 READ_MENU_TDESC() {
     local MENU_TITLE="${1:-main}"
-    local MENU_TDESC_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE} | \"\(.title);\(.description)\"")
+    local MENU_TDESC_DATA=$(<${RNJSON} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
     local IFS=$'\n'
 
     export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
@@ -120,7 +120,7 @@ READ_MENU_TDESC() {
 #
 READ_MENU_JSON() {
     local MENU_TITLE="${1:-main}"
-    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_TITLE}.items[] | \"\(.index)|\(.title)|\(.description);\"")
+    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.\"${MENU_TITLE}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
 }
 
 #
