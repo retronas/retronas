@@ -79,8 +79,7 @@ do
   CHOICE=$( cat ${TDIR}/rn_tcpser )
   case ${CHOICE} in
   01)
-    CLEAR
-    exit 0
+    EXIT_OK
     ;;
   02)
     # tcpser

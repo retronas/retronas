@@ -17,7 +17,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "CLEAR;exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -117,7 +117,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -167,7 +167,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -237,7 +237,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index": "02",
@@ -495,9 +495,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "menus",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index": "02",
@@ -547,7 +547,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index": "02",
@@ -617,7 +617,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index": "02",
@@ -776,7 +776,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -856,7 +856,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -936,7 +936,7 @@
                     "prompt": "",
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -986,7 +986,7 @@
                     "prompt": "", 
                     "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1024,9 +1024,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1054,9 +1054,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1084,9 +1084,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1114,9 +1114,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1144,9 +1144,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1224,9 +1224,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1254,9 +1254,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1284,9 +1284,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",
@@ -1364,9 +1364,9 @@
                     "description": "Return to previous menu", 
                     "id":"",
                     "prompt": "",
-                    "type": "",
+                    "type": "menu",
                     "group":"",
-                    "command": "exit 0"
+                    "command": "EXIT_OK"
                 },
                 {
                     "index":"02",

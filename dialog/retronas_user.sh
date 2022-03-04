@@ -68,7 +68,7 @@ rn_retronas_user_confirm() {
           # Add the new value and re-source
           echo "retronas_user: \"${NEWRNUSER}\"" >> "${ANCFG}"
           source $_CONFIG
-          exit 0
+          EXIT_OK
         fi
         ;;
       *)

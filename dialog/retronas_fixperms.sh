@@ -36,8 +36,7 @@ CLEAR
 rn_fix_perms
 case ${CHOICE} in
   1)
-    CLEAR
-    exit 0
+    EXIT_OK
     ;;
   *)
     CLEAR

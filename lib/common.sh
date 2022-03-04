@@ -60,7 +60,7 @@ READ_MENU_COMMAND() {
     local MENU_CHOICE=$2
 
     MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
-    
+
     local MENU_TYPE=$(echo $MENU_DATA | cut -d"|" -f1)
     local MENU_SELECT=$(echo $MENU_DATA | cut -d"|" -f2)
 
@@ -81,6 +81,9 @@ READ_MENU_COMMAND() {
             script-static)
                 EXEC_SCRIPT "s-${MENU_SELECT}"
                 ;;
+            menu)
+                "${MENU_SELECT}"
+                ;;
             *)
                 echo "Not supported, why are you here?"
                 PAUSE
@@ -91,6 +94,11 @@ READ_MENU_COMMAND() {
         PAUSE
     fi
     unset MENU_SELECT
+}
+
+EXIT_OK() {
+    CLEAR
+    exit 0
 }
 
 ### Run a script

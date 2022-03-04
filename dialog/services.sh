@@ -20,7 +20,7 @@ do
   rn_services
   case ${CHOICE} in
   01)
-    exit 0
+    EXIT_OK
     ;;
   02)
     # Samba

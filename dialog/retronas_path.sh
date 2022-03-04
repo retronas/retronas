@@ -56,7 +56,7 @@ rn_retronas_path_confirm() {
       echo "retronas_path: \"${NEWRNPATH}\"" >> "${ANCFG}"
       source $_CONFIG
       export OLDRNPATH="${NEWRNPATH}"
-      exit 0
+      EXIT_OK
       ;;
     *)
       # No, the path chooser sucks probably, so just bail

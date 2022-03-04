@@ -57,7 +57,7 @@ do
   rn_hdparm
   case ${CHOICE} in
     01)
-      exit 0
+      EXIT_OK
       ;;
     02)
       # install

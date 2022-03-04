@@ -22,8 +22,7 @@ do
   rn_tools
   case ${CHOICE} in
   01)
-    clear
-    exit 0
+    EXIT_OK
     ;;
   02)
     # gogrepo

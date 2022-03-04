@@ -24,7 +24,7 @@ rn_main() {
 while true
 do
   rn_main
-  if [ ! -z "${CHOICE}" ] && [ "${CHOICE}" != "01" ]
+  if [ ! -z "${CHOICE}" ]
   then
     READ_MENU_COMMAND ${MENU_NAME} ${CHOICE} 
   else
