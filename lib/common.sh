@@ -101,6 +101,7 @@ EXEC_SCRIPT() {
     shift
     /opt/retronas/lib/script_runner.sh "${SCRIPT}" $*
 
+    cd ${DIDIR}
     unset SCRIPT
 }
 
@@ -124,6 +125,7 @@ RN_INSTALL_DEPS() {
     source $_CONFIG
     cd ${ANDIR}
     ansible-playbook -vv retronas_dependencies.yml
+    cd ${DIDIR}
 }
 
 #
@@ -139,6 +141,7 @@ RN_INSTALL_EXECUTE() {
 
     #cd ${ANDIR}
     #ansible-playbook -vv "${PLAYBOOK}"
+    cd ${DIDIR}
     unset PLAYBOOK
 }
 
