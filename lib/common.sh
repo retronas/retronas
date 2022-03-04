@@ -7,6 +7,56 @@ source $_CONFIG
 
 export SC="systemctl --no-pager --full"
 
+###############################################################################
+#
+# Logging
+#
+###############################################################################
+
+#
+# use RN_LOG instead of echo, so we can centralise logging approach
+#
+RN_LOG() {
+    echo "${1}"
+}
+
+
+###############################################################################
+#
+# GENERAL reusable functions
+#
+###############################################################################
+
+#
+# Compare two values
+#
+COMPARE_VALUES() {
+    local STROLD=$1
+    local STRNEW=$2
+
+    if [ ! -z ${STRNEW} ] 
+    then
+      if [ "${STRNEW}" != "${STROLD}" ]
+      then
+        # Confirm the input
+        CONFIRM=1
+        CHECK_USER_EXISTS $STRNEW $STROLD
+      else
+        CLEAR
+        RN_LOG "Item not changed"
+      fi
+    else 
+      CLEAR
+      RN_LOG "No values to process"
+    fi
+}
+
+###############################################################################
+#
+# PRIVILEGE handlers
+#
+###############################################################################
+
 ## If this is run as root, switch to our RetroNAS user
 ## Manifests and cookies stored in ~/.gogrepo
 DROP_ROOT() {
@@ -23,6 +73,12 @@ CHECK_ROOT() {
     [ $UID -ne 0 ] && echo "You must run this as root" && exit 1
 }
 
+###############################################################################
+#
+# LANGUAGE handlers
+#
+###############################################################################
+
 ### Get LANG file
 GET_LANG() {
     [ ! -z "${LANG}" ] && RNLANG=$(echo $LANG | awk -F'_' '{print $1}')
@@ -37,6 +93,12 @@ GET_LANG() {
     fi
 
 }
+
+###############################################################################
+#
+# MENU data loaders
+#
+###############################################################################
 
 #
 # Read menu items from the json config
@@ -107,6 +169,12 @@ READ_MENU_COMMAND() {
     unset MENU_SELECT
 }
 
+###############################################################################
+#
+# EXIT handlers
+#
+###############################################################################
+
 EXIT_OK() {
     CLEAR
     exit 0
@@ -118,6 +186,23 @@ EXIT_CANCEL() {
     exit 1
 }
 
+### Clear function, standardised
+CLEAR() {
+    clear
+}
+
+### Wait for user input
+PAUSE() {
+    echo "${PAUSEMSG}"
+    read -s
+}
+
+###############################################################################
+#
+# COMMAND handlers
+#
+###############################################################################
+
 ### Run a script
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
@@ -128,17 +213,6 @@ EXEC_SCRIPT() {
 
     cd ${DIDIR}
     unset SCRIPT
-}
-
-### Clear function, standardised
-CLEAR() {
-    clear
-}
-
-### Wait for user input
-PAUSE() {
-    echo "${PAUSEMSG}"
-    read -s
 }
 
 #
@@ -170,8 +244,15 @@ RN_INSTALL_EXECUTE() {
     unset PLAYBOOK
 }
 
+
+###############################################################################
 #
-# GENERIC function to call a command format output
+# SERVICE query/type handlers
+#
+###############################################################################
+
+#
+# Serivce status formatting
 #
 RN_SERVICE_STATUS() {
   source $_CONFIG
@@ -233,9 +314,14 @@ RN_DIRECT_STATUS() {
 
 }
 
-# Dialog builder functions
+
+
+###############################################################################
+#
+# DIALOG builder functions
 # based on: https://stackoverflow.com/questions/4889187/dynamic-dialog-menu-box-in-bash
 #
+###############################################################################
 
 #
 # MENU
@@ -362,3 +448,4 @@ DLG_INPUTBOX() {
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
 
 }
+
