@@ -5,17 +5,12 @@ source $_CONFIG
 source ${LIBDIR}/common.sh
 
 DISABLE_GITOPS=0
-CF="$RNDIR/ansible/retronas_vars.yml"
+CF="$ANCFG"
 
-# Check ROOT
-MYID=$( whoami )
-if [ "${MYID}" != "root" ]
-then
-  echo "This script needs to be run as sudo/root"
-  echo "Please re-run:"
-  echo "sudo $0"
-  exit 1
-fi
+#
+# CHECK we are running as ROOT
+#
+CHECK_ROOT
 
 _usage() {
   echo "Usage $0" 
@@ -52,11 +47,11 @@ do
 done
 
 #### DO NOT TOUCH THE SYSTEM UNTIL USER AGREES TO DISCLAIMER
-bash $RNDIR/dialog/disclaimer.sh
-[ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && exit 1
+bash $DIDIR/disclaimer.sh
+[ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && EXIT_CANCEL
 
 
-### Setup the ansible_vars file
+### ANSIBLE_VARS
 cd $RNDIR
 if [ -f "${ANCFG}" ]
 then
@@ -73,15 +68,19 @@ then
   apt update
 fi
 
-### check for jq, needed for new menu system
+#
+# DEPENDENCIES
+#
+# jq, kept here to handle migration to new menu system
 if [ ! -f /usr/bin/jq ] 
 then
   apt-get -y install jq
-  [ $? -ne 0 ] && PAUSE && exit 1
+  [ $? -ne 0 ] && PAUSE && EXIT_CANCEL
 fi
 
-### resource the config to update vars on first run
+### source the config to update vars on first run
 source $_CONFIG
+
 ### check default user exists
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
@@ -92,7 +91,7 @@ then
 fi
 
 ### Manage install through git
-if [ $DISABLE_GITOPS -eq 0 ]
+if [ $DISABLE_GITOPS -eq 0 ] && [ ! -f ${USER_CONFIG}/disable_gitops ]
 then
   echo "Fetching latest RetroNAS scripts..."
   git config pull.rebase false
@@ -103,13 +102,9 @@ else
 fi
 
 ### Make sure log dir exists
-if [ ! -d $LOGDIR ] 
-then
-  mkdir $LOGDIR
-  chmod 755 $LOGDIR
-fi
+[ ! -d $LOGDIR ] && mkdir $LOGDIR && chmod 755 $LOGDIR
 
-### Set term emulation
+### Set term emulation,
 if [ -z $TCHOICE ]
 then
   clear

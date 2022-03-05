@@ -2,9 +2,17 @@
 
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
+source ${LIBDIR}/common.sh
+
+# MIGRATION
+[ ! -d $(dirname $AGREEMENT) ] && mkdir $(dirname $AGREEMENT)
+[ -f $OLDAGREEMENT ] && mv $OLDAGREEMENT $AGREEMENT
 
 # User has already agreed, thanks all
-[ -f $AGREEMENT ] && exit 0
+if [ -f $AGREEMENT ]
+then
+  EXIT_OK
+fi
 clear
 
 ## Check our information is available
@@ -24,8 +32,8 @@ read -p "type AGREE to accept the above in use of this project: " INPUT
 case $INPUT in
   "agree"|"AGREE")
     touch $AGREEMENT
-    exit 0
+    EXIT_OK
     ;;
   *)
-    exit 1
+    EXIT_CANCEL
 esac
