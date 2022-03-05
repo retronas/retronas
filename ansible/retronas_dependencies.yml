@@ -4,6 +4,20 @@
     - my_name: "RetroNAS dependencies"
     - my_file: "retronas_dependencies"
 
+    - packages:
+      - jq
+      - sudo
+      - git 
+      - dialog 
+      - jq
+
+    - directories:
+      - bin
+      - etc
+      - scripts
+      - log
+
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -16,12 +30,13 @@
       group: root
       mode: 0755
       state: directory
-    with_items:
-      - bin
-      - etc
-      - scripts
-      - log
+    with_items: "{{ directories }}"
 
+  - name: "{{ my_name }} - required packages"
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items: "{{ packages }}"
 
   - name: "{{ my_name }} - configure top level share directory"
     file:
