@@ -70,7 +70,7 @@ DROP_ROOT() {
 
 ### Check if we have the correct privs for op
 CHECK_ROOT() {
-    [ $UID -ne 0 ] && echo "You must run this as root" && exit 1
+    [ $UID -ne 0 ] && echo "You must run this as root, try sudo <command>" && exit 1
 }
 
 ###############################################################################
