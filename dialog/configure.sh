@@ -1,6 +1,5 @@
 #!/bin/bash
 
-clear
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
