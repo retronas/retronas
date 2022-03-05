@@ -46,8 +46,8 @@ rn_etherdfs_if_confirm() {
       source $_CONFIG
 
       # check for valid interface input
-      INTS=$(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}')
-      if [ $(echo ${INTS[*]} | grep -qF docker0) ]
+      INTS=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+      if [ $(echo ${INTS[*]} | grep -qF ${NEWETHERDFSIF}) ]
       then
         # Yes, change the value
         # Delete the old value
