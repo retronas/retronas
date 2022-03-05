@@ -4,6 +4,5 @@ scripts/*.sh
 src
 log
 ansible/retronas_vars.yml
-user_agreement
 etc/*
 config/installed.json
