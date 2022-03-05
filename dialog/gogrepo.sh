@@ -1,7 +1,9 @@
 #!/bin/bash
 
 clear
-source /opt/retronas/config/retronas.cfg
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
 ## If this is run as root, switch to our RetroNAS user
