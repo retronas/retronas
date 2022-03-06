@@ -81,6 +81,9 @@ fi
 ### source the config to update vars on first run
 source $_CONFIG
 
+### LANG UTF-8 patch (this probably needs more testing)
+export LANG=$(echo $LANG | sed -r 's/(\.| )UTF(-?)8//gi')
+
 ### check default user exists
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
