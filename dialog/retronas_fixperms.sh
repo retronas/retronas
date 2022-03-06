@@ -29,7 +29,7 @@ rn_fix_perms() {
   \n\nThis will reset all the file ownership to the user \"${OLDRNUSER}\" \
   \n\nPlease be careful, as this is irreversible.  If unsure, exit now."
 
-  DLG_MENU "Fix Permissions" $MENU_ARRAY 5 "${MENU_BLURB}" 
+  DLG_MENU "Fix Permissions" $MENU_ARRAY 10 "${MENU_BLURB}" 
 }
 
 CLEAR
