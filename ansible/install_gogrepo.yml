@@ -30,10 +30,10 @@
     with_items:
       - gog
 
-  - name: "{{ my_name }} - download gogrepo"
+  - name: "{{ my_name }} - download gogrepo+patches (sairuk)"
     shell:
       chdir: "{{ retronas_root }}/bin"
-      cmd: "git clone https://github.com/eddie3/gogrepo.git"
+      cmd: "git clone https://github.com/sairuk/gogrepo.git"
       creates: "{{ retronas_root }}/bin/gogrepo"
 
   - name: "{{ my_name }} - update gogrepo"
