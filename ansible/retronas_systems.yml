@@ -14,6 +14,7 @@ system_map: "{{
   []
   |union(system_acorn)
   |union(system_amstrad)
+  |union(system_apf)
   |union(system_apple)
   |union(system_atari)
   |union(system_bally)
@@ -96,6 +97,7 @@ system_nec:
   - { src: "nec/pcenginecd", mister: "TGFX16-CD", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_nintendo:
   - { src: "nintendo/famicom", mister: "NES", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "nintendo/famicom_disk", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: }
   - { src: "nintendo/gameboy", mister: "GAMEBOY", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "nintendo/gameboy", mister: "GAMEBOY2P", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "nintendo/gameboyadvance", mister: "GBA", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
