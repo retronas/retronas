@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+set timeout -1
+set USERNAME [lindex $argv 0]
+set PASSWORD [lindex $argv 1]
+
+spawn /opt/retronas/bin/netatalk2x/bin/afppasswd -a $USERNAME
+
+expect "Enter NEW AFP password:"
+send "$PASSWORD\r"
+
+expect "Enter NEW AFP password again:"
+send "$PASSWORD\r"
+
+expect eof

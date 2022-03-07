@@ -4,6 +4,34 @@
     - my_name: "Netatalk2.X"
     - my_file: "install_netatalk2x"
 
+    - packages:
+       - avahi-daemon
+       - build-essential
+       - make
+       - automake
+       - autoconf
+       - libdb-dev
+       - libdb++-dev
+       - libavahi-common-dev
+       - libavahi-client-dev
+       - libavahi-core-dev
+       - libdbus-1-dev
+       - libssl-dev
+       - autotools-dev
+       - libtool
+       - libcups2-dev
+       - libavahi-client-dev
+       - libgcrypt20-dev
+       - expect
+
+    - services:
+      - avahi-daemon
+      - atalkd
+      - afpd
+      - papd
+      - timelord
+      - a2boot
+
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
@@ -23,24 +51,8 @@
     apt:
        name: "{{ item }}"
        state: latest
-    with_items:
-       - avahi-daemon
-       - build-essential
-       - make
-       - automake
-       - autoconf
-       - libdb-dev
-       - libdb++-dev
-       - libavahi-common-dev
-       - libavahi-client-dev
-       - libavahi-core-dev
-       - libdbus-1-dev
-       - libssl-dev
-       - autotools-dev
-       - libtool
-       - libcups2-dev
-       - libavahi-client-dev
-       - libgcrypt20-dev
+    with_items: "{{ packages }}"
+
 
   - name: "{{ my_name }} - create install script"
     template:
@@ -53,6 +65,13 @@
   - name: "{{ my_name }} - install from source"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
+  - name: "{{ my_name }} - afpexpect.sh"
+    template:
+      src: "templates/{{ my_file }}/afpexpect.sh.j2"
+      dest: "{{ retronas_root }}/bin/netatalk2x/bin/afpexpect.sh"
+      owner: root
+      group: root
+      mode: '0754'
 
 #  - name: "{{ my_name }} - configure /etc/default/netatalk"
 #    template:
@@ -71,6 +90,7 @@
       group: root
       mode: '0644'
     notify: "{{ my_name }} - Restart service"
+
 
   - name: "{{ my_name }} - afpd.conf"
     template:
@@ -95,13 +115,7 @@
       name: "{{ item }}"
       state: started
       enabled: yes
-    with_items:
-      - avahi-daemon
-      - atalkd
-      - afpd
-      - papd
-      - timelord
-      - a2boot
+    with_items: "{{ services }}"
 
   handlers:
 
@@ -109,10 +123,4 @@
     service:
       name: "{{ item }}"
       state: restarted
-    with_items:
-      - avahi-daemon
-      - atalkd
-      - afpd
-      - papd
-      - timelord
-      - a2boot
+    with_items: "{{ services }}"

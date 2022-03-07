@@ -175,10 +175,10 @@ READ_MENU_COMMAND() {
                 RN_SYSTEMD_STATUS "${MENU_SELECT}"
                 ;;
             service_start)
-                RN_SYSTEMD_STATUS "${MENU_SELECT}"
+                RN_SYSTEMD_START "${MENU_SELECT}"
                 ;;
             service_stop)
-                RN_SYSTEMD_STATUS "${MENU_SELECT}"
+                RN_SYSTEMD_STOP "${MENU_SELECT}"
                 ;;
             menu)
                 "${MENU_SELECT}"

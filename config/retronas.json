@@ -796,7 +796,7 @@
                     "prompt": "Disable",
                     "type": "script",
                     "group":"",
-                    "command": " CLEAR;DRIVE=$(SELECT_DRIVE \"Disable APM\");hdparm -B 255 $DRIVE;PAUSE"
+                    "command": "hdparm-manager-disable-apm"
                 },
                 {
                     "index":"11",
@@ -806,7 +806,7 @@
                     "prompt": "Disable",
                     "type": "script",
                     "group":"",
-                    "command": ""
+                    "command": "hdparm-manager-disable-standby"
                 },
                 {
                     "index":"20",
@@ -814,9 +814,9 @@
                     "description": "Start hdparm service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "script",
                     "group":"",
-                    "command": "RN_SYSTEMD ${SERVICE}* \"reset-failed\";RN_SYSTEMD_START ${SERVICE}.timer"
+                    "command": "hdparm-manager-start-service"
                 },
                 {
                     "index":"21",
@@ -836,7 +836,7 @@
                     "prompt": "",
                     "type": "service_stop",
                     "group":"",
-                    "command": "RN_SYSTEMD_STOP ${SERVICE}.timer;RN_SYSTEMD_STOP ${SERVICE}.service"
+                    "command": "hdparm.timer;hdparm.service"
                 }
             ]
         },

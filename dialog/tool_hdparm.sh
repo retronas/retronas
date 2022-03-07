@@ -18,8 +18,6 @@ rn_hdparm() {
 
 }
 
-DROP_ROOT
-CLEAR
 
 # Get Available drives
 SELECT_DRIVE() {
@@ -44,6 +42,9 @@ SELECT_DRIVE() {
     esac
   done
 }
+
+
+CLEAR
 
 
 while true
