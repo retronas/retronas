@@ -956,7 +956,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"",
-                    "command": "CLEAR;${SUCOMMAND} ../scripts/3ds_qr.sh;PAUSE"
+                    "command": "3ds_qr"
                 },
                 {
                     "index":"04",
