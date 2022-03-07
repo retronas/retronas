@@ -175,9 +175,9 @@
                     "description": "Configure RetroNAS user",
                     "id":"update-user",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "dialog_input",
                     "group":"",
-                    "command": "retronas_user"
+                    "command": "update-user"
                 },
                 {
                     "index":"03",
@@ -1040,10 +1040,10 @@
                 }
             ]
         },
-        "update-user-confim": 
+        "update-user-confirm": 
         {
             "title": "Confirm User",
-            "description": "Do you want to save this setting?|NewRetroNAS user: \"${NEWRNUSER}\"",
+            "description": "Do you want to save this setting?|NewRetroNAS user: \"${NEWVALUE}\"",
             "id":"update-user-confirm-menu",
             "prompt": "Confirm",
             "type": "dialog-yn",

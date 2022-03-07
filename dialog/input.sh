@@ -17,6 +17,11 @@ case $MENU_NAME in
         DATASET=()
         PATTERN="retronas_path:"
         ;;
+    update-user)
+        OLDVALUE="${OLDRNUSER}"
+        DATASET=($(awk -F':' '{print $1}' /etc/passwd  | paste -d" " -s))
+        PATTERN="retronas_user:"
+        ;;
     *)
         PAUSE
         EXIT_CANCEL
@@ -50,19 +55,22 @@ rn_input_confirm() {
     READ_MENU_TDESC "${MENU_NAME}"
     DLG_YN "${MENU_TNAME}" "${MENU_BLURB}"
 
-    set -x
-
     case ${CHOICE} in
         0)
+            # this is crap, fix it later - mostly just for directories atm
+            [ ${#DATASET[@]} -eq 0 ] && DATASET=($(ls -lad "${NEWVALUE}" 2>/dev/null | awk '{print $9}'))
+
             echo ${DATASET[*]} | grep -qF ${NEWVALUE}
-            if  [ ${#DATASET[@]} -ge 0 ] || [ $? -eq 0 ]
+            if  [ $? -eq 0 ]
             then
+                CLEAR
                 source $_CONFIG
                 sed -i "/${PATTERN}/d" "${ANCFG}"
                 echo "${PATTERN} \"${NEWVALUE}\"" >> "${ANCFG}"
                 source $_CONFIG
                 EXIT_OK
             else
+                CLEAR
                 RN_LOG "${NEWVALUE} is not a valid choice, please confirm your choice"
                 PAUSE
                 rn_input $MENU_PARENT
