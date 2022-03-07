@@ -32,22 +32,29 @@ case ${TYPE} in
         SCRIPT=$( echo $KEY | cut -c3-)
         ;;
     i-)
-        # DIALOG INPUT
+        # DIALOG (input)
         SCDIR="${DIDIR}"
-        SCRIPT="input"
+        SCRIPT="d_input"
         X_SANITIZE=0
         VALUE=$( echo $KEY | cut -c3-)
         ;;
     d-)
         # DIALOGS (auto run)
         SCDIR="${DIDIR}"
-        SCRIPT="menu"
+        SCRIPT="d_menu"
+        X_SANITIZE=0
+        VALUE=$( echo $KEY | cut -c3-)
+        ;;
+    y-)
+        # DIALOGS (yes/no)
+        SCDIR="${DIDIR}"
+        SCRIPT="d_yn"
         X_SANITIZE=0
         VALUE=$( echo $KEY | cut -c3-)
         ;;
     *)
         # EVERYTHING ELSE
-        exit 1
+        SCRIPT="${KEY}"
         ;;
 esac
 
@@ -62,7 +69,6 @@ fi
 
 # build script name
 SCRIPT="${PREFIX}${SANITIZED}${SUFFIX}"
-
 cd "${SCDIR}"
 
 [ -z "${1}" ] && echo "No options passed" && exit 1

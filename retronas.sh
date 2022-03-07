@@ -90,7 +90,7 @@ if [ $? -ne 0 ]
 then
   echo -e "User $OLDRNUSER does not exist on this system\n opening the user config dialog"
   cd $DIDIR
-  bash input.sh update-user
+  bash d_input.sh update-user
 fi
 
 ### Manage install through git
@@ -147,4 +147,4 @@ fi
 ### Start RetroNAS
 echo "Running RetroNAS..."
 cd $DIDIR
-bash menu.sh main
+bash d_menu.sh main

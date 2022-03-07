@@ -146,6 +146,7 @@ READ_MENU_COMMAND() {
     local MENU_TYPE=$(echo $MENU_DATA | cut -d"|" -f1)
     local MENU_SELECT=$(echo $MENU_DATA | cut -d"|" -f2)
 
+    CLEAR
     if [ ! -z "${MENU_SELECT}" ] && [ $MENU_SELECT != "null" ]
     then 
         case $MENU_TYPE in
@@ -160,6 +161,9 @@ READ_MENU_COMMAND() {
                 ;;
             dialog_input)
                 EXEC_SCRIPT "i-${MENU_SELECT}"
+                ;;
+            dialog_yn)
+                EXEC_SCRIPT "y-${MENU_SELECT}"
                 ;;
             script)
                 EXEC_SCRIPT $MENU_SELECT
