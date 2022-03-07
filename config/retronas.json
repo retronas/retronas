@@ -637,7 +637,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS netatalk"
+                    "command": "netatalk"
                 },
                 {
                     "index": "04",
@@ -647,7 +647,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS etherdfs"
+                    "command": "etherdfs"
                 },
                 {
                     "index": "05",
@@ -657,7 +657,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS lighttpd"
+                    "command": "lighttpd"
                 },
                 {
                     "index": "06",
@@ -667,7 +667,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS proftpd"
+                    "command": "proftpd"
                 },
                 {
                     "index": "07",
@@ -677,7 +677,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS tftpd-hpa"
+                    "command": "tftpd-hpa"
                 },
                 {
                     "index": "08",
@@ -687,7 +687,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS ssh"
+                    "command": "ssh"
                 },
                 {
                     "index": "09",
@@ -697,7 +697,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS inetd"
+                    "command": "inetd"
                 },
                 {
                     "index": "12",
@@ -707,7 +707,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS tnfsd"
+                    "command": "tnfsd"
                 },
                 {
                     "index": "32",
@@ -716,7 +716,7 @@
                     "id":"",
                     "prompt": "",
                     "type":"service_status",
-                    "command": "RN_SYSTEMD_STATUS ps3netsrv"
+                    "command": "ps3netsrv"
                 },
                 {
                     "index": "37",
@@ -726,7 +726,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS fspd"
+                    "command": "fspd"
                 },
                 {
                     "index": "50",
@@ -736,7 +736,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS syncthing*"
+                    "command": "syncthing*"
                 },
                 {
                     "index": "51",
@@ -746,7 +746,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS cockpit"
+                    "command": "cockpit"
                 },
                 {
                     "index": "52",
@@ -756,7 +756,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS webone"
+                    "command": "webone"
                 }
             ]
         },
@@ -826,7 +826,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "RN_SYSTEMD_STATUS ${SERVICE}*"
+                    "command": "hdparm*"
                 },
                 {
                     "index":"22",
@@ -906,7 +906,7 @@
                     "prompt": "",
                     "type": "service_status",
                     "group":"",
-                    "command": "tcpser_service STATUS"
+                    "command": "tcpser*"
                 },
                 {
                     "index":"07",
