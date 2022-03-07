@@ -27,7 +27,7 @@
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "configure"
+                    "command": "config"
                 },
                 {
                     "index": "03",
@@ -67,7 +67,7 @@
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "odman"
+                    "command": "ondevice"
                 },
                 {
                     "index": "07",
@@ -946,7 +946,7 @@
                     "prompt": "Open",
                     "type": "modal",
                     "group":"",
-                    "command": "EXEC_SCRIPT gogrepo.sh"
+                    "command": "gogrepo"
                 },
                 {
                     "index":"03",

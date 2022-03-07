@@ -143,7 +143,10 @@ READ_MENU_COMMAND() {
             install)
                 RN_INSTALL_EXECUTE $MENU_SELECT
                 ;;
-            dialog|modal)
+            modal)
+                EXEC_SCRIPT "m-${MENU_SELECT}"
+                ;;
+            dialog)
                 EXEC_SCRIPT "d-${MENU_SELECT}"
                 ;;
             script)

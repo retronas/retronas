@@ -14,29 +14,44 @@ source ${LIBDIR}/common.sh
 
 PREFIX=
 SUFFIX=.sh
-SCRIPT="${1}"
+KEY="${1}"
 VALUE="${2:-}"
+X_SANITIZE=1
 
 # check for static type
-TYPE=$(echo $SCRIPT | cut -c1-2)
+TYPE=$(echo $KEY | cut -c1-2)
 case ${TYPE} in
     s-)
         # STATIC
         SCDIR="${SCDIR}/static"
-        SCRIPT=$( echo $SCRIPT | cut -c3-)
+        SCRIPT=$( echo $KEY | cut -c3-)
+        ;;
+    m-)
+        # MODAL
+        SCDIR="${DIDIR}"
+        SCRIPT=$( echo $KEY | cut -c3-)
         ;;
     d-)
-        # DIALOGS
+        # DIALOGS (auto run)
         SCDIR="${DIDIR}"
-        SCRIPT=$( echo $SCRIPT | cut -c3-)
+        SCRIPT="menu"
+        X_SANITIZE=0
+        VALUE=$( echo $KEY | cut -c3-)
         ;;
     *)
         # EVERYTHING ELSE
+        exit 1
         ;;
 esac
 
 ## make this better, its a hail mary anyway since the script is called from client-side
-SANITIZED=$(echo "${SCRIPT}" | sed 's/[\.;]//g')
+SANITIZED=$(echo "${SCRIPT}" | sed 's/[;]//g')
+
+## ADDITIONAL
+if [ $X_SANITIZE -eq 1 ]
+then
+    SANITIZED=$(echo "${SCRIPT}" | sed 's/[\.]//g')
+fi
 
 # build script name
 SCRIPT="${PREFIX}${SANITIZED}${SUFFIX}"
@@ -44,9 +59,9 @@ SCRIPT="${PREFIX}${SANITIZED}${SUFFIX}"
 cd "${SCDIR}"
 
 [ -z "${1}" ] && echo "No options passed" && exit 1
-[ ! -f ${SCRIPT} ] && echo "Failed to find script for $1" && exit 1
+[ ! -f ${SCRIPT} ] && echo "Failed to find script for ${SCRIPT}" && PAUSE && exit 1
 [ -z ${SCDIR} ] && echo "SCDIR cannot be empty, something is terribly wrong" && exit 2
 
 shift
 # this can be abused, find a better option
-bash ${SCDIR}/${SCRIPT} $* 2>&1
+bash ${SCDIR}/${SCRIPT} ${VALUE} $* 2>&1

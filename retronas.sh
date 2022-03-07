@@ -147,4 +147,4 @@ fi
 ### Start RetroNAS
 echo "Running RetroNAS..."
 cd $DIDIR
-bash retronas_main.sh
+bash menu.sh main
