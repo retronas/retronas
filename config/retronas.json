@@ -195,9 +195,9 @@
                     "description": "Configure RetroNAS top level directory",
                     "id":"set-top-level-dir",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "dialog_input",
                     "group":"",
-                    "command": "retronas_path"
+                    "command": "set-top-level-dir"
                 },
                 {
                     "index":"05",
@@ -215,9 +215,9 @@
                     "description": "Set EtherDFS network interface",
                     "id":"set-etherdfs-nic",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "dialog_input",
                     "group":"",
-                    "command": "retronas_etherdfs_interface"
+                    "command": "set-etherdfs-nic"
                 }
             ]
         },
@@ -1112,7 +1112,7 @@
         "set-top-level-dir-confirm": 
         {
             "title": "Confirm EtherDFS NIC",
-            "description": "Do you want to save this setting?|New RetroNAS top level directory: \"${NEWRNPATH}\"",
+            "description": "Do you want to save this setting?|New RetroNAS top level directory: \"${NEWVALUE}\"",
             "id":"set-top-level-dir-confirm",
             "prompt": "Confirm",
             "type": "dialog-yn",
@@ -1121,7 +1121,7 @@
         "set-etherdfs-nic": 
         {
             "title": "Set EtherDFS NIC",
-            "description": "Please enter the interface name for EtherDFS to bind to.||Normally this is something like eth0 fir wired Ethernet.||If EtherDFS is installed, you will need to re-run the installer to apply the change.",
+            "description": "Please enter the interface name for EtherDFS to bind to.||Normally this is something like eth0 for wired Ethernet.||If EtherDFS is installed, you will need to re-run the installer to apply the change.",
             "id":"set-etherdfs-nic-menu",
             "prompt": "",
             "type": "menu",
@@ -1151,7 +1151,7 @@
         "set-etherdfs-nic-confirm": 
         {
             "title": "Confirm EtherDFS NIC",
-            "description": "Do you want to save this setting?|New EtherDFS interface: \"${NEWETHERDFSIF}\"",
+            "description": "Do you want to save this setting?|New EtherDFS interface: \"${NEWVALUE}\"",
             "id":"set-etherdfs-nic-confirm",
             "prompt": "Confirm",
             "type": "dialog-yn",

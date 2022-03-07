@@ -20,7 +20,6 @@ RN_LOG() {
     echo "${1}"
 }
 
-
 ###############################################################################
 #
 # GENERAL reusable functions
@@ -33,22 +32,32 @@ RN_LOG() {
 COMPARE_VALUES() {
     local STROLD=$1
     local STRNEW=$2
+    export CONFIRM=0
 
     if [ ! -z ${STRNEW} ] 
     then
       if [ "${STRNEW}" != "${STROLD}" ]
       then
         # Confirm the input
-        CONFIRM=1
-        CHECK_USER_EXISTS $STRNEW $STROLD
+        #CHECK_USER_EXISTS $STRNEW $STROLD
+        export CONFIRM=1
       else
         CLEAR
         RN_LOG "Item not changed"
+        PAUSE
       fi
     else 
       CLEAR
       RN_LOG "No values to process"
+      PAUSE
     fi
+}
+
+#
+# CONFIRM A VALUE
+#
+CONFIRM_VALUE() {
+    echo $1
 }
 
 ###############################################################################
@@ -148,6 +157,9 @@ READ_MENU_COMMAND() {
                 ;;
             dialog)
                 EXEC_SCRIPT "d-${MENU_SELECT}"
+                ;;
+            dialog_input)
+                EXEC_SCRIPT "i-${MENU_SELECT}"
                 ;;
             script)
                 EXEC_SCRIPT $MENU_SELECT

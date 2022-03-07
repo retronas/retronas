@@ -31,6 +31,13 @@ case ${TYPE} in
         SCDIR="${DIDIR}"
         SCRIPT=$( echo $KEY | cut -c3-)
         ;;
+    i-)
+        # DIALOG INPUT
+        SCDIR="${DIDIR}"
+        SCRIPT="input"
+        X_SANITIZE=0
+        VALUE=$( echo $KEY | cut -c3-)
+        ;;
     d-)
         # DIALOGS (auto run)
         SCDIR="${DIDIR}"
