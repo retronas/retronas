@@ -29,7 +29,6 @@ rn_tcpser_edit() {
     DEVICE=25232
   fi
 
-  TCPSER_TMP="/tmp/rn_tcpser_edit"
   TCPSER_CONFIG_PATH=/opt/retronas/etc/tcpser
   TCPSER_CONFIG=${TCPSER_CONFIG_PATH}/tcpser-${LISTEN}
 
