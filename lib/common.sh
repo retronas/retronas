@@ -497,3 +497,26 @@ DLG_PASSWORD() {
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
 
 }
+
+
+#
+# FORM INPUT
+#
+DLG_FORM() {
+    local IFS=$'\n'
+    local TITLE="$1"
+    local -n MENU_ARRAY=$2
+    local MENU_H=$3
+    local MENU_BLURB=$4
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+        --backtitle "RetroNAS" \
+        --title "RetroNAS password menu" \
+        --clear \
+        --form "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
+
+    export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
+
+}

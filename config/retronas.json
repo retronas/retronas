@@ -1036,7 +1036,7 @@
                     "prompt": "",
                     "type": "input:input",
                     "group":"retronas",
-                    "command": "TOOL COMMAND"
+                    "command": "update-username"
                 }
             ]
         },
@@ -1157,11 +1157,11 @@
             "type": "dialog-yn",
             "items": []
         },
-        "tcpser-edit-serial": 
+        "tcpser-edit": 
         {
-            "title": "Serial",
-            "description": "tcpser edit serial device",
-            "id":"tcpser-edit-serial-menu",
+            "title": "tcpser Modem Config",
+            "description": "Config path: \"${TCPSER_CONFIG_PATH}\"||Legend:|- VIRTUAL: VICE RS232 mode|- PHYSICAL: for USB/Real serial ports||Attention: A Device is considered unique by listen port. Configurations are not read in from existing. This port config will be overwritten on close.",
+            "id":"tcpser-edit-menu",
             "prompt": "",
             "type": "menu",
             "items": [
@@ -1232,36 +1232,6 @@
                     "id":"tcpser-edit-mode-input",
                     "prompt": "",
                     "type": "input:dropdown:disabled",
-                    "group":"tcpser",
-                    "command": "TOOL COMMAND"
-                }
-            ]
-        },
-        "tcpser-edit-virtual": 
-        {
-            "title": "Virtual",
-            "description": "tcpser edit virtual device",
-            "id":"tcpser-edit-virtual-menu",
-            "prompt": "",
-            "type": "menu",
-            "items": [
-                {
-                    "index": "01",
-                    "title": "Back",
-                    "description": "Return to previous menu", 
-                    "id":"",
-                    "prompt": "",
-                    "type": "menu",
-                    "group":"",
-                    "command": "EXIT_OK"
-                },
-                {
-                    "index":"02",
-                    "title": "Edit",
-                    "description": "Edit Virtual Device",
-                    "id":"virtual-device-config",
-                    "prompt": "",
-                    "type": "input",
                     "group":"tcpser",
                     "command": "TOOL COMMAND"
                 }
