@@ -105,7 +105,7 @@ system_nintendo:
   - { src: "nintendo/3ds", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "nintendo/ds", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "nintendo/famicom", mister: "NES", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "nintendo/famicom_disk", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: }
+  - { src: "nintendo/famicom/disk", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: }
   - { src: "nintendo/gameandwatch", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: }
   - { src: "nintendo/gameboy", mister: "GAMEBOY", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "nintendo/gameboy", mister: "GAMEBOY2P", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
