@@ -836,7 +836,7 @@
                     "prompt": "",
                     "type": "service_stop",
                     "group":"",
-                    "command": "hdparm.timer;hdparm.service"
+                    "command": "hdparm.timer:hdparm.service"
                 }
             ]
         },
@@ -1052,7 +1052,7 @@
         "update-password": 
         {
             "title": "Update Password",
-            "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here",
+            "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here, this will also update your user password||Passwords entered here will be echoed to the backend processes",
             "id":"update-password-menu",
             "prompt": "Update",
             "type": "menu",

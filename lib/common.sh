@@ -400,7 +400,7 @@ DLG_MENU() {
     local MENU_BLURB=$4
 
 
-    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "RetroNAS" \
@@ -442,7 +442,7 @@ DLG_DSELECT() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \
@@ -463,7 +463,7 @@ DLG_INPUTBOX() {
     local MENU_BLURB=$2
     local MENU_INIT=$3
 
-    local MENU_DESC="My IP addresses: ${MY_IPS}\n${MENU_BLURB}"
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "RetroNAS" \
@@ -475,3 +475,25 @@ DLG_INPUTBOX() {
 
 }
 
+#
+# PASSWORD INPUT
+#
+DLG_PASSWORD() {
+    local IFS=$'\n'
+    local TITLE="$1"
+    local -n MENU_ARRAY=$2
+    local MENU_H=$3
+    local MENU_BLURB=$4
+
+    local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
+
+    DIALOG=(dialog \
+        --backtitle "RetroNAS" \
+        --title "RetroNAS password menu" \
+        --clear \
+        --insecure \
+        --passwordform "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
+
+    export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
+
+}
