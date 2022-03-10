@@ -826,7 +826,7 @@
                     "prompt": "",
                     "type":"service_status",
                     "group":"",
-                    "command": "hdparm*"
+                    "command": "hdparm.timer:hdparm.service"
                 },
                 {
                     "index":"22",
@@ -874,9 +874,9 @@
                     "description": "Create/Edit Serial Device",
                     "id":"tcpser-edit-serial",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "form",
                     "group":"",
-                    "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh;PAUSE"
+                    "command": "tcpser_edit"
                 },
                 {
                     "index":"04",
@@ -884,9 +884,9 @@
                     "description": "Create/Edit Virtual Device (VICE RS232)",
                     "id":"tcpser-edit-virtual",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "form",
                     "group":"",
-                    "command": "CLEAR;RN_SCRIPT_EXEC tcpser_edit.sh VIRTUAL;PAUSE"
+                    "command": "tcpser_edit/VIRTUAL"
                 },
                 {
                     "index":"05",
@@ -894,9 +894,9 @@
                     "description": "Start tcpser device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "form",
                     "group":"",
-                    "command": "tcpser_service START"
+                    "command": "tcpser_status/START"
                 },
                 {
                     "index":"06",
@@ -904,9 +904,9 @@
                     "description": "Query tcpser device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_status",
+                    "type": "form",
                     "group":"",
-                    "command": "tcpser*"
+                    "command": "tcpser_status/STATUS"
                 },
                 {
                     "index":"07",
@@ -914,9 +914,9 @@
                     "description": "Stop tcpser device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "form",
                     "group":"",
-                    "command": "tcpser_service STOP"
+                    "command": "tcpser_status/STOP"
                 }
             ]
         },
@@ -1237,6 +1237,36 @@
                 }
             ]
         },
+        "tcpser-service": 
+        {
+            "title": "tcpser",
+            "description": "Please select an option",
+            "id":"tcpser-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "01",
+                    "title": "Listen Port",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"",
+                    "command": ""
+                }
+            ]
+        },
         "romimport": 
         {
             "title": "ROM Import Tool",
@@ -1261,7 +1291,7 @@
                     "description": "",
                     "id":"romimport",
                     "prompt": "Run",
-                    "type": "script",
+                    "type": "menu",
                     "group":"",
                     "command": "EXIT_CANCEL"
                 }

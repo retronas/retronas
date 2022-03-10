@@ -141,13 +141,15 @@ READ_MENU_COMMAND() {
     local MENU_NAME=$1
     local MENU_CHOICE=$2
 
+    cd "${RNDIR}"
+
     MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
 
-    local MENU_TYPE=$(echo $MENU_DATA | cut -d"|" -f1)
-    local MENU_SELECT=$(echo $MENU_DATA | cut -d"|" -f2)
+    local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
+    local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
 
     CLEAR
-    if [ ! -z "${MENU_SELECT}" ] && [ $MENU_SELECT != "null" ]
+    if [ ! -z "${MENU_SELECT}" ] && [ "${MENU_SELECT}" != "null" ]
     then 
         case $MENU_TYPE in
             install)
@@ -164,6 +166,9 @@ READ_MENU_COMMAND() {
                 ;;
             dialog_yn)
                 EXEC_SCRIPT "y-${MENU_SELECT}"
+                ;;
+            form)
+                EXEC_SCRIPT "f-${MENU_SELECT}"
                 ;;
             script)
                 EXEC_SCRIPT $MENU_SELECT
@@ -281,47 +286,47 @@ RN_INSTALL_EXECUTE() {
 # Serivce status formatting
 #
 RN_SERVICE_STATUS() {
-  source $_CONFIG
-  local CMD="$1"
+    source $_CONFIG
+    local CMD="$1"
 
-  CLEAR
-  echo "${CMD}"
-  echo ; $CMD ; echo
-  PAUSE
+    CLEAR
+    echo "${CMD}"
+    echo ; $CMD ; echo
+    PAUSE
 }
 
 #
 # SYSTEMD status checks
 #
 RN_SYSTEMD_STATUS() {
-  RN_SYSTEMD $1 "status"
+    RN_SYSTEMD "${1}" "status"
 }
 
 #
 # SYSTEMD start/enable
 #
 RN_SYSTEMD_START() {
-  RN_SYSTEMD $1 "enable"
-  RN_SYSTEMD $1 "restart"
+    RN_SYSTEMD "${1}" "enable"
+    RN_SYSTEMD "${1}" "restart"
 }
 
 #
 # SYSTEMD stop/disable
 #
 RN_SYSTEMD_STOP() {
-  RN_SYSTEMD $1 "disable"
-  RN_SYSTEMD $1 "stop"
+    RN_SYSTEMD "${1}" "disable"
+    RN_SYSTEMD "${1}" "stop"
 }
 
 #
 # SYSTEMD
 #
 RN_SYSTEMD() {
-  source $_CONFIG
-  local SERVICE="$1"
-  local COMMAND="${2:-status}"
+    source $_CONFIG
+    local SERVICE="$1"
+    local COMMAND="${2:-status}"
 
-  RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
+    RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
 
 }
 
@@ -329,14 +334,14 @@ RN_SYSTEMD() {
 # DIRECTLY call a status command, and pass args
 #
 RN_DIRECT_STATUS() {
-  source $_CONFIG
-  local SERVICE="$1"
-  local ARGS="$2"
+    source $_CONFIG
+    local SERVICE="$1"
+    local ARGS="$2"
 
-  if [ -x "$(which $SERVICE)" ]
-  then
+    if [ -x "$(which $SERVICE)" ]
+    then
     RN_SERVICE_STATUS "${SERVICE} ${ARGS}"
-  fi
+    fi
 
 }
 
@@ -455,7 +460,7 @@ DLG_DSELECT() {
 }
 
 #
-# DIRECTORY SELECTOR
+# INPUTBOX SELECTOR
 #
 DLG_INPUTBOX() {
     local IFS=$'\n'

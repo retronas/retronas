@@ -16,7 +16,6 @@ INIT=Z
 ADDN=""
 MODE="PHYSICAL"
 
-clear
 source $_CONFIG
 cd ${DIDIR}
 
@@ -24,10 +23,7 @@ MODE=${1:-PHYSICAL}
 
 rn_tcpser_edit() {
 
-  if [ $MODE == "VIRTUAL" ]
-  then
-    DEVICE=25232
-  fi
+  [ $MODE == "VIRTUAL" ] && DEVICE=25232
 
   TCPSER_CONFIG_PATH=/opt/retronas/etc/tcpser
   TCPSER_CONFIG=${TCPSER_CONFIG_PATH}/tcpser-${LISTEN}
@@ -45,11 +41,7 @@ rn_tcpser_edit() {
 
   DLG_FORM "${MENU_TNAME}" "${MENU_ARRAY}" 8 "${MENU_BLURB}"
 
-  if [ ${#CHOICE[@]} -gt 0 ]
-  then
-    rn_tcpser_write_envfile
-    EXIT_OK
-  fi
+  [ ${#CHOICE[@]} -gt 0 ] && rn_tcpser_write_envfile
 
 }
 
@@ -73,8 +65,13 @@ rn_tcpser_write_envfile() {
     echo "SPEED=-s${CHOICE[2]}"  >> "${TCPSER_CONFIG}"
     echo "INIT=-i${CHOICE[3]}"   >> "${TCPSER_CONFIG}"
     echo "ADDN=${CHOICE[4]}"     >> "${TCPSER_CONFIG}"
+
+    EXIT_OK
+    
   else
     echo "No data available for LISTEN port, so we won't be writing a file"
+    PAUSE
+    rn_tcpser_edit
   fi
 
 }

@@ -45,6 +45,14 @@ case ${TYPE} in
         X_SANITIZE=0
         VALUE=$( echo $KEY | cut -c3-)
         ;;
+    f-)
+        # FORMS
+        SCDIR="${DIDIR}"
+        PARTS=($(echo "${KEY}" | sed 's/\// /g'))
+        SCRIPT="$(echo ${PARTS[0]} | cut -c3- )"
+        X_SANITIZE=0
+        VALUE="${PARTS[1]}"
+        ;;
     y-)
         # DIALOGS (yes/no)
         SCDIR="${DIDIR}"
