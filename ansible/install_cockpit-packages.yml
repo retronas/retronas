@@ -4,6 +4,9 @@
     - my_name: "cockpit-packages"
     - my_file: "install_cockpit-packages"
 
+    - package_tools:
+      - lm-sensors
+
     - package_data:
       - cockpit-packages.sh
 
@@ -11,6 +14,13 @@
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install prerequisite packages"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - "{{ package_tools }}"
 
   - name: "{{ my_name }} - install cockpit packages inplace"
     copy:

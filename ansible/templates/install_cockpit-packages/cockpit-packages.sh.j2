@@ -4,7 +4,7 @@
 #
 
 RNTMP=/tmp/rn_cpack
-COCKPIT=/usr/share/cockpit/
+COCKPIT=/usr/share/cockpit
 
 # make out temp dir
 [ ! -d ${RNTMP} ] && mkdir ${RNTMP}
@@ -13,9 +13,33 @@ function get_github {
 
     local ACCOUNT=$1
     local REPO=$2
+    local FOLDER=$3
 
-    cd $RNTMP
-    git clone https://github.com/${ACCOUNT}/${REPO}.git
+    
+    if [ ! -d "${RNTMP}/${FOLDER}" ]
+    then
+        cd ${RNTMP}
+        git clone https://github.com/${ACCOUNT}/${REPO}.git $FOLDER
+    else
+        cd ${RNTMP}/${FOLDER}
+        git pull
+    fi
+
+    cd ${RNTMP}/${FOLDER}
+
+    RELEASE=$(git tag | tail -n1)
+    [ ! -z "${RELEASE}" ] && git checkout $RELEASE
+
+}
+
+function install_package {
+
+    local FOLDER=$1
+
+    [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
+    
+    cp -R "${RNTMP}/${FOLDER}" "${COCKPIT}/"
+    rm -Rf "${RNTMP}/${FOLDER}/"
 
 }
 
@@ -29,18 +53,24 @@ function get_45drives {
 
     for PACKAGE in ${PACKAGES}
     do
-        get_github 45Drives $PACKAGE
-        [ ! -d "${RNTMP}/${PACKAGE}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
-        cd "${RNTMP}/${PACKAGE}"
-
-        RELEASE=$(git tag | tail -n1)
-        git checkout $RELEASE
-
         FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
-        cp -R "${FOLDER}" "${COCKPIT}/"
-        rm -Rf "${COCKPIT}/${PACKAGE}/"
+        get_github 45Drives $PACKAGE $FOLDER
+        install_package $FOLDER
+
     done
 
 }
 
+### get sensors
+function get_sensors {
+
+    PACKAGE=cockpit-sensors-plugin
+    FOLDER=$(echo ${PACKAGE} | sed -r 's/^cockpit-(.+)-plugin/\1/' )
+    get_github JamesGKent $PACKAGE $FOLDER
+    install_package $FOLDER
+
+}
+
+
 get_45drives
+get_sensors
