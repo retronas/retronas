@@ -1,0 +1,24 @@
+#!/bin/sh
+
+apt install -y curl sudo
+echo '''#!/bin/sh
+
+echo "***********************************************"
+echo ""
+echo "  Welcome to RetroNas. Type retronas to begin"
+echo ""
+echo "  Your local IP address: $(hostname -I)"
+echo ""
+echo "  SSH is enabled by default"
+echo "  Default SSH username: retronas"
+echo "  Default SSH password: retronas"
+echo ""
+echo "***********************************************"
+''' > /etc/update-motd.d/99-footer
+chmod +x /etc/update-motd.d/99-footer
+
+usermod -aG sudo retronas
+echo "retronas ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+curl -O https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
+chmod a+x ./install_retronas.sh
+./install_retronas.sh;

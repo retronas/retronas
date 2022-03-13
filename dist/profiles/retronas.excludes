@@ -1,0 +1,5 @@
+# Exclude console-setup-freebsd to prevent warnings about uninstallable files,
+# see bug #619328.
+#
+# Comment out this exclude if you are building freebsd images.
+console-setup-freebsd

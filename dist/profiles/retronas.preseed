@@ -1,0 +1,227 @@
+# these are the basic debconf pre-seeding items needed for a miminal
+# interaction debian etch install using debian-installer
+
+# this example pre-seeding file was largely based on
+# http://d-i.alioth.debian.org/manual/example-preseed.txt
+#
+# for more explanation of the options, see:
+# http://d-i.alioth.debian.org/manual/en.mips/apbs04.html
+
+## simple-cdd options
+
+# automatically select simple-cdd profiles
+# NOTE: profile "default" is now automatically included, and should not be
+# specified here.
+#simple-cdd simple-cdd/profiles multiselect ltsp
+#simple-cdd simple-cdd/profiles multiselect ltsp, x-basic
+
+
+###### Bootloader
+
+# Boot loader.
+d-i grub-installer/only_debian boolean true
+d-i grub-installer/with_other_os boolean true
+d-i grub-installer/bootdev string default
+grub-efi-amd64 grub2/force_efi_extra_removable boolean true
+grub-efi-amd64 grub2/update_nvram boolean true
+
+###### Partman.
+d-i partman-efi/non_efi_system boolean true
+
+###### Package selection.
+
+# You can choose to install any combination of tasks that are available.
+# Available tasks as of this writing include: Desktop environment,
+# Web server, Print server, DNS server, File server, Mail server, 
+# SQL database, manual package selection. The last of those will run
+# aptitude. You can also choose to install no tasks, and force the
+# installation of a set of packages in some other way.
+
+# don't install any tasks
+tasksel   tasksel/first multiselect standard 
+#tasksel   tasksel/first multiselect Desktop environment
+#tasksel  tasksel/first multiselect Web server, Mail server, DNS server
+
+d-i pkgsel/include string openssh-server
+
+# Some versions of the installer can report back on what software you have
+# installed, and what software you use. The default is not to report back,
+# but sending reports helps the project determine what software is most
+# popular and include it on CDs.
+popularity-contest popularity-contest/participate boolean false 
+
+### Finishing up the first stage install
+# Avoid that last message about the install being complete.
+d-i finish-install/reboot_in_progress note
+
+###### Time zone setup.
+
+# Controls whether or not the hardware clock is set to UTC.
+d-i clock-setup/utc boolean true
+
+# Many countries have only one time zone. If you told the installer you're
+# in one of those countries, you can choose its standard time zone via this
+# question.
+base-config tzconfig/choose_country_zone_single boolean true
+d-i     time/zone       select  America/Los_Angeles
+
+
+### keyboard configuration
+
+# don't mess with the keymap
+console-common  console-data/keymap/policy      select  Don't touch keymap
+console-data    console-data/keymap/policy      select  Don't touch keymap
+
+# keyboard layouts
+#console-data console-data/keymap/qwerty/layout select US american
+#console-data console-data/keymap/family select qwerty
+#console-common console-data/keymap/family select qwerty
+
+
+###### Account setup.
+
+# To preseed the root password, you have to put it in the clear in this
+# file. That is not a very good idea, use caution!
+passwd   passwd/root-password    password retronas
+passwd   passwd/root-password-again  password retronas
+
+# If you want to skip creation of a normal user account.
+#passwd   passwd/make-user    boolean false
+# Alternatively, you can preseed the user's name and login.
+passwd   passwd/user-fullname    string retronas
+passwd   passwd/username     string retronas
+# And their password, but use caution!
+passwd   passwd/user-password    password retronas
+passwd   passwd/user-password-again  password retronas
+
+
+#### Network configuration.
+
+# netcfg will choose an interface that has link if possible. This makes it
+# skip displaying a list if there is more than one interface.
+d-i netcfg/choose_interface select auto
+
+# Note that any hostname and domain names assigned from dhcp take
+# precidence over values set here. However, setting the values still
+# prevents the questions from being shown even if values come from dhcp.
+#d-i netcfg/get_hostname string unassigned
+#d-i netcfg/get_domain string unassigned
+# to set the domain to empty:
+d-i netcfg/get_hostname string retronas
+d-i netcfg/get_domain string "retronas.com" 
+
+# Disable that annoying WEP key dialog.
+d-i netcfg/wireless_wep string 
+
+
+### Partitioning.
+
+# you can specify a disk to partition. The device name can be given in either
+# devfs or traditional non-devfs format.  For example, to use the first disk
+# devfs knows of:
+## NOTE: disabled for lenny, as it seemed to cause issues
+#d-i partman-auto/disk string /dev/discs/disc0/disc
+
+# In addition, you'll need to specify the method to use.
+# The presently available methods are: "regular", "lvm" and "crypto"
+d-i partman-auto/method string regular
+
+# If one of the disks that are going to be automatically partitioned
+# contains an old LVM configuration, the user will normally receive a
+# warning. This can be preseeded away...
+#d-i partman-auto/purge_lvm_from_device boolean true
+# And the same goes for the confirmation to write the lvm partitions.
+d-i partman-lvm/confirm boolean true
+
+# Alternately, If the system has free space you can choose to only partition
+# that space.
+#d-i  partman-auto/init_automatically_partition select Use the largest continuous free space
+#d-i partman-auto/init_automatically_partition       select  Guided - use entire disk
+
+# You can choose from any of the predefined partitioning recipes:
+d-i partman-auto/choose_recipe  select All files in one partition (recommended for new users)
+#d-i  partman-auto/choose_recipe  select Desktop machine
+#d-i  partman-auto/choose_recipe  select Multi-user workstation
+
+# uncomment the following three values to makes partman automatically partition
+# without confirmation.
+d-i partman/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+
+d-i partman/confirm_nooverwrite boolean true
+
+d-i partman-md/confirm boolean true
+d-i partman-partitioning/confirm_write_new_label boolean true 
+
+#### Boot loader installation.
+
+# This is fairly safe to set, it makes grub install automatically to the MBR
+# if no other operating system is detected on the machine.
+d-i grub-installer/only_debian  boolean true
+# This one makes grub-installer install to the MBR if if finds some other OS
+# too, which is less safe as it might not be able to boot that other OS.
+d-i grub-installer/with_other_os  boolean true
+
+
+###### Apt setup.
+
+# automatically set the CD as the installation media.
+#base-config apt-setup/uri_type  select http
+#base-config apt-setup/uri_type  select cdrom
+# only scan the first CD by default
+d-i apt-setup/cdrom/set-first  boolean false
+# don't ask to use additional mirrors
+#base-config apt-setup/another boolean false
+# Use a network mirror?
+# apt-mirror-setup        apt-setup/use_mirror    boolean false
+
+# Select individual apt repositories
+#d-i apt-setup/services-select multiselect security, updates, backports
+# Disable extra apt repositories
+#d-i apt-setup/services-select multiselect 
+
+# You can choose to install non-free and contrib software.
+#d-i apt-setup/non-free  boolean true
+#d-i apt-setup/contrib boolean true
+
+# If you select ftp, the mirror/country string does not need to be set.
+#d-i mirror/protocol string ftp
+d-i mirror/country string US
+d-i mirror/http/mirror select ftp.us.debian.org
+d-i mirror/http/hostname string ftp.us.debian.org
+d-i mirror/http/directory string /debian
+d-i mirror/http/proxy string
+
+
+###### Mailer configuration.
+
+# During a normal install, exim asks only two questions. Here's how to
+# avoid even those. More complicated preseeding is possible.
+exim4-config  exim4/dc_eximconfig_configtype  select no configuration at this time
+# It's a good idea to set this to whatever user account you choose to
+# create. Leaving the value blank results in postmaster mail going to
+# /var/mail/mail.
+exim4-config  exim4/dc_postmaster   string 
+
+
+### skip some annoying installation status notes
+
+# Avoid that last message about the install being complete.
+d-i finish-install/reboot_in_progress note
+# Avoid the introductory message.
+base-config base-config/intro note 
+# Avoid the final message.
+base-config base-config/login note 
+
+#d-i     popularity-contest/participate  boolean false
+
+
+### simple-cdd commands
+
+# you may add to the following commands by including a ";" followed by your
+# shell commands.
+
+# loads the simple-cdd-profiles udeb to which asks for which profiles to use,
+# load the debconf preseeding and queue packages for installation.
+d-i preseed/early_command string anna-install simple-cdd-profiles
