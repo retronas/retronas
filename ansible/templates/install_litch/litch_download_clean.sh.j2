@@ -1,0 +1,9 @@
+#!/bin/bash
+echo ""
+echo "litch download purchases ..."
+echo ""
+
+mkdir -p ~/.litch 2>/dev/null
+cd ~/.litch
+
+/opt/retronas/bin/litch/litch.py --download-purchases --cleanup-incorrect-files --content-path {{ retronas_path }}/itchio
