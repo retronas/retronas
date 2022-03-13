@@ -205,9 +205,9 @@
                     "description": "Fix ALL on-disk permissions",
                     "id":"permissions",
                     "prompt": "Run",
-                    "type": "script-static",
+                    "type": "modal",
                     "group":"",
-                    "command": "permissions"
+                    "command": "retronas_fixperms"
                 },
                 {
                     "index":"06",

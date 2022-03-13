@@ -28,7 +28,7 @@ rn_gog_chooser() {
     02)
       # login
       CLEAR
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_login.sh
+      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
       PAUSE
       ;;
     03)
@@ -38,7 +38,7 @@ rn_gog_chooser() {
     04)
       # sync games list
       CLEAR
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
       PAUSE
       ;;
     05)
@@ -47,21 +47,21 @@ rn_gog_chooser() {
       rn_gog_game
       GOGGAME=$( cat ${TDIR}/rn_gog_game )
       CLEAR
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh -id ${GOGGAME}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
       PAUSE
       ;;
     06)
       # download all games
       CLEAR
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
+      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
     07)
       # sync and download
       CLEAR
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${GOGOS}
-      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${GOGOS}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
     *)

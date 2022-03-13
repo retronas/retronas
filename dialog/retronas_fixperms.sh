@@ -40,7 +40,7 @@ case ${CHOICE} in
     ;;
   *)
     CLEAR
-    chown -Rc ${OLDRNUSER}:${OLDRNUSER} "${OLDRNPATH}/${CHOICE}"
-    chmod -Rc a-st,u+rwX,g+rwX,o+rX "${OLDRNPATH}/${CHOICE}"
+    bash $SCDIR/static/permissions.sh ${CHOICE}
+    PAUSE
     ;;
 esac
