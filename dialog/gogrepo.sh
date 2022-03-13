@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
@@ -35,7 +33,6 @@ rn_gog_chooser() {
       ;;
     03)
       # OS
-      PAUSE
       rn_gog_setos
       ;;
     04)
@@ -113,7 +110,7 @@ rn_gog_setos() {
     esac
 
     sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo "retronas_gog_os: \"${CHOICE}\"" >> "${ANCFG}"
+    echo "retronas_gog_os: \"${NEWOS}\"" >> "${ANCFG}"
   
 }
 
