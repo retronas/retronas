@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clear
+
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
@@ -8,16 +8,11 @@ cd ${DIDIR}
 
 ## If this is run as root, switch to our RetroNAS user
 ## Manifests and cookies stored in ~/.gogrepo
-if [ "${USER}" == "root" ]
-then
-  SUCOMMAND="sudo -u ${OLDRNUSER}"
-else
-  SUCOMMAND=""
-fi
-
+DROP_ROOT
+CLEAR
 
 rn_gog_chooser() {
-source /opt/retronas/config/retronas.cfg
+source $_CONFIG
 dialog \
   --backtitle "RetroNAS" \
   --title "gogrepo chooser" \
@@ -37,7 +32,7 @@ dialog \
 }
 
 rn_gog_setos() {
-source /opt/retronas/config/retronas.cfg
+source $_CONFIG
 dialog \
   --backtitle "RetroNAS" \
   --title "gogrepo configure OS" \
@@ -112,10 +107,9 @@ dialog \
 
 while true
 do
-  source /opt/retronas/config/retronas.cfg
+  source $_CONFIG
   rn_gog_chooser
   CHOICE=$( cat ${TDIR}/rn_gog_chooser )
-  PAUSEMSG='Press [Enter] to continue...'
   case ${CHOICE} in
     01)
       EXIT_OK

@@ -967,16 +967,6 @@
                     "type": "dialog_yn",
                     "group":"",
                     "command": "romimport"
-                },
-                {
-                    "index":"05",
-                    "title": "litch",
-                    "description": "Download your itchio purchases",
-                    "id":"litch-menu",
-                    "prompt": "Open",
-                    "type": "modal",
-                    "group":"",
-                    "command": "litch"
                 }
             ]
         },
