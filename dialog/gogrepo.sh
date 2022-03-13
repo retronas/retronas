@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -x
 
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
@@ -12,154 +13,135 @@ DROP_ROOT
 CLEAR
 
 rn_gog_chooser() {
-source $_CONFIG
-dialog \
-  --backtitle "RetroNAS" \
-  --title "gogrepo chooser" \
-  --clear \
-  --menu "Current OS: ${OLDGOGOS} \
-  \n
-  \nWARNING: There is currently known issues with this tool,\nsee https://github.com/eddie3/gogrepo/issues/63
-  \n\nPlease choose a task" ${MG} 10 \
-  "01" "Back" \
-  "02" "Configure my GOG credentials" \
-  "03" "Change my GOG Operating System setting" \
-  "04" "Synchronise my games list" \
-  "05" "Download/update a single game" \
-  "06" "Download/update all games currently in my games list" \
-  "07" "FULL - Synchronise games list & download/update all games" \
-  2> ${TDIR}/rn_gog_chooser
+
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
+  
+  while true
+  do
+    source $_CONFIG
+    
+    case ${CHOICE} in
+      01)
+        EXIT_OK
+      ;;
+    02)
+      # login
+      CLEAR
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_login.sh
+      PAUSE
+      ;;
+    03)
+      # OS
+      PAUSE
+      rn_gog_setos
+      ;;
+    04)
+      # sync games list
+      CLEAR
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
+      PAUSE
+      ;;
+    05)
+      # download 1 game
+      rn_gog_gameslist
+      rn_gog_game
+      GOGGAME=$( cat ${TDIR}/rn_gog_game )
+      CLEAR
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh -id ${GOGGAME}
+      PAUSE
+      ;;
+    06)
+      # download all games
+      CLEAR
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
+      PAUSE
+      ;;
+    07)
+      # sync and download
+      CLEAR
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${GOGOS}
+      ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
+      PAUSE
+      ;;
+    *)
+      EXIT_CANCEL
+      ;;
+    esac
+    unset CHOICE
+  done
+
+
 }
 
 rn_gog_setos() {
-source $_CONFIG
-dialog \
-  --backtitle "RetroNAS" \
-  --title "gogrepo configure OS" \
-  --clear \
-  --menu "Current Operating Systems: ${OLDGOGOS} \
-  \n
-  \nPlease set the Operating System(s) you would like to download GOG games for." ${MG} 10 \
-  "01" "Back" \
-  "02" "Windows only" \
-  "03" "Mac only" \
-  "04" "Linux only" \
-  "05" "Windows & Mac" \
-  "06" "Windows & Linux" \
-  "07" "Mac & Linux" \
-  "08" "ALL Operating Systems" \
-  2> ${TDIR}/rn_gog_setos
-NEWGOGOS=$( cat ${TDIR}/rn_gog_setos )
-case ${NEWGOGOS} in
-  02)
+  source $_CONFIG
+
+  local MENU_NAME=gogrepo-setupos
+  READ_MENU_JSON "${MENU_NAME}"
+  READ_MENU_TDESC "${MENU_NAME}"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
+
+  case ${CHOICE} in
+    02)
+      NEWOS="windows"
+      ;;
+    03)
+      NEWOS="mac"
+      ;;
+    04)
+      NEWOS="linux"
+      ;;
+    05)
+      NEWOS="windows mac"
+      ;;
+    06)
+      NEWOS="windows linux"
+      ;;
+    07)
+      NEWOS="mac linux"
+      ;;
+    08)
+      NEWOS="windows mac linux"
+      ;;
+    *)
+      EXIT_CANCEL
+      ;;
+    esac
+
     sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "windows"' >>"${ANCFG}"
-    ;;
-  03)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "mac"' >>"${ANCFG}"
-    ;;
-  04)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "linux"' >>"${ANCFG}"
-    ;;
-  05)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "windows mac"' >>"${ANCFG}"
-    ;;
-  06)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "windows linux"' >>"${ANCFG}"
-    ;;
-  07)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "mac linux"' >>"${ANCFG}"
-    ;;
-  08)
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo 'retronas_gog_os: "windows mac linux"' >>"${ANCFG}"
-    ;;
-  *)
-    exit 0
-    ;;
-esac
+    echo "retronas_gog_os: \"${CHOICE}\"" >> "${ANCFG}"
+  
 }
 
 rn_gog_gameslist() {
-rm ${TDIR}/rn_gog_gameslist 2>/dev/null
-RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
-grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
-do
-  echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
-done
+  rm ${TDIR}/rn_gog_gameslist 2>/dev/null
+  RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
+  grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
+  do
+    echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
+  done
 }
 
 rn_gog_game() {
-dialog \
-  --backtitle "RetroNAS" \
-  --title "gogrepo game chooser" \
-  --clear \
-  --menu "Please choose a game \
-  \n
-  \nIf your game has not appeared, please synchronise your games list" ${MG} 10 \
-  $(cat ${TDIR}/rn_gog_gameslist) 2> ${TDIR}/rn_gog_game
+  local MENU_NAME=gogrepo-gamechooser
+  READ_MENU_JSON "${MENU_NAME}"
+  READ_MENU_TDESC "${MENU_NAME}"
+
+  MENU_ARRAY=$(cat ${TDIR}/rn_gog_gameslist)
+
+  dialog \
+    --backtitle "${MENU_TNAME}" \
+    --title "${MENU_TNAME}" \
+    --clear \
+    --menu "${MENU_BLURB}" ${MW} ${MH} 10 \
+    ${MENU_ARRAY[@]} \
+    2> ${TDIR}/rn_gog_game
+
 }
 
-while true
-do
-  source $_CONFIG
-  rn_gog_chooser
-  CHOICE=$( cat ${TDIR}/rn_gog_chooser )
-  case ${CHOICE} in
-    01)
-      EXIT_OK
-    ;;
-  02)
-    # login
-    clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_login.sh
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  03)
-    # OS
-    rn_gog_setos
-    ;;
-  04)
-    # sync games list
-    clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  05)
-    # download 1 game
-    rn_gog_gameslist
-    rn_gog_game
-    GOGGAME=$( cat ${TDIR}/rn_gog_game )
-    clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh -id ${GOGGAME}
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  06)
-    # download all games
-    clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  07)
-    # sync and download
-    clear
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_update.sh -os ${GOGOS}
-    ${SUCOMMAND} ${RNDIR}/scripts/gogrepo_download.sh
-    echo "${PAUSEMSG}"
-    read -s
-    ;;
-  *)
-    EXIT_CANCEL
-    ;;
-  esac
-done
+
+rn_gog_chooser

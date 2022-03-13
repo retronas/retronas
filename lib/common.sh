@@ -398,12 +398,13 @@ DLG_MENUJ() {
 #
 DLG_MENU() {
 
+    set -x
+
     local IFS=$'\n'
     local TITLE="$1"
     local -n MENU_ARRAY=$2
     local MENU_H=$3
     local MENU_BLURB=$4
-
 
     local MENU_DESC="My IP addresses: ${MY_IPS}\n\n${MENU_BLURB}"
 
@@ -412,6 +413,8 @@ DLG_MENU() {
             --title "RetroNAS ${TITLE} Menu" \
             --clear \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
+
+    PAUSE
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
 

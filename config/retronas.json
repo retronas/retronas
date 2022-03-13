@@ -1297,11 +1297,11 @@
                 }
             ]
         },
-        "gogrepo-menu": 
+        "gogrepo": 
         {
             "title": "GOG",
-            "description": "Please choose a task",
-            "id":"gogrepo-menu",
+            "description": "Current OS: \"${OLDGOGOS}\"||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",
+            "id":"gogrepo",
             "prompt": "",
             "type": "menu",
             "items": [
@@ -1317,18 +1317,18 @@
                 },
                 {
                     "index":"02",
-                    "title": "Configure GOG credentials",
-                    "description": "",
+                    "title": "Login",
+                    "description": "Configure GOG credentials",
                     "id":"gog-password-menu",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "script",
                     "group":"gogrepo",
-                    "command": "TOOL COMMAND"
+                    "command": "gogrepo_login"
                 },
                 {
                     "index":"03",
-                    "title": "Change OS preferences",
-                    "description": "",
+                    "title": "Select OS",
+                    "description": "Change OS preferences",
                     "id":"gog-os-input",
                     "prompt": "",
                     "type": "input:dropdown",
@@ -1374,6 +1374,116 @@
                     "type": "script",
                     "group":"gogrepo",
                     "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "gogrepo-setupos": 
+        {
+            "title": "GOG configure OS",
+            "description": "Current Operating Systems: ${OLDGOGOS}||Please set the Operating System\\(s\\) you would like to download GOG games for.",
+            "id":"gogrepo-setupos",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Windows",
+                    "description": "Only Windows Games",
+                    "id":"gogos-windows",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": ""
+                },
+                {
+                    "index":"03",
+                    "title": "Mac",
+                    "description": "Only Mac Games",
+                    "id":"gogos-mac",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": ""
+                },
+                {
+                    "index":"04",
+                    "title": "Linux",
+                    "description": "Only Linux Games",
+                    "id":"gogos-linux",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"05",
+                    "title": "Windows & Mac",
+                    "description": "Only Windows & Mac Games",
+                    "id":"gogos-windows-mac",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"06",
+                    "title": "Windows & Linux",
+                    "description": "Only Windows & Linux Games",
+                    "id":"gogos-windows-linux",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"07",
+                    "title": "Mac & Linux",
+                    "description": "Only Mac & Linux Games",
+                    "id":"gogos-mac-linux",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"08",
+                    "title": "All",
+                    "description": "All Games",
+                    "id":"gogos-all",
+                    "prompt": "",
+                    "type": "",
+                    "group":"gogrepo",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "gogrepo-gamechooser": 
+        {
+            "title": "GOG game chooser",
+            "description": "Please choose a game||If your game has not appeared, please synchronise your games list",
+            "id":"gogrepo-gamechooser",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
                 }
             ]
         },
