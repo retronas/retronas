@@ -1007,6 +1007,26 @@
                     "type": "install",
                     "group":"",
                     "command": "romdir"
+                },
+                {
+                    "index":"04",
+                    "title": "GNU/Linux",
+                    "description": "Update GNU/Linux Operating System packages",
+                    "id":"update-system",
+                    "prompt": "",
+                    "type": "script-static",
+                    "group":"",
+                    "command": "update-system"
+                },
+                {
+                    "index":"05",
+                    "title": "History",
+                    "description": "Update History for GNU/Linux Operating System packages",
+                    "id":"update-system-history",
+                    "prompt": "",
+                    "type": "script-static",
+                    "group":"",
+                    "command": "update-system-history"
                 }
             ]
         },
