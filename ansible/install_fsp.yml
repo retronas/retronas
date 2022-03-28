@@ -35,6 +35,12 @@
       - gcc
       - scons
 
+  - name: "{{ my_name }} - Create systemd unit folder
+    ansible.builtin.file:
+      path: /usr/lib/systemd/system
+      state: directory
+      mode: '0755'
+
   - name: "{{ my_name }} - build top level dirs"
     file:
       path: "{{ retronas_path }}/gamecube/swiss/{{ item }}"
