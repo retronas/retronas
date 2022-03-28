@@ -35,11 +35,13 @@
       - gcc
       - scons
 
-  - name: "{{ my_name }} - Create systemd unit folder
-    ansible.builtin.file:
+  - name: "{{ my_name }} - check systemd unit folder"
+    file:
       path: /usr/lib/systemd/system
+      owner: root
+      group: root
+      mode: 0755
       state: directory
-      mode: '0755'
 
   - name: "{{ my_name }} - build top level dirs"
     file:
