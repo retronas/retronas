@@ -4,6 +4,7 @@ _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
 
+ACCEPT_TOU=0
 DISABLE_GITOPS=0
 CF="$ANCFG"
 
@@ -13,8 +14,9 @@ CF="$ANCFG"
 CHECK_ROOT
 
 _usage() {
-  echo "Usage $0" 
+  echo "Usage $0"
   echo "-h this help"
+  echo "-a skip terms of use"
   echo "-d show disclaimer"
   echo "-g disable git operations"
   echo "-l show license"
@@ -22,12 +24,15 @@ _usage() {
   exit 0
 }
 
-OPTSTRING="hdgt:"
+OPTSTRING="hadgt:"
 while getopts $OPTSTRING ARG
 do
   case $ARG in
     h)
       _usage
+      ;;
+    a)
+      ACCEPT_TOU=1
       ;;
     g)
       DISABLE_GITOPS=1
@@ -47,9 +52,12 @@ do
 done
 
 #### DO NOT TOUCH THE SYSTEM UNTIL USER AGREES TO DISCLAIMER
-bash $DIDIR/disclaimer.sh
-[ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && EXIT_CANCEL
-
+# Skip interactive agreement if ACCEPT_TOS is passed
+if [ $ACCEPT_TOS -eq 0 ]
+then
+  bash $DIDIR/disclaimer.sh
+  [ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && EXIT_CANCEL
+fi
 
 ### ANSIBLE_VARS
 cd $RNDIR
@@ -72,7 +80,7 @@ fi
 # DEPENDENCIES
 #
 # jq, kept here to handle migration to new menu system
-if [ ! -f /usr/bin/jq ] 
+if [ ! -f /usr/bin/jq ]
 then
   apt-get -y install jq
   [ $? -ne 0 ] && PAUSE && EXIT_CANCEL
