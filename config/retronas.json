@@ -125,9 +125,9 @@
                     "description": "manage hdd standby mode",
                     "id":"hdparm",
                     "prompt": "",
-                    "type": "modal",
+                    "type": "dialog",
                     "group":"",
-                    "command": "tool_hdparm"
+                    "command": "hdparm"
                 },
                 {
                     "index": "03",
@@ -824,9 +824,9 @@
                     "description": "Query hdparm service status",
                     "id":"",
                     "prompt": "",
-                    "type":"service_status",
+                    "type":"script",
                     "group":"",
-                    "command": "hdparm.timer:hdparm.service"
+                    "command": "hdparm-manager-query-service"
                 },
                 {
                     "index":"22",
@@ -834,9 +834,9 @@
                     "description": "Stop the hdparm service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "script",
                     "group":"",
-                    "command": "hdparm.timer:hdparm.service"
+                    "command": "hdparm-manager-stop-service"
                 }
             ]
         },

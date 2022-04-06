@@ -12,6 +12,8 @@
       - hdparm-manager-disable-apm
       - hdparm-manager-disable-standby
       - hdparm-manager-start-service
+      - hdparm-manager-query-service
+      - hdparm-manager-stop-service
 
     - systemd_units:
       - { name: "{{ my_name }}", type: "timer", state: "stopped", instance: "no", enabled: "no", restart: "no" }

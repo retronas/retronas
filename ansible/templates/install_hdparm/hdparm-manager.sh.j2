@@ -7,7 +7,6 @@ source ${LIBDIR}/common.sh
 #CHECK_ROOT
 HDPARM=/usr/sbin/hdparm
 SERVICE="hdparm"
-UNITTYPE="timer"
 DRIVE=/dev/sda
 
 case $(basename $0 .sh) in
@@ -19,8 +18,22 @@ case $(basename $0 .sh) in
     ;;
     hdparm-manager-start-service)
       # Start Service
-        sudo systemctl reset-failed ${SERVICE}.*
-        sudo systemctl restart ${SERVICE}.${UNITTYPE}
+        sudo systemctl reset-failed ${SERVICE}.service
+        sudo systemctl restart ${SERVICE}.timer
+        sudo systemctl restart ${SERVICE}.service
+    ;;
+    hdparm-manager-query-service)
+      # Start Service
+        sudo systemctl status ${SERVICE}.timer
+        sudo systemctl status ${SERVICE}.service
+    ;;
+    hdparm-manager-stop-service)
+      # Start Service
+        sudo systemctl stop ${SERVICE}.timer
+        sudo systemctl stop ${SERVICE}.service
+
+        sudo systemctl disable ${SERVICE}.timer
+        sudo systemctl disable ${SERVICE}.service
     ;;
     *)
     exit 1
