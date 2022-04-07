@@ -397,7 +397,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba:romdir:mister_cifs"
+                    "command": "samba:romdir:extradirs:mister_cifs"
                 },                
                 {
                     "index": "34",
@@ -1000,7 +1000,7 @@
                 },
                 {
                     "index":"03",
-                    "title": "RomDir",
+                    "title": "Rom Dir(s)",
                     "description": "Update core RetroNAS rom directories",
                     "id":"romdir",
                     "prompt": "",
@@ -1010,6 +1010,16 @@
                 },
                 {
                     "index":"04",
+                    "title": "Extra Dir(s)",
+                    "description": "Update extra RetroNAS directories (bios, saves etc)",
+                    "id":"extradirs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "extradirs"
+                },
+                {
+                    "index":"05",
                     "title": "GNU/Linux",
                     "description": "Update GNU/Linux Operating System packages",
                     "id":"update-system",
@@ -1019,7 +1029,7 @@
                     "command": "update-system"
                 },
                 {
-                    "index":"05",
+                    "index":"06",
                     "title": "History",
                     "description": "Update History for GNU/Linux Operating System packages",
                     "id":"update-system-history",

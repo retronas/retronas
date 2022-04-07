@@ -1,0 +1,15 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "Generic Extra dir(s)"
+    - my_file: "install_romdir"
+
+    - top_level_paths:
+      - { name: "saves", enabled: "yes", systems: "yes" }
+      - { name: "savestates", enabled: "yes", systems: "yes" }
+      - { name: "bios", enabled: "yes", systems: "yes" }
+      - { name: "wallpapers", enabled: "yes", systems: "no" }
+
+  tasks:
+    - name: "{{ my_name }}"
+      import_tasks: retronas_create_dirs.yml

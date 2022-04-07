@@ -6,56 +6,7 @@
 
     - top_level_paths:
       - { name: "roms", enabled: "yes", systems: "yes" }
-      - { name: "saves", enabled: "yes", systems: "yes" }
-      - { name: "savestates", enabled: "yes", systems: "yes" }
-      - { name: "bios", enabled: "yes", systems: "yes" }
-      - { name: "wallpapers", enabled: "yes", systems: "no" }
 
   tasks:
-
-  - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - build layout"
-    file:
-      path: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      state: directory
-      mode: "0775"
-    with_nested:
-      - "{{ system_map }}"
-      - "{{ top_level_paths }}"
-    when:
-      - item.1.enabled == "yes"
-      - item.1.systems == "yes"
-
-  - name: "{{ my_name }} - build layout"
-    file:
-      path: "{{ retronas_path }}/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      - "{{ top_level_paths }}"
-    when:
-      - item.enabled == "yes"
-      - item.systems == "no"
-
-  - name: "{{ my_name }} - build x-system symlinks"
-    file:
-      src: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      state: link
-    with_nested:
-      - "{{ system_links }}"
-      - "{{ top_level_paths }}"
-    when:
-      - item.1.enabled == "yes"
-      - item.1.systems == "yes"
+    - name: "{{ my_name }}"
+      import_tasks: retronas_create_dirs.yml
