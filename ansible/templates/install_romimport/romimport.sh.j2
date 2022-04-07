@@ -75,12 +75,14 @@ do
 done
 
 run_buildpack() {
+  IFS=$'\n'
   local ODIR="${1}"
   local SMDB="${2}"
+  local MSDB="$(basename $(echo $SMDB) .txt)"
 
   # UNARMED FOR TESTING
   cd "${TDIR}"
-  python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory
+  python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory --missing "{{retronas_path}}/romimport/${MSDB}_missing.txt"
 
 }
 
