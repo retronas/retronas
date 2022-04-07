@@ -18,7 +18,7 @@
     - item.1.enabled == "yes"
     - item.1.systems == "yes"
 
-- name: "{{ my_name }} - build layout"
+- name: "{{ my_name }} - build layout for non-system dirs"
   file:
     path: "{{ retronas_path }}/{{ item.name }}"
     owner: "{{ retronas_user }}"
