@@ -122,7 +122,7 @@
                 {
                     "index":"02",
                     "title": "hdparm",
-                    "description": "manage hdd standby mode",
+                    "description": "Manage hdd standby mode",
                     "id":"hdparm",
                     "prompt": "",
                     "type": "dialog",
@@ -502,7 +502,7 @@
                 {
                     "index": "02",
                     "title": "webui",
-                    "description": "experimental retronas webui (cockpit)", 
+                    "description": "Experimental retronas webui (cockpit)", 
                     "id":"cockpit-retronas",
                     "prompt": "",
                     "type": "install",
@@ -512,7 +512,7 @@
                 {
                     "index": "03",
                     "title": "xboxmanager",
-                    "description": "experimental xbox manager (cockpit)", 
+                    "description": "Experimental xbox manager (cockpit)", 
                     "id":"xboxmanager",
                     "prompt": "",
                     "type": "install",
