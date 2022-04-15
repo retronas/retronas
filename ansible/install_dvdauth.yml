@@ -1,0 +1,32 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "DVDAuth"
+    - my_file: "install_dvdauth"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - git
+      - coreutils
+
+  - name: "{{ my_name }} - Prepare installer script"
+    template:
+      src: templates/{{ my_file }}/{{ my_file }}.sh.j2
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Run installer"
+    shell:
+      cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+      chdir: "{{ retronas_root }}/scripts"
+      executable: /bin/bash

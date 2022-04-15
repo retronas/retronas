@@ -528,6 +528,16 @@
                     "type": "install",
                     "group":"",
                     "command": "apfs-fuse"
+                },
+                {
+                    "index": "05",
+                    "title": "DiscImageCreator",
+                    "description": "Disc Image Creator", 
+                    "id":"disc-image-creator",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "dvdauth:eccedc:disc-image-creator"
                 }
             ]
         },

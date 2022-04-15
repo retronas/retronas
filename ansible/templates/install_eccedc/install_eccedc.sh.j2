@@ -1,0 +1,57 @@
+#!/bin/bash
+
+### SETUP
+APP=EccEdc
+APPREPO=saramibreak
+APPLOW=$(echo $APP | tr [:upper:] [:lower:])
+APPEXEC=${APP}_linux.out
+
+LOCALTMP=$( mktemp -d /tmp/${APPLOW}-XXXX )
+LOCALFILE=${LOCALTMP}/${APPLOW}.zip
+LOCALDIR=/opt/${APPLOW}
+LOCALSCRIPT=/usr/local/bin/${APPLOW}
+APPFILES=${LOCALDIR}/*
+
+PATTERN=tags.*.zip
+GITHRELS=https://github.com/${APPREPO}/${APP}/releases/latest
+
+
+### DISCOVERY
+REDIRECT=$( curl -k -s ${GITHRELS} | awk -F '"' '{print $2}' )
+RELEASE=$( curl -k -s "${REDIRECT}" | awk -F '"' /href.*${PATTERN}/'{print $2}' )
+
+
+### DOWNLOAD
+# -- Download
+[ ! -f ${LOCALFILE} ] && curl -k -L -o ${LOCALFILE} "https://github.com/${RELEASE}"
+[ $? -ne 0 ] && echo "Sadness getting ${APP}" && exit 1
+
+
+### LOCAL
+[ ! -d ${LOCALDIR} ] && /bin/mkdir ${LOCALDIR} || echo "Missing ${LOCALDIR}"
+
+
+### UNPACK
+[ -f ${LOCALFILE} ] && /usr/bin/unzip -o ${LOCALFILE} -d ${LOCALTMP} || echo "Missing: ${LOCALFILE}"
+
+### BUILD
+cd ${LOCALTMP}/${APP}-*/${APP}
+make
+
+### INSTALL
+[ -f ${LOCALTMP}/${APP}-*/${APP}/${APPEXEC} ] && mv ${LOCALTMP}/${APP}-*/${APP}/${APPEXEC} ${LOCALDIR}/
+
+
+cat << EOST > ${LOCALSCRIPT}
+#!/bin/bash
+cd ${LOCALDIR}
+${LOCALDIR}/${APPEXEC} $*
+EOST
+
+### PERMISSIONS
+chmod +x ${LOCALSCRIPT}
+chmod 755 ${LOCALSCRIPT}
+
+### CLEANUP
+rm ${LOCALFILE}
+rm -rf ${LOCALTMP}

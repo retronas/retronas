@@ -1,0 +1,48 @@
+#!/bin/bash
+
+### SETUP
+APP=DVDAuth
+APPREPO=sairuk
+APPLOW=$(echo $APP | tr [:upper:] [:lower:])
+APPEXEC=${APP}_linux.out
+
+LOCALTMP=$( mktemp -d /tmp/${APPLOW}-XXXX )
+LOCALFILE=${LOCALTMP}/${APPLOW}.zip
+LOCALDIR=/opt/${APPLOW}
+LOCALSCRIPT=/usr/local/bin/${APPLOW}
+APPFILES=${LOCALDIR}/*
+
+
+### DISCOVERY
+cd ${LOCALTMP}
+git clone https://github.com/${APPREPO}/${APP}
+cd ${LOCALTMP}/${APP}
+RELEASE=$(git tag | tail -n1)
+
+
+### LOCAL
+[ ! -d ${LOCALDIR} ] && /bin/mkdir ${LOCALDIR} || echo "Missing ${LOCALDIR}"
+
+
+### BUILD
+cd ${LOCALTMP}/${APP}/${APP}
+#git checkout ${RELEASE}  ### can't do this yet, linux makefile isn't in a release
+make
+
+### INSTALL
+[ -f ${LOCALTMP}/${APP}/${APP}/${APPEXEC} ] && mv ${LOCALTMP}/${APP}/${APP}/${APPEXEC} ${LOCALDIR}/
+
+
+cat << EOST > ${LOCALSCRIPT}
+#!/bin/bash
+cd ${LOCALDIR}
+${LOCALDIR}/${APPEXEC} \$*
+EOST
+
+### PERMISSIONS
+chmod +x ${LOCALSCRIPT}
+chmod 755 ${LOCALSCRIPT}
+
+### CLEANUP
+rm ${LOCALFILE}
+rm -rf ${LOCALTMP}
