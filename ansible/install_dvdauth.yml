@@ -16,6 +16,13 @@
     with_items:
       - git
       - coreutils
+      - make
+      - gcc
+      - g++
+      - curl
+      - build-essential
+      - unzip
+      - util-linux
 
   - name: "{{ my_name }} - Prepare installer script"
     template:
