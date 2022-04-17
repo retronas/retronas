@@ -4,7 +4,7 @@
 
 # Status
 
-This project is currently in **ALPHA** status.  Things are changing rapidly, and likely to break currently.  By all means use it, but if you're not an intermediate to advanced user, check back in about a month when the major framework has settled down and it's ready for beta status, and more user friendly.
+RetroNAS is a tool that installs other tools, and is a rolling release.  Each time the command line "retronas" tool is run, the core project is updated to its latest stable release.  Third party tools that RetroNAS installs are done so via a mix of Debian APT repositories (which can be managed via standard package manager and system update tools), and for specialised tools via upstream project pages. 
 
 Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. 
 
