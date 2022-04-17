@@ -4,7 +4,7 @@
 
 # Status
 
-RetroNAS is a tool that installs other tools, and is a rolling release.  Each time the command line "retronas" tool is run, the core project is updated to its latest stable release.  Third party tools that RetroNAS installs are done so via a mix of Debian APT repositories (which can be managed via standard package manager and system update tools), and for specialised tools via upstream project pages. 
+RetroNAS is a tool that installs other tools, and is a rolling release.  Each time the command line "retronas" tool is run, the core project is updated to its latest stable release.  Third party tools that RetroNAS installs are done so via a mix of Debian APT repositories (which can be managed via standard package manager and system update tools), and for specialised tools via upstream project pages (these can be updated by re-running the tool installer). 
 
 Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. 
 
