@@ -1043,7 +1043,7 @@
                     "title": "History",
                     "description": "Update History for GNU/Linux Operating System packages",
                     "id":"update-system-history",
-                    "prompt": "",
+                    "prompt": "View",
                     "type": "script-static",
                     "group":"",
                     "command": "update-system-history"
