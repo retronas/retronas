@@ -4,7 +4,7 @@
         "main": 
         {
             "title": "Main",
-            "description": "Please select an option.||Please ensure that you have configured your RetroNAS user and top level directory in the Global configration section before installing any tools.||Current RetroNAS user: \"${OLDRNUSER}\"|Current RetroNAS top level directory: \"${OLDRNUSER}\"||Changing either of these options will require tools to be reinstalled.",
+            "description": "Please select an option.||Please ensure that you have configured your RetroNAS user and top level directory in the Global configration section before installing any tools.||Current RetroNAS user: \"${OLDRNUSER}\"|Current RetroNAS top level directory: \"${OLDRNPATH}\"||Changing either of these options will require tools to be reinstalled.",
             "id":"main",
             "prompt": "",
             "type": "menu",
