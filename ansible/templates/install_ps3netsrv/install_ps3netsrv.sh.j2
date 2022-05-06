@@ -13,11 +13,9 @@ cd "${SRCDIR}"
 
 echo "Downloading ps3netsrv source code..."
 
-REDIRECT=$( curl -k -s 'https://github.com/aldostools/webMAN-MOD/releases/latest' | awk -F '"' '{print $2}' )
-echo $REDIRECT
-SOURCECODE=$( curl -k -s "${REDIRECT}" | grep href.*ps3netsrv.*zip | awk -F '"' '{print $2}' )
+SOURCECODE=$( curl -kLs 'https://github.com/aldostools/webMAN-MOD/releases/latest' | awk -F '"' '/href.*ps3netsrv.*zip/{print $2}' )
 echo $SOURCECODE
-wget --content-disposition "https://github.com/${SOURCECODE}"
+curl -OJL "https://github.com/${SOURCECODE}"
 unzip ps3netsrv*.zip
 cd ps3netsrv*/ps3netsrv
 meson buildrelease --buildtype=release
