@@ -81,6 +81,8 @@ def main():
                     if system['mister'] != "":
                         retronas_mister_systems.append(system['mister'])
 
+    _log("Checking against %s found MiSTer systems" % len(mister_systems))
+    _log("Checking against %s found RetroNAS (MiSTer) systems" % len(mister_systems))
     # compare
     _log("Checking for MiSTer Systems not in retronas based on distro repo")
     found = False
