@@ -6,10 +6,10 @@
 
     - top_level_paths:
       - { name: "games", enabled: "yes",  generic: "roms", systems: "yes" }
-      - { name: "saves", enabled: "no",  generic: "saves", systems: "yes"  }
-      - { name: "savestates", enabled: "no",  generic: "savestates", systems: "yes"  }
-      - { name: "BIOS", enabled: "no",  generic: "bios", systems: "yes"  }
-      - { name: "wallpapers", enabled: "no",  generic: "wallpapers", systems: "no"  }
+      - { name: "saves", enabled: "yes",  generic: "saves", systems: "yes"  }
+      - { name: "savestates", enabled: "yes",  generic: "savestates", systems: "yes"  }
+      - { name: "BIOS", enabled: "yes",  generic: "bios", systems: "yes"  }
+      - { name: "wallpapers", enabled: "yes",  generic: "wallpapers", systems: "no"  }
 
   tasks:
 
