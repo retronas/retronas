@@ -53,14 +53,11 @@ def _get(url):
 def main():
 
     mister_systems = []
-
     # mister github data
     for MISTER_REPO in MISTER_REPOS:
         mister_c = _get(MISTER_REPO)
         if mister_c is not None:
             mister_d = json.loads(mister_c)
-
-
 
             for item in mister_d['tree']:
                 for dirs in MISTER_DIRS:
@@ -82,9 +79,11 @@ def main():
                         retronas_mister_systems.append(system['mister'])
 
     _log("Checking against %s found MiSTer systems" % len(mister_systems))
-    _log("Checking against %s found RetroNAS (MiSTer) systems" % len(mister_systems))
-    # compare
-    _log("Checking for MiSTer Systems not in retronas based on distro repo")
+    _log("Checking against %s found RetroNAS (MiSTer) systems" % len(retronas_mister_systems))
+
+    
+    # mister -> retronas
+    _log("Checking for MiSTer Systems not in RetroNAS")
     found = False
     for system in mister_systems:
         if system not in retronas_mister_systems and system not in IGNORED_SYSTEMS:
@@ -92,7 +91,20 @@ def main():
             found = True
 
     if not found:
-        _log("No missing systems found")
+        _log("-- No missing systems MiSTer->RetroNAS found")
+
+
+    # retronas -> mister
+    found = False
+    _log("Checking for RetroNAS Systems not in MiSTer repo")
+    _log("-- Note: If there is anything here it is probably OK, WIP cores etc)")
+    for system in retronas_mister_systems:
+        if system not in mister_systems and system not in IGNORED_SYSTEMS:
+            _log(" %s" % system)
+            found = True
+
+    if not found:
+        _log("-- No missing systems found RetroNAS->MiSTer (excluding ignored)")
 
     return
 
