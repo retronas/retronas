@@ -538,6 +538,16 @@
                     "type": "install",
                     "group":"",
                     "command": "dvdauth:eccedc:disc-image-creator"
+                },
+                {
+                    "index": "06",
+                    "title": "Samba for Batocera",
+                    "description": "Batocera CIFS config",
+                    "id":"batocera-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "samba:romdir:extradirs:batocera_cifs"
                 }
             ]
         },
