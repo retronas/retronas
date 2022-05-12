@@ -548,6 +548,16 @@
                     "type": "install",
                     "group":"",
                     "command": "samba:romdir:extradirs:batocera_cifs"
+                },
+                {
+                    "index": "07",
+                    "title": "Samba for Recalbox",
+                    "description": "Recalbox CIFS config",
+                    "id":"batocera-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "samba:romdir:extradirs:recalbox_cifs"
                 }
             ]
         },
