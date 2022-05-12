@@ -38,7 +38,11 @@
       repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
       state: present
       filename: debian-backports
-      update_cache: yes
+      update_cache: no
+
+  - name: "{{ my_name }} - Force update repo cache"
+    shell:
+      cmd: "/usr/bin/apt update || exit 0"
 
   - name: "{{ my_name }} - Install from repo"
     apt:
