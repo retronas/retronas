@@ -7,7 +7,14 @@ import yaml
 import argparse
 
 RN_SYSTEMS="../../ansible/retronas_systems.yml"
-RN_IGNORE = ["system_map","system_links", "system_template"]
+RN_IGNORE = [
+    "system_map",
+    "system_links",
+    "system_template", 
+    "system_unsupported",
+    "system_idsoftware",
+    "system_tools"
+    ]
 
 def main(args):
 
