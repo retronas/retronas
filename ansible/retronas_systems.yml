@@ -46,10 +46,10 @@ system_map: "{{
 
 
 system_acorn:
-  - { src: "acorn/archimedes", mister: "ARCHIE", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "acorn/atom", mister: "AcornAtom", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "acorn/archimedes", mister: "ARCHIE", retropie: "", batocera: "archimedes", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "acorn/atom", mister: "AcornAtom", retropie: "", batocera: "atom", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "acorn/bbcmicro", mister: "BBCMicro", retropie: "", batocera: "bbc", recalbox: "bbcmicro", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "acorn/electron", mister: "AcornElectron", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "acorn/electron", mister: "AcornElectron", retropie: "", batocera: "electron", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_amstrad:
   - { src: "amstrad/cpc", mister: "Amstrad", retropie: "", batocera: "amstradcpc", recalbox: "amstradcpc", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "amstrad/pcw", mister: "Amstrad PCW", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -110,7 +110,7 @@ system_microsoft:
   - { src: "microsoft/xbox", mister: "", retropie: "", batocera: "xbox", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "microsoft/xbox/iso", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "microsoft/xbox/games", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "microsoft/xbox360", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "microsoft/xbox360", mister: "", retropie: "", batocera: "xbox360", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "microsoft/xbox360/iso", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "microsoft/xbox360/games", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_nec:
@@ -152,6 +152,7 @@ system_other:
   - { src: "other/antonic_galaksija", mister: "Galaksija", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/arduboy", mister: "Arduboy", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/cambridge_edsac", mister: "EDSAC", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "other/camputers_lynx", mister: "Lynx48", retropie: "", batocera: "camplynx", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/coleco_colecovision", mister: "Coleco", retropie: "", batocera: "colecovision", recalbox: "colecovision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/compukit_uk101", mister: "UK101", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/electronika_bk", mister: "BK0011M", retropie: "", batocera: "", recalbox: "bk", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -161,10 +162,10 @@ system_other:
   - { src: "other/generalinstrument_ay38500", mister: "AY-3-8500", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/intel_x86", mister: "AO486", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/interact_homecomputer", mister: "Interact", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "other/interton_vc4000", mister: "VC4000", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "other/interton_vc4000", mister: "VC4000", retropie: "", batocera: "vc4000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/jupiter_ace", mister: "Jupiter", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "other/magnavox_odyssey", mister: "", retropie: "", batocera: "o2em", recalbox: "o2em", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "other/magnavox_odyssey2", mister: "ODYSSEY2", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "other/magnavox_odyssey", mister: "", retropie: "", batocera: "", recalbox: "o2em", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "other/magnavox_odyssey2", mister: "ODYSSEY2", retropie: "", batocera: "odyssey2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/milesgordon_samcoupe", mister: "SAMCOUPE", retropie: "", batocera: "samcoupe", recalbox: "samcoupe", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/mits_altair8800", mister: "Altair8800", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/pelvarazdin_orao", mister: "ORAO", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -181,7 +182,6 @@ system_other:
   - { src: "other/vectrex", mister: "VECTREX", retropie: "", batocera: "vectrex", recalbox: "vectrex", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/videotechnology_vtechlaser", mister: "Laser", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "other/zxevolution", mister: "TSConf", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "other/camputers_lynx", mister: "Lynx48", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_philips:
   - { src: "philips/cdi", mister: "", retropie: "", batocera: "cdi", recalbox: "cdi", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_sega:
@@ -269,7 +269,7 @@ system_unsupported:
   - { src: "gamecom", mister: "", retropie: "", batocera: "gamecom", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "gamepock", mister: "", retropie: "", batocera: "gamepock", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "gmaster", mister: "", retropie: "", batocera: "gmaster", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "imageviewer", mister: "", retropie: "", batocera: "", recalbox: "imageviewer", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "imageviewer", mister: "", retropie: "", batocera: "imageviewer", recalbox: "imageviewer", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "lcdgames", mister: "", retropie: "", batocera: "lcdgames", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "lowresnx", mister: "", retropie: "", batocera: "", recalbox: "lowresnx", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "lutro", mister: "", retropie: "", batocera: "lutro", recalbox: "lutro", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -287,7 +287,7 @@ system_unsupported:
   - { src: "palm", mister: "", retropie: "", batocera: "", recalbox: "palm", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "pcv2", mister: "", retropie: "", batocera: "", recalbox: "pcv2", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "pico8", mister: "", retropie: "", batocera: "pico8", recalbox: "pico8", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "plugnplay", mister: "", retropie: "", batocera: "pluginplay", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "plugnplay", mister: "", retropie: "", batocera: "plugnplay", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "pokemini", mister: "", retropie: "", batocera: "pokemini", recalbox: "pokemini", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "pong", mister: "", retropie: "", batocera: "gong", recalbox: "gong", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "ports", mister: "", retropie: "", batocera: "ports", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -314,6 +314,32 @@ system_unsupported:
   - { src: "xash3d_fwgs", mister: "", retropie: "", batocera: "xash3d_fwgs", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "xrick", mister: "", retropie: "", batocera: "xrick", recalbox: "rickdangerous", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "zc210", mister: "", retropie: "", batocera: "zc210", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "xegs", mister: "", retropie: "", batocera: "xegs", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "triforce", mister: "", retropie: "", batocera: "triforce", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "amiga", mister: "", retropie: "", batocera: "amiga", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "msx", mister: "", retropie: "", batocera: "msx", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "cgenius", mister: "", retropie: "", batocera: "cgenius", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "library", mister: "", retropie: "", batocera: "library", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "socrates", mister: "", retropie: "", batocera: "socrates", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "vsmile", mister: "", retropie: "", batocera: "vsmile", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "supracan", mister: "", retropie: "", batocera: "supracan", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "vgmplay", mister: "", retropie: "", batocera: "vgmplay", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "superbroswar", mister: "", retropie: "", batocera: "superbroswar", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "nintendo/switch", mister: "", retropie: "", batocera: "switch", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "vitaquake2", mister: "", retropie: "", batocera: "vitaquake2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "j2me", mister: "", retropie: "", batocera: "j2me", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "vemulator", mister: "", retropie: "", batocera: "vemulator", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "openjazz", mister: "", retropie: "", batocera: "openjazz", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "hurrican", mister: "", retropie: "", batocera: "hurrican", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "hcl", mister: "", retropie: "", batocera: "hcl", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "cdogs", mister: "", retropie: "", batocera: "cdogs", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "naomi2", mister: "", retropie: "", batocera: "naomi2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "hikaru", mister: "", retropie: "", batocera: "hikaru", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "gaelco", mister: "", retropie: "", batocera: "gaelco", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "cave3rd", mister: "", retropie: "", batocera: "cave3rd", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "pdp1", mister: "", retropie: "", batocera: "pdp1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "odcommander", mister: "", retropie: "", batocera: "odcommander", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_template:
   - { src: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   
