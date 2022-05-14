@@ -408,9 +408,29 @@
                     "type": "install",
                     "group":"samba",
                     "command": "samba:romdir:xbox360"
-                },                
+                },
                 {
                     "index": "35",
+                    "title": "Samba for Batocera",
+                    "description": "Batocera CIFS config",
+                    "id":"batocera-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "samba:romdir:extradirs:batocera_cifs"
+                },
+                {
+                    "index": "36",
+                    "title": "Samba for Recalbox",
+                    "description": "Recalbox CIFS config",
+                    "id":"batocera-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "samba:romdir:extradirs:recalbox_cifs"
+                },       
+                {
+                    "index": "37",
                     "title": "gogrepo",
                     "description": "Download your GOG game installers", 
                     "id":"gogrepo",
@@ -420,7 +440,7 @@
                     "command": "gogrepo"
                 },                
                 {
-                    "index": "36",
+                    "index": "38",
                     "title": "ROM import",
                     "description": "ROM import from Smokemonster SMDBs", 
                     "id":"romimport",
@@ -430,7 +450,7 @@
                     "command": "romdir:romimport"
                 },                
                 {
-                    "index": "37",
+                    "index": "39",
                     "title": "FSP server",
                     "description": "Nintendo GameCube + Swiss FSP server", 
                     "id":"fsp",
@@ -440,7 +460,7 @@
                     "command": "romdir:fsp"
                 },                
                 {
-                    "index": "38",
+                    "index": "40",
                     "title": "SabreTools",
                     "description": "Dat Manager (x86_64 only)", 
                     "id":"sabretools",
@@ -448,6 +468,16 @@
                     "type": "install",
                     "group":"",
                     "command": "dotnetcore3:sabretools"
+                },
+                {
+                    "index": "41",
+                    "title": "DiscImageCreator",
+                    "description": "Disc Image Creator", 
+                    "id":"disc-image-creator",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "dvdauth:eccedc:disc-image-creator"
                 },
                 {
                     "index": "50",
@@ -528,36 +558,6 @@
                     "type": "install",
                     "group":"",
                     "command": "apfs-fuse"
-                },
-                {
-                    "index": "05",
-                    "title": "DiscImageCreator",
-                    "description": "Disc Image Creator", 
-                    "id":"disc-image-creator",
-                    "prompt": "",
-                    "type": "install",
-                    "group":"",
-                    "command": "dvdauth:eccedc:disc-image-creator"
-                },
-                {
-                    "index": "06",
-                    "title": "Samba for Batocera",
-                    "description": "Batocera CIFS config",
-                    "id":"batocera-cifs",
-                    "prompt": "",
-                    "type": "install",
-                    "group":"",
-                    "command": "samba:romdir:extradirs:batocera_cifs"
-                },
-                {
-                    "index": "07",
-                    "title": "Samba for Recalbox",
-                    "description": "Recalbox CIFS config",
-                    "id":"batocera-cifs",
-                    "prompt": "",
-                    "type": "install",
-                    "group":"",
-                    "command": "samba:romdir:extradirs:recalbox_cifs"
                 }
             ]
         },
