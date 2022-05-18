@@ -116,6 +116,7 @@ def main(args):
                                 _log("[INFO] We will be COPYING found files and confirm they are preset in %s before removing it from %s" % (dest, last))
 
                                 # loop over the old dir files
+                                entries = []
                                 entries = process_dir(last)
                                 for entry in entries:
                                     # dirs
@@ -124,11 +125,15 @@ def main(args):
 
                                     if not os.path.exists(dest_dirname):
                                         _log("[INFO] Creating directory %s" % dest_dirname )
-                                        os.mkdir(dest_dirname)
+                                        os.makedirs(dest_dirname)
 
                                     # files
                                     src_file = entry
                                     dest_file = entry.replace(last, dest)
+
+                                    if src_file == dest_file:
+                                        _log("[ERROR] something is wrong, src/dest should not match, exiting")
+                                        exit(1)
 
                                     # check src filesize for use later
                                     src_stat = os.path.getsize(src_file)
