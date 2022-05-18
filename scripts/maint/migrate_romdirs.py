@@ -33,6 +33,16 @@ def read_yaml(ydata):
             _log(e)
             return None
 
+def process_dir(dirname, tree=[]):
+    # loop over the old dir files
+    for entry in os.listdir(dirname):
+        path = os.path.join(dirname, entry)
+        if os.path.isdir(path):
+            process_dir(path, tree)
+        else:
+            tree.append(path)
+    return tree
+
 def main(args):
     yaml_data = None
 
@@ -104,27 +114,37 @@ def main(args):
                             if not move and move_files:
                                 _log("[INFO] We are in file-mode")
                                 _log("[INFO] We will be COPYING found files and confirm they are preset in %s before removing it from %s" % (dest, last))
-                                _log("[INFO] Space is the final frontier, so you'll need enough")
-                                try:
-                                    # loop over the old dir files
-                                    for root, dirs, files in os.walk(last):
-                                        for filename in files:
-                                            dest_file = os.path.join(dest, filename)
-                                            src_file = os.path.join(last, filename)
-                                            
-                                            # check src filesize for use later
-                                            src_stat = os.path.getsize(src_file)
-                                            _log("[INFO] %s size is %s" % (src_file, src_stat))
 
-                                            # check disk usage
-                                            if shutil.disk_usage(dest).free <= src_stat:
-                                                _log("[ERR ] You are out of space on %s, free up space and try try again" % dest)
-                                                exit(1)
+                                # loop over the old dir files
+                                entries = process_dir(last)
+                                for entry in entries:
+                                    # dirs
+                                    last_dirname = os.path.dirname(entry)
+                                    dest_dirname = os.path.dirname(entry).replace(last, dest)
 
-                                            # copy the file
-                                            _log("[INFO] Attempting to COPY file %s to %s" % (src_file, dest_file))
-                                            shutil.copy2(src_file, dest_file)
+                                    if not os.path.exists(dest_dirname):
+                                        _log("[INFO] Creating directory %s" % dest_dirname )
+                                        os.mkdir(dest_dirname)
 
+                                    # files
+                                    src_file = entry
+                                    dest_file = entry.replace(last, dest)
+
+                                    # check src filesize for use later
+                                    src_stat = os.path.getsize(src_file)
+                                    _log("[INFO] %s size is %s" % (src_file, src_stat))
+
+                                    # check disk usage
+                                    if shutil.disk_usage(dest).free <= src_stat:
+                                        _log("[ERR ] You are out of space on %s, free up space and try try again" % dest)
+                                        exit(1)
+                                    else:
+                                        _log("[ OK ] You have enough free space on %s for %s" % (dest, dest_file))
+                                        # copy the file
+                                        _log("[INFO] Attempting to COPY file %s to %s" % (src_file, dest_file))
+                                        shutil.copy2(src_file, dest_file)
+
+                                        if os.path.exists(dest_file):
                                             # check dest filesize for use later
                                             dest_stat = os.path.getsize(dest_file)
                                             _log("[INFO] %s size is %s" % (dest_file, dest_stat))
@@ -132,25 +152,29 @@ def main(args):
                                             # only remove the file if the copy was successful
                                             # this way the user will have at least one copy
                                             if os.path.exists(dest_file) and os.path.isfile(dest_file) and src_stat == dest_stat:
-                                                _log("[ OK ] %s exists, is a file and is the correct size, so it is OK to remove the old file" % dest)
+                                                _log("[ OK ] %s exists, is a file and is the correct size, so it is OK to remove the old file" % dest_file)
                                                 os.remove(src_file)
                                                 if not os.path.exists(src_file):
                                                     _log("[ OK ] %s removed successfully from %s" % (src_file, last))
+                                            else:
+                                                _log("[ERR ] %s exists, but does not match %s" % (dest, src_file))
+                                        else:
+                                            _log("[ERR ] % does not exist, can't process a file that not there" % src_file)
 
                                     # remove the empy src dir
-                                    try:
-                                        _log('[INFO] Trying to remove the old  dir %s' % last)
-                                        os.rmdir(last)
-                                        if not os.path.exists(last):
-                                            _log("[ OK ] %s removed successfully" % last)
-                                    except:
-                                        _log('[WARN] Could not remove the old  dir %s, do that manually' % last)
+                                    if os.path.exists(last_dirname):
+                                        _log('[INFO] Trying to remove the old dir %s' % last_dirname)
+                                        try:
+                                            os.rmdir(last_dirname)
+                                        except OSError as e:
+                                            _log("[INFO] Directory %s isn't empty yet, going for another round" % last_dirname)
 
-                                except:
-                                    _log("[WARN] Move failed for %s" % last)
+                                    if not os.path.exists(last_dirname):
+                                        _log("[ OK ] %s removed successfully" % last_dirname)
+
                             else:
                                 _log("[INFO] Flagged for no file-mode move: %s" % last)
-
+                            _log("----")
 
                         else:
                             _log("[ OK ] Not found: %s, do not need to migrate" % last)
