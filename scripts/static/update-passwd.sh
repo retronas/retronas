@@ -28,5 +28,5 @@ then
     ATALKDIR=/opt/retronas/bin/netatalk2x
     echo "Updating AppleTalk password for $USERNAME"
     touch ${ATALKDIR}/etc/netatalk/afppasswd
-    ${ATALKDIR}/bin/afpexpect.sh -a "${USERNAME}" "${PASSWD}" 2>/dev/null
+    sudo ${ATALKDIR}/bin/afpexpect.sh -a "${USERNAME}" "${PASSWD}" 2>/dev/null
 fi
