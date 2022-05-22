@@ -98,17 +98,9 @@ system_apple:
 system_arcade:
   - { src: "mame/hbmame", last: "", mister: "hbmame", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "mame/mame", last: "", mister: "mame", retropie: "", batocera: "mame", recalbox: "mame", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/atomiswave", last: "", mister: "", retropie: "", batocera: "atomiswave", recalbox: "atomiswave", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "aracde/fba", last: "", mister: "", retropie: "", batocera: "", recalbox: "fba", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/fbneo", last: "", mister: "", retropie: "", batocera: "fbneo", recalbox: "fbneo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/hikaru", last: "", mister: "", retropie: "", batocera: "hikaru", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/naomi", last: "", mister: "", retropie: "", batocera: "naomi", recalbox: "naomi", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/naomi2", last: "", mister: "", retropie: "", batocera: "naomi2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/naomigd", last: "", mister: "", retropie: "", batocera: "", recalbox: "naomigd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/triforce", last: "", mister: "", retropie: "", batocera: "triforce", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/model2", last: "", mister: "", retropie: "", batocera: "model2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/model3", last: "", mister: "", retropie: "", batocera: "model3", recalbox: "model3", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  #- { src: "arcade/gaelco", last: "", mister: "", retropie: "", batocera: "gaelco", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "finalburn/fba", last: "", mister: "", retropie: "", batocera: "", recalbox: "fba", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "finalburn/fbneo", last: "", mister: "", retropie: "", batocera: "fbneo", recalbox: "fbneo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "gaelco", last: "", mister: "", retropie: "", batocera: "gaelco", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_atari:
   - { src: "atari/2600", last: "", mister: "ATARI2600", retropie: "", batocera: "atari2600", recalbox: "atari2600", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "atari/5200", last: "", mister: "ATARI5200", retropie: "", batocera: "atari5200", recalbox: "atari5200", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
@@ -250,14 +242,22 @@ system_philips:
   - { src: "philips/cdi", last: "", mister: "", retropie: "", batocera: "cdi", recalbox: "cdi", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_sega:
   - { src: "sega/32x", last: "", mister: "S32X", retropie: "", batocera: "sega32x", recalbox: "sega32x", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/atomiswave", last: "", mister: "", retropie: "", batocera: "atomiswave", recalbox: "atomiswave", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/dreamcast", last: "", mister: "", retropie: "", batocera: "dreamcast", recalbox: "dreamcast", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/dreamcast/vmu", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/gamegear", last: "", mister: "", retropie: "", batocera: "gamegear", recalbox: "gamegear", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/hikaru", last: "", mister: "", retropie: "", batocera: "hikaru", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/mastersystem", last: "", mister: "SMS", retropie: "", batocera: "mastersystem", recalbox: "mastersystem", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/megacd", last: "", mister: "MegaCD", retropie: "", batocera: "segacd", recalbox: "segacd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/megadrive", last: "", mister: "Genesis", retropie: "", batocera: "megadrive", recalbox: "megadrive", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/model2", last: "", mister: "", retropie: "", batocera: "model2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/model3", last: "", mister: "", retropie: "", batocera: "model3", recalbox: "model3", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/naomi", last: "", mister: "", retropie: "", batocera: "naomi", recalbox: "naomi", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/naomi2", last: "", mister: "", retropie: "", batocera: "naomi2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/naomigd", last: "", mister: "", retropie: "", batocera: "", recalbox: "naomigd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/saturn", last: "", mister: "Saturn", retropie: "", batocera: "saturn", recalbox: "saturn", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sega/sg1000", last: "", mister: "", retropie: "", batocera: "sg1000", recalbox: "sg1000", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "sega/triforce", last: "", mister: "", retropie: "", batocera: "triforce", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_sharp:
   - { src: "sharp/mz", last: "", mister: "SharpMZ", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "sharp/x1", last: "", mister: "", retropie: "", batocera: "x1", recalbox: "x1", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
