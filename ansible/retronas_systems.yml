@@ -134,7 +134,7 @@ system_casio:
   - { src: "casio/pv1000", last: "", mister: "", retropie: "", batocera: "pv1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_coleco:
   - { src: "coleco/colecovision", last: "other/coleco_colecovision", mister: "Coleco", retropie: "", batocera: "colecovision", recalbox: "colecovision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
-  - { src: "coleco/adam", last: "", mister: "", retropie: "", batocera: "adam", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
+  - { src: "coleco/adam", last: "", mister: "Adam", retropie: "", batocera: "adam", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
 system_commodore:
   - { src: "commodore/amiga", last: "", mister: "Amiga", retropie: "", batocera: "amiga500", recalbox: "amiga600", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
   - { src: "commodore/amiga/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "" }
