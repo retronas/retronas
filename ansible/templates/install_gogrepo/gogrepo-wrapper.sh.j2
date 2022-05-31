@@ -1,0 +1,162 @@
+#!/bin/bash
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+## If this is run as root, switch to our RetroNAS user
+## Manifests and cookies stored in ~/.gogrepo
+DROP_ROOT
+CLEAR
+
+## Script Globals
+RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
+RNUGOGREPO=$RNUDIR/.gogrepo
+GOGREPO="${SUCOMMAND} /opt/retronas/bin/gogrepo/gogrepo.py"
+GOGDEPO="{{ retronas_path }}/gog"
+GOGMAN=${RNUDIR}/.gogrepo/gog-manifest.dat
+
+GOGGAME=""
+GOGOS=""
+OSLIST=()
+GAMELIST=()
+
+## New install
+# GOG Operating System
+[ -z "$OLDGOGOS" ] && OLDGOGOS="none"
+NEWGOGOS="windows"
+
+
+## Make the main directory
+[ ! -d $RNUGOGREPO ] && mkdir -p $RNUGOGREPO
+cd $RNUGOGREPO
+
+function header {
+    echo ""
+    echo "$1..."
+    echo ""
+}
+
+function update {
+    header "Refreshing GOG manifest..."
+    $GOGREPO update ${@}
+}
+
+function login {
+    header "Initiating GOG login"
+    header "Have your GOG username and password ready"
+    $GOGREPO login
+}
+
+function download {
+    header "Downloading/updating games..."
+    $GOGREPO download ${@} "${GOGDEPO}"
+}
+
+function get_os_list {
+    OS_LIST=(
+        "windows"
+        "mac"
+        "linux"
+        "windows mac"
+        "windows linux"
+        "mac linux"
+        "windows mac linux"
+        "quit"
+    )
+}
+
+function get_games_list {
+    GAME_LIST=$(grep "'title':" $GOGMAN | awk -F "'" '{print $4}' | sort)
+}
+
+function select_os {
+    header "Select the OS you would like to use..."
+    get_os_list
+
+    PS3="Enter a number (current: ${OLDGOGOS}): "
+    select ITEM in "${OS_LIST[@]}"
+    do
+        if [ ! -z "$ITEM" ]
+        then
+            if [ "$ITEM" != "quit" ]
+            then
+                NEWGOGOS="$ITEM"
+            fi
+            break
+        else
+                echo "Invalid option"
+        fi
+    done
+
+    if [ ! -z "$NEWGOGOS" ]
+    then
+        echo "Updating GOG settings to $NEWGOGOS"
+        # update gog setting
+        sed -i '/retronas_gog_os:/d' "${ANCFG}"
+        echo "retronas_gog_os: \"${NEWGOGOS}\"" >> "${ANCFG}"
+    fi
+}
+
+function gameslist {
+    PS3="Enter a number: "
+    get_games_list
+    select ITEM in $GAME_LIST
+    do
+        if [ ! -z $ITEM ]
+        then
+                GOGGAME=$ITEM
+                break
+        else
+                echo "Invalid option"
+        fi
+    done
+}
+
+function _usage {
+cat << USAGE
+[ GOGREPO RetroNAS Wrapper ]
+$0 login|select-os|update-skip-known|update-download-single|download-all|update-download
+ login                      log in to gog
+ select-os                  select the operating systems you want to target
+ update-skip-known          update all metadata
+ update-download-single     update and download a single title
+ download-all               download all know titles
+ update-download            update and download all
+
+USAGE
+exit
+}
+
+case $1 in 
+    login)
+        # login
+        login
+        ;;
+    update-skip-known)
+        # sync games list
+        update -os ${OLDGOGOS}
+        ;;
+    select-os)
+        select_os
+        ;;
+    update-download-single)
+        # download 1 game
+        gameslist
+        update -os ${OLDGOGOS} -id ${GOGGAME}
+        download -id ${GOGGAME}
+        ;;
+    download-all)
+        # download all games
+        download
+        ;;
+    update-download)
+        # sync and download
+        update -os ${GOGOS}
+        download
+        ;;
+    *)
+        _usage
+      ;;
+esac
+
+PAUSE

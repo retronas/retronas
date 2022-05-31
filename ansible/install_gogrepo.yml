@@ -4,6 +4,12 @@
     - my_name: "gogrepo"
     - my_file: "install_gogrepo"
 
+    - scripts:
+      - "gogrepo_login.sh" 
+      - "gogrepo_download.sh"
+      - "gogrepo_update.sh"
+      - "gogrepo-wrapper.sh"
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -41,26 +47,11 @@
       chdir: "{{ retronas_root }}/bin/gogrepo"
       cmd: "git pull"
 
-  - name: "{{ my_name }} - login script"
+  - name: "{{ my_name }} - scripts"
     template:
-      src: "templates/{{ my_file }}/gogrepo_login.sh.j2"
-      dest: "{{ retronas_root }}/scripts/gogrepo_login.sh"
+      src: "templates/{{ my_file }}/{{ item }}.j2"
+      dest: "{{ retronas_root }}/scripts/{{ item }}"
       owner: root
       group: root
       mode: 0755
-
-  - name: "{{ my_name }} - download script"
-    template:   
-      src: "templates/{{ my_file }}/gogrepo_download.sh.j2"
-      dest: "{{ retronas_root }}/scripts/gogrepo_download.sh"
-      owner: root
-      group: root
-      mode: 0755 
-
-  - name: "{{ my_name }} - update script"
-    template:
-      src: "templates/{{ my_file }}/gogrepo_update.sh.j2"
-      dest: "{{ retronas_root }}/scripts/gogrepo_update.sh"
-      owner: root
-      group: root
-      mode: 0755
+    with_items: "{{ scripts }}"
