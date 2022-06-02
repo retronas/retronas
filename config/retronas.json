@@ -1112,7 +1112,7 @@
         "update-password": 
         {
             "title": "Update Password",
-            "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here, this will also update your user password||Passwords entered here will be echoed to the backend processes",
+            "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here, this will also update your user password||Passwords entered here will be echoed to the backend processes||Use the up/down arrows to navigate form fields",
             "id":"update-password-menu",
             "prompt": "Update",
             "type": "menu",

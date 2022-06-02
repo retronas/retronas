@@ -29,12 +29,12 @@ rn_retronas_password() {
       /opt/retronas/scripts/static/update-passwd.sh "${PASS_ONE}"
       PAUSE
     else
-      RNLOG "Passwords do not match"
+      RN_LOG "Passwords do not match"
       PAUSE
       rn_retronas_password
     fi
   else
-    RNLOG "Password was blank"
+    RN_LOG "Password was blank"
     EXIT_CANCEL
   fi
 
