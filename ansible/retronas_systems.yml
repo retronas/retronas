@@ -210,7 +210,7 @@ system_nintendo:
   - { src: "nintendo/gameboyadvance", last: "", mister: "GBA2P", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
   - { src: "nintendo/gameboycolor", last: "", mister: "", retropie: "", batocera: "gbc", recalbox: "gbc", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
   - { src: "nintendo/gameboycolor", last: "", mister: "", retropie: "", batocera: "gbc2players", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
-  - { src: "nintendo/gamecube/iso", last: "", mister: "", retropie: "", batocera: "gamecube", recalbox: "gamecube", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "games" }
+  - { src: "nintendo/gamecube/iso", last: "", mister: "", retropie: "", batocera: "gamecube", recalbox: "gamecube", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "games", emuelec: "" }
   - { src: "nintendo/nintendo64", last: "", mister: "", retropie: "", batocera: "n64", recalbox: "n64", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
   - { src: "nintendo/nintendo64dd", last: "", mister: "", retropie: "", batocera: "n64dd", recalbox: "64dd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
   - { src: "nintendo/pokemini", last: "", mister: "", retropie: "", batocera: "pokemini", recalbox: "pokemini", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
