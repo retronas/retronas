@@ -423,14 +423,24 @@
                     "index": "36",
                     "title": "Samba for Recalbox",
                     "description": "Recalbox CIFS config",
-                    "id":"batocera-cifs",
+                    "id":"recalbox-cifs",
                     "prompt": "",
                     "type": "install",
                     "group":"",
                     "command": "samba:romdir:extradirs:recalbox_cifs"
-                },       
+                },     
                 {
                     "index": "37",
+                    "title": "Samba for EmuElec",
+                    "description": "EmuElec CIFS config",
+                    "id":"emuelec-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "samba:romdir:emuelec_cifs"
+                },   
+                {
+                    "index": "40",
                     "title": "gogrepo",
                     "description": "Download your GOG game installers", 
                     "id":"gogrepo",
@@ -440,7 +450,7 @@
                     "command": "gogrepo"
                 },                
                 {
-                    "index": "38",
+                    "index": "41",
                     "title": "ROM import",
                     "description": "ROM import from Smokemonster SMDBs", 
                     "id":"romimport",
@@ -450,7 +460,7 @@
                     "command": "romdir:romimport"
                 },                
                 {
-                    "index": "39",
+                    "index": "42",
                     "title": "FSP server",
                     "description": "Nintendo GameCube + Swiss FSP server", 
                     "id":"fsp",
@@ -460,7 +470,7 @@
                     "command": "romdir:fsp"
                 },                
                 {
-                    "index": "40",
+                    "index": "43",
                     "title": "SabreTools",
                     "description": "Dat Manager (x86_64 only)", 
                     "id":"sabretools",
@@ -470,7 +480,7 @@
                     "command": "dotnetcore3:sabretools"
                 },
                 {
-                    "index": "41",
+                    "index": "44",
                     "title": "DiscImageCreator",
                     "description": "Disc Image Creator", 
                     "id":"disc-image-creator",
