@@ -4,7 +4,7 @@
         "main": 
         {
             "title": "Main",
-            "description": "Please select an option.||Please ensure that you have configured your RetroNAS user and top level directory in the Global configration section before installing any tools.||Current RetroNAS user: \"${OLDRNUSER}\"|Current RetroNAS top level directory: \"${OLDRNPATH}\"||Changing either of these options will require tools to be reinstalled.",
+            "description": "Please ensure that you have configured your RetroNAS user and top level directory in the Global configuration section before installing any tools.|Changing either of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
             "id":"main",
             "prompt": "",
             "type": "menu",
@@ -1077,6 +1077,16 @@
                     "type": "script-static",
                     "group":"",
                     "command": "update-system-history"
+                },
+                {
+                    "index":"07",
+                    "title": "Branch",
+                    "description": "Manage the active GIT branch, (test new features, etc)",
+                    "id":"git-switch-branch",
+                    "prompt": "Manage",
+                    "type": "script-static",
+                    "group":"",
+                    "command": "git-switch-branch"
                 }
             ]
         },
