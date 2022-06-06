@@ -207,7 +207,7 @@ system_nintendo:
   - { src: "nintendo/famicom", last: "", mister: "NES", retropie: "", batocera: "nes", recalbox: "nes", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "nes" }
   - { src: "nintendo/famicom", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "famicom" }
   - { src: "nintendo/famicom/disk", last: "", mister: "", retropie: "", batocera: "fds", recalbox: "fds", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "fds" }
-  - { src: "nintendo/gameandwatch", last: "", mister: "", retropie: "", batocera: "gameandwatch", recalbox: "gw", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gameandwatch" }
+  - { src: "nintendo/gameandwatch", last: "", mister: "GameNWatch", retropie: "", batocera: "gameandwatch", recalbox: "gw", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gameandwatch" }
   - { src: "nintendo/gameboy", last: "", mister: "GAMEBOY", retropie: "", batocera: "gb", recalbox: "gb", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gb" }
   - { src: "nintendo/gameboy", last: "", mister: "GAMEBOY2P", retropie: "", batocera: "gb2players", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "" }
   - { src: "nintendo/gameboyadvance", last: "", mister: "GBA", retropie: "", batocera: "gba", recalbox: "gba", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gba" }
