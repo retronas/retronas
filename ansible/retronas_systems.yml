@@ -330,7 +330,7 @@ system_videotechnology:
 system_vtech:
   - { src: "vtech/creativision", last: "", mister: "", retropie: "", batocera: "crvision", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_watara:
-  - { src: "watara/supervision", last: "", mister: "", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "" }
+  - { src: "watara/supervision", last: "", mister: "SuperVision", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "" }
 
 system_links:
   - { src: "nec/pcengine", dest: "nec/turbografx16", smdb: "" }
