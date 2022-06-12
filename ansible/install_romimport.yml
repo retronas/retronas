@@ -9,6 +9,10 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+
+  - name: "{{ my_name }} - Load RetroNAS Systems"
+    include_vars: retronas_systems.yml
+
   - name: "{{ my_name }} - Install build tools"
     apt:
        name: "{{ item }}"
