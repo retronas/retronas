@@ -88,6 +88,15 @@
       mode: '0644'
     notify: "{{ my_name }} - Restart service"
 
+  - name: "{{ my_name }} - deluge auth"
+    template:
+      src: "templates/{{ my_file }}/auth.j2"
+      dest: "/var/lib/deluged/config/auth"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
   - name: "{{ my_name }} -remove legacy deluged startup file"
     file:
       path: "/etc/init.d/deluged"
