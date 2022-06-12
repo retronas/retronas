@@ -6,7 +6,16 @@
 
 RetroNAS is a tool that installs other tools, and is a rolling release.  Each time the command line "retronas" tool is run, the core project is updated to its latest stable release.  Third party tools that RetroNAS installs are done so via a mix of Debian APT repositories (which can be managed via standard package manager and system update tools), and for specialised tools via upstream project pages (these can be updated by re-running the tool installer). 
 
-Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. 
+Features are promoted from a feature branch into a branch called `testing` where it will sit until we are comfortable with the feature before being promoted to the "stable" `main` branch. 
+
+Branches
+- `feature_name`: new features WIP, may be broken
+- `testing`: new complete work, needs to be tested further
+- `main`: considered stable
+
+Users can opt in/out of these brances using the `Branch` tool available in the Update menu. It is suggested you only opt into the `testing` branch if you wish you provide feedback on new features we consider complete. Opting into a `feature_name` branch will not receive any support as the work is not considered complete.
+
+Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. When reporting an issue please include the branch you are currently on which is reported on the main menu in current releases of RetroNAS
 
 Please read the [Wiki](https://github.com/danmons/retronas/wiki) to see what's going on.
 
@@ -111,7 +120,7 @@ Thanks to the kind humans on the OCAU (Overclockers Australia) forums Retro sect
 
 Thanks to Bob from RetroRGB for being excited about every dumb idea I come up with, and constantly reminding me that real people need better UX. 
 
-Thanks to Sairuk for not only cleaning up my garbage code, but also for extending the project much further than I ever could. 
+Thanks to sairuk for not only cleaning up my garbage code, but also for extending the project much further than I ever could. 
 
 # How To
 

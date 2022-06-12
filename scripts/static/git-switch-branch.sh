@@ -10,6 +10,9 @@ SELECT_BRANCH() {
   
     cd /opt/retronas
 
+    # remove deleted remote branches from output
+    git fetch --prune origin &> /dev/null
+
     PS3="Please select a branch ($OLDRNBRANCH): "
     BRANCHES="$(git branch --remotes | awk -F'\/' '!/HEAD/{print $2}' ) exit"
     select BRANCH in $BRANCHES
