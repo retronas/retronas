@@ -11,25 +11,9 @@ TARGET=""
 declare -A SYSTEMS
 
 SYSTEMS=(
-  [atari/2600]="Atari 2600 SMDB.txt"
-  [atari/5200]="Atari 5200 SMDB.txt"
-  [atari/7800]="Atari 7800 SMDB.txt"
-  [atari/lynx]="Atari Lynx SMDB.txt"
-  [nec/pcengine]="Turbo EverDrive & Super SD System 3 SMDB.txt"
-  [nec/pcenginecd]="PC Engine CD Redump Supplement.txt"
-  [nintendo/famicom/disk]="Famicom Disk System SMDB.txt"
-  [nintendo/gameboy]="Game Boy SMDB.txt"
-  [nintendo/gameboyadvance]="EverDrive GBA SMDB.txt"
-  [nintendo/gameboycolor]="Game Boy Color SMDB.txt"
-  [nintendo/nintendo64]="EverDrive 64 & 64drive SMDB.txt"
-  [nintendo/snes]="Super EverDrive & SD2SNES SMDB.txt"
-  [nintendo/nes]="EverDrive N8 & PowerPak SMDB.txt"
-  [coleco/colecovision]="Colecovision SMDB.txt"
-  [sega/gamegear]="EverDrive GG SMDB.txt"
-  [sega/mastersystem]="Master EverDrive SMDB.txt"
-  [sega/megacd]="SegaCD.txt"
-  [sega/megadrive]="Mega EverDrive SMDB.txt"
-  [sega/saturn]="Saturn Redump Supplement.txt"
+  {% for item in system_map if item.smdb %}
+  [{{ item.src }}]="{{ item.smdb }}"
+  {% endfor %}
 )
 
 
