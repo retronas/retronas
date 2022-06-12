@@ -207,7 +207,7 @@ system_nintendo:
   - { src: "nintendo/famicom", last: "", mister: "NES", retropie: "", batocera: "nes", recalbox: "nes", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "nes", smdb: "EverDrive N8 & PowerPak SMDB.txt" }
   - { src: "nintendo/famicom", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "famicom", smdb: "" }
   - { src: "nintendo/famicom/disk", last: "", mister: "", retropie: "", batocera: "fds", recalbox: "fds", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "fds", smdb: "Famicom Disk System SMDB.txt" }
-  - { src: "nintendo/gameandwatch", last: "", mister: "", retropie: "", batocera: "gameandwatch", recalbox: "gw", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gameandwatch", smdb: "" }
+  - { src: "nintendo/gameandwatch", last: "", mister: "GameNWatch", retropie: "", batocera: "gameandwatch", recalbox: "gw", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gameandwatch", smdb: "" }
   - { src: "nintendo/gameboy", last: "", mister: "GAMEBOY", retropie: "", batocera: "gb", recalbox: "gb", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gb", smdb: "Game Boy SMDB.txt" }
   - { src: "nintendo/gameboy", last: "", mister: "GAMEBOY2P", retropie: "", batocera: "gb2players", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "nintendo/gameboyadvance", last: "", mister: "GBA", retropie: "", batocera: "gba", recalbox: "gba", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gba", smdb: "EverDrive GBA SMDB.txt" }
@@ -330,7 +330,7 @@ system_videotechnology:
 system_vtech:
   - { src: "vtech/creativision", last: "", mister: "", retropie: "", batocera: "crvision", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_watara:
-  - { src: "watara/supervision", last: "", mister: "", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "" }
+  - { src: "watara/supervision", last: "", mister: "SuperVision", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "" }
 
 system_links:
   - { src: "nec/pcengine", dest: "nec/turbografx16", smdb: "" }
