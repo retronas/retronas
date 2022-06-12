@@ -31,11 +31,6 @@
       group: "{{ retronas_user }}"
       mode: "0775"
       state: directory
-    with_items:
-      - torrents
-      - auto-add
-      - downloading
-      - complete
 
   - name: "{{ my_name }} - create bittorrent dirs"
     file:
@@ -44,7 +39,11 @@
       group: "{{ retronas_user }}"
       mode: "0775"
       state: directory
-
+    with_items:
+      - torrents
+      - auto-add
+      - downloading
+      - complete
 
   - name: "{{ my_name }} - create deluge lib dir"
     file:
