@@ -4,15 +4,6 @@
     - my_name: "ps3netsrv"
     - my_file: "install_ps3netsrv"
 
-    - system_map:
-      - { src: "../../roms/sony/playstation3/games", dest: "GAMES" }
-      - { src: "../../roms/sony/playstation3/iso", dest: "PS3ISO" }
-      - { src: "../../roms/sony/playstation2", dest: "PS2ISO" }
-      - { src: "../../roms/sony/playstation1/iso", dest: "PSXISO" }
-      - { src: "../../roms/sony/playstationportable/iso", dest: "PSPISO" }
-      - { src: "../../roms/videos/bdiso", dest: "BDISO" }
-      - { src: "../../roms/videos/dvdiso", dest: "DVDISO" }
-
     - systemd_units:
       - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
       - { name: "ps3netsrv-perms", type: 'service', state: "started", enabled: "no", restart: "yes", instance: "no" }
@@ -36,6 +27,9 @@
 
   tasks:
 
+  - name: "{{ my_name }} - Include systems map"
+    include_vars: "retronas_systems.yml"
+
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
@@ -57,13 +51,16 @@
       
   - name: "{{ my_name }} - build layout"
     file:
-      src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/ps3/ps3netsrv/{{ item.dest }}"
+      src: "../../roms/{{ item.src }}"
+      dest: "{{ retronas_path }}/ps3/ps3netsrv/{{ item.ps3netsrv }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       state: link
     with_items:
-      "{{ system_map }}"
+      - "{{ system_sony }}"
+      - "{{ system_videos }}"
+    when:
+      - item.ps3netsrv | length > 0
 
   - name: "{{ my_name }} - Generate {{ my_file }} script"
     template:
