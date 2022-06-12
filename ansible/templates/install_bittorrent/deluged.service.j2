@@ -1,0 +1,17 @@
+[Unit]
+Description=Deluge Daemon
+After=network-online.target
+
+[Service]
+Type=simple
+
+User={{ retronas_user }}
+Group={{ retronas_user }}
+UMask=007
+
+ExecStart=/usr/bin/deluged --do-not-daemonize --config /var/lib/deluged/config
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
