@@ -118,7 +118,7 @@ system_bandai:
   - { src: "bandai/wonderswan", last: "", mister: "WonderSwan", retropie: "", batocera: "wswan", recalbox: "wswan", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswan", smdb: "" }
   - { src: "bandai/wonderswancolor", last: "", mister: "", retropie: "", batocera: "wswanc", recalbox: "wswanc", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswancolor", smdb: "" }
 system_bitcorporation:
-  - { src: "bitcorporation/gamate", last: "", mister: "", retropie: "", batocera: "gamate", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "bitcorporation/gamate", last: "", mister: "Gamate", retropie: "", batocera: "gamate", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_cambridge:
   - { src: "cambridge/edsac", last: "other/cambridge_edsac", mister: "EDSAC", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_camputers:
