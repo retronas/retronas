@@ -37,6 +37,7 @@ system_map: "{{
   |union(system_fairchild)
   |union(system_fantasy_console)
   |union(system_fujitsu)
+  |union(system_gamepark)
   |union(system_generalinstrument)
   |union(system_interact)
   |union(system_interton)
@@ -162,6 +163,8 @@ system_fujitsu:
   - { src: "fujitsu/fm-7", last: "", mister: "", retropie: "", batocera: "fm7", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "fujitsu/fmtowns", last: "", mister: "", retropie: "", batocera: "fmtowns", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "fujitsu/fmtownsmarty", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_gamepark:
+  - { src: "gamepark/gp32", last: "", mister: "", retropie: "", batocera: "gp32", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_generalinstrument:
   - { src: "generalinstrument/ay38500", last: "other/generalinstrument_ay38500", mister: "AY-3-8500", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_interact:
@@ -416,7 +419,7 @@ system_unsupported:
   - { src: "uzebox", last: "", mister: "", retropie: "", batocera: "uzebox", recalbox: "uzebox", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "uzebox", smdb: "" }
   - { src: "vemulator", last: "", mister: "", retropie: "", batocera: "vemulator", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "vgmplay", last: "", mister: "", retropie: "", batocera: "vgmplay", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
-  - { src: "videopacplus", last: "", mister: "", retropie: "", batocera: "", recalbox: "videopacplus", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "videopac", smdb: "" }
+  - { src: "videopacplus", last: "", mister: "", retropie: "", batocera: "videopacplus", recalbox: "videopacplus", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "videopac", smdb: "" }
   - { src: "windows", last: "", mister: "", retropie: "", batocera: "windows", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "windows_installers", last: "", mister: "", retropie: "", batocera: "windows_installers", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "xash3d_fwgs", last: "", mister: "", retropie: "", batocera: "xash3d_fwgs", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
