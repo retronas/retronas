@@ -15,7 +15,7 @@
     file:
       path: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     with_items:

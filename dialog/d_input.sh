@@ -22,6 +22,11 @@ case $MENU_NAME in
         DATASET=($(awk -F':' '{print $1}' /etc/passwd  | paste -d" " -s))
         PATTERN="retronas_user:"
         ;;
+    update-group)
+        OLDVALUE="${OLDRNGROUP}"
+        DATASET=($(awk -F':' '{print $1}' /etc/group  | paste -d" " -s))
+        PATTERN="retronas_group:"
+        ;;
     *)
         PAUSE
         EXIT_CANCEL

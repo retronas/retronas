@@ -12,7 +12,7 @@ PROCDIR="${OLDRNPATH}/${1}"
 
 echo "Processing: ${PROCDIR}"
 
-sudo chown -Rc ${OLDRNUSER}:${OLDRNUSER} "${PROCDIR}"
+sudo chown -Rc ${OLDRNUSER}:${OLDRNGROUP} "${PROCDIR}"
 sudo chmod -Rc a-st,u+rwX,g+rwX,o+rX "${PROCDIR}"
 
 echo "Done, if there was anything to do output will be listed above"

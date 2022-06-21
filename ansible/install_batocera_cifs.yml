@@ -24,7 +24,7 @@
     file:
       path: "{{ retronas_path }}/batocera"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
@@ -40,7 +40,7 @@
     file:
       path: "{{ retronas_path }}/batocera/{{ item.name }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     with_items:
@@ -54,7 +54,7 @@
       src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
       dest: "{{ retronas_path }}/batocera/{{ item.1.name }}/{{ item.0.batocera }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_nested:
       - "{{ system_map }}"
@@ -70,7 +70,7 @@
       src: "../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/batocera/{{ item.dest }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_items:
       - "{{ internal_symlinks }}"

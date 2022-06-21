@@ -22,7 +22,7 @@
     file: 
       path: "{{ retronas_path }}/device-mounts"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       mode: "0755"
       state: directory
 
@@ -30,7 +30,7 @@
     file: 
       path: "{{ retronas_path }}/device-mounts/xbox"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       mode: "0755"
       state: directory
 
@@ -43,5 +43,5 @@
       src: templates/{{ my_file }}/xboxmanager.cfg.j2
       dest: /opt/xboxmanager/xboxmanager.cfg
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       mode: '0644'

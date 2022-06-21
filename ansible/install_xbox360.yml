@@ -12,7 +12,7 @@
     file:
       path: "{{ retronas_path }}/xbox360"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
@@ -22,7 +22,7 @@
       src: "{{ item.src }}"
       dest: "{{ retronas_path }}/xbox360/{{ item.dest }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_items:
       - { src: "../roms/microsoft/xbox360/games", dest: "games" }

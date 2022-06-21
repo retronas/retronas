@@ -4,7 +4,7 @@
         "main": 
         {
             "title": "Main",
-            "description": "Please ensure that you have configured your RetroNAS user and top level directory in the Global configuration section before installing any tools.|Changing either of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
+            "description": "Please ensure that you have configured your RetroNAS user, group and top level directory in the Global configuration section before installing any tools. Changing any of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
             "id":"main",
             "prompt": "",
             "type": "menu",
@@ -154,7 +154,7 @@
         "config": 
         {
             "title": "Configuration",
-            "description": "Please select a configuration||Current RetroNAS user: \"${OLDRNUSER}\"|Current RetroNAS top level directory: \"${OLDRNPATH}\"",
+            "description": "Please select a configuration||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
             "id":"config",
             "prompt": "Change",
             "type": "menu",
@@ -191,6 +191,16 @@
                 },
                 {
                     "index":"04",
+                    "title": "Group",
+                    "description": "Configure RetroNAS group",
+                    "id":"update-group",
+                    "prompt": "",
+                    "type": "dialog_input",
+                    "group":"",
+                    "command": "update-group"
+                },
+                {
+                    "index":"05",
                     "title": "Data Directory",
                     "description": "Configure RetroNAS top level directory",
                     "id":"set-top-level-dir",
@@ -200,7 +210,7 @@
                     "command": "set-top-level-dir"
                 },
                 {
-                    "index":"05",
+                    "index":"06",
                     "title": "Permissions",
                     "description": "Fix ALL on-disk permissions",
                     "id":"permissions",
@@ -210,7 +220,7 @@
                     "command": "retronas_fixperms"
                 },
                 {
-                    "index":"06",
+                    "index":"07",
                     "title": "EtherDFS",
                     "description": "Set EtherDFS network interface",
                     "id":"set-etherdfs-nic",
@@ -1123,8 +1133,47 @@
         "update-user-confirm": 
         {
             "title": "Confirm User",
-            "description": "Do you want to save this setting?|NewRetroNAS user: \"${NEWVALUE}\"",
+            "description": "Do you want to save this setting?|New RetroNAS user: \"${NEWVALUE}\"",
             "id":"update-user-confirm-menu",
+            "prompt": "Confirm",
+            "type": "dialog-yn",
+            "items": []
+        },
+        "update-group": 
+        {
+            "title": "Update Group",
+            "description": "Please enter the group for all RetroNAS services to run as||This will normally default to \"pi\" on Raspberry Pi OS Install||It is recommended you leave it as default unless you know what you are doing.",
+            "id":"update-group-menu",
+            "prompt": "Update",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Group",
+                    "description": "",
+                    "id":"update-group",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"retronas",
+                    "command": "update-group"
+                }
+            ]
+        },
+        "update-group-confirm": 
+        {
+            "title": "Confirm Group",
+            "description": "Do you want to save this setting?|New RetroNAS group: \"${NEWVALUE}\"",
+            "id":"update-group-confirm-menu",
             "prompt": "Confirm",
             "type": "dialog-yn",
             "items": []

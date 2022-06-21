@@ -21,7 +21,7 @@
     file:
       path: "{{ retronas_path }}/recalbox"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
@@ -37,7 +37,7 @@
     file:
       path: "{{ retronas_path }}/recalbox/{{ item.name }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     with_items:
@@ -51,7 +51,7 @@
       src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
       dest: "{{ retronas_path }}/recalbox/{{ item.1.name }}/{{ item.0.recalbox }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_nested:
       - "{{ system_map }}"

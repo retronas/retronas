@@ -8,7 +8,7 @@
   file:
     path: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
     owner: "{{ retronas_user }}"
-    group: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
     state: directory
     mode: "0775"
   with_nested:
@@ -22,7 +22,7 @@
   file:
     path: "{{ retronas_path }}/{{ item.name }}"
     owner: "{{ retronas_user }}"
-    group: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
     state: directory
     mode: "0775"
   with_items:
@@ -36,7 +36,7 @@
     src: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
     dest: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }}"
     owner: "{{ retronas_user }}"
-    group: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
     state: link
   with_nested:
     - "{{ system_links }}"
