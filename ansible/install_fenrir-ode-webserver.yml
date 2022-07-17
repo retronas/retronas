@@ -1,0 +1,78 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "fenrir-ode-webserver"
+    - my_file: "install_fenrir-ode-webserver"
+
+    - fenrir_ode_path: "{{ retronas_path }}/fenrir-ode-webserver"
+    - fenrir_ode_port: "31994"
+    - fenrir_ode_bin: "/usr/local/bin/FenrirServer"
+
+    - my_service: "{{ my_name }}.service"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - make
+      - gcc
+      - coreutils
+      - cmake
+
+  - name: "{{ my_name }} - copy in build script"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      mode: 0750
+
+  - name: "{{ my_name }} - run build tool"
+    shell:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "{{ fenrir_ode_bin }}"
+
+  - name: "{{ my_name }} - create share link"
+    file:
+      src: "roms/sega/saturn"
+      dest: "{{ fenrir_ode_path }}"
+      state: link
+
+  - name: "{{ my_name }} - systemd unit file"
+    copy:
+      dest: "/usr/lib/systemd/system/{{ my_service }}"
+      content: |
+        [Unit]
+        Description={{ my_name }}
+        After=network.target
+        StartLimitIntervalSec=60
+        StartLimitBurst=4
+
+        [Service]
+        User={{ retronas_user }}
+        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port "{{ fenrir_ode_port }} --verbose"
+        Restart=on-failure
+        RestartSec=5
+
+        [Install]
+        WantedBy=multi-user.target
+      owner: "root"
+      group: "root"
+      mode: "0644"
+    notify: "{{ my_name }} - Restart service"
+
+
+  handlers:
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+      daemon_reload: yes
+    with_items: "{{ my_service }}"

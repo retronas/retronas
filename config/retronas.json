@@ -588,6 +588,16 @@
                     "type": "install",
                     "group":"",
                     "command": "apfs-fuse"
+                },
+                {
+                    "index": "05",
+                    "title": "fenrir-ode-webserver",
+                    "description": "Fenrir ODE Webserver", 
+                    "id":"fenrir-ode-webserver",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
                 }
             ]
         },
