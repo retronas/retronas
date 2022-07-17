@@ -29,8 +29,8 @@
     template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
+      owner: "root"
+      group: "root"
       mode: 0750
 
   - name: "{{ my_name }} - run build tool"
@@ -56,7 +56,7 @@
 
         [Service]
         User={{ retronas_user }}
-        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port "{{ fenrir_ode_port }} --verbose"
+        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port {{ fenrir_ode_port }} --verbose
         Restart=on-failure
         RestartSec=5
 
@@ -66,7 +66,6 @@
       group: "root"
       mode: "0644"
     notify: "{{ my_name }} - Restart service"
-
 
   handlers:
   - name: "{{ my_name }} - Restart service"
