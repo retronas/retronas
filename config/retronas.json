@@ -528,6 +528,16 @@
                     "type": "install",
                     "group":"",
                     "command": "dotnetcore3:webone"
+                },
+                {
+                    "index": "53",
+                    "title": "BitTorrent",
+                    "description": "Deluge Web BitTorrent Client", 
+                    "id":"bittorrent",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "bittorrent"
                 }
             ]
         },

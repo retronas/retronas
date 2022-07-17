@@ -1,0 +1,17 @@
+[Unit]
+Description=Deluge Bittorrent Client Web Interface
+After=network-online.target
+
+[Service]
+Type=simple
+
+User={{ retronas_user }}
+Group={{ retronas_user }}
+UMask=007
+
+ExecStart=/usr/bin/deluge-web -d
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
