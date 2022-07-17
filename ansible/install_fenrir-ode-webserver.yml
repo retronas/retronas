@@ -56,7 +56,7 @@
 
         [Service]
         User={{ retronas_user }}
-        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port {{ fenrir_ode_port }} --verbose
+        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port {{ fenrir_ode_port }}
         Restart=on-failure
         RestartSec=5
 
