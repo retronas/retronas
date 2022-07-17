@@ -227,7 +227,7 @@ system_nintendo:
   - { src: "nintendo/superfamicom/msu1", last: "", mister: "", retropie: "", batocera: "snes-msu1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "snesmsu1", smdb: "" }
   - { src: "nintendo/superfamicom", last: "", mister: "SNES", retropie: "", batocera: "snes", recalbox: "snes", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "snes", smdb: "Super EverDrive & SD2SNES SMDB.txt" }
   - { src: "nintendo/superfamicom", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sfc", smdb: "" }
-  - { src: "nintendo/supergameboy", last: "", mister: "", retropie: "", batocera: "sgb", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" } 
+  - { src: "nintendo/supergameboy", last: "", mister: "SGB", retropie: "", batocera: "sgb", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" } 
   #- { src: "nintendo/switch", last: "", mister: "", retropie: "", batocera: "switch", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "nintendo/virtualboy", last: "", mister: "", retropie: "", batocera: "virtualboy", recalbox: "virtualboy", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "virtualboy", smdb: "" }
   - { src: "nintendo/wii", last: "", mister: "", retropie: "", batocera: "wii", recalbox: "wii", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wii", smdb: "" }
@@ -324,6 +324,7 @@ system_tiger:
   - { src: "gamecom", last: "", mister: "", retropie: "", batocera: "gamecom", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_tomytronic:
   - { src: "tomytronic/scramble", last: "", mister: "TomyScramble", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "tomytronic/tutor", last: "", mister: "TomyTutor", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_tsukuda:
   - { src: "tsukuda/othellomultivision", last: "", mister: "", retropie: "", batocera: "", recalbox: "multivision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_vector:
