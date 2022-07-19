@@ -668,6 +668,16 @@
                     "type": "install",
                     "group":"",
                     "command": "pfsshell"
+                },
+                {
+                    "index": "07",
+                    "title": "cue2pops",
+                    "description": "Convert PS1 images for use with POPS", 
+                    "id":"cue2pops",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "cue2pops"
                 }
             ]
         },
