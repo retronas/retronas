@@ -24,7 +24,6 @@
       - "CFG"
       - "CHT"
       - "LNG"
-      - "POPS"
       - "THM"
       - "VMC"
     notify: "{{ my_name }} - Restart service"

@@ -292,6 +292,7 @@ system_snk:
 system_sony:
   - { src: "sony/playstation1", last: "", mister: "PSX", retropie: "", batocera: "psx", recalbox: "psx", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psx", smdb: "" }
   - { src: "sony/playstation1/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "PSXISO", fspd: "", emuelec: "", smdb: "" }
+  - { src: "sony/playstation1/vcd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "POPS", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2", last: "", mister: "", retropie: "", batocera: "ps2", recalbox: "ps2", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2/cd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "CD", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2/dvd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "DVD", ps3netsrv: "PS2ISO", fspd: "", emuelec: "", smdb: "" }

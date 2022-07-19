@@ -1,0 +1,27 @@
+#!/bin/bash
+
+### SETUP
+APP=cue2pops
+APPREPO=makefu
+
+LOCALDIR=/opt/${APP}
+LOCALSCRIPT=/usr/local/bin/${APP}
+
+if [ -f ${LOCALDIR}/${APP} ]
+then
+    echo "Already compiled, nothing to do"
+    exit
+fi
+
+cd /opt
+git clone https://github.com/${APPREPO}/${APP}-linux.git $APP
+cd ${APP}
+make
+
+if [ $? -eq 0 ]
+then
+    ln -sf ${LOCALDIR}/${APP} $LOCALSCRIPT
+else
+    echo "Compilation failed"
+fi
+
