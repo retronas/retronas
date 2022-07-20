@@ -608,6 +608,16 @@
                     "type": "install",
                     "group":"",
                     "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index": "06",
+                    "title": "xlink-kai",
+                    "description": "XLink Kai Gaming Network", 
+                    "id":"xlink-kai",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "xlink-kai"
                 }
             ]
         },

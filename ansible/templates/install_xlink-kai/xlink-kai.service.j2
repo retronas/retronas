@@ -1,0 +1,14 @@
+[Unit]
+Description=xlink-kai
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+User={{ retronas_user }}
+ExecStart=/usr/bin/kaiengine
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
