@@ -538,7 +538,17 @@
                     "type": "install",
                     "group":"",
                     "command": "bittorrent"
-                }
+                },
+                {   
+                    "index": "54",
+                    "title": "aria2",
+                    "description": "lightweight multi-protocol/source cli download utility", 
+                    "id":"aria2",
+                    "prompt": "", 
+                    "type": "install",
+                    "group":"",
+                    "command": "aria2"
+                }   
             ]
         },
         "experimental": 
