@@ -1,0 +1,37 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "megatools"
+    - my_file: "install_megatools"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - build-essential 
+      - libglib2.0-dev libssl-dev
+      - libcurl4-openssl-dev
+      - make
+      - gcc
+      - coreutils
+      - meson
+      - ninja-build
+
+  - name: "{{ my_name }} - install script"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: '0750'
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "/usr/local/bin/pfsfuse"
