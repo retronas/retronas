@@ -548,7 +548,17 @@
                     "type": "install",
                     "group":"",
                     "command": "aria2"
-                }   
+                },
+                {   
+                    "index": "55",
+                    "title": "megatools",
+                    "description": "command line client application for Mega", 
+                    "id":"megatools",
+                    "prompt": "", 
+                    "type": "install",
+                    "group":"",
+                    "command": "megatools"
+                } 
             ]
         },
         "experimental": 

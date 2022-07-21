@@ -10,12 +10,13 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
+    package:
        name: "{{ item }}"
        state: latest
     with_items:
       - build-essential 
-      - libglib2.0-dev libssl-dev
+      - libglib2.0-dev
+      - libssl-dev
       - libcurl4-openssl-dev
       - make
       - gcc
@@ -34,4 +35,4 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "/usr/local/bin/pfsfuse"
+      creates: "/usr/local/bin/megatools"

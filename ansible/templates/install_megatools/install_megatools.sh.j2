@@ -29,6 +29,10 @@ fi
 
 cd ${OUTPATH}/${APP}
 
+# patch for old debian glib
+sed -i 's/g_memdup2/g_memdup/g' lib/mega.c
+#
+
 mkdir build
 cd build
 meson ..
