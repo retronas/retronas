@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -u
+
+RN_BIN=/usr/local/bin/
+
+APP=webserver
+REPO=https://github.com/Fenrir-ode/${APP}.git
+OUTPATH=/tmp
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+#[ ! -x /usr/bin/gmake ] && _log "GMAKE not found" && REQFAIL=1
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
+
+cd ${OUTPATH}/${APP}
+git submodule init
+git submodule update --recursive
+
+
+mkdir build
+cd build
+cmake ..
+make
+
+mv ${OUTPATH}/${APP}/build/FenrirServer $RN_BIN/
+
+
+# CLEAN UP
+#rm -Rf ${OUTPATH}/${APP}

@@ -58,7 +58,7 @@
     file:
       path: /var/log/lighttpd
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       recurse: yes
 
@@ -66,7 +66,7 @@
     file:
       path: /var/run/lighttpd
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       recurse: yes
 

@@ -68,6 +68,7 @@ system_map: "{{
   |union(system_texas_instruments)
   |union(system_thomson)
   |union(system_tiger)
+  |union(system_tomytronic)
   |union(system_tsukuda)
   |union(system_vector)
   |union(system_videos)
@@ -154,6 +155,7 @@ system_entex:
   - { src: "entex/adventurevision", last: "other/entex_adventurevision", mister: "AVision", retropie: "", batocera: "advision", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_epoch_co:
   - { src: "epoch_co/scv", last: "", mister: "", retropie: "", batocera: "scv", recalbox: "scv", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "epoch_co/galaxy2", last: "", mister: "EpochGalaxyII", retropie: "", batocera: "scv", recalbox: "scv", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_fairchild:
   - { src: "fairchild/channelf", last: "other/fairchild_channelf", mister: "ChannelF", retropie: "", batocera: "channelf", recalbox: "channelf", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_fantasy_console:
@@ -225,7 +227,7 @@ system_nintendo:
   - { src: "nintendo/superfamicom/msu1", last: "", mister: "", retropie: "", batocera: "snes-msu1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "snesmsu1", smdb: "" }
   - { src: "nintendo/superfamicom", last: "", mister: "SNES", retropie: "", batocera: "snes", recalbox: "snes", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "snes", smdb: "Super EverDrive & SD2SNES SMDB.txt" }
   - { src: "nintendo/superfamicom", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sfc", smdb: "" }
-  - { src: "nintendo/supergameboy", last: "", mister: "", retropie: "", batocera: "sgb", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" } 
+  - { src: "nintendo/supergameboy", last: "", mister: "SGB", retropie: "", batocera: "sgb", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" } 
   #- { src: "nintendo/switch", last: "", mister: "", retropie: "", batocera: "switch", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "nintendo/virtualboy", last: "", mister: "", retropie: "", batocera: "virtualboy", recalbox: "virtualboy", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "virtualboy", smdb: "" }
   - { src: "nintendo/wii", last: "", mister: "", retropie: "", batocera: "wii", recalbox: "wii", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wii", smdb: "" }
@@ -290,6 +292,7 @@ system_snk:
 system_sony:
   - { src: "sony/playstation1", last: "", mister: "PSX", retropie: "", batocera: "psx", recalbox: "psx", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psx", smdb: "" }
   - { src: "sony/playstation1/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "PSXISO", fspd: "", emuelec: "", smdb: "" }
+  - { src: "sony/playstation1/vcd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "POPS", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2", last: "", mister: "", retropie: "", batocera: "ps2", recalbox: "ps2", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2/cd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "CD", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstation2/dvd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "DVD", ps3netsrv: "PS2ISO", fspd: "", emuelec: "", smdb: "" }
@@ -320,6 +323,9 @@ system_thomson:
   - { src: "thomson/thomson", last: "", mister: "", retropie: "", batocera: "thomson", recalbox: "thomson", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_tiger:
   - { src: "gamecom", last: "", mister: "", retropie: "", batocera: "gamecom", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_tomytronic:
+  - { src: "tomytronic/scramble", last: "", mister: "TomyScramble", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "tomytronic/tutor", last: "", mister: "TomyTutor", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_tsukuda:
   - { src: "tsukuda/othellomultivision", last: "", mister: "", retropie: "", batocera: "", recalbox: "multivision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_vector:

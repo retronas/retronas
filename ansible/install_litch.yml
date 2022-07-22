@@ -28,7 +28,7 @@
     file:
       path: "{{ retronas_path }}/{{ item }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       mode: "0775"
       state: directory
     with_items:

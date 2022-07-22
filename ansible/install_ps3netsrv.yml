@@ -44,7 +44,7 @@
     file:
       path: "{{ retronas_path }}/ps3/ps3netsrv"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
@@ -54,7 +54,7 @@
       src: "../../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/ps3/ps3netsrv/{{ item.ps3netsrv }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_items:
       - "{{ system_sony }}"

@@ -12,7 +12,7 @@ DefaultRoot "{{ retronas_path }}"
 
 # Set the Linux on-disk permissions to match the RetroNAS user
 User "{{ retronas_user }}"
-Group "{{ retronas_user }}"
+Group "{{ retronas_group }}"
 
 # Allow writes from the RetroNAS user
 <Directory "{{ retronas_path }}">

@@ -9,39 +9,30 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - configure 3DS directory"
-    file:
-      path: "{{ retronas_path }}/3ds"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      state: directory
-
   - name: "{{ my_name }} - configure CIA directory"
     file:
       path: "{{ retronas_path }}/3ds/cia"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
+
+  - name: "{{ my_name }} - configure 3DS directory as symlink"
+    file:
+      src: "{{ retronas_path }}/roms/nintendo/3ds/cia"
+      dest: "{{ retronas_path }}/3ds"
+      state: link
 
   - name: "{{ my_name }} - configure QR codes directory"
     file:
       path: "{{ retronas_path }}/3ds/qr"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory 
 
   - name: "{{ my_name }} - install qrencode"
     apt:
        name: qrencode
        state: latest
-
-#  - name: "{{ my_name }} - configure cron scheduled task"
-#    template:
-#      src: "templates/{{ my_file }}/retronas_3ds_qr.cron.j2"
-#      dest: "/etc/cron.d/retronas_3ds_qr"
-#      owner: root
-#      group: root
-#      mode: '0644'
 
   - name: "{{ my_name }} - configure QR generator script"
     template:

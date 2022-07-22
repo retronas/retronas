@@ -27,7 +27,7 @@
     file:
       path: "{{ retronas_path }}/dos"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       mode: "0775"
       state: directory
 

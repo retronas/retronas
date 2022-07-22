@@ -1,0 +1,17 @@
+- hosts: localhost
+
+  vars:
+    - my_name: "aria2"
+    - my_file: "install_aria2"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+    
+  - name: "{{ my_name }} - install packages"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      - aria2

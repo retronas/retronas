@@ -24,7 +24,7 @@
     file:
       path: "{{ retronas_path }}/emuelec"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
@@ -41,7 +41,7 @@
       src: "../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/emuelec/{{ item.emuelec }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_items:
       - "{{ system_map }}"
@@ -54,7 +54,7 @@
       src: "../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/emuelec/{{ item.dest }}"
       owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
       state: link
     with_items:
       - "{{ internal_symlinks }}"
