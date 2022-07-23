@@ -57,6 +57,14 @@
       dest: "/etc/systemd/system/{{ my_name }}.service"
     notify: "{{ my_name }} - Restart service(s)"
 
+  - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
+    file:
+      path: "/etc/kaiengine.conf"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: '0640'
+    notify: "{{ my_name }} - Restart service(s)"
+
   handlers:
   - name: "{{ my_name }} - Restart service(s)"
     service:
