@@ -1,3 +1,8 @@
+# Dependencies
+- import_playbook: install_samba.yml
+- import_playbook: install_romdir.yml
+- import_playbook: install_extradirs.yml
+
 - hosts: localhost
 
   vars:

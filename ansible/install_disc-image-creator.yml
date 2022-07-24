@@ -1,3 +1,7 @@
+# Dependencies
+- import_playbook: install_dvdauth.yml
+- import_playbook: install_eccedc.yml
+
 - hosts: localhost
 
   vars:

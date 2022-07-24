@@ -1,3 +1,6 @@
+# Dependencies
+- import_playbook: install_dotnetcore3.yml
+
 - hosts: localhost
 
   vars:
