@@ -7,6 +7,9 @@ StartLimitBurst=4
 [Service]
 User={{ retronas_user }}
 ExecStart=/usr/bin/kaiengine
+KillSignal=3
+RestartKillSignal=3
+SuccessExitStatus=3 SIGQUIT QUIT
 Restart=always
 RestartSec=5
 
