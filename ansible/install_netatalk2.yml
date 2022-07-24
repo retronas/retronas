@@ -116,3 +116,8 @@
     with_items:
       - avahi-daemon
       - netatalk
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "netatalk2"
+    module_state: "present"

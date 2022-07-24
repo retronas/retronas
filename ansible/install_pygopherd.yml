@@ -58,4 +58,8 @@
     with_items:
       - "{{ my_name }}"
 
-    
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "pygopherd"
+    module_state: "present"
+

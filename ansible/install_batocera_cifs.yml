@@ -102,3 +102,8 @@
     with_items:
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "batocera_cifs"
+    module_state: "present"

@@ -30,3 +30,8 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "cockpit-retronas"
+    module_state: "present"

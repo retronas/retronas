@@ -30,3 +30,8 @@
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/ucon64"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "ucon64"
+    module_state: "present"

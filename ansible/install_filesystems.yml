@@ -22,3 +22,8 @@
       - dosfstools
       - curlftpfs
       - sshfs
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "filesystems"
+    module_state: "present"

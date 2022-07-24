@@ -57,3 +57,8 @@
     with_items:
       - avahi-daemon
       - proftpd
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "proftpd"
+    module_state: "present"

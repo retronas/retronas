@@ -34,3 +34,8 @@
     service:
       name: tftpd-hpa
       state: restarted
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "tftpd-hpa"
+    module_state: "present"

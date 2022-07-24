@@ -86,3 +86,8 @@
     with_items:
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "emuelec_cifs"
+    module_state: "present"

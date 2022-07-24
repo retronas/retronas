@@ -58,4 +58,7 @@
     with_items:
       - tnfsd
 
-    
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "tnfs"
+    module_state: "present"

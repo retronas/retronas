@@ -133,3 +133,8 @@
     when: 
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "ps3netsrv"
+    module_state: "present"

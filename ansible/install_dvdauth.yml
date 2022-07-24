@@ -37,3 +37,8 @@
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "dvdauth"
+    module_state: "present"

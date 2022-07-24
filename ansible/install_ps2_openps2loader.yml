@@ -64,3 +64,8 @@
     with_items:
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "ps2_openps2loader"
+    module_state: "present"

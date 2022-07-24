@@ -74,3 +74,8 @@
       daemon_reload: yes
     with_items:
       - "{{ my_name }}.service"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "xlink-kai"
+    module_state: "present"

@@ -51,3 +51,8 @@
       state: restarted
     with_items:
       - nfs-kernel-server
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "nfs"
+    module_state: "present"

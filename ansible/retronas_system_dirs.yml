@@ -23,7 +23,7 @@
       path: "{{ retronas_path }}/config/packages.ini"
       section: "package"
       option: "{{ module_name }}"
-      value: "installed"
+      value: "{{ module_state }}"
       state: "{{ module_state }}"
     when: module_name is defined and 
           module_state is defined

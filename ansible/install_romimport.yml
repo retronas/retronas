@@ -47,3 +47,8 @@
     shell: "chown -R {{ retronas_user}}:{{ retronas_user }} Hardware-Target-Game-Database"
     args:
       chdir: "{{ retronas_root}}/bin"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "romimport"
+    module_state: "present"

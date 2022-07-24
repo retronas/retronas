@@ -45,3 +45,8 @@
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       mode: '0644'
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "xboxmanager"
+    module_state: "present"

@@ -35,3 +35,9 @@
   - name: "{{ my_name }} - get packages"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
+
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "cockpit-packages"
+    module_state: "present"

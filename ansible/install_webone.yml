@@ -63,3 +63,7 @@
     with_items:
       - webone
 
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "webone"
+    module_state: "present"

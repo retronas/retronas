@@ -15,3 +15,8 @@
        state: latest
     with_items:
       - aria2
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "aria2"
+    module_state: "present"

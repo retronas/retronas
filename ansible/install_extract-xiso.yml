@@ -31,3 +31,8 @@
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/extract-xiso"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "extract-xiso"
+    module_state: "present"

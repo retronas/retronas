@@ -13,3 +13,8 @@
   tasks:
     - name: "{{ my_name }}"
       import_tasks: retronas_create_dirs.yml
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "extradirs"
+    module_state: "present"

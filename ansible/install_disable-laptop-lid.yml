@@ -35,3 +35,8 @@
     service:
       name: "{{ service }}"
       state: restarted
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "disable-laptop-lid"
+    module_state: "present"

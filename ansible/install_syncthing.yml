@@ -66,3 +66,7 @@
       - syncthing@{{ retronas_user }}
 
     
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "syncthing"
+    module_state: "present"

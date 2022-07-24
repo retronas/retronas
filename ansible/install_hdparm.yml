@@ -96,3 +96,8 @@
       - "{{ systemd_units }}"
     when:
       - item.restart == "yes"
+
+- import_playbook: retronas_system_dirs.yml
+  vars:
+    module_name: "hdparm"
+    module_state: "present"
