@@ -3,28 +3,36 @@
   vars:
     - my_name: "3DS QR Codes"
     - my_file: "install_3ds_qr_codes"
+    - rom_path: "{{ retronas_path }}/3ds"
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+  - name: "{{ my_name }} - configure 3DS directory"
+    file:
+      path: "{{ rom_path }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+      
   - name: "{{ my_name }} - configure CIA directory"
     file:
-      path: "{{ retronas_path }}/3ds/cia"
+      path: "{{ rom_path }}/cia"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
 
-  - name: "{{ my_name }} - configure 3DS directory as symlink"
+  - name: "{{ my_name }} - configure 3DS cia directory"
     file:
-      src: "{{ retronas_path }}/roms/nintendo/3ds/cia"
-      dest: "{{ retronas_path }}/3ds"
+      src: "{{ rom_path }}/cia"
+      dest: "{{ retronas_path }}/roms/nintendo/3ds/cia"
       state: link
 
   - name: "{{ my_name }} - configure QR codes directory"
     file:
-      path: "{{ retronas_path }}/3ds/qr"
+      path: "{{ rom_path }}/qr"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory 
