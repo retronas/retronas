@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+
+  vars:
+    my_name: "retronas user config setup"
+    system_user_dirs:
+      - config
+
+  tasks:
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Create retronas user system dirs"
+    file:
+      path: "{{ retronas_path }}/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      mode: "0755"
+    with_items: "{{ system_user_dirs }}"
+
+  - name: "{{ my_name }} - Log Entry"
+    ini_file:
+      path: "{{ retronas_path }}/config/packages.ini"
+      section: "package"
+      option: "{{ module_name }}"
+      value: "installed"
+      state: "{{ module_state }}"
+    when: module_name is defined and 
+          module_state is defined
