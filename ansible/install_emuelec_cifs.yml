@@ -8,6 +8,7 @@
       - { src: 'nintendo/famicom', dest: 'nesh' }
       - { src: 'nintendo/gameboyadvance', dest: 'gbah' }
       - { src: 'nintendo/gameboy', dest: 'gbh' }
+      - { src: 'nintendo/gameboycolor', dest: 'gbch' }      
       - { src: 'nintendo/superfamicom', dest: 'snesh' }
       - { src: 'sega/gamegear', dest: 'gamegearh' }
       - { src: 'sega/megadrive', dest: 'genh' }
