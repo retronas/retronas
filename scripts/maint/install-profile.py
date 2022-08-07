@@ -10,7 +10,7 @@ from configparser import ConfigParser
 
 rn_dir = "/opt/retronas"
 rn_ansible_runner = os.path.join(rn_dir, "lib/ansible_runner.sh")
-
+rn_section = "package"
 
 def ini2dict(profile):
     if os.path.exists(profile):
@@ -29,11 +29,13 @@ def ansible_run(profile):
     return
 
 def main(args):
-
     config = ini2dict(args.profile)
     if config is not None:
-        for item in config["package"]:
-            ansible_run(item)
+        if rn_section in config.keys():
+            for item in config[rn_section]:
+                ansible_run(item)
+        else:
+            print("Incompatible profile, could not find %s entry" % rn_section)
     return
 
 
