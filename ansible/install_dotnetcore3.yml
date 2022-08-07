@@ -44,7 +44,7 @@
       DOTNET_ROOT: "{{ retronas_root }}/bin/dotnetcore3"
       DOTNET_INSTALL_DIR: "{{ retronas_root }}/bin/dotnetcore3"
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "dotnetcore3"
     module_state: "present"

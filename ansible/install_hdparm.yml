@@ -97,7 +97,7 @@
     when:
       - item.restart == "yes"
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "hdparm"
     module_state: "present"

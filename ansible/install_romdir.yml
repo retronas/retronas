@@ -11,7 +11,7 @@
     - name: "{{ my_name }}"
       import_tasks: retronas_create_dirs.yml
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "romdir"
     module_state: "present"

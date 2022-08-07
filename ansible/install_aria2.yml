@@ -16,7 +16,7 @@
     with_items:
       - aria2
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "aria2"
     module_state: "present"

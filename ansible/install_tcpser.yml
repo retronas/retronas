@@ -52,7 +52,7 @@
       groups: dialout
       append: yes
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "tcpser"
     module_state: "present"

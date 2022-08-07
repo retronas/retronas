@@ -138,7 +138,7 @@
       - item.restart == 'yes'
       - item.instance == 'no'
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "bittorrent"
     module_state: "present"

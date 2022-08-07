@@ -77,7 +77,7 @@
     with_items:
       - cockpit
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "cockpit"
     module_state: "present"

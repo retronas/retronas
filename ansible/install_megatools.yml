@@ -37,7 +37,7 @@
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/megatools"
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "megatools"
     module_state: "present"

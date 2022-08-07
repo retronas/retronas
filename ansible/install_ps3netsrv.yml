@@ -137,7 +137,7 @@
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "ps3netsrv"
     module_state: "present"

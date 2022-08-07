@@ -15,6 +15,7 @@
       path: "{{ retronas_path }}/{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
+      state: directory
       mode: "0755"
     with_items: "{{ system_user_dirs }}"
 

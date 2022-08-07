@@ -125,7 +125,7 @@
       state: restarted
     with_items: "{{ services }}"
 
-- import_playbook: retronas_system_dirs.yml
+- import_playbook: retronas_system_config.yml
   vars:
     module_name: "netatalk2x"
     module_state: "present"
