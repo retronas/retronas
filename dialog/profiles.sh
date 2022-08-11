@@ -30,10 +30,19 @@ rn_profile_chooser() {
 
   for ITEM in "${MENU_ARRAY2[@]}"
   do
+
+    #TITLE="$(grep -E "^title\s=" "${ITEM}" | cut -d' ' -f3-)"
+    UPDATED=$(grep -E "^last_updated\s=" "${ITEM}" | cut -d' ' -f3-)
+
+    [ -z "${TITLE}" ] && TITLE="Unknown"
+    [ -z "${UPDATED}" ] && UPDATED="00-00-0000"
+
     ITEM2=${ITEM##*/}
-    ITEM3=${ITEM2%%.*}
-    MENU_ARRAY+="$ITEM3 $ITEM2 "
+    ININAME=${ITEM2%%.*}
+    MENU_ARRAY+="$ININAME $UPDATED "
   done
+
+  PAUSE
 
   dialog \
     --backtitle "${MENU_NAME}" \
@@ -44,8 +53,16 @@ rn_profile_chooser() {
     2> ${TDIR}/rn_profile
 
     CLEAR
-    python3 ${SCDIR}/maint/install-profile.py --profile "${PROFILED}/$(cat ${TDIR}/rn_profile).ini"
 
+    PROFILE="$(cat ${TDIR}/rn_profile)"
+    if [ ! -z "$PROFILE" ]
+    then
+      python3 ${SCDIR}/maint/install-profile.py --profile "${PROFILED}/${PROFILE}.ini"
+    else
+      echo "Couldn't find profile"
+      PAUSE
+      exit 1
+    fi
 }
 
 rn_profile_chooser

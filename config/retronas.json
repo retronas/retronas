@@ -1728,8 +1728,8 @@
         },
         "profiles": 
         {
-            "title": "Profile",
-            "description": "Available installation profiles",
+            "title": "Installation Profile(s)",
+            "description": "Available installation profiles||Profile Location: \"${OLDRNPATH}/config\"",
             "id":"profiles",
             "prompt": "",
             "type": "menu",

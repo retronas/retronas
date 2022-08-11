@@ -12,15 +12,14 @@ rn_dir = "/opt/retronas"
 rn_ansible_runner = os.path.join(rn_dir, "lib/ansible_runner.sh")
 rn_section = "package"
 
+
 def ini2dict(profile):
     if os.path.exists(profile):
-
         config= ConfigParser()
         config.read(profile)
         return config
     else:
         print("Couldn't read from profile: %s" % profile)
-
     return None
 
 def ansible_run(profile):
