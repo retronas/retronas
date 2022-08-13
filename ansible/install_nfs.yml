@@ -17,6 +17,22 @@
       - nfs-common
       - nfs-kernel-server
 
+  - name: "{{ my_name }} - retrieve {{ retronas_user }} user info"
+    getent:
+      database: passwd
+      key: "{{ retronas_user }}"
+
+  - set_fact:
+      retronas_user_id: "{{ getent_passwd[retronas_user][1] }}"
+
+  - name: "{{ my_name }} - retrieve {{ retronas_group }} group info"
+    getent:
+      database: group
+      key: "{{ retronas_group }}"
+
+  - set_fact:
+      retronas_group_id: "{{ getent_group[retronas_group][1] }}"
+
   - name: "{{ my_name }} - enable NFS v2 v3 v4"
     template:
       src: "templates/{{ my_file }}/default.j2"

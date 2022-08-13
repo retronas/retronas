@@ -1,4 +1,4 @@
 ## Automatically created by RetroNAS
 ## Changes will be lost
 
-{{ retronas_path }}  *(rw,async,fsid=99,all_squash,anonuid=1000,anongid=1000)
+{{ retronas_path }}  *(rw,async,fsid=99,all_squash,anonuid={{ retronas_user_id }},anongid={{ retronas_group_id }})

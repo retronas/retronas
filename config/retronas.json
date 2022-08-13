@@ -622,12 +622,12 @@
                 {
                     "index": "05",
                     "title": "fenrir-ode-webserver",
-                    "description": "Fenrir ODE Webserver", 
+                    "description": "Fenrir-ODE Webserver", 
                     "id":"fenrir-ode-webserver",
                     "prompt": "",
-                    "type": "install",
+                    "type": "dialog",
                     "group":"",
-                    "command": "fenrir-ode-webserver"
+                    "command": "fenrirodewebserver"
                 },
                 {
                     "index":"06",
@@ -960,10 +960,80 @@
                 }
             ]
         },
+        "fenrirodewebserver":
+        {
+            "title": "Fenrir-ODE Web Server",
+            "description": "",
+            "id":"fenrir-ode-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install the Fenrir-ODE Webserver application",
+                    "id":"fenrir-ode-webserver",
+                    "prompt": "Install",
+                    "type":"install",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"03",
+                    "title": "Gamelist",
+                    "description": "Manually refresh the gamelist",
+                    "id":"",
+                    "prompt": "Refresh",
+                    "type": "service_restart",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"20",
+                    "title": "Start",
+                    "description": "Start service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"21",
+                    "title": "Status",
+                    "description": "Query service status",
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"22",
+                    "title": "Stop",
+                    "description": "Stop the service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                }
+            ]
+        },
         "xlinkkai": 
         {
             "title": "XLink Kai",
-            "description": "XLink Kai online gaming service for LAN based game modes",
+            "description": "XLink Kai online gaming service for LAN based game modes||WARNING: XLink Kai works by capturing and inspecting network traffic, we recommend you isolate devices running XLink from your main net",
             "id":"xlinkkai-menu",
             "prompt": "",
             "type": "modal",
