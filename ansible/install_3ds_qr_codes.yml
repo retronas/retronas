@@ -1,3 +1,6 @@
+# Dependencies
+- import_playbook: install_lighttpd.yml
+
 - hosts: localhost
 
   vars:
@@ -49,3 +52,8 @@
       owner: root
       group: root
       mode: '0755'
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "3ds_qr_codes"
+    module_state: "present"

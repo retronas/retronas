@@ -36,3 +36,8 @@
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "{{ retronas_root }}/bin/apfs-fuse"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "apfs-fuse"
+    module_state: "present"

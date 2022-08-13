@@ -1,3 +1,6 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+
 - hosts: localhost
 
   vars:
@@ -133,4 +136,7 @@
       daemon_reload: yes
     with_items: "{{ my_service }}"
 
-    
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "fsp"
+    module_state: "present"

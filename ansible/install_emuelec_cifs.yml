@@ -1,3 +1,7 @@
+# Dependencies
+- import_playbook: install_samba.yml
+- import_playbook: install_romdir.yml
+
 - hosts: localhost
 
   vars:
@@ -87,3 +91,8 @@
     with_items:
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "emuelec_cifs"
+    module_state: "present"

@@ -124,3 +124,8 @@
       - avahi-daemon
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "samba"
+    module_state: "present"

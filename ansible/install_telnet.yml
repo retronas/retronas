@@ -29,3 +29,8 @@
     service:
       name: inetd
       state: restarted
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "telnet"
+    module_state: "present"

@@ -1,3 +1,6 @@
+# Dependencies
+- import_playbook: install_filesystems.yml
+
 - hosts: localhost
 
   vars:
@@ -74,4 +77,7 @@
     with_items:
       - cockpit
 
-    
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "cockpit"
+    module_state: "present"

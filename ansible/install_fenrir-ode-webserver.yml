@@ -76,3 +76,8 @@
       enabled: yes
       daemon_reload: yes
     with_items: "{{ my_service }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "fenrir-ode-webserver"
+    module_state: "present"
