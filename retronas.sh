@@ -74,8 +74,16 @@ fi
 # added retronas_group
 if [ -z "${OLDRNGROUP}" ]
 then
-  echo "retronas_group: \"${OLDRNUSER}\"" >> ${ANCFG}
+  grep "retronas_group" ${ANCFG}
+  if [ $? -ne 0 ]
+  then
+    echo "retronas_group: \"${OLDRNUSER}\"" >> ${ANCFG}
+  else
+    sed -i "s/retronas_group:.*/retronas_group: \"${OLDRNUSER}\"/" ${ANCFG}
+  fi
 fi
+
+
 # jq, kept here to handle migration to new menu system
 if [ ! -f /usr/bin/jq ] 
 then
