@@ -39,6 +39,7 @@ system_map: "{{
   |union(system_fujitsu)
   |union(system_gamepark)
   |union(system_generalinstrument)
+  |union(system_ibm)
   |union(system_interact)
   |union(system_interton)
   |union(system_jupiter)
@@ -170,6 +171,8 @@ system_gamepark:
   - { src: "gamepark/gp32", last: "", mister: "", retropie: "", batocera: "gp32", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_generalinstrument:
   - { src: "generalinstrument/ay38500", last: "other/generalinstrument_ay38500", mister: "AY-3-8500", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_ibm:
+  - { src: "ibm/pcxt", last: "", mister: "PCXT", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_interact:
   - { src: "interact/homecomputer", last: "other/interact_homecomputer", mister: "Interact", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_interton:
