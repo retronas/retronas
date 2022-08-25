@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 clear
 _CONFIG=/opt/retronas/config/retronas.cfg
@@ -28,6 +28,13 @@ rn_profile_chooser() {
   MENU_ARRAY=()
   MENU_ARRAY2+=("$PROFILED"/*.ini )
 
+  if [ "${#MENU_ARRAY2[@]}" -le 0 ] || [ $(echo ${MENU_ARRAY2[@]} | grep "*" ) ]
+  then
+    echo "No profiles found"
+    PAUSE
+    exit 1
+  fi
+
   for ITEM in "${MENU_ARRAY2[@]}"
   do
 
@@ -41,8 +48,6 @@ rn_profile_chooser() {
     ININAME=${ITEM2%%.*}
     MENU_ARRAY+="$ININAME $UPDATED "
   done
-
-  PAUSE
 
   dialog \
     --backtitle "${MENU_NAME}" \
@@ -59,8 +64,6 @@ rn_profile_chooser() {
     then
       python3 ${SCDIR}/maint/install-profile.py --profile "${PROFILED}/${PROFILE}.ini"
     else
-      echo "Couldn't find profile"
-      PAUSE
       exit 1
     fi
 }
