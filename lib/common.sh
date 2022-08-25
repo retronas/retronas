@@ -182,6 +182,9 @@ READ_MENU_COMMAND() {
             service_start)
                 RN_SYSTEMD_START "${MENU_SELECT}"
                 ;;
+            service_restart)
+                RN_SYSTEMD_RESTART "${MENU_SELECT}"
+                ;;
             service_stop)
                 RN_SYSTEMD_STOP "${MENU_SELECT}"
                 ;;
@@ -292,7 +295,7 @@ RN_SERVICE_STATUS() {
     CLEAR
     echo "${CMD}"
     echo ; $CMD ; echo
-    PAUSE
+    #PAUSE
 }
 
 #
@@ -300,6 +303,7 @@ RN_SERVICE_STATUS() {
 #
 RN_SYSTEMD_STATUS() {
     RN_SYSTEMD "${1}" "status"
+    PAUSE
 }
 
 #
@@ -307,6 +311,13 @@ RN_SYSTEMD_STATUS() {
 #
 RN_SYSTEMD_START() {
     RN_SYSTEMD "${1}" "enable"
+    RN_SYSTEMD "${1}" "restart"
+}
+
+#
+# SYSTEMD restart
+#
+RN_SYSTEMD_RESTART() {
     RN_SYSTEMD "${1}" "restart"
 }
 

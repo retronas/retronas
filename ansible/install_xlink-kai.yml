@@ -1,0 +1,81 @@
+- hosts: localhost
+
+  # https://repo.teamxlink.co.uk/
+
+  vars:
+    - my_name: "xlink-kai"
+    - my_file: "install_xlink-kai"
+    - my_key: "/usr/share/keyrings/teamxlink.asc"
+    - my_repo: "https://repo.teamxlink.co.uk/debian"
+
+    - packages: 
+        - "xlinkkai"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+    
+  - name: "{{ my_name }} - Install prerequisite packages"
+    package:
+      name: "{{ item }}"
+      update_cache: yes
+    with_items:
+      - curl
+
+  - name: "{{ my_name }} - Add teamxlink key"
+    shell:
+        cmd: "curl {{ my_repo }}/KEY.asc --create-dirs -o {{ my_key }}"
+        creates: "/usr/share/keyrings/teamxlink.asc"
+
+
+  - name: "{{ my_name }} - Add teamxlink repository"
+    copy:
+      dest: "/etc/apt/sources.list.d/teamxlink.list"
+      content: |
+        deb [signed-by={{ my_key }}] {{ my_repo }}/ /
+
+  - name: "{{ my_name }} - Install packages"
+    package:
+      name: "{{ packages }}"
+      update_cache: yes
+
+  - name: "{{ my_name }} - check for arm build"
+    stat:
+      path: "/usr/bin/kaiengine_arm"
+    register: arm_build
+
+  - name: "{{ my_name }} - link arm build"
+    file:
+      src: "/usr/bin/kaiengine_arm"
+      dest: "/usr/bin/kaiengine"
+    when: arm_build.stat.exists is true
+
+  - name: "{{ my_name }} - Create systemd service"
+    template:
+      src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
+      dest: "/etc/systemd/system/{{ my_name }}.service"
+    notify: "{{ my_name }} - Restart service(s)"
+
+  - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
+    file:
+      path: "/etc/kaiengine.conf"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: '0640'
+    notify: "{{ my_name }} - Restart service(s)"
+
+  handlers:
+  - name: "{{ my_name }} - Restart service(s)"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}.service"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "xlink-kai"
+    module_state: "present"

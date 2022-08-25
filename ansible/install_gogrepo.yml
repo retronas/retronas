@@ -55,3 +55,8 @@
       group: root
       mode: 0755
     with_items: "{{ scripts }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "gogrepo"
+    module_state: "present"

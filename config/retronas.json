@@ -228,6 +228,16 @@
                     "type": "dialog_input",
                     "group":"",
                     "command": "set-etherdfs-nic"
+                },
+                {
+                    "index":"08",
+                    "title": "Profiles",
+                    "description": "Install a preconfigured profile",
+                    "id":"profiles",
+                    "prompt": "",
+                    "type": "modal",
+                    "group":"",
+                    "command": "profiles"
                 }
             ]
         },
@@ -377,7 +387,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "lighttpd:3ds_qr_codes"
+                    "command": "3ds_qr_codes"
                 },                
                 {
                     "index": "31",
@@ -387,7 +397,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba:romdir:ps2_openps2loader"
+                    "command": "ps2_openps2loader"
                 },                
                 {
                     "index": "32",
@@ -397,7 +407,7 @@
                     "prompt": "ps3netsrv",
                     "type": "install",
                     "group":"",
-                    "command": "romdir:ps3netsrv"
+                    "command": "ps3netsrv"
                 },                
                 {
                     "index": "33",
@@ -407,7 +417,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba:romdir:extradirs:mister_cifs"
+                    "command": "mister_cifs"
                 },                
                 {
                     "index": "34",
@@ -417,7 +427,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"samba",
-                    "command": "samba:romdir:xbox360"
+                    "command": "xbox360"
                 },
                 {
                     "index": "35",
@@ -427,7 +437,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "samba:romdir:extradirs:batocera_cifs"
+                    "command": "batocera_cifs"
                 },
                 {
                     "index": "36",
@@ -437,7 +447,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "samba:romdir:extradirs:recalbox_cifs"
+                    "command": "recalbox_cifs"
                 },     
                 {
                     "index": "37",
@@ -447,7 +457,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "samba:romdir:emuelec_cifs"
+                    "command": "emuelec_cifs"
                 },   
                 {
                     "index": "40",
@@ -467,7 +477,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "romdir:romimport"
+                    "command": "romimport"
                 },                
                 {
                     "index": "42",
@@ -477,7 +487,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "romdir:fsp"
+                    "command": "fsp"
                 },                
                 {
                     "index": "43",
@@ -487,7 +497,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "dotnetcore3:sabretools"
+                    "command": "sabretools"
                 },
                 {
                     "index": "44",
@@ -497,7 +507,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "dvdauth:eccedc:disc-image-creator"
+                    "command": "disc-image-creator"
                 },
                 {
                     "index": "50",
@@ -517,7 +527,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "filesystems:cockpit:cockpit-packages"
+                    "command": "cockpit-packages"
                 },
                 {
                     "index": "52",
@@ -527,7 +537,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "dotnetcore3:webone"
+                    "command": "webone"
                 },
                 {
                     "index": "53",
@@ -548,7 +558,17 @@
                     "type": "install",
                     "group":"",
                     "command": "aria2"
-                }   
+                },
+                {   
+                    "index": "55",
+                    "title": "megatools",
+                    "description": "command line client application for Mega", 
+                    "id":"megatools",
+                    "prompt": "", 
+                    "type": "install",
+                    "group":"",
+                    "command": "megatools"
+                } 
             ]
         },
         "experimental": 
@@ -577,7 +597,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "cockpit:cockpit-packages:cockpit-retronas"
+                    "command": "cockpit-retronas"
                 },
                 {
                     "index": "03",
@@ -587,7 +607,7 @@
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "filesystems:extract-xiso:xboxmanager"
+                    "command": "xboxmanager"
                 },
                 {
                     "index": "04",
@@ -602,12 +622,22 @@
                 {
                     "index": "05",
                     "title": "fenrir-ode-webserver",
-                    "description": "Fenrir ODE Webserver", 
+                    "description": "Fenrir-ODE Webserver", 
                     "id":"fenrir-ode-webserver",
                     "prompt": "",
-                    "type": "install",
+                    "type": "dialog",
                     "group":"",
-                    "command": "fenrir-ode-webserver"
+                    "command": "fenrirodewebserver"
+                },
+                {
+                    "index":"06",
+                    "title": "xlink-kai",
+                    "description": "XLink Kai Gaming Network",
+                    "id":"xlinkkai",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "xlinkkai"
                 }
             ]
         },
@@ -927,6 +957,136 @@
                     "type": "script",
                     "group":"",
                     "command": "hdparm-manager-stop-service"
+                }
+            ]
+        },
+        "fenrirodewebserver":
+        {
+            "title": "Fenrir-ODE Web Server",
+            "description": "",
+            "id":"fenrir-ode-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install the Fenrir-ODE Webserver application",
+                    "id":"fenrir-ode-webserver",
+                    "prompt": "Install",
+                    "type":"install",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"03",
+                    "title": "Gamelist",
+                    "description": "Manually refresh the gamelist",
+                    "id":"",
+                    "prompt": "Refresh",
+                    "type": "service_restart",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"20",
+                    "title": "Start",
+                    "description": "Start service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"21",
+                    "title": "Status",
+                    "description": "Query service status",
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                },
+                {
+                    "index":"22",
+                    "title": "Stop",
+                    "description": "Stop the service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "fenrir-ode-webserver"
+                }
+            ]
+        },
+        "xlinkkai": 
+        {
+            "title": "XLink Kai",
+            "description": "XLink Kai online gaming service for LAN based game modes||WARNING: XLink Kai works by capturing and inspecting network traffic, we recommend you isolate devices running XLink from your main net",
+            "id":"xlinkkai-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install the XLink Kai application",
+                    "id":"xlink-kai",
+                    "prompt": "Install",
+                    "type":"install",
+                    "group":"",
+                    "command": "xlink-kai"
+                },
+                {
+                    "index":"20",
+                    "title": "Start",
+                    "description": "Start service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "xlink-kai"
+                },
+                {
+                    "index":"21",
+                    "title": "Status",
+                    "description": "Query service status",
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "xlink-kai"
+                },
+                {
+                    "index":"22",
+                    "title": "Stop",
+                    "description": "Stop the service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "xlink-kai"
                 }
             ]
         },
@@ -1633,6 +1793,36 @@
                     "type": "",
                     "group":"gogrepo",
                     "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "profiles": 
+        {
+            "title": "Installation Profile(s)",
+            "description": "Available installation profiles||Profile Location: \"${OLDRNPATH}/config\"",
+            "id":"profiles",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Login",
+                    "description": "Configure GOG credentials",
+                    "id":"gog-password-menu",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"gogrepo",
+                    "command": "gogrepo_login"
                 }
             ]
         },

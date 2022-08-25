@@ -1,3 +1,7 @@
+# Dependencies
+- import_playbook: install_samba.yml
+- import_playbook: install_romdir.yml
+
 - hosts: localhost
 
   vars:
@@ -8,6 +12,7 @@
       - { src: 'nintendo/famicom', dest: 'nesh' }
       - { src: 'nintendo/gameboyadvance', dest: 'gbah' }
       - { src: 'nintendo/gameboy', dest: 'gbh' }
+      - { src: 'nintendo/gameboycolor', dest: 'gbch' }      
       - { src: 'nintendo/superfamicom', dest: 'snesh' }
       - { src: 'sega/gamegear', dest: 'gamegearh' }
       - { src: 'sega/megadrive', dest: 'genh' }
@@ -86,3 +91,8 @@
     with_items:
       - smbd
       - nmbd
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "emuelec_cifs"
+    module_state: "present"

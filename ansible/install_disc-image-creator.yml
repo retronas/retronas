@@ -1,3 +1,7 @@
+# Dependencies
+- import_playbook: install_dvdauth.yml
+- import_playbook: install_eccedc.yml
+
 - hosts: localhost
 
   vars:
@@ -36,3 +40,8 @@
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "disc-image-creator"
+    module_state: "present"
