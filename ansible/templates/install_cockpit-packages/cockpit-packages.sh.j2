@@ -55,7 +55,7 @@ function get_45drives {
     do
         FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
         get_github 45Drives $PACKAGE $FOLDER
-        install_package $FOLDER
+        install_package $FOLDER/$FOLDER
 
     done
 
