@@ -45,3 +45,11 @@
       state: "{{ module_state }}"
     when: module_name is defined and 
           module_state is defined
+
+  - name: "{{ my_name }} - fix config perms"
+    file:
+      path: "{{ retronas_path }}/config/{{ ini_filename }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: file
+      mode: "0644"
