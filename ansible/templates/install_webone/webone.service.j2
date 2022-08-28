@@ -8,9 +8,9 @@ After=network-online.target
 Type=simple
 #DynamicUser=yes
 Environment="HOME=/tmp/"
-Environment="DOTNET_ROOT={{ retronas_root }}/bin/dotnetcore3"
-Environment="DOTNET_INSTALL_DIR={{ retronas_root }}/bin/dotnetcore3"
-Environment="PATH={{ retronas_root }}/bin/dotnetcore3:{{ retronas_root }}/bin/dotnetcore3/tools:$PATH"
+Environment="DOTNET_ROOT={{ retronas_root }}/bin/dotnetcore6"
+Environment="DOTNET_INSTALL_DIR={{ retronas_root }}/bin/dotnetcore6"
+Environment="PATH={{ retronas_root }}/bin/dotnetcore6:{{ retronas_root }}/bin/dotnetcore6/tools:$PATH"
 ExecStart={{ retronas_root }}/bin/webone/webone --daemon
 ReadWriteDirectories=-/var/log/
 TimeoutStopSec=10
