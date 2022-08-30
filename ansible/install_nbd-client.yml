@@ -28,7 +28,7 @@
     shell: "lsmod | grep nbd"
     args:
       warn: no 
-      fail: no
+    ignore_errors: yes
     register: module_loaded
 
   - name: "{{ my_name }} - enable ndb kernel module"
