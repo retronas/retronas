@@ -50,16 +50,16 @@
     apt_repository:
       repo: deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
       state: present
-      filename: "{{ ansible_distribution_release }}-backports.list"
+      filename: "{{ ansible_distribution_release }}-backports"
       update_cache: no
     when: ansible_distribution == "Ubuntu" and
           ansible_architecture == "x86_64"
 
   - name: "{{ my_name }} - Configure APT repo for Ubuntu non x86_64 (ports)"
     apt_repository:
-      repo: deb http://ports.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+      repo: deb http://ports.ubuntu.com/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
       state: present
-      filename: "{{ ansible_distribution_release }}-backports.list"
+      filename: "{{ ansible_distribution_release }}-backports"
       update_cache: no
     when: ansible_distribution == "Ubuntu" and
           ansible_architecture != "x86_64"
