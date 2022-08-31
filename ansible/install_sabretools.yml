@@ -1,3 +1,6 @@
+- hosts: localhost
+  gather_facts: yes
+
 # Dependencies
 - import_playbook: install_dotnetcore3.yml
   when: ansible_architecture == "x86_64"
