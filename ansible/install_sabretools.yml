@@ -9,6 +9,9 @@
 
   tasks:
 
+  - meta: end_play
+    when: ansible_architecture != "x86_64"
+
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
