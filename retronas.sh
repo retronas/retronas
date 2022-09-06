@@ -60,6 +60,7 @@ else
   echo "Config file missing, creating it"
   cp "${ANCFG}.default" "${ANCFG}"
 fi
+source $_CONFIG
 
 # check if apt was updated in the last 24 hours
 if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
