@@ -127,7 +127,7 @@ system_cambridge:
 system_camputers:
   - { src: "camputers/lynx", last: "other/camputers_lynx", mister: "Lynx48", retropie: "", batocera: "camplynx", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_casio:
-  - { src: "casio/pv1000", last: "", mister: "", retropie: "", batocera: "pv1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "casio/pv1000", last: "", mister: "Casio_PV-1000", retropie: "", batocera: "pv1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "casio/pv2000", last: "", mister: "Casio_PV-2000", retropie: "", batocera: "pv1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_coleco:
   - { src: "coleco/colecovision", last: "other/coleco_colecovision", mister: "Coleco", retropie: "", batocera: "colecovision", recalbox: "colecovision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "coleco", smdb: "Colecovision SMDB.txt" }
@@ -149,6 +149,8 @@ system_dec:
   - { src: "dec/pdp1", last: "", mister: "", retropie: "", batocera: "pdp1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_dragon:
   - { src: "dragon", last: "", mister: "", retropie: "", batocera: "", recalbox: "dragon", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_eaca:
+  - { src: "eaca/eg2000", last: "", mister: "eg2000", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_electronika:
   - { src: "electronika/bk", last: "other/electronika_bk", mister: "BK0011M", retropie: "", batocera: "", recalbox: "bk", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_emerson:
