@@ -25,8 +25,14 @@
       - build-essential
       - unzip
       - libmbedtls-dev
-      - libmbedtls12
       - coreutils
+
+    - packages_debian:
+      - libmbedtls12
+
+    - packages_ubuntu:
+      - libmbedtls14
+
 
   tasks:
 
@@ -42,6 +48,22 @@
        state: latest
     with_items:
       "{{ packages }}"
+
+  - name: "{{ my_name }} - Install build tools (debian)"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      "{{ packages_debian }}"
+    when: ansible_distribution == 'Debian'
+
+  - name: "{{ my_name }} - Install build tools (ubuntu)"
+    apt:
+       name: "{{ item }}"
+       state: latest
+    with_items:
+      "{{ packages_ubuntu }}"
+    when: ansible_distribution == 'Ubuntu'
 
   - name: "{{ my_name }} - build top level"
     file:
