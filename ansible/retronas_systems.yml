@@ -30,6 +30,7 @@ system_map: "{{
   |union(system_compukit)
   |union(system_dec)
   |union(system_dragon)
+  |union(system_eaca)
   |union(system_electronika)
   |union(system_emerson)
   |union(system_entex)
@@ -243,7 +244,7 @@ system_oric:
   - { src: "oric/tangerine", last: "", mister: "Oric", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "oric/telestrat", last: "", mister: "TeleStrat", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_other:
-  - { src: "other/arduboy", last: "", mister: "Arduboy", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "other/arduboy", last: "", mister: "Arduboy", retropie: "", batocera: "arduboy", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "other/intel_x86", last: "", mister: "AO486", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "other/radio_86rk", last: "", mister: "APOGEE", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "other/scummvm", last: "", mister: "", retropie: "", batocera: "scummvm", recalbox: "scummvm", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "scummvm", smdb: "" }
@@ -308,6 +309,7 @@ system_sony:
   - { src: "sony/playstationportable", last: "", mister: "", retropie: "", batocera: "psp", recalbox: "psp", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psp", smdb: "" }
   - { src: "sony/playstationportable/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "PSPISO", fspd: "", emuelec: "", smdb: "" }
   - { src: "sony/playstationportable/minis", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pspminis", smdb: "" }
+  - { src: "sony/playstationvita", last: "", mister: "", retropie: "", batocera: "psvita", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_sord:
   - { src: "sord/m5", last: "other/sord_m5", mister: "Sord M5", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_spectravideo:
