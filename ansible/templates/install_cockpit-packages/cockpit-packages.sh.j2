@@ -8,6 +8,9 @@ set -u
 RNTMP=/tmp/rn_cpack
 COCKPIT=/usr/share/cockpit
 
+# clean up old stuff
+[ -d "${RNTMP}" ] && rm -Rf "${RNTMP}/"
+
 # make out temp dir
 [ ! -d ${RNTMP} ] && mkdir ${RNTMP}
 
