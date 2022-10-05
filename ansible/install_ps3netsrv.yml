@@ -26,6 +26,7 @@
       - unzip
       - libmbedtls-dev
       - coreutils
+      - jq
 
     - packages_debian:
       - libmbedtls12
