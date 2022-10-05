@@ -2,6 +2,7 @@
 
 SRCDIR="{{ retronas_root }}/src"
 BINDIR="{{ retronas_root }}/bin"
+PATTERN=.*zip
 
 #echo "Installing prerequisite packages..."
 #apt install -y curl wget make gcc g++ automake autoconf build-essential unzip libmbedtls-dev libmbedtls12 meson ninja-build
@@ -13,7 +14,10 @@ cd "${SRCDIR}"
 
 echo "Downloading ps3netsrv source code..."
 
-SOURCECODE=$( curl -kLs 'https://github.com/aldostools/webMAN-MOD/releases/latest' | awk -F '"' '/href.*ps3netsrv.*zip/{print $2}' )
+#SOURCECODE=$( curl -kLs 'https://github.com/aldostools/webMAN-MOD/releases/latest' | awk -F '"' '/href.*ps3netsrv.*zip/{print $2}'
+SOURCECODE=$( curl -kLs 'https://github.com/aldostools/webMAN-MOD/tags' | awk -F '"' /href.*${PATTERN}/'{print $4}' | head -n1 )
+[ -z "$SOURCECODE" ] && echo "Couldn't get source code name" && exit 1
+
 echo $SOURCECODE
 curl -OJL "https://github.com/${SOURCECODE}"
 unzip ps3netsrv*.zip
