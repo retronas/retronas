@@ -15,13 +15,12 @@ LOCALDIR=/opt/${APPLOW}
 LOCALSCRIPT=/usr/local/bin/${APPLOW}
 APPFILES=${LOCALDIR}/*
 
-PATTERN=tags.*.zip
-GITHRELS=https://github.com/${APPREPO}/${APP}/releases/latest
-
+PATTERN=*archive.*zip
+GITHRELS=https://github.com/${APPREPO}/${APP}/tags
 
 ### DISCOVERY
-REDIRECT=$( curl -k -s ${GITHRELS} | awk -F '"' '{print $2}' )
-RELEASE=$( curl -k -s "${REDIRECT}" | awk -F '"' /href.*${PATTERN}/'{print $2}' )
+#REDIRECT=$( curl -k -s ${GITHRELS} | awk -F '"' '{print $2}' )
+RELEASE=$( curl -Lks "${GITHRELS}" | awk -F '"' /href.*${PATTERN}/'{print $4}' | head -n1 )
 
 
 ### DOWNLOAD

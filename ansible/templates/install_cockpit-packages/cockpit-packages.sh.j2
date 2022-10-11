@@ -3,8 +3,13 @@
 # Clone down additional Cockpit Packages
 #
 
+set -u
+
 RNTMP=/tmp/rn_cpack
 COCKPIT=/usr/share/cockpit
+
+# clean up old stuff
+[ -d "${RNTMP}" ] && rm -Rf "${RNTMP}/"
 
 # make out temp dir
 [ ! -d ${RNTMP} ] && mkdir ${RNTMP}
@@ -15,7 +20,6 @@ function get_github {
     local REPO=$2
     local FOLDER=$3
 
-    
     if [ ! -d "${RNTMP}/${FOLDER}" ]
     then
         cd ${RNTMP}
@@ -39,7 +43,6 @@ function install_package {
     [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
     
     cp -R "${RNTMP}/${FOLDER}" "${COCKPIT}/"
-    rm -Rf "${RNTMP}/${FOLDER}/"
 
 }
 
@@ -55,7 +58,7 @@ function get_45drives {
     do
         FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
         get_github 45Drives $PACKAGE $FOLDER
-        install_package $FOLDER
+        install_package $FOLDER/$FOLDER
 
     done
 
@@ -74,3 +77,6 @@ function get_sensors {
 
 get_45drives
 get_sensors
+
+# clean up
+[ -d "${RNTMP}" ] && rm -Rf "${RNTMP}/"

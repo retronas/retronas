@@ -23,6 +23,7 @@
        - libavahi-client-dev
        - libgcrypt20-dev
        - expect
+       - libltdl-dev
 
     - services:
       - avahi-daemon

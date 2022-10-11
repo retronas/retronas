@@ -17,7 +17,7 @@ cd "${ANDIR}"
 function run_ansible {
     local PLAYBOOK="${1}"
     [ ! -f ${PLAYBOOK} ] && echo "Failed to find playbook: ${PLAYBOOK}" && exit 1
-    ${ANSCMD} -vv "${PLAYBOOK}"
+    ${ANSCMD} "${PLAYBOOK}"
 }
 
 [ -z "${1}" ] && echo "No options passed" && exit 1
