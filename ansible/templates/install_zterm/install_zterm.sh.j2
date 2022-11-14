@@ -4,7 +4,7 @@ set -u
 
 OUTDIR=/opt/zterm
 ATMPDIR=/tmp/zterm
-REPO=https://github.com/minlux/zterm
+REPO=https://github.com/sairuk/zterm
 
 # clean up old files
 [ -d "$ATMPDIR" ] && rm -rf "$ATMPDIR"
@@ -24,9 +24,10 @@ make
 # move
 if [ -f $ATMPDIR/build/zterm ]
 then
-    mv $ATMPDIR/build/{zterm,zdir,zsend} $OUTDIR
+    mv $ATMPDIR/build/z* $OUTDIR
 
     #fix path
     sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zdir
     sed -i -r 's#^FILE.+#FILE={{ retronas_path }}/$1#' $OUTDIR/zsend
+    sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zrecv
 fi
