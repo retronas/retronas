@@ -20,8 +20,8 @@ rn_zterm_edit() {
   READ_MENU_TDESC "${MENU_NAME}"
 
   MENU_ARRAY=(
-    "Device:"      0 5 "$DEVICE"  1 20 20 20
-    "Speed:"       1 5 "$SPEED"   1 20 20 20
+    "Device:"      1 5 "$DEVICE"  1 20 20 20
+    "Speed:"       2 5 "$SPEED"   2 20 20 20
   )
 
   DLG_FORM "${MENU_TNAME}" "${MENU_ARRAY}" 8 "${MENU_BLURB}"
