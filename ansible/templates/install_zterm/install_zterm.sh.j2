@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -u
+
+OUTDIR=/opt/zterm
+ATMPDIR=/tmp/zterm
+REPO=https://github.com/minlux/zterm
+
+# clean up old files
+[ -d "$ATMPDIR" ] && rm -rf "$ATMPDIR"
+
+# clone
+cd /tmp
+git clone $REPO
+
+# build
+cd "$ATMPDIR/build"
+cmake ..
+make
+
+# dir
+[ ! -d $OUTDIR ] && mkdir -p $OUTDIR
+
+# move
+if [ -f $ATMPDIR/build/zterm ]
+then
+    mv $ATMPDIR/build/{zterm,zdir,zsend} $OUTDIR
+
+    #fix path
+    sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zdir
+    sed -i -r 's#^FILE.+#FILE={{ retronas_path }}/$1#' $OUTDIR/zsend
+fi

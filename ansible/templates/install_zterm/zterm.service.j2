@@ -1,0 +1,16 @@
+[Unit]
+Description=zterm zmodem file transfer server
+StartLimitIntervalSec=60
+StartLimitBurst=4
+ConditionPathExists=/dev/ttyUSB0
+
+[Service]
+User={{ retronas_user }}
+ExecStart=/opt/zterm/zterm
+Restart=on-failure
+RestartSec=2
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+[Install]
+WantedBy=multi-user.target
