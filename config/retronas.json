@@ -2036,7 +2036,7 @@
                 },
                 {
                     "index":"04",
-                    "title": "service_start",
+                    "title": "Start",
                     "description": "Start zterm device",
                     "id":"",
                     "prompt": "",
@@ -2045,8 +2045,8 @@
                     "command": "zterm"
                 },
                 {
-                    "index":"06",
-                    "title": "service_stop",
+                    "index":"05",
+                    "title": "Stop",
                     "description": "Stop zterm device",
                     "id":"",
                     "prompt": "",
@@ -2056,7 +2056,7 @@
                 },
                 {
                     "index":"06",
-                    "title": "service_status",
+                    "title": "Status",
                     "description": "Query zterm device",
                     "id":"",
                     "prompt": "",
