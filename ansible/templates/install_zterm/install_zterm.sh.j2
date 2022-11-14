@@ -27,7 +27,5 @@ then
     mv $ATMPDIR/build/z* $OUTDIR
 
     #fix path
-    sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zdir
-    sed -i -r 's#^FILE.+#FILE={{ retronas_path }}/$1#' $OUTDIR/zsend
-    sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zrecv
+    sed -i -r 's#^DIR.+#DIR={{ retronas_path }}#' $OUTDIR/zconfig
 fi

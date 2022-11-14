@@ -2035,6 +2035,26 @@
                     "command": "zterm_edit"
                 },
                 {
+                    "index":"04",
+                    "title": "service_start",
+                    "description": "Start zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index":"06",
+                    "title": "service_stop",
+                    "description": "Stop zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
                     "index":"06",
                     "title": "service_status",
                     "description": "Query zterm device",
@@ -2069,6 +2089,16 @@
                     "title": "Edit",
                     "description": "Edit Device",
                     "id":"zterm-edit-serial-input",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"zterm",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"03",
+                    "title": "Speed",
+                    "description": "Baud Rate",
+                    "id":"zterm-edit-speed-input",
                     "prompt": "",
                     "type": "input:input",
                     "group":"zterm",

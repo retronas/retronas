@@ -6,10 +6,11 @@ source ${LIBDIR}/common.sh
 MENU_NAME=zterm-edit
 cd ${DIDIR}
 
-[ ! -f /opt/zterm/zdir ] && echo "Install zterm first" && PAUSE
+[ ! -f /opt/zterm/zconfig ] && echo "Install zterm first" && PAUSE
 
 # DEFAULTS
-DEVICE="$(awk -F "=" '/^DEV/{print $2}' /opt/zterm/zdir)"
+DEVICE="$(awk -F "=" '/^DEV/{print $2}' /opt/zterm/zconfig)"
+SPEED="$(awk -F "=" '/^SPEED/{print $2}' /opt/zterm/zconfig)"
 OUTDIR=/opt/zterm
 
 source $_CONFIG
@@ -20,6 +21,7 @@ rn_zterm_edit() {
 
   MENU_ARRAY=(
     "Device:"      0 5 "$DEVICE"  1 20 20 20
+    "Speed:"       1 5 "$SPEED"   1 20 20 20
   )
 
   DLG_FORM "${MENU_TNAME}" "${MENU_ARRAY}" 8 "${MENU_BLURB}"
@@ -33,8 +35,8 @@ rn_zterm_write_config() {
   if [ ! -z ${CHOICE[0]} ] 
   then
     echo "Updating device to ${DEVSTR}${CHOICE[0]}"
-    sed -i -r "s#^DEV.+#DEV=${DEVSTR}${CHOICE[0]}#" $OUTDIR/zdir
-    sed -i -r "s#^DEV.+#DEV=${DEVSTR}${CHOICE[0]}#" $OUTDIR/zsend
+    sed -i -r "s#^DEV.+#DEV=${DEVSTR}${CHOICE[0]}#" $OUTDIR/zconfig
+    sed -i -r "s#^SPEED.+#SPEED=${DEVSTR}${CHOICE[1]}#" $OUTDIR/zconfig
     sed -i -r "s#^Condition.+#ConditionPathExists=${DEVSTR}${CHOICE[0]}#" /usr/lib/systemd/system/zterm.service
     sudo systemctl daemon-reload
     sudo systemctl restart zterm.service
