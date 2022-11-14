@@ -28,7 +28,7 @@ rn_zterm_edit() {
 
   DLG_FORM "${MENU_TNAME}" "${MENU_ARRAY}" 8 "${MENU_BLURB}"
 
-  [ ! -z ${CHOICE[@]} ] && rn_zterm_write_config
+  [ ${#CHOICE[@]}  -gt 1 ] && rn_zterm_write_config
 
 }
 
