@@ -648,6 +648,16 @@
                     "type": "dialog",
                     "group":"",
                     "command": "hbstorecdn"
+                },
+                {
+                    "index": "06",
+                    "title": "zterm",
+                    "description": "Zmodem transfer suite",
+                    "id":"zterm",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "zterm"
                 }
             ]
         },
@@ -1983,6 +1993,86 @@
                     "type": "menu",
                     "group":"",
                     "command": "EXIT_OK"
+                }
+            ]
+        },
+        "zterm": 
+        {
+            "title": "zterm",
+            "description": "Please select an option",
+            "id":"zterm-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install zterm application",
+                    "id":"zterm",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index":"03",
+                    "title": "Serial Device",
+                    "description": "Create/Edit Serial Device",
+                    "id":"zterm-edit-serial",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "zterm_edit"
+                },
+                {
+                    "index":"06",
+                    "title": "service_status",
+                    "description": "Query zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "zterm"
+                }
+            ]
+        },
+        "zterm-edit": 
+        {
+            "title": "zterm Device Config",
+            "description": "set zterm device",
+            "id":"zterm-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Edit",
+                    "description": "Edit Device",
+                    "id":"zterm-edit-serial-input",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"zterm",
+                    "command": "TOOL COMMAND"
                 }
             ]
         },
