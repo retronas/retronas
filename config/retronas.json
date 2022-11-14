@@ -2050,7 +2050,7 @@
                     "description": "Stop zterm device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_status",
+                    "type": "service_stop",
                     "group":"",
                     "command": "zterm"
                 },
