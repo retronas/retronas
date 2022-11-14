@@ -12,6 +12,7 @@
       - cmake
       - git
       - build-essential
+      - lrzsz
 
     - packages_debian:
     - packages_ubuntu:
