@@ -292,7 +292,7 @@ system_sega:
   - { src: "sega/naomigd", last: "", mister: "", retropie: "", batocera: "", recalbox: "naomigd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sega/pico", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Sega - PICO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sega/saturn", last: "", mister: "Saturn", retropie: "", batocera: "saturn", recalbox: "saturn", retroarch: "Sega - Saturn", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "saturn", smdb: "Saturn Redump Supplement.txt" }
-  - { src: "sega/sg1000", last: "", mister: "", retropie: "", batocera: "sg1000", recalbox: "sg1000", retroarch: "Sega - SG-1000", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sg-1000", smdb: "" }
+  - { src: "sega/sg1000", last: "", mister: "SG1000SV", retropie: "", batocera: "sg1000", recalbox: "sg1000", retroarch: "Sega - SG-1000", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sg-1000", smdb: "" }
   - { src: "sega/triforce", last: "", mister: "", retropie: "", batocera: "triforce", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "sega/sc3000", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sc-3000", smdb: "" }
 system_sharp:
