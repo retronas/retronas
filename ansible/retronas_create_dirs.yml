@@ -10,7 +10,7 @@
   no_log: yes
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when:
-    - item.1.enabled == "yes"
+    - item.1.enabled is true
 
 - name: "{{ my_name }} - build layout"
   shell:
@@ -30,5 +30,5 @@
     - "{{ system_links }}"
     - "{{ top_level_paths }}"
   when:
-    - item.1.enabled == "yes"
-    - item.1.systems == "yes"
+    - item.1.enabled is true
+    - item.1.systems is true
