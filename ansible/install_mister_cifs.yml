@@ -46,20 +46,19 @@
       - item.enabled is true
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - build systems directory layout"
-    file:
-      src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_nested:
-      - "{{ system_map }}"
-      - "{{ top_level_paths }}"
-    when: 
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }};' ]"
+    loop: "{{ system_map|product(top_level_paths)|list }}"
+    when:
       - item.1.enabled is true
       - item.0.mister | length > 0
       - item.1.systems is true
+
+  - name: "{{ my_name }} - build systems directory layout"
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure includes file"
