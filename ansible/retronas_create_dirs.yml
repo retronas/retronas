@@ -9,8 +9,7 @@
     path_list: "{{ path_list|default([]) }} + [ '{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src if item.1.systems is true }}' ]"
   no_log: yes
   loop: "{{ system_map|product(top_level_paths)|list }}"
-  when:
-    - item.1.enabled is true
+  when: item.1.enabled is true
 
 - name: "{{ my_name }} - build layout"
   shell:
