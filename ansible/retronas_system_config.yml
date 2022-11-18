@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  gather_facts: no
 
   vars:
     my_name: "retronas user config setup"
