@@ -24,6 +24,14 @@
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
+    
+  - name: "{{ my_name }} - create dirs"
+    file:
+      path: "{{ rom_path }}/{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+    when: "{{ dirs }}"
 
   - name: "{{ my_name }} - link 3DS cia directory"
     file:
