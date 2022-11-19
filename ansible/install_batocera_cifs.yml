@@ -35,13 +35,6 @@
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "get facts for path"
-    stat:
-      path: "{{ retronas_path }}/batocera/{{ item.batocera }}"
-    with_items:
-      - "{{ system_map }}"
-    register: batocera_stat
-
   - name: "{{ my_name }} - build top level share paths"
     file:
       path: "{{ retronas_path }}/batocera/{{ item.name }}"
@@ -55,20 +48,19 @@
       - item.enabled == "yes"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - build systems directory layout"
-    file:
-      src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/batocera/{{ item.1.name }}/{{ item.0.batocera }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_nested:
-      - "{{ system_map }}"
-      - "{{ top_level_paths }}"
-    when: 
-      - item.1.enabled == "yes"
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/batocera/{{ item.1.name }}/{{ item.0.batocera }};' ]"
+    loop: "{{ system_map|product(top_level_paths)|list }}"
+    when:
+      - item.1.enabled is true
       - item.0.batocera | length > 0
-      - item.1.systems == "yes"
+      - item.1.systems is true
+
+  - name: "{{ my_name }} - build systems directory layout"
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
