@@ -32,13 +32,6 @@
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "get facts for path"
-    stat:
-      path: "{{ retronas_path }}/recalbox/{{ item.recalbox }}"
-    with_items:
-      - "{{ system_map }}"
-    register: recalbox_stat
-
   - name: "{{ my_name }} - build top level share paths"
     file:
       path: "{{ retronas_path }}/recalbox/{{ item.name }}"
@@ -58,7 +51,7 @@
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
-      - item.0.recallbox | length > 0
+      - item.0.recalbox | length > 0
       - item.1.systems is true
 
   - name: "{{ my_name }} - build systems directory layout"
@@ -66,7 +59,6 @@
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
     notify: "{{ my_name }} - Restart service"
-
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
