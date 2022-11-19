@@ -31,7 +31,7 @@
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
-    when: "{{ dirs }}"
+    with_items: "{{ dirs }}"
 
   - name: "{{ my_name }} - link 3DS cia directory"
     file:
