@@ -1,4 +1,5 @@
 # Dependencies
+- import_playbook: install_cockpit.yml
 - import_playbook: install_filesystems.yml
 - import_playbook: install_extract-xiso.yml
 
