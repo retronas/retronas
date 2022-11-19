@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: no
 
   # https://repo.teamxlink.co.uk/
 
@@ -27,7 +28,6 @@
     shell:
         cmd: "curl {{ my_repo }}/KEY.asc --create-dirs -o {{ my_key }}"
         creates: "/usr/share/keyrings/teamxlink.asc"
-
 
   - name: "{{ my_name }} - Add teamxlink repository"
     copy:

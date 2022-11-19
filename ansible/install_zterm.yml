@@ -14,9 +14,6 @@
       - build-essential
       - lrzsz
 
-    - packages_debian:
-    - packages_ubuntu:
-
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
@@ -26,27 +23,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages }}"
        state: latest
-    with_items:
-      "{{ packages }}"
-
-  - name: "{{ my_name }} - Install build tools (debian)"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
-      "{{ packages_debian }}"
-    when: ansible_distribution == 'Debian'
-
-  - name: "{{ my_name }} - Install build tools (ubuntu)"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
-      "{{ packages_ubuntu }}"
-    when: ansible_distribution == 'Ubuntu'
 
   - name: "{{ my_name }} - Generate {{ my_file }} script"
     template:

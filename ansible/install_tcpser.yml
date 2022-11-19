@@ -1,8 +1,15 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "tcpser"
     - my_file: "install_tcpser"
+
+    - my_packages:
+      - make
+      - gcc
+      - coreutils
+      - git
 
   tasks:
 
@@ -10,14 +17,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - make
-      - gcc
-      - coreutils
-      - git
 
   - name: "{{ my_name }} - Generate scripts"
     template:
