@@ -30,4 +30,3 @@
   shell:
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined
-  notify: "{{ my_name }} - Restart service"
