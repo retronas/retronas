@@ -1,8 +1,14 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "litch"
     - my_file: "install_litch"
+
+    - my_packages:
+      - python3
+      - python3-bs4
+      - git
 
     - scripts:
       - litch_login
@@ -16,23 +22,17 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - python3
-      - python3-bs4
-      - git
 
   - name: "{{ my_name }} - create GOG dir"
     file:
-      path: "{{ retronas_path }}/{{ item }}"
+      path: "{{ retronas_path }}/itchio"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       mode: "0775"
       state: directory
-    with_items:
-      - itchio
 
   - name: "{{ my_name }} - download litch"
     shell:

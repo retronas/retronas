@@ -10,11 +10,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: nbd-client
        state: latest
-    with_items:
-      - nbd-client
 
   - name: "{{ my_name }} - enable ndb kernel module"
     template:

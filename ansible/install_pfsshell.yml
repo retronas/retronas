@@ -1,8 +1,17 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "pfsshell"
     - my_file: "install_pfsshell"
+
+    - my_packages:
+      - make
+      - gcc
+      - coreutils
+      - meson
+      - ninja-build
+      - libfuse-dev
 
   tasks:
 
@@ -10,16 +19,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - make
-      - gcc
-      - coreutils
-      - meson
-      - ninja-build
-      - libfuse-dev
 
   - name: "{{ my_name }} - install script"
     template:

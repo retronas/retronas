@@ -4,6 +4,7 @@
 - import_playbook: install_extradirs.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Recalbox CIFS"

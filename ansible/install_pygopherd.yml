@@ -1,8 +1,12 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "pygopherd"
     - my_file: "install_pygopherd"
+
+    - my_packages:
+      - python3
 
   tasks:
 
@@ -11,10 +15,8 @@
 
   - name: "{{ my_name }} - Install build tools"
     apt:
-       name: "{{ item }}" 
+       name: "{{ my_packages }}" 
        state: latest
-    with_items:
-      - python3
 
   - name: "{{ my_name }} - install script"
     template:

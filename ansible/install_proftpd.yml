@@ -1,7 +1,12 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "ProFTPd"
+
+    - my_packages:
+       - avahi-daemon
+       - proftpd-core
 
   tasks:
 
@@ -9,12 +14,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }}  - install from repos"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-       - avahi-daemon
-       - proftpd-core
 
   - name: "{{ my_name }} - remove  mod_unique_id.c"
     ini_file:

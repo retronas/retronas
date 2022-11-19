@@ -1,7 +1,12 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "OpenSSH"
+    - my_packages:
+         - openssh-client
+         - openssh-server
+         - openssh-sftp-server
 
   tasks:
 
@@ -9,11 +14,8 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install from repos"
-    apt:
-       name:
-         - openssh-client
-         - openssh-server
-         - openssh-sftp-server
+    package:
+       name: "{{ my_packages }}"
        state: latest
     notify:
     - Restart ssh

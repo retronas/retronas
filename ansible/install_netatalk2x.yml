@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Netatalk2.X"
@@ -42,18 +43,14 @@
     shell: "/usr/bin/apt-mark unhold netatalk"
 
   - name: "{{ my_name }}  - remove package-based Netatalk"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: netatalk
        state: absent
-    with_items:
-       - netatalk
 
   - name: "{{ my_name }}  - install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages }}"
        state: latest
-    with_items: "{{ packages }}"
-
 
   - name: "{{ my_name }} - create install script"
     template:
@@ -74,15 +71,6 @@
       group: root
       mode: '0754'
 
-#  - name: "{{ my_name }} - configure /etc/default/netatalk"
-#    template:
-#      src: "templates/{{ my_file }}/default.j2"
-#      dest: /etc/default/netatalk
-#      owner: root
-#      group: root
-#      mode: '0644'
-#    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - AppleVolumes.default"
     template:
       src: "templates/{{ my_file }}/AppleVolumes.default.j2"
@@ -91,7 +79,6 @@
       group: root
       mode: '0644'
     notify: "{{ my_name }} - Restart service"
-
 
   - name: "{{ my_name }} - afpd.conf"
     template:
