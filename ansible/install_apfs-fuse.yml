@@ -1,19 +1,11 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "apfs-fuse"
     - my_file: "install_apfs-fuse"
 
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
+    - my_packages:
       - git
       - fuse 
       - libfuse3-dev 
@@ -23,6 +15,16 @@
       - g++ 
       - libattr1-dev 
       - zlib1g-dev
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
 
   - name: "{{ my_name }} - Generate scripts"
     template:

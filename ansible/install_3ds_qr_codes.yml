@@ -2,11 +2,16 @@
 - import_playbook: install_lighttpd.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "3DS QR Codes"
     - my_file: "install_3ds_qr_codes"
     - rom_path: "{{ retronas_path }}/3ds"
+
+    - dirs:
+      - cia
+      - qr
 
   tasks:
 
@@ -19,26 +24,12 @@
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
-      
-  - name: "{{ my_name }} - configure CIA directory"
-    file:
-      path: "{{ rom_path }}/cia"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
 
-  - name: "{{ my_name }} - configure 3DS cia directory"
+  - name: "{{ my_name }} - link 3DS cia directory"
     file:
       src: "{{ rom_path }}/cia"
       dest: "{{ retronas_path }}/roms/nintendo/3ds/cia"
       state: link
-
-  - name: "{{ my_name }} - configure QR codes directory"
-    file:
-      path: "{{ rom_path }}/qr"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory 
 
   - name: "{{ my_name }} - install qrencode"
     apt:
