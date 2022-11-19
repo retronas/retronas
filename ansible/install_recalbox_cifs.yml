@@ -42,7 +42,7 @@
       mode: "0775"
     with_items: "{{ top_level_paths }}"
     when: 
-      - item.enabled == yes
+      - item.enabled is true
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - build layout list (set fact)"
