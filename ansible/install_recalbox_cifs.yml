@@ -9,6 +9,7 @@
   vars:
     - my_name: "Recalbox CIFS"
     - my_file: "install_recalbox_cifs"
+    - rompath: "{{ retronas_path }}/recalbox"
 
     - top_level_paths:
       - { name: "ROMS",  enabled: yes,  generic: "roms",  systems: yes }
@@ -25,7 +26,7 @@
 
   - name: "{{ my_name }} - build top level"
     file:
-      path: "{{ retronas_path }}/recalbox"
+      path: "{{ rompath }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
@@ -34,15 +35,14 @@
 
   - name: "{{ my_name }} - build top level share paths"
     file:
-      path: "{{ retronas_path }}/recalbox/{{ item.name }}"
+      path: "{{ rompath }}/{{ item.name }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
+    with_items: "{{ top_level_paths }}"
     when: 
-      - item.enabled == "yes"
+      - item.enabled == yes
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - build layout list (set fact)"
