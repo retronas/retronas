@@ -1,5 +1,5 @@
 - hosts: localhost
-  gather_facts: yes
+  gather_facts: no
 
   vars:
     - my_name: "Netatalk2.X"
