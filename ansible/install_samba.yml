@@ -63,7 +63,7 @@
 
   - name: "{{ my_name }} - enable startup services"
     service:
-      name: "{{ my_services }}"
+      name: "{{ item }}"
       state: started
       enabled: yes
     with_items: "{{ my_services }}"
@@ -72,7 +72,7 @@
 
   - name: "{{ my_name }} - Restart service"
     service:
-      name: "{{ my_services }}"
+      name: "{{ item }}"
       state: restarted
     with_items: "{{ my_services }}"
 
