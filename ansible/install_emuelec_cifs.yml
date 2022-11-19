@@ -35,24 +35,17 @@
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "get facts for path"
-    stat:
-      path: "{{ retronas_path }}/emuelec/{{ item.emuelec }}"
-    with_items:
-      - "{{ system_map }}"
-    register: emuelec_stat
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/batocera/{{ item.1.name }}/{{ item.0.batocera }};' ]"
+    loop: "{{ system_map }}"
+    when:
+      - item.0.emuelec | length > 0
 
   - name: "{{ my_name }} - build systems directory layout"
-    file:
-      src: "../roms/{{ item.src }}"
-      dest: "{{ retronas_path }}/emuelec/{{ item.emuelec }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_items:
-      - "{{ system_map }}"
-    when: 
-      - item.emuelec | length > 0
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
