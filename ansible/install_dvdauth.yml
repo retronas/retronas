@@ -1,19 +1,11 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "DVDAuth"
     - my_file: "install_dvdauth"
 
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install dependencies"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
+    - my_packages:
       - git
       - coreutils
       - make
@@ -23,6 +15,16 @@
       - build-essential
       - unzip
       - util-linux
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

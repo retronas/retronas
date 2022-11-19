@@ -2,6 +2,7 @@
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: hb-store-cdn
@@ -25,7 +26,7 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
+    package:
        name: "{{ packages }}"
        state: latest
 

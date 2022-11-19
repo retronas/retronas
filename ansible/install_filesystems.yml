@@ -1,16 +1,11 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "RetroNAS filesystems"
     - my_file: "install_filesystems"
 
-  tasks:
-
-  - name: "{{ my_name }} - install packages"
-    apt:
-      name: "{{ item }}"
-      state: latest
-    with_items:
+    - my_packages:
       - btrfs-progs
       - ntfs-3g
       - exfatprogs
@@ -22,6 +17,13 @@
       - dosfstools
       - curlftpfs
       - sshfs
+
+  tasks:
+
+  - name: "{{ my_name }} - install packages"
+    apt:
+      name: "{{ my_packages }}"
+      state: latest
 
 - import_playbook: retronas_system_config.yml
   vars:

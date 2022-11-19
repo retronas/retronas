@@ -1,8 +1,15 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "DotNet Core 3.X SDK"
     - my_file: "install_dotnetcore3"
+
+    - my_packages:
+      - wget
+      - curl
+      - aria2
+      - coreutils
 
   tasks:
 
@@ -10,14 +17,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - wget
-      - curl
-      - aria2
-      - coreutils
 
   - name: "{{ my_name }} - create build dirs"
     file:

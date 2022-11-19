@@ -3,6 +3,7 @@
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "EmuElec CIFS"
