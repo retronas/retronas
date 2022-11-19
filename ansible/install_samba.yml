@@ -4,89 +4,45 @@
   vars:
     - my_name: "Samba"
 
+    - my_packages:
+      - avahi-daemon
+      - samba
+      - samba-vfs-modules
+
+    - my_services:
+      - avahi-daemon
+      - smbd
+      - nmbd
+
+    - config_opts:
+      - { section: "global", option: "min protocol",              value: "CORE"}
+      - { section: "global", option: "netbios name",              value: "retrosmb"}
+      - { section: "global", option: "lanman auth",               value: "yes"}
+      - { section: "global", option: "client lanman auth",        value: "yes"}
+      - { section: "global", option: "ntlm auth",                 value: "yes"}
+      - { section: "global", option: "client ntlm auth",          value: "yes"}
+      - { section: "global", option: "ntlmv2 auth",               value: "yes"}
+      - { section: "global", option: "client ntlmv2 auth",        value: "yes"}
+      - { section: "global", option: "unix extensions",           value: "no"}
+      - { section: "global", option: "allow insecure wide links", value: "yes"}
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - avahi-daemon
-      - samba
-      - samba-vfs-modules
 
-  - name: "{{ my_name }} - configure retro protocols"
-    ini_file: 
-      path: /etc/samba/smb.conf
-      section: global
-      option: "min protocol"
-      value: "CORE"
-
-  - name: "{{ my_name }} - netbios name"
+  - name: "{{ my_name }} - configure smaba config"
     ini_file:
       path: /etc/samba/smb.conf
-      section: global
-      option: "netbios name"
-      value: "retrosmb"
-
-  - name: "{{ my_name }} - lanman auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "lanman auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - client lanman auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "client lanman auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - ntlm auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "ntlm auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - client ntlm auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "client ntlm auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - ntlmv2 auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "ntlmv2 auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - client ntlmv2 auth"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "client ntlmv2 auth"
-      value: "yes"
-
-  - name: "{{ my_name }} - unix extensions"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "unix extensions"
-      value: "no"
-
-  - name: "{{ my_name }} - allow insecure wide links"
-    ini_file:
-      path: /etc/samba/smb.conf
-      section: global
-      option: "allow insecure wide links"
-      value: "yes"
+      section: "{{ item.section }}"
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items: "{{ config_opts }}"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -107,24 +63,18 @@
 
   - name: "{{ my_name }} - enable startup services"
     service:
-      name: "{{ item }}"
+      name: "{{ my_services }}"
       state: started
       enabled: yes
-    with_items:
-      - avahi-daemon
-      - smbd
-      - nmbd
+    with_items: "{{ my_services }}"
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
     service:
-      name: "{{ item }}"
+      name: "{{ my_services }}"
       state: restarted
-    with_items:
-      - avahi-daemon
-      - smbd
-      - nmbd
+    with_items: "{{ my_services }}"
 
 - import_playbook: retronas_system_config.yml
   vars:
