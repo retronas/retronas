@@ -11,9 +11,9 @@
     - my_file: "install_recalbox_cifs"
 
     - top_level_paths:
-      - { name: "ROMS", enabled: "yes",  generic: "roms", systems: "yes" }
-      - { name: "SAVES", enabled: "yes",  generic: "saves", systems: "yes"  }
-      - { name: "BIOS", enabled: "yes",  generic: "bios", systems: "yes"  }
+      - { name: "ROMS",  enabled: yes,  generic: "roms",  systems: yes }
+      - { name: "SAVES", enabled: yes,  generic: "saves", systems: yes  }
+      - { name: "BIOS",  enabled: yes,  generic: "bios",  systems: yes  }
 
   tasks:
 
