@@ -113,8 +113,7 @@
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when:
       - item.instance == 'no'
     notify: "{{ my_name }} - Restart service"
@@ -125,8 +124,7 @@
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when:
       - item.instance == 'no'
 
@@ -137,8 +135,7 @@
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when: 
       - item.restart == 'yes'
       - item.instance == 'no'
