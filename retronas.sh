@@ -129,14 +129,14 @@ fi
 [ ! -d $LOGDIR ] && mkdir $LOGDIR && chmod 755 $LOGDIR
 
 ### Set term emulation,
-RNSECONDS=5
+RNSECONDS=3
 if [ -z $TCHOICE ]
 then
   CLEAR
   echo
   echo "Terminal encoding:"
   echo
-  echo "1) Current - ${TERM} (default in 5s)"
+  echo "1) Current - ${TERM} (default in 3s)"
   echo "2) vt100 (best for telnet and retro computers)"
   echo
   read -r $TCHOICE -t 5 -n 1 -p "Please choose: "
