@@ -1,18 +1,19 @@
 # Dependencies
-- import_playbook: install_samba.yml
 - import_playbook: install_romdir.yml
 - import_playbook: install_extradirs.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Recalbox CIFS"
     - my_file: "install_recalbox_cifs"
+    - rompath: "{{ retronas_path }}/recalbox"
 
     - top_level_paths:
-      - { name: "ROMS", enabled: "yes",  generic: "roms", systems: "yes" }
-      - { name: "SAVES", enabled: "yes",  generic: "saves", systems: "yes"  }
-      - { name: "BIOS", enabled: "yes",  generic: "bios", systems: "yes"  }
+      - { name: "ROMS",  enabled: yes,  generic: "roms",  systems: yes }
+      - { name: "SAVES", enabled: yes,  generic: "saves", systems: yes  }
+      - { name: "BIOS",  enabled: yes,  generic: "bios",  systems: yes  }
 
   tasks:
 
@@ -24,48 +25,39 @@
 
   - name: "{{ my_name }} - build top level"
     file:
-      path: "{{ retronas_path }}/recalbox"
+      path: "{{ rompath }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "get facts for path"
-    stat:
-      path: "{{ retronas_path }}/recalbox/{{ item.recalbox }}"
-    with_items:
-      - "{{ system_map }}"
-    register: recalbox_stat
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build top level share paths"
     file:
-      path: "{{ retronas_path }}/recalbox/{{ item.name }}"
+      path: "{{ rompath }}/{{ item.name }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
+    with_items: "{{ top_level_paths }}"
     when: 
-      - item.enabled == "yes"
-    notify: "{{ my_name }} - Restart service"
+      - item.enabled is true
+    notify: "{{ my_name }} - Install Samba"
+
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/recalbox/{{ item.1.name }}/{{ item.0.recalbox }};' ]"
+    loop: "{{ system_map|product(top_level_paths)|list }}"
+    when:
+      - item.1.enabled is true
+      - item.0.recalbox | length > 0
+      - item.1.systems is true
 
   - name: "{{ my_name }} - build systems directory layout"
-    file:
-      src: "../../{{ item.1.generic|lower }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/recalbox/{{ item.1.name }}/{{ item.0.recalbox }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_nested:
-      - "{{ system_map }}"
-      - "{{ top_level_paths }}"
-    when: 
-      - item.1.enabled == "yes"
-      - item.0.recalbox | length > 0
-      - item.1.systems == "yes"
-    notify: "{{ my_name }} - Restart service"
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -73,7 +65,7 @@
       section: recalbox
       option: "include"
       value: "/etc/samba/retronas_recalbox.conf"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     template:
@@ -82,17 +74,19 @@
       owner: root
       group: root
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - smbd
-      - nmbd
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:

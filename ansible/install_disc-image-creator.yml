@@ -3,21 +3,13 @@
 - import_playbook: install_eccedc.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Disc Image Creator"
     - my_file: "install_disc-image-creator"
 
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install dependencies"
-    apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
+    - my_packages:
       - git
       - coreutils
       - make
@@ -26,6 +18,16 @@
       - curl
       - build-essential
       - unzip
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

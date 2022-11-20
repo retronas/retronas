@@ -33,10 +33,9 @@
     with_items: "{{ directories }}"
 
   - name: "{{ my_name }} - required packages"
-    apt:
-      name: "{{ item }}"
+    package:
+      name: "{{ packages }}"
       state: latest
-    with_items: "{{ packages }}"
 
   - name: "{{ my_name }} - configure top level share directory"
     file:

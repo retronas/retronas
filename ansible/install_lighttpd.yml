@@ -1,7 +1,14 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "lighttpd"
+
+
+    - config_settings_absent:
+      - { section: null, option: "server.document-root"}
+      - { section: null, option: "server.username"}
+      - { section: null, option: "server.groupname"}
 
   tasks:
 
@@ -9,32 +16,17 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    apt:
+    package:
        name: lighttpd
        state: latest
 
-  - name: "{{ my_name }} - configure server.document-root"
+  - name: "{{ my_name }} - configure main config"
     ini_file:
       path: /etc/lighttpd/lighttpd.conf
-      section: null
-      option: server.document-root
+      section: "{{ item.section }}"
+      option: "{{ item.option }}"
       state: absent
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - configure server.username"
-    ini_file:
-      path: /etc/lighttpd/lighttpd.conf
-      section: null
-      option: server.username
-      state: absent
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - configure server.groupname"
-    ini_file:
-      path: /etc/lighttpd/lighttpd.conf
-      section: null
-      option: server.groupname
-      state: absent
+    with_items: "{{ config_settings_absent }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
@@ -77,7 +69,6 @@
       option: server.errorlog
       state: absent
     notify: "{{ my_name }} - Restart service"
-
 
   - name: "{{ my_name }} - enable startup services"
     service:

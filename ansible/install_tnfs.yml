@@ -1,8 +1,12 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "TNFS Atari 8-bit and ZX Spectrum"
     - my_file: "install_tnfs"
+
+    - my_packages:
+      -  build-essential
 
   tasks:
 
@@ -10,11 +14,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - build-essential
 
   - name: "{{ my_name }} - Generate install scripts"
     template:

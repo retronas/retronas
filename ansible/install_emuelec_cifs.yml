@@ -1,8 +1,8 @@
 # Dependencies
-- import_playbook: install_samba.yml
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "EmuElec CIFS"
@@ -32,27 +32,20 @@
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
-  - name: "get facts for path"
-    stat:
-      path: "{{ retronas_path }}/emuelec/{{ item.emuelec }}"
-    with_items:
-      - "{{ system_map }}"
-    register: emuelec_stat
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../roms/{{ item.src }} {{ retronas_path }}/emuelec/{{ item.emuelec }};' ]"
+    loop: "{{ system_map }}"
+    when:
+      - item.emuelec | length > 0
 
   - name: "{{ my_name }} - build systems directory layout"
-    file:
-      src: "../roms/{{ item.src }}"
-      dest: "{{ retronas_path }}/emuelec/{{ item.emuelec }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_items:
-      - "{{ system_map }}"
-    when: 
-      - item.emuelec | length > 0
-    notify: "{{ my_name }} - Restart service"
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
     file:
@@ -63,7 +56,7 @@
       state: link
     with_items:
       - "{{ internal_symlinks }}"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -71,7 +64,7 @@
       section: emuelec
       option: "include"
       value: "/etc/samba/retronas_emuelec.conf"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     template:
@@ -80,17 +73,19 @@
       owner: root
       group: root
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - smbd
-      - nmbd
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:

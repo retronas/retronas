@@ -1,8 +1,10 @@
 # Dependencies
+- import_playbook: install_cockpit.yml
 - import_playbook: install_filesystems.yml
 - import_playbook: install_extract-xiso.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "xboxmanager"

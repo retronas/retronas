@@ -1,13 +1,36 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "BitTorrent"
     - my_file: "install_bittorrent"
 
+    - my_packages:
+      - geoip-bin
+      - geoip-database
+      - deluged
+      - deluge-web
+      - deluge-console
+
     - systemd_units:
       - { name: "deluged", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
       - { name: "deluge-web", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
+    - dirs:
+      - /var/lib/deluged
+      - /var/lib/deluged/config
+      - "{{ retronas_path }}/bittorrent"
+      - "{{ retronas_path }}/bittorrent/torrents"
+      - "{{ retronas_path }}/bittorrent/auto-add"
+      - "{{ retronas_path }}/bittorrent/downloading"
+      - "{{ retronas_path }}/bittorrent/complete"
+
+    - templates:
+      - { file: "autoadd.conf", path: "/var/lib/deluged/config/autoadd.conf" }
+      - { file: "default_deluged", path: "/etc/init.d/deluged" }
+      - { file: "core.conf", path: "/var/lib/deluged/config/core.conf" }
+      - { file: "auth", path: "/var/lib/deluged/config/auth" }
+  
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -15,86 +38,26 @@
 
   - name: "{{ my_name }} - install deluge from repos"
     apt:
-       name: "{{ item }}"
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - geoip-bin
-      - geoip-database
-      - deluged
-      - deluge-web
-      - deluge-console
 
-  - name: "{{ my_name }} - create bittorrent top level dir"
+  - name: "{{ my_name }} - create dirs"
     file:
-      path: "{{ retronas_path }}/bittorrent"
+      path: "{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       mode: "0775"
       state: directory
+    with_items: "{{ dirs }}"
 
-  - name: "{{ my_name }} - create bittorrent dirs"
-    file:
-      path: "{{ retronas_path }}/bittorrent/{{ item }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: "0775"
-      state: directory
-    with_items:
-      - torrents
-      - auto-add
-      - downloading
-      - complete
-
-  - name: "{{ my_name }} - create deluge lib dir"
-    file:
-      path: "/var/lib/deluged"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: "0775"
-      state: directory
-
-  - name: "{{ my_name }} - create deluge config  dir"
-    file:
-      path: "/var/lib/deluged/config"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: "0775"
-      state: directory
-
-  - name: "{{ my_name }} - deluge autoadd conf"
+  - name: "{{ my_name }} - add templates"
     template:
-      src: "templates/{{ my_file }}/autoadd.conf.j2"
-      dest: "/var/lib/deluged/config/autoadd.conf"
+      src: "templates/{{ my_file }}/{{ item.file }}.j2"
+      dest: "{{ item.path }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - deluge core conf"
-    template:
-      src: "templates/{{ my_file }}/core.conf.j2"
-      dest: "/var/lib/deluged/config/core.conf"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - deluged default"
-    template:
-      src: "templates/{{ my_file }}/default_deluged.j2"
-      dest: "/etc/init.d/deluged"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - deluge auth"
-    template:
-      src: "templates/{{ my_file }}/auth.j2"
-      dest: "/var/lib/deluged/config/auth"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_user }}"
-      mode: '0644'
+    with_items: "{{ templates }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} -remove legacy deluged startup file"

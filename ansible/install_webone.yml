@@ -2,10 +2,18 @@
 - import_playbook: install_dotnetcore6.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "WebOne proxy"
     - my_file: "install_webone"
+
+    - my_packages:
+      - git
+      - imagemagick-6.q16
+      - imagemagick-6-common
+      - ffmpeg
+      - coreutils
 
   tasks:
 
@@ -13,15 +21,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - git
-      - imagemagick-6.q16
-      - imagemagick-6-common
-      - ffmpeg
-      - coreutils
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

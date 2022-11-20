@@ -12,6 +12,10 @@
     - my_name: "SabreTools"
     - my_file: "install_sabretools"
 
+    - my_packages:
+      - git
+      - coreutils
+
   tasks:
 
   - meta: end_play
@@ -22,11 +26,8 @@
 
   - name: "{{ my_name }} - Install dependencies"
     apt:
-       name: "{{ item }}"
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - git
-      - coreutils
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

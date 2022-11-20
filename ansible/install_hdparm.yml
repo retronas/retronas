@@ -1,8 +1,13 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "hdparm"
     - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+         - hdparm
+         - coreutils
 
     - scripts:
       - "{{ my_name }}.sh"
@@ -25,13 +30,10 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install from repos"
-    apt:
-       name:
-         - hdparm
-         - coreutils
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    notify:
-    - "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - check dir"
     file:

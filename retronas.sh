@@ -62,13 +62,6 @@ else
 fi
 source $_CONFIG
 
-# check if apt was updated in the last 24 hours
-if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
-then
-  echo "APT repositories are old, syncing..."
-  apt update
-fi
-
 #
 # MIGRATIONS
 #
@@ -88,6 +81,7 @@ fi
 # jq, kept here to handle migration to new menu system
 if [ ! -f /usr/bin/jq ] 
 then
+  CHECK_PACKAGE_CACHE
   apt-get -y install jq
   [ $? -ne 0 ] && PAUSE && EXIT_CANCEL
 fi
@@ -135,14 +129,14 @@ fi
 [ ! -d $LOGDIR ] && mkdir $LOGDIR && chmod 755 $LOGDIR
 
 ### Set term emulation,
-RNSECONDS=5
+RNSECONDS=3
 if [ -z $TCHOICE ]
 then
   CLEAR
   echo
   echo "Terminal encoding:"
   echo
-  echo "1) Current - ${TERM} (default in 5s)"
+  echo "1) Current - ${TERM} (default in 3s)"
   echo "2) vt100 (best for telnet and retro computers)"
   echo
   read -r $TCHOICE -t 5 -n 1 -p "Please choose: "

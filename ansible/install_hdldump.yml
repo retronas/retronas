@@ -1,8 +1,14 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "hdldump"
     - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - make
+      - gcc
+      - coreutils
 
   tasks:
 
@@ -10,13 +16,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - make
-      - gcc
-      - coreutils
 
   - name: "{{ my_name }} - Generate scripts"
     template:

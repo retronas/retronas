@@ -1,8 +1,8 @@
 # Dependencies
-- import_playbook: install_samba.yml
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "PS2 OpenPS2Loader"
@@ -30,7 +30,7 @@
       - "LNG"
       - "THM"
       - "VMC"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build symlinks"
     file:
@@ -40,7 +40,7 @@
     with_items: "{{ system_sony }}"
     when:
       - item.ops2l | length > 0
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -48,7 +48,7 @@
       section: ps2
       option: "include"
       value: "/etc/samba/retronas_ps2.conf"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     template:
@@ -57,17 +57,19 @@
       owner: root
       group: root
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - smbd
-      - nmbd
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:
