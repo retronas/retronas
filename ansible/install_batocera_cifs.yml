@@ -1,5 +1,4 @@
 # Dependencies
-- import_playbook: install_samba.yml
 - import_playbook: install_romdir.yml
 - import_playbook: install_extradirs.yml
 
@@ -33,7 +32,7 @@
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build top level share paths"
     file:
@@ -46,7 +45,7 @@
       "{{ top_level_paths }}"
     when: 
       - item.enabled is true
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build layout list (set fact)"
     set_fact:
@@ -61,7 +60,7 @@
     shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
     file:
@@ -72,7 +71,7 @@
       state: link
     with_items:
       - "{{ internal_symlinks }}"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -80,7 +79,7 @@
       section: batocera
       option: "include"
       value: "/etc/samba/retronas_batocera.conf"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     template:
@@ -89,17 +88,19 @@
       owner: root
       group: root
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - smbd
-      - nmbd
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:

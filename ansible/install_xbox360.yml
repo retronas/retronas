@@ -20,7 +20,7 @@
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - symlinks"
     file:
@@ -31,7 +31,7 @@
       state: link
     with_items:
       - { src: "../roms/microsoft/xbox360/games", dest: "games" }
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -39,7 +39,7 @@
       section: xbox360
       option: "include"
       value: "/etc/samba/retronas_xbox360.conf"
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     template:
@@ -48,17 +48,19 @@
       owner: root
       group: root
       mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Install Samba"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - smbd
-      - nmbd
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:

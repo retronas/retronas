@@ -26,6 +26,8 @@
       - { section: "global", option: "unix extensions",           value: "no"}
       - { section: "global", option: "allow insecure wide links", value: "yes"}
 
+    - changed: false
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -36,7 +38,7 @@
        name: "{{ my_packages }}"
        state: latest
 
-  - name: "{{ my_name }} - configure smaba config"
+  - name: "{{ my_name }} - configure samba config"
     ini_file:
       path: /etc/samba/smb.conf
       section: "{{ item.section }}"
@@ -67,6 +69,14 @@
       state: started
       enabled: yes
     with_items: "{{ my_services }}"
+
+  - name: "{{ my_name }} - restart if imported because handlers will not run"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+    with_items: "{{ my_services }}"
+    when: changed is true
 
   handlers:
 
