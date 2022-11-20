@@ -261,8 +261,8 @@ PAUSE() {
 EXEC_SCRIPT() {
     local SCRIPT="${1}"
 
-    CLEAR
-    CHECK_PACKAGE_CACHE
+    #CLEAR
+    #CHECK_PACKAGE_CACHE
 
     CLEAR
     shift
