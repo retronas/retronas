@@ -1,5 +1,4 @@
 # Dependencies
-- import_playbook: install_samba.yml
 - import_playbook: install_romdir.yml
 
 - hosts: localhost

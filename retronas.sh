@@ -62,13 +62,6 @@ else
 fi
 source $_CONFIG
 
-# check if apt was updated in the last 24 hours
-if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
-then
-  echo "APT repositories are old, syncing..."
-  apt update
-fi
-
 #
 # MIGRATIONS
 #
@@ -88,6 +81,7 @@ fi
 # jq, kept here to handle migration to new menu system
 if [ ! -f /usr/bin/jq ] 
 then
+  CHECK_PACKAGE_CACHE
   apt-get -y install jq
   [ $? -ne 0 ] && PAUSE && EXIT_CANCEL
 fi

@@ -20,6 +20,26 @@ RN_LOG() {
     echo "${1}"
 }
 
+
+###############################################################################
+#
+# Package
+#
+###############################################################################
+CHECK_PACKAGE_CACHE() {
+    case $1 in
+        *)
+            # check if apt was updated in the last 24 hours
+            if find /var/cache/apt -maxdepth 1 -type f -mtime -1 -exec false {} +
+            then
+                echo "APT repositories are old, syncing..."
+                apt update
+            fi
+            ;;
+    esac
+}
+
+
 ###############################################################################
 #
 # GENERAL reusable functions
@@ -242,6 +262,9 @@ EXEC_SCRIPT() {
     local SCRIPT="${1}"
 
     CLEAR
+    CHECK_PACKAGE_CACHE
+
+    CLEAR
     shift
     /opt/retronas/lib/script_runner.sh "${SCRIPT}" $*
 
@@ -257,6 +280,10 @@ EXEC_SCRIPT() {
 RN_INSTALL_DEPS() {
     source $_CONFIG
     cd ${ANDIR}
+
+    CLEAR
+    CHECK_PACKAGE_CACHE
+
     ansible-playbook -vv retronas_dependencies.yml
     cd ${DIDIR}
 }
@@ -267,6 +294,9 @@ RN_INSTALL_DEPS() {
 RN_INSTALL_EXECUTE() {
     source $_CONFIG
     local PLAYBOOK=$1
+
+    CLEAR
+    CHECK_PACKAGE_CACHE
 
     CLEAR
     /opt/retronas/lib/ansible_runner.sh "${PLAYBOOK}"
