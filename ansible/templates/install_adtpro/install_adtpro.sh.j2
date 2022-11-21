@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -u
+
+BINDIR="/opt/adtpro"
+DLDIR=$(mktemp -d)
+
+
+echo "Downloading adtpro release..."
+RELEASE=$( curl -kLs https://api.github.com/repos/ADTPro/adtpro/releases | jq -r ".[0].assets | map(select(.name | match (\".tar.gz\")))[] | .browser_download_url" )
+[ -z "$RELEASE" ] && echo "Couldn't get release file" && exit 1
+
+cd $DLDIR
+curl -OJL "${RELEASE}"
+
+RELFILE=$(basename $RELEASE)
+
+if [ -f $RELFILE ]
+then
+    echo "install dir"
+    [ -d $BINDIR ] && mkdir -p $BINDIR
+
+    echo "unpacking"
+    tar xvf $DLDIR/$RELFILE 
+    
+    echo "moving" 
+    mv ADTPro-*/* $BINDIR/
+
+    echo "cleaning up"
+    rm -rf "${DLDIR}"
+else
+    echo "file is not present"
+    exit 1
+fi
+
+echo "All done!"

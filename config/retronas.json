@@ -658,6 +658,16 @@
                     "type": "dialog",
                     "group":"",
                     "command": "zterm"
+                },
+                {
+                    "index": "07",
+                    "title": "adtpro",
+                    "description": "Apple Disk Transfer ProDOS",
+                    "id":"adtpro",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro"
                 }
             ]
         },
@@ -2103,6 +2113,236 @@
                     "type": "input:input",
                     "group":"zterm",
                     "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "adtpro": 
+        {
+            "title": "adtpro",
+            "description": "ADTPro service, transfers physical disks and disk images between Apple II-era computers||Note: whilst you may run this, we cannot configure this service yet",
+            "id":"adtpro-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install adtpro application",
+                    "id":"adtpro",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "adtpro"
+                },
+                {
+                    "index":"03",
+                    "title": "Serial Device",
+                    "description": "Run ADTpro in Serial mode",
+                    "id":"adtpro-serial",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro_serial"
+                },
+                {
+                    "index":"04",
+                    "title": "Ethernet Device",
+                    "description": "Run ADTpro in Ethernet mode",
+                    "id":"adtpro-ethernet",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro_ethernet"
+                },
+                {
+                    "index":"05",
+                    "title": "Audio Device",
+                    "description": "Run ADTpro in Audio mode",
+                    "id":"adtpro-audio",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro_audio"
+                },
+                {
+                    "index":"06",
+                    "title": "Localhost Device",
+                    "description": "Run ADTpro in locahost mode",
+                    "id":"adtpro-localhost",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro_localhost"
+                }
+            ]
+        },
+        "adtpro_serial": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-serial-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index":"01",
+                    "title": "Start",
+                    "description": "Start adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@serial"
+                },
+                {
+                    "index":"02",
+                    "title": "Stop",
+                    "description": "Stop adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@serial"
+                },
+                {
+                    "index":"03",
+                    "title": "Status",
+                    "description": "Query adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@serial"
+                }
+            ]
+        },
+        "adtpro-ethernet": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-ethernet-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index":"01",
+                    "title": "Start",
+                    "description": "Start adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                },
+                {
+                    "index":"02",
+                    "title": "Stop",
+                    "description": "Stop adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                },
+                {
+                    "index":"03",
+                    "title": "Status",
+                    "description": "Query adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                }
+            ]
+        },
+        "adtproaudio": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-audio-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index":"01",
+                    "title": "Start",
+                    "description": "Start adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@audio"
+                },
+                {
+                    "index":"02",
+                    "title": "Stop",
+                    "description": "Stop adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@audio"
+                },
+                {
+                    "index":"03",
+                    "title": "Status",
+                    "description": "Query adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@audio"
+                }
+            ]
+        },
+        "adtpro-localhost": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-localhost-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index":"01",
+                    "title": "Start",
+                    "description": "Start adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"02",
+                    "title": "Stop",
+                    "description": "Stop adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"03",
+                    "title": "Status",
+                    "description": "Query adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@localhost"
                 }
             ]
         },
