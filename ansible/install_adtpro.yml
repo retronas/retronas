@@ -45,7 +45,6 @@
       group: "{{ item.group|default('root') }}"
       mode: "{{ item.mode|default('0644') }}"
     with_items: "{{ templates }}"
-    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Install"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
