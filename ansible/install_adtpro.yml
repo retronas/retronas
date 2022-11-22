@@ -35,6 +35,7 @@
       dest: "{{ my_dir }}"
       owner: "root"
       group: "root"
+      state: directory
       mode: 0755
 
   - name: "{{ my_name }} - templates"
