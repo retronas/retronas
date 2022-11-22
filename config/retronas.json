@@ -2165,16 +2165,6 @@
                     "command": "adtpro_ethernet"
                 },
                 {
-                    "index":"05",
-                    "title": "Audio Device",
-                    "description": "Run ADTpro in Audio mode",
-                    "id":"adtpro-audio",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "adtpro_audio"
-                },
-                {
                     "index":"06",
                     "title": "Localhost Device",
                     "description": "Run ADTpro in locahost mode",
