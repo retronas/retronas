@@ -34,6 +34,7 @@ rn_zterm_edit() {
 
 rn_zterm_write_config() {
 
+  CLEAR
   if [ ! -z ${CHOICE[0]} ] 
   then
     echo "Updating device to ${DEVSTR}${CHOICE[0]}"

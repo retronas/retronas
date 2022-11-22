@@ -4,9 +4,8 @@ StartLimitIntervalSec=60
 StartLimitBurst=4
 
 [Service]
-User={{ retronas_user }}
-WorkingDirectory=/opt/adtpro/
-ExecStart=/opt/adtpro/adtpro.sh headless %i
+WorkingDirectory={{ my_dir }}
+ExecStart={{ my_dir }}/adtpro.sh headless %i
 Restart=on-failure
 RestartSec=2
 SuccessExitStatus=3 4

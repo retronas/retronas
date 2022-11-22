@@ -59,6 +59,12 @@
       group: root
       mode: 0644
     with_items: "{{ systemd_units }}"
+    notify: "{{ my_name }} daemon-reload only" 
+
+  handlers:
+    - name: "{{ my_name }} daemon-reload"
+      systemd:
+        daemon_reload: yes
 
 - import_playbook: retronas_system_config.yml
   vars:

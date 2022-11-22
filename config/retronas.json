@@ -2195,7 +2195,27 @@
             "type": "modal",
             "items": [
                 {
-                    "index":"01",
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Serial device settings", 
+                    "id":"adtpro-edit-serial",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_serial_edit"
+                },
+                {
+                    "index":"03",
                     "title": "Start",
                     "description": "Start adtpro serial mode",
                     "id":"",
@@ -2205,7 +2225,7 @@
                     "command": "adtpro@serial"
                 },
                 {
-                    "index":"02",
+                    "index":"04",
                     "title": "Stop",
                     "description": "Stop adtpro serial mode",
                     "id":"",
@@ -2215,7 +2235,7 @@
                     "command": "adtpro@serial"
                 },
                 {
-                    "index":"03",
+                    "index":"05",
                     "title": "Status",
                     "description": "Query adtpro serial mode",
                     "id":"",
@@ -2235,7 +2255,27 @@
             "type": "modal",
             "items": [
                 {
-                    "index":"01",
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Change the Ethenet net listen port", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_ethernet_edit"
+                },
+                {
+                    "index":"03",
                     "title": "Start",
                     "description": "Start adtpro ethernet mode",
                     "id":"",
@@ -2245,7 +2285,7 @@
                     "command": "adtpro@ethernet"
                 },
                 {
-                    "index":"02",
+                    "index":"04",
                     "title": "Stop",
                     "description": "Stop adtpro ethernet mode",
                     "id":"",
@@ -2255,7 +2295,7 @@
                     "command": "adtpro@ethernet"
                 },
                 {
-                    "index":"03",
+                    "index":"05",
                     "title": "Status",
                     "description": "Query adtpro ethernet mode",
                     "id":"",
@@ -2275,7 +2315,17 @@
             "type": "modal",
             "items": [
                 {
-                    "index":"01",
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
                     "title": "Start",
                     "description": "Start adtpro audio mode",
                     "id":"",
@@ -2285,7 +2335,7 @@
                     "command": "adtpro@audio"
                 },
                 {
-                    "index":"02",
+                    "index":"03",
                     "title": "Stop",
                     "description": "Stop adtpro audio mode",
                     "id":"",
@@ -2295,7 +2345,7 @@
                     "command": "adtpro@audio"
                 },
                 {
-                    "index":"03",
+                    "index":"04",
                     "title": "Status",
                     "description": "Query adtpro audio mode",
                     "id":"",
@@ -2315,7 +2365,17 @@
             "type": "modal",
             "items": [
                 {
-                    "index":"01",
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
                     "title": "Start",
                     "description": "Start adtpro localhost mode",
                     "id":"",
@@ -2325,7 +2385,7 @@
                     "command": "adtpro@localhost"
                 },
                 {
-                    "index":"02",
+                    "index":"03",
                     "title": "Stop",
                     "description": "Stop adtpro localhost mode",
                     "id":"",
@@ -2335,7 +2395,7 @@
                     "command": "adtpro@localhost"
                 },
                 {
-                    "index":"03",
+                    "index":"04",
                     "title": "Status",
                     "description": "Query adtpro localhost mode",
                     "id":"",
@@ -2345,6 +2405,24 @@
                     "command": "adtpro@localhost"
                 }
             ]
+        },
+        "adtpro_serial_edit": 
+        {
+            "title": "ADTPro Serial Config",
+            "description": "set ADTPro device",
+            "id":"adtpro-serial-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": []
+        },
+        "adtpro_ethernet_edit": 
+        {
+            "title": "ADTPro Ethernet Config",
+            "description": "set ADTPro device",
+            "id":"adtpro-ethernet-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": []
         },
         "example": 
         {
