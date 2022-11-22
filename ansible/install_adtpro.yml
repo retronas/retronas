@@ -45,7 +45,7 @@
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
       mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default(yes) }}"
+      force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - Install"
@@ -61,7 +61,7 @@
       group: root
       mode: 0644
     with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} daemon-reload only" 
+    notify: "{{ my_name }} daemon-reload" 
 
   handlers:
     - name: "{{ my_name }} daemon-reload"
