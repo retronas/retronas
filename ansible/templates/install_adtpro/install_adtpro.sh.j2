@@ -28,6 +28,14 @@ then
 
     echo "cleaning up"
     rm -rf "${DLDIR}"
+
+
+    if [ -d $BINDIR/disks ]
+    then
+        echo "copying disks to storage"
+        chown -R {{ retronas_user }}: "${BINDIR}/disks/"
+        cp --no-clobber -p "${BINDIR}/disks/"* "{{ retronas_path }}/roms/apple/appleii/"
+    fi
 else
     echo "file is not present"
     exit 1

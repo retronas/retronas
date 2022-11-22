@@ -12,7 +12,7 @@ SERVICE_CONFIG=${OUTDIR}/ADTPro.properties
 [ ! -f ${SERVICE_CONFIG} ] && echo "Install adtpro first" && PAUSE
 
 # DEFAULTS
-PORT="$(awk -F "=" '/^SerialIPPort/{print $2}' ${SERVICE_CONFIG})"
+PORT="$(awk -F "=" '/^UDPServerPort/{print $2}' ${SERVICE_CONFIG})"
 
 source $_CONFIG
 cd ${DIDIR}
@@ -36,7 +36,7 @@ rn_adtpro_write_config() {
   if [ ! -z ${CHOICE[0]} ] 
   then
     echo "Updating device to ${DEVSTR}${CHOICE[0]}"
-    sed -i -r "s#^SerialIPPort.+#SerialIPPort=${DEVSTR}${CHOICE[0]}#" $SERVICE_CONFIG
+    sed -i -r "s#^UDPServerPort.+#UDPServerPort=${DEVSTR}${CHOICE[0]}#" $SERVICE_CONFIG
 
     #sed -i -r "s#^Condition.+#ConditionPathExists=${DEVSTR}${CHOICE[0]}#" /usr/lib/systemd/system/adtpro.service
     sudo systemctl daemon-reload

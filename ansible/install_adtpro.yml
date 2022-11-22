@@ -1,3 +1,6 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+
 - hosts: localhost
   gather_facts: no
 
@@ -17,6 +20,10 @@
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no}
 
+    - paths:
+      - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
+      #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
+
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
@@ -30,13 +37,20 @@
        name: "{{ packages }}"
        state: latest
 
-  - name: "{{ my_name }} - path {{ my_dir }}"
+  - name: "{{ my_name }} - paths"
     file:
-      dest: "{{ my_dir }}"
-      owner: "root"
-      group: "root"
-      state: directory
-      mode: 0755
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - disks symlink"
+    file:
+      src: "roms/apple/appleii"
+      dest: "{{ retronas_path }}/{{ my_name }}"
+      state: "link"
 
   - name: "{{ my_name }} - templates"
     template:
