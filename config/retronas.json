@@ -2226,7 +2226,7 @@
                 }
             ]
         },
-        "adtpro-ethernet": 
+        "adtpro_ethernet": 
         {
             "title": "adtpro",
             "description": "Please select an option",
@@ -2266,7 +2266,7 @@
                 }
             ]
         },
-        "adtproaudio": 
+        "adtpro_audio": 
         {
             "title": "adtpro",
             "description": "Please select an option",
@@ -2306,7 +2306,7 @@
                 }
             ]
         },
-        "adtpro-localhost": 
+        "adtpro_localhost": 
         {
             "title": "adtpro",
             "description": "Please select an option",

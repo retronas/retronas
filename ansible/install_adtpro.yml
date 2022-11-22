@@ -1,8 +1,10 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "adtpro"
     - my_file: "install_{{ my_name }}"
+    - my_dir: /opt/adtpro
 
     - systemd_units:
       - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -10,6 +12,10 @@
     - packages:
       - default-jre
       - xvfb
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "ADTPro.properties", dest: "{{ my_dir }}"}
 
   tasks:
 
@@ -24,18 +30,27 @@
        name: "{{ packages }}"
        state: latest
 
-  - name: "{{ my_name }} - Generate {{ my_file }} script"
-    template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
+  - name: "{{ my_name }} - path {{ my_dir }}"
+    file:
+      dest: "{{ my_dir }}"
+      owner: "root"
+      group: "root"
       mode: 0755
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Install"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
-      creates: "{{ retronas_root}} /opt/zterm/zterm"
+      creates: "{{ retronas_root}} {{ my_dir }}/adtpro.sh"
 
   - name: "{{ my_name }} - create startup service(s) instance"
     template:
@@ -44,8 +59,7 @@
       owner: root
       group: root
       mode: 0644
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
 
 - import_playbook: retronas_system_config.yml
   vars:
