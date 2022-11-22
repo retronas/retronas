@@ -22,8 +22,6 @@
       - { section: "Global", option: "log file", value: "/var/log/afp.log" }
       - { section: "Global", option: "afp listen", value: "0.0.0.0" }
       - { section: "Global", option: "include", value: "/etc/netatalk/retronas.conf" }
-      - { section: "", option: "", value: "" }
-      - { section: "", option: "", value: "" }
 
   tasks:
 
