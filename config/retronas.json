@@ -2167,7 +2167,7 @@
                 {
                     "index":"06",
                     "title": "Localhost Device",
-                    "description": "Run ADTpro in localhost mode",
+                    "description": "Run ADTpro in localhost (SIP) mode",
                     "id":"adtpro-localhost",
                     "prompt": "",
                     "type": "dialog",
@@ -2365,7 +2365,17 @@
                     "command": "EXIT_OK"
                 },
                 {
-                    "index":"02",
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Change the localhost (SIP) config", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_localhost_edit"
+                },
+                {
+                    "index":"03",
                     "title": "Start",
                     "description": "Start adtpro localhost mode",
                     "id":"",
@@ -2375,7 +2385,7 @@
                     "command": "adtpro@localhost"
                 },
                 {
-                    "index":"03",
+                    "index":"04",
                     "title": "Stop",
                     "description": "Stop adtpro localhost mode",
                     "id":"",
@@ -2385,7 +2395,7 @@
                     "command": "adtpro@localhost"
                 },
                 {
-                    "index":"04",
+                    "index":"05",
                     "title": "Status",
                     "description": "Query adtpro localhost mode",
                     "id":"",
