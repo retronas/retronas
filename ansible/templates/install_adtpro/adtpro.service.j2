@@ -5,7 +5,7 @@ StartLimitBurst=4
 
 [Service]
 WorkingDirectory={{ my_dir }}
-ExecStart={{ my_dir }}/adtpro.sh headless %i
+ExecStart={{ my_dir }}/adtpro_retronas.sh %i
 Restart=on-failure
 RestartSec=2
 SuccessExitStatus=3 4

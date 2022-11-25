@@ -1,0 +1,18 @@
+#!/bin/bash
+
+MODE=${1:-localhost}
+PORT=${2:-60000}
+
+PARENTPID=$(ps -ef | grep -E "xvfb-run.*adtpro.*$MODE" | grep -v grep | head -n1 | awk '{print $2}')
+
+cd {{ my_dir }}
+./adtpro.sh headless $MODE &> {{ retronas_root }}/log/adtpro_$MODE.log &
+
+
+# get atpro runtime details
+sleep 3
+SESSION=$(ps -ef | grep -E "$PARENTPID.*Xvfb" | head -n1 | awk '{print $9,$16}')
+XDISPLAY=$(echo $SESSION | cut -d' ' -f1 )
+XAUTH=$(echo $SESSION | cut -d' ' -f2 )
+
+/usr/local/bin/x11vnc_wrapper.sh $XDISPLAY $XAUTH $PORT

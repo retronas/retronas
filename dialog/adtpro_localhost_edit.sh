@@ -22,8 +22,8 @@ rn_adtpro_serial_edit() {
   READ_MENU_TDESC "${MENU_NAME}"
 
   MENU_ARRAY=(
-    "Host:"       1 5 "$SIPHOST"     1 20 20 20
-    "Port:"       2 5 "$SIPPORT"     2 20 20 20
+    "Remote Host:"       1 5 "$SIPHOST"     1 20 20 20
+    "Remote Port:"       2 5 "$SIPPORT"     2 20 20 20
   )
 
   DLG_FORM "${MENU_TNAME}" "${MENU_ARRAY}" 8 "${MENU_BLURB}"

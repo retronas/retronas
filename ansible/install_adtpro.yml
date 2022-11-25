@@ -1,5 +1,6 @@
 # Dependencies
 - import_playbook: install_romdir.yml
+- import_playbook: install_x11vnc.yml
 
 - hosts: localhost
   gather_facts: no
@@ -15,10 +16,12 @@
     - packages:
       - default-jre
       - xvfb
+      - x11vnc
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no}
+      - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755"}
 
     - paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
