@@ -6,6 +6,7 @@ APP=RASCSI
 REPO=https://github.com/akuker/${APP}.git
 SRCDIR={{ retronas_root }}/src/
 RPI=0
+CONNECT_TYPE=${1:-standard}
 
 function _log {
 	echo "$1"
@@ -25,7 +26,8 @@ else
 	git pull
 fi
 
-if [ -f /proc/device-tree/model ] && [ $(grep -E "^Raspberry.*") ]
+grep -Eqq "^Raspberry.*" /proc/device-tree/model
+if [ $? -eq 0 ]
 then
 	# RPI ONLY
 	cd ${SRCDIR}/${APP}/src/raspberrypi
@@ -36,7 +38,7 @@ else
 	exit 1
 fi
 
-case $1 in
+case CONNECT_TYPE in
 	fullspec)
 		# FULL SPEC BOARD
 		CONNECT_TYPE=FULLSPEC

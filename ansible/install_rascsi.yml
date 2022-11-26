@@ -6,13 +6,13 @@
     - my_file: "install_rascsi"
 
     - my_packages:
+      - build-essential
       - bridge-utils 
       - genisoimage 
       - git 
       - libev-dev 
       - libevdev2
-      - libpcap-dev
-      - libpcap-dev 
+      - libpcap0.8-dev
       - libspdlog-dev 
       - nginx 
       - protobuf-compiler 
@@ -32,6 +32,7 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+  # libpcap can conflict with libpcap from backport (tcpdump etc)
   - name: "{{ my_name }} - Install build tools"
     apt:
        name: "{{ my_packages }}" 
