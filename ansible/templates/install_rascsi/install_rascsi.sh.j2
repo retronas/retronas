@@ -3,13 +3,14 @@
 set -u
 
 APP=RASCSI
+RELEASE=v22.10.01
 REPO=https://github.com/akuker/${APP}.git
 SRCDIR={{ retronas_root }}/src/
 RPI=0
 CONNECT_TYPE=${1:-standard}
 
 function _log {
-	echo "$1"
+        echo "$1"
 }
 
 ### REQUIREMENTS
@@ -18,7 +19,7 @@ REQFAIL=0
 
 [ ! -d $SRCDIR ] && mkdir -p $SRCDIR
 cd $SRCDIR
-if [ ! -f ${SRCDIR}/${APP}/.git/config ] 
+if [ ! -f ${SRCDIR}/${APP}/.git/config ]
 then
 	git clone $REPO
 else
@@ -26,6 +27,7 @@ else
 	git pull
 fi
 
+git checkout ${RELEASE}
 grep -Eqq "^Raspberry.*" /proc/device-tree/model
 if [ $? -eq 0 ]
 then
@@ -38,17 +40,18 @@ else
 	exit 1
 fi
 
-case CONNECT_TYPE in
+case $CONNECT_TYPE in
 	fullspec)
-		# FULL SPEC BOARD
-		CONNECT_TYPE=FULLSPEC
-		;;
+			# FULL SPEC BOARD
+			CONNECT_TYPE=FULLSPEC
+			;;
 	standard)
-		# STANDARD BOARD
-		CONNECT_TYPE=STANDARD
-		;;
+			# STANDARD BOARD
+			CONNECT_TYPE=STANDARD
+			;;
 	*)
-		_log "Please pass a board type fullspec or standard"
+			_log "Please pass a board type fullspec or standard"
+			exit 1
 esac
 
 
