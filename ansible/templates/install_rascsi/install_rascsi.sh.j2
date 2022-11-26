@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -u
+
+APP=RASCSI
+REPO=https://github.com/akuker/${APP}.git
+SRCDIR={{ retronas_root }}/src/
+RPI=0
+
+function _log {
+	echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+[ ! -d $SRCDIR ] && mkdir -p $SRCDIR
+cd $SRCDIR
+if [ ! -f ${SRCDIR}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${SRCDIR}/${APP}
+	git pull
+fi
+
+if [ -f /proc/device-tree/model ] && [ $(grep -E "^Raspberry.*") ]
+then
+	# RPI ONLY
+	cd ${SRCDIR}/${APP}/src/raspberrypi
+else
+	# X64 remote access build flags
+	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
+	_log "Unsupported OS"
+	exit 1
+fi
+
+case $1 in
+	fullspec)
+		# FULL SPEC BOARD
+		CONNECT_TYPE=FULLSPEC
+		;;
+	standard)
+		# STANDARD BOARD
+		CONNECT_TYPE=STANDARD
+		;;
+	*)
+		_log "Please pass a board type fullspec or standard"
+esac
+
+
+make clean
+make all CONNECT_TYPE=${CONNECT_TYPE}
+sudo make install CONNECT_TYPE=${CONNECT_TYPE}

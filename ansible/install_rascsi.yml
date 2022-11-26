@@ -1,0 +1,85 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "rascsi"
+    - my_file: "install_rascsi"
+
+    - my_packages:
+      - bridge-utils 
+      - genisoimage 
+      - git 
+      - libev-dev 
+      - libevdev2
+      - libpcap-dev
+      - libpcap-dev 
+      - libspdlog-dev 
+      - nginx 
+      - protobuf-compiler 
+      - python3 
+      - python3-dev 
+      - python3-venv 
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
+    - systemd_units:
+      - { name: "rsyslog", type: 'service', state: "restarted", enabled: "yes", restart: "yes", instance: "no" }
+      - { name: "rascsi", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    apt:
+       name: "{{ my_packages }}" 
+       state: latest
+
+  - name: "{{ my_name }} - install script"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: '0750'
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "/opt/rascsi/bin/rascsi"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - install config"
+    template:
+      src: "templates/{{ my_file }}/{{ my_name }}.conf.j2"
+      dest: "{{ retronas_root }}/etc/{{ my_name }}.conf"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - install service"
+    template:
+      src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
+      dest: "/usr/lib/systemd/system/{{ my_name }}.service"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "rascsi"
+    module_state: "present"
+

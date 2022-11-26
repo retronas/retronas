@@ -1,0 +1,16 @@
+[Unit]
+Description=rasci
+After=multi-user.target
+
+[Service]
+User={{ retronas_user }}
+Type=simple
+Restart=always
+WorkingDirectory=/opt/{{ my_name }}
+Environment=PYTHONPATH=/opt/{{ my_name }}
+ExecStart=/opt/pygopherd/bin/{{ my_name }} {{ retronas_root}}/etc/{{ my_name }}.conf
+TimeoutStartSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
