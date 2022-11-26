@@ -66,6 +66,12 @@
       state: link
     with_items: "{{ script_links }}"
 
+  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
+    user:
+      name: "{{ retronas_user }}"
+      groups: dialout
+      append: yes
+
 - import_playbook: retronas_system_config.yml
   vars:
     module_name: "minicom"

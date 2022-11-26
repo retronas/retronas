@@ -35,6 +35,12 @@
       group: root
       mode: 0755
 
+  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
+    user:
+      name: "{{ retronas_user }}"
+      groups: dialout
+      append: yes
+
   - name: "{{ my_name }} - Install from source code"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
