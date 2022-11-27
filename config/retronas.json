@@ -678,6 +678,16 @@
                     "type": "dialog",
                     "group":"",
                     "command": "minicom"
+                },
+                {
+                    "index": "09",
+                    "title": "rascsi",
+                    "description": "RASCSI project",
+                    "id":"rascsi",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "rascsi"
                 }
             ]
         },
