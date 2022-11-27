@@ -17,6 +17,7 @@ function _log {
 REQFAIL=0
 [ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
 
+
 [ ! -d $SRCDIR ] && mkdir -p $SRCDIR
 cd $SRCDIR
 if [ ! -f ${SRCDIR}/${APP}/.git/config ]
@@ -27,19 +28,7 @@ else
 	git pull
 fi
 
-git checkout ${RELEASE}
-grep -Eqq "^Raspberry.*" /proc/device-tree/model
-if [ $? -eq 0 ]
-then
-	# RPI ONLY
-	cd ${SRCDIR}/${APP}/src/raspberrypi
-else
-	# X64 remote access build flags
-	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
-	_log "Unsupported OS"
-	exit 1
-fi
-
+# BUILD TYPE
 case $CONNECT_TYPE in
 	fullspec)
 			# FULL SPEC BOARD
@@ -55,6 +44,11 @@ case $CONNECT_TYPE in
 esac
 
 
-make clean
-make all CONNECT_TYPE=${CONNECT_TYPE}
-sudo make install CONNECT_TYPE=${CONNECT_TYPE}
+# PATCH MAKEFILE
+git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
+
+# BUILD STANDALONE
+./easyinstall.sh -h -j=$(nproc) -r=10 -c=$CONNECT_TYPE 2>&1 | tee {{ retronas_root }}/${APP}_build.log
+
+#RESTORE MAKEFILE
+git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff

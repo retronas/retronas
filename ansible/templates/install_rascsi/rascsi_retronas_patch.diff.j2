@@ -1,0 +1,24 @@
+diff --git a/src/raspberrypi/Makefile b/src/raspberrypi/Makefile
+index 5a09b4a..33c16cb 100644
+--- a/src/raspberrypi/Makefile
++++ b/src/raspberrypi/Makefile
+@@ -9,8 +9,8 @@ GCCVERSION10 := $(shell expr `gcc -dumpversion` \>= 10)
+ ##                   arm-linux-gnueabihf-
+ CROSS_COMPILE =
+ 
+-CC = $(CROSS_COMPILE)gcc
+-CXX = $(CROSS_COMPILE)g++
++CC = $(CROSS_COMPILE)gcc-9
++CXX = $(CROSS_COMPILE)g++-9
+ 
+ ##   DEBUG=1  : A Debug build includes the debugger symbols
+ ##              and disables compiler optimization. Typically,
+@@ -22,7 +22,7 @@ ifeq ($(DEBUG), 1)
+ 	BUILD_TYPE = Debug
+ else
+ 	# Release compiler flags
+-	CXXFLAGS += -O3 -Wall -Werror -Wextra -DNDEBUG
++	CXXFLAGS += -O3 -Wall -Wextra -DNDEBUG
+ 	BUILD_TYPE = Release
+ endif
+ ifeq ("$(shell uname -s)","Linux")
