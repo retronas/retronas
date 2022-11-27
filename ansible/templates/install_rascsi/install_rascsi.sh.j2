@@ -8,11 +8,11 @@ source ${LIBDIR}/common.sh
 
 
 APP=RASCSI
-RELEASE=v22.10.01
 REPO=https://github.com/akuker/${APP}.git
 SRCDIR={{ retronas_root }}/src/
 RPI=0
 CONNECT_TYPE=${1:-standard}
+OUTDIR={{ retronas_root }}/bin/${APP}
 
 function _log {
         echo "$1"
@@ -22,47 +22,53 @@ function _log {
 REQFAIL=0
 [ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
 
-
 [ ! -d $SRCDIR ] && mkdir -p $SRCDIR
 cd $SRCDIR
-
-
 
 if [ ! -f ${SRCDIR}/${APP}/.git/config ]
 then
 	git clone $REPO
 else
 	cd ${SRCDIR}/${APP}
+	git clean -d -f
+    git reset --hard
+	git checkout master
 	git pull
 fi
+
+
+LATEST=$(git tag | tail -n1)
+git checkout $LATEST
 
 # BUILD TYPE
 case $CONNECT_TYPE in
 	fullspec)
 			# FULL SPEC BOARD
-			CONNECT_TYPE=FULLSPEC
+			CONNECT_TYPE_BUILD=FULLSPEC
 			;;
 	standard)
 			# STANDARD BOARD
-			CONNECT_TYPE=STANDARD
+			CONNECT_TYPE_BUILD=STANDARD
 			;;
 	*)
 			_log "Please pass a board type fullspec or standard"
 			exit 1
 esac
 
-# easinstall does a root check
-#chown -R {{ retronas_user }}: ${SRCDIR}/${APP}
-#DROP_ROOT
 
 # PATCH MAKEFILE
 git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
 
 # BUILD STANDALONE
 make clean
-make all CONNECT_TYPE=${CONNECT_TYPE}
-make install CONNECT_TYPE=${CONNECT_TYPE}
-#sudo -A -u {{ retronas_user }} "./easyinstall.sh -h -j=$(nproc) -r=10 -c=$CONNECT_TYPE 2>&1 | tee {{ retronas_root }}/${APP}_build.log" -S
+make all CONNECT_TYPE=${CONNECT_TYPE_BUILD} -j$(nproc+1)
 
 #RESTORE MAKEFILE
 git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff
+
+# Copy BINs
+if [ -f /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/rascsi ]
+then
+	[ ! -d "${OUTDIR}" ] && mkdir -p "${OUTDIR}"
+	cp /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/* "${OUTDIR}/"
+fi

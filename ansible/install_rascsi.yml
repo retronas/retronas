@@ -33,7 +33,7 @@
       - unzip
 
     - paths:
-      - { name: "{{ my_name }}", dest: "{{ retronas_root }}/src" }
+      - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}

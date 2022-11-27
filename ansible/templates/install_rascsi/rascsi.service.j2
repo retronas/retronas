@@ -1,14 +1,15 @@
 [Unit]
-Description=rasci
+Description=rascsi
 After=multi-user.target
 
 [Service]
 User={{ retronas_user }}
 Type=simple
 Restart=always
-WorkingDirectory=/opt/{{ my_name }}
+WorkingDirectory=/{{ retronas_root }}/bin/RASCSI
 Environment=PYTHONPATH=/opt/{{ my_name }}
-ExecStart=/opt/pygopherd/bin/{{ my_name }} {{ retronas_root}}/etc/{{ my_name }}.conf
+Environment=PATH=$PATH:/{{ retronas_root }}/bin/RASCSI
+ExecStart=/{{ retronas_root }}/bin/RASCSI/rascsi -F {{ retrpnas_path }}/rascsi"
 TimeoutStartSec=0
 RemainAfterExit=yes
 
