@@ -2525,7 +2525,7 @@
                 {
                     "index":"02",
                     "title": "Install",
-                    "description": "Install rascsi standalone - (builds STANDARD)",
+                    "description": "Install rascsi standalone - (builds FULLSPEC)",
                     "id":"rascsi",
                     "prompt": "Install",
                     "type": "install",
