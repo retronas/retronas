@@ -2514,8 +2514,8 @@
                 },
                 {
                     "index":"02",
-                    "title": "Standard",
-                    "description": "Install rascsi standalone - STANDARD",
+                    "title": "Install",
+                    "description": "Install rascsi standalone - (builds STANDARD)",
                     "id":"rascsi",
                     "prompt": "Install",
                     "type": "install",
@@ -2523,17 +2523,27 @@
                     "command": "rascsi"
                 },
                 {
-                    "index":"02",
-                    "title": "Fullspec",
-                    "description": "Install rascsi standalone - FULLSPEC",
-                    "id":"rascsi_fullspec",
-                    "prompt": "Install",
-                    "type": "install",
+                    "index":"03",
+                    "title": "Standard",
+                    "description": "Build rascsi standalone - STANDARD",
+                    "id":"rascsi",
+                    "prompt": "Build",
+                    "type": "script",
                     "group":"",
-                    "command": "rascsi_fullspec"
+                    "command": "install_rascsi"
                 },
                 {
                     "index":"04",
+                    "title": "Fullspec",
+                    "description": "Build rascsi standalone - FULLSPEC",
+                    "id":"rascsi_fullspec",
+                    "prompt": "Install",
+                    "type": "script",
+                    "group":"",
+                    "command": "install_rascsi_fullspec"
+                },
+                {
+                    "index":"05",
                     "title": "Start",
                     "description": "Start rascsi",
                     "id":"",
@@ -2543,7 +2553,7 @@
                     "command": "rascsi"
                 },
                 {
-                    "index":"05",
+                    "index":"06",
                     "title": "Stop",
                     "description": "Stop rascsi",
                     "id":"",
@@ -2553,7 +2563,7 @@
                     "command": "rascsi"
                 },
                 {
-                    "index":"06",
+                    "index":"07",
                     "title": "Status",
                     "description": "Query rascsi",
                     "id":"",
