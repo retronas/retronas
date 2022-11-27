@@ -37,7 +37,8 @@
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-      - { name: "rascsi_retronas_patch.diff", dest: "{{ retronas_root }}/src", mode: "0644"}
+      - { name: "{{ my_name }}_retronas_patch.diff", dest: "{{ retronas_root }}/src"}
+      - { name: "{{ my_name }}.services", dest: "/etc/systemd/system"}
       
 
     - systemd_units:
@@ -77,7 +78,7 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "/opt/rascsi/bin/rascsi"
+      creates: "{{ retronas_root }}/bin/RASCSI/rascsi"
     notify: "{{ my_name }} - Restart service"
 
   handlers:
