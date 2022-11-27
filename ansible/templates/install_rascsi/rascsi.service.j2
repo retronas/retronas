@@ -5,9 +5,9 @@ After=multi-user.target
 [Service]
 Type=simple
 Restart=always
-WorkingDirectory=/{{ retronas_root }}/bin/RASCSI
-Environment=PATH=$PATH:/{{ retronas_root }}/bin/RASCSI
-ExecStart=/{{ retronas_root }}/bin/RASCSI/rascsi -F /home/{{ retronas_user }}/rascsi
+WorkingDirectory={{ retronas_root }}/bin/RASCSI
+Environment=PATH=$PATH:{{ retronas_root }}/bin/RASCSI
+ExecStart={{ retronas_root }}/bin/RASCSI/rascsi -F /home/{{ retronas_user }}/rascsi
 TimeoutStartSec=0
 RemainAfterExit=yes
 
