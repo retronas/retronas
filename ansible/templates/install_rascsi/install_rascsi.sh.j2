@@ -22,6 +22,19 @@ function _log {
 REQFAIL=0
 [ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
 
+grep -Eqq "^Raspberry.*" /proc/device-tree/model
+if [ $? -eq 0 ]
+then
+	# RPI ONLY
+	cd ${SRCDIR}/${APP}/src/raspberrypi
+else
+	# X64 remote access build flags
+	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
+	_log "Unsupported OS"
+	sleep 3
+	exit 1
+fi
+
 [ ! -d $SRCDIR ] && mkdir -p $SRCDIR
 cd $SRCDIR
 
