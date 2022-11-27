@@ -34,12 +34,12 @@
 
     - paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
+      - { name: "{{ my_name }}", dest: "/home/{{ retronas_user }}", state: "link" }
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_name }}_retronas_patch.diff", dest: "{{ retronas_root }}/src"}
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system"}
-      
 
     - systemd_units:
       - { name: "rsyslog", type: 'service', state: "restarted", enabled: "yes", restart: "yes", instance: "no" }
@@ -94,4 +94,3 @@
   vars:
     module_name: "rascsi"
     module_state: "present"
-

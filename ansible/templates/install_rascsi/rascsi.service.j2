@@ -9,7 +9,7 @@ Restart=always
 WorkingDirectory=/{{ retronas_root }}/bin/RASCSI
 Environment=PYTHONPATH=/opt/{{ my_name }}
 Environment=PATH=$PATH:/{{ retronas_root }}/bin/RASCSI
-ExecStart=/{{ retronas_root }}/bin/RASCSI/rascsi -F {{ retronas_path }}/rascsi"
+ExecStart=/{{ retronas_root }}/bin/RASCSI/rascsi -F /home/{{ retronas_user }}/rascsi
 TimeoutStartSec=0
 RemainAfterExit=yes
 
