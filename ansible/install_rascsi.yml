@@ -38,6 +38,7 @@
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_file }}_fullspec.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_name }}_retronas_patch.diff", dest: "{{ retronas_root }}/src"}
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system"}
 

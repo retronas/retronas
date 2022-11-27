@@ -2444,7 +2444,6 @@
             "type": "menu",
             "items": []
         },
-
         "minicom": 
         {
             "title": "minicom",
@@ -2492,6 +2491,76 @@
                     "type": "script",
                     "group":"",
                     "command": "minicom-config"
+                }
+            ]
+        },
+        "rascsi": 
+        {
+            "title": "rascsi",
+            "description": "Please select an option",
+            "id":"rascsi",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Standard",
+                    "description": "Install rascsi standalone - STANDARD",
+                    "id":"rascsi",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "rascsi"
+                },
+                {
+                    "index":"02",
+                    "title": "Fullspec",
+                    "description": "Install rascsi standalone - FULLSPEC",
+                    "id":"rascsi_fullspec",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "rascsi_fullspec"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start rascsi",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "rascsi"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop rascsi",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "rascsi"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query rascsi",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "rascsi"
                 }
             ]
         },
