@@ -56,13 +56,13 @@ esac
 #DROP_ROOT
 
 # PATCH MAKEFILE
-"git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff"
+git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
 
 # BUILD STANDALONE
 make clean
 make all CONNECT_TYPE=${CONNECT_TYPE}
-sudo make install CONNECT_TYPE=${CONNECT_TYPE}
+make install CONNECT_TYPE=${CONNECT_TYPE}
 #sudo -A -u {{ retronas_user }} "./easyinstall.sh -h -j=$(nproc) -r=10 -c=$CONNECT_TYPE 2>&1 | tee {{ retronas_root }}/${APP}_build.log" -S
 
 #RESTORE MAKEFILE
-"git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff"
+git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff
