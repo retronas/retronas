@@ -82,7 +82,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - password file"
-    file:
+    copy:
       dest: /etc/rascsi_passwd
       content: retronas
       mode: 600
