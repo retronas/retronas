@@ -2,6 +2,11 @@
 
 set -u
 
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+
 APP=RASCSI
 RELEASE=v22.10.01
 REPO=https://github.com/akuker/${APP}.git
@@ -20,6 +25,9 @@ REQFAIL=0
 
 [ ! -d $SRCDIR ] && mkdir -p $SRCDIR
 cd $SRCDIR
+
+
+
 if [ ! -f ${SRCDIR}/${APP}/.git/config ]
 then
 	git clone $REPO
@@ -43,9 +51,13 @@ case $CONNECT_TYPE in
 			exit 1
 esac
 
+# easinstall does a root check
+chown -R {{ retronas_user }}: ${SRCDIR}/${APP}
+DROP_ROOT
 
 # PATCH MAKEFILE
 git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
+
 
 # BUILD STANDALONE
 ./easyinstall.sh -h -j=$(nproc) -r=10 -c=$CONNECT_TYPE 2>&1 | tee {{ retronas_root }}/${APP}_build.log
