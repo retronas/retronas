@@ -81,6 +81,14 @@
       creates: "{{ retronas_root }}/bin/RASCSI/rascsi"
     notify: "{{ my_name }} - Restart service"
 
+  - name: "{{ my_name }} - password file"
+    file:
+      dest: /etc/rascsi_passwd
+      content: retronas
+      mode: 600
+      owner: root
+      group: root
+
   - name: "{{ my_name }} - enable service(s)"
     service:
       name: "{{ item.name }}.{{ item.type }}"
