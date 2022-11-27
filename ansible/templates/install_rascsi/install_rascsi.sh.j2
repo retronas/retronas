@@ -23,14 +23,10 @@ REQFAIL=0
 [ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
 
 grep -Eqq "^Raspberry.*" /proc/device-tree/model
-if [ $? -eq 0 ]
-then
-	# RPI ONLY
-	cd ${SRCDIR}/${APP}/src/raspberrypi
-else
+if [ $? -ne 0 ]
 	# X64 remote access build flags
 	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
-	_log "Unsupported OS"
+	_log "Unsupported OS, only for RPI"
 	sleep 3
 	exit 1
 fi
@@ -68,13 +64,13 @@ case $CONNECT_TYPE in
 			exit 1
 esac
 
-
 # PATCH MAKEFILE
 git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
 
 # BUILD STANDALONE
+cd ${SRCDIR}/${APP}/src/raspberrypi
 make clean
-make all CONNECT_TYPE=${CONNECT_TYPE_BUILD} -j$(nproc+1)
+make all CONNECT_TYPE=${CONNECT_TYPE_BUILD} -j$(nproc)
 
 #RESTORE MAKEFILE
 git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff
