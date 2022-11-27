@@ -64,12 +64,6 @@
       state: "{{ item.state|default('directory') }}"
     with_items: "{{ paths }}"
 
-  - name: "{{ my_name }} - build source"
-    command:
-      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "/opt/rascsi/bin/rascsi"
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - templates"
     template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
@@ -79,6 +73,11 @@
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "/opt/rascsi/bin/rascsi"
     notify: "{{ my_name }} - Restart service"
 
   handlers:
