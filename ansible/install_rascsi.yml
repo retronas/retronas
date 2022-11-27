@@ -86,7 +86,7 @@
     copy:
       dest: /etc/rascsi_passwd
       content: retronas
-      mode: 600
+      mode: 0600
       owner: root
       group: root
 
