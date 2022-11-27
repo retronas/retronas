@@ -78,6 +78,14 @@ git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff
 # Copy BINs
 if [ -f /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/rascsi ]
 then
+
 	[ ! -d "${OUTDIR}" ] && mkdir -p "${OUTDIR}"
+
+	SERVICE=rascsi.service
+	STARTED=$(systemctl show $SERVICE --full --property SubState --value)
+	[ $STARTED == "running" ] && systemctl stop $SERVICE
+
 	cp /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/* "${OUTDIR}/"
+	systemctl restart $SERVICE
+
 fi
