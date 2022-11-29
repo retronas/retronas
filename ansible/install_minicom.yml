@@ -1,0 +1,78 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "minicom"
+    - my_file: "install_{{ my_name }}"
+    - my_dir: ""
+
+    - systemd_units:
+      #- { name: "minicom", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+
+    - packages:
+      - minicom
+      - lrzsz
+
+    - templates:
+      - { name: "minirc.dfl", dest: "/etc/minicom", mode: "0644", owner: "{{ retronas_user }}", group: "{{ retronas_user }}", force: no }
+      - { name: "minicom.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
+    - script_links:
+      - { dest: "minicom-config.sh", src: "minicom.sh" }
+
+    - paths:
+      - { name: "{{ my_name }}", dest: "/etc", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_user }}" }
+      - { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_user }}"}
+
+  tasks:
+
+  - name: "{{ my_name }} - Include systems map"
+    include_vars: "retronas_systems.yml"
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install packages"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - script links" 
+    file:
+      dest: "{{ retronas_root }}/scripts/{{ item.dest }}"
+      src: "{{ retronas_root }}/scripts/{{ item.src }}"
+      state: link
+    with_items: "{{ script_links }}"
+
+  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
+    user:
+      name: "{{ retronas_user }}"
+      groups: dialout
+      append: yes
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "minicom"
+    module_state: "present"

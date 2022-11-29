@@ -458,7 +458,27 @@
                     "type": "install",
                     "group":"",
                     "command": "emuelec_cifs"
-                },   
+                },
+                {
+                    "index": "38",
+                    "title": "fenrir-ode-webserver",
+                    "description": "Fenrir-ODE Webserver", 
+                    "id":"fenrir-ode-webserver",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "fenrirodewebserver"
+                },
+                {
+                    "index":"39",
+                    "title": "xlink-kai",
+                    "description": "XLink Kai Gaming Network",
+                    "id":"xlinkkai",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "xlinkkai"
+                },                 
                 {
                     "index": "40",
                     "title": "gogrepo",
@@ -568,7 +588,7 @@
                     "type": "install",
                     "group":"",
                     "command": "megatools"
-                } 
+                }
             ]
         },
         "experimental": 
@@ -620,24 +640,44 @@
                     "command": "apfs-fuse"
                 },
                 {
-                    "index": "05",
-                    "title": "fenrir-ode-webserver",
-                    "description": "Fenrir-ODE Webserver", 
-                    "id":"fenrir-ode-webserver",
+                    "index":"05",
+                    "title": "hb-store-cdn",
+                    "description": "Ps4 Homebrew Store CDN",
+                    "id":"hbstorecdn",
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "fenrirodewebserver"
+                    "command": "hbstorecdn"
                 },
                 {
-                    "index":"06",
-                    "title": "xlink-kai",
-                    "description": "XLink Kai Gaming Network",
-                    "id":"xlinkkai",
+                    "index": "06",
+                    "title": "zterm",
+                    "description": "Zmodem transfer suite",
+                    "id":"zterm",
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "xlinkkai"
+                    "command": "zterm"
+                },
+                {
+                    "index": "07",
+                    "title": "adtpro",
+                    "description": "Apple Disk Transfer ProDOS",
+                    "id":"adtpro",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro"
+                },
+                {
+                    "index": "08",
+                    "title": "minicom",
+                    "description": "minicom terminal",
+                    "id":"minicom",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "minicom"
                 }
             ]
         },
@@ -957,6 +997,76 @@
                     "type": "script",
                     "group":"",
                     "command": "hdparm-manager-stop-service"
+                }
+            ]
+        },
+        "hbstorecdn":
+        {
+            "title": "PS4 Homebrew Store CDN",
+            "description": "",
+            "id":"hb-store-cdn-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install the PS4 Homebrew Store CDN",
+                    "id":"hb-store-cdn",
+                    "prompt": "Install",
+                    "type":"install",
+                    "group":"",
+                    "command": "hb-store-cdn"
+                },
+                {
+                    "index":"03",
+                    "title": "Package List",
+                    "description": "Manually refresh the package list",
+                    "id":"",
+                    "prompt": "Refresh",
+                    "type": "service_restart",
+                    "group":"",
+                    "command": "hb-store-cdn"
+                },
+                {
+                    "index":"20",
+                    "title": "Start",
+                    "description": "Start service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "hb-store-cdn"
+                },
+                {
+                    "index":"21",
+                    "title": "Status",
+                    "description": "Query service status",
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "hb-store-cdn"
+                },
+                {
+                    "index":"22",
+                    "title": "Stop",
+                    "description": "Stop the service",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "hb-store-cdn"
                 }
             ]
         },
@@ -1903,6 +2013,485 @@
                     "type": "menu",
                     "group":"",
                     "command": "EXIT_OK"
+                }
+            ]
+        },
+        "zterm": 
+        {
+            "title": "zterm",
+            "description": "Please select an option",
+            "id":"zterm-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install zterm application",
+                    "id":"zterm",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index":"03",
+                    "title": "Serial Device",
+                    "description": "Create/Edit Serial Device",
+                    "id":"zterm-edit-serial",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "zterm_edit"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query zterm device",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "zterm"
+                }
+            ]
+        },
+        "zterm-edit": 
+        {
+            "title": "zterm Device Config",
+            "description": "set zterm device",
+            "id":"zterm-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Edit",
+                    "description": "Edit Device",
+                    "id":"zterm-edit-serial-input",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"zterm",
+                    "command": "TOOL COMMAND"
+                },
+                {
+                    "index":"03",
+                    "title": "Speed",
+                    "description": "Baud Rate",
+                    "id":"zterm-edit-speed-input",
+                    "prompt": "",
+                    "type": "input:input",
+                    "group":"zterm",
+                    "command": "TOOL COMMAND"
+                }
+            ]
+        },
+        "adtpro": 
+        {
+            "title": "adtpro",
+            "description": "ADTPro transfers data \\(physical disks and/or disk images\\) between Apple II-era computers and RetroNAS||We launch this service in headless localhost mode \\(serial over IP\\), you can use VNC to access the gui with the full feature set||Note: Requires a VNC client connected to retronas:60000",
+            "id":"adtpro-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install adtpro application",
+                    "id":"adtpro",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "adtpro"
+                },
+                {
+                    "index": "03",
+                    "title": "Edit",
+                    "description": "Change the localhost (SIP) config", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_localhost_edit"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                }
+            ]
+        },
+        "adtpro_serial": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-serial-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Serial device settings", 
+                    "id":"adtpro-edit-serial",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_serial_edit"
+                },
+                {
+                    "index":"03",
+                    "title": "Start",
+                    "description": "Start adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@serial"
+                },
+                {
+                    "index":"04",
+                    "title": "Stop",
+                    "description": "Stop adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@serial"
+                },
+                {
+                    "index":"05",
+                    "title": "Status",
+                    "description": "Query adtpro serial mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@serial"
+                }
+            ]
+        },
+        "adtpro_ethernet": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-ethernet-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Change the Ethenet net listen port", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_ethernet_edit"
+                },
+                {
+                    "index":"03",
+                    "title": "Start",
+                    "description": "Start adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                },
+                {
+                    "index":"04",
+                    "title": "Stop",
+                    "description": "Stop adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                },
+                {
+                    "index":"05",
+                    "title": "Status",
+                    "description": "Query adtpro ethernet mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@ethernet"
+                }
+            ]
+        },
+        "adtpro_audio": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option",
+            "id":"adtpro-audio-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Start",
+                    "description": "Start adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@audio"
+                },
+                {
+                    "index":"03",
+                    "title": "Stop",
+                    "description": "Stop adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@audio"
+                },
+                {
+                    "index":"04",
+                    "title": "Status",
+                    "description": "Query adtpro audio mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@audio"
+                }
+            ]
+        },
+        "adtpro_localhost": 
+        {
+            "title": "adtpro",
+            "description": "Please select an option, note in this mode ADTPro is a client",
+            "id":"adtpro-localhost-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index": "02",
+                    "title": "Edit",
+                    "description": "Change the localhost (SIP) config", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "adtpro_localhost_edit"
+                },
+                {
+                    "index":"03",
+                    "title": "Start",
+                    "description": "Start adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"04",
+                    "title": "Stop",
+                    "description": "Stop adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                },
+                {
+                    "index":"05",
+                    "title": "Status",
+                    "description": "Query adtpro localhost mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "adtpro@localhost"
+                }
+            ]
+        },
+        "adtpro_serial_edit": 
+        {
+            "title": "ADTPro Serial Config",
+            "description": "set ADTPro device",
+            "id":"adtpro-serial-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": []
+        },
+        "adtpro_ethernet_edit": 
+        {
+            "title": "ADTPro Ethernet Config",
+            "description": "set ADTPro device",
+            "id":"adtpro-ethernet-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": []
+        },
+
+        "minicom": 
+        {
+            "title": "minicom",
+            "description": "Please select an option",
+            "id":"minicom",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install adtpro application",
+                    "id":"minicom",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "minicom"
+                },
+                {
+                    "index": "03",
+                    "title": "Start",
+                    "description": "Run minicom", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"",
+                    "command": "minicom"
+                },
+                {
+                    "index":"04",
+                    "title": "Config",
+                    "description": "Start minicom in config mode",
+                    "id":"",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"",
+                    "command": "minicom-config"
                 }
             ]
         },

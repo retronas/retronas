@@ -4,16 +4,7 @@
     - my_name: "megatools"
     - my_file: "install_megatools"
 
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install build tools"
-    package:
-       name: "{{ item }}"
-       state: latest
-    with_items:
+    - my_packages:
       - build-essential 
       - libglib2.0-dev
       - libssl-dev
@@ -23,6 +14,16 @@
       - coreutils
       - meson
       - ninja-build
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
 
   - name: "{{ my_name }} - install script"
     template:

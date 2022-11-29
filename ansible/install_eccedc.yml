@@ -1,8 +1,18 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "EccEDC"
     - my_file: "install_eccedc"
+
+    - my_packages:
+      - coreutils
+      - make
+      - gcc
+      - g++
+      - curl
+      - build-essential
+      - unzip
 
   tasks:
 
@@ -11,17 +21,8 @@
 
   - name: "{{ my_name }} - Install dependencies"
     apt:
-       name: "{{ item }}"
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - git
-      - coreutils
-      - make
-      - gcc
-      - g++
-      - curl
-      - build-essential
-      - unzip
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

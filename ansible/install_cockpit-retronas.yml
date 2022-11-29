@@ -3,6 +3,7 @@
 - import_playbook: install_cockpit-packages.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "retronas"

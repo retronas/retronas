@@ -1,8 +1,16 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "gogrepo"
     - my_file: "install_gogrepo"
+
+    - my_packages:
+      - python3
+      - python-is-python3
+      - python3-html5lib
+      - git
+      - sudo
 
     - scripts:
       - "gogrepo_login.sh" 
@@ -16,15 +24,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - python3
-      - python-is-python3
-      - python3-html5lib
-      - git
-      - sudo
 
   - name: "{{ my_name }} - create GOG dir"
     file:

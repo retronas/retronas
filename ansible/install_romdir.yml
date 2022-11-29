@@ -1,11 +1,12 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Generic ROM dir"
     - my_file: "install_romdir"
 
     - top_level_paths:
-      - { name: "roms", enabled: "yes", systems: "yes" }
+      - { name: "roms", enabled: yes, systems: yes }
 
   tasks:
     - name: "{{ my_name }}"

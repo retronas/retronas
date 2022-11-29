@@ -2,11 +2,20 @@
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "FSP for Swiss"
     - my_file: "install_fsp"
     - my_service: "fspd"
+
+    - my_packages:
+      - python3
+      - python-is-python3
+      - build-essential
+      - flex
+      - gcc
+      - scons
 
     - swiss_dirs:
       - swiss
@@ -27,16 +36,9 @@
     include_vars: retronas_systems.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - python3
-      - python-is-python3
-      - build-essential
-      - flex
-      - gcc
-      - scons
 
   - name: "{{ my_name }} - check systemd unit folder"
     file:

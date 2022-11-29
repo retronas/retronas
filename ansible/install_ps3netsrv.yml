@@ -2,6 +2,7 @@
 - import_playbook: install_romdir.yml
 
 - hosts: localhost
+  gather_facts: yes
 
   vars:
     - my_name: "ps3netsrv"
@@ -44,26 +45,20 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages }}"
        state: latest
-    with_items:
-      "{{ packages }}"
 
   - name: "{{ my_name }} - Install build tools (debian)"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages_debian }}"
        state: latest
-    with_items:
-      "{{ packages_debian }}"
     when: ansible_distribution == 'Debian'
 
   - name: "{{ my_name }} - Install build tools (ubuntu)"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages_ubuntu }}"
        state: latest
-    with_items:
-      "{{ packages_ubuntu }}"
     when: ansible_distribution == 'Ubuntu'
 
   - name: "{{ my_name }} - build top level"
@@ -118,8 +113,7 @@
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when:
       - item.instance == 'no'
     notify: "{{ my_name }} - Restart service"
@@ -130,8 +124,7 @@
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when:
       - item.instance == 'no'
 
@@ -142,8 +135,7 @@
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
+    with_items: "{{ systemd_units }}"
     when: 
       - item.restart == 'yes'
       - item.instance == 'no'

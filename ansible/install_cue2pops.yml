@@ -1,8 +1,17 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "cue2pops"
     - my_file: "install_cue2pops"
+
+    - my_packages:
+      - git
+      - coreutils
+      - make
+      - gcc
+      - g++
+      - build-essential
 
   tasks:
 
@@ -10,16 +19,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - git
-      - coreutils
-      - make
-      - gcc
-      - g++
-      - build-essential
 
   - name: "{{ my_name }} - Prepare installer script"
     template:

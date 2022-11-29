@@ -30,3 +30,9 @@ then
     touch ${ATALKDIR}/etc/netatalk/afppasswd
     sudo ${ATALKDIR}/bin/afpexpect.sh -a "${USERNAME}" "${PASSWD}" 2>/dev/null
 fi
+
+X11VNC=$(which x11vnc)
+if [ ! -z "${X11VNC}" ]
+then
+    sudo $X11VNC -storepasswd "${PASSWD}" /etc/vncpasswd_retronas
+fi

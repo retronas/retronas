@@ -1,0 +1,7 @@
+#!/bin/bash
+
+XDISPLAY=$1
+XAUTH=$2
+PORT=$3
+
+x11vnc -quiet -display $XDISPLAY -auth $XAUTH -listen 0.0.0.0 -rfbport $PORT -rfbauth /etc/vncpasswd_retronas

@@ -1,8 +1,13 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "NFS"
     - my_file: "install_nfs"
+
+    - my_packages:
+      - nfs-common
+      - nfs-kernel-server
 
   tasks:
 
@@ -10,12 +15,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - nfs-common
-      - nfs-kernel-server
 
   - name: "{{ my_name }} - retrieve {{ retronas_user }} user info"
     getent:

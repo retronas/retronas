@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "tftpd-hpa"

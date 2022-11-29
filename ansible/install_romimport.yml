@@ -3,23 +3,23 @@
   vars:
     - my_name: "ROM Import"
     - my_file: "install_romimport"
+    
+    - my_packages:
+      - python3
+      - git
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
-
   - name: "{{ my_name }} - Load RetroNAS Systems"
     include_vars: retronas_systems.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - python3
-      - git
 
   - name: "{{ my_name }} - build top level"
     file:

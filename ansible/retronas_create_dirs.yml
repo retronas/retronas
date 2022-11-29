@@ -4,43 +4,29 @@
 - name: "{{ my_name }} - Load RetroNAS config"
   include_vars: retronas_vars.yml
 
+- name: "{{ my_name }} - build layout list (set fact)"
+  set_fact:
+    path_list: "{{ path_list|default([]) }} + [ '{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src if item.1.systems is true }}' ]"
+  no_log: yes
+  loop: "{{ system_map|product(top_level_paths)|list }}"
+  when: item.1.enabled is true
+
 - name: "{{ my_name }} - build layout"
-  file:
-    path: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
-    owner: "{{ retronas_user }}"
-    group: "{{ retronas_group }}"
-    state: directory
-    mode: "0775"
-  with_nested:
-    - "{{ system_map }}"
-    - "{{ top_level_paths }}"
-  when:
-    - item.1.enabled == "yes"
-    - item.1.systems == "yes"
+  shell:
+    cmd: mkdir -p {{ path_list|flatten|join(' ') }}
+  become: yes
+  become_user: "{{ retronas_user }}"
+  when: path_list is defined
 
-- name: "{{ my_name }} - build layout for non-system dirs"
-  file:
-    path: "{{ retronas_path }}/{{ item.name }}"
-    owner: "{{ retronas_user }}"
-    group: "{{ retronas_group }}"
-    state: directory
-    mode: "0775"
-  with_items:
-    - "{{ top_level_paths }}"
+- name: "{{ my_name }} - build systems directory layout (set fact)"
+  set_fact:
+    link_list: "{{ link_list|default([]) }} + ['ln -sf {{ retronas_path }}/{{ item.1.name|lower }}/{{ item.0.src }} {{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }};' ]"
+  loop: "{{ system_links|product(top_level_paths)|list }}"
   when:
-    - item.enabled == "yes"
-    - item.systems == "no"
+    - item.1.enabled is true
+    - item.1.systems is true
 
-- name: "{{ my_name }} - build x-system symlinks"
-  file:
-    src: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src }}"
-    dest: "{{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }}"
-    owner: "{{ retronas_user }}"
-    group: "{{ retronas_group }}"
-    state: link
-  with_nested:
-    - "{{ system_links }}"
-    - "{{ top_level_paths }}"
-  when:
-    - item.1.enabled == "yes"
-    - item.1.systems == "yes"
+- name: "{{ my_name }} - build systems directory layout"
+  shell:
+    cmd: "{{ link_list|join('') }}"
+  when: link_list is defined

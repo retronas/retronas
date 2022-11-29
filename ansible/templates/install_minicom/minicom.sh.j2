@@ -1,0 +1,18 @@
+#!/bin/bash
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+DROP_ROOT
+
+case $(basename $0 .sh) in
+    minicom-config)
+        /usr/bin/minicom -s
+        [ $? -ne 0 ] && PAUSE
+    ;;
+    *)
+        /usr/bin/minicom
+        [ $? -ne 0 ] && PAUSE
+    ;;
+esac

@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "Disable Laptop Lid"
@@ -18,7 +19,6 @@
       group: 'root'
       mode: '0755'
       state: directory
-
 
   - name: "{{ my_name }} - install config"
     template:

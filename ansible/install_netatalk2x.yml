@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: yes
 
   vars:
     - my_name: "Netatalk2.X"
@@ -33,6 +34,12 @@
       - timelord
       - a2boot
 
+    - templates:
+      - { name: "afpexpect.sh", dest: "{{ retronas_root }}/bin/netatalk2x/bin", mode: "0754"}
+      - { name: "AppleVolumes.default", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk"}
+      - { name: "afpd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk"}
+      - { name: "atalkd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk"}
+
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
@@ -42,18 +49,14 @@
     shell: "/usr/bin/apt-mark unhold netatalk"
 
   - name: "{{ my_name }}  - remove package-based Netatalk"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: netatalk
        state: absent
-    with_items:
-       - netatalk
 
   - name: "{{ my_name }}  - install dependencies"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ packages }}"
        state: latest
-    with_items: "{{ packages }}"
-
 
   - name: "{{ my_name }} - create install script"
     template:
@@ -66,49 +69,14 @@
   - name: "{{ my_name }} - install from source"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
-  - name: "{{ my_name }} - afpexpect.sh"
+  - name: "{{ my_name }} - templates"
     template:
-      src: "templates/{{ my_file }}/afpexpect.sh.j2"
-      dest: "{{ retronas_root }}/bin/netatalk2x/bin/afpexpect.sh"
-      owner: root
-      group: root
-      mode: '0754'
-
-#  - name: "{{ my_name }} - configure /etc/default/netatalk"
-#    template:
-#      src: "templates/{{ my_file }}/default.j2"
-#      dest: /etc/default/netatalk
-#      owner: root
-#      group: root
-#      mode: '0644'
-#    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - AppleVolumes.default"
-    template:
-      src: "templates/{{ my_file }}/AppleVolumes.default.j2"
-      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/AppleVolumes.default"
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-
-  - name: "{{ my_name }} - afpd.conf"
-    template:
-      src: "templates/{{ my_file }}/afpd.conf.j2"
-      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/afpd.conf"
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - atalkd.conf"
-    template:
-      src: "templates/{{ my_file }}/atalkd.conf.j2"
-      dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk/atalkd.conf"
-      owner: root
-      group: root
-      mode: '0644'
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+    with_items: "{{ templates }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"

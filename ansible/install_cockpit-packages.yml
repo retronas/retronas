@@ -3,6 +3,7 @@
 - import_playbook: install_cockpit.yml
 
 - hosts: localhost
+  gather_facts: no
 
   vars:
     - my_name: "cockpit-packages"
@@ -20,11 +21,9 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install prerequisite packages"
-    apt:
-       name: "{{ item }}"
+    package:
+       name: "{{ package_tools }}"
        state: latest
-    with_items:
-      - "{{ package_tools }}"
 
   - name: "{{ my_name }} - install cockpit packages inplace"
     copy:

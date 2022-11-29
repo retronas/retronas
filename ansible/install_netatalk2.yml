@@ -1,4 +1,5 @@
 - hosts: localhost
+  gather_facts: yes
 
   vars:
     - my_name: "Netatalk2"

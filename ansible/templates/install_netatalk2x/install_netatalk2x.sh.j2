@@ -20,6 +20,6 @@ cd Netatalk-2.x
 
 ./bootstrap
 ./configure --prefix=${IDIR} --enable-systemd --enable-ddp --enable-a2boot --enable-cups --enable-timelord --enable-zeroconf
-make -j{{ansible_processor_vcpus}}
+make -j$(nproc)
 make install
 
