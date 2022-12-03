@@ -688,6 +688,16 @@
                     "type": "install",
                     "group":"",
                     "command": "xboxmanager"
+                },
+                {
+                    "index": "04",
+                    "title": "netlink",
+                    "description": "Sega Saturn Netlink tunneling service", 
+                    "id":"netlink",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "netlink"
                 }
             ]
         },
@@ -937,6 +947,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "dreampi"
+                },
+                {
+                    "index": "54",
+                    "title": "netlink",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "netlink"
                 }
             ]
         },

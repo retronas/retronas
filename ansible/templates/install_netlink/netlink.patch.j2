@@ -1,0 +1,11 @@
+--- tunnel.py	2022-12-03 21:45:41.763778651 +0000
++++ tunnel.py	2022-09-26 14:29:52.000000000 +0100
+@@ -67,7 +67,7 @@
+ def com_scanner():
+     global com_port
+     speed = 115200
+-    for i in range(1,25): # this should be a big enough range. USB com ports usually end up in the teens.
++    for i in range(0,25): # this should be a big enough range. USB com ports usually end up in the teens.
+         osName = os.name
+         if osName == 'posix': # should work on linux and Mac for USB modem, but untested.
+             com_port = "/dev/ttyACM%s" % i
