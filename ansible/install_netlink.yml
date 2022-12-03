@@ -65,16 +65,6 @@
       executable: /bin/bash
     notify: "{{ my_name }} Restart Services"
 
-  - name: "{{ my_name }} - Patch systemd service"
-    lineinfile:
-      path: /etc/systemd/system/{{ item.unit }}
-      regex: "{{ item.regex }}"
-      insertafter: "{{ item.after }}"
-      line: "{{ item.line }}"
-      state: present
-    with_items: "{{ systemd_patches }}"
-    notify: "{{ my_name }} Restart Services"
-
   - name: "{{ my_name }} - Patch com port range detection"
     patch:
       src: /tmp/{{ my_name }}.patch
