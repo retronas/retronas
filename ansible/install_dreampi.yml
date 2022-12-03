@@ -1,5 +1,5 @@
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
 
 
   vars:
@@ -20,13 +20,23 @@
       - python3-pip
 
     - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.conf", dest: "/etc/dnsmasq.d", force: no }
 
     - paths:
       - { name: "dnsmasq.d", dest: "/etc" }
 
   tasks:
+
+  - name: "{{ my_name }} - Checking hw platform compatiblity"
+    debug:
+      msg: "INCOMPATIBLE PLATFORM, only arm/aarch64 is supported"
+    when: "arm" not in ansible_architecture or
+          "aarch64" not in ansible_architecture
+
+  - meta: end_play
+    when: "arm" not in ansible_architecture or
+          "aarch64" not in ansible_architecture
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
