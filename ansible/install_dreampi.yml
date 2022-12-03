@@ -10,7 +10,7 @@
       - git
       - dnsmasq 
       - dnsutils 
-      - libnetfilter-queue-dev -
+      - libnetfilter-queue-dev
       - libnetfilter-queue1 
       - ppp
       - arping 
