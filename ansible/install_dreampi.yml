@@ -99,5 +99,5 @@
 
 - import_playbook: retronas_system_config.yml
   vars:
-    module_name: "dvdauth"
+    module_name: "dreampi"
     module_state: "present"
