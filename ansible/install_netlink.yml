@@ -8,6 +8,7 @@
 
     - my_packages:
       - curl
+      - unzip
       - dnsmasq 
       - dnsutils 
       - libnetfilter-queue-dev
