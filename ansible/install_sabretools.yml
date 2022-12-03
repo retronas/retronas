@@ -16,10 +16,17 @@
       - git
       - coreutils
 
+    - my_arch: "x86_64"
+
   tasks:
 
+  - name: "{{ my_name }} - Checking hw platform compatiblity"
+    debug:
+      msg: "INCOMPATIBLE PLATFORM, only {{ my_arch }} is supported"
+    when: ansible_architecture != my_arch
+
   - meta: end_play
-    when: ansible_architecture != "x86_64"
+    when: ansible_architecture != my_arch
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
