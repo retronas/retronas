@@ -27,7 +27,7 @@
       - { name: "dnsmasq.d", dest: "/etc" }
 
     - systemd_patches:
-      - { unit: "dreampi.service", line: "Restart=on-failure", regex: "^Restart=on-failure$", after: "^Exec=.*$" }
+      - { unit: "dreampi.service", line: "Restart=on-failure", regex: "^Restart=on-failure$", after: "^ExecStart=.*$" }
       - { unit: "dreampi.service", line: "RestartSec=30s", regex: "^RestartSec=.+", after: "^Restart=.*$" }
 
   tasks:
