@@ -13,7 +13,7 @@
       - { option: "last_updated", value: "{{ ansible_date_time.date }}" }
 
     platform_info:
-      - { option: "architecture", value: "{{ ansible.architecture }}" }
+      - { option: "architecture", value: "{{ ansible_architecture }}" }
       - { option: "ipv4addr", value: "{{ ansible_default_ipv4.address }}" }
       - { option: "ipv4iface", value: "{{ ansible_default_ipv4.interface }}" }
 
@@ -49,7 +49,7 @@
       option: "{{ item.option }}"
       value: "{{ item.value }}"
       state: present
-    with_items: "{{ general_options }}"
+    with_items: "{{ platform_info }}"
     when: platform_info is defined
 
   - name: "{{ my_name }} - Log Package Entry"
