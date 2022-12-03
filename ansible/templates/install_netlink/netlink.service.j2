@@ -1,0 +1,11 @@
+[Unit]
+Description=netlink for Sega Saturn
+After=network.target
+
+[Service]
+ExecStart=/opt/netlink/tunnel.py
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target

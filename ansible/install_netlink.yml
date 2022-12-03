@@ -1,0 +1,90 @@
+- hosts: localhost
+  gather_facts: no
+
+
+  vars:
+    - my_name: "netlink"
+    - my_file: "install_netlink"
+
+    - my_packages:
+      - curl
+      - dnsmasq 
+      - dnsutils 
+      - libnetfilter-queue-dev
+      - libnetfilter-queue1 
+      - ppp
+      - arping 
+      - nftables 
+      - tcpd 
+      - wvdial 
+      - python3-pip
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_file }}.service", dest: "/etc/systemd/system" }
+      - { name: "{{ my_name }}.conf", dest: "/etc/dnsmasq.d" }
+
+    - paths:
+      - { name: "dnsmasq.d", dest: "/etc" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"   
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} Restart Services"
+
+  - name: "{{ my_name }} - Run installer"
+    shell:
+      cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+      chdir: "{{ retronas_root }}/scripts"
+      executable: /bin/bash
+    notify: "{{ my_name }} Restart Services"
+
+  - name: "{{ my_name }} - Patch systemd service"
+    lineinfile:
+      path: /etc/systemd/system/{{ item.unit }}
+      regex: "{{ item.regex }}"
+      insertafter: "{{ item.after }}"
+      line: "{{ item.line }}"
+      state: present
+    with_items: "{{ systemd_patches }}"
+    notify: "{{ my_name }} Restart Services"
+
+  handlers:
+    - name: "{{ my_name }} Restart Services"
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+        daemon_reload: yes
+      with_items:
+        - "{{ my_name }}.service"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "netlink"
+    module_state: "present"
