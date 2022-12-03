@@ -3,7 +3,7 @@ Description=netlink for Sega Saturn
 After=network.target
 
 [Service]
-ExecStart=/opt/netlink/tunnel.py
+ExecStart=/usr/bin/python3 /opt/netlink/tunnel.py
 Restart=on-failure
 RestartSec=30s
 

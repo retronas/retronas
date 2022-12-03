@@ -23,6 +23,7 @@
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_file }}.service", dest: "/etc/systemd/system" }
       - { name: "{{ my_name }}.conf", dest: "/etc/dnsmasq.d" }
+      - { name: "{{ my_name }}.patch", dest: "/tmp" }
 
     - paths:
       - { name: "dnsmasq.d", dest: "/etc" }
@@ -73,6 +74,11 @@
       state: present
     with_items: "{{ systemd_patches }}"
     notify: "{{ my_name }} Restart Services"
+
+  - name: "{{ my_name }} - Patch com port range detection"
+    patch:
+      src: /tmp/{{ my_name }}.patch
+      dest: /opt/{{ my_name }}/tunnel.py
 
   handlers:
     - name: "{{ my_name }} Restart Services"

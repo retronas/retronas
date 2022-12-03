@@ -9,16 +9,14 @@ cd $DPITMP
 SOURCECODE=$( curl -kLs https://api.github.com/repos/eaudunord/Netlink/releases | jq -r ".[0].assets | map(select(.name | match (\"Netlink_Tunnel\")))[] | .browser_download_url" )
 [ -z "$SOURCECODE" ] && echo "Couldn't get source code name" && exit 1
 echo $SOURCECODE
-curl -OJL "${SOURCECODE}"
+
+RELEASE=$(basename "${SOURCECODE}") 
+[ ! -f $RELEASE ] && curl -OJL "${SOURCECODE}"
 
 # unpack and clean
-unzip $(basename "${SOURCECODE}")
-cd Netlink_Tunnel_*/
-rm -rf run_tunnel.bat winPython/
-
-# install
-[ !-d $OUTDIR ] && mkdir -p $OUTDIR
-cp -R * $OUTDIR/
+[ ! -d $OUTDIR ] && mkdir -p $OUTDIR
+unzip $RELEASE -x "*/winPython/*" "*.bat"
+cp -R Netlink_Tunnel*/* $OUTDIR/
 
 # pull python3 requirements from dreampi
 curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
