@@ -21,7 +21,7 @@
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
-      - { name: "{{ my_file }}.service", dest: "/etc/systemd/system" }
+      - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
       - { name: "{{ my_name }}.conf", dest: "/etc/dnsmasq.d" }
       - { name: "{{ my_name }}.patch", dest: "/tmp" }
 
