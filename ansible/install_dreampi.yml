@@ -26,6 +26,10 @@
     - paths:
       - { name: "dnsmasq.d", dest: "/etc" }
 
+    - systemd_patches:
+      - { unit: "dreampi.service", line: "Restart=on-failure", regex: "^Restart=on-failure$", after: "^Exec=.*$" }
+      - { unit: "dreampi.service", line: "RestartSec=30s", regex: "^RestartSec=.+", after: "^Restart=.*$" }
+
   tasks:
 
   - name: "{{ my_name }} - Checking hw platform compatiblity"
@@ -71,6 +75,16 @@
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
+    notify: "{{ my_name }} Restart Services"
+
+  - name: "{{ my_name }} - Patch systemd service"
+    lineinfile:
+      path: /etc/systemd/system/{{ item.unit }}
+      regex: "{{ item.regex }}"
+      insertafter: "{{ item.after }}"
+      line: "{{ item.line }}"
+      state: present
+    with_items: "{{ systemd_patches }}"
     notify: "{{ my_name }} Restart Services"
 
   handlers:
