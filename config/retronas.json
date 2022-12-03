@@ -588,6 +588,66 @@
                     "type": "install",
                     "group":"",
                     "command": "megatools"
+                },
+                {
+                    "index": "56",
+                    "title": "apfs-fuse",
+                    "description": "Apple File System fuse library", 
+                    "id":"apfs-fuse",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "apfs-fuse"
+                },
+                {
+                    "index":"57",
+                    "title": "hb-store-cdn",
+                    "description": "Ps4 Homebrew Store CDN",
+                    "id":"hbstorecdn",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "hbstorecdn"
+                },
+                {
+                    "index": "58",
+                    "title": "zterm",
+                    "description": "Zmodem transfer suite",
+                    "id":"zterm",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index": "59",
+                    "title": "adtpro",
+                    "description": "Apple Disk Transfer ProDOS",
+                    "id":"adtpro",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro"
+                },
+                {
+                    "index": "60",
+                    "title": "minicom",
+                    "description": "minicom terminal",
+                    "id":"minicom",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "minicom"
+                },
+                {
+                    "index": "61",
+                    "title": "dreampi",
+                    "description": "dialup solution for dreamcast",
+                    "id":"dreampi",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "dreampi"
                 }
             ]
         },
@@ -628,66 +688,6 @@
                     "type": "install",
                     "group":"",
                     "command": "xboxmanager"
-                },
-                {
-                    "index": "04",
-                    "title": "apfs-fuse",
-                    "description": "Apple File System fuse library", 
-                    "id":"apfs-fuse",
-                    "prompt": "",
-                    "type": "install",
-                    "group":"",
-                    "command": "apfs-fuse"
-                },
-                {
-                    "index":"05",
-                    "title": "hb-store-cdn",
-                    "description": "Ps4 Homebrew Store CDN",
-                    "id":"hbstorecdn",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "hbstorecdn"
-                },
-                {
-                    "index": "06",
-                    "title": "zterm",
-                    "description": "Zmodem transfer suite",
-                    "id":"zterm",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "zterm"
-                },
-                {
-                    "index": "07",
-                    "title": "adtpro",
-                    "description": "Apple Disk Transfer ProDOS",
-                    "id":"adtpro",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "adtpro"
-                },
-                {
-                    "index": "08",
-                    "title": "minicom",
-                    "description": "minicom terminal",
-                    "id":"minicom",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "minicom"
-                },
-                {
-                    "index": "09",
-                    "title": "dreampi",
-                    "description": "dialup solution for dreamcast",
-                    "id":"dreampi",
-                    "prompt": "",
-                    "type": "install",
-                    "group":"",
-                    "command": "dreampi"
                 }
             ]
         },
@@ -927,6 +927,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "webone"
+                },
+                {
+                    "index": "53",
+                    "title": "dreampi",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "dreampi"
                 }
             ]
         },
