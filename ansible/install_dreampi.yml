@@ -30,13 +30,13 @@
 
   - name: "{{ my_name }} - Checking hw platform compatiblity"
     debug:
-      msg: "INCOMPATIBLE PLATFORM, only arm/aarch64 is supported"
-    when: "arm" not in ansible_architecture or
-          "aarch64" not in ansible_architecture
+      msg: "INCOMPATIBLE PLATFORM, only arm is supported"
+    when: '"arm" not in ansible_architecture' or
+          '"aarch64" not in ansible_architecture'
 
   - meta: end_play
-    when: "arm" not in ansible_architecture or
-          "aarch64" not in ansible_architecture
+    when: '"arm" not in ansible_architecture' or
+          '"aarch64" not in ansible_architecture'
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
