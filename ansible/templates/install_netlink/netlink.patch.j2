@@ -4,8 +4,8 @@
  def com_scanner():
      global com_port
      speed = 115200
--    for i in range(0,25): # this should be a big enough range. USB com ports usually end up in the teens.
-+    for i in range(1,25): # this should be a big enough range. USB com ports usually end up in the teens.
+-    for i in range(1,25): # this should be a big enough range. USB com ports usually end up in the teens.
++    for i in range(0,25): # this should be a big enough range. USB com ports usually end up in the teens.
          osName = os.name
          if osName == 'posix': # should work on linux and Mac for USB modem, but untested.
              com_port = "/dev/ttyACM%s" % i
