@@ -17,7 +17,7 @@
       - dosfstools
       - curlftpfs
       - sshfs
-      - udisks
+      - udisks2
       - udisks2-btrfs
       - udisks2-lvm2
       - udisks2-zram
