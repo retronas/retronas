@@ -72,7 +72,7 @@
                 {
                     "index": "07",
                     "title": "Advanced",
-                    "description": "bd/eLiTe",
+                    "description": "Tools that may require manual setup",
                     "id":"advanced",
                     "prompt": "",
                     "type": "dialog",
@@ -698,6 +698,16 @@
                     "type": "install",
                     "group":"",
                     "command": "netlink"
+                },
+                {
+                    "index": "05",
+                    "title": "kermit",
+                    "description": "kermit (server mode)", 
+                    "id":"kermit",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "kermit"
                 }
             ]
         },
@@ -957,6 +967,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "netlink"
+                },
+                {
+                    "index": "55",
+                    "title": "inetd",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "inetd"
                 }
             ]
         },
