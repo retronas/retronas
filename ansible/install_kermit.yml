@@ -24,7 +24,7 @@
   - name: "{{ my_name }} - configure kermit path"
     replace:
       path: /etc/inetd.conf
-      regex: (^.+kermit.*--root:)(/srv.+)(.*)
+      regexp: (^.+kermit.*--root:)(/srv.+)(.*)
       replace: \1{{ retronas_path }}\3
     notify: "{{ my_name }} - Restart service"
 
