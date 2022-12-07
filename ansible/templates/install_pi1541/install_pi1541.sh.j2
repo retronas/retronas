@@ -27,22 +27,24 @@ INSTALL_PI1541() {
 	local ARCHIVE=Pi1541.zip
 	cd $TMPFILES
 
+	echo "Installing Pi1541 software"
 	if [ ! -f $TMPFILES/$ARCHIVE ]
 	then
 		echo "$ARCHIVE not found downloading to $TMPFILES"
 		curl -sO https://cbm-pi1541.firebaseapp.com/$ARCHIVE
 	fi
 	
-	echo "installing $ARCHIVE to $TARGET"
+	echo "Installing $ARCHIVE to $TARGET"
 	unzip -qq -o $ARCHIVE
 	cp -R Pi1541/* $TARGET/
-	rm -f Pi1541/
+	rm -rf Pi1541/
 }
 
 INSTALL_FIRMWARE() {
 	local ARCHIVE=1.20180919.zip
 	cd $TMPFILES
 
+	echo "Installing RPI firmware"
 	if [ ! -f $TMPFILES/$ARCHIVE ]
 	then
 		echo "$ARCHIVE not found downloading to $TMPFILES"
@@ -57,6 +59,7 @@ INSTALL_ROM() {
 	local ARCHIVE=vice-tmp.zip
 	cd $TMPFILES
 
+	echo "Installing drive firmware and font files"
 	if [ ! -f $TMPFILES/$ARCHIVE ]
 	then
 		echo "$ARCHIVE not found downloading to $TMPFILES"
@@ -135,7 +138,7 @@ SELECT_DRIVE() {
 	do
 	    [ $DRIVE == "exit" ] && echo "Exiting..." && exit 0
 	    
-	    read -p "Are you sure? [y/N]: " ANSWER
+	    read -p "($DRIVE) Are you sure? [y/N]: " ANSWER
 
 	    case $ANSWER in
 	      y|Y)
