@@ -52,6 +52,7 @@ system_map: "{{
   |union(system_microsoft)
   |union(system_milesgordon)
   |union(system_mits)
+  |union(system_nabu)
   |union(system_nec)
   |union(system_nintendo)
   |union(system_oric)
@@ -214,6 +215,8 @@ system_milesgordon:
   - { src: "milesgordon/samcoupe", last: "other/milesgordon_samcoupe", mister: "SAMCOUPE", retropie: "", batocera: "samcoupe", recalbox: "samcoupe", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_mits:
   - { src: "mits/altair8800", last: "other/mits_altair8800", mister: "Altair8800", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_nabu:
+  - { src: "nabu", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_nec:
   - { src: "nec/pc88", last: "", mister: "PC8801", retropie: "", batocera: "pc88", recalbox: "pc88", retroarch: "NEC - PC-98", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "nec/pc98", last: "", mister: "Zet98", retropie: "", batocera: "pc98", recalbox: "pc98", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pc98", smdb: "" }

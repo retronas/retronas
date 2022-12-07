@@ -1,0 +1,22 @@
+#!/bin/bash
+
+BINDIR=/opt/nabu
+PORT=${1:-8285}
+BIN=NABUInternetAdapter.exe
+
+cd $BINDIR
+/usr/bin/xvfb-run --auto-servernum mono $BIN &
+sleep 3
+PARENTPID=$(ps -ef | grep -E "xvfb-run.*$BIN.*" | grep -v grep | head -n1 | awk '{print $2}')
+
+if [ ! -z "$PARENTPID" ]
+then
+    SESSION=$(ps -ef | grep -E "$PARENTPID.*Xvfb" | head -n1 | awk '{print $9,$16}')
+    XDISPLAY=$(echo $SESSION | cut -d' ' -f1 )
+    XAUTH=$(echo $SESSION | cut -d' ' -f2 )
+
+    /usr/local/bin/x11vnc_wrapper.sh $XDISPLAY $XAUTH $PORT
+else
+    echo "Failed to find the xfvb session"
+    sleep 3
+fi

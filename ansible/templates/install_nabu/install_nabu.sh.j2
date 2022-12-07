@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+TMPFILES=$(mktemp -d)
+
+BINDIR=/opt/nabu
+ARCHIVE=NABUInternetAdapter.zip
+
+[ ! -d $BINDIR ] && mkdir -p $BINDIR
+
+cd $TMPFILES
+curl -O http://cloud.nabu.ca/$ARCHIVE
+
+unzip $ARCHIVE -d $BINDIR
+rm -f $ARCHIVE
