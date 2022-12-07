@@ -73,6 +73,19 @@ INSTALL_ROM() {
 	unzip -qq -o -j $ARCHIVE "*/C64/chargen" -d $TARGET/ 
 }
 
+CONFIG_OPTIONB() {
+	    read -p "Configure cable Option B support? [y/N]: " ANSWER
+
+	    case $ANSWER in
+	      y|Y)
+		  	sed -i -r 's/\/\/(splitIECLines)/\1/' $TARGET/options.txt
+            ;;
+	      *)  
+            INSTALL_ROMS
+            ;;
+        esac
+}
+
 INSTALL_ROMS() {
         SYSTEMS=(
             commodore64 
@@ -147,6 +160,7 @@ SELECT_DRIVE() {
 			INSTALL_FIRMWARE
 			INSTALL_PI1541
 			INSTALL_ROM
+			CONFIG_OPTIONB
 			INSTALL_ROMS
 			CLEANUP
 		fi
