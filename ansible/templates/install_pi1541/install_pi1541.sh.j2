@@ -5,6 +5,8 @@
 
 set -u
 
+clear
+
 TMPFILES=$(mktemp -d)
 TARGET=/mnt/pi1541
 
@@ -97,12 +99,20 @@ CLEANUP() {
 
 	echo "Unmounting $TARGET"
 	umount $TARGET
+	rmdir $TARGET
 }
 
 SELECT_DRIVE() {
-	FAT32DEVS=($(lsblk -f -r | grep -v boot | awk '/vfat/{print $1}' ) exit)
+	FAT32DEVS=($(lsblk -f -r | grep -v boot | awk '/FAT32/{print $1}' ) exit)
 
-	echo "Available FAT32 devices"
+	if [ ${#FAT32DEVS[@]} -le 1 ]
+	then
+		echo "No available FAT32 drives found, insert one and run this script again"
+		sleep 3
+		exit 1
+	fi
+
+	echo "Available FAT32 devices:"
 	select DRIVE in "${FAT32DEVS[@]}"
 	do
 	    [ $DRIVE == "exit" ] && echo "Exiting..." && exit 0
@@ -117,6 +127,7 @@ SELECT_DRIVE() {
 			INSTALL_FIRMWARE
 			INSTALL_PI1541
 			INSTALL_ROM
+			INSTALL_ROMS
 			CLEANUP
 		fi
 		exit
