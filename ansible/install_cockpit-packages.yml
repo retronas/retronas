@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_filesystems.yml
-- import_playbook: install_cockpit.yml
+#- import_playbook: install_filesystems.yml
+#- import_playbook: install_cockpit.yml
 
 - hosts: localhost
   gather_facts: no
