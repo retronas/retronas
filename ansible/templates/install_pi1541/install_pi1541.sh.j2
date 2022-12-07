@@ -105,7 +105,9 @@ CLEANUP() {
 SELECT_DRIVE() {
 	FAT32DEVS=($(lsblk -f -r | grep -v boot | awk '/FAT32/{print $1}' ) exit)
 
-	if [ ${#FAT32DEVS[@]} -le 1 ]
+
+	{# this workaround is for broken bash array count support in jinja #}
+	if [ {{ ['${','#FAT32DEVS[@]}']|join('') }} -le 1 ]
 	then
 		echo "No available FAT32 drives found, insert one and run this script again"
 		sleep 3
