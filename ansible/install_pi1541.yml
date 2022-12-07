@@ -15,7 +15,7 @@
 
   - name: "{{ my_name }} - create retronas cache"
     file:
-      path: "{{ retronas_path/{{ my_name }}"
+      path: "{{ retronas_path }}/{{ my_name }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       mode: 0755
