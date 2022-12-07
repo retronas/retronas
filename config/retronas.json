@@ -222,7 +222,7 @@
                 {
                     "index":"07",
                     "title": "EtherDFS",
-                    "description": "Set EtherDFS network interface",
+                    "description": "Set EtherDFS/ethflopd network interface",
                     "id":"set-etherdfs-nic",
                     "prompt": "",
                     "type": "dialog_input",
@@ -648,7 +648,17 @@
                     "type": "install",
                     "group":"",
                     "command": "dreampi"
-                }
+                },
+                {
+                    "index": "62",
+                    "title": "ethflopd",
+                    "description": "lightweight layer 2 network floppy emulator for DOS", 
+                    "id":"ethflopd",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ethflopd"
+                },
             ]
         },
         "experimental": 
@@ -987,6 +997,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "inetd"
+                },
+                {
+                    "index": "56",
+                    "title": "ethflopd",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "ethflopd"
                 }
             ]
         },
