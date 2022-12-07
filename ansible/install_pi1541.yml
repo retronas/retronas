@@ -6,7 +6,7 @@
 
   vars:
     - my_name: "pi1541"
-    - my_file: "install_{{ name }}"
+    - my_file: "install_{{ my_name }}"
 
   tasks:
 
