@@ -1,0 +1,35 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "pi1541"
+    - my_file: "install_{{ name }}"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - check mount path"
+    file:
+      path: /mnt/{{ my_name }}
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+  - name: "{{ my_name }} - Generate install scripts"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "pi1541"
+    module_state: "present"

@@ -788,6 +788,16 @@
                     "type": "install",
                     "group":"",
                     "command": "cue2pops"
+                },
+                {
+                    "index": "08",
+                    "title": "pi1541",
+                    "description": "Setup a pi1541 SD card", 
+                    "id":"pi1541",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "pi1541"
                 }
             ]
         },
@@ -2526,7 +2536,7 @@
                 {
                     "index":"02",
                     "title": "Install",
-                    "description": "Install adtpro application",
+                    "description": "Install minicom application",
                     "id":"minicom",
                     "prompt": "Install",
                     "type": "install",
@@ -2552,6 +2562,46 @@
                     "type": "script",
                     "group":"",
                     "command": "minicom-config"
+                }
+            ]
+        },
+        "pi1541": 
+        {
+            "title": "pi1541",
+            "description": "Assists with setting up a pi1541 sd card device, provide a FAT32 formatted device and run setup",
+            "id":"pi1541",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install pi1541 setup script",
+                    "id":"pi151",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "pi1541"
+                },
+                {
+                    "index": "03",
+                    "title": "Setup",
+                    "description": "Run the setup script", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"",
+                    "command": "pi1541"
                 }
             ]
         },

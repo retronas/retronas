@@ -4,8 +4,8 @@
 SELECT_DRIVE() {
   
   PS3="Please select a drive ($1): "
-  DRIVES="$(grep -E "/dev/(sd|hd)[a-z]+" /proc/mounts | awk '{print $1}') exit"
-  select DRIVE in $DRIVES
+  DRIVES=("$(grep -E "/dev/(sd|hd)[a-z]+" /proc/mounts | awk '{print $1}') exit")
+  select DRIVE in "${DRIVES[@]}"
   do  
 
     [ $DRIVE == "exit" ] && echo "Exiting..." && exit 0
