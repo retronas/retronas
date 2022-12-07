@@ -13,6 +13,14 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
+  - name: "{{ my_name }} - create retronas cache"
+    file:
+      path: "{{ retronas_path/{{ my_name }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      mode: 0755
+      state: directory
+
   - name: "{{ my_name }} - check mount path"
     file:
       path: /mnt/{{ my_name }}
