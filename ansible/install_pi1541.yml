@@ -29,10 +29,10 @@
       mode: 0755
       state: directory
 
-  - name: "{{ my_name }} - Generate install scripts"
+  - name: "{{ my_name }} - Generate setup script"
     template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      src: "templates/{{ my_file }}/{{ my_name }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
       owner: root
       group: root
       mode: 0755
