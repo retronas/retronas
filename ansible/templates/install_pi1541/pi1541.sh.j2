@@ -87,7 +87,7 @@ INSTALL_ROMS() {
 
     select SYSTEM in "${SYSTEMS[@]}"
     do  
-        [ $SYSTEM == "exit" ] && echo "Exiting..." && exit 0
+        [ $SYSTEM == "exit" ] && echo "Exiting..." && CLEANUP
         ROMPATH="{{ retronas_path }}/roms/commodore/$SYSTEM"
 
         echo "$(df -h | grep "$TARGET" | awk '{print $1, "has", $4, "free"}') $(du -hs $ROMPATH | awk '{print $1, "is required"}')"
@@ -113,12 +113,11 @@ INSTALL_ROMS() {
 }
 
 CLEANUP() {
-	echo "Cleaning up"
-	rm -rf $TMPFILES
-
 	echo "Unmounting $TARGET"
 	umount $TARGET
 	rmdir $TARGET
+
+	exit 0
 }
 
 SELECT_DRIVE() {
