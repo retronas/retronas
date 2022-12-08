@@ -36,11 +36,11 @@
     debug:
       msg: "INCOMPATIBLE PLATFORM, only arm platforms are supported"
     when: ansible_architecture is not search('arm') and
-      ansible_architecture != 'aarch64'
+          ansible_architecture != 'aarch64'
 
   - meta: end_play
     when: ansible_architecture is not search('arm') and
-      ansible_architecture != 'aarch64'
+          ansible_architecture != 'aarch64'
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml

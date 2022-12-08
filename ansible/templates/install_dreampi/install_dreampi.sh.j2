@@ -10,7 +10,12 @@ cd dreampi
 git checkout python3
 
 # install dependancies
+dpkg --add-architecture armhf
+apt-get update
 dpkg -i arm/*.deb
+
+# workaround for if a previous install was broken due to missing arch
+apt-get --fix-missing install
 
 # pull python3 requirements
 curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
