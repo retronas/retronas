@@ -20,3 +20,8 @@
     package:
        name: "{{ my_packages }}"
        state: latest
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "mc"
+    module_state: "present"

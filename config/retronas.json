@@ -668,6 +668,26 @@
                     "type": "install",
                     "group":"",
                     "command": "mc"
+                },
+                {
+                    "index": "64",
+                    "title": "ytree",
+                    "description": "Ytree File Manager (Xtree clone)", 
+                    "id":"ytree",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ytree"
+                },
+                {
+                    "index": "65",
+                    "title": "far2l",
+                    "description": "far2l File Manager", 
+                    "id":"far2l",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "far2l"
                 }
             ]
         },

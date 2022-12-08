@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -u
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="/usr/local/bin"
+REPO=https://github.com/lattenero/ytree
+
+
+echo "Configuring build directories..."
+[ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading git source ..."
+git clone $REPO
+cd "${SRCDIR}/$(basename $REPO .git)"
+
+echo "Building"
+make -j5
+
+echo "Moving binary to RetroNAS bin dir..."
+mkdir -p "${BINDIR}" 2>/dev/null
+mv -vf ytree "${BINDIR}/"
+
+echo "Cleaning up..."
+[ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+
+echo "All done!"

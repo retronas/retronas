@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -u
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="/usr/local/bin"
+REPO=https://github.com/elfmz/far2l
+
+
+echo "Configuring build directories..."
+[ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading git source ..."
+git clone $REPO
+cd "${SRCDIR}/$(basename $REPO .git)"
+git checkout $(git tag | tail -n1)
+
+echo "Building"
+mkdir _build
+cd _build
+cmake -DUSEWX=no -DCMAKE_CXX_COMPILER=g++-9 -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . -j$(nproc --all)
+sudo cmake --install .
+
+echo "Cleaning up..."
+[ -d ${SRCDIR} ] && rm -rf "${SRCDIR}"
+
+echo "All done!"
