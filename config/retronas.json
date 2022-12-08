@@ -658,6 +658,16 @@
                     "type": "install",
                     "group":"",
                     "command": "ethflopd"
+                },
+                {
+                    "index": "63",
+                    "title": "mc",
+                    "description": "Midnight Commander (Norton clone)", 
+                    "id":"mc",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "mc"
                 }
             ]
         },

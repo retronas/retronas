@@ -1,0 +1,22 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "mc"
+    - my_file: "install_mc"
+
+    - my_packages:
+      - mc
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Load RetroNAS systems"
+    include_vars: retronas_systems.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
