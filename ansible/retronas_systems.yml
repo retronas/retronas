@@ -201,7 +201,8 @@ system_mattel:
   - { src: "mattel/aquarius", last: "", mister: "AQUARIUS", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "mattel/intellivision", last: "", mister: "Intellivision", retropie: "", batocera: "intellivision", recalbox: "intellivision", retroarch: "Mattel - Intellivision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "intellivision", smdb: "" }
 system_microsoft:
-  - { src: "microsoft/msx", last: "", mister: "MSX", retropie: "", batocera: "msx1", recalbox: "msx1", retroarch: "Microsoft - MSX", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx", smdb: "" }
+  - { src: "microsoft/msx", last: "", mister: "MSX1", retropie: "", batocera: "msx1", recalbox: "msx1", retroarch: "Microsoft - MSX", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx", smdb: "" }
+  - { src: "microsoft/msx", last: "", mister: "MSX", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "microsoft/msx2", last: "", mister: "", retropie: "", batocera: "msx2", recalbox: "msx2", retroarch: "Microsoft - MSX2", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx2", smdb: "" }
   - { src: "microsoft/msxplus", last: "", mister: "", retropie: "", batocera: "msx2+", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
   - { src: "microsoft/msxturbor", last: "", mister: "", retropie: "", batocera: "msxturbor", recalbox: "msxturbor", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
