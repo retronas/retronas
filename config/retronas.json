@@ -718,6 +718,16 @@
                     "type": "install",
                     "group":"",
                     "command": "kermit"
+                },
+                {
+                    "index": "06",
+                    "title": "NABU",
+                    "description": "NABU Internet Adapter", 
+                    "id":"nabu",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "nabu"
                 }
             ]
         },
@@ -1007,6 +1017,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "ethflopd"
+                },
+                {
+                    "index": "57",
+                    "title": "nabu",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "nabu"
                 }
             ]
         },
