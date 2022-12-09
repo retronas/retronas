@@ -13,7 +13,7 @@ git checkout python3
 dpkg --add-architecture armhf
 apt-get update
 # workaround for if a previous install was broken due to missing arch
-apt-get --fix-missing install
+apt-get --fix-missing -y install
 
 # install dependancies
 dpkg -i arm/*.deb
