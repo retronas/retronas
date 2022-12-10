@@ -20,12 +20,12 @@
       - unzip
 
     - templates:
-      - { name: "config.xml", dest: "/usr/share/NABU Internet Adapter", mode: "0644", owner: "{{ retronas_user }}", group: "{{ retronas_group }}"}
+      - { name: "config.xml", dest: "{{ my_dir }}/NABU Internet Adapter", mode: "0644", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.sh", dest: "{{ my_dir }}",  mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
     - paths:
-      - { name: "{{ my_name }}", dest: "/usr/share/NABU Internet Adapter", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}"}
+      - { name: "NABU Internet Adapter", dest: "{{ my_dir }}", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "{{ my_name }}", dest: "/opt", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
   tasks:
