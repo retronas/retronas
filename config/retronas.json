@@ -530,6 +530,16 @@
                     "command": "disc-image-creator"
                 },
                 {
+                    "index": "45",
+                    "title": "Samba for Amiga",
+                    "description": "Samba share for SMBMounter", 
+                    "id":"smbmounter",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "smbmounter"
+                },
+                {
                     "index": "50",
                     "title": "Syncthing",
                     "description": "File sync tool", 
