@@ -10,8 +10,13 @@ function _log {
 	echo "$1"
 }
 
+
+HEADERS=linux-headers-$(uname -r)
+grep "Raspberry Pi" /proc/device-tree/model
+[ $? -eq 0 ] && HEADERS=raspberrypi-kernel-headers
+
 # install the required source files
-apt-get -y install git build-essential linux-headers-$(uname -r)
+apt-get -y install git build-essential $HEADERS
 
 cd $OUTPATH
 if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
