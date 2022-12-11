@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -u
+
+APP=linux-dexdrive
+REPO=https://github.com/fbriere/${APP}.git
+OUTPATH=$(mktemp -d)
+
+function _log {
+	echo "$1"
+}
+
+# install the required source files
+apt-get -y install git build-essential linux-headers-$(uname -r)
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
+
+cd ${OUTPATH}/${APP}
+git apply /tmp/makefile.patch
+make
+make install
+
+echo "dexdrive" >> /
+
+# remove the required source files
+apt-get -y remove linux-headers-$(uname -r)

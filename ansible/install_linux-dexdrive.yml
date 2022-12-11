@@ -1,0 +1,71 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "linux-dexdrive"
+    - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - git 
+      - build-essential
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "makefile.patch", dest: "/tmp", force: yes}
+
+    - systemd_units:
+      - { name: "{{ my_name }}", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Load RetroNAS systems"
+    include_vars: retronas_systems.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "/usr/local/bin/dexattach"
+
+  - name: "{{ my_name }} - dexdrive module"
+    lineinfile:
+      path: /etc/modules-load.d/modules.conf
+      regex: "^dexdrive$"
+      line: "dexdrive"
+
+  - name: "{{ my_name }} - create startup service(s) instance"
+    template:
+      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+      dest: /etc/systemd/system/{{ item.name }}@.{{ item.type }}
+      owner: root
+      group: root
+      mode: 0644
+    with_items: "{{ systemd_units }}"
+    notify: "{{ my_name }} daemon-reload" 
+
+  handlers:
+    - name: "{{ my_name }} daemon-reload"
+      systemd:
+        daemon_reload: yes
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "linux-dexdrive"
+    module_state: "present"
