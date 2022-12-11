@@ -32,7 +32,7 @@ git apply /tmp/makefile.patch
 make
 make install
 
-echo "dexdrive" >> /
+echo "dexdrive" >> /etc/modprobe.d/dexdrive.conf
 
 # remove the required source files
-apt-get -y remove $HEADERS
+apt-get -y remove linux-headers-$HEADER
