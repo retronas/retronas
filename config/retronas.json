@@ -2741,7 +2741,7 @@
                     "prompt": "",
                     "type": "service_start",
                     "group":"",
-                    "command": "linux-dexdrive@$DEVICE"
+                    "command": "linux-dexdrive"
                 },
                 {
                     "index":"05",
@@ -2751,7 +2751,7 @@
                     "prompt": "",
                     "type": "service_stop",
                     "group":"",
-                    "command": "linux-dexdrive@$DEVICE"
+                    "command": "linux-dexdrive"
                 },
                 {
                     "index":"06",
@@ -2761,7 +2761,7 @@
                     "prompt": "",
                     "type": "service_status",
                     "group":"",
-                    "command": "linux-dexdrive@*"
+                    "command": "linux-dexdrive"
                 }
             ]
         },
