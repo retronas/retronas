@@ -30,6 +30,7 @@ system_map: "{{
   |union(system_compukit)
   |union(system_creatronic)
   |union(system_dec)
+  |union(system_distribution)
   |union(system_dragon)
   |union(system_eaca)
   |union(system_electronika)
@@ -155,6 +156,10 @@ system_creatronic:
   - { src: "creatronic/megaduck", last: "", mister: "MegaDuck", retropie: "", batocera: "megaduck", recalbox: "megaduck", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_dec:
   - { src: "dec/pdp1", last: "", mister: "", retropie: "", batocera: "pdp1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+system_distribution:
+  - { src: "dist/image", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "dist/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
+  - { src: "dist/project", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_dragon:
   - { src: "dragon", last: "", mister: "", retropie: "", batocera: "", recalbox: "dragon", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "" }
 system_eaca:
