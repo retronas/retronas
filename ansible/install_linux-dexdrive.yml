@@ -10,8 +10,9 @@
       - build-essential
 
     - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-      - { name: "makefile.patch", dest: "/tmp", force: yes}
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "makefile.patch", dest: "/tmp" }
+      - { name: "dexdrive_dumper.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     - systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -49,6 +50,12 @@
       path: /etc/modules-load.d/modules.conf
       regex: "^dexdrive$"
       line: "dexdrive"
+
+  - name: "{{ my_name }} - {{ retronas_user }} groups"
+    user:
+      name: "{{ retronas_user }}"
+      group: "disk"
+      append: yes
 
   - name: "{{ my_name }} - create startup service(s) instance"
     template:

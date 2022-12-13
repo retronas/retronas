@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -u
+
+DEXEXT="*.mc*"
+DEXPATH=/data/retronas/saves/sony/playstation1
+DEXDEV=/dev/dexdrive0
+DESYS=${1:-ps1}
+
+case $1 in
+    n64)
+        DEXEXT="*.n64"
+        DEXPATH=/data/retronas/saves/nintendo/nintendo64
+        echo "N64 is untested, let me know what raw save format is for N64"
+        PAUSE
+        exit 0
+        ;;
+    *)
+        ;;
+esac
+
+FILENAME=""
+while [ -z $FILENAME ]
+do
+    read -p "Please type a name for the memcard to be saved as (no extension, (q)uit): " FILENAME
+    case $FILENAME in
+        Q|q)
+            echo "Quitting"
+            exit 1
+            ;;
+        *)
+            echo $FILENAME
+    esac
+done
+
+if [[ -f ${DEXDEV} ] && [ -z ${FILENAME} ]]
+then
+    echo "Dumping ${DEXDEV} to ${DEXPATH}, please wait ..."
+    dd if=${DEXDEV} of=${DEXPATH}/
+else
+    echo "$DEXDEV not found, didn't you connect it?"
+    sleep 3
+fi

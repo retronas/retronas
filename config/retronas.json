@@ -2762,6 +2762,26 @@
                     "type": "service_status",
                     "group":"",
                     "command": "linux-dexdrive"
+                },
+                {
+                    "index":"07",
+                    "title": "Dump",
+                    "description": "Dump a PS1 memory card",
+                    "id":"dexdrive_dumper",
+                    "prompt": "Dump",
+                    "type": "script",
+                    "group":"",
+                    "command": "dexdrive_dumper"
+                },
+                {
+                    "index":"08",
+                    "title": "Image",
+                    "description": "Write an image to a memory card",
+                    "id":"dexdrive_memcards",
+                    "prompt": "Dump",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "dexdrive_memcards"
                 }
             ]
         },
@@ -2773,6 +2793,26 @@
             "prompt": "",
             "type": "menu",
             "items": []
+        },
+        "dexdrive-gamechooser": 
+        {
+            "title": "GOG game chooser",
+            "description": "Please choose a game||If your game has not appeared, please synchronise your games list",
+            "id":"gogrepo-gamechooser",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                }
+            ]
         },
         "example": 
         {
