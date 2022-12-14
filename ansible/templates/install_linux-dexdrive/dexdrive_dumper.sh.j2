@@ -7,7 +7,7 @@ DEXPATH=/data/retronas/saves/sony/playstation1
 DEXDEV=/dev/dexdrive0
 DESYS=${1:-ps1}
 
-case $1 in
+case $DESYS in
     n64)
         DEXEXT="*.n64"
         DEXPATH=/data/retronas/saves/nintendo/nintendo64
@@ -33,7 +33,7 @@ do
     esac
 done
 
-if [[ -f ${DEXDEV} ] && [ -z ${FILENAME} ]]
+if [ -f ${DEXDEV} ]
 then
     echo "Dumping ${DEXDEV} to ${DEXPATH}, please wait ..."
     dd if=${DEXDEV} of=${DEXPATH}/
