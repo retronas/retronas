@@ -21,16 +21,16 @@ case $DESYS in
 esac
 
 FILENAME=""
-while [ -z $FILENAME ]
+while [ -z "${FILENAME}" ]
 do
     read -p "Please type a name for the memcard to be saved as (no extension, (q)uit): " FILENAME
-    case $FILENAME in
+    case "${FILENAME}" in
         Q|q)
             echo "Quitting"
             exit 1
             ;;
         *)
-            echo $FILENAME
+            echo "${FILENAME}"
     esac
 done
 

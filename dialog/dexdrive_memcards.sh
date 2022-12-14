@@ -24,16 +24,14 @@ case $1 in
     ;;
 esac
 
-rn_dexdrive_chooser() {
-  rn_dexdrive_game
-}
-
 rn_dexdrive_game() {
-  local MENU_NAME=dexdrive-gamechooser
+  local MENU_NAME=dexdrive_gamechooser
   READ_MENU_JSON "${MENU_NAME}"
   READ_MENU_TDESC "${MENU_NAME}"
 
   MENU_ARRAY=()
+  MENU_ARRAY2=()
+
   MENU_ARRAY2+=("${DEXPATH}"/${DEXEXT})
 
   if [ "${#MENU_ARRAY2[@]}" -le 0 ] || [ $(echo ${MENU_ARRAY2[@]} | grep "*" ) ]
@@ -45,9 +43,9 @@ rn_dexdrive_game() {
 
   for ITEM in "${MENU_ARRAY2[@]}"
   do
-    ITEM2=${ITEM##*/}
-    MEMCARD=${ITEM2%%.*}
-    TYPE=${ITEM2##*.}
+    ITEM2="${ITEM##*/}"
+    MEMCARD="${ITEM2%%.*}"
+    TYPE="${ITEM2##*.}"
     MENU_ARRAY+="$MEMCARD $TYPE "
   done
 
@@ -58,13 +56,21 @@ rn_dexdrive_game() {
     --menu "${MENU_BLURB}" ${MW} ${MH} 10 \
     ${MENU_ARRAY[@]} \
     2> ${TDIR}/rn_dexdrive
+ 
+  while true
+  do
+     [ ${#CHOICE[@]} -gt 0 ] && rn_dexdrive_image
+  done
+  
+  unset $CHOICE
+}
 
-
+rn_dexdrive_image() {
   CLEAR
   NMEMCARD="$(cat ${TDIR}/rn_dexdrive)"
-  if [ ! -z "$NMEMCARD" ]
+  if [ ! -z "${NMEMCARD}" ]
   then
-    if [ -f ${DEXDEV} ]
+    if [ -b ${DEXDEV} ]
     then
       echo "Writing ${NMEMCARD} to ${DEXDEV}, please wait ..."
       echo "dd if=${DEXPATH}/${NMEMCARD} of=${DEXDEV}"
@@ -82,5 +88,4 @@ rn_dexdrive_game() {
 
 }
 
-
-rn_dexdrive_chooser
+rn_dexdrive_game

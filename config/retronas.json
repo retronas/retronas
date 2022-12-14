@@ -2794,11 +2794,11 @@
             "type": "menu",
             "items": []
         },
-        "dexdrive-gamechooser": 
+        "dexdrive_gamechooser": 
         {
-            "title": "GOG game chooser",
-            "description": "Please choose a game||If your game has not appeared, please synchronise your games list",
-            "id":"gogrepo-gamechooser",
+            "title": "Dex Drive Image Chooser",
+            "description": "Please choose an image to write to the memory card",
+            "id":"dexdrive-gamechooser",
             "prompt": "",
             "type": "menu",
             "items": [
