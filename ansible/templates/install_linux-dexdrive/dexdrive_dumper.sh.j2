@@ -2,15 +2,17 @@
 
 set -u
 
-DEXEXT="*.mc*"
-DEXPATH=/data/retronas/saves/sony/playstation1
+
 DEXDEV=/dev/dexdrive0
 DESYS=${1:-ps1}
 
+# PS1
+DEXEXT="mcd"
+DEXPATH={{ retronas_path }}/saves/sony/playstation1
 case $DESYS in
     n64)
-        DEXEXT="*.n64"
-        DEXPATH=/data/retronas/saves/nintendo/nintendo64
+        DEXEXT="n64"
+        DEXPATH={{ retronas_path }}/saves/nintendo/nintendo64
         echo "N64 is untested, let me know what raw save format is for N64"
         PAUSE
         exit 0
@@ -36,7 +38,7 @@ done
 if [ -b ${DEXDEV} ]
 then
     echo "Dumping ${DEXDEV} to ${DEXPATH}, please wait ..."
-    dd if=${DEXDEV} of=${DEXPATH}/
+    dd if="${DEXDEV}" of="${DEXPATH}/${FILENAME}.${DEXEXT}"
 else
     echo "$DEXDEV not found, didn't you connect it?"
     sleep 3
