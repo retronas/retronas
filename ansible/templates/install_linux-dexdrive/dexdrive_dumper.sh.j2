@@ -2,7 +2,6 @@
 
 set -u
 
-
 DEXDEV=/dev/dexdrive0
 DESYS=${1:-ps1}
 
@@ -37,8 +36,10 @@ done
 
 if [ -b ${DEXDEV} ]
 then
-    echo "Dumping ${DEXDEV} to ${DEXPATH}, please wait ..."
-    dd if="${DEXDEV}" of="${DEXPATH}/${FILENAME}.${DEXEXT}"
+    DUMPFILE="${DEXPATH}/${FILENAME}.${DEXEXT}"
+    echo "Dumping ${DEXDEV} to ${DUMPFILE}, please wait ..."
+    dd if="${DEXDEV}" of="${DUMPFILE}"
+    chown {{ retronas_user }}:{{ retronas_group }} "${DUMPFILE}"
 else
     echo "$DEXDEV not found, didn't you connect it?"
     sleep 3
