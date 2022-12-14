@@ -33,7 +33,7 @@ do
     esac
 done
 
-if [ -f ${DEXDEV} ]
+if [ -b ${DEXDEV} ]
 then
     echo "Dumping ${DEXDEV} to ${DEXPATH}, please wait ..."
     dd if=${DEXDEV} of=${DEXPATH}/
