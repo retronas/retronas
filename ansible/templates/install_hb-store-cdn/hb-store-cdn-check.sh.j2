@@ -4,6 +4,6 @@
 STATUS=$(sudo -u {{ retronas_user }} {{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server check-bin | grep "Update is required")
 if [ ! -z "${STATUS}" ] 
 then
-    sudo -u {{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server download-bin
+    sudo -u {{ retronas_user }} {{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server download-bin
     systemctl restart {{ my_name }}.service
 fi
