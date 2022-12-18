@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#set -x
+
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
@@ -13,6 +15,8 @@ CLEAR
 DEXEXT="*.mc*"
 DEXPATH=/data/retronas/saves/sony/playstation1
 DEXDEV=/dev/dexdrive0
+
+IFS=";"
 
 case $1 in
   N64)
@@ -41,14 +45,18 @@ rn_dexdrive_game() {
     exit 1
   fi
 
+  IFS=";"
   for ITEM in "${MENU_ARRAY2[@]}"
   do
+    UPDATED=$(stat -c %y "${ITEM}" | awk '{print $1}')
     ITEM2="${ITEM##*/}"
     MEMCARD="${ITEM2%%.*}"
-    TYPE="${ITEM2##*.}"
-    MENU_ARRAY+="$MEMCARD $TYPE "
+    TYPE=${ITEM2##*.}
+    MENU_ARRAY+="$ITEM2;$UPDATED;"
   done
 
+  echo ${MENU_ARRAY[@]}
+  
   dialog \
     --backtitle "${MENU_TNAME}" \
     --title "${MENU_TNAME}" \
@@ -57,33 +65,29 @@ rn_dexdrive_game() {
     ${MENU_ARRAY[@]} \
     2> ${TDIR}/rn_dexdrive
  
-  while true
-  do
-     [ ${#CHOICE[@]} -gt 0 ] && rn_dexdrive_image
-  done
-  
-  unset $CHOICE
+  [ $? -eq 0 ] && rn_dexdrive_image
+
 }
 
 rn_dexdrive_image() {
   CLEAR
   NMEMCARD="$(cat ${TDIR}/rn_dexdrive)"
+  echo "Going to write \"${NMEMCARD}\" to ${DEXDEV}"
   if [ ! -z "${NMEMCARD}" ]
   then
     if [ -b ${DEXDEV} ]
     then
       echo "Writing ${NMEMCARD} to ${DEXDEV}, please wait ..."
-      echo "dd if=${DEXPATH}/${NMEMCARD} of=${DEXDEV}"
+      dd if="${DEXPATH}/${NMEMCARD}" of=${DEXDEV}
       PAUSE
     else
-      echo "No Dex Drive found"
+      echo "No Dex Drive found at ${DEXDEV}"
       PAUSE
       exit 1
     fi
   else
     exit 1
   fi
-  
   PAUSE
 
 }
