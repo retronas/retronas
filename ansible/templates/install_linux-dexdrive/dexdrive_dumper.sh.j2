@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -u
+
+DEXDEV=/dev/dexdrive0
+DESYS=${1:-ps1}
+
+# PS1
+DEXEXT="mcd"
+DEXPATH={{ retronas_path }}/saves/sony/playstation1
+case $DESYS in
+    n64)
+        DEXEXT="n64"
+        DEXPATH={{ retronas_path }}/saves/nintendo/nintendo64
+        echo "N64 is untested, let me know what raw save format is for N64"
+        PAUSE
+        exit 0
+        ;;
+    *)
+        ;;
+esac
+
+FILENAME=""
+while [ -z "${FILENAME}" ]
+do
+    read -p "Please type a name for the memcard to be saved as (no extension, (q)uit): " FILENAME
+    case "${FILENAME}" in
+        Q|q)
+            echo "Quitting"
+            exit 1
+            ;;
+        *)
+            echo "${FILENAME}"
+    esac
+done
+
+if [ -b ${DEXDEV} ]
+then
+    DUMPFILE="${DEXPATH}/${FILENAME}.${DEXEXT}"
+    echo "Dumping ${DEXDEV} to ${DUMPFILE}, please wait ..."
+    dd if="${DEXDEV}" of="${DUMPFILE}"
+    chown {{ retronas_user }}:{{ retronas_group }} "${DUMPFILE}"
+else
+    echo "$DEXDEV not found, didn't you connect it?"
+    sleep 3
+fi
