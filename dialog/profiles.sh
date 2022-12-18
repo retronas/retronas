@@ -35,6 +35,7 @@ rn_profile_chooser() {
     exit 1
   fi
 
+  IFS=";"
   for ITEM in "${MENU_ARRAY2[@]}"
   do
 
@@ -45,8 +46,8 @@ rn_profile_chooser() {
     [ -z "${UPDATED}" ] && UPDATED="00-00-0000"
 
     ITEM2=${ITEM##*/}
-    ININAME=${ITEM2%%.*}
-    MENU_ARRAY+="$ININAME $UPDATED "
+    ININAME="${ITEM2%%.*}"
+    MENU_ARRAY+="$ININAME;$UPDATED;"
   done
 
   dialog \
