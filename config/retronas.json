@@ -770,7 +770,7 @@
                     "command": "nabu"
                 },
                 {
-                    "index": "05",
+                    "index": "07",
                     "title": "dexdrive",
                     "description": "Dex Drive block devices",
                     "id":"dexdrive",
@@ -2794,11 +2794,11 @@
             "type": "menu",
             "items": []
         },
-        "dexdrive_gamechooser": 
+        "dexdrive_memcards": 
         {
             "title": "Dex Drive Image Chooser",
             "description": "Please choose an image to write to the memory card",
-            "id":"dexdrive-gamechooser",
+            "id":"dexdrive-memcards",
             "prompt": "",
             "type": "menu",
             "items": [
