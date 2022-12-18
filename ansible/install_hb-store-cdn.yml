@@ -20,7 +20,7 @@
 
     - templates:
       - { name: "{{ my_name }}-check.sh", dest: "{{ retronas_root }}/bin/{{ my_name }}", mode: "0755"}
-      - { name: "{{ my_name }}-cron", dest: "/etc/cron.d", mode: "0644"}
+      - { name: "{{ my_name }}.cron", dest: "/etc/cron.d" }
 
   tasks:
   - name: "{{ my_name }} - Include systems map"
