@@ -91,14 +91,14 @@
       creates: "{{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server"
 
   - name: "{{ my_name }} - templates"
-      template:
-        src: "templates/{{ my_file }}/{{ item.name }}.j2"
-        dest: "{{ item.dest }}/{{ item.name }}"
-        owner: "{{ item.owner|default('root') }}"
-        group: "{{ item.group|default('root') }}"
-        mode: "{{ item.mode|default('0644') }}"
-        force: "{{ item.force|default('yes') }}"
-      with_items: "{{ templates }}"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - create startup service(s)"
     template:
