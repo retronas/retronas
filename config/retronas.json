@@ -148,16 +148,6 @@
                     "type": "install",
                     "group":"",
                     "command": "disable-laptop-lid"
-                },
-                {
-                    "index": "05",
-                    "title": "dexdrive",
-                    "description": "Dex Drive block devices",
-                    "id":"dexdrive",
-                    "prompt": "",
-                    "type": "dialog",
-                    "group":"",
-                    "command": "dexdrive"
                 }
             ]
         },
@@ -778,6 +768,16 @@
                     "type": "install",
                     "group":"",
                     "command": "nabu"
+                },
+                {
+                    "index": "05",
+                    "title": "dexdrive",
+                    "description": "Dex Drive block devices",
+                    "id":"dexdrive",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "dexdrive"
                 }
             ]
         },
