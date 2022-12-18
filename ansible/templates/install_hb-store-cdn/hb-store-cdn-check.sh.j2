@@ -1,0 +1,4 @@
+#!/bin/bash
+
+STATUS=$(sudo -u {{ retronas_user }} {{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server check-bin | grep "Update is required")
+[ ! -z "${STATUS}" ] && systemctl restart {{ my_name }.service
