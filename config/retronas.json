@@ -698,6 +698,16 @@
                     "type": "install",
                     "group":"",
                     "command": "far2l"
+                },
+                {
+                    "index": "66",
+                    "title": "ntp",
+                    "description": "Network Time Protocol Server", 
+                    "id":"ntp",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ntp"
                 }
             ]
         },
@@ -1077,6 +1087,16 @@
                     "type":"service_status",
                     "group":"",
                     "command": "nabu"
+                },
+                {
+                    "index": "58",
+                    "title": "ntp",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "ntp"
                 }
             ]
         },
