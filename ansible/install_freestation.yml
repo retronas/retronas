@@ -1,0 +1,114 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+- import_playbook: install_extradirs.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "freestation"
+    - my_file: "install_{{ my_name }}"
+
+    - top_level_paths:
+      - { name: "games",      enabled: yes,  generic: "roms",        systems: yes }
+      - { name: "bios",       enabled: yes,  generic: "bios",        systems: yes }
+
+    - templates:
+      - { name: "retronas_freestation_cifs.conf", name_dest: "retronas_freestation.conf", dest: "/etc/samba"}
+      - { name: "retronas_freestation_nfs.conf",  name_dest: "retronas_freestation.conf", dest: "/etc/exports.d"}
+
+    - paths:
+      - { name: "exports.d", dest: "/etc",                state: "directory", mode: "0755"}
+
+  tasks:
+
+  - name: "{{ my_name }} - Include systems map"
+    include_vars: "retronas_systems.yml"
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - build top level"
+    file:
+      path: "{{ retronas_path }}/{{ my_name }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+      mode: "0775"
+
+  - name: "{{ my_name }} - build top level share paths"
+    file:
+      path: "{{ retronas_path }}/{{ my_name }}/{{ item.name }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+      mode: "0775"
+    with_items:
+      "{{ top_level_paths }}"
+    when: 
+      - item.enabled is true
+
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }};' ]"
+    loop: "{{ system_map|product(top_level_paths)|list }}"
+    when:
+      - item.1.enabled is true
+      - item.0.freestation | length > 0
+      - item.1.systems is true
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - build systems directory layout"
+    shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
+    notify: "{{ my_name }} - Install Changed"
+
+  - name: "{{ my_name }} - configure includes file"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: "{{ my_name  }}"
+      option: "include"
+      value: "/etc/samba/retronas_{{ my_name }}.conf"
+    notify: "{{ my_name }} - Install Changed"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name_dest | default(item.name) }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  handlers:
+
+  - name: "{{ my_name }} - Install Changed"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
+
+- import_playbook: install_nfs.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "mister_cifs"
+    module_state: "present"
