@@ -206,7 +206,7 @@ system_mattel:
   - { src: "mattel/aquarius", last: "", mister: "AQUARIUS", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "mattel/intellivision", last: "", mister: "Intellivision", retropie: "", batocera: "intellivision", recalbox: "intellivision", retroarch: "Mattel - Intellivision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "intellivision", smdb: "", freestation: "" }
 system_microsoft:
-  - { src: "microsoft/msx", last: "", mister: "MSX1", retropie: "", batocera: "msx1", recalbox: "msx1", retroarch: "Microsoft - MSX", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx", smdb: "", freestation: "" }
+  - { src: "microsoft/msx", last: "", mister: "MSX1", retropie: "", batocera: "msx1", recalbox: "msx1", retroarch: "Microsoft - MSX", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx", smdb: "", freestation: "msx" }
   - { src: "microsoft/msx", last: "", mister: "MSX", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "microsoft/msx2", last: "", mister: "", retropie: "", batocera: "msx2", recalbox: "msx2", retroarch: "Microsoft - MSX2", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "msx2", smdb: "", freestation: "" }
   - { src: "microsoft/msxplus", last: "", mister: "", retropie: "", batocera: "msx2+", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -226,7 +226,7 @@ system_nabu:
 system_nec:
   - { src: "nec/pc88", last: "", mister: "PC8801", retropie: "", batocera: "pc88", recalbox: "pc88", retroarch: "NEC - PC-98", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nec/pc98", last: "", mister: "Zet98", retropie: "", batocera: "pc98", recalbox: "pc98", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pc98", smdb: "", freestation: "" }
-  - { src: "nec/pcengine", last: "", mister: "", retropie: "", batocera: "pcengine", recalbox: "pcengine", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pcengine", smdb: "Turbo EverDrive & Super SD System 3 SMDB.txt", freestation: "" }
+  - { src: "nec/pcengine", last: "", mister: "", retropie: "", batocera: "pcengine", recalbox: "pcengine", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pcengine", smdb: "Turbo EverDrive & Super SD System 3 SMDB.txt", freestation: "pce" }
   - { src: "nec/pcengine", last: "", mister: "TGFX16", retropie: "", batocera: "", recalbox: "", retroarch: "NEC - PC Engine - TurboGrafx 16", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "tg16", smdb: "Turbo EverDrive & Super SD System 3 SMDB.txt", freestation: "" }
   - { src: "nec/pcengine/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nec/pcenginecd", last: "", mister: "", retropie: "", batocera: "pcenginecd", recalbox: "pcenginecd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pcenginecd", smdb: "PC Engine CD Redump Supplement.txt", freestation: "" }
