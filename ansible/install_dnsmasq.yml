@@ -1,0 +1,34 @@
+# Dependencies
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "dnsmasq"
+    - my_file: "install_{{ my_name }}"
+
+    - packages:
+      - dnsmasq
+
+  changed: false
+
+  tasks:
+
+  - name: "{{ my_name }} - Install dnsmasq from repos"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
+
+  - name: "{{ my_name }} - restart if imported because handlers will not run"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+    with_items: "{{ my_services }}"
+    when: changed is true
+
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "dnsmasq"
+    module_state: "present"

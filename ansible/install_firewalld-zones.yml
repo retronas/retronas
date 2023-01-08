@@ -1,0 +1,59 @@
+# Dependencies
+- import_playbook: install_dnsmasq.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "firewalld-zones"
+    - my_file: "install_{{ my_name }}"
+
+    - templates:
+      - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_name }}/policies",  force: no }
+      - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_name }}/services",  force: no }
+      - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no }
+      - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no } 
+      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
+      - { name: "override.conf",            sub: "workarounds", dest: "/src/systemd/system" }
+
+    - paths:
+      - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
+
+  tasks:
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} Reload firewalld"
+
+  handlers:
+  - name: "{{ my_name }} - Reload firewalld"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_firewalld.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "firewalld-zones"
+    module_state: "present"

@@ -1,0 +1,47 @@
+# Dependencies
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "firewalld"
+    - my_file: "install_{{ my_name }}"
+
+    - my_services: "firewalld.service"
+
+    - templates:
+      - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_name }}/policies",  force: no }
+      - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_name }}/services",  force: no }
+      - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no }
+      - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no } 
+      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
+      - { name: "override.conf",            sub: "workarounds", dest: "/src/systemd/system" }
+
+    - paths:
+      - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
+
+    - changed: false
+
+  tasks:
+  - name: "{{ my_name }} - reload"
+    service:
+      name: "{{ item }}"
+      state: reloaded
+      enabled: yes
+    with_items: "{{ my_services }}"
+    when: changed is true
+
+  handlers:
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ my_services }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "firewalld"
+    module_state: "present"

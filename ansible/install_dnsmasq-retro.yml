@@ -1,0 +1,107 @@
+# Dependencies
+- import_playbook: install_ntp.yml
+- import_playbook: install_dnsmasq.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "dnsmasq-retro"
+    - my_file: "install_{{ my_name }}"
+
+    - templates:
+      - { name: "dchp-eth0.conf",           dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "dhcp-static-leases.conf",  dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "dhcp.conf",                dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "dns.conf",                 dest: "/etc/{{ my_name }}.d/retro", force: no } 
+      - { name: "dnsmasq.conf",             dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "interfaces.conf",          dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "ipv6.conf",                dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "dnsmasq-retro.service",    dest: "/src/systemd/system"}
+
+
+    - paths:
+      - { name: "{{ my_name }}.d",  dest: "/etc",                 state: "directory", mode: "0755" }
+      - { name: "retro",            dest: "/etc/{{ my_name }}.d", state: "directory", mode: "0755" }
+
+
+    - net_settings:
+      - { option: "interface", value: "eth0", match_regex: "^interface eth0$", after_regex: "", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static", value: "ip_address=10.99.1.1/24", after_regex: "^interface eth0$", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf"  }
+      - { option: "static", value: "domain_name_servers=10.99.1.1", after_regex: "^interface ip_address\=.+$", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf"  }
+
+
+  tasks:
+
+  - name: "{{ my_name }} - checking for dhcpcd"
+    stat:
+      path: "/etc/dhcpcd.conf"
+    register: dhcpcd_check
+
+  - name: "{{ my_name }} - checking for dhcpcd support"
+    meta: end_play
+    when: dhcpcd_check.stat.exists == no
+
+  - name: "{{ my_name }} - mask default dnsmasq service" 
+    service:
+      name: "dnsmasq"
+      state: stopped
+      daemon_reload: yes
+      enabled: no
+      masked: yes
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart dnsmasq"
+
+  - name: "{{ my_name }} - setup dhcpcd"
+    linefile:
+      path: "{{ item.dest }}"
+      search_string: "{{ item.match_regex | default('^$') }}"
+      insertbefore: "{{ item.before_regex | default('^$') }}"
+      insertafter: "{{ item.after_regex | default('^$') }}"
+      line: "{{ item.option }} {{ item.value }}"
+    with_items: "{{ net_settings }}"
+    when: dhcpcd_check.stat.exists
+    notify: "{{ my_name }} - Restart dhcpcd"
+
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart dhcpcd"
+    service:
+      name: "dhcpcd.service"
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+
+  - name: "{{ my_name }} - Restart dnsmasq"
+    set_fact:
+      install_changed: true
+
+- import_playbook: install_dnsmasq.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "dnsmasq-retro"
+    module_state: "present"
