@@ -34,7 +34,12 @@ login_target() {
     iscsiadm -m node -T $IQN -p $SERVERIP --login  &>/dev/null
     if [ $? -eq 0 ]
     then
-        sed -i -r 's/node.conn\[0\].startup.*/node.conn[0].startup = automatic/' "${ISCSICFG}/${TARGET}/default"
+        if [ -f "${ISCSICFG}/${TARGET}/default" ]
+        then
+            sed -i -r 's/node.conn\[0\].startup.*/node.conn[0].startup = automatic/' "${ISCSICFG}/${TARGET}/default"
+        else
+            echo "default node profile for ${TARGET} not found, cannot update node startup settings"
+        fi
     else
         echo "login to target failed, not enabling on startup"
     fi
