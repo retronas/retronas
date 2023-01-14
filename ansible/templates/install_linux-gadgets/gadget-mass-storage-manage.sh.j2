@@ -1,0 +1,78 @@
+#!/bin/bash
+
+MODULE=g_mass_storage
+DEVICE=""
+DEVICEPATH=""
+SYSTEMD="retronas-gadget"
+
+select_device() {
+    IFS=$'\n'
+    DEVICE=()
+    DEVICES+=($(lsblk -sl 2>/dev/null | awk '/disk/{print $1" ("$4")"}' | sort -u))
+    DEVICES+=($(ls -la {{ retronas_path }}/images/* | awk '{print $9}'))
+    DEVICES+=(" quit")
+
+    [ {{ ''.join (('$','{', '#DEVICES[@]}')) }} -le 1 ] && echo "No targets found, exiting ... " && exit 1
+    select SDEVICE in "${DEVICES[@]}"
+    do
+        DEVICE="$(echo ${SDEVICE} | awk -F ' ' '{print $1}')"
+        [ $SDEVICE == "quit" ] && echo "User requested exit ..." && exit 0
+        [ ! -z "${DEVICE}" ] && break
+    done
+}
+
+create_systemd_path() {
+    DEVICEPATH=$(ls -la /dev/disk/by-path/ | grep $DEVICE | head -n1 | awk '{print $9}')
+
+    if [ ! -z "${DEVICEPATH}" ]
+    then
+    echo "Configuring systemd path file for ${DEVICE} (${DEVICEPATH})"
+
+cat << PEOF > /etc/systemd/system/${SYSTEMD}.path
+[Path]
+PathExists=/dev/disk/by-path/$DEVICEPATH
+
+[Install]
+WantedBy=remote-fs.target
+PEOF
+
+    fi
+
+}
+
+create_systemd_service() {
+    DEVICEPATH=$(ls -la /dev/disk/by-path/ | grep $DEVICE | head -n1 | awk '{print $9}')
+
+    if [ ! -z "${DEVICEPATH}" ]
+    then
+    echo "Configuring systemd service file for ${DEVICE} (${DEVICEPATH})"
+
+cat << SEOF > /etc/systemd/system/${SYSTEMD}.service
+[Unit]
+Description=Gadget Device
+Requires=open-iscsi.service
+
+[Service]
+Type=oneshot
+ExecStartPre=-echo on > /sys/bus/usb/devices/usb1/power/control
+ExecStartPre=-/usr/sbin/rmmod g_mass_storage
+ExecStartPre=/usr/bin/sleep 2
+ExecStart=/usr/sbin/modprobe g_mass_storage file=/dev/disk/by-path/${DEVICEPATH} stall=0 ro=0 removable=1
+Restart=no
+RemainAfterExit=yes
+SEOF
+
+    fi
+
+}
+
+enable_systemd() {
+    systemctl daemon-reload
+    systemctl enable ${SYSTEMD}.path
+    systemctl start ${SYSTEMD}.path
+}
+
+select_device
+create_systemd_path
+create_systemd_service
+#enable_systemd
