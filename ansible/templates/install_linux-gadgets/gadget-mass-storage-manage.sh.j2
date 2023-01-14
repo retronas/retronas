@@ -8,7 +8,7 @@ SYSTEMD="retronas-gadget"
 select_device() {
     IFS=$'\n'
     DEVICE=()
-    DEVICES+=($(lsblk -sl 2>/dev/null | awk '/disk/{print $1" ("$4")"}' | sort -u))
+    DEVICES+=($(lsblk -sl 2>/dev/null | awk '/(disk|part|rom)/{print $1" ("$4")"}' | sort -u))
     DEVICES+=($(ls -la {{ retronas_path }}/images/* 2>/dev/null | awk '{print $9}'))
     DEVICES+=("quit")
 
