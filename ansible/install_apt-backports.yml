@@ -1,5 +1,4 @@
 # Dependencies
-- import_playbook: install_filesystems.yml
 
 - hosts: localhost
   gather_facts: yes
