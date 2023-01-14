@@ -1,0 +1,65 @@
+#!/bin/bash
+
+SERVERIP=${1:-}
+USERNAME=""
+PASSWORD=""
+IQN=""
+TARGET=""
+ISCSICFG=/etc/iscsi/node
+
+list_targets() {
+    IFS=$'\n'
+    TARGETS=($(iscsiadm -m discovery -t st -p $1 2>/dev/null | awk -F ' ' /$SERVERIP/'{print $2" ("$1")"}') quit)
+
+    [ {{ ''.join (('$','{', '#TARGETS[@]}')) }} -le 1 ] && echo "No targets found, exiting ... " && exit 1
+    select TARGET in "${TARGETS[@]}"
+    do
+        IQN="$(echo ${TARGET} | awk -F ' ' '{print $1}')"
+        [ $IQN == "quit" ] && echo "User requested exit ..." && exit 0
+        [ ! -z "${IQN}" ] && break
+    done
+}
+
+check_target() {
+    iscsiadm -m session | grep -E "${SERVERIP}.*${IQN}" &>/dev/null
+    if [ $? -eq 0 ]
+    then
+        echo "Target is already connected, nothing to do, exiting ..."
+        exit 0
+    fi
+}
+
+login_target() {
+    check_target
+    iscsiadm -m node -T $IQN -p $SERVERIP --login  &>/dev/null
+    if [ $? -eq 0 ]
+    then
+        sed -i -r 's/node.conn\[0\].startup.*/node.conn[0].startup = automatic/' "${ISCSICFG}/${TARGET}/default"
+    else
+        echo "login to target failed, not enabling on startup"
+    fi
+}
+
+get_ip() {
+    read -r -p "Enter ISCSI target host ip address [ip:port (default:3620)]: " SERVERIP
+}
+
+get_up() {
+    read -r -p "does your ISCSI target required credentials?" ANSWER
+
+    case ANSWER in
+        Yy)
+            read -r -p "Enter ISCSI target username: " USERNAME
+            read -r --password -p "Enter ISCSI target password: " PASSWORD
+            ;;
+        *)
+            ;;
+    esac
+}
+
+
+[ -z "$SERVERIP" ] && get_ip
+#[ -z "$USERNAME"] || [ -z "$PASSWORD" ] && get_up
+
+list_targets $SERVERIP
+login_target $IQN
