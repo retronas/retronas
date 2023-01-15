@@ -32,11 +32,12 @@ check_target() {
 login_target() {
     check_target
     iscsiadm -m node -T $IQN -p $SERVERIP --login  &>/dev/null
+    DEFAULTPATH="${ISCSICFG}/${IQN}/${SERVERIP}*/default"
     if [ $? -eq 0 ]
     then
-        if [ -f "${ISCSICFG}/${TARGET}/default" ]
+        if [ -f ${DEFAULTPATH} ]
         then
-            sed -i -r 's/node.conn\[0\].startup.*/node.conn[0].startup = automatic/' "${ISCSICFG}/${TARGET}/default"
+            sed -i -r 's/node.conn\[0\].startup.*/node.conn[0].startup = automatic/' ${DEFAULTPATH}
         else
             echo "default node profile for ${TARGET} not found, cannot update node startup settings"
         fi
