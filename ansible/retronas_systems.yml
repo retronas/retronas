@@ -21,6 +21,7 @@ system_map: "{{
   |union(system_atari)
   |union(system_bally)
   |union(system_bandai)
+  |union(system_benesse)
   |union(system_bitcorporation)
   |union(system_cambridge)
   |union(system_camputers)
@@ -44,6 +45,7 @@ system_map: "{{
   |union(system_gamepark)
   |union(system_generalinstrument)
   |union(system_hartung)
+  |union(system_homelab)
   |union(system_ibm)
   |union(system_interact)
   |union(system_interton)
@@ -100,6 +102,7 @@ system_apf:
   - { src: "apf/mp1000", last: "", mister: "", retropie: "", batocera: "apfm1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_apple:
   - { src: "apple/applei", last: "", mister: "Apple-I", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "apple/applei", last: "", mister: "APPLE-I", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/appleii", last: "", mister: "Apple-II", retropie: "", batocera: "apple2", recalbox: "apple2", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/appleiigs", last: "", mister: "", retropie: "", batocera: "apple2gs", recalbox: "apple2gs", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/appleiii", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -126,6 +129,8 @@ system_bandai:
   - { src: "bandai/sumfami", last: "", mister: "", retropie: "", batocera: "sufami", recalbox: "sufami", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "bandai/wonderswan", last: "", mister: "WonderSwan", retropie: "", batocera: "wswan", recalbox: "wswan", retroarch: "Bandai - WonderSwan", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswan", smdb: "", freestation: "" }
   - { src: "bandai/wonderswancolor", last: "", mister: "WonderSwanColor", retropie: "", batocera: "wswanc", recalbox: "wswanc", retroarch: "Bandai - WonderSwan Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswancolor", smdb: "", freestation: "" }
+system_benesse:
+  - { src: "benesse/pocketchallengev2", last: "", mister: "PocketChallengeV2", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_bitcorporation:
   - { src: "bitcorporation/gamate", last: "", mister: "Gamate", retropie: "", batocera: "gamate", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_cambridge:
@@ -155,7 +160,7 @@ system_compukit:
 system_creatronic:
   - { src: "creatronic/megaduck", last: "", mister: "MegaDuck", retropie: "", batocera: "megaduck", recalbox: "megaduck", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_dec:
-  - { src: "dec/pdp1", last: "", mister: "", retropie: "", batocera: "pdp1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "dec/pdp1", last: "", mister: "PDP1", retropie: "", batocera: "pdp1", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_distribution:
   - { src: "dist/image", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "dist/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -191,6 +196,8 @@ system_generalinstrument:
   - { src: "generalinstrument/ay38500", last: "other/generalinstrument_ay38500", mister: "AY-3-8500", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_hartung:
   - { src: "hartung/gamemaster", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Hartung - Game Master", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+system_homelab:
+  - { src: "homelab/homelab", last: "", mister: "Homelab", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_ibm:
   - { src: "ibm/pcxt", last: "", mister: "PCXT", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_interact:
