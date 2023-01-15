@@ -101,7 +101,6 @@ system_antonic:
 system_apf:
   - { src: "apf/mp1000", last: "", mister: "", retropie: "", batocera: "apfm1000", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_apple:
-  - { src: "apple/applei", last: "", mister: "Apple-I", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/applei", last: "", mister: "APPLE-I", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/appleii", last: "", mister: "Apple-II", retropie: "", batocera: "apple2", recalbox: "apple2", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "apple/appleiigs", last: "", mister: "", retropie: "", batocera: "apple2gs", recalbox: "apple2gs", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
