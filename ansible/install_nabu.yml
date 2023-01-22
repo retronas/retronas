@@ -1,6 +1,5 @@
 # Dependencies
 - import_playbook: install_romdir.yml
-- import_playbook: install_x11vnc.yml
 
 - hosts: localhost
   gather_facts: no
@@ -14,19 +13,14 @@
       - { name: "nabu", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
     - packages:
-      - mono-devel
-      - xvfb
-      - x11vnc
       - unzip
 
     - templates:
-      - { name: "config.xml", dest: "{{ my_dir }}/NABU Internet Adapter", mode: "0644", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
-      - { name: "{{ my_name }}.sh", dest: "{{ my_dir }}",  mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts",  mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - paths:
-      - { name: "NABU Internet Adapter", dest: "{{ my_dir }}", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-      - { name: "{{ my_name }}", dest: "/opt", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+    - links:
+      - { dest: "/home/{{ retronas_user }}/NABU Internet Adapter", src: "{{ retronas_path }}/roms/nabu" }
 
   tasks:
 
@@ -47,20 +41,12 @@
       group: "dialout"
       append: yes
 
-  - name: "{{ my_name }} - paths"
+  - name: "{{ my_name }} - links"
     file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
-
-  - name: "{{ my_name }} - disks symlink"
-    file:
-      src: "roms/nabu"
-      dest: "{{ retronas_path }}/{{ my_name }}"
-      state: "link"
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      state: "{{ item.state|default('link') }}"
+    with_items: "{{ links }}"
 
   - name: "{{ my_name }} - templates"
     template:
@@ -76,31 +62,6 @@
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/nabu.sh"
-    notify: "{{ my_name }} Restart Services" 
-
-  - name: "{{ my_name }} - create startup service(s) instance"
-    template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} Restart Services" 
-
-  - name: "{{ my_name }} - enable startup services"
-    service:
-      name: "{{ my_name }}.service"
-      state: started
-      enabled: yes
-
-  handlers:
-    - name: "{{ my_name }} Restart Services"
-      service:
-        name: "{{ my_name }}.service"
-        state: restarted
-        enabled: yes
-        daemon_reload: yes
 
 - import_playbook: retronas_system_config.yml
   vars:
