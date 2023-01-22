@@ -1,0 +1,35 @@
+#!/bin/bash
+# based on https://github.com/Kazade/dreampi/issues/17
+
+DPITMP=$(mktemp -d)
+
+# clone the repo and switch to the python3 branch
+cd $DPITMP
+git clone https://github.com/sargunv/dreampi.git
+cd dreampi
+git checkout python3
+
+# add arch armhf
+dpkg --add-architecture armhf
+apt-get update
+# workaround for if a previous install was broken due to missing arch
+apt-get --fix-missing -y install
+
+# install dependancies
+dpkg -i arm/*.deb
+
+
+
+# pull python3 requirements
+curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
+python3 -m pip install -r requirements.txt
+
+# install dreampi
+mkdir /usr/local/share/dreampi
+cp *.py dial-tone.wav /usr/local/share/dreampi
+ln -s /usr/local/share/dreampi/dreampi.py /usr/local/bin/dreampi
+chown -R root:root /usr/local/share/dreampi/
+
+# create startup scripts
+cp etc/init.d/dreampi /etc/init.d/
+cp etc/systemd/system/dreampi.service /etc/systemd/system/

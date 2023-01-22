@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+TMPFILES=$(mktemp -d)
+
+declare -A VERSIONS=(
+    ['x86_64']='x64',
+    ['aarch64']='arm64',
+    ['arm']='arm',
+)
+
+BINDIR=/opt/nabu
+ARCH=$(uname -m)
+
+[ ! -d $BINDIR ] && mkdir -p $BINDIR
+
+cd $TMPFILES
+curl -O http://cloud.nabu.ca/linux-$}VERSIONS[$ARCH]}.zip
+
+unzip $ARCHIVE -d $BINDIR
+rm -f $ARCHIVE
+
+chmod +x $BINDIR/NABU-Internet-Adapter*

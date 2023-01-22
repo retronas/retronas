@@ -1,17 +1,16 @@
 [Unit]
-Description=Homebrew Store for PlayStation4
+Description=ethflopd L2 floppy emulator server for MS-DOS
 After=network.target
 StartLimitIntervalSec=60
 StartLimitBurst=4
 
 [Service]
+Umask=0000
 User={{ retronas_user }}
-WorkingDirectory={{ retronas_root }}/bin/{{ my_name }}
-ExecStart={{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server start
+ExecStart={{ retronas_root }}/bin/ethflopd -f {{ retronas_etherdfs_interface }} {{ retronas_path}}/dos
 Restart=on-failure
 RestartSec=1
 SuccessExitStatus=3 4
-
 RestartForceExitStatus=3 4
 
 [Install]

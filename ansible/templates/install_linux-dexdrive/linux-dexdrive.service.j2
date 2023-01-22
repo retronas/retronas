@@ -1,0 +1,11 @@
+﻿[Unit]
+Description=Dex Drive service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/dexattach -D /dev/ttyUSB0
+TimeoutStopSec=10
+Restart=no
+
+[Install]
+WantedBy=default.target

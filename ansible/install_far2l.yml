@@ -1,0 +1,52 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "far2l"
+    - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - gawk 
+      - m4
+      - libpcre3-dev 
+      - libxerces-c-dev 
+      - libspdlog-dev 
+      - libuchardet-dev
+      - libssh-dev 
+      - libssl-dev 
+      - libsmbclient-dev 
+      - libnfs-dev 
+      - libneon27-dev 
+      - libarchive-dev 
+      - cmake 
+      - g++-9
+      - gcc-9
+      - git
+
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - Generate scripts"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - build source"
+    command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "far2l"
+    module_state: "present"

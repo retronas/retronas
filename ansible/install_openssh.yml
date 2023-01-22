@@ -28,7 +28,7 @@
 
   handlers:
 
-  - name: "{{ my_name }} - Restart openssh-server"
+  - name: "{{ my_name }} - Restart ssh"
     service:
       name: ssh
       state: restarted

@@ -51,15 +51,17 @@ function install_package {
 function get_45drives {
 
     PACKAGES=(
-        cockpit-navigator
+        "cockpit-navigator|navigator"
+        #"cockpit-zfs-manager|zfs"
+        #"cockpit-file-sharing|file-sharing"
     )
 
-    for PACKAGE in ${PACKAGES}
+    for ITEM in ${PACKAGES[@]}
     do
-        FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
+        PACKAGE=$(echo ${ITEM} | cut -d '|' -f1)
+        FOLDER=$(echo ${ITEM} | cut -d'|' -f2)
         get_github 45Drives $PACKAGE $FOLDER
         install_package $FOLDER/$FOLDER
-
     done
 
 }

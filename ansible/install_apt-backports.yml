@@ -1,0 +1,71 @@
+# Dependencies
+
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "Apt Backports"
+    - my_file: "install_apt-backports"
+
+    - my_packages:
+      - gnupg
+      - aria2
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+    
+  - name: "{{ my_name }} - install prerequisite packages"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - download Debian signing keys"
+    shell:
+      chdir: "/tmp"
+      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb"
+    when: ansible_distribution == "Debian"
+
+  - name: "{{ my_name }} - install Debian signing keys"
+    shell:
+      chdir: "/tmp"
+      cmd: "dpkg -i debian-archive-keyring*.deb"
+    when: ansible_distribution == "Debian"
+
+  - name: "{{ my_name }} - Configure APT repo"
+    apt_repository:
+      repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
+      state: present
+      filename: debian-backports
+      update_cache: no
+    when: ansible_distribution == "Debian"
+
+  - name: "{{ my_name }} - Configure APT repo for Ubuntu x86_64"
+    apt_repository:
+      repo: deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+      state: present
+      filename: "{{ ansible_distribution_release }}-backports"
+      update_cache: no
+    when: ansible_distribution == "Ubuntu" and
+          ansible_architecture == "x86_64"
+
+  - name: "{{ my_name }} - Configure APT repo for Ubuntu non x86_64 (ports)"
+    apt_repository:
+      repo: deb http://ports.ubuntu.com/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+      state: present
+      filename: "{{ ansible_distribution_release }}-backports"
+      update_cache: no
+    when: ansible_distribution == "Ubuntu" and
+          ansible_architecture != "x86_64"
+
+  - name: "{{ my_name }} - Force update repo cache"
+    shell:
+      cmd: "/usr/bin/apt update || exit 0"
+    when: ansible_distribution == "Ubuntu" or
+          ansible_distribution == "Debian"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "apt-backports"
+    module_state: "present"

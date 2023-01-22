@@ -1,0 +1,12 @@
+diff --git a/Makefile b/Makefile
+index 7e5a5f0..622f248 100644
+--- a/Makefile
++++ b/Makefile
+@@ -27,6 +27,7 @@ modules:
+ install: all
+ 	cp dexattach $(DESTDIR)/$(PREFIX)/bin
+ 	$(MAKE) -C $(KERNELDIR) M=$(PWD) INSTALL_MOD_PATH=$(abspath $(DESTDIR)) modules_install
++	depmod -A
+ 
+ clean:
+ 	rm -rf dexattach

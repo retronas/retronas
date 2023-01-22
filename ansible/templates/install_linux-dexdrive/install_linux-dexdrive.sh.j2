@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -u
+
+APP=linux-dexdrive
+REPO=https://github.com/fbriere/${APP}.git
+OUTPATH=$(mktemp -d)
+
+function _log {
+	echo "$1"
+}
+
+
+HEADERS=linux-headers-$(uname -r)
+grep "Raspberry Pi" /proc/device-tree/model
+[ $? -eq 0 ] && HEADERS=raspberrypi-kernel-headers
+
+# install the required source files
+apt-get -y install git build-essential $HEADERS
+
+cd $OUTPATH
+if [ ! -f ${OUTPATH}/${APP}/.git/config ] 
+then
+	git clone $REPO
+else
+	cd ${OUTPATH}/${APP}
+	git pull
+fi
+
+cd ${OUTPATH}/${APP}
+git apply /tmp/makefile.patch
+make
+make install
+
+echo "dexdrive" >> /etc/modprobe.d/dexdrive.conf
+
+# remove the required source files
+apt-get -y remove $HEADERS

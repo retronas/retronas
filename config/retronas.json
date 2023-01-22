@@ -72,7 +72,7 @@
                 {
                     "index": "07",
                     "title": "Advanced",
-                    "description": "bd/eLiTe",
+                    "description": "Tools that may require manual setup",
                     "id":"advanced",
                     "prompt": "",
                     "type": "dialog",
@@ -222,7 +222,7 @@
                 {
                     "index":"07",
                     "title": "EtherDFS",
-                    "description": "Set EtherDFS network interface",
+                    "description": "Set EtherDFS/ethflopd network interface",
                     "id":"set-etherdfs-nic",
                     "prompt": "",
                     "type": "dialog_input",
@@ -530,6 +530,16 @@
                     "command": "disc-image-creator"
                 },
                 {
+                    "index": "45",
+                    "title": "Samba for Amiga",
+                    "description": "Samba share for SMBMounter", 
+                    "id":"smbmounter",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "smbmounter"
+                },
+                {
                     "index": "50",
                     "title": "Syncthing",
                     "description": "File sync tool", 
@@ -588,6 +598,116 @@
                     "type": "install",
                     "group":"",
                     "command": "megatools"
+                },
+                {
+                    "index": "56",
+                    "title": "apfs-fuse",
+                    "description": "Apple File System fuse library", 
+                    "id":"apfs-fuse",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "apfs-fuse"
+                },
+                {
+                    "index":"57",
+                    "title": "hb-store-cdn",
+                    "description": "Ps4 Homebrew Store CDN",
+                    "id":"hbstorecdn",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "hbstorecdn"
+                },
+                {
+                    "index": "58",
+                    "title": "zterm",
+                    "description": "Zmodem transfer suite",
+                    "id":"zterm",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "zterm"
+                },
+                {
+                    "index": "59",
+                    "title": "adtpro",
+                    "description": "Apple Disk Transfer ProDOS",
+                    "id":"adtpro",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "adtpro"
+                },
+                {
+                    "index": "60",
+                    "title": "minicom",
+                    "description": "minicom terminal",
+                    "id":"minicom",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "minicom"
+                },
+                {
+                    "index": "61",
+                    "title": "dreampi",
+                    "description": "dialup solution for dreamcast",
+                    "id":"dreampi",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "dreampi"
+                },
+                {
+                    "index": "62",
+                    "title": "ethflopd",
+                    "description": "lightweight layer 2 network floppy emulator for DOS", 
+                    "id":"ethflopd",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ethflopd"
+                },
+                {
+                    "index": "63",
+                    "title": "mc",
+                    "description": "Midnight Commander (Norton clone)", 
+                    "id":"mc",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "mc"
+                },
+                {
+                    "index": "64",
+                    "title": "ytree",
+                    "description": "Ytree File Manager (Xtree clone)", 
+                    "id":"ytree",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ytree"
+                },
+                {
+                    "index": "65",
+                    "title": "far2l",
+                    "description": "far2l File Manager", 
+                    "id":"far2l",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "far2l"
+                },
+                {
+                    "index": "66",
+                    "title": "ntp",
+                    "description": "Network Time Protocol Server", 
+                    "id":"ntp",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "ntp"
                 }
             ]
         },
@@ -631,53 +751,63 @@
                 },
                 {
                     "index": "04",
-                    "title": "apfs-fuse",
-                    "description": "Apple File System fuse library", 
-                    "id":"apfs-fuse",
+                    "title": "netlink",
+                    "description": "Sega Saturn Netlink tunneling service", 
+                    "id":"netlink",
                     "prompt": "",
                     "type": "install",
                     "group":"",
-                    "command": "apfs-fuse"
+                    "command": "netlink"
                 },
                 {
-                    "index":"05",
-                    "title": "hb-store-cdn",
-                    "description": "Ps4 Homebrew Store CDN",
-                    "id":"hbstorecdn",
+                    "index": "05",
+                    "title": "kermit",
+                    "description": "kermit (server mode)", 
+                    "id":"kermit",
                     "prompt": "",
-                    "type": "dialog",
+                    "type": "install",
                     "group":"",
-                    "command": "hbstorecdn"
+                    "command": "kermit"
                 },
                 {
                     "index": "06",
-                    "title": "zterm",
-                    "description": "Zmodem transfer suite",
-                    "id":"zterm",
+                    "title": "NABU",
+                    "description": "NABU Internet Adapter", 
+                    "id":"nabu",
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "zterm"
+                    "command": "nabu"
                 },
                 {
                     "index": "07",
-                    "title": "adtpro",
-                    "description": "Apple Disk Transfer ProDOS",
-                    "id":"adtpro",
+                    "title": "dexdrive",
+                    "description": "Dex Drive block devices",
+                    "id":"dexdrive",
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "adtpro"
+                    "command": "dexdrive"
                 },
                 {
                     "index": "08",
-                    "title": "minicom",
-                    "description": "minicom terminal",
-                    "id":"minicom",
+                    "title": "open-iscsi",
+                    "description": "iSCSI support",
+                    "id":"open_iscsi",
                     "prompt": "",
                     "type": "dialog",
                     "group":"",
-                    "command": "minicom"
+                    "command": "open_iscsi"
+                },
+                {
+                    "index": "09",
+                    "title": "linux-gadgets",
+                    "description": "Manage Linux OTG Gadgets",
+                    "id":"linux_gadgets",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "linux_gadgets"
                 }
             ]
         },
@@ -758,6 +888,16 @@
                     "type": "install",
                     "group":"",
                     "command": "cue2pops"
+                },
+                {
+                    "index": "08",
+                    "title": "pi1541",
+                    "description": "Setup a pi1541 SD card", 
+                    "id":"pi1541",
+                    "prompt": "",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "pi1541"
                 }
             ]
         },
@@ -917,6 +1057,66 @@
                     "type":"service_status",
                     "group":"",
                     "command": "webone"
+                },
+                {
+                    "index": "53",
+                    "title": "dreampi",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "dreampi"
+                },
+                {
+                    "index": "54",
+                    "title": "netlink",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "netlink"
+                },
+                {
+                    "index": "55",
+                    "title": "inetd",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "inetd"
+                },
+                {
+                    "index": "56",
+                    "title": "ethflopd",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "ethflopd"
+                },
+                {
+                    "index": "57",
+                    "title": "nabu",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "nabu"
+                },
+                {
+                    "index": "58",
+                    "title": "ntp",
+                    "description": "", 
+                    "id":"",
+                    "prompt": "",
+                    "type":"service_status",
+                    "group":"",
+                    "command": "ntp"
                 }
             ]
         },
@@ -2466,7 +2666,7 @@
                 {
                     "index":"02",
                     "title": "Install",
-                    "description": "Install adtpro application",
+                    "description": "Install minicom application",
                     "id":"minicom",
                     "prompt": "Install",
                     "type": "install",
@@ -2492,6 +2692,345 @@
                     "type": "script",
                     "group":"",
                     "command": "minicom-config"
+                }
+            ]
+        },
+        "pi1541": 
+        {
+            "title": "pi1541",
+            "description": "Assists with setting up a pi1541 sd card device, provide a FAT32 formatted device and run setup",
+            "id":"pi1541",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install pi1541 setup script",
+                    "id":"pi151",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "pi1541"
+                },
+                {
+                    "index": "03",
+                    "title": "Setup",
+                    "description": "Run the setup script", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"",
+                    "command": "pi1541"
+                }
+            ]
+        },
+        "dexdrive": 
+        {
+            "title": "dexdrive",
+            "description": "linux-dexdrive project read PSX/N64 memory cards and linux block devices",
+            "id":"dexdrive-menu",
+            "prompt": "",
+            "type": "modal",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install linux-dexdrive application",
+                    "id":"linux-dexdrive",
+                    "prompt": "Install",
+                    "type": "install",
+                    "group":"",
+                    "command": "linux-dexdrive"
+                },
+                {
+                    "index": "03",
+                    "title": "Edit",
+                    "description": "Change the serial device", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "form",
+                    "group":"",
+                    "command": "dexdrive_serial_edit"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start Dex Drive daemon",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "linux-dexdrive"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop Dex Drive daemon",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "linux-dexdrive"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query Dex Drive daemon",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "linux-dexdrive"
+                },
+                {
+                    "index":"07",
+                    "title": "Dump",
+                    "description": "Dump a PS1 memory card",
+                    "id":"dexdrive_dumper",
+                    "prompt": "Dump",
+                    "type": "script",
+                    "group":"",
+                    "command": "dexdrive_dumper"
+                },
+                {
+                    "index":"08",
+                    "title": "Image",
+                    "description": "Write an image to a memory card",
+                    "id":"dexdrive_memcards",
+                    "prompt": "Dump",
+                    "type": "dialog",
+                    "group":"",
+                    "command": "dexdrive_memcards"
+                }
+            ]
+        },
+        "dexdrive_serial_edit": 
+        {
+            "title": "Dex Drive Serial Config",
+            "description": "set Dex Drive device",
+            "id":"dexdrive-serial-edit-menu",
+            "prompt": "",
+            "type": "menu",
+            "items": []
+        },
+        "dexdrive_memcards": 
+        {
+            "title": "Dex Drive Image Chooser",
+            "description": "Please choose an image to write to the memory card",
+            "id":"dexdrive-memcards",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                }
+            ]
+        },
+        "open_iscsi": 
+        {
+            "title": "iSCSI options",
+            "description": "Manage iSCSI targets",
+            "id":"open-iscsi",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install iSCSI support",
+                    "id":"open-iscsi",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "open-iscsi"
+                },
+                {
+                    "index":"03",
+                    "title": "Targets",
+                    "description": "List and login to iSCSI targets",
+                    "id":"iscsi-manager-target-login",
+                    "prompt": "Login",
+                    "type": "script",
+                    "group":"",
+                    "command": "iscsi-manager-target-login"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "open-iscsi"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "open-iscsi"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "open-iscsi"
+                }
+            ]
+        },
+        "linux_gadgets": 
+        {
+            "title": "Linux Gadgets",
+            "description": "Manage Linux OTG Gadgets",
+            "id":"linux-gadgets",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install Gadget support",
+                    "id":"linux-gadgets",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "linux-gadgets"
+                },
+                {
+                    "index":"03",
+                    "title": "Mass Storage",
+                    "description": "Manage g_mass_storage gadgets",
+                    "id":"gadget-mass-storage-manage",
+                    "prompt": "Manage",
+                    "type": "script",
+                    "group":"",
+                    "command": "gadget-mass-storage-manage"
+                },
+                {
+                    "index":"04",
+                    "title": "Start",
+                    "description": "Start gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "retronas-gadget.path"
+                },
+                {
+                    "index":"05",
+                    "title": "Stop",
+                    "description": "Stop gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_stop",
+                    "group":"",
+                    "command": "retronas-gadget.path"
+                },
+                {
+                    "index":"06",
+                    "title": "Status",
+                    "description": "Query gadget",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "retronas-gadget*"
+                }
+            ]
+        },
+        "nabu": 
+        {
+            "title": "NABU Internet Adapter",
+            "description": "Manage the NABU Internet Adapter",
+            "id":"naubia",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install the NABU Internet Adapter software",
+                    "id":"nabu-software",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "nabu"
+                },
+                {
+                    "index":"03",
+                    "title": "Open",
+                    "description": "Open the NABU Internet Adapter",
+                    "id":"",
+                    "prompt": "",
+                    "type": "script",
+                    "group":"",
+                    "command": "nabu"
                 }
             ]
         },

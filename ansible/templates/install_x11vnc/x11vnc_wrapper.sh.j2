@@ -4,4 +4,12 @@ XDISPLAY=$1
 XAUTH=$2
 PORT=$3
 
-x11vnc -quiet -display $XDISPLAY -auth $XAUTH -listen 0.0.0.0 -rfbport $PORT -rfbauth /etc/vncpasswd_retronas
+RFBAUTH=/etc/vncpasswd_retronas
+
+# use a local auth file if it exists
+if [ -f /home/$USER/vncpasswd_retronas ]
+then
+    RFBAUTH=/home/$USER/vncpasswd_retronas
+fi
+
+x11vnc -quiet -display $XDISPLAY -auth $XAUTH -listen 0.0.0.0 -rfbport $PORT -rfbauth $RFBAUTH -forever

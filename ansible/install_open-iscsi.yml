@@ -1,0 +1,54 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "open-iscsi"
+    - my_file: "install_{{ my_name }}"
+    - my_packages:
+         - open-iscsi
+
+    - my_services:
+        - open-iscsi
+
+    - templates:
+      - { name: "iscsi-manager-target-login.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+    
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install from repos"
+    package:
+       name: "{{ my_packages }}"
+       state: latest
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}{{ item.ext|default('.j2')}}"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - Enable startup services"
+    service:
+      name: ssh
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart ssh"
+    service:
+      name: ssh
+      state: restarted
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "open-iscsi"
+    module_state: "present"
