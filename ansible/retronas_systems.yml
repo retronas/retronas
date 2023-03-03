@@ -153,7 +153,7 @@ system_commodore:
   - { src: "commodore/amigacdtv", last: "", mister: "", retropie: "", batocera: "amigacdtv", recalbox: "amigacdtv", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "commodore/commodore16", last: "", mister: "C16", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c16", smdb: "", freestation: "" }
   - { src: "commodore/commodore64", last: "", mister: "C64", retropie: "", batocera: "c64", recalbox: "c64", retroarch: "Commodore - 64", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c64", smdb: "", freestation: "" }
-  - { src: "commodore/commodore128", last: "", mister: "", retropie: "", batocera: "c128", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c128", smdb: "", freestation: "" }
+  - { src: "commodore/commodore128", last: "", mister: "C128", retropie: "", batocera: "c128", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c128", smdb: "", freestation: "" }
   - { src: "commodore/pet", last: "", mister: "PET2001", retropie: "", batocera: "pet", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "commodore/vic20", last: "", mister: "VIC20", retropie: "", batocera: "c20", recalbox: "vic20", retroarch: "Commodore - VIC-20", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "vic20", smdb: "", freestation: "" }
   - { src: "commodore/commodoreplus4", last: "", mister: "", retropie: "", batocera: "cplus4", recalbox: "", retroarch: "Commodore - Plus-4", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
