@@ -808,6 +808,16 @@
                     "type": "dialog",
                     "group":"",
                     "command": "linux_gadgets"
+                },
+                {
+                    "index": "10",
+                    "title": "WaybackProxy",
+                    "description": "Retrocomputer web proxy for Wayback and OOcities",
+                    "id":"waybackproxy",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "waybackproxy"
                 }
             ]
         },
