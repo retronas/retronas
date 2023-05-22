@@ -11,6 +11,8 @@
       - gnupg
       - aria2
 
+    - debfile: debian-archive-keyring_2023.3_all.deb
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -24,13 +26,13 @@
   - name: "{{ my_name }} - download Debian signing keys"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb"
+      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/{{ debfile }} https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/{{ debfile }}"
     when: ansible_distribution == "Debian"
 
   - name: "{{ my_name }} - install Debian signing keys"
     shell:
       chdir: "/tmp"
-      cmd: "dpkg -i debian-archive-keyring*.deb"
+      cmd: "dpkg -i {{ debfile }}"
     when: ansible_distribution == "Debian"
 
   - name: "{{ my_name }} - Configure APT repo"
