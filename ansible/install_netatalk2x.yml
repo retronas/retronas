@@ -25,6 +25,7 @@
        - libgcrypt20-dev
        - expect
        - libltdl-dev
+       - libtool-bin
 
     - services:
       - avahi-daemon
