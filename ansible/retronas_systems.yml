@@ -60,6 +60,7 @@ system_map: "{{
   |union(system_nabu)
   |union(system_nec)
   |union(system_nintendo)
+  |union(system_nichibutsu)
   |union(system_oric)
   |union(system_other)
   |union(system_panasonic)
@@ -275,6 +276,8 @@ system_nintendo:
   - { src: "nintendo/wii", last: "", mister: "", retropie: "", batocera: "wii", recalbox: "wii", retroarch: "Nintendo - Wii", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wii", smdb: "", freestation: "wii" }
   - { src: "nintendo/wiid", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Nintendo - Wii (Digital)", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nintendo/wiiu", last: "", mister: "", retropie: "", batocera: "wiiu", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "wiiu" }
+system_nichibutsu:
+  - { src: "nichibutsu/myvision", last: "", mister: "MyVision", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_oric:
   - { src: "oric/atmos", last: "", mister: "", retropie: "", batocera: "", recalbox: "oricatmos", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "oric/tangerine", last: "", mister: "Oric", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -393,6 +396,7 @@ system_videotechnology:
   - { src: "videotechnology/vsmile", last: "", mister: "", retropie: "", batocera: "vsmile", recalbox: "", retroarch: "VTech - V.Smile", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_watara:
   - { src: "watara/supervision", last: "", mister: "SuperVision", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "Watara - Supervision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "", freestation: "" }
+  - { src: "watara/supervision8000", last: "", mister: "SuperVision8000", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 
 system_links:
   - { src: "nec/pcengine", dest: "nec/turbografx16" }
