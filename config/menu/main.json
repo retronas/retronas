@@ -68,16 +68,6 @@
                 "command": "ondevice"
             },
             {
-                "index": "07",
-                "title": "Advanced",
-                "description": "Tools that may require manual setup",
-                "id":"advanced",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "advanced"
-            },
-            {
                 "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",
