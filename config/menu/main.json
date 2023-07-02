@@ -1,0 +1,102 @@
+{
+    "main": 
+    {
+        "title": "Main",
+        "description": "Please ensure that you have configured your RetroNAS user, group and top level directory in the Global configuration section before installing any tools. Changing any of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
+        "id":"main",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Exit",
+                "description": "So long and thanks for all the bits",
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Config",
+                "description": "Change Global Settings",
+                "id":"config",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "config"
+            },
+            {
+                "index": "03",
+                "title": "Install",
+                "description": "The fun place, for things",
+                "id":"install",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "install"
+            },
+            {
+                "index": "04",
+                "title": "Services",
+                "description": "See if things are OK",
+                "id":"services",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "services"
+            },
+            {
+                "index": "05",
+                "title": "Tools",
+                "description": "Run tools and scripts",
+                "id":"tools",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "tools"
+            },
+            {
+                "index": "06",
+                "title": "OnDevice",
+                "description": "On-Device Management Tools",
+                "id":"ondevice",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "ondevice"
+            },
+            {
+                "index": "07",
+                "title": "Advanced",
+                "description": "Tools that may require manual setup",
+                "id":"advanced",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "advanced"
+            },
+            {
+                "index": "50",
+                "title": "Experimental",
+                "description": "there be dragons here!",
+                "id":"experimental",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "experimental"
+            },
+            {
+                "index": "99",
+                "title": "Update",
+                "description": "Update core RetroNAS features",
+                "id":"update",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "update"
+            }
+        ]
+    }
+}

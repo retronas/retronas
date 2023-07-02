@@ -1,0 +1,52 @@
+{
+    "tools": 
+    {
+        "title": "Tools",
+        "description": "Please select an option to install",
+        "id":"tools",
+        "prompt": "Run",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "GOG",
+                "description": "Download your GOG installers and extras",
+                "id":"gogrepo-menu",
+                "prompt": "Open",
+                "type": "modal",
+                "group":"",
+                "command": "gogrepo"
+            },
+            {
+                "index":"03",
+                "title": "3DS QR code",
+                "description": "Nintendo 3DS FBI homebrew",
+                "id":"3ds_qr",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "3ds_qr"
+            },
+            {
+                "index":"04",
+                "title": "ROM import",
+                "description": "Import roms via Smokemonster SMDBs",
+                "id":"romimport",
+                "prompt": "Open",
+                "type": "dialog_yn",
+                "group":"",
+                "command": "romimport"
+            }
+        ]
+    }
+}

@@ -1,0 +1,221 @@
+{
+    "services": 
+    {
+        "title": "Services",
+        "description": "Please select a service to check",
+        "id":"services",
+        "prompt": "Check",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "Samba",
+                "description": "", 
+                "id":"samba-services",
+                "prompt": "",
+                "type":"script-static",
+                "group":"",
+                "command": "service-samba"
+            },
+            {
+                "index": "03",
+                "title": "Netatalk3",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "netatalk"
+            },
+            {
+                "index": "04",
+                "title": "EtherDFS",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "etherdfs"
+            },
+            {
+                "index": "05",
+                "title": "lighttpd",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "lighttpd"
+            },
+            {
+                "index": "06",
+                "title": "ProFTPd",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "proftpd"
+            },
+            {
+                "index": "07",
+                "title": "tftpd-hpa",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "tftpd-hpa"
+            },
+            {
+                "index": "08",
+                "title": "OpenSSH",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "ssh"
+            },
+            {
+                "index": "09",
+                "title": "Telnet",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "inetd"
+            },
+            {
+                "index": "12",
+                "title": "TNFS",
+                "description": "Atari 8-bit and ZX Spectrum", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "tnfsd"
+            },
+            {
+                "index": "32",
+                "title": "ps3netsrv",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "command": "ps3netsrv"
+            },
+            {
+                "index": "37",
+                "title": "FSP",
+                "description": "for GameCube", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "fspd"
+            },
+            {
+                "index": "50",
+                "title": "Syncthing",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "syncthing*"
+            },
+            {
+                "index": "51",
+                "title": "Cockpit",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "cockpit"
+            },
+            {
+                "index": "52",
+                "title": "WebOne",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "webone"
+            },
+            {
+                "index": "53",
+                "title": "dreampi",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "dreampi"
+            },
+            {
+                "index": "54",
+                "title": "netlink",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "netlink"
+            },
+            {
+                "index": "55",
+                "title": "inetd",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "inetd"
+            },
+            {
+                "index": "56",
+                "title": "ethflopd",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "ethflopd"
+            },
+            {
+                "index": "57",
+                "title": "nabu",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "nabu"
+            },
+            {
+                "index": "58",
+                "title": "ntp",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "ntp"
+            }
+        ]
+    }
+}

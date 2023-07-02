@@ -1,0 +1,52 @@
+{
+    "minicom": 
+    {
+        "title": "minicom",
+        "description": "Please select an option",
+        "id":"minicom",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install minicom application",
+                "id":"minicom",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "minicom"
+            },
+            {
+                "index": "03",
+                "title": "Start",
+                "description": "Run minicom", 
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "minicom"
+            },
+            {
+                "index":"04",
+                "title": "Config",
+                "description": "Start minicom in config mode",
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "minicom-config"
+            }
+        ]
+    }
+}

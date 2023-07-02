@@ -1,0 +1,82 @@
+{
+    "hdparm": 
+    {
+        "title": "hdparm",
+        "description": "WARNING: These changes are irreversable, USE AT YOUR OWN RISK||Try in ORDER:|APM -\\> Standby -\\> Custom service \\!\\!LAST RESORT\\!\\! \\<-||The custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",
+        "id":"hdparm-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install the hdparm application",
+                "id":"hdparm",
+                "prompt": "Install",
+                "type":"install",
+                "group":"",
+                "command": "hdparm"
+            },
+            {
+                "index":"10",
+                "title": "APM",
+                "description": "Disable Advanced Power Management (APM)",
+                "id":"hdparm-disable-apm",
+                "prompt": "Disable",
+                "type": "script",
+                "group":"",
+                "command": "hdparm-manager-disable-apm"
+            },
+            {
+                "index":"11",
+                "title": "Standby",
+                "description": "Disable drive Standy",
+                "id":"hdparm-disable-standby",
+                "prompt": "Disable",
+                "type": "script",
+                "group":"",
+                "command": "hdparm-manager-disable-standby"
+            },
+            {
+                "index":"20",
+                "title": "Start",
+                "description": "Start hdparm service",
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "hdparm-manager-start-service"
+            },
+            {
+                "index":"21",
+                "title": "Status",
+                "description": "Query hdparm service status",
+                "id":"",
+                "prompt": "",
+                "type":"script",
+                "group":"",
+                "command": "hdparm-manager-query-service"
+            },
+            {
+                "index":"22",
+                "title": "Stop",
+                "description": "Stop the hdparm service",
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "hdparm-manager-stop-service"
+            }
+        ]
+    }
+}

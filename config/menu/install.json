@@ -1,0 +1,472 @@
+{
+    "install": 
+    {
+        "title": "Install",
+        "description": "Please select an option to install",
+        "id":"install",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "Samba",
+                "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing",
+                "id":"samba",
+                "prompt": "",
+                "type": "install",
+                "group":"samba",
+                "command": "samba"
+            },                
+            {
+                "index": "03",
+                "title": "Netatalk2",
+                "description": "AppleTalk and AppleShare file sharing (System6/OS8+)", 
+                "id":"netatalk2x",
+                "prompt": "",
+                "type": "install",
+                "group":"netatalk",
+                "command": "netatalk2x"
+            },
+            {
+                "index": "04",
+                "title": "Netatalk3",
+                "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)", 
+                "id":"netatalk3",
+                "prompt": "",
+                "type": "install",
+                "group":"netatalk",
+                "command": "netatalk3"
+            },                
+            {
+                "index": "05",
+                "title": "EtherDFS",
+                "description": "lightweight layer 2 network file sharing for DOS", 
+                "id":"etherdfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "etherdfs"
+            },
+            {
+                "index": "06",
+                "title": "lighttpd",
+                "description": "HTTP/Web server", 
+                "id":"lighttpd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "lighttpd"
+            },                
+            {
+                "index": "07",
+                "title": "ProFTPd",
+                "description": "FTP, File Transfer Protocol file sharing", 
+                "id":"proftpd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "proftpd"
+            },
+            {
+                "index": "08",
+                "title": "tftpd-hpa",
+                "description": "TFTP, Trivial File Transfer Protocol file sharing", 
+                "id":"tftpd-hpa",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "tftpd-hpa"
+            },                
+            {
+                "index": "09",
+                "title": "OpenSSH",
+                "description": "SSH/SFTP/SCP Secure Shell command line and file transfer",
+                "id":"openssh",
+                "prompt": "", 
+                "type": "install",
+                "group":"",
+                "command": "openssh"
+            },
+            {
+                "index": "10",
+                "title": "Telnet",
+                "description": "unencrypted remote access shell", 
+                "id":"telnet",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "telnet"
+            },
+            {
+                "index": "11",
+                "title": "NFS",
+                "description": "NFS versions 2, 3 and 4", 
+                "id":"nfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "nfs"
+            },
+            {
+                "index": "12",
+                "title": "TNFS",
+                "description": "Atari 8-bit and ZX Spectrum", 
+                "id":"tnfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "tnfs"
+            },
+            {
+                "index": "20",
+                "title": "pygopherd",
+                "description": "Gopher protocol server", 
+                "id":"pygopherd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "pygopherd"
+            },
+            {
+                "index": "30",
+                "title": "3DS QR codes",
+                "description": "Nintendo 3DS FBI Homebrew installer", 
+                "id":"3ds_qr_codes",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "3ds_qr_codes"
+            },                
+            {
+                "index": "31",
+                "title": "Samba for PS2",
+                "description": "OpenPS2Loader SMB config", 
+                "id":"ps2_openps2loader",
+                "prompt": "",
+                "type": "install",
+                "group":"samba",
+                "command": "ps2_openps2loader"
+            },                
+            {
+                "index": "32",
+                "title": "PlayStation 3",
+                "description": "ps3netsrv for CFW/HEN + webMAN-MOD", 
+                "id":"",
+                "prompt": "ps3netsrv",
+                "type": "install",
+                "group":"",
+                "command": "ps3netsrv"
+            },                
+            {
+                "index": "33",
+                "title": "Samba for MiSTer",
+                "description": "MiSTer FPGA CIFS config", 
+                "id":"mister_cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"samba",
+                "command": "mister_cifs"
+            },                
+            {
+                "index": "34",
+                "title": "Samba for X360",
+                "description": "Microsoft XBox360 SMB config", 
+                "id":"xbox360",
+                "prompt": "",
+                "type": "install",
+                "group":"samba",
+                "command": "xbox360"
+            },
+            {
+                "index": "35",
+                "title": "Samba for Batocera",
+                "description": "Batocera CIFS config",
+                "id":"batocera-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "batocera_cifs"
+            },
+            {
+                "index": "36",
+                "title": "Samba for Recalbox",
+                "description": "Recalbox CIFS config",
+                "id":"recalbox-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "recalbox_cifs"
+            },     
+            {
+                "index": "37",
+                "title": "Samba for EmuElec",
+                "description": "EmuElec CIFS config",
+                "id":"emuelec-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "emuelec_cifs"
+            },
+            {
+                "index": "38",
+                "title": "fenrir-ode-webserver",
+                "description": "Fenrir-ODE Webserver", 
+                "id":"fenrir-ode-webserver",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "fenrirodewebserver"
+            },
+            {
+                "index":"39",
+                "title": "xlink-kai",
+                "description": "XLink Kai Gaming Network",
+                "id":"xlinkkai",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "xlinkkai"
+            },                 
+            {
+                "index": "40",
+                "title": "gogrepo",
+                "description": "Download your GOG game installers", 
+                "id":"gogrepo",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "gogrepo"
+            },                
+            {
+                "index": "41",
+                "title": "ROM import",
+                "description": "ROM import from Smokemonster SMDBs", 
+                "id":"romimport",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "romimport"
+            },                
+            {
+                "index": "42",
+                "title": "FSP server",
+                "description": "Nintendo GameCube + Swiss FSP server", 
+                "id":"fsp",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "fsp"
+            },                
+            {
+                "index": "43",
+                "title": "SabreTools",
+                "description": "Dat Manager (x86_64 only)", 
+                "id":"sabretools",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "sabretools"
+            },
+            {
+                "index": "44",
+                "title": "DiscImageCreator",
+                "description": "Disc Image Creator", 
+                "id":"disc-image-creator",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "disc-image-creator"
+            },
+            {
+                "index": "45",
+                "title": "Samba for Amiga",
+                "description": "Samba share for SMBMounter", 
+                "id":"smbmounter",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "smbmounter"
+            },
+            {
+                "index": "50",
+                "title": "Syncthing",
+                "description": "File sync tool", 
+                "id":"syncthing",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "syncthing"
+            },
+            {
+                "index": "51",
+                "title": "Cockpit",
+                "description": "Web based Linux system manager", 
+                "id":"cockpit",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "cockpit-packages"
+            },
+            {
+                "index": "52",
+                "title": "WebOne",
+                "description": "HTTP 1.x proxy for a HTTP 2.x world", 
+                "id":"webone",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "webone"
+            },
+            {
+                "index": "53",
+                "title": "BitTorrent",
+                "description": "Deluge Web BitTorrent Client", 
+                "id":"bittorrent",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "bittorrent"
+            },
+            {   
+                "index": "54",
+                "title": "aria2",
+                "description": "lightweight multi-protocol/source cli download utility", 
+                "id":"aria2",
+                "prompt": "", 
+                "type": "install",
+                "group":"",
+                "command": "aria2"
+            },
+            {   
+                "index": "55",
+                "title": "megatools",
+                "description": "command line client application for Mega", 
+                "id":"megatools",
+                "prompt": "", 
+                "type": "install",
+                "group":"",
+                "command": "megatools"
+            },
+            {
+                "index": "56",
+                "title": "apfs-fuse",
+                "description": "Apple File System fuse library", 
+                "id":"apfs-fuse",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "apfs-fuse"
+            },
+            {
+                "index":"57",
+                "title": "hb-store-cdn",
+                "description": "Ps4 Homebrew Store CDN",
+                "id":"hbstorecdn",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "hbstorecdn"
+            },
+            {
+                "index": "58",
+                "title": "zterm",
+                "description": "Zmodem transfer suite",
+                "id":"zterm",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "zterm"
+            },
+            {
+                "index": "59",
+                "title": "adtpro",
+                "description": "Apple Disk Transfer ProDOS",
+                "id":"adtpro",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "adtpro"
+            },
+            {
+                "index": "60",
+                "title": "minicom",
+                "description": "minicom terminal",
+                "id":"minicom",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "minicom"
+            },
+            {
+                "index": "61",
+                "title": "dreampi",
+                "description": "dialup solution for dreamcast",
+                "id":"dreampi",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dreampi"
+            },
+            {
+                "index": "62",
+                "title": "ethflopd",
+                "description": "lightweight layer 2 network floppy emulator for DOS", 
+                "id":"ethflopd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ethflopd"
+            },
+            {
+                "index": "63",
+                "title": "mc",
+                "description": "Midnight Commander (Norton clone)", 
+                "id":"mc",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "mc"
+            },
+            {
+                "index": "64",
+                "title": "ytree",
+                "description": "Ytree File Manager (Xtree clone)", 
+                "id":"ytree",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ytree"
+            },
+            {
+                "index": "65",
+                "title": "far2l",
+                "description": "far2l File Manager", 
+                "id":"far2l",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "far2l"
+            },
+            {
+                "index": "66",
+                "title": "ntp",
+                "description": "Network Time Protocol Server", 
+                "id":"ntp",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ntp"
+            }
+        ]
+    }
+}

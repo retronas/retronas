@@ -1,0 +1,62 @@
+{
+    "xlinkkai": 
+    {
+        "title": "XLink Kai",
+        "description": "XLink Kai online gaming service for LAN based game modes||WARNING: XLink Kai works by capturing and inspecting network traffic, we recommend you isolate devices running XLink from your main net",
+        "id":"xlinkkai-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install the XLink Kai application",
+                "id":"xlink-kai",
+                "prompt": "Install",
+                "type":"install",
+                "group":"",
+                "command": "xlink-kai"
+            },
+            {
+                "index":"20",
+                "title": "Start",
+                "description": "Start service",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "xlink-kai"
+            },
+            {
+                "index":"21",
+                "title": "Status",
+                "description": "Query service status",
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "xlink-kai"
+            },
+            {
+                "index":"22",
+                "title": "Stop",
+                "description": "Stop the service",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "xlink-kai"
+            }
+        ]
+    }
+}

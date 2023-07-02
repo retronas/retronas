@@ -1,0 +1,42 @@
+{
+    "nabu": 
+    {
+        "title": "NABU Internet Adapter",
+        "description": "Manage the NABU Internet Adapter",
+        "id":"naubia",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install the NABU Internet Adapter software",
+                "id":"nabu-software",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "nabu"
+            },
+            {
+                "index":"03",
+                "title": "Open",
+                "description": "Open the NABU Internet Adapter",
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "nabu"
+            }
+        ]
+    }
+}

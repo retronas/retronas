@@ -1,0 +1,192 @@
+{
+    "tcpser": 
+    {
+        "title": "tcpser",
+        "description": "Please select an option",
+        "id":"tcpser-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install tcpser application",
+                "id":"tcpser",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "tcpser"
+            },
+            {
+                "index":"03",
+                "title": "Serial Device",
+                "description": "Create/Edit Serial Device",
+                "id":"tcpser-edit-serial",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "tcpser_edit"
+            },
+            {
+                "index":"04",
+                "title": "Virtual Device",
+                "description": "Create/Edit Virtual Device (VICE RS232)",
+                "id":"tcpser-edit-virtual",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "tcpser_edit/VIRTUAL"
+            },
+            {
+                "index":"05",
+                "title": "Start",
+                "description": "Start tcpser device",
+                "id":"",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "tcpser_status/START"
+            },
+            {
+                "index":"06",
+                "title": "Status",
+                "description": "Query tcpser device",
+                "id":"",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "tcpser_status/STATUS"
+            },
+            {
+                "index":"07",
+                "title": "Stop",
+                "description": "Stop tcpser device",
+                "id":"",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "tcpser_status/STOP"
+            }
+        ]
+    },
+    "tcpser-edit": 
+    {
+        "title": "tcpser Modem Config",
+        "description": "Config path: \"${TCPSER_CONFIG_PATH}\"||Legend:|- VIRTUAL: VICE RS232 mode|- PHYSICAL: for USB/Real serial ports||Attention: A Device is considered unique by listen port. Configurations are not read in from existing. This port config will be overwritten on close.",
+        "id":"tcpser-edit-menu",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Edit",
+                "description": "Edit Device",
+                "id":"tcpser-edit-serial-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index":"03",
+                "title": "Port",
+                "description": "Listen Port",
+                "id":"tcpser-edit-port-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index":"04",
+                "title": "Speed",
+                "description": "Baud Rate",
+                "id":"tcpser-edit-speed-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index":"05",
+                "title": "Init String",
+                "description": "Hayes Modem Init String (without leading A)",
+                "id":"tcpser-edit-init-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index":"06",
+                "title": "Additional",
+                "description": "Additional TCPser Options",
+                "id":"tcpser-edit-additional-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index":"06",
+                "title": "Mode",
+                "description": "Device Mode",
+                "id":"tcpser-edit-mode-input",
+                "prompt": "",
+                "type": "input:dropdown:disabled",
+                "group":"tcpser",
+                "command": "TOOL COMMAND"
+            }
+        ]
+    },
+    "tcpser-service": 
+    {
+        "title": "tcpser",
+        "description": "Please select an option",
+        "id":"tcpser-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "01",
+                "title": "Listen Port",
+                "description": "", 
+                "id":"",
+                "prompt": "",
+                "type": "input:input",
+                "group":"",
+                "command": ""
+            }
+        ]
+    }
+}
