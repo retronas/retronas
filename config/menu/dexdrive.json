@@ -89,7 +89,7 @@
             }
         ]
     },
-    "dexdrive_serial_edit": 
+    "dexdrive-serial-edit": 
     {
         "title": "Dex Drive Serial Config",
         "description": "set Dex Drive device",
@@ -98,7 +98,7 @@
         "type": "menu",
         "items": []
     },
-    "dexdrive_memcards": 
+    "dexdrive-memcards": 
     {
         "title": "Dex Drive Image Chooser",
         "description": "Please choose an image to write to the memory card",

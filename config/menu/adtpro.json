@@ -69,7 +69,7 @@
             }
         ]
     },
-    "adtpro_serial": 
+    "adtpro-serial": 
     {
         "title": "adtpro",
         "description": "Please select an option",
@@ -129,7 +129,7 @@
             }
         ]
     },
-    "adtpro_ethernet": 
+    "adtpro-ethernet": 
     {
         "title": "adtpro",
         "description": "Please select an option",
@@ -189,7 +189,7 @@
             }
         ]
     },
-    "adtpro_audio": 
+    "adtpro-audio": 
     {
         "title": "adtpro",
         "description": "Please select an option",
@@ -239,7 +239,7 @@
             }
         ]
     },
-    "adtpro_localhost": 
+    "adtpro-localhost": 
     {
         "title": "adtpro",
         "description": "Please select an option, note in this mode ADTPro is a client",
@@ -299,7 +299,7 @@
             }
         ]
     },
-    "adtpro_serial_edit": 
+    "adtpro-serial-edit": 
     {
         "title": "ADTPro Serial Config",
         "description": "set ADTPro device",
@@ -308,7 +308,7 @@
         "type": "menu",
         "items": []
     },
-    "adtpro_ethernet_edit": 
+    "adtpro-ethernet-edit": 
     {
         "title": "ADTPro Ethernet Config",
         "description": "set ADTPro device",
