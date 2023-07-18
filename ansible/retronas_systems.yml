@@ -338,7 +338,7 @@ system_snk:
   - { src: "snk/neogeo", last: "", mister: "NEOGEO", retropie: "", batocera: "neogeo", recalbox: "neogeo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neogeo", smdb: "MiSTer Neo Geo Add-On.txt", freestation: "" }
   - { src: "snk/neogeopocket", last: "", mister: "", retropie: "", batocera: "ngp", recalbox: "ngp", retroarch: "SNK - Neo Geo Pocket", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngp", smdb: "NGPC RetroHQ SMDB.txt", freestation: "" }
   - { src: "snk/neogeopocketcolor", last: "", mister: "", retropie: "", batocera: "ngpc", recalbox: "ngpc", retroarch: "SNK - Neo Geo Pocket Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngpc", smdb: "NGPC RetroHQ SMDB.txt", freestation: "" }
-  - { src: "snk/neogeocd", last: "", mister: "", retropie: "", batocera: "neogeocd", recalbox: "neogeocd", retroarch: "SNK - Neo Geo CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neocd", smdb: "", freestation: "" }
+  - { src: "snk/neogeocd", last: "", mister: "NeoGeo-CD", retropie: "", batocera: "neogeocd", recalbox: "neogeocd", retroarch: "SNK - Neo Geo CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neocd", smdb: "", freestation: "" }
 system_sony:
   - { src: "sony/playstation1", last: "", mister: "PSX", retropie: "", batocera: "psx", recalbox: "psx", retroarch: "Sony - PlayStation", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psx", smdb: "PlayStation Redump Supplement.txt", freestation: "ps1" }
   - { src: "sony/playstation1/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "PSXISO", fspd: "", emuelec: "", smdb: "", freestation: "" }
