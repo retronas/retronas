@@ -25,6 +25,11 @@
       - { section: "global", option: "client ntlmv2 auth",        value: "yes"}
       - { section: "global", option: "unix extensions",           value: "no"}
       - { section: "global", option: "allow insecure wide links", value: "yes"}
+      - { section: "global", option: "socket options",            value: "TCP_NODELAY IPTOS_LOWDELAY SO_KEEPALIVE"}
+      - { section: "global", option: "strict locking",            value: "no"}
+      - { section: "global", option: "strict sync",               value: "no"}
+      - { section: "global", option: "sync always",               value: "no"}
+      - { section: "global", option: "deadtime",                  value: "20"}
 
     - changed: false
 
