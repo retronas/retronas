@@ -1171,7 +1171,7 @@
                 {
                     "index":"11",
                     "title": "Standby",
-                    "description": "Disable drive Standy",
+                    "description": "Disable drive Standby",
                     "id":"hdparm-disable-standby",
                     "prompt": "Disable",
                     "type": "script",
