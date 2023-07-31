@@ -1,5 +1,5 @@
 {
-    "pi1541": 
+    "menu": 
     {
         "title": "pi1541",
         "description": "Assists with setting up a pi1541 sd card device, provide a FAT32 formatted device and run setup",

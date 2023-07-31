@@ -1,5 +1,5 @@
 {
-    "main": 
+    "menu": 
     {
         "title": "Main",
         "description": "Please ensure that you have configured your RetroNAS user, group and top level directory in the Global configuration section before installing any tools. Changing any of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",

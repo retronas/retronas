@@ -1,5 +1,5 @@
 {
-    "romimport": 
+    "menu": 
     {
         "title": "ROM Import Tool",
         "description": "This uses Frederic Mahe's Python scripts and Smokemonster's SMDB databases to import ROMs.||ROMs are matched by checksum, renamed and placed into the matching directory structure via space-saving hard links.||Existing ROMs will never be overwritten.||If ROMs fail to import, it means you have a ROM with a checksum not in the database, or the system type is not yet added.||Place ROMs in the import directory above use SMB/CIFS/AFP/FTP/SCP/SFTP/whatever first.||Do you wish to proceed?",

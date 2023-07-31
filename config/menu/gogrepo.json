@@ -1,5 +1,5 @@
 {
-    "gogrepo": 
+    "menu": 
     {
         "title": "GOG",
         "description": "Current OS: \"${OLDGOGOS}\"||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",

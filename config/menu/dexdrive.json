@@ -1,5 +1,5 @@
 {
-    "dexdrive": 
+    "menu": 
     {
         "title": "dexdrive",
         "description": "linux-dexdrive project read PSX/N64 memory cards and linux block devices",

@@ -1,5 +1,5 @@
 {
-    "profiles": 
+    "menu": 
     {
         "title": "Installation Profile(s)",
         "description": "Available installation profiles||Profile Location: \"${OLDRNPATH}/config\"",

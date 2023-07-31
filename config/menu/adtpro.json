@@ -1,5 +1,5 @@
 {
-    "adtpro": 
+    "menu": 
     {
         "title": "adtpro",
         "description": "ADTPro transfers data \\(physical disks and/or disk images\\) between Apple II-era computers and RetroNAS||We launch this service in headless localhost mode \\(serial over IP\\), you can use VNC to access the gui with the full feature set||Note: Requires a VNC client connected to retronas:60000",

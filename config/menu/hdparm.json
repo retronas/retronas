@@ -1,5 +1,5 @@
 {
-    "hdparm": 
+    "menu": 
     {
         "title": "hdparm",
         "description": "WARNING: These changes are irreversable, USE AT YOUR OWN RISK||Try in ORDER:|APM -\\> Standby -\\> Custom service \\!\\!LAST RESORT\\!\\! \\<-||The custom service reads a random sector from the drive at random intervals every 3-5m, this should be enough to keep the drive up and reduce any impact on the drive.",

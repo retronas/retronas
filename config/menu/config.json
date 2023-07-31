@@ -1,5 +1,5 @@
 {
-    "config": 
+    "menu": 
     {
         "title": "Configuration",
         "description": "Please select a configuration||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
