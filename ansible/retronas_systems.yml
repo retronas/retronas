@@ -120,8 +120,8 @@ system_atari:
   - { src: "atari/2600", last: "", mister: "Atari2600", retropie: "", batocera: "atari2600", recalbox: "atari2600", retroarch: "Atari - 2600", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari2600", smdb: "Atari 2600 SMDB.txt", freestation: ""  }
   - { src: "atari/5200", last: "", mister: "ATARI5200", retropie: "", batocera: "atari5200", recalbox: "atari5200", retroarch: "Atari - 5200", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari5200", smdb: "Atari 5200 SMDB.txt", freestation: ""  }
   - { src: "atari/7800", last: "", mister: "ATARI7800", retropie: "", batocera: "atari7800", recalbox: "atari7800", retroarch: "Atari - 7800", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari7800", smdb: "Atari 7800 SMDB.txt", freestation: ""  }
-  - { src: "atari/800", last: "", mister: "ATARI800", retropie: "", batocera: "atari800", recalbox: "atari800", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari800", smdb: "", freestation: "" }
-  - { src: "atari/jaguar", last: "", mister: "", retropie: "", batocera: "jaguar", recalbox: "jaguar", retroarch: "Atari - Jaguar", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "atari/800", last: "", mister: "ATARI800", retropie: "", batocera: "atari800", recalbox: "atari800", retroarch: "Atari - 8-bit", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari800", smdb: "", freestation: "" }
+  - { src: "atari/jaguar", last: "", mister: "", retropie: "", batocera: "jaguar", recalbox: "jaguar", retroarch: "Atari - Jaguar", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "Atari Jaguar SMDB.txt", freestation: "" }
   - { src: "atari/lynx", last: "", mister: "AtariLynx", retropie: "", batocera: "lynx", recalbox: "lynx", retroarch: "Atari - Lynx", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarilynx", smdb: "Atari Lynx SMDB.txt", freestation: ""  }
   - { src: "atari/st", last: "", mister: "AtariST", retropie: "", batocera: "atarist", recalbox: "atarist", retroarch: "Atari - ST", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarist", smdb: "", freestation: "" }
 system_bally:
@@ -129,8 +129,8 @@ system_bally:
 system_bandai:
   - { src: "bandai/rx78", last: "", mister: "RX78", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "bandai/sumfami", last: "", mister: "", retropie: "", batocera: "sufami", recalbox: "sufami", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "bandai/wonderswan", last: "", mister: "WonderSwan", retropie: "", batocera: "wswan", recalbox: "wswan", retroarch: "Bandai - WonderSwan", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswan", smdb: "", freestation: "" }
-  - { src: "bandai/wonderswancolor", last: "", mister: "WonderSwanColor", retropie: "", batocera: "wswanc", recalbox: "wswanc", retroarch: "Bandai - WonderSwan Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswancolor", smdb: "", freestation: "" }
+  - { src: "bandai/wonderswan", last: "", mister: "WonderSwan", retropie: "", batocera: "wswan", recalbox: "wswan", retroarch: "Bandai - WonderSwan", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswan", smdb: "Wonderswan SMDB.txt", freestation: "" }
+  - { src: "bandai/wonderswancolor", last: "", mister: "WonderSwanColor", retropie: "", batocera: "wswanc", recalbox: "wswanc", retroarch: "Bandai - WonderSwan Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "wonderswancolor", smdb: "Wonderswan SMDB.txt", freestation: "" }
 system_bbc:
   - { src: "bbc/bridgecompanion", last: "", mister: "BBCBridgeCompanion", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_benesse:
@@ -151,12 +151,12 @@ system_coleco:
 system_commodore:
   - { src: "commodore/amiga", last: "", mister: "Amiga", retropie: "", batocera: "amiga500", recalbox: "amiga600", retroarch: "Commodore - Amiga", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "amiga", smdb: "", freestation: "" }
   - { src: "commodore/amiga/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "commodore/amigacd32", last: "", mister: "", retropie: "", batocera: "amigacd32", recalbox: "amigacd32", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "amigacd32", smdb: "", freestation: "" }
-  - { src: "commodore/amigacdtv", last: "", mister: "", retropie: "", batocera: "amigacdtv", recalbox: "amigacdtv", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "commodore/amigacd32", last: "", mister: "", retropie: "", batocera: "amigacd32", recalbox: "amigacd32", retroarch: "Commodore - CD32", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "amigacd32", smdb: "", freestation: "" }
+  - { src: "commodore/amigacdtv", last: "", mister: "", retropie: "", batocera: "amigacdtv", recalbox: "amigacdtv", retroarch: "Commodore - CDTV", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "commodore/commodore16", last: "", mister: "C16", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c16", smdb: "", freestation: "" }
   - { src: "commodore/commodore64", last: "", mister: "C64", retropie: "", batocera: "c64", recalbox: "c64", retroarch: "Commodore - 64", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c64", smdb: "", freestation: "" }
   - { src: "commodore/commodore128", last: "", mister: "C128", retropie: "", batocera: "c128", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "c128", smdb: "", freestation: "" }
-  - { src: "commodore/pet", last: "", mister: "PET2001", retropie: "", batocera: "pet", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "commodore/pet", last: "", mister: "PET2001", retropie: "", batocera: "pet", recalbox: "", retroarch: "Commodore - PET", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "commodore/vic20", last: "", mister: "VIC20", retropie: "", batocera: "c20", recalbox: "vic20", retroarch: "Commodore - VIC-20", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "vic20", smdb: "", freestation: "" }
   - { src: "commodore/commodoreplus4", last: "", mister: "", retropie: "", batocera: "cplus4", recalbox: "", retroarch: "Commodore - Plus-4", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_compukit:
@@ -187,7 +187,9 @@ system_fairchild:
 system_fantasy_console:
   - { src: "fantasyconsole/pico8", last: "", mister: "", retropie: "", batocera: "pico8", recalbox: "pico8", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pico-8", smdb: "", freestation: "" }
   - { src: "fantasyconsole/tic80", last: "", mister: "", retropie: "", batocera: "tic80", recalbox: "tic80", retroarch: "TIC-80", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "tic-80", smdb: "", freestation: "" }
-  - { src: "fantasyconsole/wasm4", last: "", mister: "", retropie: "", batocera: "wasm4", recalbox: "", retroarch: "WASM-4", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }  
+  - { src: "fantasyconsole/wasm4", last: "", mister: "", retropie: "", batocera: "wasm4", recalbox: "wasm4", retroarch: "WASM-4", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" } 
+  - { src: "fantasyconsole/microw8", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "MicroW8", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" } 
+  - { src: "fantasyconsole/pyxel  ", last: "", mister: "", retropie: "", batocera: "pyxel", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }  
 system_fujitsu:
   - { src: "fujitsu/fm-7", last: "", mister: "", retropie: "", batocera: "fm7", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "fujitsu/fmtowns", last: "", mister: "", retropie: "", batocera: "fmtowns", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -214,7 +216,7 @@ system_jupiter:
   - { src: "jupiter/ace", last: "other/jupiter_ace", mister: "Jupiter", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_magnavox:
   - { src: "magnavox/odyssey", last: "other/magnavox_odyssey", mister: "", retropie: "", batocera: "o2em", recalbox: "o2em", retroarch: "Magnavox - Odyssey2", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "odyssey", smdb: "", freestation: "" }
-  - { src: "magnavox/odyssey2", last: "other/magnavox_odyssey2", mister: "ODYSSEY2", retropie: "", batocera: "odyssey2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "magnavox/odyssey2", last: "other/magnavox_odyssey2", mister: "ODYSSEY2", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_mattel:
   - { src: "mattel/aquarius", last: "", mister: "AQUARIUS", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "mattel/intellivision", last: "", mister: "Intellivision", retropie: "", batocera: "intellivision", recalbox: "intellivision", retroarch: "Mattel - Intellivision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "intellivision", smdb: "", freestation: "" }
@@ -251,7 +253,7 @@ system_nintendo:
   - { src: "nintendo/ds", last: "", mister: "", retropie: "", batocera: "nds", recalbox: "nds", retroarch: "Nintendo - Nintendo DS", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nintendo/dsi", last: "", mister: "", retropie: "", batocera: "nds", recalbox: "nds", retroarch: "Nintendo - Nintendo DSi", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nintendo/ereader", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Nintendo - e-Reader", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "nintendo/famicom", last: "", mister: "NES", retropie: "", batocera: "nes", recalbox: "nes", retroarch: "Nintendo - Nintendo Entertainment System", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "nes", smdb: "EverDrive N8 & PowerPak SMDB.txt", freestation: "" }
+  - { src: "nintendo/famicom", last: "", mister: "NES", retropie: "", batocera: "nes", recalbox: "nes", retroarch: "Nintendo - Nintendo Entertainment System", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "nes", smdb: "NES2.0 SMDB.txt", freestation: "" }
   - { src: "nintendo/famicom", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "famicom", smdb: "", freestation: "" }
   - { src: "nintendo/famicom/disk", last: "", mister: "", retropie: "", batocera: "fds", recalbox: "fds", retroarch: "Nintendo - Family Computer Disk System", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "fds", smdb: "Famicom Disk System SMDB.txt", freestation: "" }
   - { src: "nintendo/gameandwatch", last: "", mister: "GameNWatch", retropie: "", batocera: "gameandwatch", recalbox: "gw", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "gameandwatch", smdb: "", freestation: "" }
@@ -283,7 +285,7 @@ system_oric:
   - { src: "oric/tangerine", last: "", mister: "Oric", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "oric/telestrat", last: "", mister: "TeleStrat", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_other:
-  - { src: "other/arduboy", last: "", mister: "Arduboy", retropie: "", batocera: "arduboy", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "other/arduboy", last: "", mister: "Arduboy", retropie: "", batocera: "arduboy", recalbox: "arduboy", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "other/intel_x86", last: "", mister: "AO486", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "other/radio_86rk", last: "", mister: "APOGEE", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "other/scummvm", last: "", mister: "", retropie: "", batocera: "scummvm", recalbox: "scummvm", retroarch: "ScummVM", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "scummvm", smdb: "", freestation: "" }
@@ -316,14 +318,14 @@ system_sega:
   - { src: "sega/naomi", last: "", mister: "", retropie: "", batocera: "naomi", recalbox: "naomi", retroarch: "Sega - Naomi", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "naomi", smdb: "", freestation: "" }
   - { src: "sega/naomi2", last: "", mister: "", retropie: "", batocera: "naomi2", recalbox: "", retroarch: "Sega - Naomi 2", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sega/naomigd", last: "", mister: "", retropie: "", batocera: "", recalbox: "naomigd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "sega/pico", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Sega - PICO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "sega/pico", last: "", mister: "", retropie: "", batocera: "pico", recalbox: "", retroarch: "Sega - PICO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sega/saturn", last: "", mister: "Saturn", retropie: "", batocera: "saturn", recalbox: "saturn", retroarch: "Sega - Saturn", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "saturn", smdb: "Saturn Redump Supplement.txt", freestation: "sat" }
-  - { src: "sega/sg1000", last: "", mister: "SG1000SV", retropie: "", batocera: "sg1000", recalbox: "sg1000", retroarch: "Sega - SG-1000", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sg-1000", smdb: "", freestation: "" }
+  - { src: "sega/sg1000", last: "", mister: "SG1000SV", retropie: "", batocera: "sg1000", recalbox: "sg1000", retroarch: "Sega - SG-1000", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sg-1000", smdb: "Sega SG-1000 SMDB.txt", freestation: "" }
   - { src: "sega/triforce", last: "", mister: "", retropie: "", batocera: "triforce", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sega/sc3000", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sc-3000", smdb: "", freestation: "" }
 system_sharp:
   - { src: "sharp/mz", last: "", mister: "SharpMZ", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "sharp/x1", last: "", mister: "", retropie: "", batocera: "x1", recalbox: "x1", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "sharp/x1", last: "", mister: "", retropie: "", batocera: "x1", recalbox: "x1", retroarch: "Sharp - X1", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sharp/x68000", last: "", mister: "X68000", retropie: "", batocera: "x68000", recalbox: "x68000", retroarch: "Sharp - X68000", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "x68000", smdb: "", freestation: "" }
 system_sinclair:
   - { src: "sinclair/ql", last: "", mister: "QL", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -333,14 +335,14 @@ system_sinclair:
   - { src: "sinclair/zxspectrum", last: "", mister: "zx48", retropie: "", batocera: "zxspectrum", recalbox: "zxspectrum", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sinclair/zxspectrum", last: "", mister: "ZXNext", retropie: "", batocera: "zxspectrum", recalbox: "zxspectrum", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_smith_engineering:
-  - { src: "vectrex", last: "other/vectrex", mister: "VECTREX", retropie: "", batocera: "vectrex", recalbox: "vectrex", retroarch: "GCE - Vectrex", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "vectrex", smdb: "", freestation: "" }
+  - { src: "vectrex", last: "other/vectrex", mister: "VECTREX", retropie: "", batocera: "vectrex", recalbox: "vectrex", retroarch: "GCE - Vectrex", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "vectrex", smdb: "Vectrex SMDB.txt", freestation: "" }
 system_snk:
-  - { src: "snk/neogeo", last: "", mister: "NEOGEO", retropie: "", batocera: "neogeo", recalbox: "neogeo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neogeo", smdb: "", freestation: "" }
-  - { src: "snk/neogeopocket", last: "", mister: "", retropie: "", batocera: "ngp", recalbox: "ngp", retroarch: "SNK - Neo Geo Pocket", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngp", smdb: "", freestation: "" }
-  - { src: "snk/neogeopocketcolor", last: "", mister: "", retropie: "", batocera: "ngpc", recalbox: "ngpc", retroarch: "SNK - Neo Geo Pocket Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngpc", smdb: "", freestation: "" }
-  - { src: "snk/neogeocd", last: "", mister: "", retropie: "", batocera: "neogeocd", recalbox: "neogeocd", retroarch: "SNK - Neo Geo CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neocd", smdb: "", freestation: "" }
+  - { src: "snk/neogeo", last: "", mister: "NEOGEO", retropie: "", batocera: "neogeo", recalbox: "neogeo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neogeo", smdb: "MiSTer Neo Geo Add-On.txt", freestation: "" }
+  - { src: "snk/neogeopocket", last: "", mister: "", retropie: "", batocera: "ngp", recalbox: "ngp", retroarch: "SNK - Neo Geo Pocket", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngp", smdb: "NGPC RetroHQ SMDB.txt", freestation: "" }
+  - { src: "snk/neogeopocketcolor", last: "", mister: "", retropie: "", batocera: "ngpc", recalbox: "ngpc", retroarch: "SNK - Neo Geo Pocket Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngpc", smdb: "NGPC RetroHQ SMDB.txt", freestation: "" }
+  - { src: "snk/neogeocd", last: "", mister: "NeoGeo-CD", retropie: "", batocera: "neogeocd", recalbox: "neogeocd", retroarch: "SNK - Neo Geo CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neocd", smdb: "", freestation: "" }
 system_sony:
-  - { src: "sony/playstation1", last: "", mister: "PSX", retropie: "", batocera: "psx", recalbox: "psx", retroarch: "Sony - PlayStation", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psx", smdb: "", freestation: "ps1" }
+  - { src: "sony/playstation1", last: "", mister: "PSX", retropie: "", batocera: "psx", recalbox: "psx", retroarch: "Sony - PlayStation", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "psx", smdb: "PlayStation Redump Supplement.txt", freestation: "ps1" }
   - { src: "sony/playstation1/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "PSXISO", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sony/playstation1/vcd", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "POPS", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "sony/playstation2", last: "", mister: "", retropie: "", batocera: "ps2", recalbox: "ps2", retroarch: "Sony - PlayStation 2", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "ps2" }
@@ -362,6 +364,7 @@ system_sord:
 system_spectravideo:
   - { src: "spectravideo/sv328", last: "other/spectravideo_sv328", mister: "SVI328", retropie: "", batocera: "", recalbox: "spectravideo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_tandy:
+  - { src: "tandy/vis", last: "", mister: "", retropie: "", batocera: "vis", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tandy/trs80", last: "", mister: "TRS-80", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tandy/trs80colorcomputer1", last: "", mister: "", retropie: "", batocera: "coco", recalbox: "trs80coco", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tandy/trs80colorcomputer2", last: "", mister: "CoCo2", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -382,7 +385,7 @@ system_tomytronic:
   - { src: "tomytronic/scramble", last: "", mister: "TomyScramble", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tomytronic/tutor", last: "", mister: "TomyTutor", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_tsukuda:
-  - { src: "tsukuda/othellomultivision", last: "", mister: "", retropie: "", batocera: "", recalbox: "multivision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "tsukuda/othellomultivision", last: "", mister: "", retropie: "", batocera: "multivision", recalbox: "multivision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_rca:
   - { src: "rca/studioii", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "RCA - Studio II", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_vector:
@@ -395,7 +398,7 @@ system_videotechnology:
   - { src: "videotechnology/vtechlaser", last: "other/videotechnology_vtechlaser", mister: "Laser", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "videotechnology/vsmile", last: "", mister: "", retropie: "", batocera: "vsmile", recalbox: "", retroarch: "VTech - V.Smile", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 system_watara:
-  - { src: "watara/supervision", last: "", mister: "SuperVision", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "Watara - Supervision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "", freestation: "" }
+  - { src: "watara/supervision", last: "", mister: "SuperVision", retropie: "", batocera: "supervision", recalbox: "supervision", retroarch: "Watara - Supervision", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "supervision", smdb: "Watara Supervision SMDB.txt", freestation: "" }
   - { src: "watara/supervision8000", last: "", mister: "SuperVision8000", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
 
 system_links:
@@ -414,12 +417,12 @@ system_tools:
 
 system_idsoftware:
   - { src: "doom", last: "", mister: "", retropie: "", batocera: "gzdoom", recalbox: "doom", retroarch: "DOOM", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "doom", smdb: "", freestation: "" }
-  - { src: "doom3", last: "", mister: "", retropie: "", batocera: "", recalbox: "doom3", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "doom3", last: "", mister: "", retropie: "", batocera: "boom3", recalbox: "doom3", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "ecwolf", last: "", mister: "", retropie: "", batocera: "ecwolf", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "prboom", last: "", mister: "", retropie: "", batocera: "prboom", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "quake", last: "", mister: "", retropie: "", batocera: "", recalbox: "quake", retroarch: "Quake", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "quake2", last: "", mister: "", retropie: "", batocera: "", recalbox: "quake2", retroarch: "Quake II", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "quake3", last: "", mister: "", retropie: "", batocera: "", recalbox: "quake3", retroarch: "Quake III", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "quake3", last: "", mister: "", retropie: "", batocera: "quake3", recalbox: "quake3", retroarch: "Quake III", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tyrquake", last: "", mister: "", retropie: "", batocera: "tyrquake", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "vitaquake2", last: "", mister: "", retropie: "", batocera: "vitaquake2", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "wolfenstein3d", last: "", mister: "", retropie: "", batocera: "", recalbox: "wolfenstein3d", retroarch: "Wolfenstein 3D", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -442,7 +445,7 @@ system_unsupported:
   - { src: "dungeoncrawlstonesoup", last: "", mister: "", retropie: "", batocera: "", recalbox: "dungeoncrawlstonesoup", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "easyrpg", last: "", mister: "", retropie: "", batocera: "easyrpg", recalbox: "easyrpg", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "easyrpg", smdb: "", freestation: "" }
   - { src: "flash", last: "", mister: "", retropie: "", batocera: "flash", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
-  - { src: "flashback", last: "", mister: "", retropie: "", batocera: "", recalbox: "flashback", retroarch: "Flashback", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "flashback", last: "", mister: "", retropie: "", batocera: "reminiscence", recalbox: "flashback", retroarch: "Flashback", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "flatpak", last: "", mister: "", retropie: "", batocera: "flatpak", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "fpinball", last: "", mister: "", retropie: "", batocera: "fpinball", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "gamepock", last: "", mister: "", retropie: "", batocera: "gamepock", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
@@ -514,6 +517,12 @@ system_unsupported:
   - { src: "rpgmaker", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "RPG Maker", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "tombraider", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "Tomb Raider", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "ikemen", last: "", mister: "", retropie: "", batocera: "ikemen", recalbox: "", retroarch: "Tomb Raider", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "thextech", last: "", mister: "", retropie: "", batocera: "thextech", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "openlara", last: "", mister: "", retropie: "", batocera: "openlara", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "vpinball", last: "", mister: "", retropie: "", batocera: "vpinball", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "namco2x6", last: "", mister: "", retropie: "", batocera: "namco2x6", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+  - { src: "chip8", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "CHIP-8", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
+
 
 system_template:
   - { src: "", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
