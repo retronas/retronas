@@ -6,6 +6,9 @@
 TRIES=0
 RANDSECTOR=1
 
+# check for config file
+[ ! -f {{ retronas_path }}/config/hdparm-manager-drive) ] && exit 1
+
 function set_sector() {
   local MAXSECTOR=$1
   RANDSECTOR=$(shuf -i 1-${MAXSECTOR} -n 1 2>&1)
@@ -27,7 +30,7 @@ function set_sector() {
 
 # list the drives that need to be punished
 NOSLEEP=(
-  /dev/sda
+  $(cat {{ retronas_path }}/config/hdparm-manager-drive)
 )
 
 # REQUIREMENTS
