@@ -16,6 +16,10 @@
       - { name: "BIOS",       enabled: yes,  generic: "bios",        systems: yes }
       - { name: "wallpapers", enabled: yes,  generic: "wallpapers",  systems: no  }
 
+    - save_overrides:
+      - { name: "GAMEBOY2P", src: "nintendo/gameboy2p" }
+      - { name: "GBA2P", src: "nintendo/gameboyadvance2p" }
+
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
@@ -60,6 +64,23 @@
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
     notify: "{{ my_name }} - Install Samba"
+
+  - name: "{{ my_name }} - create custom save directories"
+    file:
+      dest: "{{ retronas_path }}/{{ item.1 }}/{{ item.0.src|lower }}"
+      state: directory
+    with_nested: 
+      - "{{ save_overrides }}"
+      - ["saves", "savestates"]
+
+  - name: "{{ my_name }} - create custom save links"
+    file:
+      src: "../../{{ item.1 }}/{{ item.0.src|lower }}"
+      dest: "{{ retronas_path }}/mister/{{ item.1 }}/{{ item.0.name }}"
+      state: link
+    with_nested: 
+      - "{{ save_overrides }}"
+      - ["saves", "savestates"]
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
