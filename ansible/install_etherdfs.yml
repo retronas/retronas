@@ -92,6 +92,10 @@
     with_items:
       - etherdfs
 
+  - name: "{{ my_name }} - Install Samba"
+    set_fact:
+      install_changed: true
+
 - import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
