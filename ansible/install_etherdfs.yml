@@ -65,6 +65,23 @@
     with_items:
       - etherdfs
 
+  - name: "{{ my_name }} - configure includes file"
+    ini_file:
+      path: /etc/samba/smb.conf
+      section: dos
+      option: "include"
+      value: "/etc/samba/retronas_dos.conf"
+    notify: "{{ my_name }} - Install Samba"
+
+  - name: "{{ my_name }} - configure retro shares"
+    template:
+      src: "templates/{{  my_file }}/retronas_dos.conf.j2"
+      dest: /etc/samba/retronas_dos.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Install Samba"
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
@@ -75,6 +92,11 @@
     with_items:
       - etherdfs
 
+- import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
     
 - import_playbook: retronas_system_config.yml
   vars:
