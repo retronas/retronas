@@ -36,10 +36,10 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/emuelec/' + item.1.name + '/' + item.0.emuelec + ';' ] }}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sf ../roms/' + item.src + ' ' + retronas_path + '/emuelec/' + item.emuelec + ';' ] }}"
     loop: "{{ system_map }}"
     when:
-      - item.emuelec | length > 0
+      - item.0.emuelec | length > 0
 
   - name: "{{ my_name }} - build systems directory layout"
     shell:
