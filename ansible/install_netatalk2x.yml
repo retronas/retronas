@@ -47,7 +47,14 @@
     include_vars: retronas_vars.yml
 
   - name: "{{ my_name }}  - unhold netatalk package"
+    shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    register: result
+    failed_when:
+      - result.rc >= 2
+
+  - name: "{{ my_name }}  - unhold netatalk package"
     shell: "/usr/bin/apt-mark unhold netatalk"
+    when: result.rc == 0
 
   - name: "{{ my_name }}  - remove package-based Netatalk"
     package:
