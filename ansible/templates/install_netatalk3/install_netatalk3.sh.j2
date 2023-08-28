@@ -1,0 +1,33 @@
+#!/bin/bash
+
+## RetroNAS Netatalk-3 install script
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/netatalk3"
+mkdir -p "${IDIR}"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf netatalk
+
+# Clone the source code from SourceForge
+git clone https://github.com/netatalk/netatalk.git
+git checkout $(git tag | grep netatalk-3 | tail -n1)
+cd netatalk
+
+./bootstrap
+./configure \
+    --prefix=${IDIR} \
+    --with-init-style=debian-systemd \ \
+    --enable-krbV-uam \
+    --with-pam-confdir=/etc/pam.d \
+    --with-dbus-daemon=/usr/bin/dbus-daemon \
+    --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
+    --with-tracker-pkgconfig-version=2.0 \
+    --enable-afs
+make -j$(nproc)
+make install

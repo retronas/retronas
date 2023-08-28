@@ -26,6 +26,7 @@
        - expect
        - libltdl-dev
        - libtool-bin
+       - libevent-dev
 
     - services:
       - avahi-daemon
@@ -46,7 +47,7 @@
   - name: "{{ my_name }}  - Load RetroNAS config"
     include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }}  - unhold netatalk package"
+  - name: "{{ my_name }}  - check if  netatalk package is available"
     shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
     register: result
     failed_when:
