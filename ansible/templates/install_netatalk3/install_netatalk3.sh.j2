@@ -16,18 +16,25 @@ rm -rf netatalk
 
 # Clone the source code from SourceForge
 git clone https://github.com/netatalk/netatalk.git
-git checkout $(git tag | grep netatalk-3 | tail -n1)
 cd netatalk
+git checkout $(git tag | grep netatalk-3 | tail -n1)
+
+# hacky fix for tracker 3.0 spotlight support
+[ ! -f /usr/bin/tracker ] && ln -sf /usr/bin/tracker3 /usr/bin/tracker 
 
 ./bootstrap
 ./configure \
-    --prefix=${IDIR} \
-    --with-init-style=debian-systemd \ \
-    --enable-krbV-uam \
-    --with-pam-confdir=/etc/pam.d \
-    --with-dbus-daemon=/usr/bin/dbus-daemon \
-    --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
-    --with-tracker-pkgconfig-version=2.0 \
-    --enable-afs
+        --with-init-style=debian-systemd \
+        --without-libevent \
+        --without-tdb \
+        --with-cracklib \
+        --enable-krbV-uam \
+        --with-pam-confdir=/etc/pam.d \
+        --with-dbus-daemon=/usr/bin/dbus-daemon \
+        --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
+        --with-tracker-pkgconfig-version=3.0
 make -j$(nproc)
 make install
+
+# clean up hacky fix for tracker 3.0 spotlight support
+[ -L /usr/bin/tracker ] && rm -f /usr/bin/tracker
