@@ -20,7 +20,7 @@ git checkout $(git tag | tail -n1)
 echo "Building"
 mkdir _build
 cd _build
-cmake -DUSEWX=no -DCMAKE_CXX_COMPILER=g++-9 -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_BUILD_TYPE=Release ..
+cmake -DUSEWX=no -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . -j$(nproc --all)
 sudo cmake --install .
 

@@ -14,13 +14,14 @@
        name:
          - telnet
          - telnetd
+         - xinetd
        state: latest
     notify:
     - "{{ my_name }} - Restart services"
 
   - name: "{{ my_name }} - Enable startup services"
     service:
-      name: inetd
+      name: xinetd
       state: started
       enabled: yes
 
@@ -28,7 +29,7 @@
 
   - name: "{{ my_name }} - Restart services"
     service:
-      name: inetd
+      name: xinetd
       state: restarted
 
 - import_playbook: retronas_system_config.yml
