@@ -27,7 +27,7 @@
 
     - templates:
       - { file: "autoadd.conf", path: "/var/lib/deluged/config/autoadd.conf" }
-      - { file: "default_deluged", path: "/etc/init.d/deluged" }
+      - { file: "default_deluged", path: "/etc/default/deluged" }
       - { file: "core.conf", path: "/var/lib/deluged/config/core.conf" }
       - { file: "auth", path: "/var/lib/deluged/config/auth" }
   

@@ -7,9 +7,30 @@ source ${LIBDIR}/common.sh
 #CHECK_ROOT
 HDPARM=/usr/sbin/hdparm
 SERVICE="hdparm"
-DRIVE=/dev/sda
+SELECTION={{ retronas_path }}/config/hdparm-manager-drive
+
+# check for previous selection or default to /dev/sda
+if [ -f $SELECTION ]
+then
+  DRIVE=$(cat $SELECTION)
+else
+  DRIVE=/dev/sda
+fi
+
+function drive_selector {
+  PS3="Select a drive ($DRIVE): "
+  select DRIVE in $(lsblk --all --list --noheadings | awk '/disk/{print "/dev/"$1}') quit
+  do
+    [ $DRIVE == "quit" ] && exit
+    echo $DRIVE > $SELECTION
+    exit
+  done
+}
 
 case $(basename $0 .sh) in
+    hdparm-manager-drive-selector)
+        drive_selector
+    ;;
     hdparm-manager-disable-apm)
         sudo ${HDPARM} -B 255 $DRIVE
     ;;

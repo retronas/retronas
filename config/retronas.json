@@ -1159,6 +1159,16 @@
                     "command": "hdparm"
                 },
                 {
+                    "index":"03",
+                    "title": "Select Drive",
+                    "description": "Select drive to process (default /dev/sda)",
+                    "id":"hdparm-manager-drive-selector",
+                    "prompt": "Select",
+                    "type": "script",
+                    "group":"",
+                    "command": "hdparm-manager-drive-selector"
+                },
+                {
                     "index":"10",
                     "title": "APM",
                     "description": "Disable Advanced Power Management (APM)",

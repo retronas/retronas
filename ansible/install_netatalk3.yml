@@ -25,11 +25,27 @@
 
   tasks:
 
-  - name: "{{ my_name }}  - Load RetroNAS config"
+  - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - check if  netatalk package is available"
+    shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    register: result
+    failed_when:
+      - result.rc >= 2
+
+  - name: "{{ my_name }} - set fact if netatalk is not present"
+    set_fact:
+      no_netatalk: true
+    when: result.rc == 1
+
+  - name: "{{ my_name }} - end play if no netatalk package"
+    meta: end_play
+    when: no_netatalk is true
 
   - name: "{{ my_name }}  - unhold netatalk package"
     shell: "/usr/bin/apt-mark unhold netatalk"
+    when: result.rc == 0
 
   - name: "{{ my_name }}  - install from repos"
     package:
@@ -73,3 +89,4 @@
   vars:
     module_name: "netatalk3"
     module_state: "present"
+  when: no_netatalk is undefined
