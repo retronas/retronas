@@ -6,6 +6,8 @@ After=multi-user.target
 Type=simple
 Restart=no
 WorkingDirectory=/opt/retronas/ansible
+ExecStartPre=/usr/bin/git reset --hard HEAD
+ExecStartPre=/usr/bin/git pull
 ExecStart=/usr/bin/ansible-playbook --extra-vars "dirs_only=true" {{ my_file }}.yml
 TimeoutStartSec=0
 RemainAfterExit=no
