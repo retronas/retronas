@@ -199,11 +199,19 @@ READ_MENU_COMMAND() {
             service_status)
                 RN_SYSTEMD_STATUS "${MENU_SELECT}"
                 ;;
+            service_enable_start)
+                RN_SYSTEMD_ENABLE "${MENU_SELECT}"
+                RN_SYSTEMD_START "${MENU_SELECT}"
+                ;;
             service_start)
                 RN_SYSTEMD_START "${MENU_SELECT}"
                 ;;
             service_restart)
                 RN_SYSTEMD_RESTART "${MENU_SELECT}"
+                ;;
+            service_disable_stop)
+                RN_SYSTEMD_DISABLE "${MENU_SELECT}"
+                RN_SYSTEMD_STOP "${MENU_SELECT}"
                 ;;
             service_stop)
                 RN_SYSTEMD_STOP "${MENU_SELECT}"
@@ -337,11 +345,17 @@ RN_SYSTEMD_STATUS() {
 }
 
 #
-# SYSTEMD start/enable
+# SYSTEMD enable
+#
+RN_SYSTEMD_ENABLE() {
+    RN_SYSTEMD "${1}" "enable"
+}
+
+#
+# SYSTEMD start
 #
 RN_SYSTEMD_START() {
-    RN_SYSTEMD "${1}" "enable"
-    RN_SYSTEMD "${1}" "restart"
+    RN_SYSTEMD "${1}" "start"
 }
 
 #
@@ -352,10 +366,16 @@ RN_SYSTEMD_RESTART() {
 }
 
 #
-# SYSTEMD stop/disable
+# SYSTEMD disable
+#
+RN_SYSTEMD_DISABLE() {
+    RN_SYSTEMD "${1}" "disable"
+}
+
+#
+# SYSTEMD stop
 #
 RN_SYSTEMD_STOP() {
-    RN_SYSTEMD "${1}" "disable"
     RN_SYSTEMD "${1}" "stop"
 }
 

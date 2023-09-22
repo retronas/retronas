@@ -415,9 +415,9 @@
                     "description": "MiSTer FPGA CIFS config", 
                     "id":"mister_cifs",
                     "prompt": "",
-                    "type": "install",
+                    "type": "dialog",
                     "group":"samba",
-                    "command": "mister_cifs"
+                    "command": "mister"
                 },                
                 {
                     "index": "34",
@@ -1264,7 +1264,7 @@
                     "description": "Start service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "hb-store-cdn"
                 },
@@ -1284,7 +1284,7 @@
                     "description": "Stop the service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "hb-store-cdn"
                 }
@@ -1334,7 +1334,7 @@
                     "description": "Start service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "fenrir-ode-webserver"
                 },
@@ -1354,7 +1354,7 @@
                     "description": "Stop the service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "fenrir-ode-webserver"
                 }
@@ -1394,7 +1394,7 @@
                     "description": "Start service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "xlink-kai"
                 },
@@ -1414,7 +1414,7 @@
                     "description": "Stop the service",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "xlink-kai"
                 }
@@ -2280,7 +2280,7 @@
                     "description": "Start zterm device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "zterm"
                 },
@@ -2290,7 +2290,7 @@
                     "description": "Stop zterm device",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "zterm"
                 },
@@ -2390,7 +2390,7 @@
                     "description": "Start adtpro localhost mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "adtpro@localhost"
                 },
@@ -2400,7 +2400,7 @@
                     "description": "Stop adtpro localhost mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "adtpro@localhost"
                 },
@@ -2450,7 +2450,7 @@
                     "description": "Start adtpro serial mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "adtpro@serial"
                 },
@@ -2460,7 +2460,7 @@
                     "description": "Stop adtpro serial mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "adtpro@serial"
                 },
@@ -2510,7 +2510,7 @@
                     "description": "Start adtpro ethernet mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "adtpro@ethernet"
                 },
@@ -2520,7 +2520,7 @@
                     "description": "Stop adtpro ethernet mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "adtpro@ethernet"
                 },
@@ -2560,7 +2560,7 @@
                     "description": "Start adtpro audio mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "adtpro@audio"
                 },
@@ -2570,7 +2570,7 @@
                     "description": "Stop adtpro audio mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "adtpro@audio"
                 },
@@ -2620,7 +2620,7 @@
                     "description": "Start adtpro localhost mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "adtpro@localhost"
                 },
@@ -2630,7 +2630,7 @@
                     "description": "Stop adtpro localhost mode",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "adtpro@localhost"
                 },
@@ -2799,7 +2799,7 @@
                     "description": "Start Dex Drive daemon",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "linux-dexdrive"
                 },
@@ -2809,7 +2809,7 @@
                     "description": "Stop Dex Drive daemon",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "linux-dexdrive"
                 },
@@ -2918,7 +2918,7 @@
                     "description": "Start gadget",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "open-iscsi"
                 },
@@ -2928,7 +2928,7 @@
                     "description": "Stop gadget",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "open-iscsi"
                 },
@@ -2988,7 +2988,7 @@
                     "description": "Start gadget",
                     "id":"",
                     "prompt": "",
-                    "type": "service_start",
+                    "type": "service_enable_start",
                     "group":"",
                     "command": "retronas-gadget.path"
                 },
@@ -2998,7 +2998,7 @@
                     "description": "Stop gadget",
                     "id":"",
                     "prompt": "",
-                    "type": "service_stop",
+                    "type": "service_disable_stop",
                     "group":"",
                     "command": "retronas-gadget.path"
                 },
@@ -3011,6 +3011,76 @@
                     "type": "service_status",
                     "group":"",
                     "command": "retronas-gadget*"
+                }
+            ]
+        },
+        "mister": 
+        {
+            "title": "MiSTer",
+            "description": "Install the MiSTer Samba service, enable/disable the auto dis updater or run the updater manually",
+            "id":"mister-cifs",
+            "prompt": "",
+            "type": "menu",
+            "items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
+                {
+                    "index":"02",
+                    "title": "Install",
+                    "description": "Install Samba for MiSTer support",
+                    "id":"mister-cifs",
+                    "prompt": "",
+                    "type": "install",
+                    "group":"",
+                    "command": "mister_cifs"
+                },
+                {
+                    "index":"03",
+                    "title": "Enable",
+                    "description": "Enable auto dir updates",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_enable_start",
+                    "group":"",
+                    "command": "retronas-mister-dirs.timer"
+                },
+                {
+                    "index":"04",
+                    "title": "Disable",
+                    "description": "Disable auto dir updater",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_disable_stop",
+                    "group":"",
+                    "command": "retronas-mister-dirs.timer"
+                },
+                {
+                    "index":"05",
+                    "title": "Status",
+                    "description": "Query auto dir updater",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_status",
+                    "group":"",
+                    "command": "retronas-mister-dirs*"
+                },
+                {
+                    "index":"06",
+                    "title": "Run",
+                    "description": "Run directory updater now",
+                    "id":"",
+                    "prompt": "",
+                    "type": "service_start",
+                    "group":"",
+                    "command": "retronas-mister-dirs.service"
                 }
             ]
         },
