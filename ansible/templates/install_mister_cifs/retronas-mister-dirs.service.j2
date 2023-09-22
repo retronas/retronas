@@ -1,0 +1,14 @@
+[Unit]
+Description=retronas-mister-dirs
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=no
+WorkingDirectory=/opt/retronas/ansible
+ExecStart=/usr/bin/ansible-playbook --extra-vars "dirs_only=true" {{ my_file }}.yml
+TimeoutStartSec=0
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
