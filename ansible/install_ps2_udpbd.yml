@@ -1,0 +1,108 @@
+# Dependencies
+- import_playbook: install_romdir.yml
+- import_playbook: retronas_update_user.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "ps2_udpbd"
+    - my_file: "install_ps2_udpbd"
+
+    - systemd_units:
+      - { name: "ps2_udpbd", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+
+    - packages:
+      - make
+      - gcc
+      - g++
+      - git
+      - build-essential
+
+    - templates:
+      - { name: "udpbd_manager.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
+  tasks:
+
+  - name: "{{ my_name }} - Include systems map"
+    include_vars: "retronas_systems.yml"
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - build top level"
+    file:
+      path: "{{ retronas_path }}/{{ my_name }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+      mode: "0775"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - Generate {{ my_file }} script"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Install from source code"
+    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "{{ retronas_root}} /bin/ps2_udpbd"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - create startup service(s)"
+    template:
+      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+      dest: /etc/systemd/system/{{ item.name }}.{{ item.type }}
+      owner: root
+      group: root
+      mode: 0644
+      force: no
+    with_items:
+      "{{ systemd_units }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable service(s)"
+    service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+    when:
+      - item.instance == 'no'
+    notify: "{{ my_name }} - Restart service"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+    when: 
+      - item.restart == 'yes'
+      - item.instance == 'no'
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "ps2_udpbd"
+    module_state: "present"

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: "Load RetroNAS config"
+      include_vars: retronas_vars.yml
+
+    - name: "update user"
+      user:
+        user: "{{ retronas_user }}"
+        groups: "disk"
+        append: true
