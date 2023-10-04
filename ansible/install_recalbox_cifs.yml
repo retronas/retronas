@@ -46,7 +46,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     set_fact:
-      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/recalbox/{{ item.1.name }}/{{ item.0.recalbox }};' ]"
+      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/recalbox/' + item.1.name + '/' + item.0.recalbox + ';' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true

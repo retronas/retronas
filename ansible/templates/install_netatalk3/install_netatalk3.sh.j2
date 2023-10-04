@@ -1,0 +1,45 @@
+#!/bin/bash
+
+## RetroNAS Netatalk-3 install script
+TRKRVER=$(dpkg -l | awk -F'-' '/libtracker-miner/{print $3}')
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/netatalk3"
+mkdir -p "${IDIR}"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf netatalk
+
+# Clone the source code from SourceForge
+git clone https://github.com/netatalk/netatalk.git
+cd netatalk
+git checkout $(git tag | grep netatalk-3 | tail -n1)
+
+
+OPTIONS=()
+OPTIONS+=" --prefix=${IDIR}"
+OPTIONS+=" --with-init-style=debian-systemd"
+OPTIONS+=" --without-libevent"
+OPTIONS+=" --without-tdb"
+OPTIONS+=" --with-cracklib"
+OPTIONS+=" --enable-krbV-uam"
+OPTIONS+=" --with-pam-confdir=/etc/pam.d"
+OPTIONS+=" --with-dbus-daemon=/usr/bin/dbus-daemon"
+OPTIONS+=" --with-dbus-sysconf-dir=/etc/dbus-1/system.d"
+
+# spotlight support requires libtracker-miner
+if [ ! -z $TRKRVER ]
+then 
+        [ ! -f /usr/bin/tracker ] && ln -sf /usr/bin/tracker3 /usr/bin/tracker 
+        OPTIONS+=" --with-tracker-pkgconfig-version=$TRKRVER"
+fi
+
+./bootstrap
+./configure $OPTIONS
+make -j$(nproc)
+make install

@@ -30,7 +30,12 @@
       - jq
 
     - packages_debian:
-      - libmbedtls12
+        debian10:
+          - libmbedtls12
+        debian11:
+          - libmbedtls12
+        debian12:
+          - libmbedtls14
 
     - packages_ubuntu:
       - libmbedtls14
@@ -51,12 +56,12 @@
 
   - name: "{{ my_name }} - Install build tools (debian)"
     package:
-       name: "{{ packages_debian }}"
+       name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
        state: latest
     when: ansible_distribution == 'Debian'
 
   - name: "{{ my_name }} - Install build tools (ubuntu)"
-    package:
+    package:  
        name: "{{ packages_ubuntu }}"
        state: latest
     when: ansible_distribution == 'Ubuntu'
