@@ -173,7 +173,7 @@
                 "description": "MiSTer FPGA CIFS config", 
                 "id":"mister_cifs",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"samba",
                 "command": "mister_cifs"
             },                
