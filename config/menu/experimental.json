@@ -26,6 +26,16 @@
                 "type": "install",
                 "group":"",
                 "command": "cockpit-retronas"
+            },
+            {
+                "index": "03",
+                "title": "UDPBD",
+                "description": "PS2 block device service",
+                "id":"ps2_udpbd",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "ps2_udpbd"
             }
         ]
     }
