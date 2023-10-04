@@ -135,7 +135,12 @@ GET_LANG() {
 #
 READ_MENU_TDESC() {
     export MENU_TITLE="$1"
-    local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu | \"\(.title);\(.description)\"")
+    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        local MENU_TDESC_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
+    else
+        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu | \"\(.title);\(.description)\"")
+    fi
     local IFS=$'\n'
 
     export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
@@ -149,7 +154,12 @@ READ_MENU_TDESC() {
 #
 READ_MENU_JSON() {
     local MENU_TITLE="$1"
-    export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+    else
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+    fi
 }
 
 #
@@ -163,7 +173,12 @@ READ_MENU_COMMAND() {
 
     cd "${RNDIR}"
 
-    MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    else
+        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    fi
 
     local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
     local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
