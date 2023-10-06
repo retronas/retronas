@@ -121,7 +121,7 @@ system_atari:
   - { src: "atari/5200", last: "", mister: "ATARI5200", retropie: "", batocera: "atari5200", recalbox: "atari5200", retroarch: "Atari - 5200", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari5200", smdb: "Atari 5200 SMDB.txt", freestation: ""  }
   - { src: "atari/7800", last: "", mister: "ATARI7800", retropie: "", batocera: "atari7800", recalbox: "atari7800", retroarch: "Atari - 7800", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari7800", smdb: "Atari 7800 SMDB.txt", freestation: ""  }
   - { src: "atari/800", last: "", mister: "ATARI800", retropie: "", batocera: "atari800", recalbox: "atari800", retroarch: "Atari - 8-bit", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atari800", smdb: "", freestation: "" }
-  - { src: "atari/jaguar", last: "", mister: "", retropie: "", batocera: "jaguar", recalbox: "jaguar", retroarch: "Atari - Jaguar", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "Atari Jaguar SMDB.txt", freestation: "" }
+  - { src: "atari/jaguar", last: "", mister: "Jaguar", retropie: "", batocera: "jaguar", recalbox: "jaguar", retroarch: "Atari - Jaguar", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "Atari Jaguar SMDB.txt", freestation: "" }
   - { src: "atari/lynx", last: "", mister: "AtariLynx", retropie: "", batocera: "lynx", recalbox: "lynx", retroarch: "Atari - Lynx", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarilynx", smdb: "Atari Lynx SMDB.txt", freestation: ""  }
   - { src: "atari/st", last: "", mister: "AtariST", retropie: "", batocera: "atarist", recalbox: "atarist", retroarch: "Atari - ST", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarist", smdb: "", freestation: "" }
 system_bally:
