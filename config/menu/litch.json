@@ -1,0 +1,62 @@
+{
+    "menu": 
+    {
+        "title": "litch",
+        "description": "itch.io leech script||WARNING: This tool is in an alpha state,\nsee https://github.com/sairuk/gogrepo||Please choose a task",
+        "id":"litch",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Login",
+                "description": "Configure your itch.io credentials",
+                "id":"litch-login",
+                "prompt": "",
+                "type": "script",
+                "group":"litch",
+                "command": "litch_login"
+            },
+            {
+                "index":"03",
+                "title": "Claim",
+                "description": "Claim bundle purchases",
+                "id":"litch-claim",
+                "prompt": "",
+                "type": "script",
+                "group":"litch",
+                "command": "litch_claim"
+            },
+            {
+                "index":"04",
+                "title": "Download",
+                "description": "Download your purchases",
+                "id":"litch-download",
+                "prompt": "",
+                "type": "script",
+                "group":"litch",
+                "command": "litch_download"
+            },
+            {
+                "index":"05",
+                "title": "Down/Clean",
+                "description": "Download(+clean) purchases",
+                "id":"litch-download-clean",
+                "prompt": "",
+                "type": "script",
+                "group":"litch",
+                "command": "litch_download_clean"
+            }
+        ]
+    }
+}

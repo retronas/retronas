@@ -1,0 +1,72 @@
+{
+    "menu": 
+    {
+        "title": "MiSTer",
+        "description": "Install the MiSTer Samba service, enable/disable the auto disk updater or run the updater manually",
+        "id":"mister-cifs",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install Samba for MiSTer support",
+                "id":"mister-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "mister_cifs"
+            },
+            {
+                "index":"03",
+                "title": "Enable",
+                "description": "Enable auto dir updates",
+                "id":"",
+                "prompt": "",
+                "type": "service_enable_start",
+                "group":"",
+                "command": "retronas-mister-dirs.timer"
+            },
+            {
+                "index":"04",
+                "title": "Disable",
+                "description": "Disable auto dir updater",
+                "id":"",
+                "prompt": "",
+                "type": "service_disable_stop",
+                "group":"",
+                "command": "retronas-mister-dirs.timer"
+            },
+            {
+                "index":"05",
+                "title": "Status",
+                "description": "Query auto dir updater",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "retronas-mister-dirs*"
+            },
+            {
+                "index":"06",
+                "title": "Run",
+                "description": "Run directory updater now",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "retronas-mister-dirs.service"
+            }
+        ]
+    }
+}
