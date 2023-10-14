@@ -1,4 +1,5 @@
 # Dependencies
+- import_playbook: install_romdir.yml
 - import_playbook: install_lighttpd.yml
 
 - hosts: localhost
