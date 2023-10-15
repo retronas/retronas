@@ -515,7 +515,7 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "open_iscsi"
+                "command": "open-iscsi"
             },
             {
                 "index": "52",
@@ -525,7 +525,7 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "linux_gadgets"
+                "command": "linux-gadgets"
             },
             {
                 "index": "53",

@@ -135,11 +135,14 @@ GET_LANG() {
 #
 READ_MENU_TDESC() {
     export MENU_TITLE="$1"
-    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu | \"\(.title);\(.description)\"")
+    elif [ -f ${RNJSONOLD} ]
     then
         local MENU_TDESC_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
     else
-        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu | \"\(.title);\(.description)\"")
+        local MENU_TDESC_DATA=$(<${RNJSON}/main.json jq -r ".menu | \"\(.title);\(.description)\"")    
     fi
     local IFS=$'\n'
 
@@ -154,11 +157,14 @@ READ_MENU_TDESC() {
 #
 READ_MENU_JSON() {
     local MENU_TITLE="$1"
-    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+    elif [ -f ${RNJSONOLD} ]
     then
         export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
     else
-        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+        export MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
     fi
 }
 
@@ -173,11 +179,14 @@ READ_MENU_COMMAND() {
 
     cd "${RNDIR}"
 
-    if [ ! -f ${RNJSON}/${MENU_TITLE}.json ]
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    elif [ -f ${RNJSONOLD} ]
     then
         MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
     else
-        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+        MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
     fi
 
     local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
