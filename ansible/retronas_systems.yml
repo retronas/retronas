@@ -243,7 +243,6 @@ system_nec:
   - { src: "nec/pc98", last: "", mister: "Zet98", retropie: "", batocera: "pc98", recalbox: "pc98", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pc98", smdb: "", freestation: "" }
   - { src: "nec/pcengine", last: "", mister: "", retropie: "", batocera: "pcengine", recalbox: "pcengine", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pcengine", smdb: "Turbo EverDrive & Super SD System 3 SMDB.txt", freestation: "pce" }
   - { src: "nec/pcengine", last: "", mister: "TGFX16", retropie: "", batocera: "", recalbox: "", retroarch: "NEC - PC Engine - TurboGrafx 16", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "tg16", smdb: "Turbo EverDrive & Super SD System 3 SMDB.txt", freestation: "" }
-  - { src: "nec/pcengine/iso", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "" }
   - { src: "nec/pcenginecd", last: "", mister: "", retropie: "", batocera: "pcenginecd", recalbox: "pcenginecd", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "pcenginecd", smdb: "PC Engine CD Redump Supplement.txt", freestation: "" }
   - { src: "nec/pcenginecd", last: "", mister: "TGFX16-CD", retropie: "", batocera: "", recalbox: "", retroarch: "NEC - PC Engine CD - TurboGrafx-CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "tg16cd", smdb: "PC Engine CD Redump Supplement.txt", freestation: "" }
   - { src: "nec/pcengine/supergrafx", last: "", mister: "", retropie: "", batocera: "supergrafx", recalbox: "supergrafx", retroarch: "NEC - PC Engine SuperGrafx", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "sgfx", smdb: "", freestation: "" }
@@ -401,7 +400,7 @@ system_watara:
 
 system_links:
   - { src: "nec/pcengine", dest: "nec/turbografx16" }
-  - { src: "nec/pcengine/iso", dest: "nec/turbografxcd" }
+  - { src: "nec/pcenginecd", dest: "nec/turbografxcd" }
   - { src: "nintendo/famicom", dest: "nintendo/nes" }
   - { src: "nintendo/superfamicom", dest: "nintendo/snes" }
   - { src: "sega/megacd", dest: "sega/segacd" }
