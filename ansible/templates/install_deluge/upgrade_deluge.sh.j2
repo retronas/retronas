@@ -1,0 +1,28 @@
+#!/bin/bash
+
+ENDPOINT=http://ftp.us.debian.org/debian/pool/main/d/deluge/
+VERSION=${1:-2.1.2~dev0+20230918-1_all.deb}
+
+PACKAGES=(
+  deluge-common
+  deluge-web
+  deluge-console
+  deluged
+)
+
+DTMPDIR=$(mktemp -d)
+DEBFILES=()
+
+cd $DTMPDIR
+
+for PACKAGE in ${PACKAGES[@]}
+do
+  PNAME=${PACKAGE}_${VERSION}
+  curl -O${PNAME} $ENDPOINT/${PNAME}
+  DEBFILES+=" ./${PNAME}"
+done
+
+apt install -y ${DEBFILES}
+rm -f ${DEBFILES}
+systemctl daemon-reload
+systemctl restart deluge*

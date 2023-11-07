@@ -329,13 +329,13 @@
             },
             {
                 "index": "33",
-                "title": "BitTorrent",
+                "title": "Deluge",
                 "description": "Deluge Web BitTorrent Client", 
-                "id":"bittorrent",
+                "id":"deluge",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"",
-                "command": "bittorrent"
+                "command": "deluge"
             },
             {   
                 "index": "34",
