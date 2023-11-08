@@ -1947,7 +1947,7 @@
                 {
                     "index":"0",
                     "title": "Import",
-                    "description": "Run the Import tool",
+                    "description": "Run for all systems",
                     "id":"romimport",
                     "prompt": "Run",
                     "type": "script",
@@ -1956,6 +1956,16 @@
                 },
                 {
                     "index":"1",
+                    "title": "Import",
+                    "description": "SNES",
+                    "id":"romimport",
+                    "prompt": "Run",
+                    "type": "script",
+                    "group":"",
+                    "command": "romimport -t Super EverDrive & SD2SNES SMDB.txt"
+                },
+                {
+                    "index":"2",
                     "title": "Back",
                     "description": "",
                     "id":"romimport",
