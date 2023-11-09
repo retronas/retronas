@@ -18,12 +18,21 @@ cd $DTMPDIR
 for PACKAGE in ${PACKAGES[@]}
 do
   PNAME=${PACKAGE}_${VERSION}
-  curl -O${PNAME} $ENDPOINT/${PNAME}
+  curl -s -O${PNAME} $ENDPOINT/${PNAME}
   DEBFILES+=" ./${PNAME}"
 done
 
 apt update
 apt install -y ${DEBFILES}
 rm -f ${DEBFILES}
+
+sed -i 's/debian-deluged/{{ retronas_user }}/' /usr/lib/systemd/system/deluged.service
+sed -i 's/debian-deluged/{{ retronas_user }}/' /usr/lib/systemd/system/deluge-web.service
+
+#usermod -a -G debian-deluged {{ retronas_user }}
+chown {{ retronas_user }}:{{ retronas_group }} -R /var/lib/deluged/
+
 systemctl daemon-reload
+sleep 2
+systemctl stop deluge*
 systemctl restart deluge*
