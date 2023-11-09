@@ -7,7 +7,7 @@ TRIES=0
 RANDSECTOR=1
 
 # check for config file
-[ ! -f {{ retronas_path }}/config/hdparm-manager-drive) ] && exit 1
+[ ! -f {{ retronas_path }}/config/hdparm-manager-drive ] && exit 1
 
 function set_sector() {
   local MAXSECTOR=$1
