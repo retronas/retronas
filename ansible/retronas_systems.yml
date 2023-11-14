@@ -80,8 +80,10 @@ system_map: "{{
   |union(system_texas_instruments)
   |union(system_thomson)
   |union(system_tiger)
+  |union(system_timetop)
   |union(system_tomytronic)
   |union(system_tsukuda)
+  |union(system_umtech)
   |union(system_rca)
   |union(system_vector)
   |union(system_videos)
@@ -334,7 +336,7 @@ system_sinclair:
 system_smith_engineering:
   - { src: "vectrex", last: "other/vectrex", mister: "VECTREX", retropie: "", batocera: "vectrex", recalbox: "vectrex", retroarch: "GCE - Vectrex", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "vectrex", smdb: "Vectrex SMDB.txt", freestation: "", analoguepocket: "" }
 system_snk:
-  - { src: "snk/neogeo", last: "", mister: "NEOGEO", retropie: "", batocera: "neogeo", recalbox: "neogeo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neogeo", smdb: "MiSTer Neo Geo Add-On.txt", freestation: "", analoguepocket: "" }
+  - { src: "snk/neogeo", last: "", mister: "NEOGEO", retropie: "", batocera: "neogeo", recalbox: "neogeo", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neogeo", smdb: "MiSTer Neo Geo Add-On.txt", freestation: "", analoguepocket: "ng" }
   - { src: "snk/neogeopocket", last: "", mister: "", retropie: "", batocera: "ngp", recalbox: "ngp", retroarch: "SNK - Neo Geo Pocket", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngp", smdb: "NGPC RetroHQ SMDB.txt", freestation: "", analoguepocket: "" }
   - { src: "snk/neogeopocketcolor", last: "", mister: "", retropie: "", batocera: "ngpc", recalbox: "ngpc", retroarch: "SNK - Neo Geo Pocket Color", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "ngpc", smdb: "NGPC RetroHQ SMDB.txt", freestation: "", analoguepocket: "" }
   - { src: "snk/neogeocd", last: "", mister: "NeoGeo-CD", retropie: "", batocera: "neogeocd", recalbox: "neogeocd", retroarch: "SNK - Neo Geo CD", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "neocd", smdb: "", freestation: "", analoguepocket: "" }
@@ -378,13 +380,17 @@ system_thomson:
   - { src: "thomson/thomson", last: "", mister: "", retropie: "", batocera: "thomson", recalbox: "thomson", retroarch: "Thomson - MOTO", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
 system_tiger:
   - { src: "gamecom", last: "", mister: "", retropie: "", batocera: "gamecom", recalbox: "", retroarch: "Tiger - Game.com", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
+system_timetop:
+  - { src: "timetop/gameking", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "game_king" }
 system_tomytronic:
   - { src: "tomytronic/scramble", last: "", mister: "TomyScramble", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
   - { src: "tomytronic/tutor", last: "", mister: "TomyTutor", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
 system_tsukuda:
   - { src: "tsukuda/othellomultivision", last: "", mister: "", retropie: "", batocera: "multivision", recalbox: "multivision", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
+system_umtech:
+  - { src: "umtech/videobrain", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "videobrain" }
 system_rca:
-  - { src: "rca/studioii", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "RCA - Studio II", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
+  - { src: "rca/studioii", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "RCA - Studio II", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "studio2" }
 system_vector:
   - { src: "vector/06c", last: "other/vector06c", mister: "VECTOR06", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
 system_videos:
@@ -520,6 +526,7 @@ system_unsupported:
   - { src: "namco2x6", last: "", mister: "", retropie: "", batocera: "namco2x6", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
   - { src: "chip8", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "CHIP-8", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "" }
   - { src: "tamagotchi", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "tamagotchi_p1" }
+  - { src: "flappybird", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "flappybird" }
 
 
 system_template:
