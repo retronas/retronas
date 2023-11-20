@@ -10,9 +10,11 @@
     - my_file: "install_analoguepocket_cifs"
 
     - top_level_paths:
-      - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
-    #  - { name: "saves",  enabled: yes,  generic: "saves",  systems: yes }
-    #  - { name: "bios",   enabled: yes,  generic: "bios",   systems: yes }
+      - { name: "Assets",       enabled: yes,  generic: "roms",   systems: yes }
+      - { name: "Cores",        enabled: yes,  generic: "",       systems: no }
+      - { name: "Platforms",    enabled: yes,  generic: "",       systems: no }
+      - { name: "Presets",      enabled: yes,  generic: "",       systems: no }
+      - { name: "Saves",        enabled: yes,  generic: "",       systems: no }
 
     #- internal_symlinks:
     #  - { src: '', dest: '' }
@@ -49,7 +51,25 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/analoguepocket/' + item.1.name + '/' + item.0.analoguepocket + ';' ] }}"
+      path_list: "{{ path_list|default([]) + [ retronas_path + '/analoguepocket/' + item.1.name + '/' + item.0.analoguepocket if item.1.systems is true else ';' ] }}"
+    no_log: yes
+    loop: "{{ system_map|product(top_level_paths)|list }}"
+    when:
+      - item.1.enabled is true
+      - item.0.analoguepocket | length > 0
+      - item.1.systems is true
+
+  - name: "{{ my_name }} - build layout"
+    shell:
+      cmd: mkdir -p {{ path_list|flatten|join(' ') }}
+    become: yes
+    become_user: "{{ retronas_user }}"
+    when: path_list is defined
+    notify: "{{ my_name }} - Install Samba"
+
+  - name: "{{ my_name }} - build layout list (set fact)"
+    set_fact:
+      path_list_links: "{{ path_list_links|default([]) + [ 'ln -sfT ../../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/analoguepocket/' + item.1.name + '/' + item.0.analoguepocket + '/common;' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
@@ -58,8 +78,8 @@
 
   - name: "{{ my_name }} - build systems directory layout"
     shell:
-      cmd: "{{ path_list|join('') }}"
-    when: path_list is defined
+      cmd: "{{ path_list_links|join('') }}"
+    when: path_list_links is defined
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
