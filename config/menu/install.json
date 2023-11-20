@@ -576,6 +576,26 @@
                 "type": "install",
                 "group":"",
                 "command": "disable-laptop-lid"
+            },
+            {
+                "index": "58",
+                "title": "emudeck-cifs",
+                "description": "Samba for EmuDeck",
+                "id":"emudeck-cifs",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "emudeck_cifs"
+            },
+            {
+                "index": "59",
+                "title": "analoguepocket-cifs",
+                "description": "Samba for Analogue Pocket",
+                "id":"analoguepocket-cifs",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "analoguepocket_cifs"
             }
         ]
     }
