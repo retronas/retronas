@@ -63,7 +63,7 @@
                 "description": "HTTP/Web server", 
                 "id":"lighttpd",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"",
                 "command": "lighttpd"
             },                
@@ -596,6 +596,26 @@
                 "type": "install",
                 "group":"",
                 "command": "analoguepocket_cifs"
+            },
+            {
+                "index":"60",
+                "title": "nginx",
+                "description": "Install nginx with directory listing enabled",
+                "id":"nginx",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "nginx"
+            },
+            {
+                "index":"61",
+                "title": "sslcert",
+                "description": "Manage a self-signed ssl certificate",
+                "id":"sslcert",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "sslcert"
             }
         ]
     }
