@@ -52,6 +52,15 @@
       dest: /etc/{{ my_name }}/sites-enabled/{{ item }}
       state: "link"
     with_items: "{{ sites_enable }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - update runas user"
+    lineinfile:
+      path: /etc/{{ my_name }}/{{ my_name }}.conf
+      regexp: '^user\s[a-z-]+;$'
+      line: user {{ retronas_user }};
+      state: present
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
     service:
