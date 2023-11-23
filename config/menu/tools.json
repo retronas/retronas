@@ -46,6 +46,16 @@
                 "type": "dialog_yn",
                 "group":"",
                 "command": "romimport"
+            },
+            {
+                "index":"05",
+                "title": "Local Module",
+                "description": "Run local playbooks",
+                "id":"run-local-module",
+                "prompt": "Run",
+                "type": "script-static",
+                "group":"",
+                "command": "run-local-module"
             }
         ]
     }
