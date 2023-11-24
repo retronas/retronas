@@ -11,7 +11,7 @@
       - gnupg
       - aria2
 
-    - debfile: debian-archive-keyring_2023.3_all.deb
+    - debfile: debian-archive-keyring_2023.4_all.deb
 
   tasks:
 
