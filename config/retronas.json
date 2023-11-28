@@ -1960,7 +1960,7 @@
                     "description": "Import a Specific System",
                     "id":"romimportsystem",
                     "prompt": "",
-                    "type": "dialog",
+                    "type": "modal",
                     "group":"",
                     "command": "romimportsystem"
                 }
@@ -1971,11 +1971,21 @@
 			"title": "ROM Import by System",
 			"description": "Import a specific system.",
 			"id": "romimportsystem",
-			"prompt": "Run",
+			"prompt": "",
 			"type": "menu",
 			"items": [
+                {
+                    "index": "01",
+                    "title": "Back",
+                    "description": "Return to previous menu", 
+                    "id":"",
+                    "prompt": "",
+                    "type": "menu",
+                    "group":"",
+                    "command": "EXIT_OK"
+                },
 				{
-                    "index":"01",
+                    "index":"02",
                     "title": "Import Atari 2600",
                     "description": "",
                     "id":"romimport-a2600",
@@ -1985,7 +1995,7 @@
                     "command": "romimport -t atari/2600"
                 },
 				{
-                    "index":"02",
+                    "index":"03",
                     "title": "Import PC Engine CD Redump Supplement",
                     "description": "",
                     "id":"romimport-pcecdrs",
@@ -1995,7 +2005,7 @@
                     "command": "romimport -t 'nec/pcenginecd'"
                 },
 				{
-                    "index":"03",
+                    "index":"04",
                     "title": "Import N64",
                     "description": "",
                     "id":"romimport-n64",
@@ -2005,7 +2015,7 @@
                     "command": "romimport -t 'nintendo/nintendo64'"
                 }
 				,                {
-                    "index":"04",
+                    "index":"05",
                     "title": "Import NeoGeo Pocket",
                     "description": "",
                     "id":"romimport-ngp",
@@ -2015,7 +2025,7 @@
                     "command": "romimport -t 'snk/neogeopocket'"
                 }
 				,                {
-                    "index":"05",
+                    "index":"06",
                     "title": "Import Sega SG-1000",
                     "description": "",
                     "id":"romimport-sg1000",
@@ -2025,7 +2035,7 @@
                     "command": "romimport -t 'sega/sg1000'"
                 }
 				,                {
-                    "index":"06",
+                    "index":"07",
                     "title": "Import Colecovision",
                     "description": "",
                     "id":"romimport-cv",
@@ -2035,7 +2045,7 @@
                     "command": "romimport -t 'coleco/colecovision'"
                 }
 				,                {
-                    "index":"07",
+                    "index":"08",
                     "title": "Import Saturn",
                     "description": "",
                     "id":"romimport-saturn",
@@ -2045,7 +2055,7 @@
                     "command": "romimport -t 'sega/saturn'"
                 }
 				,                {
-                    "index": "08",
+                    "index": "09",
                     "title": "Import MegaDrive/Genesis",
                     "description": "",
                     "id":"romimport-md",
@@ -2055,7 +2065,7 @@
                     "command": "romimport -t 'sega/megadrive'"
                 }
 				,                {
-                    "index": "09",
+                    "index": "10",
                     "title": "Import NeoGeo",
                     "description": "",
                     "id":"romimport-neogeo",
@@ -2065,7 +2075,7 @@
                     "command": "romimport -t 'snk/neogeo'"
                 },
 				{
-                    "index":"10",
+                    "index":"11",
                     "title": "Import SNES/SuperFamicom",
                     "description": "",
                     "id":"romimport-snes",
@@ -2075,7 +2085,7 @@
                     "command": "romimport -t 'nintendo/superfamicom'"
                 },
 				{
-                    "index":"11",
+                    "index":"12",
                     "title": "Import Watara Supervision",
                     "description": "",
                     "id":"romimport-supervision",
@@ -2085,7 +2095,7 @@
                     "command": "romimport -t 'watara/supervision'"
                 },
 				{
-                    "index":"12",
+                    "index":"13",
                     "title": "Import PSX Redump Supplement",
                     "description": "",
                     "id":"romimport-psx",
@@ -2095,7 +2105,7 @@
                     "command": "romimport -t 'sony/playstation1'"
                 },
 				{
-                    "index":"13",
+                    "index":"14",
                     "title": "Import Sega CD/Mega CD",
                     "description": "",
                     "id":"romimport-megacd",
@@ -2105,7 +2115,7 @@
                     "command": "romimport -t 'sega/megacd'"
                 },
 				{
-                    "index":"14",
+                    "index":"15",
                     "title": "Import Wonderswancolor",
                     "description": "",
                     "id":"romimport-wonderswancolor",
@@ -2115,7 +2125,7 @@
                     "command": "romimport -t 'bandai/wonderswancolor'"
                 },
 				{
-                    "index":"15",
+                    "index":"16",
                     "title": "Import Master System",
                     "description": "",
                     "id":"romimport-segams",
@@ -2125,7 +2135,7 @@
                     "command": "romimport -t 'sega/mastersystem'"
                 },
 				{
-                    "index":"16",
+                    "index":"17",
                     "title": "Import Lynx",
                     "description": "",
                     "id":"romimport-lynx",
@@ -2135,7 +2145,7 @@
                     "command": "romimport -t 'atari/lynx'"
                 },
 				{
-                    "index":"17",
+                    "index":"18",
                     "title": "Import Gameboy Advance",
                     "description": "",
                     "id":"romimport-gba",
@@ -2145,7 +2155,7 @@
                     "command": "romimport -t 'nintendo/gameboyadvance'"
                 },
 				{
-                    "index":"18",
+                    "index":"19",
                     "title": "Import Gameboy Color",
                     "description": "",
                     "id":"romimport-gbc",
@@ -2155,7 +2165,7 @@
                     "command": "romimport -t 'nintendo/gameboycolor'"
                 },
 				{
-                    "index":"19",
+                    "index":"20",
                     "title": "Import Vectrix",
                     "description": "",
                     "id":"romimport-vectrix",
@@ -2165,7 +2175,7 @@
                     "command": "romimport -t 'vectrix'"
                 },
 				{
-                    "index":"20",
+                    "index":"21",
                     "title": "Import Atari 7800",
                     "description": "",
                     "id":"romimport-a7800",
@@ -2175,7 +2185,7 @@
                     "command": "romimport -t 'atari/7800'"
                 },
 				{
-                    "index":"21",
+                    "index":"22",
                     "title": "Import NeoGeo Pocket Color",
                     "description": "",
                     "id":"romimport-ngpc",
@@ -2185,7 +2195,7 @@
                     "command": "romimport -t 'snk/neogeopocketcolor'"
                 },
 				{
-                    "index":"22",
+                    "index":"23",
                     "title": "Import Gameboy",
                     "description": "",
                     "id":"romimport-gb",
@@ -2195,7 +2205,7 @@
                     "command": "romimport -t 'nintendo/gameboy'"
                 },
 				{
-                    "index":"23",
+                    "index":"24",
                     "title": "Import Jaguar",
                     "description": "",
                     "id":"romimport-jaguar",
@@ -2205,7 +2215,7 @@
                     "command": "romimport -t 'atari/jaguar'"
                 },
 				{
-                    "index":"24",
+                    "index":"25",
                     "title": "Import GameGear",
                     "description": "",
                     "id":"romimport-gg",
@@ -2215,7 +2225,7 @@
                     "command": "romimport -t 'sega/gamegear'"
                 },
 				{
-                    "index":"25",
+                    "index":"26",
                     "title": "Import NES/Famicom",
                     "description": "",
                     "id":"romimport-nes",
@@ -2225,7 +2235,7 @@
                     "command": "romimport -t 'nintendo/famicom'"
                 },
 				{
-                    "index":"26",
+                    "index":"27",
                     "title": "Import Atari 5200",
                     "description": "",
                     "id":"romimport-a5200",
@@ -2235,7 +2245,7 @@
                     "command": "romimport -t 'atari/5200'"
                 },
 				{
-                    "index":"27",
+                    "index":"28",
                     "title": "Import PC Engine",
                     "description": "",
                     "id":"romimport-pce",
@@ -2245,7 +2255,7 @@
                     "command": "romimport -t 'nec/pcengine'"
                 },
 				{
-                    "index":"28",
+                    "index":"29",
                     "title": "Import Wonderswan",
                     "description": "",
                     "id":"romimport-wonderswan",
@@ -2255,7 +2265,7 @@
                     "command": "romimport -t 'bandai/wonderswan'"
                 },
 				{
-                    "index":"29",
+                    "index":"30",
                     "title": "Import Famicom Disk System",
                     "description": "",
                     "id":"romimport-fds",
