@@ -22,8 +22,8 @@ rn_import_system() {
         lineArr=($line)
         STR=${lineArr[0]}
         SUB="id"
-        if [["$STR" == *"$SUB"*]]; then
-            echo ${lineArr[1]}
+        if [[ "$STR" == *"$SUB"* ]]; then
+            echo "${lineArr[1]}"
             SYSTEMS+=${lineArr[1]}' '
         fi
     done < <(/opt/retronas/scripts/romimport.sh -l)
