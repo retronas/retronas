@@ -1951,7 +1951,7 @@
                     "id":"romimport-all",
                     "prompt": "",
                     "type": "script",
-                    "group":"romimport",
+                    "group":"",
                     "command": "romimport"
                 },                
 				{
@@ -1960,8 +1960,8 @@
                     "description": "Import a Specific System",
                     "id":"romimportsystem",
                     "prompt": "",
-                    "type": "script",
-                    "group":"dialog",
+                    "type": "dialog",
+                    "group":"",
                     "command": "romimportsystem"
                 }
             ]
