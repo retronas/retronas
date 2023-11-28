@@ -1955,16 +1955,6 @@
                     "command": "romimport"
                 },
                 {
-                    "index":"02",
-                    "title": "Import SNES",
-                    "description": "SNES",
-                    "id":"romimport-snes",
-                    "prompt": "",
-                    "type": "script",
-                    "group":"romimport",
-                    "command": "romimport -t Super EverDrive & SD2SNES SMDB.txt"
-                },
-                {
                     "index":"03",
                     "title": "Back",
                     "description": "",
