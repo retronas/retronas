@@ -26,8 +26,8 @@ rn_import_system() {
     i=2
     for s in $SYSTEMS:
     do
-        echo "system"
-        echo $s
+        # echo "system"
+        # echo $s
         SYSTEM_ARR[i]=$s
         ((++i))
     done
