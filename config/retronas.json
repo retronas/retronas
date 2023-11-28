@@ -1982,7 +1982,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t atari\/2600"
+                    "command": "romimport -t atari/2600"
                 },
 				{
                     "index":"02",
