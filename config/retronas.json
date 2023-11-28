@@ -1554,7 +1554,7 @@
                     "description": "Import roms via Smokemonster SMDBs",
                     "id":"romimport",
                     "prompt": "Open",
-                    "type": "dialog_yn",
+                    "type": "modal",
                     "group":"",
                     "command": "romimport"
                 }
