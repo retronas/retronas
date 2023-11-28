@@ -19,8 +19,8 @@ rn_import_system() {
   
 
     while read -r line; do
-        # echo $line
-        SYSTEMS+=${line[1]}
+        echo $line[1]
+        SYSTEMS+=$line[1]
     done < <(/opt/retronas/scripts/romimport.sh -l)
 
     i=2
