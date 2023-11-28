@@ -1554,7 +1554,7 @@
                     "description": "Import roms via Smokemonster SMDBs",
                     "id":"romimport",
                     "prompt": "Open",
-                    "type": "dialog_yn",
+                    "type": "modal",
                     "group":"",
                     "command": "romimport"
                 }
@@ -1945,30 +1945,30 @@
             "type": "menu",
             "items": [
                 {
-                    "index":"0",
+                    "index":"01",
                     "title": "Import",
                     "description": "Run for all systems",
                     "id":"romimport",
                     "prompt": "Run",
                     "type": "script",
-                    "group":"romimport-menu",
+                    "group":"romimport-all",
                     "command": "romimport"
                 },
                 {
-                    "index":"1",
+                    "index":"02",
                     "title": "Import",
                     "description": "SNES",
                     "id":"romimport",
                     "prompt": "Run",
                     "type": "script",
-                    "group":"romimport-menu",
+                    "group":"romimport-snes",
                     "command": "romimport -t Super EverDrive & SD2SNES SMDB.txt"
                 },
                 {
-                    "index":"2",
+                    "index":"02",
                     "title": "Back",
                     "description": "",
-                    "id":"romimport",
+                    "id":"romimport-cancel",
                     "prompt": "Run",
                     "type": "menu",
                     "group":"",
