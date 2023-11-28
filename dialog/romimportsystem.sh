@@ -20,7 +20,7 @@ rn_import_system() {
 
 while read -r line; do
     SYSTEMS += ${line[1]} + ' '
-done << '/opt/retronas/scripts/romimport.sh -l'
+done << (/opt/retronas/scripts/romimport.sh -l)
 
 i = 2
 for s in SYSTEMS:
