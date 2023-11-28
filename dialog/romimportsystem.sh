@@ -20,7 +20,9 @@ rn_import_system() {
 
     while read -r line; do
         lineArr=($line)
-        if [["${lineArr[0]}" == *"id:"*]]; then
+        STR=${lineArr[0]}
+        SUB="id"
+        if [["$STR" == *"$SUB"*]]; then
             echo ${lineArr[1]}
             SYSTEMS+=${lineArr[1]}' '
         fi
