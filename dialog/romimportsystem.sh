@@ -19,12 +19,14 @@ rn_import_system() {
   
 
     while read -r line; do
+        echo $line
         SYSTEMS += ${line[1]} + ' '
     done < <(/opt/retronas/scripts/romimport.sh -l)
 
     i = 2
     for s in SYSTEMS:
     do
+        echo $s
         SYSTEM_ARR[i] = $s
         i++
     done
@@ -38,7 +40,8 @@ rn_import_system() {
         EXIT_OK
       ;;
       02)
-        CLEAR
+        # CLEAR
+        echo $SYSTEM_ARR[2]
         /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[2]}
         PAUSE
       ;;
