@@ -20,9 +20,10 @@ rn_import_system() {
 
     while read -r line; do
         lineArr=($line)
-        if ${lineArr[0]} == 'id:':
+        if [${lineArr[0]} -eq 'id:']; then
             echo ${lineArr[1]}
             SYSTEMS+=${lineArr[1]}' '
+        fi
     done < <(/opt/retronas/scripts/romimport.sh -l)
 
     i=2
