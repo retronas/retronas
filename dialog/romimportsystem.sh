@@ -28,7 +28,7 @@ rn_import_system() {
     do
         echo $s
         SYSTEM_ARR[i]=$s
-        $i+1
+        ((++$1))
     done
 
   while true
