@@ -1992,7 +1992,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t atari/2600"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"03",
@@ -2002,7 +2002,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nec/pcenginecd'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"04",
@@ -2012,7 +2012,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/nintendo64'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index":"05",
@@ -2022,7 +2022,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'snk/neogeopocket'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index":"06",
@@ -2032,7 +2032,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/sg1000'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index":"07",
@@ -2042,7 +2042,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'coleco/colecovision'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index":"08",
@@ -2052,7 +2052,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/saturn'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index": "09",
@@ -2062,7 +2062,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/megadrive'"
+                    "command": "TOOL COMMAND"
                 }
 				,                {
                     "index": "10",
@@ -2072,7 +2072,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'snk/neogeo'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"11",
@@ -2082,7 +2082,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/superfamicom'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"12",
@@ -2092,7 +2092,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'watara/supervision'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"13",
@@ -2102,7 +2102,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sony/playstation1'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"14",
@@ -2112,7 +2112,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/megacd'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"15",
@@ -2122,7 +2122,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'bandai/wonderswancolor'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"16",
@@ -2132,7 +2132,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/mastersystem'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"17",
@@ -2142,7 +2142,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'atari/lynx'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"18",
@@ -2152,7 +2152,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/gameboyadvance'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"19",
@@ -2162,7 +2162,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/gameboycolor'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"20",
@@ -2172,7 +2172,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'vectrix'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"21",
@@ -2182,7 +2182,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'atari/7800'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"22",
@@ -2192,7 +2192,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'snk/neogeopocketcolor'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"23",
@@ -2202,7 +2202,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/gameboy'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"24",
@@ -2212,7 +2212,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'atari/jaguar'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"25",
@@ -2222,7 +2222,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'sega/gamegear'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"26",
@@ -2232,7 +2232,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/famicom'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"27",
@@ -2242,7 +2242,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'atari/5200'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"28",
@@ -2252,7 +2252,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nec/pcengine'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"29",
@@ -2262,7 +2262,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'bandai/wonderswan'"
+                    "command": "TOOL COMMAND"
                 },
 				{
                     "index":"30",
@@ -2272,7 +2272,7 @@
                     "prompt": "",
                     "type": "script",
                     "group":"romimport",
-                    "command": "romimport -t 'nintendo/famicom/disk'"
+                    "command": "TOOL COMMAND"
                 }
 			]
 		},
