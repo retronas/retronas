@@ -18,15 +18,16 @@ rn_import_system() {
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
   
 
-while read -r line; do
-    SYSTEMS += ${line[1]} + ' '
-done <<(/opt/retronas/scripts/romimport.sh -l)
+    while read -r line; do
+        SYSTEMS += ${line[1]} + ' '
+    done < <(/opt/retronas/scripts/romimport.sh -l)
 
-i = 2
-for s in SYSTEMS:
-    SYSTEM_ARR[i] = $s
-    i++
-
+    i = 2
+    for s in SYSTEMS:
+    do
+        SYSTEM_ARR[i] = $s
+        i++
+    done
 
   while true
   do
