@@ -26,7 +26,7 @@ i = 2
 for s in SYSTEMS:
     SYSTEM_ARR[i] = $s
     i++
-}
+
 
   while true
   do
@@ -130,5 +130,6 @@ for s in SYSTEMS:
     esac
     unset CHOICE
   done
+}
 
 rn_import_system
