@@ -24,11 +24,11 @@ rn_import_system() {
     done < <(/opt/retronas/scripts/romimport.sh -l)
 
     i = 2
-    for s in SYSTEMS:
+    for s in $SYSTEMS:
     do
         echo $s
         SYSTEM_ARR[i] = $s
-        i++
+        $i++
     done
 
   while true
