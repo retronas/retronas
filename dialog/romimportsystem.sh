@@ -6,7 +6,6 @@ source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
 ## If this is run as root, switch to our RetroNAS user
-## Manifests and cookies stored in ~/.gogrepo
 DROP_ROOT
 CLEAR
 
@@ -23,7 +22,6 @@ rn_import_system() {
         STR=${lineArr[0]}
         SUB="id"
         if [[ "$STR" == *"$SUB"* ]]; then
-            echo "${lineArr[1]}"
             SYSTEMS+=${lineArr[1]}' '
         fi
     done < <(/opt/retronas/scripts/romimport.sh -l)
@@ -31,9 +29,6 @@ rn_import_system() {
     i=2
     for s in $SYSTEMS:
     do
-        echo "system"
-        echo $i
-        echo $s
         SYSTEM_ARR[$i]=$s
         ((++i))
     done
@@ -47,8 +42,7 @@ rn_import_system() {
         EXIT_OK
       ;;
       02)
-        # CLEAR
-        echo ${SYSTEM_ARR[2]}
+        CLEAR
         /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[2]}
         PAUSE
       ;;
