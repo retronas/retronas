@@ -1969,7 +1969,7 @@
 		"romimportsystem":
 		{
 			"title": "ROM Import by System",
-			"Import a specific system.",
+			"description": "Import a specific system.",
 			"id": "romimportsystem",
 			"prompt": "Run",
 			"type": "menu",
