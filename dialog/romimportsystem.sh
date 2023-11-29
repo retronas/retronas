@@ -187,6 +187,9 @@ rn_import_system() {
       #   PAUSE
       # ;;
       *)
+      CLEAR
+      echo $CHOICE
+      PAUSE
       EXIT_CANCEL
       ;;
       
