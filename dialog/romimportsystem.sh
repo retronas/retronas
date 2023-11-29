@@ -188,6 +188,7 @@ rn_import_system() {
       # ;;
       *)
       EXIT_CANCEL
+      PAUSE
       ;;
       
     esac
