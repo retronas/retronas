@@ -8,24 +8,24 @@
         "type": "menu",
         "items": [
             {
-                "index":"0",
-                "title": "Import",
-                "description": "Run the Import tool",
-                "id":"romimport",
-                "prompt": "Run",
+                "index":"01",
+                "title": "Import All",
+                "description": "Run for all systems",
+                "id":"romimport-all",
+                "prompt": "",
                 "type": "script",
                 "group":"",
                 "command": "romimport"
             },
             {
-                "index":"1",
-                "title": "Back",
-                "description": "",
-                "id":"romimport",
-                "prompt": "Run",
-                "type": "menu",
+                "index":"02",
+                "title": "Import By System",
+                "description": "Import a Specific System",
+                "id":"romimportsystem",
+                "prompt": "",
+                "type": "modal",
                 "group":"",
-                "command": "EXIT_CANCEL"
+                "command": "romimportsystem"
             }
         ]
     }
