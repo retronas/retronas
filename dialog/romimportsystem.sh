@@ -29,7 +29,6 @@ rn_import_system() {
     I=2
     for S in $SYSTEMS:
     do
-        echo $S
         SYSTEM_ARR[$I]=$S
         ((++I))
     done
@@ -44,9 +43,7 @@ rn_import_system() {
       ;;
       0[2-9]|[1-2][0-9]|30)
         CLEAR
-        echo $CHOICE
-        PAUSE
-        /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[$CHOICE]}
+        /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[10#$CHOICE]}
         PAUSE
       ;;
       # 03)
@@ -190,9 +187,6 @@ rn_import_system() {
       #   PAUSE
       # ;;
       *)
-      CLEAR
-      echo $CHOICE
-      PAUSE
       EXIT_CANCEL
       ;;
       
