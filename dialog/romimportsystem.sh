@@ -45,7 +45,7 @@ rn_import_system() {
         CLEAR
         /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[$CHOICE]}
         PAUSE
-      # ;;
+      ;;
       # 03)
       #   CLEAR
       #   /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[3]}
