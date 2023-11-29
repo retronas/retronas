@@ -29,7 +29,7 @@ rn_import_system() {
     I=2
     for s in $SYSTEMS:
     do
-        SYSTEM_ARR[$I]=$s
+        SYSTEM_ARR[$I]=$S
         ((++I))
     done
 
@@ -187,8 +187,8 @@ rn_import_system() {
       #   PAUSE
       # ;;
       *)
-      EXIT_CANCEL
       PAUSE
+      EXIT_CANCEL
       ;;
       
     esac
