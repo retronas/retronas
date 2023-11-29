@@ -1,0 +1,51 @@
+#!/bin/bash
+
+###
+# The x86_64 version is pulled from the official github
+# The aarch64 version is manually built and hosted seperately
+#
+
+set -e
+
+APP=redumper
+DESTDIR=/opt/${APP}
+
+[ ! -d "${DESTDIR}" ] && mkdir -p "${DESTDIR}"
+
+dl_install() {
+    RELEASE=${1}
+    
+    [ -z "$RELEASE" ] && echo "Couldn't get release " && exit 1
+    RTMP=$(mktemp -d)
+    cd $RTMP
+    curl -sOJL "${RELEASE}"
+    unzip $(basename ${RELEASE})
+    mv redumper*Linux/bin/* $DESTDIR
+    cd ..
+    rm -rf $RTMP
+}
+
+get_x86_64() {
+    ORG=superg
+    REPO=redumper
+    RELEASE=$(curl -skJL https://api.github.com/repos/${ORG}/${REPO}/releases | jq -r ".[0].assets | map(select(.name | match (\"Linux\")))[] | .browser_download_url" )
+    dl_install $RELEASE
+}
+
+get_aarch64() {
+    URL=https://mameau.com/notes/retronas/redumper/aarch64/
+    PATTERN="redumper.*Linux-aarch64.zip"
+    RELEASE=$(curl -skJL $URL | grep -o "$PATTERN" | sort -r | head -n1)
+    dl_install $RELEASE
+}
+
+
+case $(uname -m) in
+    x86_64)
+        get_x86_64
+        ;;
+
+    aarch64)
+        get_aarch64
+        ;;
+esac

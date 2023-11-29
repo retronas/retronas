@@ -616,6 +616,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "sslcert"
+            },
+            {
+                "index":"62",
+                "title": "redumper",
+                "description": "Redumper project",
+                "id":"redumper",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "redumper"
             }
         ]
     }
