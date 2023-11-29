@@ -16,7 +16,7 @@
                 "type": "script",
                 "group":"",
                 "command": "romimport"
-            },                
+            },
             {
                 "index":"02",
                 "title": "Import By System",
