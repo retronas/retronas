@@ -41,7 +41,7 @@ rn_import_system() {
       01)
         EXIT_OK
       ;;
-      0[2-9]|[1-2][0-9]|30)
+      [0-9][0-9])
         CLEAR
         /opt/retronas/scripts/romimport.sh -t ${SYSTEM_ARR[10#$CHOICE]}
         PAUSE
