@@ -1,0 +1,92 @@
+{
+    "menu": 
+    {
+        "title": "OnDevice",
+        "description": "Choose an item to install",
+        "id":"ondevice",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "uCON64",
+                "description": "Multipurpose Swiss Army Knife Backup/Copier tool", 
+                "id":"ucon64",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ucon64"
+            },
+            {
+                "index": "03",
+                "title": "extract-xiso",
+                "description": "XISO Tool", 
+                "id":"extract-xiso",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "extract-xiso"
+            },
+            {
+                "index": "04",
+                "title": "hdl-dump",
+                "description": "Sony PS2 HDD Game management", 
+                "id":"hdldump",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hdldump"
+            },
+            {
+                "index": "05",
+                "title": "NBD client",
+                "description": "Network Block Device Client", 
+                "id":"nbd-client",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "nbd-client"
+            },
+            {
+                "index": "06",
+                "title": "pfsshell/pfsfuse",
+                "description": "PS2 HDD filesystem tools", 
+                "id":"pfsshell",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "pfsshell"
+            },
+            {
+                "index": "07",
+                "title": "cue2pops",
+                "description": "Convert PS1 images for use with POPS", 
+                "id":"cue2pops",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "cue2pops"
+            },
+            {
+                "index": "08",
+                "title": "pi1541",
+                "description": "Setup a pi1541 SD card", 
+                "id":"pi1541",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "pi1541"
+            }
+        ]
+    }
+}

@@ -1,0 +1,28 @@
+[Unit]
+Description=Internet Kermit Server
+
+[Service]
+# Note the - to make systemd ignore the exit code
+ExecStart=-/usr/sbin/iksd -A --dbfile:/var/run/iksd/iksd.db --syslog:5 --root:{{ retronas_path }} --anonymous:on
+
+# This is the part that makes it work like inetd
+StandardInput=socket
+StandardOutput=socket
+
+DynamicUser=no
+User=root
+Group=root
+
+# /usr, /boot, /etc read-only
+ProtectSystem=strict
+ProtectHome=true
+NoNewPrivileges=true
+RuntimeDirectory=iksd
+ReadWritePaths=/var/run/iksd /run/iksd /var/log
+ReadOnlyPaths={{ retronas_path }}
+
+# We can't establish new network connections
+RestrictAddressFamilies=AF_INET AF_INET6 AF_PACKET
+
+[Install]
+WantedBy=multi-user.target

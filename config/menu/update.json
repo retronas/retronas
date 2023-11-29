@@ -1,0 +1,82 @@
+{
+    "menu": 
+    {
+        "title": "Update",
+        "description": "Please select a tool to update",
+        "id":"update",
+        "prompt": "Update",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu",
+                "id":"",
+                "prompt": "", 
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "RetroNAS",
+                "description": "Update RetroNAS",
+                "id":"update-retronas",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "update-retronas"
+            },
+            {
+                "index":"03",
+                "title": "Rom Dir(s)",
+                "description": "Update core RetroNAS rom directories",
+                "id":"romdir",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "romdir"
+            },
+            {
+                "index":"04",
+                "title": "Extra Dir(s)",
+                "description": "Update extra RetroNAS directories (bios, saves etc)",
+                "id":"extradirs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "extradirs"
+            },
+            {
+                "index":"05",
+                "title": "GNU/Linux",
+                "description": "Update GNU/Linux Operating System packages",
+                "id":"update-system",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "update-system"
+            },
+            {
+                "index":"06",
+                "title": "History",
+                "description": "Update History for GNU/Linux Operating System packages",
+                "id":"update-system-history",
+                "prompt": "View",
+                "type": "script-static",
+                "group":"",
+                "command": "update-system-history"
+            },
+            {
+                "index":"07",
+                "title": "Branch",
+                "description": "Manage the active GIT branch, (test new features, etc)",
+                "id":"git-switch-branch",
+                "prompt": "Manage",
+                "type": "script-static",
+                "group":"",
+                "command": "git-switch-branch"
+            }
+        ]
+    }
+}

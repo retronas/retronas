@@ -1,0 +1,38 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "sslcert"
+    - my_file: "install_{{ my_name }}"
+    - my_cert: /etc/ssl/private/retronas.crt
+    - my_key: /etc/ssl/private/retronas.key
+
+    - packages:
+      - { name: "openssl", state: "latest" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - manage packages"
+    package:
+       name: "{{ item.name }}"
+       state: "{{ item.state }}"
+    with_items: "{{ packages }}"
+
+  - name: "{{ my_name }} - check self-signed cert"
+    stat:
+      path: "{{ my_cert }}"
+    register: self_signed_cert
+
+  - name: "{{ my_name }} - create self-signed cert"
+    shell:
+      cmd: /usr/bin/openssl req -nodes -new -x509  -keyout {{ my_key }} -out {{ my_cert }} -subj "/C=AU/ST=Sydney/L=retronas/O=retronas/OU=retronas/CN=retronas"
+    when: self_signed_cert is defined and
+          self_signed_cert.stat.exists is false
+  
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "sslcert"
+    module_state: "present"
