@@ -1,0 +1,42 @@
+{
+    "menu": 
+    {
+        "title": "pi1541",
+        "description": "Assists with setting up a pi1541 sd card device, provide a FAT32 formatted device and run setup",
+        "id":"pi1541",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install pi1541 setup script",
+                "id":"pi151",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "pi1541"
+            },
+            {
+                "index": "03",
+                "title": "Setup",
+                "description": "Run the setup script", 
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "pi1541"
+            }
+        ]
+    }
+}

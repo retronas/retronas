@@ -41,6 +41,7 @@ case $(basename $0 .sh) in
       # Start Service
         sudo systemctl reset-failed ${SERVICE}.service
         sudo systemctl restart ${SERVICE}.timer
+        sudo systemctl enable ${SERVICE}.timer
         sudo systemctl restart ${SERVICE}.service
     ;;
     hdparm-manager-query-service)
