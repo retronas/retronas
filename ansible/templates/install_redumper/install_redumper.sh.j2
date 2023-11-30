@@ -36,9 +36,8 @@ get_aarch64() {
     URL=https://mameau.com/notes/retronas/redumper/aarch64/
     PATTERN="redumper.*Linux-aarch64.zip"
     RELEASE=$(curl -skJL $URL | grep -o "$PATTERN" | sort -r | head -n1)
-    dl_install $RELEASE
+    dl_install $URL/$RELEASE
 }
-
 
 case $(uname -m) in
     x86_64)
