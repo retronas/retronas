@@ -19,6 +19,7 @@ system_map: "{{
   |union(system_apple)
   |union(system_arcade)
   |union(system_atari)
+  |union(system_audiosonic)
   |union(system_bally)
   |union(system_bandai)
   |union(system_bbc)
@@ -144,6 +145,8 @@ system_atari:
   - { src: "atari/lynx", last: "", mister: "AtariLynx", retropie: "", batocera: "lynx", recalbox: "lynx", retroarch: "Atari - Lynx", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarilynx", smdb: "Atari Lynx SMDB.txt", freestation: "" , analoguepocket: "", emudeck: "atarilynx", igdb: "lynx" }
   - { src: "atari/st", last: "", mister: "AtariST", retropie: "", batocera: "atarist", recalbox: "atarist", retroarch: "Atari - ST", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "atarist", smdb: "", freestation: "", analoguepocket: "", emudeck: "atarist", igdb: "atari-st" }
   - { src: "atari/xegs", last: "", mister: "", retropie: "", batocera: "xegs", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "atarixe", igdb: "" }
+system_audiosonic:
+  - { src: "audiosonic", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "" }
 system_bally:
   - { src: "bally/astrocade", last: "", mister: "Astrocade", retropie: "", batocera: "astrocde", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "astrocde", igdb: "astrocade" }
 system_bandai:
