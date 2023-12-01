@@ -36,6 +36,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "ps2_udpbd"
+            },
+            {
+                "index": "04",
+                "title": "network",
+                "description": "firewalld/dnsmasq config",
+                "id":"network",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network"
             }
         ]
     }

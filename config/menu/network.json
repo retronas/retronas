@@ -1,0 +1,62 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "HIGHLY EXPERIMENTAL||This menu will allow you to install firewall, dhcp and dns (dnsmasq) services. You may install these services as vanilla or install the retro/modern zones to provide isolation.||The default net is 10.99.1.0/24 for retro on eth0 while the modern net is connected over wlan0.||Traffic is forwarded from eth0 to wlan0 for internet access",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "firewalld",
+                "description": "Install basic firewalld (manual config)", 
+                "id":"firewalld",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "firewalld"
+            },
+            {
+                "index": "03",
+                "title": "dnsmasq",
+                "description": "Install basic dnsmasq (manual config), Note: may conflict with your existing network", 
+                "id":"dnsmasq",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dnsmasq"
+            },
+            {
+                "index": "04",
+                "title": "firewalld-zoning",
+                "description": "Install the firewalld retro (eth0)/modern (wlan0) zone", 
+                "id":"firewalld-zones",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "firewalld-zones"
+            },
+            {
+                "index": "05",
+                "title": "dnsmasq-retro",
+                "description": "Install dhcp, dns support for retro zone (10.99.1.0/24)", 
+                "id":"dnsmasq-retro",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dnsmasq-retro"
+            }
+        ]
+    }
+}
