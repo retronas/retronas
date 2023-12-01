@@ -1,22 +1,17 @@
 #!/bin/bash
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
 
 BINDIR=/opt/nabu
-PORT=${1:-8285}
-BIN=NABUInternetAdapter.exe
+BIN=NABU-Internet-Adapter-84
 
 cd $BINDIR
-/usr/bin/xvfb-run --auto-servernum mono $BIN &
-sleep 3
-PARENTPID=$(ps -ef | grep -E "xvfb-run.*$BIN.*" | grep -v grep | head -n1 | awk '{print $2}')
 
-if [ ! -z "$PARENTPID" ]
-then
-    SESSION=$(ps -ef | grep -E "$PARENTPID.*Xvfb" | head -n1 | awk '{print $9,$16}')
-    XDISPLAY=$(echo $SESSION | cut -d' ' -f1 )
-    XAUTH=$(echo $SESSION | cut -d' ' -f2 )
+LIB=libdl.so
+[ ! -f ${LIB} ] && ln -s /lib/x86_64-linux-gnu/${LIB}.2 ${LIB}
 
-    /usr/local/bin/x11vnc_wrapper.sh $XDISPLAY $XAUTH $PORT
-else
-    echo "Failed to find the xfvb session"
-    sleep 3
-fi
+
+DROP_ROOT
+
+$SUCOMMAND ./$BIN

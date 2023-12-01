@@ -1,0 +1,311 @@
+{
+    "menu": {
+        "title": "ROM Import by System",
+        "description": "Import a specific system.",
+        "id": "romimportsystem",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu",
+                "id": "",
+                "prompt": "",
+                "type": "menu",
+                "group": "",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "Import Atari 2600",
+                "description": "",
+                "id": "romimport-a2600",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "03",
+                "title": "Import PC Engine CD Redump Supplement",
+                "description": "",
+                "id": "romimport-pcecdrs",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "04",
+                "title": "Import N64",
+                "description": "",
+                "id": "romimport-n64",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "05",
+                "title": "Import NeoGeo Pocket",
+                "description": "",
+                "id": "romimport-ngp",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "06",
+                "title": "Import Sega SG-1000",
+                "description": "",
+                "id": "romimport-sg1000",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "07",
+                "title": "Import Colecovision",
+                "description": "",
+                "id": "romimport-cv",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "08",
+                "title": "Import Saturn",
+                "description": "",
+                "id": "romimport-saturn",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "09",
+                "title": "Import MegaDrive/Genesis",
+                "description": "",
+                "id": "romimport-md",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "10",
+                "title": "Import NeoGeo",
+                "description": "",
+                "id": "romimport-neogeo",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "11",
+                "title": "Import SNES/SuperFamicom",
+                "description": "",
+                "id": "romimport-snes",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "12",
+                "title": "Import Watara Supervision",
+                "description": "",
+                "id": "romimport-supervision",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "13",
+                "title": "Import PSX Redump Supplement",
+                "description": "",
+                "id": "romimport-psx",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "14",
+                "title": "Import Sega CD/Mega CD",
+                "description": "",
+                "id": "romimport-megacd",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "15",
+                "title": "Import Wonderswancolor",
+                "description": "",
+                "id": "romimport-wonderswancolor",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "16",
+                "title": "Import Master System",
+                "description": "",
+                "id": "romimport-segams",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "17",
+                "title": "Import Lynx",
+                "description": "",
+                "id": "romimport-lynx",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "18",
+                "title": "Import Gameboy Advance",
+                "description": "",
+                "id": "romimport-gba",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "19",
+                "title": "Import Gameboy Color",
+                "description": "",
+                "id": "romimport-gbc",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "20",
+                "title": "Import Vectrix",
+                "description": "",
+                "id": "romimport-vectrix",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "21",
+                "title": "Import Atari 7800",
+                "description": "",
+                "id": "romimport-a7800",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "22",
+                "title": "Import NeoGeo Pocket Color",
+                "description": "",
+                "id": "romimport-ngpc",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "23",
+                "title": "Import Gameboy",
+                "description": "",
+                "id": "romimport-gb",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "24",
+                "title": "Import Jaguar",
+                "description": "",
+                "id": "romimport-jaguar",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "25",
+                "title": "Import GameGear",
+                "description": "",
+                "id": "romimport-gg",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "26",
+                "title": "Import NES/Famicom",
+                "description": "",
+                "id": "romimport-nes",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "27",
+                "title": "Import Atari 5200",
+                "description": "",
+                "id": "romimport-a5200",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "28",
+                "title": "Import PC Engine",
+                "description": "",
+                "id": "romimport-pce",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "29",
+                "title": "Import Wonderswan",
+                "description": "",
+                "id": "romimport-wonderswan",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            },
+            {
+                "index": "30",
+                "title": "Import Famicom Disk System",
+                "description": "",
+                "id": "romimport-fds",
+                "prompt": "",
+                "type": "script",
+                "group": "romimport",
+                "command": "TOOL COMMAND"
+            }
+        ]
+    }
+}

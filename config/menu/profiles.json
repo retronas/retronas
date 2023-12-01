@@ -1,0 +1,32 @@
+{
+    "menu": 
+    {
+        "title": "Installation Profile(s)",
+        "description": "Available installation profiles||Profile Location: \"${OLDRNPATH}/config\"",
+        "id":"profiles",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Login",
+                "description": "Configure GOG credentials",
+                "id":"gog-password-menu",
+                "prompt": "",
+                "type": "script",
+                "group":"gogrepo",
+                "command": "gogrepo_login"
+            }
+        ]
+    }
+}

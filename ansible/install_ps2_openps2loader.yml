@@ -32,6 +32,16 @@
       - "VMC"
     notify: "{{ my_name }} - Install Samba"
 
+  - name: "{{ my_name }} - check old pops dir"
+    stat:
+      path: "{{ retronas_path }}/ps2/OpenPS2Loader/POPS"
+    register: old_pops
+
+  - name: "{{ my_name }} - rename old pops dir"
+    shell:
+      cmd: "mv {{ retronas_path }}/ps2/OpenPS2Loader/POPS {{ retronas_path }}/ps2/OpenPS2Loader/POPS-OLD"
+    when: old_pops.stat.isdir is true
+
   - name: "{{ my_name }} - build symlinks"
     file:
       src: "../../roms/{{ item.src }}"
@@ -52,7 +62,7 @@
 
   - name: "{{ my_name }} - configure retro shares"
     template:
-      src: "templates/{{ my_file }}/retronas_ps2.conf.j2"
+      src: "templates/{{  my_file }}/retronas_ps2.conf.j2"
       dest: /etc/samba/retronas_ps2.conf
       owner: root
       group: root

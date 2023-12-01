@@ -9,7 +9,11 @@
       - ckermit
 
     - systemd_units:
-      - { name: "inetd.service", enabled: yes, state: 'started' }
+      - { name: "iksd.socket", enabled: yes, state: 'restarted' }
+
+    - templates:
+      - { name: "iksd@.service", dest: "/etc/systemd/system" }
+      - { name: "iksd.socket", dest: "/etc/systemd/system" }
 
   tasks:
 
@@ -21,31 +25,22 @@
        name: "{{ packages }}"
        state: latest
 
-  - name: "{{ my_name }} - configure kermit path"
-    replace:
-      path: /etc/inetd.conf
-      regexp: (^.+)#(kermit.*--root:)(/srv/ftp)\s(.*)
-      replace: \2{{ retronas_path }}\4
-    notify: "{{ my_name }} - Restart service"
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
 
-  - name: "{{ my_name }} - enable inetd service"
-    command:
-      cmd: "update-inetd --enable {{ my_name }}"
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - enable startup services"
+  - name: "{{ my_name }} - manage startup services"
     service:
       name: "{{ item.name }}"
-      state: "{{ item.state }}"
-      enabled: "{{ item.enabled }}"
-    with_items: "{{ systemd_units }}"
-
-  handlers:
-
-  - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item.name }}"
-      state: restarted
+      state: "{{ item.state|default('stopped') }}"
+      enabled: "{{ item.enabled|default('no') }}"
+      daemon_reload: true
     with_items: "{{ systemd_units }}"
 
 - import_playbook: retronas_system_config.yml

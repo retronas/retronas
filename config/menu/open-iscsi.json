@@ -1,0 +1,72 @@
+{
+    "menu": 
+    {
+        "title": "iSCSI options",
+        "description": "Manage iSCSI targets",
+        "id":"open-iscsi",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install iSCSI support",
+                "id":"open-iscsi",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "open-iscsi"
+            },
+            {
+                "index":"03",
+                "title": "Targets",
+                "description": "List and login to iSCSI targets",
+                "id":"iscsi-manager-target-login",
+                "prompt": "Login",
+                "type": "script",
+                "group":"",
+                "command": "iscsi-manager-target-login"
+            },
+            {
+                "index":"04",
+                "title": "Start",
+                "description": "Start gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "open-iscsi"
+            },
+            {
+                "index":"05",
+                "title": "Stop",
+                "description": "Stop gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "open-iscsi"
+            },
+            {
+                "index":"06",
+                "title": "Status",
+                "description": "Query gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "open-iscsi"
+            }
+        ]
+    }
+}

@@ -19,8 +19,8 @@
       - libneon27-dev 
       - libarchive-dev 
       - cmake 
-      - g++-9
-      - gcc-9
+      - g++
+      - gcc
       - git
 
 

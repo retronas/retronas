@@ -17,6 +17,7 @@ rm -rf Netatalk-2.x
 # Clone the source code from SourceForge
 git clone https://github.com/rdmark/Netatalk-2.x.git
 cd Netatalk-2.x
+git checkout $(git tag | grep netatalk-2 | tail -n1)
 
 ./bootstrap
 ./configure --prefix=${IDIR} --enable-systemd --enable-ddp --enable-a2boot --enable-cups --enable-timelord --enable-zeroconf

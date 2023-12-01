@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+REPO="https://gitlab.com/ps2max/udpbd-server.git"
+BASE=$( basename $REPO .git )
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading {{ my_name }} source code... from $REPO"
+
+git clone $REPO
+cd $BASE
+make
+
+if [ -f $BASE ]
+then
+    echo "Moving binary to RetroNAS bin dir..."
+    mkdir -p "${BINDIR}" 2>/dev/null
+    mv -vf $BASE "${BINDIR}"/
+
+    echo "Cleaning up..."
+    rm -rf "${SRCDIR}" 
+
+    echo "All done!"
+else
+    echo "Build failed"
+fi

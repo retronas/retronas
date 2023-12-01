@@ -60,7 +60,7 @@ rn_gog_chooser() {
     07)
       # sync and download
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${GOGOS}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS}
       ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;

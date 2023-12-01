@@ -1,6 +1,7 @@
 # Dependencies
 - import_playbook: install_romdir.yml
 - import_playbook: install_extradirs.yml
+- import_playbook: install_samba.yml
 
 - hosts: localhost
   gather_facts: no
@@ -15,6 +16,21 @@
       - { name: "savestates", enabled: yes,  generic: "savestates",  systems: yes }
       - { name: "BIOS",       enabled: yes,  generic: "bios",        systems: yes }
       - { name: "wallpapers", enabled: yes,  generic: "wallpapers",  systems: no  }
+
+    - save_overrides:
+      - { name: "GAMEBOY2P", src: "nintendo/gameboy2p" }
+      - { name: "GBA2P", src: "nintendo/gameboyadvance2p" }
+
+    - templates:
+      - { name: "retronas_mister.conf", dest: "/etc/samba" }
+      - { name: "retronas-mister-dirs.service", dest: "/etc/systemd/system" }
+      - { name: "retronas-mister-dirs.timer", dest: "/etc/systemd/system" }
+
+    - systemd_units:
+      - { name: "retronas-mister-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+      - { name: "retronas-mister-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
+
+    - dirs_only: false
 
   tasks:
 
@@ -31,7 +47,6 @@
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build top level share paths"
     file:
@@ -44,11 +59,10 @@
       "{{ top_level_paths }}"
     when: 
       - item.enabled is true
-    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build layout list (set fact)"
     set_fact:
-      path_list: "{{ path_list|default([]) }} + ['ln -sf ../../{{ item.1.generic|lower }}/{{ item.0.src }} {{ retronas_path }}/mister/{{ item.1.name }}/{{ item.0.mister }};' ]"
+      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/mister/' + item.1.name + '/' + item.0.mister + ';' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
@@ -59,7 +73,37 @@
     shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
-    notify: "{{ my_name }} - Install Samba"
+
+  - name: "{{ my_name }} - create custom save directories"
+    file:
+      dest: "{{ retronas_path }}/{{ item.1 }}/{{ item.0.src|lower }}"
+      state: directory
+    with_nested: 
+      - "{{ save_overrides }}"
+      - ["saves", "savestates"]
+
+  - name: "{{ my_name }} - create custom save links"
+    file:
+      src: "../../{{ item.1 }}/{{ item.0.src|lower }}"
+      dest: "{{ retronas_path }}/mister/{{ item.1 }}/{{ item.0.name }}"
+      state: link
+    with_nested: 
+      - "{{ save_overrides }}"
+      - ["saves", "savestates"]
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    when: dirs_only is false
+    notify: 
+      - "{{ my_name }} daemon-reload"
+      - "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ini_file:
@@ -67,18 +111,14 @@
       section: mister
       option: "include"
       value: "/etc/samba/retronas_mister.conf"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure retro shares"
-    template:
-      src: "templates/{{ my_file }}/retronas_mister.conf.j2"
-      dest: /etc/samba/retronas_mister.conf
-      owner: root
-      group: root
-      mode: '0644'
+    when: dirs_only is false
     notify: "{{ my_name }} - Install Samba"
 
   handlers:
+
+  - name: "{{ my_name }} daemon-reload"
+    systemd:
+      daemon_reload: yes
 
   - name: "{{ my_name }} - Install Samba"
     set_fact:

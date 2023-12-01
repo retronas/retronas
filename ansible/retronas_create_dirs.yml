@@ -6,7 +6,7 @@
 
 - name: "{{ my_name }} - build layout list (set fact)"
   set_fact:
-    path_list: "{{ path_list|default([]) }} + [ '{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src if item.1.systems is true }}' ]"
+    path_list: "{{ path_list|default([]) + [ retronas_path + '/' + item.1.name + '/' + item.0.src if item.1.systems is true else '' ] }}"
   no_log: yes
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when: item.1.enabled is true
@@ -20,7 +20,7 @@
 
 - name: "{{ my_name }} - build systems directory layout (set fact)"
   set_fact:
-    link_list: "{{ link_list|default([]) }} + ['ln -sf {{ retronas_path }}/{{ item.1.name|lower }}/{{ item.0.src }} {{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }};' ]"
+    link_list: "{{ link_list|default([]) + [ 'ln -sfT ' + retronas_path  + '/' + item.1.name|lower + '/' + item.0.src + ' ' + retronas_path  + '/' +  item.1.name + '/' + item.0.dest + ';' ] }}"
   loop: "{{ system_links|product(top_level_paths)|list }}"
   when:
     - item.1.enabled is true

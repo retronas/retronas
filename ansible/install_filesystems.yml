@@ -15,7 +15,7 @@
       - nfs-common
       - e2fsprogs
       - dosfstools
-      - curlftpfs
+      #- curlftpfs
       - sshfs
       - udisks2
       - udisks2-btrfs

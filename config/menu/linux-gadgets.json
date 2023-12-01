@@ -1,0 +1,72 @@
+{
+    "menu": 
+    {
+        "title": "Linux Gadgets",
+        "description": "Manage Linux OTG Gadgets",
+        "id":"linux-gadgets",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install Gadget support",
+                "id":"linux-gadgets",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "linux-gadgets"
+            },
+            {
+                "index":"03",
+                "title": "Mass Storage",
+                "description": "Manage g_mass_storage gadgets",
+                "id":"gadget-mass-storage-manage",
+                "prompt": "Manage",
+                "type": "script",
+                "group":"",
+                "command": "gadget-mass-storage-manage"
+            },
+            {
+                "index":"04",
+                "title": "Start",
+                "description": "Start gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "retronas-gadget.path"
+            },
+            {
+                "index":"05",
+                "title": "Stop",
+                "description": "Stop gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "retronas-gadget.path"
+            },
+            {
+                "index":"06",
+                "title": "Status",
+                "description": "Query gadget",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "retronas-gadget*"
+            }
+        ]
+    }
+}

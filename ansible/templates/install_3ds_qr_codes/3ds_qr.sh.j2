@@ -13,7 +13,7 @@ CIAURL=$( echo "${MYURL}/cia/$RELDIR/${BASENAME}" | sed 's/\ /%20/g' )
 QRURL=$( echo "${MYURL}/qr/$RELDIR/${BARENAME}.png" | sed 's/\ /%20/g' )
 # Generate QR code
 echo "Generating QR for ${BARENAME} ..."
-qrencode -o "${QRDIR}/${BARENAME}.png" -s 10 "${CIAURL}"
+qrencode -o "${QRDIR}/${BARENAME}.png" -s 10 -8 "${CIAURL}"
 # Generate HTML file
 echo "\
 <html>\

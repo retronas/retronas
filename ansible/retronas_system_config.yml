@@ -6,6 +6,7 @@
     my_name: "retronas user config setup"
     system_user_dirs:
       - config
+      - config/modules
       
     general_options:
       - { option: "title", value: "RetroNAS Packages"}

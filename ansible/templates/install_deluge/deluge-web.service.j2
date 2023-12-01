@@ -9,7 +9,7 @@ User={{ retronas_user }}
 Group={{ retronas_user }}
 UMask=007
 
-ExecStart=/usr/bin/deluge-web -d
+ExecStart=/usr/bin/deluge-web -d -c /var/lib/deluged/config
 
 Restart=on-failure
 
