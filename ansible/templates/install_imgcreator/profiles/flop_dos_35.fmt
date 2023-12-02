@@ -1,0 +1,8 @@
+# A 3.5" DOS floppy is 2 sides, 80 tracks, 18 sectors per track, 512 bytes per sector
+FS=FAT12
+BYTESIZE=512
+TRACKS=80
+SECTORS=18
+SIDES=2
+EXT=.dsk
+SEEK=
