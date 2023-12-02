@@ -7,28 +7,29 @@
 
   vars:
     - my_name: "dnsmasq-retro"
+    - my_service: dnsmasq
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "dchp-eth0.conf",           dest: "/etc/{{ my_name }}.d/retro", force: no }
-      - { name: "dhcp-static-leases.conf",  dest: "/etc/{{ my_name }}.d/retro", force: no }
-      - { name: "dhcp.conf",                dest: "/etc/{{ my_name }}.d/retro", force: no }
-      - { name: "dns.conf",                 dest: "/etc/{{ my_name }}.d/retro", force: no } 
-      - { name: "dnsmasq.conf",             dest: "/etc/{{ my_name }}.d/retro", force: no }
-      - { name: "interfaces.conf",          dest: "/etc/{{ my_name }}.d/retro", force: no }
-      - { name: "ipv6.conf",                dest: "/etc/{{ my_name }}.d/retro", force: no }
+      - { name: "dchp-eth0.conf",           dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "dhcp-static-leases.conf",  dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "dhcp.conf",                dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "dns.conf",                 dest: "/etc/{{ my_service }}.d/retro", force: no } 
+      - { name: "dnsmasq.conf",             dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "interfaces.conf",          dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "ipv6.conf",                dest: "/etc/{{ my_service }}.d/retro", force: no }
       - { name: "dnsmasq-retro.service",    dest: "/src/systemd/system"}
 
 
     - paths:
-      - { name: "{{ my_name }}.d",  dest: "/etc",                 state: "directory", mode: "0755" }
-      - { name: "retro",            dest: "/etc/{{ my_name }}.d", state: "directory", mode: "0755" }
+      - { name: "{{ my_service }}.d",       dest: "/etc",                       state: "directory", mode: "0755" }
+      - { name: "retro",                    dest: "/etc/{{ my_service }}.d",    state: "directory", mode: "0755" }
 
 
     - net_settings:
-      - { option: "interface", value: "eth0", match_regex: "^interface eth0$", after_regex: "", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "static", value: "ip_address=10.99.1.1/24", after_regex: "^interface eth0$", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf"  }
-      - { option: "static", value: "domain_name_servers=10.99.1.1", after_regex: "^interface ip_address\=.+$", before_regex: "", state: "present", dest: "/etc/dhcpcd.conf"  }
+      - { option: "interface",  value: "eth0",                           match_regex: "^interface eth0$",  after_regex: "",                            before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'ip_address\=10.99.1.1/24',                                         after_regex: "^interface eth0$",            before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'domain_name_servers\=10.99.1.1',                                   after_regex: "^interface ip_address=.+$",   before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
 
 
   tasks:
@@ -40,7 +41,7 @@
 
   - name: "{{ my_name }} - checking for dhcpcd support"
     meta: end_play
-    when: dhcpcd_check.stat.exists == no
+    when: dhcpcd_check.stat.exists == false
 
   - name: "{{ my_name }} - mask default dnsmasq service" 
     service:
@@ -61,7 +62,7 @@
 
   - name: "{{ my_name }} - templates"
     template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      src: "templates/{{ my_file }}/{{ item.name }}"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -71,7 +72,7 @@
     notify: "{{ my_name }} - Restart dnsmasq"
 
   - name: "{{ my_name }} - setup dhcpcd"
-    linefile:
+    lineinfile:
       path: "{{ item.dest }}"
       search_string: "{{ item.match_regex | default('^$') }}"
       insertbefore: "{{ item.before_regex | default('^$') }}"

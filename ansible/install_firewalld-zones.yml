@@ -6,19 +6,25 @@
 
   vars:
     - my_name: "firewalld-zones"
+    - my_service: firewalld
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_name }}/policies",  force: no }
-      - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_name }}/services",  force: no }
-      - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no }
-      - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no } 
-      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
-      - { name: "override.conf",            sub: "workarounds", dest: "/src/systemd/system" }
+      - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_service }}/policies",                 force: no }
+      - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_service }}/services",                 force: no }
+      - { name: "ps3netsrv.xml",            sub: "services",    dest: "/etc/{{ my_service }}/services",                 force: no }
+      - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no }
+      - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no } 
+      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",                                mode: '0750' }
+      - { name: "override.conf",            sub: "workarounds", dest: "/etc/systemd/system/{{ my_service }}.service.d" }
 
     - paths:
-      - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
-      - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}",               dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}",               dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}/policies",      dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}/services",      dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_service }}/zones",         dest: "/etc",                  state: "directory", mode: "0750" }
 
   tasks:
 
@@ -33,14 +39,14 @@
 
   - name: "{{ my_name }} - templates"
     template:
-      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}.j2"
+      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
-    notify: "{{ my_name }} Reload firewalld"
+    notify: "{{ my_name }} - Reload firewalld"
 
   handlers:
   - name: "{{ my_name }} - Reload firewalld"

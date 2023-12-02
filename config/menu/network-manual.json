@@ -1,9 +1,9 @@
 {
-    "menu": 
+    "menu":    
     {
-        "title": "EXPERIMENTAL",
-        "description": "WARNING these tools are very EXPERIMENTAL and could break your system or destroy your data!||Do not use these unless you are comfortable with losing everthing",
-        "id":"experimental",
+        "title": "network",
+        "description": "HIGHLY EXPERIMENTAL||Manually install networking tools",
+        "id":"network",
         "prompt": "Install",
         "type": "menu",
         "items": [
@@ -19,23 +19,23 @@
             },
             {
                 "index": "02",
-                "title": "webui",
-                "description": "Experimental retronas webui (cockpit)", 
-                "id":"cockpit-retronas",
+                "title": "firewalld",
+                "description": "Basic firewalld", 
+                "id":"firewalld",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "cockpit-retronas"
+                "command": "firewalld"
             },
             {
                 "index": "03",
-                "title": "UDPBD",
-                "description": "PS2 block device service",
-                "id":"ps2_udpbd",
+                "title": "dnsmasq",
+                "description": "Basic dnsmasq", 
+                "id":"dnsmasq",
                 "prompt": "",
-                "type": "dialog",
+                "type": "install",
                 "group":"",
-                "command": "ps2_udpbd"
+                "command": "dnsmasq"
             }
         ]
     }

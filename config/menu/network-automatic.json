@@ -1,9 +1,9 @@
 {
-    "menu": 
+    "menu":    
     {
-        "title": "EXPERIMENTAL",
-        "description": "WARNING these tools are very EXPERIMENTAL and could break your system or destroy your data!||Do not use these unless you are comfortable with losing everthing",
-        "id":"experimental",
+        "title": "network",
+        "description": "HIGHLY EXPERIMENTAL||Install networking using pre-selected modes of operation",
+        "id":"network",
         "prompt": "Install",
         "type": "menu",
         "items": [
@@ -19,23 +19,23 @@
             },
             {
                 "index": "02",
-                "title": "webui",
-                "description": "Experimental retronas webui (cockpit)", 
-                "id":"cockpit-retronas",
+                "title": "firewalld-zoning",
+                "description": "retro (eth0)/modern (wlan0) zone", 
+                "id":"firewalld-zones",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "cockpit-retronas"
+                "command": "firewalld-zones"
             },
             {
                 "index": "03",
-                "title": "UDPBD",
-                "description": "PS2 block device service",
-                "id":"ps2_udpbd",
+                "title": "dnsmasq-retro",
+                "description": "DHCP, DNS support for retro zone", 
+                "id":"dnsmasq-retro",
                 "prompt": "",
-                "type": "dialog",
+                "type": "install",
                 "group":"",
-                "command": "ps2_udpbd"
+                "command": "dnsmasq-retro"
             }
         ]
     }

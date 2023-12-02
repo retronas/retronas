@@ -59,16 +59,6 @@
             },
             {
                 "index": "06",
-                "title": "OnDevice",
-                "description": "On-Device Management Tools",
-                "id":"ondevice",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "ondevice"
-            },
-            {
-                "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",
                 "id":"experimental",
@@ -76,6 +66,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "experimental"
+            },
+            {
+                "index": "07",
+                "title": "Network",
+                "description": "highly experimental!",
+                "id":"network",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network"
             },
             {
                 "index": "99",
