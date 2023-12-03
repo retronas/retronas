@@ -1,0 +1,15 @@
+#!/bin/bash
+
+APP=amitools
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="/usr/local/sbin"
+
+BINS=(
+    affsck
+    mkaffs
+)
+
+pip3 install cython
+pip3 install -U git+https://github.com/cnvogelg/${APP}.git
+
+echo "All done!"

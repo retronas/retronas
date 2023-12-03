@@ -636,6 +636,16 @@
                 "type": "install",
                 "group":"",
                 "command": "affstools"
+            },
+            {
+                "index":"64",
+                "title": "amitools",
+                "description": "Various tools for using AmigaOS programs on other platforms",
+                "id":"amitools",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "amitools"
             }
         ]
     }
