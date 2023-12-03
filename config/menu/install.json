@@ -646,6 +646,16 @@
                 "type": "install",
                 "group":"",
                 "command": "amitools"
+            },
+            {
+                "index":"65",
+                "title": "curlftpfs",
+                "description": "Mount ftp server as a filesystem",
+                "id":"curlftpfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "curlftpfs"
             }
         ]
     }
