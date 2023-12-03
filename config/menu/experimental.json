@@ -36,6 +36,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "ps2_udpbd"
+            },
+            {
+                "index": "04",
+                "title": "imgcreator",
+                "description": "Create images for use withdevices",
+                "id":"imgcreator",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "imgcreator"
             }
         ]
     }

@@ -1,0 +1,42 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "imgcreator"
+    - my_file: "install_{{ my_name }}"
+
+    - templates:
+      - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
+    - paths:
+      - { name: "formats", dest: "{{ retronas_path }}/config", state: "directory", mode: "0755"}
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - Profiles"
+    template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: "{{ item.owner|default({{ retronas_user }}) }}"
+      group: "{{ item.group|default({{ retronas_user }}) }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_filetree: "templates/profile"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "imgcreator"
+    module_state: "present"

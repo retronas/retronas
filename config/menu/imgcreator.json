@@ -1,0 +1,42 @@
+{
+    "menu": 
+    {
+        "title": "imgcreator",
+        "description": "Creator image files for user with devices",
+        "id":"imgcreator",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install imgcreator script and profiles",
+                "id":"imgcreator",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "imgcreator"
+            },
+            {
+                "index":"03",
+                "title": "profiles",
+                "description": "select from premade profiles",
+                "id":"imgcreator-profiles",
+                "prompt": "",
+                "type": "modal",
+                "group":"",
+                "command": "imgcreator-profiles"
+            }
+        ]
+    }
+}
