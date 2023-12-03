@@ -626,6 +626,16 @@
                 "type": "install",
                 "group":"",
                 "command": "redumper"
+            },
+            {
+                "index":"63",
+                "title": "affstools",
+                "description": "Amiga Fast Filesystem tools",
+                "id":"affstools",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "affstools"
             }
         ]
     }
