@@ -138,6 +138,9 @@ then
                 [ ! -z "$VOLUME" ] && FCLI_OPTS+=" -L ${VOLUME}"
                 mke2fs -t ${PARTS[$PART]} $FCLI_OPTS "${DEVNAME}${PARTMAP}"
                 ;;
+            #affs[0-7])
+            #    parted -s -- $FCLI_OPTS "${DEVNAME}${PARTMAP}"
+            #    ;;
             *)
             error "Unsupported: ${PARTS[$PART]}"
             ;;
