@@ -10,8 +10,7 @@
     - my_packages:
       - gnupg
       - aria2
-
-    - debfile: debian-archive-keyring_2023.4_all.deb
+      - curl
 
   tasks:
 
@@ -23,16 +22,23 @@
        name: "{{ my_packages }}"
        state: latest
 
+  - name: "{{ my_name }} - discover signing key"
+    shell:
+      cmd: curl -skL http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/ | grep -oP "href=\"debian-archive-keyring.+.deb\">" | sed -r 's/href=\"(debian-archive.+all.deb)\">/\1/' | tail -n1
+    register: debian_signing_key
+    when: ansible_distribution == "Debian"
+
   - name: "{{ my_name }} - download Debian signing keys"
     shell:
       chdir: "/tmp"
-      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/{{ debfile }} https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/{{ debfile }}"
-    when: ansible_distribution == "Debian"
+      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }} https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }}"
+    when: ansible_distribution == "Debian" and
+          debian_signing_key is defined
 
   - name: "{{ my_name }} - install Debian signing keys"
     shell:
       chdir: "/tmp"
-      cmd: "dpkg -i {{ debfile }}"
+      cmd: "dpkg -i {{ debian_signing_key.stdout }}"
     when: ansible_distribution == "Debian"
 
   - name: "{{ my_name }} - Configure APT repo"
