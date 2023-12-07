@@ -15,6 +15,7 @@
     - my_packages:
       - git
       - coreutils
+      - unzip
 
     - my_arch: "x86_64"
 
