@@ -656,6 +656,16 @@
                 "type": "install",
                 "group":"",
                 "command": "curlftpfs"
+            },
+            {
+                "index":"66",
+                "title": "macproxy",
+                "description": "Proxy for retro computers",
+                "id":"macproxy",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "macproxy"
             }
         ]
     }
