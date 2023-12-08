@@ -666,6 +666,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "macproxy"
+            },
+            {
+                "index":"65",
+                "title": "wrp",
+                "description": "Proxy for retro computers, uses image maps",
+                "id":"wrp",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "wrp"
             }
         ]
     }
