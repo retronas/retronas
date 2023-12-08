@@ -668,7 +668,7 @@
                 "command": "macproxy"
             },
             {
-                "index":"65",
+                "index":"67",
                 "title": "wrp",
                 "description": "Proxy for retro computers, uses image maps",
                 "id":"wrp",
