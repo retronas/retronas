@@ -28,7 +28,7 @@
 
   - name: "{{ my_name }} - create self-signed cert"
     shell:
-      cmd: /usr/bin/openssl req -nodes -new -x509  -keyout {{ my_key }} -out {{ my_cert }} -subj "/C=AU/ST=Sydney/L=retronas/O=retronas/OU=retronas/CN=retronas"
+      cmd: /usr/bin/openssl req -nodes -new -x509  -keyout {{ my_key }} -out {{ my_cert }} -subj "/C=AU/ST=Sydney/L=retronas/O=retronas/OU=retronas/CN=retronas" -days 3660
     when: self_signed_cert is defined and
           self_signed_cert.stat.exists is false
   
