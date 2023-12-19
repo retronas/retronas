@@ -1,0 +1,7 @@
+# https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
+BYTESIZE=256
+TRACKS=35
+SECTORS=13
+SIDES=1
+EXT=.dsk
+SEEK=
