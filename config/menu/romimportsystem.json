@@ -14,7 +14,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group": "",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -24,7 +25,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "03",
@@ -34,7 +36,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "04",
@@ -44,7 +47,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "05",
@@ -64,7 +68,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "07",
@@ -74,7 +79,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "08",
@@ -84,7 +90,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "09",
@@ -94,7 +101,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "10",
@@ -104,7 +112,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "11",
@@ -114,7 +123,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "12",
@@ -124,7 +134,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "13",
@@ -134,7 +145,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "14",
@@ -144,7 +156,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "15",
@@ -154,7 +167,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "16",
@@ -164,7 +178,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "17",
@@ -174,7 +189,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "18",
@@ -184,7 +200,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "19",
@@ -194,7 +211,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "20",
@@ -204,7 +222,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "21",
@@ -214,7 +233,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "22",
@@ -224,7 +244,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "23",
@@ -234,7 +255,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "24",
@@ -244,7 +266,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "25",
@@ -264,7 +287,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "27",
@@ -274,7 +298,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "28",
@@ -284,7 +309,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "29",
@@ -294,7 +320,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index": "30",
@@ -304,7 +331,8 @@
                 "prompt": "",
                 "type": "script",
                 "group": "romimport",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             }
         ]
     }

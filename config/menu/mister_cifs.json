@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "mister_cifs"
+                "command": "mister_cifs",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "service_enable_start",
                 "group":"",
-                "command": "retronas-mister-dirs.timer"
+                "command": "retronas-mister-dirs.timer",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_disable_stop",
                 "group":"",
-                "command": "retronas-mister-dirs.timer"
+                "command": "retronas-mister-dirs.timer",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "retronas-mister-dirs*"
+                "command": "retronas-mister-dirs*",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "retronas-mister-dirs.service"
+                "command": "retronas-mister-dirs.service",
+                "args": ""
             }
         ]
     }

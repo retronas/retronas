@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "macproxy"
+                "command": "macproxy",
+                "args": ""
             },
             {
                 "index":"20",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "macproxy"
+                "command": "macproxy",
+                "args": ""
             },
             {
                 "index":"21",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "macproxy"
+                "command": "macproxy",
+                "args": ""
             },
             {
                 "index":"22",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "macproxy"
+                "command": "macproxy",
+                "args": ""
             }
         ]
     }

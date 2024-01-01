@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "config"
+                "command": "config",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "install"
+                "command": "install",
+                "args": ""
             },
             {
                 "index": "04",
@@ -55,7 +58,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "tools"
+                "command": "tools",
+                "args": ""
             },
             {
                 "index": "06",
@@ -65,7 +69,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "ondevice"
+                "command": "ondevice",
+                "args": ""
             },
             {
                 "index": "50",
@@ -75,7 +80,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "experimental"
+                "command": "experimental",
+                "args": ""
             },
             {
                 "index": "99",
@@ -85,7 +91,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "update"
+                "command": "update",
+                "args": ""
             }
         ]
     }

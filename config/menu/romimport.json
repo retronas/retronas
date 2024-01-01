@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "romimport"
+                "command": "romimport",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "modal",
                 "group":"",
-                "command": "romimportsystem"
+                "command": "romimportsystem",
+                "args": ""
             }
         ]
     }

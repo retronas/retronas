@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "cockpit-retronas"
+                "command": "cockpit-retronas",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "ps2_udpbd"
+                "command": "ps2_udpbd",
+                "args": ""
             }
         ]
     }

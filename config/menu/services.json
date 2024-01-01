@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type":"script-static",
                 "group":"",
-                "command": "service-samba"
+                "command": "service-samba",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "netatalk"
+                "command": "netatalk",
+                "args": ""
             },
             {
                 "index": "04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "etherdfs"
+                "command": "etherdfs",
+                "args": ""
             },
             {
                 "index": "05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "lighttpd"
+                "command": "lighttpd",
+                "args": ""
             },
             {
                 "index": "06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "proftpd"
+                "command": "proftpd",
+                "args": ""
             },
             {
                 "index": "07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "tftpd-hpa"
+                "command": "tftpd-hpa",
+                "args": ""
             },
             {
                 "index": "08",
@@ -85,7 +92,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "ssh"
+                "command": "ssh",
+                "args": ""
             },
             {
                 "index": "09",
@@ -95,7 +103,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "inetd"
+                "command": "inetd",
+                "args": ""
             },
             {
                 "index": "12",
@@ -105,7 +114,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "tnfsd"
+                "command": "tnfsd",
+                "args": ""
             },
             {
                 "index": "32",
@@ -114,7 +124,8 @@
                 "id":"",
                 "prompt": "",
                 "type":"service_status",
-                "command": "ps3netsrv"
+                "command": "ps3netsrv",
+                "args": ""
             },
             {
                 "index": "37",
@@ -124,7 +135,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "fspd"
+                "command": "fspd",
+                "args": ""
             },
             {
                 "index": "50",
@@ -134,7 +146,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "syncthing*"
+                "command": "syncthing*",
+                "args": ""
             },
             {
                 "index": "51",
@@ -144,7 +157,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "cockpit"
+                "command": "cockpit",
+                "args": ""
             },
             {
                 "index": "52",
@@ -154,7 +168,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "webone"
+                "command": "webone",
+                "args": ""
             },
             {
                 "index": "53",
@@ -164,7 +179,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "dreampi"
+                "command": "dreampi",
+                "args": ""
             },
             {
                 "index": "54",
@@ -174,7 +190,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "netlink"
+                "command": "netlink",
+                "args": ""
             },
             {
                 "index": "55",
@@ -184,7 +201,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "inetd"
+                "command": "inetd",
+                "args": ""
             },
             {
                 "index": "56",
@@ -194,7 +212,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "ethflopd"
+                "command": "ethflopd",
+                "args": ""
             },
             {
                 "index": "57",
@@ -204,7 +223,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "nabu"
+                "command": "nabu",
+                "args": ""
             },
             {
                 "index": "58",
@@ -214,7 +234,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "ntp"
+                "command": "ntp",
+                "args": ""
             }
         ]
     }

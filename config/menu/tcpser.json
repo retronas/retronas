@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "tcpser"
+                "command": "tcpser",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "tcpser_edit"
+                "command": "tcpser_edit",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "tcpser_edit/VIRTUAL"
+                "command": "tcpser_edit/VIRTUAL",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "tcpser_status/START"
+                "command": "tcpser_status/START",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "tcpser_status/STATUS"
+                "command": "tcpser_status/STATUS",
+                "args": ""
             },
             {
                 "index":"07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "tcpser_status/STOP"
+                "command": "tcpser_status/STOP",
+                "args": ""
             }
         ]
     },
@@ -95,7 +102,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -105,7 +113,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"03",
@@ -115,7 +124,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"04",
@@ -125,7 +135,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"05",
@@ -135,7 +146,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"06",
@@ -145,7 +157,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"06",
@@ -155,7 +168,8 @@
                 "prompt": "",
                 "type": "input:dropdown:disabled",
                 "group":"tcpser",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             }
         ]
     },
@@ -175,7 +189,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "01",
@@ -185,7 +200,8 @@
                 "prompt": "",
                 "type": "input:input",
                 "group":"",
-                "command": ""
+                "command": "",
+                "args": ""
             }
         ]
     }
