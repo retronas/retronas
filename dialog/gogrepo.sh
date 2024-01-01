@@ -77,9 +77,9 @@ rn_gog_chooser() {
 rn_gog_setos() {
   source $_CONFIG
 
-  local MENU_NAME=gogrepo-setupos
-  READ_MENU_JSON "${MENU_NAME}"
-  READ_MENU_TDESC "${MENU_NAME}"
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "gogrepo-setupos"
+  READ_MENU_TDESC "${MENU_NAME}" "gogrepo-setupos"
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
   case ${CHOICE} in
