@@ -1,0 +1,41 @@
+#!/bin/bash
+# grab a local copy of the the sidecart db
+
+BASE_URL=http://ataristdb.sidecart.xyz
+DBDIR={{ base_path }}/sidecart/db
+WAIT=1
+
+
+_dlfile() {
+    [ -f ${1}.csv ] && rm ${1}.csv
+    wget -c -nc -nH -x "${BASE_URL}/${1}"
+}
+
+# Update db first
+{{ retronas_root }}/scripts/atarist-sidecart-updatedb.sh
+
+# Process Floppies DB
+cd {{ base_path }}/floppies
+for ENTRY in $(ls ${DBDIR})
+do
+    for ITEM in $(cat "${DBDIR}/${ENTRY}" | awk -F';' '{print $6}' | sed 's/"//g' | sed  's/\r$//' )
+    do
+        _dlfile $ITEM
+        sleep ${WAIT}
+    done
+done
+
+# Process ROMs json data
+cd /tmp
+_dlfile https://raw.githubusercontent.com/diegoparrilla/atarist-sidecart-raspberry-pico/main/roms/roms.json
+
+# dl ROMs
+cd {{ base_path }}/roms
+for URL in $(cat /tmp/roms.json | jq -r '.[].url')
+do
+    _dlfile $ITEM
+    sleep ${WAIT}
+done
+
+[ -f /tmp/roms.json ] && rm -f /tmp/roms.json
+chown -R {{ retronas_user }}:{{ retronas_group }} {{ base_path }}

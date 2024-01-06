@@ -39,6 +39,17 @@
                 "group":"",
                 "command": "ps2_udpbd",
                 "args": ""
+            },
+            {
+                "index": "04",
+                "title": "Sidecart",
+                "description": "Atari ST sidecart support",
+                "id":"sidecart",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "atarist-sidecart",
+                "args": ""
             }
         ]
     }
