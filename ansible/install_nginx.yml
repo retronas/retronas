@@ -28,6 +28,8 @@
       systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
+      site_enable: ""
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -107,6 +109,14 @@
     with_items: "{{ templates }}"
     when: item.enable is defined and 
           item.enable == "yes"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable this site"
+    file:
+      src: "{{ nginx_sites_available }}/{{ site_enable }}"
+      dest: "{{ nginx_sites_enabled }}/{{ site_enable }}"
+      state: "link"
+    when: site_enable | length > 0
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - disable sites"

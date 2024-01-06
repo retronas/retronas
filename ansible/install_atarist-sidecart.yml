@@ -31,6 +31,8 @@
       - { name: "{{ my_name }}-updatedb.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}-mirrordb.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}-generate-roms.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "99-retronas-sidecart.conf", dest: "/etc/nginx/sites-available" }
+      - { name: "index.html", dest: "{{ base_path }}/sidecart", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
   tasks:
 
@@ -69,7 +71,7 @@
     with_items: "{{ templates }}"
     notify: 
       - "{{ my_name }} daemon-reload"
-      - "{{ my_name }} - Install Samba"
+      - "{{ my_name }} - Install changed"
 
   - name: "{{ my_name }} - get update script"
     shell: curl -kLso "{{ script_dest }}" {{ script_url }}
@@ -85,7 +87,7 @@
       section: atarist
       option: "include"
       value: "/etc/samba/retronas_atarist.conf"
-    notify: "{{ my_name }} - Install Samba"
+    notify: "{{ my_name }} - Install changed"
 
   handlers:
 
@@ -93,9 +95,15 @@
     systemd:
       daemon_reload: yes
 
-  - name: "{{ my_name }} - Install Samba"
+  - name: "{{ my_name }} - Install changed"
     set_fact:
       install_changed: true
+
+- import_playbook: install_nginx.yml
+  vars:
+    site_enable: 99-retronas-sidecart.conf
+  when: install_changed is defined and
+        install_changed is true
 
 - import_playbook: install_samba.yml
   vars:
