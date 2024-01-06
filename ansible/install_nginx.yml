@@ -78,15 +78,16 @@
     loop: "{{ lookup('filetree', 'templates/{{ my_file }}/conf') }}"
     when: item.state == 'file'
 
-  - name: "{{ my_name }} - www dirs"
-    file:
-      path: "/data/retronas/www/{{ item.path }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      mode: "{{ item.mode|default('0750') }}"
-      state: directory
-    loop: "{{ lookup('filetree', 'templates/{{ my_file }}/www') }}"
-    when: item.state == 'directory'
+  # retained for when/if we have a larger structure under www
+  #- name: "{{ my_name }} - www dirs"
+  #  file:
+  #    path: "/data/retronas/www/{{ item.path }}"
+  #    owner: "{{ retronas_user }}"
+  #    group: "{{ retronas_group }}"
+  #    mode: "{{ item.mode|default('0750') }}"
+  #    state: directory
+  #  loop: "{{ lookup('filetree', 'templates/{{ my_file }}/www') }}"
+  #  when: item.state == 'directory'
 
   - name: "{{ my_name }} - www files"
     template:
@@ -97,7 +98,7 @@
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     loop: "{{ lookup('filetree', 'templates/{{ my_file }}/www') }}"
-    when: item.state == 'file'
+    when: item.state == 'file'  
 
   - name: "{{ my_name }} - enable sites"
     file:
