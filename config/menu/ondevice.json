@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ucon64"
+                "command": "ucon64",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "extract-xiso"
+                "command": "extract-xiso",
+                "args": ""
             },
             {
                 "index": "04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "hdldump"
+                "command": "hdldump",
+                "args": ""
             },
             {
                 "index": "05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "nbd-client"
+                "command": "nbd-client",
+                "args": ""
             },
             {
                 "index": "06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "pfsshell"
+                "command": "pfsshell",
+                "args": ""
             },
             {
                 "index": "07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "cue2pops"
+                "command": "cue2pops",
+                "args": ""
             },
             {
                 "index": "08",
@@ -85,7 +92,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "pi1541"
+                "command": "pi1541",
+                "args": ""
             }
         ]
     }

@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type":"install",
                 "group":"",
-                "command": "fenrir-ode-webserver"
+                "command": "fenrir-ode-webserver",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "Refresh",
                 "type": "service_restart",
                 "group":"",
-                "command": "fenrir-ode-webserver"
+                "command": "fenrir-ode-webserver",
+                "args": ""
             },
             {
                 "index":"20",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "fenrir-ode-webserver"
+                "command": "fenrir-ode-webserver",
+                "args": ""
             },
             {
                 "index":"21",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "fenrir-ode-webserver"
+                "command": "fenrir-ode-webserver",
+                "args": ""
             },
             {
                 "index":"22",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "fenrir-ode-webserver"
+                "command": "fenrir-ode-webserver",
+                "args": ""
             }
         ]
     }

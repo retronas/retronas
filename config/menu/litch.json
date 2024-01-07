@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"litch",
-                "command": "litch_login"
+                "command": "litch_login",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"litch",
-                "command": "litch_claim"
+                "command": "litch_claim",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"litch",
-                "command": "litch_download"
+                "command": "litch_download",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"litch",
-                "command": "litch_download_clean"
+                "command": "litch_download_clean",
+                "args": ""
             }
         ]
     }

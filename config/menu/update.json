@@ -15,7 +15,8 @@
                 "prompt": "", 
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "script-static",
                 "group":"",
-                "command": "update-retronas"
+                "command": "update-retronas",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "romdir"
+                "command": "romdir",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "extradirs"
+                "command": "extradirs",
+                "args": ""
             },
             {
                 "index":"05",
@@ -65,7 +69,8 @@
                 "prompt": "View",
                 "type": "script-static",
                 "group":"",
-                "command": "update-system-history"
+                "command": "update-system-history",
+                "args": ""
             },
             {
                 "index":"07",
@@ -75,7 +80,8 @@
                 "prompt": "Manage",
                 "type": "script-static",
                 "group":"",
-                "command": "git-switch-branch"
+                "command": "git-switch-branch",
+                "args": ""
             }
         ]
     }

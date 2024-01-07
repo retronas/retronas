@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "pi1541"
+                "command": "pi1541",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "pi1541"
+                "command": "pi1541",
+                "args": ""
             }
         ]
     }

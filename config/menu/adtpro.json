@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "adtpro"
+                "command": "adtpro",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "adtpro_localhost_edit"
+                "command": "adtpro_localhost_edit",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             }
         ]
     },
@@ -85,7 +91,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -95,7 +102,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "adtpro_serial_edit"
+                "command": "adtpro_serial_edit",
+                "args": ""
             },
             {
                 "index":"03",
@@ -105,7 +113,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "adtpro@serial"
+                "command": "adtpro@serial",
+                "args": ""
             },
             {
                 "index":"04",
@@ -115,7 +124,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "adtpro@serial"
+                "command": "adtpro@serial",
+                "args": ""
             },
             {
                 "index":"05",
@@ -125,7 +135,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "adtpro@serial"
+                "command": "adtpro@serial",
+                "args": ""
             }
         ]
     },
@@ -145,7 +156,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -155,7 +167,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "adtpro_ethernet_edit"
+                "command": "adtpro_ethernet_edit",
+                "args": ""
             },
             {
                 "index":"03",
@@ -165,7 +178,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "adtpro@ethernet"
+                "command": "adtpro@ethernet",
+                "args": ""
             },
             {
                 "index":"04",
@@ -175,7 +189,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "adtpro@ethernet"
+                "command": "adtpro@ethernet",
+                "args": ""
             },
             {
                 "index":"05",
@@ -185,7 +200,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "adtpro@ethernet"
+                "command": "adtpro@ethernet",
+                "args": ""
             }
         ]
     },
@@ -205,7 +221,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -215,7 +232,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "adtpro@audio"
+                "command": "adtpro@audio",
+                "args": ""
             },
             {
                 "index":"03",
@@ -225,7 +243,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "adtpro@audio"
+                "command": "adtpro@audio",
+                "args": ""
             },
             {
                 "index":"04",
@@ -235,7 +254,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "adtpro@audio"
+                "command": "adtpro@audio",
+                "args": ""
             }
         ]
     },
@@ -255,7 +275,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -265,7 +286,8 @@
                 "prompt": "",
                 "type": "form",
                 "group":"",
-                "command": "adtpro_localhost_edit"
+                "command": "adtpro_localhost_edit",
+                "args": ""
             },
             {
                 "index":"03",
@@ -275,7 +297,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             },
             {
                 "index":"04",
@@ -285,7 +308,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             },
             {
                 "index":"05",
@@ -295,7 +319,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "adtpro@localhost"
+                "command": "adtpro@localhost",
+                "args": ""
             }
         ]
     },

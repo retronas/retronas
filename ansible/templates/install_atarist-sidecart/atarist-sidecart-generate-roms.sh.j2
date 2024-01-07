@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MYURL="http://$(ip -4 -br a | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}')/files/atarist/roms"
+umask 002
+
+cd {{ retronas_path }}/atarist/sidecart
+python {{ script_dest }} --path {{ retronas_path }}/atarist/roms --url ${MYURL}
+
+mv {{ retronas_path }}/atarist/roms/roms.json {{ retronas_path }}/atarist/sidecart/
+chown {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/atarist/sidecart/*

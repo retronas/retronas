@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "minicom"
+                "command": "minicom",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "minicom"
+                "command": "minicom",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "minicom-config"
+                "command": "minicom-config",
+                "args": ""
             }
         ]
     }
