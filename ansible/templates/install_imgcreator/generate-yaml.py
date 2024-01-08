@@ -80,7 +80,7 @@ def main():
                 try:
                     new['formats'][item][section]['capacity'] = existing['formats'][item]['media']
                 except:
-                    pass
+                     new['formats'][item][section]['capacity'] = None
 
             # add new properties
             str_properties = ['comment']

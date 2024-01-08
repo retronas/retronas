@@ -17,6 +17,7 @@ formats:
       encoding:
       physical:
       rpm:
+      capacity:
     comment: parted -s -a optimal -- $IMAGE mklabel msdos mkpart primary ext3 1MiB
       100MiB mkpart primary fat32 100MiB 200MiB
     reference:
@@ -33,6 +34,11 @@ formats:
       sides: 2
       seek:
     media:
+      capacity:
+      density:
+      encoding:
+      physical:
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_flop_525_720k:
@@ -49,6 +55,11 @@ formats:
       seek:
       layout:
     media:
+      capacity:
+      density:
+      encoding:
+      physical:
+      rpm:
     comment:
     reference: http://philipstorr.id.au/pcbook/book4/floppyd.htm
   appleii_flop_525_113.75k:
@@ -65,6 +76,11 @@ formats:
       seek:
       layout:
     media:
+      capacity:
+      density:
+      encoding:
+      physical:
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   amstrad_flop_3_720k:
@@ -2146,7 +2162,12 @@ formats:
       sides: 2
       seek:
       layout:
-    media: 2.5
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 2.5
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   thomson_525_80k:
@@ -2162,7 +2183,12 @@ formats:
       sides: 1
       seek:
       layout:
-    media: 5.25
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 5.25
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   thomson_525_320k:
@@ -2178,7 +2204,12 @@ formats:
       sides: 2
       seek:
       layout:
-    media: 5.25
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 5.25
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   thomson_35_320k:
@@ -2194,7 +2225,12 @@ formats:
       sides: 1
       seek:
       layout:
-    media: 3.5
+    media: 
+      capacity:
+      density:
+      encoding:
+      physical: 3.5
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   thomson_35_640k:
@@ -2210,7 +2246,12 @@ formats:
       sides: 2
       seek:
       layout:
-    media: 3.5
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 3.5
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   victor_525_612k:
@@ -2227,7 +2268,12 @@ formats:
       sides: 1
       seek:
       layout:
-    media: 5.25
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 5.25
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   victor_525_1196k:
@@ -2244,7 +2290,12 @@ formats:
       sides: 2
       seek:
       layout:
-    media: 5.25
+    media:
+      capacity:
+      density:
+      encoding:
+      physical: 5.25
+      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
 
