@@ -1,7 +1,0 @@
-# http://philipstorr.id.au/pcbook/book4/floppyd.htm
-BYTESIZE=512
-TRACKS=80
-SECTORS=21
-SIDES=2
-EXT=.dmf
-SEEK=

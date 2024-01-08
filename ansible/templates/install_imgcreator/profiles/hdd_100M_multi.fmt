@@ -1,9 +1,0 @@
-FS=FAT32
-BYTESIZE=100MiB
-TRACKS=0
-SECTORS=0
-SIDES=0
-EXT=hdd
-SEEK=1
-# parted -s -a optimal -- $IMAGE mklabel msdos mkpart primary ext3 1MiB 100MiB mkpart primary fat32 100MiB 200MiB
-LAYOUT=label:msdos,part:primary:fat32:60MiB,part:primary:ext4:99MiB

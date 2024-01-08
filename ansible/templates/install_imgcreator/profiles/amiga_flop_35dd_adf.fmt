@@ -1,8 +1,0 @@
-FS=affs0
-BYTESIZE=512
-TRACKS=80
-SECTORS=11
-SIDES=2
-EXT=.adf
-SEEK=
-LAYOUT=label:amiga

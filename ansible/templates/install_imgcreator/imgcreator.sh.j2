@@ -3,10 +3,10 @@
 set -e
 #set -x
 
-#IFS=$'\n'
-FMT_DIR=/data/retronas/config/formats
+FORMATS=formats.yml
 IMG_DIR=/data/retronas/images
 MOUNT=0
+LIST_ONLY=0
 
 _usage() {
     echo "BLAH"
@@ -21,9 +21,25 @@ log() {
     echo "LOG: $1"
 }
 
-[ ! -d ${FMT_DIR} ] && exit 1
+listformats() {
+    yq -r '.[] | keys[]' $FORMATS
+}
 
-while getopts "v:n:p:m" OPTS; do
+getformat() {
+    local FORMAT=${1}
+    DATASET=$(yq ".[\"formats\"][\"$FORMAT\"]" $FORMATS)
+    FS=$( echo ${DATASET} | jq -r '.fs' )
+    BYTESIZE=$( echo ${DATASET} | jq -r '.bytesize' )
+    TRACKS=$( echo ${DATASET} | jq -r '.tracks' )
+    SECTORS=$( echo ${DATASET} | jq -r '.sectors' )
+    SIDES=$( echo ${DATASET} | jq -r '.sides' )
+    EXT=$( echo ${DATASET} | jq -r '.ext' )
+    SEEK=$( echo ${DATASET} | jq -r '.seek' )
+    LAYOUT=$( echo ${DATASET} | jq -r '.layout' )
+    COMMENT=$( echo ${DATASET} | jq -r '.comment' )
+}
+
+while getopts "v:n:p:m:l" OPTS; do
     case "${OPTS}" in
         m)
             MOUNT=1
@@ -37,29 +53,42 @@ while getopts "v:n:p:m" OPTS; do
         v)
             VOLUME=${OPTARG}
             ;;
+        l)
+            LIST_ONLY=1
+            ;;
         *)
             _usage
             ;;
     esac
 done
 
+if [ $LIST_ONLY -ne 0 ]
+then
+    listformats
+    exit
+fi
+
 REQFAIL=0
+[ ! -f /usr/bin/yq ] && error "yq is required" && REQFAIL=1
+[ ! -f /usr/bin/dd ] && error "dd is required" && REQFAIL=1
+[ ! -f /usr/sbin/parted ] && error "parted is required" && REQFAIL=1
 [ -z "${PROFILE}" ] && error "Profile is required" && REQFAIL=1
-[ ! -f "${FMT_DIR}/${PROFILE}" ] && error "Profile $PROFILE not found" && REQFAIL=1
 [ -z "${NAME}" ] && error "Name is required" && REQFAIL=1
 [ $REQFAIL -eq 1 ] && exit 1
 
 [ ! -d "${IMG_DIR}" ] && mkdir -p "${IMG_DIR}"
 ### this should come as input along with VOLUME, NAME and MOUNT
 
-. "${FMT_DIR}/${PROFILE}"
-OUTNAME="${IMG_DIR}/${NAME}.${EXT}"
+OUTNAME="${IMG_DIR}/${NAME}${EXT}"
 
 CLI_OPTS="of=${OUTNAME}"
 [ ! -z "$SEEK" ] && CLI_OPTS+=" seek=$SEEK"
 [ ! -z "$BYTESIZE" ] && CLI_OPTS+=" bs=$BYTESIZE"
 
-#create
+#
+#
+# CREATE
+#
 if [ ! -f ${OUTNAME} ]
 then
 
@@ -105,6 +134,10 @@ then
     fi
     sync
 
+
+    #
+    # LOOPBACK
+    #
     DEVNAME=$OUTNAME
     if [ $PARTNUM -gt 0 ]
     then
@@ -118,8 +151,9 @@ then
         DEVNAME=$LODEV
     fi
 
-    #format
-
+    #
+    # FORMAT
+    #
     for PART in ${!PARTS[@]}
     do
         FCLI_OPTS=""
