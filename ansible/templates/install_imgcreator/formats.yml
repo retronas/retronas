@@ -397,7 +397,7 @@ formats:
       rpm: 360
     comment:
     reference: http://philipstorr.id.au/pcbook/book4/floppyd.htm
-  sharp_flop_525_1232k:
+  sharp_x68k_flop_525_1232k:
     platform: sharp
     fs:
     ext: .dsk
@@ -481,7 +481,7 @@ formats:
       rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  sharp_flop_35_1232k:
+  sharp_x68k_flop_35_1232k:
     platform: sharp
     fs:
     ext: .dsk
@@ -565,27 +565,6 @@ formats:
       rpm: 300
     comment:
     reference: http://philipstorr.id.au/pcbook/book4/floppyd.htm
-  sharp_flop_25_64k:
-    platform: sharp
-    fs:
-    ext: .dsk
-    geometry:
-      bytesize: 512
-      tracks: 16
-      sectors:
-        max: 8
-        variable: false
-      sides: 2
-      seek:
-      layout:
-    media:
-      capacity: 64k
-      density: single
-      encoding: gcr
-      physical: 2.5
-      rpm:
-    comment: 2x64k sides, flippable
-    reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   appleii_flop_35_800k:
     platform: appleii
     fs:
@@ -626,27 +605,6 @@ formats:
       encoding: mfm
       physical: 8
       rpm: 524
-    comment:
-    reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  sega_flop_3_160k:
-    platform:
-    fs:
-    ext: .dsk
-    geometry:
-      bytesize: 256
-      tracks: 40
-      sectors:
-        max: 16
-        variable: false
-      sides: 2
-      seek:
-      layout:
-    media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   acorn_flop_35_1600k:
@@ -1249,7 +1207,7 @@ formats:
     - https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
     - https://en.wikipedia.org/wiki/Zone_bit_recording
   commodore_8bit_flop_525_521k:
-    platform:
+    platform: commodore
     fs:
     ext: .dsk
     geometry:
@@ -1273,7 +1231,7 @@ formats:
     - https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
     - https://en.wikipedia.org/wiki/Zone_bit_recording
   commodore_8bit_flop_525_1024k:
-    platform:
+    platform: commodore
     fs:
     ext: .dsk
     geometry:
@@ -1297,7 +1255,7 @@ formats:
     - https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
     - https://en.wikipedia.org/wiki/Zone_bit_recording
   commodore_8bit_flop_35_800k:
-    platform:
+    platform: commodore
     fs:
     ext: .dsk
     geometry:
@@ -1316,7 +1274,7 @@ formats:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   commodore_amiga_flop_525_440k:
-    platform:
+    platform: amiga
     fs:
     ext: .adf
     geometry:
@@ -1329,15 +1287,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 440k
+      density: double
+      encoding: mfm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   commodore_amiga_flop_525_880k:
-    platform:
+    platform: amiga
     fs:
     ext: .adf
     geometry:
@@ -1350,15 +1308,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 880k
+      density: quad
+      encoding: mfm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   commodore_amiga_flop_35_880k:
-    platform:
+    platform: amiga
     fs:
     ext: .adf
     geometry:
@@ -1371,15 +1329,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 880k
+      density: double
+      encoding: mfm
+      physical: 3.5
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   commodore_amiga_flop_35_1520k:
-    platform:
+    platform: amiga
     fs:
     ext: .adf
     geometry:
@@ -1392,15 +1350,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1520k
+      density: high
+      encoding: gcr
+      physical: 3.5
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   commodore_amiga_flop_35_1760k:
-    platform:
+    platform: amiga
     fs:
     ext: .adf
     geometry:
@@ -1413,15 +1371,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1760k
+      density: high
+      encoding: mfm
+      physical: 3.5
+      rpm: 150
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_33fd_flop_8_240.5k:
-    platform:
+    platform: ibm
     fs:
     ext: .dsk
     geometry:
@@ -1434,15 +1392,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 240.5k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_33fd_flop_8_277.5k:
-    platform:
+    platform: ibm
     fs:
     ext: .dsk
     geometry:
@@ -1455,15 +1413,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 277.5k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_33fd_flop_8_296k:
-    platform:
+    platform: ibm
     fs:
     ext: .dsk
     geometry:
@@ -1476,15 +1434,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 296k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_43fd_flop_8_481k:
-    platform:
+    platform: ibm
     fs:
     ext: .dsk
     geometry:
@@ -1497,15 +1455,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 481k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_43fd_flop_8_555k:
-    platform:
+    platform: ibm
     fs:
     ext: .dsk
     geometry:
@@ -1518,11 +1476,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 555k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_53fd_flop_8_962k:
@@ -1539,11 +1497,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 962k
+      density: double
+      encoding: mfm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_53fd_flop_8_1.08M:
@@ -1560,11 +1518,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1.08M
+      density: double
+      encoding: mfm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   ibm_53fd_flop_8_1.16M:
@@ -1581,11 +1539,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1.16M
+      density: double
+      encoding: mfm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   dec_rx01_flop_8_250k:
@@ -1602,15 +1560,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 250k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   dec_rx02_flop_8_500k:
-    platform:
+    platform: dec
     fs:
     ext: .dsk
     geometry:
@@ -1623,15 +1581,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 500k
+      density: double
+      encoding: fm/mfm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   dec_rx50_flop_525_400k:
-    platform:
+    platform: dec
     fs:
     ext: .dsk
     geometry:
@@ -1644,15 +1602,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 400k
+      density: quad
+      encoding: mfm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   sam_coupe_flop_35_800k:
-    platform:
+    platform: samcoupe
     fs:
     ext: .dsk
     geometry:
@@ -1665,15 +1623,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 800k
+      density: double
+      encoding: mfm
+      physical: 3.5
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_8_250.25k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1684,15 +1642,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 250.25k
+      density: single
+      encoding: fm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_8_1232k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1705,15 +1663,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1232k
+      density: double
+      encoding: mfm
+      physical: 8
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_525_640k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1726,11 +1684,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 640k
+      density: double
+      encoding: mfm
+      physical: 5.25
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_525_720k:
@@ -1747,15 +1705,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 720k
+      density: double
+      encoding: mfm
+      physical: 5.25 
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_525_1200k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1768,15 +1726,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
+      capacity: 1200k
+      density: high
+      encoding: mfm
+      physical: 5.25
       rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_525_1280k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1789,15 +1747,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1200k
+      density: high
+      encoding: mfm
+      physical: 5.25
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_525_1232k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1810,15 +1768,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1232k
+      density: high
+      encoding: mfm
+      physical: 5.25
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_640k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1831,15 +1789,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 640k
+      density: double
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_720k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1852,15 +1810,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 720k
+      density: double
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_1200k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1873,15 +1831,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1200k
+      density: high
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_1280k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1894,15 +1852,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1280k
+      density: high
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_1232k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1915,15 +1873,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1232k
+      density: high
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_1.44M:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1934,15 +1892,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 1.44M
+      density: high
+      encoding: mfm
+      physical: 3.5
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   nec_pc98_flop_35_9120k:
-    platform:
+    platform: pc98
     fs:
     ext: .dsk
     geometry:
@@ -1953,15 +1911,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 9120k
+      density: triple
+      encoding: mfm
+      physical: 3.5
+      rpm: 360
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   osborne_flop_525_100k:
-    platform:
+    platform: osborne
     fs:
     ext: .dsk
     geometry:
@@ -1974,15 +1932,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 100k
+      density: single
+      encoding: fm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   osborne_flop_525_200k:
-    platform:
+    platform: osborne
     fs:
     ext: .dsk
     geometry:
@@ -1995,15 +1953,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 200k
+      density: double
+      encoding: mfm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   sega_sf7000_flop_3_160k:
-    platform:
+    platform: sf7000
     fs:
     ext: .dsk
     geometry:
@@ -2016,57 +1974,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
+      capacity: 160k
+      density: single
       encoding:
-      physical:
-      rpm:
-    comment:
-    reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  sharp_x68k_flop_525_1232k:
-    platform:
-    fs:
-    ext: .dsk
-    geometry:
-      bytesize: 1024
-      tracks: 77
-      sectors:
-        max: 8
-        variable: false
-      sides: 2
-      seek:
-      layout:
-    media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
-    comment:
-    reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  sharp_x68k_flop_35_1232k:
-    platform:
-    fs:
-    ext: .dsk
-    geometry:
-      bytesize: 1024
-      tracks: 77
-      sectors:
-        max: 8
-        variable: false
-      sides: 2
-      seek:
-      layout:
-    media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
-    comment:
+      physical: 3
+      rpm: 
+    comment: per side, flippable
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   sharp_cex_flop_25_64k:
-    platform:
+    platform: sharp
     fs:
     ext: .dsk
     geometry:
@@ -2079,15 +1995,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
+      capacity: 64k
+      density: single
+      encoding: gcr
       physical: 2.5
-      rpm:
-    comment:
+      rpm: 270
+    comment: 2x64k sides, flippable
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   victor_flop_525_612k:
-    platform:
+    platform: victor
     fs:
     ext: .dsk
     geometry:
@@ -2101,15 +2017,15 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
+      capacity: 612k
+      density: single
+      encoding: gcr
       physical: 5.25
-      rpm:
+      rpm: 252-417
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   victor_flop_525_1196k:
-    platform:
+    platform: victor
     fs:
     ext: .dsk
     geometry:
@@ -2123,11 +2039,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
+      capacity: 1196k
+      density: double
+      encoding: gcr
       physical: 5.25
-      rpm:
+      rpm: 252-417
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   tandy_trs80_flop_525_88k:
@@ -2441,7 +2357,7 @@ formats:
       capacity: 1232k
       density: double
       encoding: mfm
-      physical:
+      physical: 8
       rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
@@ -2462,7 +2378,7 @@ formats:
       capacity: 640k
       density: quad
       encoding: mfm
-      physical: 525
+      physical: 5.25
       rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
@@ -2544,10 +2460,10 @@ formats:
       layout: label:msdos,part:primary:fat32:60mib,part:primary:ext4:99mib
     media:
       density:
-      encoding:
-      physical:
-      rpm:
-      capacity:
+      encoding: raw
+      physical: 35
+      rpm: 7200
+      capacity: 100M
     comment: parted -s -a optimal -- $IMAGE mklabel msdos mkpart primary ext3 1MiB
       100MiB mkpart primary fat32 100MiB 200MiB
     reference:
@@ -2565,11 +2481,11 @@ formats:
       seek: 1
       layout:
     media:
-      capacity:
+      capacity: 1G
       density:
-      encoding:
-      physical:
-      rpm:
+      encoding: raw
+      physical: 3.5
+      rpm: 7200
     comment:
     reference: []
   hdd_8TB_fat32:
@@ -2586,10 +2502,10 @@ formats:
       seek: 8192
       layout:
     media:
-      capacity:
+      capacity: 8T
       density:
-      encoding:
-      physical:
-      rpm:
+      encoding: raw
+      physical: 3.5
+      rpm: 7200
     comment:
     reference: []
