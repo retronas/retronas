@@ -29,13 +29,13 @@ getformat() {
     local FORMAT=${1}
     DATASET=$(yq ".[\"formats\"][\"$FORMAT\"]" $FORMATS)
     FS=$( echo ${DATASET} | jq -r '.fs' )
-    BYTESIZE=$( echo ${DATASET} | jq -r '.bytesize' )
-    TRACKS=$( echo ${DATASET} | jq -r '.tracks' )
-    SECTORS=$( echo ${DATASET} | jq -r '.sectors' )
-    SIDES=$( echo ${DATASET} | jq -r '.sides' )
+    BYTESIZE=$( echo ${DATASET} | jq -r '.["geometry"].bytesize' )
+    TRACKS=$( echo ${DATASET} | jq -r '.["geometry"].tracks' )
+    SECTORS=$( echo ${DATASET} | jq -r '.["geometry"].sectors.max' )
+    SIDES=$( echo ${DATASET} | jq -r '.["geometry"].sides' )
     EXT=$( echo ${DATASET} | jq -r '.ext' )
-    SEEK=$( echo ${DATASET} | jq -r '.seek' )
-    LAYOUT=$( echo ${DATASET} | jq -r '.layout' )
+    SEEK=$( echo ${DATASET} | jq -r '.["geometry"].seek' )
+    LAYOUT=$( echo ${DATASET} | jq -r '.["geometry"].layout' )
     COMMENT=$( echo ${DATASET} | jq -r '.comment' )
 }
 
@@ -75,6 +75,8 @@ REQFAIL=0
 [ -z "${PROFILE}" ] && error "Profile is required" && REQFAIL=1
 [ -z "${NAME}" ] && error "Name is required" && REQFAIL=1
 [ $REQFAIL -eq 1 ] && exit 1
+
+getformat ${PROFILE}
 
 [ ! -d "${IMG_DIR}" ] && mkdir -p "${IMG_DIR}"
 ### this should come as input along with VOLUME, NAME and MOUNT
