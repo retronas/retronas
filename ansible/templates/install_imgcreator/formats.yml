@@ -747,11 +747,11 @@ formats:
       seek:
       layout:
     media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
+      capacity: 320k
+      density: double
+      encoding: mfm
+      physical: 5.25
+      rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
   memorex_650_flop_8_1.4M:
