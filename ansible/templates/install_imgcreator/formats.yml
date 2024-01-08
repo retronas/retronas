@@ -1,26 +1,4 @@
 formats:
-  hdd_100M_multi:
-    platform: generic
-    fs: fat32
-    ext: hdd
-    geometry:
-      bytesize: 100mib
-      tracks: 0
-      sectors:
-        max: 0
-        variable: false
-      sides: 0
-      seek: 1
-      layout: label:msdos,part:primary:fat32:60mib,part:primary:ext4:99mib
-    media:
-      density:
-      encoding:
-      physical:
-      rpm:
-      capacity:
-    comment: parted -s -a optimal -- $IMAGE mklabel msdos mkpart primary ext3 1MiB
-      100MiB mkpart primary fat32 100MiB 200MiB
-    reference:
   acorn_flop_525_640k:
     platform: acorn
     fs:
@@ -104,27 +82,6 @@ formats:
       rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  hdd_1G_ext4:
-    platform:
-    fs: ext4
-    ext: hdd
-    geometry:
-      bytesize: 1g
-      tracks: 0
-      sectors:
-        max: 0
-        variable: false
-      sides: 0
-      seek: 1
-      layout:
-    media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
-    comment:
-    reference: []
   hp_flop_525_286k:
     platform:
     fs:
@@ -566,27 +523,6 @@ formats:
       rpm:
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  hdd_8TB_fat32:
-    platform: generic
-    fs: fat32
-    ext: .hdd
-    geometry:
-      bytesize: 1g
-      tracks: 0
-      sectors:
-        max: 0
-        variable: false
-      sides: 0
-      seek: 8192
-      layout:
-    media:
-      capacity:
-      density:
-      encoding:
-      physical:
-      rpm:
-    comment:
-    reference: []
   acorn_flop_35_640k:
     platform: acorn
     fs:
@@ -2615,18 +2551,40 @@ formats:
       rpm: 300
     comment:
     reference: https://en.wikipedia.org/wiki/List_of_floppy_disk_formats
-  template:
-    platform:
-    fs:
-    ext:
+  hdd_100M_multi:
+    platform: generic
+    fs: fat32
+    ext: hdd
     geometry:
-      bytesize:
-      tracks:
+      bytesize: 100mib
+      tracks: 0
       sectors:
-        max:
-        variable:
-      sides:
-      seek:
+        max: 0
+        variable: false
+      sides: 0
+      seek: 1
+      layout: label:msdos,part:primary:fat32:60mib,part:primary:ext4:99mib
+    media:
+      density:
+      encoding:
+      physical:
+      rpm:
+      capacity:
+    comment: parted -s -a optimal -- $IMAGE mklabel msdos mkpart primary ext3 1MiB
+      100MiB mkpart primary fat32 100MiB 200MiB
+    reference:
+  hdd_1G_ext4:
+    platform:
+    fs: ext4
+    ext: hdd
+    geometry:
+      bytesize: 1g
+      tracks: 0
+      sectors:
+        max: 0
+        variable: false
+      sides: 0
+      seek: 1
       layout:
     media:
       capacity:
@@ -2635,4 +2593,25 @@ formats:
       physical:
       rpm:
     comment:
-    reference:
+    reference: []
+  hdd_8TB_fat32:
+    platform: generic
+    fs: fat32
+    ext: .hdd
+    geometry:
+      bytesize: 1g
+      tracks: 0
+      sectors:
+        max: 0
+        variable: false
+      sides: 0
+      seek: 8192
+      layout:
+    media:
+      capacity:
+      density:
+      encoding:
+      physical:
+      rpm:
+    comment:
+    reference: []

@@ -1,0 +1,22 @@
+formats:
+  template:
+    platform:
+    fs:
+    ext:
+    geometry:
+      bytesize:
+      tracks:
+      sectors:
+        max:
+        variable:
+      sides:
+      seek:
+      layout:
+    media:
+      capacity:
+      density:
+      encoding:
+      physical:
+      rpm:
+    comment:
+    reference:

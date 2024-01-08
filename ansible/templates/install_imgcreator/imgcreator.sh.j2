@@ -9,7 +9,14 @@ MOUNT=0
 LIST_ONLY=0
 
 _usage() {
-    echo "BLAH"
+cat << EOF
+Usage: $0 option
+    l  list built-in profiles
+    p  profile name
+    m  mount image
+    v  volume name
+    n  name
+EOF
     exit 1
 }
 
@@ -23,6 +30,7 @@ log() {
 
 listformats() {
     yq -r '.[] | keys[]' $FORMATS
+    exit
 }
 
 getformat() {
@@ -39,7 +47,7 @@ getformat() {
     COMMENT=$( echo ${DATASET} | jq -r '.comment' )
 }
 
-while getopts "v:n:p:m:l" OPTS; do
+while getopts "v:n:p:m:lf:" OPTS; do
     case "${OPTS}" in
         m)
             MOUNT=1
@@ -56,17 +64,17 @@ while getopts "v:n:p:m:l" OPTS; do
         l)
             LIST_ONLY=1
             ;;
+        f)
+            FORMATS=${OPTARG}
+            ;;
         *)
             _usage
             ;;
     esac
-done
+done    
 
-if [ $LIST_ONLY -ne 0 ]
-then
-    listformats
-    exit
-fi
+[ ! -f ${FORMATS} ] && error "cannot find ${FORMATS}" && exit 1
+[ $LIST_ONLY -ne 0 ] && listformats
 
 REQFAIL=0
 [ ! -f /usr/bin/yq ] && error "yq is required" && REQFAIL=1
