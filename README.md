@@ -17,7 +17,7 @@ Users can opt in/out of these brances using the `Branch` tool available in the U
 
 Community feedback and bug reporting is vital. Please click the "Issues" button in GitHub to report problems. When reporting an issue please include the branch you are currently on which is reported on the main menu in current releases of RetroNAS
 
-Please read the [Wiki](https://github.com/danmons/retronas/wiki) to see what's going on.
+Please read the [Wiki](https://github.com/retronas/retronas/wiki) to see what's going on.
 
 # About
 
@@ -33,7 +33,7 @@ You will generally need to have some sort of home TCP/IP based network with the 
 
 Future options are planned to integrate dial-up modem, PPP or SLIP connected systems.  This is currently work in progress.
 
-For a complete guide and list of supported systems and protocols, see the [Wiki](https://github.com/danmons/retronas/wiki) section.
+For a complete guide and list of supported systems and protocols, see the [Wiki](https://github.com/retronas/retronas/wiki) section.
 
 If you want to chat about RetroNAS, come say hi on [Twitter](https://twitter.com/_daemons).
 
@@ -76,14 +76,14 @@ Some of the supported systems include:
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
 * MiSTer FPGA
-* [Many more planned](https://github.com/danmons/retronas/blob/main/IDEAS.md)
+* [Many more planned](https://github.com/retronas/retronas/blob/main/IDEAS.md)
 
 Some of the extra services include:
 * Nintendo 3DS with FBI - QR code auto generation for CIA installs over WiFi
 * WebOne HTTP proxy for legacy web browsers without SSL/TLS or Web2.0 support to browse the modern Internet
 * Syncthing secure personal file sharing with no cloud services needed
 * gogrepo - back up your entire GOG library for DRM-free offline installs
-* [Many more planned](https://github.com/danmons/retronas/blob/main/IDEAS.md)
+* [Many more planned](https://github.com/retronas/retronas/blob/main/IDEAS.md)
 
 Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
 
@@ -114,7 +114,7 @@ RetroNAS is merely a small set of scripts that utilise Ansible to install and co
 
 The true heroes are the people behind each of these open source projects, all of whom have done the hard work - reverse engineering proprietary code/protocols, creating new code/protocols, writing homebrew tools and new code for old consoles and computers, and giving them all away under permissive licenses.  This project would not exist without their work. 
 
-See the [Wiki](https://github.com/danmons/retronas/wiki) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
+See the [Wiki](https://github.com/retronas/retronas/wiki) section for a list of all the tools included, and acknowledgement of the individual authors behind them. Without these people, this project could not exist.
 
 Thanks to the kind humans on the OCAU (Overclockers Australia) forums Retro section who have been brave enough to test this in early alpha stages, give feedback on things, recommend packages, and be generally enthusiastic.
 
@@ -124,4 +124,4 @@ Thanks to sairuk for not only cleaning up my garbage code, but also for extendin
 
 # How To
 
-Full howto in the wiki: https://github.com/danmons/retronas/wiki
+Full howto in the wiki: https://github.com/retronas/retronas/wiki
