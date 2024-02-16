@@ -6,15 +6,37 @@
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+
+    - formats:
+      - { name: "formats.yml", dest: "{{ retronas_path }}/config", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "format_template.yml", dest: "{{ retronas_path }}/config/formats", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
     - paths:
-      - { name: "formats", dest: "{{ retronas_path }}/config", state: "directory", mode: "0755"}
+      - { name: "formats", dest: "{{ retronas_path }}/config", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    - packages:
+      - yq
+      - parted
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - install from repos"
+    package: 
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      state: "{{ item.state|default('directory') }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+    with_items: "{{ paths }}"
 
   - name: "{{ my_name }} - templates"
     template:
@@ -25,6 +47,16 @@
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - formats"
+    copy:
+      src: "templates/{{ my_file }}/{{ item.name }}"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ formats }}"
 
   - name: "{{ my_name }} - Profiles"
     template:

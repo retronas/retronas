@@ -5,7 +5,7 @@ set -e
 
 # mformat
 
-FORMATS=formats.yml
+FORMATS=/data/retronas/config/formats.yml
 IMG_DIR=/data/retronas/images
 MOUNT=0
 LIST_ONLY=0
@@ -13,11 +13,11 @@ LIST_ONLY=0
 _usage() {
 cat << EOF
 Usage: $0 option
-    l  list built-in profiles
-    p  profile name
-    m  mount image
-    v  volume name
-    n  name
+    -l  list built-in profiles
+    -p  profile name
+    -m  mount image
+    -v  volume name
+    -n  name
 EOF
     exit 1
 }
