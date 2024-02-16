@@ -6,37 +6,40 @@ MYURL="http://$(ip -4 -br a | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}')/3ds
 umask 002
 
 generate_qr () {
-# Build path
-mkdir -p "${QRDIR}" 2>/dev/null
-# Convert URLs to HTML safe encoding:
-CIAURL=$( echo "${MYURL}/cia/$RELDIR/${BASENAME}" | sed 's/\ /%20/g' )
-QRURL=$( echo "${MYURL}/qr/$RELDIR/${BARENAME}.png" | sed 's/\ /%20/g' )
-# Generate QR code
-echo "Generating QR for ${BARENAME} ..."
-qrencode -o "${QRDIR}/${BARENAME}.png" -s 10 -8 "${CIAURL}"
-# Generate HTML file
-echo "\
-<html>\
-<center>\
-<br><br>\
-"${CIAURL}"\
-<br><br>\
-<img src="${QRURL}" border="0">\
-<br><br>" > "${QRDIR}/${BARENAME}".html
+  # Build path
+  mkdir -p "${QRDIR}" 2>/dev/null
+  # Convert URLs to HTML safe encoding:
+  CIAURL=$( echo "${MYURL}/cia/$RELDIR/${BASENAME}" | sed 's/\ /%20/g' )
+  QRURL=$( echo "${MYURL}/qr/$RELDIR/${BARENAME}.png" | sed 's/\ /%20/g' )
+  # Generate QR code
+  echo "Generating QR for ${BARENAME} ..."
+  qrencode -o "${QRDIR}/${BARENAME}.png" -s 10 -8 "${CIAURL}"
+  # Generate HTML file
+  echo "\
+  <html>\
+  <center>\
+  <br><br>\
+  "${CIAURL}"\
+  <br><br>\
+  <img src="${QRURL}" border="0">\
+  <br><br>" > "${QRDIR}/${BARENAME}".html
 }
 
-## Clean QR codes
-echo "Cleaning out stale QR codes..."
-find "{{ retronas_path }}/3ds/qr/" -type f -iname '*.png' | while read QRFILE
-do
-  BASENAME=$( basename "${QRFILE}" )
-  BARENAME="${BASENAME%.*}"
-  BASEDIR=$( dirname "${QRFILE}" )
-  RELDIR=$( echo "${BASEDIR}" | sed 's#{{ retronas_path }}/3ds/qr##g' )
-  CIADIR="{{ retronas_path }}/3ds/cia/${RELDIR}"
-  test -f "${CIADIR}/${BARENAME}".cia || test -f "${CIADIR}/${BARENAME}".CIA || rm -vf "${BASEDIR}/${BARENAME}.png" "${BASEDIR}/${BARENAME}.html"
-done
+clean() {
+  ## Clean QR codes
+  echo "Cleaning out stale QR codes..."
+  find "{{ retronas_path }}/3ds/qr/" -type f -iname '*.png' | while read QRFILE
+  do
+    BASENAME=$( basename "${QRFILE}" )
+    BARENAME="${BASENAME%.*}"
+    BASEDIR=$( dirname "${QRFILE}" )
+    RELDIR=$( echo "${BASEDIR}" | sed 's#{{ retronas_path }}/3ds/qr##g' )
+    CIADIR="{{ retronas_path }}/3ds/cia/${RELDIR}"
+    test -f "${CIADIR}/${BARENAME}".cia || test -f "${CIADIR}/${BARENAME}".CIA || rm -vf "${BASEDIR}/${BARENAME}.png" "${BASEDIR}/${BARENAME}.html"
+  done
+}
 
+clean
 ## Find CIA files to scan
 echo "Scanning for new CIA files, generating QR codes..."
 find "{{ retronas_path }}/3ds/cia/" -type f -iname '*.cia' | while read CIAFILE
@@ -50,3 +53,4 @@ do
 done
 
 echo "All done"
+read -s
