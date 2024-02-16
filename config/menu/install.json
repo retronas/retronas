@@ -154,11 +154,11 @@
                 "index": "14",
                 "title": "3DS QR codes",
                 "description": "Nintendo 3DS FBI Homebrew installer", 
-                "id":"3ds_qr_codes",
+                "id":"3ds_qr",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"",
-                "command": "3ds_qr_codes",
+                "command": "3ds_qr",
                 "args": ""
             },                
             {
