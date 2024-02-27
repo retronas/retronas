@@ -36,15 +36,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - configure samba config"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
@@ -52,7 +52,7 @@
     with_items: "{{ config_opts }}"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: retronas
       option: "include"
@@ -60,7 +60,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: templates/install_samba/retronas.conf.j2
       dest: /etc/samba/retronas.conf
       owner: root
@@ -69,14 +69,14 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
     with_items: "{{ my_services }}"
 
   - name: "{{ my_name }} - restart if imported because handlers will not run"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       enabled: yes
@@ -86,12 +86,12 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "samba"
     module_state: "present"

@@ -4,10 +4,10 @@
 
   tasks:
     - name: "Load RetroNAS config"
-      include_vars: retronas_vars.yml
+      ansible.builtin.include_vars: retronas_vars.yml
 
     - name: "update user"
-      user:
+      ansible.builtin.user:
         user: "{{ retronas_user }}"
         groups: "disk"
         append: true

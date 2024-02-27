@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_extradirs.yml
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_extradirs.yml
 
 - hosts: localhost
   gather_facts: no
@@ -23,13 +23,13 @@
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - build top level"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/{{ my_name }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -37,7 +37,7 @@
       mode: "0775"
 
   - name: "{{ my_name }} - build top level share paths"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/{{ my_name }}/{{ item.name }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -49,7 +49,7 @@
       - item.enabled is true
 
   - name: "{{ my_name }} - build layout list (set fact)"
-    set_fact:
+    ansible.builtin.set_fact:
       path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/{{ my_name }}/' + item.1.name + '/' + item.0.freestation + ';' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
@@ -58,7 +58,7 @@
       - item.1.systems is true
 
   - name: "{{ my_name }} - paths"
-    file:
+    ansible.builtin.file:
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -67,13 +67,13 @@
     with_items: "{{ paths }}"
 
   - name: "{{ my_name }} - build systems directory layout"
-    shell:
+    ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
     notify: "{{ my_name }} - Install Changed"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: "{{ my_name  }}"
       option: "include"
@@ -81,7 +81,7 @@
     notify: "{{ my_name }} - Install Changed"
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name_dest | default(item.name) }}"
       owner: "{{ item.owner|default('root') }}"
@@ -93,22 +93,22 @@
   handlers:
 
   - name: "{{ my_name }} - Install Changed"
-    set_fact:
+    ansible.builtin.set_fact:
       install_changed: true
 
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: install_nfs.yml
+- ansible.builtin.import_playbook: install_nfs.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "freestation"
     module_state: "present"

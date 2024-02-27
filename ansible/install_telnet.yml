@@ -7,10 +7,10 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install from repos"
-    apt:
+    ansible.builtin.apt:
        name:
          - telnet
          - telnetd
@@ -20,7 +20,7 @@
     - "{{ my_name }} - Restart services"
 
   - name: "{{ my_name }} - Enable startup services"
-    service:
+    ansible.builtin.service:
       name: xinetd
       state: started
       enabled: yes
@@ -28,11 +28,11 @@
   handlers:
 
   - name: "{{ my_name }} - Restart services"
-    service:
+    ansible.builtin.service:
       name: xinetd
       state: restarted
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "telnet"
     module_state: "present"

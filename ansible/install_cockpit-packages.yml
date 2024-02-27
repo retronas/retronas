@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_filesystems.yml
-- import_playbook: install_cockpit.yml
+- ansible.builtin.import_playbook: install_filesystems.yml
+- ansible.builtin.import_playbook: install_cockpit.yml
 
 - hosts: localhost
   gather_facts: no
@@ -18,15 +18,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install prerequisite packages"
-    package:
+    ansible.builtin.package:
        name: "{{ package_tools }}"
        state: latest
 
   - name: "{{ my_name }} - install cockpit packages inplace"
-    copy:
+    ansible.builtin.copy:
       src: "templates/{{ my_file }}/{{ item }}.j2"
       dest: "{{ retronas_root }}/scripts/{{ item }}"
       owner: root
@@ -36,11 +36,11 @@
       "{{ package_data }}"
 
   - name: "{{ my_name }} - get packages"
-    command:
+    ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
 
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "cockpit-packages"
     module_state: "present"

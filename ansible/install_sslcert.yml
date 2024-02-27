@@ -13,26 +13,26 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - manage packages"
-    package:
+    ansible.builtin.package:
        name: "{{ item.name }}"
        state: "{{ item.state }}"
     with_items: "{{ packages }}"
 
   - name: "{{ my_name }} - check self-signed cert"
-    stat:
+    ansible.builtin.stat:
       path: "{{ my_cert }}"
     register: self_signed_cert
 
   - name: "{{ my_name }} - create self-signed cert"
-    shell:
+    ansible.builtin.shell:
       cmd: /usr/bin/openssl req -nodes -new -x509  -keyout {{ my_key }} -out {{ my_cert }} -subj "/C=AU/ST=Sydney/L=retronas/O=retronas/OU=retronas/CN=retronas" -days 3660
     when: self_signed_cert is defined and
           self_signed_cert.stat.exists is false
   
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "sslcert"
     module_state: "present"

@@ -7,15 +7,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    package:
+    ansible.builtin.package:
        name: nbd-client
        state: latest
 
   - name: "{{ my_name }} - enable ndb kernel module"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/nbd.conf.j2"
       dest: /etc/modules-load.d/nbd.conf
       owner: root
@@ -23,10 +23,10 @@
       mode: '0644'
 
   - name: "{{ my_name }} - enable ndb kernel module"
-    shell:
+    ansible.builtin.shell:
       cmd: "modprobe nbd"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "nbd-client"
     module_state: "present"

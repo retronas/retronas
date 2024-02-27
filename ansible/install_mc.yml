@@ -11,17 +11,17 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Load RetroNAS systems"
-    include_vars: retronas_systems.yml
+    ansible.builtin.include_vars: retronas_systems.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "mc"
     module_state: "present"

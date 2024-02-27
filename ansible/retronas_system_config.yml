@@ -22,10 +22,10 @@
 
   tasks:
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Create retronas user system dirs"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -34,7 +34,7 @@
     with_items: "{{ system_user_dirs }}"
 
   - name: "{{ my_name }} - Log General Entry"
-    ini_file:
+    ansible.builtin.ini_file:
       path: "{{ retronas_path }}/config/{{ ini_filename }}"
       section: "general"
       option: "{{ item.option }}"
@@ -44,7 +44,7 @@
     when: general_options is defined
 
   - name: "{{ my_name }} - Log Platform info"
-    ini_file:
+    ansible.builtin.ini_file:
       path: "{{ retronas_path }}/config/{{ ini_filename }}"
       section: "platform"
       option: "{{ item.option }}"
@@ -54,7 +54,7 @@
     when: platform_info is defined
 
   - name: "{{ my_name }} - Log Package Entry"
-    ini_file:
+    ansible.builtin.ini_file:
       path: "{{ retronas_path }}/config/{{ ini_filename }}"
       section: "package"
       option: "{{ module_name }}"
@@ -64,7 +64,7 @@
           module_state is defined
 
   - name: "{{ my_name }} - fix config perms"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/config/{{ ini_filename }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"

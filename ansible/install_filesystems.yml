@@ -25,11 +25,11 @@
   tasks:
 
   - name: "{{ my_name }} - install packages"
-    apt:
+    ansible.builtin.apt:
       name: "{{ my_packages }}"
       state: latest
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "filesystems"
     module_state: "present"

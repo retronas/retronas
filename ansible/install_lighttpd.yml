@@ -26,17 +26,17 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - manage packages"
-    package:
+    ansible.builtin.package:
        name: "{{ item.name }}"
        state: "{{ item.state }}"
     with_items: "{{ packages }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure main config"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/{{ my_name }}/{{ my_name }}.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
@@ -45,7 +45,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -55,14 +55,14 @@
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - enable conf"
-    file:
+    ansible.builtin.file:
       src: /etc/{{ my_name }}/conf-available/{{ item }}
       dest: /etc/{{ my_name }}/conf-enabled/{{ item }}
       state: "link"
     with_items: "{{ conf_enable }}"
 
   - name: "{{ my_name }} - set logfile permissions"
-    file:
+    ansible.builtin.file:
       path: /var/log/{{ my_name }}
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -70,7 +70,7 @@
       recurse: yes
 
   - name: "{{ my_name }} - set run dir permissions"
-    file:
+    ansible.builtin.file:
       path: /var/run/{{ my_name }}
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -78,7 +78,7 @@
       recurse: yes
 
   - name: "{{ my_name }} - configure server.errorlog"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/{{ my_name }}/{{ my_name }}.conf
       section: null
       option: server.errorlog
@@ -86,7 +86,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -95,13 +95,13 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}"
       state: restarted
     with_items: "{{ systemd_units }}"
     when: item.restart == "yes"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "lighttpd"
     module_state: "present"
