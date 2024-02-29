@@ -743,6 +743,17 @@
                 "group":"",
                 "command": "wrp",
                 "args": ""
+            },     
+            {
+                "index": "68",
+                "title": "Samba for RetroArch",
+                "description": "RetroArch Based Systems CIFS config",
+                "id":"retroarch-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "retroarch_cifs",
+                "args": ""
             }
         ]
     }
