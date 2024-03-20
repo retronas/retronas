@@ -18,21 +18,21 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - clean up old installs"
-    file:
+    ansible.builtin.file:
       path: "{{ srcdir }}"
       force: yes
       state: absent
 
   - name: "{{ my_name }} - create build dirs"
-    file:
+    ansible.builtin.file:
       path: "{{ srcdir }}"
       owner: root
       group: root
@@ -40,7 +40,7 @@
       state: directory
 
   - name: "{{ my_name }} - Download SDK installer"
-    get_url:
+    ansible.builtin.get_url:
       url: https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
       dest: "{{ srcdir }}"
       owner: root
@@ -48,7 +48,7 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install DotNet SDK"
-    shell:
+    ansible.builtin.shell:
       cmd: "./dotnet-install.sh --version {{ version }} 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ srcdir }}"
       executable: /bin/bash
@@ -57,7 +57,7 @@
       DOTNET_INSTALL_DIR: "{{ retronas_root }}/bin/dotnetcore3"
       TMPDIR: "{{ srcdir }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "dotnetcore3"
     module_state: "present"

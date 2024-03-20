@@ -1,7 +1,7 @@
 # Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_nginx.yml
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_nginx.yml
+- ansible.builtin.import_playbook: install_samba.yml
 
 - hosts: localhost
   gather_facts: no
@@ -37,12 +37,12 @@
   tasks:
 
   - name: "{{ my_name }} - Install packages"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - paths"
     ansible.builtin.file:
@@ -74,7 +74,7 @@
       - "{{ my_name }} - Install changed"
 
   - name: "{{ my_name }} - get update script"
-    shell: curl -kLso "{{ script_dest }}" {{ script_url }}
+    ansible.builtin.shell: curl -kLso "{{ script_dest }}" {{ script_url }}
 
   - name: "{{ my_name }} - make script executable"
     file:
@@ -82,7 +82,7 @@
       mode: '0755'
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: atarist
       option: "include"
@@ -92,26 +92,26 @@
   handlers:
 
   - name: "{{ my_name }} daemon-reload"
-    systemd:
+    ansible.builtin.systemd:
       daemon_reload: yes
 
   - name: "{{ my_name }} - Install changed"
-    set_fact:
+    ansible.builtin.set_fact:
       install_changed: true
 
-- import_playbook: install_nginx.yml
+- ansible.builtin.import_playbook: install_nginx.yml
   vars:
     site_enable: 99-retronas-sidecart.conf
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "atarist-sidecart"
     module_state: "present"

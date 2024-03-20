@@ -1,7 +1,6 @@
 - hosts: localhost
   gather_facts: no
 
-
   vars:
     - my_name: "netlink"
     - my_file: "install_netlink"
@@ -32,15 +31,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - paths"
-    file:
+    ansible.builtin.file:
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -49,7 +48,7 @@
     with_items: "{{ paths }}"   
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -60,26 +59,26 @@
     notify: "{{ my_name }} Restart Services"
 
   - name: "{{ my_name }} - Run installer"
-    shell:
+    ansible.builtin.shell:
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
     notify: "{{ my_name }} Restart Services"
 
   - name: "{{ my_name }} - Patch com port range detection"
-    patch:
+    ansible.builtin.patch:
       src: /tmp/{{ my_name }}.patch
       dest: /opt/{{ my_name }}/tunnel.py
 
   handlers:
-    - name: "{{ my_name }} Restart Services"
-      service:
-        name: "{{ item }}"
-        state: started
-        enabled: yes
-        daemon_reload: yes
-      with_items:
-        - "{{ my_name }}.service"
+  - name: "{{ my_name }} Restart Services"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}.service"
 
 - import_playbook: retronas_system_config.yml
   vars:

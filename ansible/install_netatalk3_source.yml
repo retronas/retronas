@@ -63,42 +63,42 @@
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }}  - check if  netatalk package is available"
-    shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    ansible.builtin.shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
     register: result
     failed_when:
       - result.rc >= 2
 
   - name: "{{ my_name }} - unhold netatalk package"
-    shell: "/usr/bin/apt-mark unhold netatalk"
+    ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
     when: result.rc == 0
 
   - name: "{{ my_name }}  - remove package-based Netatalk"
-    package:
+    ansible.builtin.package:
        name: netatalk
        state: absent
 
   - name: "{{ my_name }}  - install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - Install build tools (debian)"
-    package:
+    ansible.builtin.package:
        name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
        state: latest
     when: ansible_distribution == 'Debian'
 
   - name: "{{ my_name }} - Install build tools (ubuntu)"
-    package:  
+    ansible.builtin.package:  
        name: "{{ packages_ubuntu }}"
        state: latest
     when: ansible_distribution == 'Ubuntu'
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -108,10 +108,10 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - install from source"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
   - name: "{{ my_name }} - configure"
-    ini_file: 
+    ansible.builtin.ini_file: 
       dest: /etc/netatalk/afp.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
@@ -120,7 +120,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
-    template: 
+    ansible.builtin.template: 
       src: "templates/{{ my_file }}/retronas.conf.j2"
       dest: /etc/netatalk/retronas.conf
       owner: root
@@ -129,7 +129,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -138,13 +138,13 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon-reload: yes
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "netatalk3"
     module_state: "present"

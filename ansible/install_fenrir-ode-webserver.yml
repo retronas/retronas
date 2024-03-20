@@ -21,15 +21,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
-       name: "{{ my_packages }}"
-       state: latest
+    ansible.builtin.package:
+      name: "{{ my_packages }}"
+      state: latest
 
   - name: "{{ my_name }} - copy in build script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: "root"
@@ -37,18 +37,18 @@
       mode: 0750
 
   - name: "{{ my_name }} - run build tool"
-    shell:
+    ansible.builtin.shell:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "{{ fenrir_ode_bin }}"
 
   - name: "{{ my_name }} - create share link"
-    file:
+    ansible.builtin.file:
       src: "roms/sega/saturn"
       dest: "{{ fenrir_ode_path }}"
       state: link
 
   - name: "{{ my_name }} - systemd unit file"
-    copy:
+    ansible.builtin.copy:
       dest: "/usr/lib/systemd/system/{{ my_service }}"
       content: |
         [Unit]
@@ -72,14 +72,14 @@
 
   handlers:
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       enabled: yes
       daemon_reload: yes
     with_items: "{{ my_service }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "fenrir-ode-webserver"
     module_state: "present"

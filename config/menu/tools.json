@@ -35,7 +35,7 @@
                 "description": "Nintendo 3DS FBI homebrew",
                 "id":"3ds_qr",
                 "prompt": "",
-                "type": "script",
+                "type": "dialog",
                 "group":"",
                 "command": "3ds_qr",
                 "args": ""

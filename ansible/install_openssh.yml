@@ -11,17 +11,17 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
     notify:
     - Restart ssh
 
   - name: "{{ my_name }} - Enable startup services"
-    service:
+    ansible.builtin.service:
       name: ssh
       state: started
       enabled: yes
@@ -29,11 +29,11 @@
   handlers:
 
   - name: "{{ my_name }} - Restart ssh"
-    service:
+    ansible.builtin.service:
       name: ssh
       state: restarted
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "openssh"
     module_state: "present"

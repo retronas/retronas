@@ -1,3 +1,4 @@
+---
 - hosts: localhost
   gather_facts: no
   become: yes
@@ -22,19 +23,18 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - clean up old key"
-    shell:
-      cmd: "rm -f /usr/share/keyrings/teamxlink.asc"
+    ansible.builtin.shell: "rm -f /usr/share/keyrings/teamxlink.asc"
 
   - name: "{{ my_name }} - Install prerequisite packages"
-    package:
+    ansible.builtin.package:
       name: "{{ prerequisite_packages }}"
       update_cache: yes
 
   - name: "{{ my_name }} - Create key dir"
-    file:
+    ansible.builtin.file:
       path: "{{ my_keyrings }}"
       mode: 0755
       owner: root
@@ -42,47 +42,47 @@
       state: directory
 
   - name: "{{ my_name }} - Add teamxlink key"
-    shell:
+    ansible.builtin.shell:
         cmd: "curl -fsSL {{ my_repo }}/gpg | gpg --dearmor -o {{ my_key }}"
         creates: "{{ my_key }}"
 
   - name: "{{ my_name }} - Fix perms on file"
-    file:
+    ansible.builtin.file:
       path: "{{ my_key }}"
       mode: 0755
       owner: root
       group: root
 
   - name: "{{ my_name }} - Add teamxlink repository"
-    copy:
+    ansible.builtin.copy:
       dest: "/etc/apt/sources.list.d/teamxlink.list"
       content: |
         deb [signed-by={{ my_key }}] {{ my_repo }}/static/deb/release/ /
 
   - name: "{{ my_name }} - Install packages"
-    package:
+    ansible.builtin.package:
       name: "{{ packages }}"
       update_cache: yes
 
   - name: "{{ my_name }} - check for arm build"
-    stat:
+    ansible.builtin.stat:
       path: "/usr/bin/kaiengine_arm"
     register: arm_build
 
   - name: "{{ my_name }} - link arm build"
-    file:
+    ansible.builtin.file:
       src: "/usr/bin/kaiengine_arm"
       dest: "/usr/bin/kaiengine"
     when: arm_build.stat.exists is true
 
   - name: "{{  my_name }} - Create systemd service"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
       dest: "/etc/systemd/system/{{ my_name }}.service"
     notify: "{{ my_name }} - Restart service(s)"
 
   - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
-    file:
+    ansible.builtin.file:
       path: "/etc/kaiengine.conf"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
@@ -91,7 +91,7 @@
 
   handlers:
   - name: "{{ my_name }} - Restart service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -99,7 +99,7 @@
     with_items:
       - "{{ my_name }}.service"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.mport_playbook: retronas_system_config.yml
   vars:
     module_name: "xlink-kai"
     module_state: "present"

@@ -1,3 +1,4 @@
+---
 # Dependencies
 - hosts: localhost
   gather_facts: no
@@ -15,33 +16,33 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - check architecture"
-    shell:
+    ansible.builtin.shell:
       cmd: dpkg --print-architecture | head -n1
     register: architecture
 
   - name: "{{ my_name }} - check google-chrome"
-    stat:
+    ansible.builtin.stat:
       path: "{{ google_chrome }}"
     register: google_chrome_check
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
     when: google_chrome_check.stat.exists is false
 
   - name: "{{ my_name }} - fake google-chrome"
-    file:
+    ansible.builtin.file:
        src: "{{ chromium }}"
        dest: "{{ google_chrome }}"
        state: link
     when: google_chrome_check.stat.exists is false
 
   - name: "{{ my_name }} - Prepare installer script"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ my_file }}.sh.j2
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -49,13 +50,13 @@
       mode: 0755
 
   - name: "{{ my_name }} - Run installer"
-    shell:
+    ansible.builtin.shell:
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
 
   - name: "{{ my_name }} - create startup service"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ my_name }}.service.j2
       dest: /usr/lib/systemd/system/{{ my_name }}.service
       owner: root
@@ -64,7 +65,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -75,14 +76,14 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
     with_items:
       - "{{ my_name }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "wrp"
     module_state: "present"

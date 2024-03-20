@@ -1,4 +1,3 @@
----
 # Dependencies
 - ansible.builtin.import_playbook: install_romdir.yml
 
@@ -6,45 +5,51 @@
   gather_facts: no
 
   vars:
-    - my_name: "XBox360"
-    - my_file: "install_xbox360"
+    - my_name: "RetroArch Based Systems CIFS"
+    - my_file: "install_retroarch_cifs"
+
   tasks:
+
+  - name: "{{ my_name }} - Include systems map"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - top level directory"
+  - name: "{{ my_name }} - build top level"
     ansible.builtin.file:
-      path: "{{ retronas_path }}/xbox360"
+      path: "{{ retronas_path }}/retroarch"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Install Samba"
 
-  - name: "{{ my_name }} - symlinks"
-    ansible.builtin.file:
-      src: "{{ item.src }}"
-      dest: "{{ retronas_path }}/xbox360/{{ item.dest }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_items:
-      - { src: "../roms/microsoft/xbox360/games", dest: "games" }
+  - name: "{{ my_name }} - build layout list (set fact)"
+    ansible.builtin.set_fact:
+      path_list: "{{ path_list|default([]) + [ 'ln -sf ../roms/' + item.src + ' \"' + retronas_path + '/retroarch/' + item.retroarch + '\";' ]}}"
+    loop: "{{ system_map }}"
+    when:
+      - item.retroarch | length > 0
+
+  - name: "{{ my_name }} - build systems directory layout"
+    ansible.builtin.shell:
+      cmd: "{{ path_list|join('') }}"
+    when: path_list is defined
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
-      section: xbox360
+      section: retroarch
       option: "include"
-      value: "/etc/samba/retronas_xbox360.conf"
+      value: "/etc/samba/retronas_retroarch.conf"
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
     ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_xbox360.conf.j2"
-      dest: /etc/samba/retronas_xbox360.conf
+      src: "templates/{{ my_file }}/retronas_retroarch.conf.j2"
+      dest: /etc/samba/retronas_retroarch.conf
       owner: root
       group: root
       mode: '0644'
@@ -64,5 +69,5 @@
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
-    module_name: "xbox360"
+    module_name: "retroarch_cifs"
     module_state: "present"

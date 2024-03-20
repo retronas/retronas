@@ -19,15 +19,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - create GOG dir"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/itchio"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -35,18 +35,18 @@
       state: directory
 
   - name: "{{ my_name }} - download litch"
-    shell:
+    ansible.builtin.shell:
       chdir: "{{ retronas_root }}/bin"
       cmd: "git clone https://github.com/sairuk/litch.git"
       creates: "{{ retronas_root }}/bin/litch"
 
   - name: "{{ my_name }} - update litch"
-    shell: 
+    ansible.builtin.shell: 
       chdir: "{{ retronas_root }}/bin/litch"
       cmd: "git pull"
 
   - name: "{{ my_name }} - scripts"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ item }}.sh"
       owner: root
@@ -54,7 +54,7 @@
       mode: 0755
     with_items: "{{ scripts }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "litch"
     module_state: "present"

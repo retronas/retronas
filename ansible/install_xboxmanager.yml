@@ -1,9 +1,9 @@
+---
 # Dependencies
-- import_playbook: install_cockpit.yml
-- import_playbook: install_filesystems.yml
-- import_playbook: install_extract-xiso.yml
-- import_playbook: install_curlftpfs.yml
-
+- ansible.builtin.import_playbook: install_cockpit.yml
+- ansible.builtin.import_playbook: install_filesystems.yml
+- ansible.builtin.import_playbook: install_extract-xiso.yml
+- ansible.builtin.import_playbook: install_curlftpfs.yml
 
 - hosts: localhost
   gather_facts: no
@@ -16,10 +16,10 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - clone repo"
-    git:
+    ansible.builtin.git:
       repo: 'https://github.com/sairuk/cockpit-xboxmanager.git'
       dest: "{{ my_path }}/xboxmanager"
       clone: yes
@@ -27,7 +27,7 @@
       version: "main"
 
   - name: "{{ my_name }} create device mounts dir"
-    file: 
+    ansible.builtin.file: 
       path: "{{ retronas_path }}/device-mounts"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -35,7 +35,7 @@
       state: directory
 
   - name: "{{ my_name }} create device mount xbox dir"
-    file: 
+    ansible.builtin.file: 
       path: "{{ retronas_path }}/device-mounts/xbox"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -43,18 +43,18 @@
       state: directory
 
   - name: "{{ my_name }} - run installer"
-    command:
+    ansible.builtin.command:
       cmd: "{{ my_path }}/xboxmanager/xboxmanager-install.sh"
 
   - name: "{{ my_name }} config file"
-    template: 
+    ansible.builtin.template: 
       src: templates/{{ my_file }}/xboxmanager.cfg.j2
       dest: /opt/xboxmanager/xboxmanager.cfg
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       mode: '0644'
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "xboxmanager"
     module_state: "present"

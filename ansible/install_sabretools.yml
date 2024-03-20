@@ -2,7 +2,7 @@
   gather_facts: yes
 
 # Dependencies
-- import_playbook: install_dotnetcore3.yml
+- ansible.builtin.import_playbook: install_dotnetcore3.yml
   when: ansible_architecture == "x86_64"
 
 - hosts: localhost
@@ -22,23 +22,23 @@
   tasks:
 
   - name: "{{ my_name }} - Checking hw platform compatiblity"
-    debug:
+    ansible.builtin.debug:
       msg: "INCOMPATIBLE PLATFORM, only {{ my_arch }} is supported"
     when: ansible_architecture != my_arch
 
-  - meta: end_play
+  - ansible.builtin.meta: end_play
     when: ansible_architecture != my_arch
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    apt:
+    ansible.builtin.apt:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - Prepare installer script"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ my_file }}.sh.j2
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -46,12 +46,12 @@
       mode: 0755
 
   - name: "{{ my_name }} - Run installer"
-    shell:
+    ansible.builtin.shell:
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "sabretools"
     module_state: "present"

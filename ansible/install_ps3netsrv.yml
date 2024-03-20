@@ -44,30 +44,30 @@
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - Install build tools (debian)"
-    package:
+    ansible.builtin.package:
        name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
        state: latest
     when: ansible_distribution == 'Debian'
 
   - name: "{{ my_name }} - Install build tools (ubuntu)"
-    package:  
+    ansible.builtin.package:  
        name: "{{ packages_ubuntu }}"
        state: latest
     when: ansible_distribution == 'Ubuntu'
 
   - name: "{{ my_name }} - build top level"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/ps3/ps3netsrv"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -76,7 +76,7 @@
     notify: "{{ my_name }} - Restart service"
       
   - name: "{{ my_name }} - build layout"
-    file:
+    ansible.builtin.file:
       src: "../../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/ps3/ps3netsrv/{{ item.ps3netsrv }}"
       owner: "{{ retronas_user }}"
@@ -89,7 +89,7 @@
       - item.ps3netsrv | length > 0
 
   - name: "{{ my_name }} - Generate {{ my_file }} script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -97,12 +97,12 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install from source code"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} /bin/ps3netsrv"
 
   - name: "{{ my_name }} - create startup service(s)"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
       owner: root
@@ -113,7 +113,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -124,7 +124,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -136,7 +136,7 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
@@ -146,7 +146,7 @@
       - item.instance == 'no'
 
   - name: "{{ my_name }} - Restart instances"
-    service:
+    ansible.builtin.service:
       name: "{{ item.1.name }}{{ item.0.dest }}.{{ item.1.type }}"
       state: restarted
       daemon_reload: yes
@@ -157,7 +157,7 @@
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "ps3netsrv"
     module_state: "present"

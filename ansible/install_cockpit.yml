@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_filesystems.yml
-- import_playbook: install_apt-backports.yml
+- ansible.builtin.import_playbook: install_filesystems.yml
+- ansible.builtin.import_playbook: install_apt-backports.yml
 
 - hosts: localhost
   gather_facts: yes
@@ -18,17 +18,17 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
  
   - name: "{{ my_name }} - Install from repo"
-    apt:
+    ansible.builtin.apt:
        name: "{{ my_packages }}"
        state: latest
        default_release: "{{ ansible_distribution_release }}-backports"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ my_service }}"
       state: started
       enabled: yes
@@ -37,12 +37,12 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ my_service }}"
       state: restarted
       daemon_reload: yes
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "cockpit"
     module_state: "present"
