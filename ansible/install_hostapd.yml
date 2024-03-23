@@ -1,0 +1,63 @@
+# Dependencies
+
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    - my_name: "hostapd"
+    - my_file: "install_{{ my_name }}"
+
+    # default wifi
+    - retronas_wifi_ssid: "retronas"
+    - retronas_wifi_password: "retronas"
+    - retronas_wifi_interface: "wlan0"
+    - retronas_wifi_channel: 6
+    - retronas_wifi_hwmode: "g"
+    - retronas_wifi_countrycode: "AU"
+
+    - packages:
+      - hostapd
+
+    - my_services: "hostapd-retronas.service"
+
+    - templates:
+      - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
+      - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
+
+
+  tasks:
+  - name: "{{ my_name }} - Install packages"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - enable"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items: "{{ my_services }}"
+
+  handlers:
+  - name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ my_services }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "hostapd"
+    module_state: "present"
