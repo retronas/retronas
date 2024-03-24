@@ -7,7 +7,7 @@
     - my_file: "install_ntp"
 
     - my_packages:
-      - openntp
+      - openntpd
 
     - remove_packages:
       - ntp
@@ -29,7 +29,7 @@
     ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
-      notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - listen"
     ansible.builtin.lineinfile:
@@ -37,7 +37,7 @@
       search_string: "^listen on *$"
       insertafter: "^# Addresses to listen on (ntpd does not listen by default)$"
       line: "listen on *"
-      notify: "{{ my_name }} - Restart service"
+    notify: "{{ my_name }} - Restart service"
 
 
   handlers:
