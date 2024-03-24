@@ -3,9 +3,8 @@ Description=DNS caching server retro.
 After=network.target
 
 [Service]
-ExecStart=/usr/sbin/dnsmasq -k --interface=eth0--except-interface=lo,wlan0 --bind-interfaces --conf-dir=/etc/dnsmasq.d/retro --pid-file=/var/run/dnsmasq-retro.pid
+ExecStart=/usr/sbin/dnsmasq -k --conf-dir=/etc/dnsmasq.d/retro --pid-file=/var/run/dnsmasq-retro.pid
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
-
