@@ -76,14 +76,14 @@ Some of the supported systems include:
 * Sony PlayStation 3 with CFW/HEN and webMAN-MOD
 * Microsoft XBox 360 with JTAG/RGH, custom dash and ConnectX plugin
 * MiSTer FPGA
-* [Many more planned](https://github.com/retronas/retronas/blob/main/IDEAS.md)
+* [Many more planned](https://github.com/retronas/retronas/wiki/Ideas)
 
 Some of the extra services include:
 * Nintendo 3DS with FBI - QR code auto generation for CIA installs over WiFi
 * WebOne HTTP proxy for legacy web browsers without SSL/TLS or Web2.0 support to browse the modern Internet
 * Syncthing secure personal file sharing with no cloud services needed
 * gogrepo - back up your entire GOG library for DRM-free offline installs
-* [Many more planned](https://github.com/retronas/retronas/blob/main/IDEAS.md)
+* [Many more planned](https://github.com/retronas/retronas/wiki/Ideas)
 
 Please see the [How To](#How-To) section for a comprehensive list of all protocols, supported systems and features.
 
