@@ -6,5 +6,5 @@
   <service name="samba-modern"/>
   <service name="ssh"/>
   <masquerade/>
-  <interface name="wlan0"/>
+  <interface name="{{ retronas_net_modern_interface}}"/>
 </zone>

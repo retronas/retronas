@@ -8,5 +8,5 @@
   <service name="samba"/>
   <service name="mdns"/>
   <protocol value="icmp"/>
-  <interface name="eth0"/>
+  <interface name="{{ retronas_net_retro_interface}}"/>
 </zone>

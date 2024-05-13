@@ -15,12 +15,8 @@
       - { name: "ps3netsrv.xml",            sub: "services",    dest: "/etc/{{ my_service }}/services",                 force: no }
       - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no }
       - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no } 
-      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",                                mode: '0750' }
-      - { name: "override.conf",            sub: "workarounds", dest: "/etc/systemd/system/{{ my_service }}.service.d" }
 
     - paths:
-      - { name: "{{ my_service }}",               dest: "/etc",                  state: "directory", mode: "0750" }
-      - { name: "{{ my_service }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}",               dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}/policies",      dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}/services",      dest: "/etc",                  state: "directory", mode: "0750" }

@@ -11,7 +11,7 @@
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "dchp-eth0.conf",           dest: "/etc/{{ my_service }}.d/retro", force: no }
+      - { name: "dchp-retro.conf",          dest: "/etc/{{ my_service }}.d/retro", force: no }
       - { name: "dhcp-static-leases.conf",  dest: "/etc/{{ my_service }}.d/retro", force: no }
       - { name: "dhcp.conf",                dest: "/etc/{{ my_service }}.d/retro", force: no }
       - { name: "dns.conf",                 dest: "/etc/{{ my_service }}.d/retro", force: no } 
@@ -27,9 +27,9 @@
 
 
     - net_settings:
-      - { option: "interface",  value: "eth0",                           match_regex: "^interface eth0$",  after_regex: "",                            before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "static",     value: 'ip_address\=10.99.1.1/24',                                         after_regex: "^interface eth0$",            before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "static",     value: 'domain_name_servers\=10.99.1.1',                                   after_regex: "^interface ip_address=.+$",   before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "interface",  value: "{{ retronas_net_retro_ethernet_interface }}",     match_regex: "^interface {{ retronas_net_retro_ethernet_interface }}$",             after_regex: "",  before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'ip_address\=10.99.1.1/24',                        after_regex: "^interface {{ retronas_net_retro_ethernet_interface }}$",             before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'domain_name_servers\=10.99.1.1',                  after_regex: "^interface ip_address=.+$",   before_regex: "", state: "present", dest: "/etc/dhcpcd.conf" }
 
 
   tasks:

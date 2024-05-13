@@ -7,14 +7,9 @@
   vars:
     - my_name: "firewalld"
     - my_file: "install_{{ my_name }}"
-
     - my_services: "firewalld.service"
 
     - templates:
-      - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_name }}/policies",  force: no }
-      - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_name }}/services",  force: no }
-      - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no }
-      - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_name }}/zones",     force: no } 
       - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
       - { name: "override.conf",            sub: "workarounds", dest: "/src/systemd/system" }
 
@@ -25,6 +20,26 @@
     - changed: false
 
   tasks:
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Reload firewalld"
+
   - name: "{{ my_name }} - reload"
     service:
       name: "{{ item }}"
