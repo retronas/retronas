@@ -99,7 +99,7 @@
     with_items:
       - "{{ my_name }}.service"
 
-- ansible.builtin.mport_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "xlink-kai"
     module_state: "present"

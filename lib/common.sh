@@ -242,6 +242,10 @@ READ_MENU_COMMAND() {
             service_start)
                 RN_SYSTEMD_START "${MENU_SELECT}"
                 ;;
+            service_start_follow)
+                RN_SYSTEMD_START "${MENU_SELECT}"
+                RN_JOURNAL_FOLLOW "${MENU_SELECT}"
+                ;;
             service_restart)
                 RN_SYSTEMD_RESTART "${MENU_SELECT}"
                 ;;
@@ -425,6 +429,13 @@ RN_SYSTEMD() {
 
     RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
 
+}
+
+#
+# JOURNAL follow
+#
+RN_SYSTEMD_START() {
+    journalctl --follow -u "${1}"
 }
 
 #
