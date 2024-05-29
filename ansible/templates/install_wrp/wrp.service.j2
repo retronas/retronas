@@ -1,0 +1,12 @@
+[Unit]
+Description={{ my_name|upper }} service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/opt/{{ my_name }}/{{ my_name }}-{{ architecture.stdout }}-linux -h -l :64888
+SyslogIdentifier={{ my_name|upper }}
+
+[Install]
+WantedBy=multi-user.target

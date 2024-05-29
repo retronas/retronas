@@ -1,0 +1,55 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "curlftpfs"
+    - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - curlftpfs
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - get primary pkg architecture"
+    ansible.builtin.shell:
+       cmd: dpkg --print-architecture
+    register: architecture
+
+  - name: "{{ my_name }} - Install from repo"
+    ansible.builtin.apt:
+       name: "{{ my_packages }}"
+       state: latest
+       default_release: "{{ ansible_distribution_release }}-backports"
+    when: ansible_distribution_major_version is version('12','<=')
+
+  - name: "{{ my_name }} - discover deb"
+    ansible.builtin.shell:
+      cmd: curl -skL http://ftp.debian.org/debian/pool/main/c/curlftpfs/ | grep -oP "href=\"curlftpfs_.+_{{ architecture.stdout }}.deb\">" | sed -r 's/href=\"(curlftpfs_.+_{{ architecture.stdout }}.deb)\">/\1/' | tail -n1
+    register: debfile
+    when: ansible_distribution == "Debian" and 
+          ansible_distribution_major_version is version ('12','>=') and
+          architecture is defined
+
+  - name: "{{ my_name }} - download deb"
+    ansible.builtin.shell:
+      chdir: "/tmp"
+      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/c/curlftpfs/{{ debfile.stdout }} https://mirror.aarnet.edu.au/pub/debian/pool/main/c/curlftpfs/{{ debfile.stdout }}"
+    when: ansible_distribution == "Debian" and 
+          ansible_distribution_major_version is version ('12','>=') and
+          debfile is defined
+
+  - name: "{{ my_name }} - install deb"
+    ansible.builtin.shell:
+      chdir: "/tmp"
+      cmd: "dpkg -i {{ debfile.stdout }}"
+    when: ansible_distribution == "Debian" and 
+          ansible_distribution_major_version is version ('12','>=') and
+          debfile is defined
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "curlftpfs"
+    module_state: "present"

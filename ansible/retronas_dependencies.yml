@@ -1,3 +1,4 @@
+---
 - hosts: localhost
 
   vars:
@@ -17,14 +18,13 @@
       - scripts
       - log
 
-
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - configure program directories"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_root }}/{{ item }}"
       owner: root
       group: root
@@ -33,12 +33,12 @@
     with_items: "{{ directories }}"
 
   - name: "{{ my_name }} - required packages"
-    package:
+    ansible.builtin.package:
       name: "{{ packages }}"
       state: latest
 
   - name: "{{ my_name }} - configure top level share directory"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"

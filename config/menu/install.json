@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index": "02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"samba",
-                "command": "samba"
+                "command": "samba",
+                "args": ""
             },                
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"netatalk",
-                "command": "netatalk2x"
+                "command": "netatalk2x",
+                "args": ""
             },
             {
                 "index": "04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"netatalk",
-                "command": "netatalk3"
+                "command": "netatalk3",
+                "args": ""
             },                
             {
                 "index": "05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "etherdfs"
+                "command": "etherdfs",
+                "args": ""
             },
             {
                 "index": "06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "lighttpd"
+                "command": "lighttpd",
+                "args": ""
             },                
             {
                 "index": "07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "proftpd"
+                "command": "proftpd",
+                "args": ""
             },
             {
                 "index": "08",
@@ -85,7 +92,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "tftpd-hpa"
+                "command": "tftpd-hpa",
+                "args": ""
             },                
             {
                 "index": "09",
@@ -95,7 +103,8 @@
                 "prompt": "", 
                 "type": "install",
                 "group":"",
-                "command": "openssh"
+                "command": "openssh",
+                "args": ""
             },
             {
                 "index": "10",
@@ -105,7 +114,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "telnet"
+                "command": "telnet",
+                "args": ""
             },
             {
                 "index": "11",
@@ -115,7 +125,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "nfs"
+                "command": "nfs",
+                "args": ""
             },
             {
                 "index": "12",
@@ -125,7 +136,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "tnfs"
+                "command": "tnfs",
+                "args": ""
             },
             {
                 "index": "13",
@@ -135,17 +147,19 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "pygopherd"
+                "command": "pygopherd",
+                "args": ""
             },
             {
                 "index": "14",
                 "title": "3DS QR codes",
                 "description": "Nintendo 3DS FBI Homebrew installer", 
-                "id":"3ds_qr_codes",
+                "id":"3ds_qr",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"",
-                "command": "3ds_qr_codes"
+                "command": "3ds_qr",
+                "args": ""
             },                
             {
                 "index": "15",
@@ -155,7 +169,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"samba",
-                "command": "ps2_openps2loader"
+                "command": "ps2_openps2loader",
+                "args": ""
             },                
             {
                 "index": "16",
@@ -165,7 +180,8 @@
                 "prompt": "ps3netsrv",
                 "type": "install",
                 "group":"",
-                "command": "ps3netsrv"
+                "command": "ps3netsrv",
+                "args": ""
             },                
             {
                 "index": "17",
@@ -175,7 +191,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"samba",
-                "command": "mister_cifs"
+                "command": "mister_cifs",
+                "args": ""
             },                
             {
                 "index": "18",
@@ -185,7 +202,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"samba",
-                "command": "xbox360"
+                "command": "xbox360",
+                "args": ""
             },
             {
                 "index": "19",
@@ -195,7 +213,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "batocera_cifs"
+                "command": "batocera_cifs",
+                "args": ""
             },
             {
                 "index": "20",
@@ -205,7 +224,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "recalbox_cifs"
+                "command": "recalbox_cifs",
+                "args": ""
             },     
             {
                 "index": "21",
@@ -215,7 +235,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "emuelec_cifs"
+                "command": "emuelec_cifs",
+                "args": ""
             },
             {
                 "index": "22",
@@ -225,7 +246,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "fenrirodewebserver"
+                "command": "fenrirodewebserver",
+                "args": ""
             },
             {
                 "index":"23",
@@ -235,7 +257,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "xlinkkai"
+                "command": "xlinkkai",
+                "args": ""
             },                 
             {
                 "index": "24",
@@ -245,7 +268,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "gogrepo"
+                "command": "gogrepo",
+                "args": ""
             },                
             {
                 "index": "25",
@@ -255,7 +279,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "romimport"
+                "command": "romimport",
+                "args": ""
             },                
             {
                 "index": "26",
@@ -265,7 +290,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "fsp"
+                "command": "fsp",
+                "args": ""
             },                
             {
                 "index": "27",
@@ -275,7 +301,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "sabretools"
+                "command": "sabretools",
+                "args": ""
             },
             {
                 "index": "28",
@@ -285,7 +312,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "disc-image-creator"
+                "command": "disc-image-creator",
+                "args": ""
             },
             {
                 "index": "29",
@@ -295,7 +323,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "smbmounter"
+                "command": "smbmounter",
+                "args": ""
             },
             {
                 "index": "30",
@@ -305,7 +334,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "syncthing"
+                "command": "syncthing",
+                "args": ""
             },
             {
                 "index": "31",
@@ -315,7 +345,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "cockpit-packages"
+                "command": "cockpit-packages",
+                "args": ""
             },
             {
                 "index": "32",
@@ -325,7 +356,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "webone"
+                "command": "webone",
+                "args": ""
             },
             {
                 "index": "33",
@@ -335,7 +367,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "deluge"
+                "command": "deluge",
+                "args": ""
             },
             {   
                 "index": "34",
@@ -345,7 +378,8 @@
                 "prompt": "", 
                 "type": "install",
                 "group":"",
-                "command": "aria2"
+                "command": "aria2",
+                "args": ""
             },
             {   
                 "index": "35",
@@ -355,7 +389,8 @@
                 "prompt": "", 
                 "type": "install",
                 "group":"",
-                "command": "megatools"
+                "command": "megatools",
+                "args": ""
             },
             {
                 "index": "36",
@@ -365,7 +400,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "apfs-fuse"
+                "command": "apfs-fuse",
+                "args": ""
             },
             {
                 "index":"37",
@@ -375,7 +411,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "hbstorecdn"
+                "command": "hbstorecdn",
+                "args": ""
             },
             {
                 "index": "38",
@@ -385,7 +422,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "zterm"
+                "command": "zterm",
+                "args": ""
             },
             {
                 "index": "39",
@@ -395,7 +433,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "adtpro"
+                "command": "adtpro",
+                "args": ""
             },
             {
                 "index": "40",
@@ -405,7 +444,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "minicom"
+                "command": "minicom",
+                "args": ""
             },
             {
                 "index": "41",
@@ -415,7 +455,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "dreampi"
+                "command": "dreampi",
+                "args": ""
             },
             {
                 "index": "42",
@@ -425,7 +466,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ethflopd"
+                "command": "ethflopd",
+                "args": ""
             },
             {
                 "index": "43",
@@ -435,7 +477,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "mc"
+                "command": "mc",
+                "args": ""
             },
             {
                 "index": "44",
@@ -445,7 +488,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ytree"
+                "command": "ytree",
+                "args": ""
             },
             {
                 "index": "45",
@@ -455,7 +499,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "far2l"
+                "command": "far2l",
+                "args": ""
             },
             {
                 "index": "46",
@@ -465,7 +510,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ntp"
+                "command": "ntp",
+                "args": ""
             },
             {
                 "index": "47",
@@ -475,7 +521,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "netlink"
+                "command": "netlink",
+                "args": ""
             },
             {
                 "index": "48",
@@ -485,7 +532,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "kermit"
+                "command": "kermit",
+                "args": ""
             },
             {
                 "index": "49",
@@ -495,7 +543,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "nabu"
+                "command": "nabu",
+                "args": ""
             },
             {
                 "index": "50",
@@ -505,7 +554,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "dexdrive"
+                "command": "dexdrive",
+                "args": ""
             },
             {
                 "index": "51",
@@ -515,7 +565,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "open-iscsi"
+                "command": "open-iscsi",
+                "args": ""
             },
             {
                 "index": "52",
@@ -525,7 +576,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "linux-gadgets"
+                "command": "linux-gadgets",
+                "args": ""
             },
             {
                 "index": "53",
@@ -535,7 +587,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "waybackproxy"
+                "command": "waybackproxy",
+                "args": ""
             },
             {
                 "index": "54",
@@ -545,7 +598,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "xboxmanager"
+                "command": "xboxmanager",
+                "args": ""
             },
             {
                 "index":"55",
@@ -555,7 +609,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "hdparm"
+                "command": "hdparm",
+                "args": ""
             },
             {
                 "index": "56",
@@ -565,7 +620,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "tcpser"
+                "command": "tcpser",
+                "args": ""
             },
             {
                 "index": "57",
@@ -575,7 +631,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "disable-laptop-lid"
+                "command": "disable-laptop-lid",
+                "args": ""
             },
             {
                 "index": "58",
@@ -585,7 +642,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "emudeck_cifs"
+                "command": "emudeck_cifs",
+                "args": ""
             },
             {
                 "index": "59",
@@ -595,7 +653,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "analoguepocket_cifs"
+                "command": "analoguepocket_cifs",
+                "args": ""
             },
             {
                 "index":"60",
@@ -605,7 +664,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "nginx"
+                "command": "nginx",
+                "args": ""
             },
             {
                 "index":"61",
@@ -615,7 +675,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "sslcert"
+                "command": "sslcert",
+                "args": ""
             },
             {
                 "index":"62",
@@ -625,7 +686,74 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "redumper"
+                "command": "redumper",
+                "args": ""
+            },
+            {
+                "index":"63",
+                "title": "affstools",
+                "description": "Amiga Fast Filesystem tools",
+                "id":"affstools",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "affstools",
+                "args": ""
+            },
+            {
+                "index":"64",
+                "title": "amitools",
+                "description": "Various tools for using AmigaOS programs on other platforms",
+                "id":"amitools",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "amitools",
+                "args": ""
+            },
+            {
+                "index":"65",
+                "title": "curlftpfs",
+                "description": "Mount ftp server as a filesystem",
+                "id":"curlftpfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "curlftpfs",
+                "args": ""
+            },
+            {
+                "index":"66",
+                "title": "macproxy",
+                "description": "Proxy for retro computers",
+                "id":"macproxy",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "macproxy",
+                "args": ""
+            },
+            {
+                "index":"67",
+                "title": "wrp",
+                "description": "Proxy for retro computers, uses image maps",
+                "id":"wrp",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "wrp",
+                "args": ""
+            },     
+            {
+                "index": "68",
+                "title": "Samba for RetroArch",
+                "description": "RetroArch Based Systems CIFS config",
+                "id":"retroarch-cifs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "retroarch_cifs",
+                "args": ""
             }
         ]
     }

@@ -1,5 +1,5 @@
 # Dependencies
-- import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_romdir.yml
 
 - hosts: localhost
   gather_facts: no
@@ -20,13 +20,13 @@
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - build top level"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/emuelec"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -35,20 +35,20 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build layout list (set fact)"
-    set_fact:
+    ansible.builtin.set_fact:
       path_list: "{{ path_list|default([]) + [ 'ln -sf ../roms/' + item.src + ' ' + retronas_path + '/emuelec/' + item.emuelec + ';' ] }}"
     loop: "{{ system_map }}"
     when:
       - item.emuelec | length > 0
 
   - name: "{{ my_name }} - build systems directory layout"
-    shell:
+    ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"
-    file:
+    ansible.builtin.file:
       src: "../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/emuelec/{{ item.dest }}"
       owner: "{{ retronas_user }}"
@@ -59,7 +59,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: emuelec
       option: "include"
@@ -67,7 +67,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/retronas_emuelec.conf.j2"
       dest: /etc/samba/retronas_emuelec.conf
       owner: root
@@ -78,16 +78,16 @@
   handlers:
 
   - name: "{{ my_name }} - Install Samba"
-    set_fact:
+    ansible.builtin.set_fact:
       install_changed: true
 
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "emuelec_cifs"
     module_state: "present"

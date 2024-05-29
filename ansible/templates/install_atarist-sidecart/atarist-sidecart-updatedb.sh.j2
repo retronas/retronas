@@ -1,0 +1,24 @@
+#!/bin/bash
+# grab a local copy of the the sidecart db
+
+BASE_URL=http://ataristdb.sidecart.xyz
+OUTPUTDIR={{ base_path }}/sidecart/db
+
+cd $OUTPUTDIR
+
+_dlfile() {
+    [ -f ${1}.csv ] && rm ${1}.csv
+    wget -c -w1 "${BASE_URL}/db/${1}"
+}
+
+for LETTER in {a..z}
+do
+  _dlfile ${LETTER}.csv
+done
+
+for NUMBER in {0..9}
+do
+    _dlfile ${NUMBER}.csv
+done
+
+chown -R {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/atarist/db

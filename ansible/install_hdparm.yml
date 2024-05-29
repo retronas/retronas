@@ -28,16 +28,16 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - check dir"
-    file:
+    ansible.builtin.file:
       path: /usr/lib/systemd/system
       owner: root
       group: root
@@ -45,7 +45,7 @@
       state: directory
 
   - name: "{{ my_name }} - install script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item }}.j2"
       dest: "{{ retronas_root }}/scripts/{{ item }}"
       owner: root
@@ -56,7 +56,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - create startup service"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
       owner: root
@@ -67,7 +67,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - create symlinks for webui"
-    file:
+    ansible.builtin.file:
       src: "{{ retronas_root }}/scripts/{{ my_name }}-manager.sh"
       dest: "{{ retronas_root }}/scripts/{{ item }}.sh"
       owner: root
@@ -78,7 +78,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}"
       state: started
       enabled: "{{ item.enabled }}"
@@ -91,7 +91,7 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
@@ -100,7 +100,7 @@
     when:
       - item.restart == "yes"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "hdparm"
     module_state: "present"

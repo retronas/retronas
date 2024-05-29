@@ -1,0 +1,34 @@
+#!/bin/bash
+
+APP=affstools
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="/usr/local/sbin"
+
+BINS=(
+    affsck
+    mkaffs
+)
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading source code..."
+git clone https://github.com/kdave/${APP}
+cd ${APP}
+
+./configure
+make
+
+echo "Moving binary to ${BINDIR}..."
+for BIN in ${BINS[@]}
+do
+    chmod +x ${BIN}
+    mv -vf ${BIN} "${BINDIR}"/
+done
+
+echo "Cleaning up..."
+rm -rf "${SRCDIR}"
+
+echo "All done!"

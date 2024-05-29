@@ -45,11 +45,14 @@ rn_gog_chooser() {
       # download 1 game
       rn_gog_gameslist
       rn_gog_game
-      GOGGAME=$( cat ${TDIR}/rn_gog_game )
-      CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
-      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
-      PAUSE
+      if [ $? -eq 0 ]
+      then
+        GOGGAME=$( cat ${TDIR}/rn_gog_game )
+        CLEAR
+        ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
+        ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
+        PAUSE
+      fi
       ;;
     06)
       # download all games
@@ -77,9 +80,9 @@ rn_gog_chooser() {
 rn_gog_setos() {
   source $_CONFIG
 
-  local MENU_NAME=gogrepo-setupos
-  READ_MENU_JSON "${MENU_NAME}"
-  READ_MENU_TDESC "${MENU_NAME}"
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-setupos"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-setupos"
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
   case ${CHOICE} in
@@ -117,16 +120,23 @@ rn_gog_setos() {
 rn_gog_gameslist() {
   rm ${TDIR}/rn_gog_gameslist 2>/dev/null
   RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
-  grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
-  do
-    echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
-  done
+  if [ ! -f ${RNUDIR}/.gogrepo/gog-manifest.dat ]
+  then
+    echo "GOG Manifest not found, you'll need to login/sync first"
+    PAUSE
+    echo 1
+  else
+    grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
+    do
+      echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
+    done
+  fi
 }
 
 rn_gog_game() {
-  local MENU_NAME=gogrepo-gamechooser
-  READ_MENU_JSON "${MENU_NAME}"
-  READ_MENU_TDESC "${MENU_NAME}"
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-gamechooser"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-gamechooser"
 
   MENU_ARRAY=$(cat ${TDIR}/rn_gog_gameslist)
 
@@ -139,6 +149,5 @@ rn_gog_game() {
     2> ${TDIR}/rn_gog_game
 
 }
-
 
 rn_gog_chooser

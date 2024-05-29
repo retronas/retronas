@@ -1,0 +1,58 @@
+- hosts: localhost
+  gather_facts: no
+
+
+  vars:
+    - my_name: "macproxy"
+    - my_file: "install_macproxy"
+
+    - my_packages:
+      - python3 
+      - python3-venv
+      - python3-pip
+
+    - templates:
+      - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
+
+    - repo: https://github.com/rdmark/macproxy.git
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install dependencies"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - clone repo"
+    ansible.builtin.git:
+      repo: "{{ repo }}"
+      dest: /opt/{{ my_name }}
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} Restart Services"
+
+  handlers:
+  - name: "{{ my_name }} Restart Services"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}.service"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "macproxy"
+    module_state: "present"

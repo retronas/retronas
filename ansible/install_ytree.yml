@@ -1,3 +1,4 @@
+---
 - hosts: localhost
   gather_facts: no
 
@@ -13,18 +14,18 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Load RetroNAS systems"
-    include_vars: retronas_systems.yml
+    ansible.builtin.include_vars: retronas_systems.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - check systemd unit folder"
-    file:
+    ansible.builtin.file:
       path: /usr/lib/systemd/system
       owner: root
       group: root
@@ -32,7 +33,7 @@
       state: directory
 
   - name: "{{ my_name }} - Generate install scripts"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -40,9 +41,9 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install from source code"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "ytree"
     module_state: "present"

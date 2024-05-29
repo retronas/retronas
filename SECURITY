@@ -5,7 +5,7 @@
           RetroNAS is a compilation of existing opensource products. 
 
               RetroNAS is made available under the MIT license
-            https://github.com/danmons/retronas/blob/main/LICENSE
+            https://github.com/retronas/retronas/blob/main/LICENSE
 
 Due to the nature of retro computing, many of the tools and protocols used in 
 this project are COMPLETELY INSECURE. It is at the users behest which tools
@@ -44,7 +44,7 @@ first, or run this only on a system dedicated to the purpose.
        The RetroNAS team may in turn use this enquiry to revise support 
                  documentation for the benefit of the project
 
-                     https://github.com/danmons/retronas
+                     https://github.com/retronas/retronas
 
               The RetroNAS team are retro computing ENTHUSIASTS 
 

@@ -135,9 +135,14 @@ GET_LANG() {
 #
 READ_MENU_TDESC() {
     export MENU_TITLE="$1"
+    export MENU="$2"
+
+    # handle submenus
+    [ -z "$MENU" ] && MENU="menu"
+
     if [ -f ${RNJSON}/${MENU_TITLE}.json ]
     then
-        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu | \"\(.title);\(.description)\"")
+        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\" | \"\(.title);\(.description)\"")
     elif [ -f ${RNJSONOLD} ]
     then
         local MENU_TDESC_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
@@ -156,13 +161,18 @@ READ_MENU_TDESC() {
 # export the data for use in dialogs
 #
 READ_MENU_JSON() {
-    local MENU_TITLE="$1"
+    local MENU_TITLE="${1}"
+    local MENU="${2}"
+
+    # handle submenus
+    [ -z "$MENU" ] && MENU="menu"
+
     if [ -f ${RNJSON}/${MENU_TITLE}.json ]
     then
-        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
     elif [ -f ${RNJSONOLD} ]
     then
-        export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+        export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
     else
         export MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
     fi
@@ -181,16 +191,18 @@ READ_MENU_COMMAND() {
 
     if [ -f ${RNJSON}/${MENU_TITLE}.json ]
     then
-        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
     elif [ -f ${RNJSONOLD} ]
     then
         MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
     else
-        MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+        MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
     fi
 
     local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
     local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
+    local MENU_ARGS=$(echo -e "${MENU_DATA}" | cut -d"|" -f3-)
+
 
     CLEAR
     if [ ! -z "${MENU_SELECT}" ] && [ "${MENU_SELECT}" != "null" ]
@@ -215,7 +227,7 @@ READ_MENU_COMMAND() {
                 EXEC_SCRIPT "f-${MENU_SELECT}"
                 ;;
             script)
-                EXEC_SCRIPT $MENU_SELECT
+                EXEC_SCRIPT $MENU_SELECT $MENU_ARGS
                 ;;
             script-static)
                 EXEC_SCRIPT "s-${MENU_SELECT}"
@@ -229,6 +241,10 @@ READ_MENU_COMMAND() {
                 ;;
             service_start)
                 RN_SYSTEMD_START "${MENU_SELECT}"
+                ;;
+            service_start_follow)
+                RN_SYSTEMD_START "${MENU_SELECT}"
+                RN_JOURNAL_FOLLOW "${MENU_SELECT}"
                 ;;
             service_restart)
                 RN_SYSTEMD_RESTART "${MENU_SELECT}"
@@ -413,6 +429,13 @@ RN_SYSTEMD() {
 
     RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
 
+}
+
+#
+# JOURNAL follow
+#
+RN_SYSTEMD_START() {
+    journalctl --follow -u "${1}"
 }
 
 #

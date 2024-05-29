@@ -1,0 +1,9 @@
+#!/bin/bash
+
+APP=amitools
+mv /usr/lib/python3*/EXTERNALLY-MANAGED /usr/lib/python3/EXTERNALLY-MANAGED.old 2> /dev/null
+pip3 install cython
+pip3 install -U git+https://github.com/cnvogelg/${APP}.git
+mv /usr/lib/python3*/EXTERNALLY-MANAGED.old /usr/lib/python3/EXTERNALLY-MANAGED 2> /dev/null
+
+echo "All done!"

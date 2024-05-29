@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_x11vnc.yml
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_x11vnc.yml
 
 - hosts: localhost
   gather_facts: no
@@ -30,18 +30,18 @@
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - paths"
-    file:
+    ansible.builtin.file:
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -50,13 +50,13 @@
     with_items: "{{ paths }}"
 
   - name: "{{ my_name }} - disks symlink"
-    file:
+    ansible.builtin.file:
       src: "roms/apple/appleii"
       dest: "{{ retronas_path }}/{{ my_name }}"
       state: "link"
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -66,12 +66,12 @@
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - Install"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/adtpro.sh"
 
   - name: "{{ my_name }} - create startup service(s) instance"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /usr/lib/systemd/system/{{ item.name }}@.{{ item.type }}
       owner: root
@@ -82,10 +82,10 @@
 
   handlers:
     - name: "{{ my_name }} daemon-reload"
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: yes
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "adtpro"
     module_state: "present"

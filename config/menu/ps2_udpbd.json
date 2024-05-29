@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ps2_udpbd"
+                "command": "ps2_udpbd",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "service_enable_start",
                 "group":"",
-                "command": "ps2_udpbd.service"
+                "command": "ps2_udpbd.service",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_disable_stop",
                 "group":"",
-                "command": "ps2_udpbd.service"
+                "command": "ps2_udpbd.service",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "ps2_udpbd.service"
+                "command": "ps2_udpbd.service",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "service_restart",
                 "group":"",
-                "command": "ps2_udpbd.service"
+                "command": "ps2_udpbd.service",
+                "args": ""
             },
             {
                 "index":"07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "udpbd_manager"
+                "command": "udpbd_manager",
+                "args": ""
             }
         ]
     }

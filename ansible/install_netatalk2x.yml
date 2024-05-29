@@ -45,30 +45,30 @@
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }}  - check if  netatalk package is available"
-    shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    ansible.builtin.shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
     register: result
     failed_when:
       - result.rc >= 2
 
   - name: "{{ my_name }}  - unhold netatalk package"
-    shell: "/usr/bin/apt-mark unhold netatalk"
+    ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
     when: result.rc == 0
 
   - name: "{{ my_name }}  - remove package-based Netatalk"
-    package:
+    ansible.builtin.package:
        name: netatalk
        state: absent
 
   - name: "{{ my_name }}  - install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - create install script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -76,10 +76,10 @@
       mode: '0755'
 
   - name: "{{ my_name }} - install from source"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -89,7 +89,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -98,12 +98,12 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items: "{{ services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "netatalk2x"
     module_state: "present"

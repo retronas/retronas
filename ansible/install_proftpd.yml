@@ -11,15 +11,15 @@
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }}  - install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - remove  mod_unique_id.c"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/proftpd/modules.conf
       section: null
       option: "LoadModule mod_unique_id.c"
@@ -27,7 +27,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: templates/install_proftpd/retronas.conf.j2
       dest: /etc/proftpd/conf.d/retronas.conf
       owner: root
@@ -36,7 +36,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure avahi"
-    template:
+    ansible.builtin.template:
       src: templates/install_proftpd/ftp.service.j2
       dest: /etc/avahi/services/ftp.service
       owner: root
@@ -45,7 +45,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: proftpd
       state: started
       enabled: yes
@@ -53,14 +53,14 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items:
       - avahi-daemon
       - proftpd
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "proftpd"
     module_state: "present"

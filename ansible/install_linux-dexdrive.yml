@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_extradirs.yml
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_extradirs.yml
 
 - hosts: localhost
   gather_facts: no
@@ -24,18 +24,18 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Load RetroNAS systems"
-    include_vars: retronas_systems.yml
+    ansible.builtin.include_vars: retronas_systems.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -45,24 +45,24 @@
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - build source"
-    command:
+    ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/dexattach"
 
   - name: "{{ my_name }} - dexdrive module"
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/modules-load.d/modules.conf
       regex: "^dexdrive$"
       line: "dexdrive"
 
   - name: "{{ my_name }} - {{ retronas_user }} groups"
-    user:
+    ansible.builtin.user:
       name: "{{ retronas_user }}"
       group: "disk"
       append: yes
 
   - name: "{{ my_name }} - create startup service(s) instance"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /etc/systemd/system/{{ item.name }}.{{ item.type }}
       owner: root
@@ -72,11 +72,11 @@
     notify: "{{ my_name }} daemon-reload" 
 
   handlers:
-    - name: "{{ my_name }} daemon-reload"
-      systemd:
-        daemon_reload: yes
+  - name: "{{ my_name }} daemon-reload"
+    ansible.builtin.systemd:
+      daemon_reload: yes
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "linux-dexdrive"
     module_state: "present"

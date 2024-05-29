@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Install",
                 "type": "install",
                 "group":"",
-                "command": "deluge"
+                "command": "deluge",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "deluge*"
+                "command": "deluge*",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "deluge*"
+                "command": "deluge*",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "deluge*"
+                "command": "deluge*",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "Upgrade",
                 "type": "script",
                 "group":"",
-                "command": "upgrade_deluge"
+                "command": "upgrade_deluge",
+                "args": ""
             }
         ]
     }

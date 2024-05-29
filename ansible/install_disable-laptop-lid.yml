@@ -10,10 +10,10 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - create directory"
-    file:
+    ansible.builtin.file:
       path: "{{ my_path }}"
       owner: 'root'
       group: 'root'
@@ -21,7 +21,7 @@
       state: directory
 
   - name: "{{ my_name }} - install config"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/retronas.conf.j2
       dest: "{{ my_path }}/retronas.conf"
       owner: 'root'
@@ -32,11 +32,11 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ service }}"
       state: restarted
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "disable-laptop-lid"
     module_state: "present"

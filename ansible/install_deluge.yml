@@ -35,15 +35,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install deluge from repos"
-    apt:
+    ansible.builtin.apt:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - create dirs"
-    file:
+    ansible.builtin.file:
       path: "{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
@@ -52,7 +52,7 @@
     with_items: "{{ dirs }}"
 
   - name: "{{ my_name }} - add templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.file }}.j2"
       dest: "{{ item.path }}"
       owner: "{{ retronas_user }}"
@@ -67,7 +67,7 @@
       state: absent
 
   - name: "{{ my_name }} - create startup service(s)"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
       owner: "{{ retronas_user }}"
@@ -77,7 +77,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -90,7 +90,7 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
@@ -99,7 +99,7 @@
       - item.restart == 'yes'
       - item.instance == 'no'
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "bittorrent"
     module_state: "present"

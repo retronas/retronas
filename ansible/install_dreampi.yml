@@ -33,25 +33,25 @@
   tasks:
 
   - name: "{{ my_name }} - Checking hw platform compatiblity"
-    debug:
+    ansible.builtin.debug:
       msg: "INCOMPATIBLE PLATFORM, only arm platforms are supported"
     when: ansible_architecture is not search('arm') and
           ansible_architecture != 'aarch64'
 
-  - meta: end_play
+  - ansible.builtin.meta: end_play
     when: ansible_architecture is not search('arm') and
           ansible_architecture != 'aarch64'
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - paths"
-    file:
+    ansible.builtin.file:
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -60,7 +60,7 @@
     with_items: "{{ paths }}"   
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -71,14 +71,14 @@
     notify: "{{ my_name }} Restart Services"
 
   - name: "{{ my_name }} - Run installer"
-    shell:
+    ansible.builtin.shell:
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
     notify: "{{ my_name }} Restart Services"
 
   - name: "{{ my_name }} - Patch systemd service"
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/systemd/system/{{ item.unit }}
       regex: "{{ item.regex }}"
       insertafter: "{{ item.after }}"
@@ -88,14 +88,14 @@
     notify: "{{ my_name }} Restart Services"
 
   handlers:
-    - name: "{{ my_name }} Restart Services"
-      service:
-        name: "{{ item }}"
-        state: started
-        enabled: yes
-        daemon_reload: yes
-      with_items:
-        - "{{ my_name }}.service"
+  - name: "{{ my_name }} Restart Services"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}.service"
 
 - import_playbook: retronas_system_config.yml
   vars:

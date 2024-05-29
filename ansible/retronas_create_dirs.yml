@@ -1,25 +1,25 @@
 - name: "{{ my_name }} - Include systems map"
-  include_vars: "retronas_systems.yml"
+  ansible.builtin.include_vars: "retronas_systems.yml"
 
 - name: "{{ my_name }} - Load RetroNAS config"
-  include_vars: retronas_vars.yml
+  ansible.builtin.include_vars: retronas_vars.yml
 
 - name: "{{ my_name }} - build layout list (set fact)"
-  set_fact:
+  ansible.builtin.set_fact:
     path_list: "{{ path_list|default([]) + [ retronas_path + '/' + item.1.name + '/' + item.0.src if item.1.systems is true else '' ] }}"
   no_log: yes
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when: item.1.enabled is true
 
 - name: "{{ my_name }} - build layout"
-  shell:
+  ansible.builtin.shell:
     cmd: mkdir -p {{ path_list|flatten|join(' ') }}
   become: yes
   become_user: "{{ retronas_user }}"
   when: path_list is defined
 
 - name: "{{ my_name }} - build systems directory layout (set fact)"
-  set_fact:
+  ansible.builtin.set_fact:
     link_list: "{{ link_list|default([]) + [ 'ln -sfT ' + retronas_path  + '/' + item.1.name|lower + '/' + item.0.src + ' ' + retronas_path  + '/' +  item.1.name + '/' + item.0.dest + ';' ] }}"
   loop: "{{ system_links|product(top_level_paths)|list }}"
   when:
@@ -27,6 +27,6 @@
     - item.1.systems is true
 
 - name: "{{ my_name }} - build systems directory layout"
-  shell:
+  ansible.builtin.shell:
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined

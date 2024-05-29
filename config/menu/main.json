@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "config"
+                "command": "config",
+                "args": ""
             },
             {
                 "index": "03",
@@ -35,7 +37,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "install"
+                "command": "install",
+                "args": ""
             },
             {
                 "index": "04",
@@ -55,17 +58,19 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "tools"
+                "command": "tools",
+                "args": ""
             },
             {
                 "index": "06",
-                "title": "Experimental",
-                "description": "there be dragons here!",
-                "id":"experimental",
+                "title": "OnDevice",
+                "description": "On-Device Management Tools",
+                "id":"ondevice",
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "experimental"
+                "command": "ondevice",
+                "args": ""
             },
             {
                 "index": "07",
@@ -78,6 +83,17 @@
                 "command": "network"
             },
             {
+                "index": "50",
+                "title": "Experimental",
+                "description": "there be dragons here!",
+                "id":"experimental",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "experimental",
+                "args": ""
+            },
+            {
                 "index": "99",
                 "title": "Update",
                 "description": "Update core RetroNAS features",
@@ -85,7 +101,8 @@
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "update"
+                "command": "update",
+                "args": ""
             }
         ]
     }

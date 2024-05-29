@@ -1,6 +1,6 @@
 # Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_nginx.yml
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_nginx.yml
 
 - hosts: localhost
   gather_facts: no
@@ -17,17 +17,17 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - configure 3DS directory"
-    file:
+    ansible.builtin.file:
       path: "{{ rom_path }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
     
   - name: "{{ my_name }} - create dirs"
-    file:
+    ansible.builtin.file:
       path: "{{ rom_path }}/{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -35,25 +35,25 @@
     with_items: "{{ dirs }}"
 
   - name: "{{ my_name }} - link 3DS cia directory"
-    file:
+    ansible.builtin.file:
       src: "{{ rom_path }}/cia"
       dest: "{{ retronas_path }}/roms/nintendo/3ds/cia"
       state: link
 
   - name: "{{ my_name }} - install qrencode"
-    apt:
+    ansible.builtin.apt:
        name: qrencode
        state: latest
 
   - name: "{{ my_name }} - configure QR generator script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/3ds_qr.sh.j2"
       dest: "{{ retronas_root }}/scripts/3ds_qr.sh"
       owner: root
       group: root
       mode: '0755'
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "3ds_qr_codes"
     module_state: "present"

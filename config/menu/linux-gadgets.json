@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "linux-gadgets"
+                "command": "linux-gadgets",
+                "args": ""
             },
             {
                 "index":"03",
@@ -35,7 +37,8 @@
                 "prompt": "Manage",
                 "type": "script",
                 "group":"",
-                "command": "gadget-mass-storage-manage"
+                "command": "gadget-mass-storage-manage",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "retronas-gadget.path"
+                "command": "retronas-gadget.path",
+                "args": ""
             },
             {
                 "index":"05",
@@ -55,7 +59,8 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "retronas-gadget.path"
+                "command": "retronas-gadget.path",
+                "args": ""
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "retronas-gadget*"
+                "command": "retronas-gadget*",
+                "args": ""
             }
         ]
     }

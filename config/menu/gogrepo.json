@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"gogrepo",
-                "command": "gogrepo_login"
+                "command": "gogrepo-wrapper",
+                "args": "login"
             },
             {
                 "index":"03",
@@ -33,9 +35,10 @@
                 "description": "Change OS preferences",
                 "id":"gog-os-input",
                 "prompt": "",
-                "type": "input:dropdown",
+                "type": "script",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "gogrepo_wrapper",
+                "args": "select-os"
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "gogrepo-wrapper",
+                "args": "update-skip-known"
             },
             {
                 "index":"05",
@@ -53,9 +57,10 @@
                 "description": "Download/update a single game",
                 "id":"gog-dl-one-game",
                 "prompt": "",
-                "type": "modal",
+                "type": "script",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "gogrepo-wrapper",
+                "args": "update-download-single"
             },
             {
                 "index":"06",
@@ -65,7 +70,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "gogrepo-wrapper",
+                "args": "download-all"
             },
             {
                 "index":"07",
@@ -75,7 +81,8 @@
                 "prompt": "",
                 "type": "script",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "gogrepo-wrapper",
+                "args": "update-download"
             }
         ]
     },
@@ -95,7 +102,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -105,7 +113,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": ""
+                "command": "",
+                "args": ""
             },
             {
                 "index":"03",
@@ -115,7 +124,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": ""
+                "command": "",
+                "args": ""
             },
             {
                 "index":"04",
@@ -125,7 +135,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"05",
@@ -135,7 +146,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"06",
@@ -145,7 +157,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"07",
@@ -155,7 +168,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             },
             {
                 "index":"08",
@@ -165,7 +179,8 @@
                 "prompt": "",
                 "type": "",
                 "group":"gogrepo",
-                "command": "TOOL COMMAND"
+                "command": "TOOL COMMAND",
+                "args": ""
             }
         ]
     },
@@ -185,7 +200,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             }
         ]
     }

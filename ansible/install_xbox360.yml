@@ -1,5 +1,6 @@
+---
 # Dependencies
-- import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_romdir.yml
 
 - hosts: localhost
   gather_facts: no
@@ -10,10 +11,10 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - top level directory"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/xbox360"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -22,7 +23,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - symlinks"
-    file:
+    ansible.builtin.file:
       src: "{{ item.src }}"
       dest: "{{ retronas_path }}/xbox360/{{ item.dest }}"
       owner: "{{ retronas_user }}"
@@ -33,7 +34,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: xbox360
       option: "include"
@@ -41,7 +42,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/retronas_xbox360.conf.j2"
       dest: /etc/samba/retronas_xbox360.conf
       owner: root
@@ -52,16 +53,16 @@
   handlers:
 
   - name: "{{ my_name }} - Install Samba"
-    set_fact:
+    ansible.builtin.set_fact:
       install_changed: true
 
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "xbox360"
     module_state: "present"

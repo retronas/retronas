@@ -11,42 +11,53 @@
       - aria2
       - coreutils
 
+    - srcdir: "{{ retronas_root }}/src/{{ my_file }}"
+    - version: 6.0.400
+    - arch: x64
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
+  - name: "{{ my_name }} - clean up old installs"
+    ansible.builtin.file:
+      path: "{{ srcdir }}"
+      force: yes
+      state: absent
+
   - name: "{{ my_name }} - create build dirs"
-    file:
-      path: "{{ retronas_root }}/src/{{ my_file }}"
+    ansible.builtin.file:
+      path: "{{ srcdir }}"
       owner: root
       group: root
       mode: 0755
       state: directory
 
   - name: "{{ my_name }} - Download SDK installer"
-    get_url:
+    ansible.builtin.get_url:
       url: https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
-      dest: "{{ retronas_root }}/src/{{ my_file }}"
+      dest: "{{ srcdir }}"
       owner: root
       group: root
       mode: 0755
 
   - name: "{{ my_name }} - Install DotNet SDK"
-    shell:
-      cmd: "./dotnet-install.sh --version 6.0.400 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-      chdir: "{{ retronas_root }}/src/{{ my_file }}"
+    ansible.builtin.shell:
+      cmd: "./dotnet-install.sh --version {{ version }} 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+      chdir: "{{ srcdir }}"
       executable: /bin/bash
     environment:
       DOTNET_ROOT: "{{ retronas_root }}/bin/dotnetcore6"
       DOTNET_INSTALL_DIR: "{{ retronas_root }}/bin/dotnetcore6"
+      TMPDIR: "{{ srcdir }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "dotnetcore6"
     module_state: "present"

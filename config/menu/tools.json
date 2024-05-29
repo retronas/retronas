@@ -15,7 +15,8 @@
                 "prompt": "",
                 "type": "menu",
                 "group":"",
-                "command": "EXIT_OK"
+                "command": "EXIT_OK",
+                "args": ""
             },
             {
                 "index":"02",
@@ -25,7 +26,8 @@
                 "prompt": "Open",
                 "type": "modal",
                 "group":"",
-                "command": "gogrepo"
+                "command": "gogrepo",
+                "args": ""
             },
             {
                 "index":"03",
@@ -33,9 +35,10 @@
                 "description": "Nintendo 3DS FBI homebrew",
                 "id":"3ds_qr",
                 "prompt": "",
-                "type": "script",
+                "type": "dialog",
                 "group":"",
-                "command": "3ds_qr"
+                "command": "3ds_qr",
+                "args": ""
             },
             {
                 "index":"04",
@@ -45,7 +48,8 @@
                 "prompt": "Open",
                 "type": "dialog",
                 "group":"",
-                "command": "romimport"
+                "command": "romimport",
+                "args": ""
             },
             {
                 "index": "05",
@@ -125,7 +129,8 @@
                 "prompt": "Run",
                 "type": "script-static",
                 "group":"",
-                "command": "run-local-module"
+                "command": "run-local-module",
+                "args": ""
             }
         ]
     }
