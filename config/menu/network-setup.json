@@ -18,34 +18,25 @@
                 "command": "EXIT_OK"
             },
             {
-                "index": "02",
-                "title": "manual",
-                "description": "Tools for manual network setup", 
-                "id":"network-manual",
+                "index":"02",
+                "title": "retro-nic",
+                "description": "Set the interface for the Retro network",
+                "id":"set-retronas-net-retro-nic",
                 "prompt": "",
-                "type": "dialog",
+                "type": "dialog_input",
                 "group":"",
-                "command": "network-manual"
+                "command": "set-retronas-net-retro-nic",
+                "args": ""
             },
             {
-                "index": "03",
-                "title": "automatic",
-                "description": "Automate network setups", 
-                "id":"network-automatic",
+                "index":"03",
+                "title": "modern-nic",
+                "description": "Set the interface for the Modern network",
+                "id":"set-retronas-net-modern-nic",
                 "prompt": "",
-                "type": "dialog",
+                "type": "dialog_input",
                 "group":"",
-                "command": "network-automatic"
-            },
-            {
-                "index":"04",
-                "title": "setup",
-                "description": "Setup the network interfaces",
-                "id":"setup-network",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "network-setup",
+                "command": "set-retronas-net-modern-nic",
                 "args": ""
             }
         ]
