@@ -63,17 +63,6 @@
             },
             {
                 "index": "06",
-                "title": "OnDevice",
-                "description": "On-Device Management Tools",
-                "id":"ondevice",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "ondevice",
-                "args": ""
-            },
-            {
-                "index": "07",
                 "title": "Network",
                 "description": "highly experimental!",
                 "id":"network",
