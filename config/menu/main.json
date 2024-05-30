@@ -62,16 +62,6 @@
                 "args": ""
             },
             {
-                "index": "06",
-                "title": "Network",
-                "description": "highly experimental!",
-                "id":"network",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "network"
-            },
-            {
                 "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",
