@@ -1,5 +1,6 @@
 # Dependencies
 - import_playbook: install_dnsmasq.yml
+- import_playbook: install_firewalld.yml
 
 - hosts: localhost
   gather_facts: no

@@ -11,15 +11,23 @@
 
     - templates:
       - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
-      - { name: "override.conf",            sub: "workarounds", dest: "/src/systemd/system" }
+      - { name: "override.conf",            sub: "workarounds", dest: "/etc/systemd/system" }
 
     - paths:
       - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
 
+    - packages: 
+      - firewalld
+
     - changed: false
 
   tasks:
+  - name: "{{ my_name }} - Install packages"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
   - name: "{{ my_name }} - paths"
     file:
       dest: "{{ item.dest }}/{{ item.name }}"
@@ -38,7 +46,7 @@
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
-    notify: "{{ my_name }} - Reload firewalld"
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - reload"
     service:
