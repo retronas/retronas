@@ -36,6 +36,28 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network-automatic"
+            },
+            {
+                "index":"04",
+                "title": "retro-nic",
+                "description": "Set the interface for the Retro network",
+                "id":"set-retronas-net-retro-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-nic",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "modern-nic",
+                "description": "Set the interface for the Modern network",
+                "id":"set-retronas-net-modern-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-modern-nic",
+                "args": ""
             }
         ]
     }

@@ -36,6 +36,16 @@
                 "type": "install",
                 "group":"",
                 "command": "dnsmasq"
+            },
+            {
+                "index": "04",
+                "title": "hostapd",
+                "description": "Basic hostapd", 
+                "id":"hostapd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hostapd"
             }
         ]
     }

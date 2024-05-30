@@ -27,6 +27,16 @@ case $MENU_NAME in
         DATASET=($(awk -F':' '{print $1}' /etc/group  | paste -d" " -s))
         PATTERN="retronas_group:"
         ;;
+    set-retronas-net-retro-nic)
+        OLDVALUE=${OLDRETROIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_retro_interface:"
+        ;;
+    set-retronas-net-modern-nic)
+        OLDVALUE=${OLDMODERNIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_modern_interface:"
+        ;;
     *)
         PAUSE
         EXIT_CANCEL
