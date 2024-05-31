@@ -24,12 +24,12 @@
 
   tasks:
   - name: "{{ my_name }} - Install packages"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - paths"
-    file:
+    ansible.builtin.file:
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -38,7 +38,7 @@
     with_items: "{{ paths }}"
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -49,7 +49,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - reload"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: reloaded
       enabled: yes
@@ -58,13 +58,13 @@
 
   handlers:
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "firewalld"
     module_state: "present"

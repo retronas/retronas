@@ -36,17 +36,6 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network-automatic"
-            },
-            {
-                "index":"04",
-                "title": "setup",
-                "description": "Setup the network interfaces",
-                "id":"setup-network",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "network-setup",
-                "args": ""
             }
         ]
     }

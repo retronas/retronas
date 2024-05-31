@@ -87,6 +87,41 @@ case $MENU_NAME in
         DATASET=()
         PATTERN="retronas_net_wifi_hwmode:"
         ;;
+    set-retronas-net-retro-ip)
+        OLDVALUE=${OLDRETROIP}
+        DATASET=()
+        PATTERN="retronas_net_retro_ip:"
+        ;;
+    set-retronas-net-retro-subnet)
+        OLDVALUE=${OLDRETROSUBNET}
+        DATASET=()
+        PATTERN="retronas_net_retro_subnet:"
+        ;;
+    set-retronas-net-wifi-ip)
+        OLDVALUE=${OLDWIFIIP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ip:"
+        ;;
+    set-retronas-net-wifi-subnet)
+        OLDVALUE=${OLDWIFISUBNET}
+        DATASET=()
+        PATTERN="retronas_net_wifi_subnet:"
+        ;;
+    set-retronas-net-wifi-dhcprange)
+        OLDVALUE=${OLDWIFIDHCP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_dhcprange:"
+        ;;
+    set-retronas-net-wifi-router)
+        OLDVALUE=${OLDWIFIROUTER}
+        DATASET=()
+        PATTERN="retronas_net_wifi_router:"
+        ;;
+    set-retronas-net-wifi-ntp)
+        OLDVALUE=${OLDWIFINTP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ntp:"
+        ;;
     *)
         echo "Menu not supported"
         PAUSE

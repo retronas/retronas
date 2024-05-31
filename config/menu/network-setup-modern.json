@@ -1,0 +1,33 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "Setup the network for use when installing the network services",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "modern-nic",
+                "description": "Set the interface for the Modern network",
+                "id":"set-retronas-net-modern-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-modern-nic",
+                "args": ""
+            }
+        ]
+    }
+}

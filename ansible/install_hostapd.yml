@@ -8,7 +8,7 @@
     - my_file: "install_{{ my_name }}"
 
     # default wifi
-    - hostapd_retronas_wifi_password: "retronas"
+    - retronas_wifi_password: "retronas"
 
     - packages:
       - hostapd
@@ -18,16 +18,20 @@
     - templates:
       - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
       - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
+      - { name: "update-wifi-passwd.sh",    sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
 
 
   tasks:
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
   - name: "{{ my_name }} - Install packages"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - templates"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item.name }}.j2"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
@@ -37,7 +41,7 @@
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - enable"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -46,13 +50,13 @@
 
   handlers:
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "hostapd"
     module_state: "present"
