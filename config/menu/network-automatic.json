@@ -2,7 +2,7 @@
     "menu":    
     {
         "title": "network",
-        "description": "HIGHLY EXPERIMENTAL||Install networking using pre-selected modes of operation",
+        "description": "Install networking using pre-selected modes of operation",
         "id":"network",
         "prompt": "Install",
         "type": "menu",

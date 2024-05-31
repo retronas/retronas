@@ -8,13 +8,8 @@
     - my_file: "install_{{ my_name }}"
 
     # default wifi
-    - hostapd_retronas_wifi_ssid: "retronas"
     - hostapd_retronas_wifi_password: "retronas"
-    - hostapd_retronas_wifi_interface: "{{ retronas_net_modern_interface}}"
-    - hostapd_retronas_wifi_channel: 6
-    - hostapd_retronas_wifi_hwmode: "g"
-    - hostapd_retronas_wifi_countrycode: "AU"
-hostapd_
+
     - packages:
       - hostapd
 

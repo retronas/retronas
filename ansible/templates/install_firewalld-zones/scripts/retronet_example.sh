@@ -9,9 +9,8 @@ cat << EOD
                              |
               +--------------+--------------+
               |              |              |
-              |              |              |
-    ethernet  | retro     ---+-->   modern  |  wifi (wlan0)
-wifi (wlan1)  | 10.99.x      |              |
+    ethernet  | retro     ---+-->   modern  |  wifi 
+     (eth0)   | 10.99.x      |              | (wlan0)
               |              |              |
               +------+-------+---+---+---+--+
                      |       |   |   |   |

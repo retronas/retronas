@@ -2,7 +2,7 @@
     "menu":    
     {
         "title": "network",
-        "description": "HIGHLY EXPERIMENTAL||This menu will allow you to install firewall, dhcp and dns services. You may install these services as vanilla or install the retro/modern zones to provide isolation.||The default net is 10.99.1.0/24 for retro on eth0 while the modern net is connected over wlan0.||Traffic is forwarded from eth0 to wlan0 for internet access",
+        "description": "Setup the network for use when installing the network services",
         "id":"network",
         "prompt": "Install",
         "type": "menu",
@@ -30,6 +30,61 @@
             },
             {
                 "index":"03",
+                "title": "dns1",
+                "description": "Set the primary DNS upstream server",
+                "id":"set-retronas-net-upstream-dns1",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-upstream-dns1",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "dns2",
+                "description": "Set the secondary DNS upstream server",
+                "id":"set-retronas-net-upstream-dns2",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-upstream-dns2",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "dhcp-ntp",
+                "description": "Set ntp server for the retro network",
+                "id":"set-retronas-net-retro-ntp",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-ntp",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "dhcp-iprange",
+                "description": "Set the ip range for the retro network",
+                "id":"set-retronas-net-retro-dhcprange",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-dhcprange",
+                "args": ""
+            },
+            {
+                "index":"07",
+                "title": "dhcp-gateway",
+                "description": "Set the gateway for the retro network",
+                "id":"set-retronas-net-retro-router",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-router",
+                "args": ""
+            },
+            {
+                "index":"12",
                 "title": "modern-nic",
                 "description": "Set the interface for the Modern network",
                 "id":"set-retronas-net-modern-nic",
@@ -37,6 +92,61 @@
                 "type": "dialog_input",
                 "group":"",
                 "command": "set-retronas-net-modern-nic",
+                "args": ""
+            },
+            {
+                "index":"22",
+                "title": "wifi-cc",
+                "description": "Set the wifi country code",
+                "id":"set-retronas_net_wifi_countrycode",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas_net_wifi_countrycode",
+                "args": ""
+            },
+            {
+                "index":"23",
+                "title": "wifi-hwmode",
+                "description": "Set the wifi hardware mode",
+                "id":"set-retronas-net-wifi-hwmode",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-hwmode",
+                "args": ""
+            },
+            {
+                "index":"24",
+                "title": "wifi-channel",
+                "description": "Set the wifi channel",
+                "id":"set-retronas-net-wifi-channel",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-channel",
+                "args": ""
+            },
+            {
+                "index":"25",
+                "title": "wifi-ssid",
+                "description": "Set the wifi ssid",
+                "id":"set-retronas-net-wifi-ssid",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-ssid",
+                "args": ""
+            },
+            {
+                "index":"26",
+                "title": "wifi-nic",
+                "description": "Set the wifi interface",
+                "id":"set-retronas-net-wifi-interface",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-interface",
                 "args": ""
             }
         ]

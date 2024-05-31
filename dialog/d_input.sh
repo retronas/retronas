@@ -37,7 +37,58 @@ case $MENU_NAME in
         DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
         PATTERN="retronas_net_modern_interface:"
         ;;
+    set-retronas_net_wifi_countrycode)
+        OLDVALUE=${OLDWIFICC}
+        DATASET=(AU NZ US)
+        PATTERN="retronas_net_wifi_countrycode:"
+        ;;
+    set-retronas-net-retro-dhcprange)
+        OLDVALUE=${OLDRETRODHCP}
+        DATASET=()
+        PATTERN="retronas_net_retro_dhcprange:"
+        ;;
+    set-retronas-net-retro-router)
+        OLDVALUE=${OLDRETROROUTER}
+        DATASET=()
+        PATTERN="retronas_net_retro_router:"
+        ;;
+    set-retronas-net-retro-ntp)
+        OLDVALUE=${OLDRETRONTP}
+        DATASET=()
+        PATTERN="retronas_net_retro_ntp:"
+        ;;
+    set-retronas-net-upstream-dns1)
+        OLDVALUE=${OLDUPDNS1}
+        DATASET=()
+        PATTERN="retronas_net_upstream_dns1:"
+        ;;
+    set-retronas-net-upstream-dns2)
+        OLDVALUE=${OLDUPDNS2}
+        DATASET=()
+        PATTERN="retronas_net_upstream_dns2:"
+        ;;
+    set-retronas-net-wifi-interface)
+        OLDVALUE=${OLDWIFIINT}
+        DATASET=()
+        PATTERN="retronas_net_wifi_interface:"
+        ;;
+    set-retronas-net-wifi-ssid)
+        OLDVALUE=${OLDWIFISSID}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ssid:"
+        ;;
+    set-retronas-net-wifi-channel)
+        OLDVALUE=${OLDWIFICHANNEL}
+        DATASET=()
+        PATTERN="retronas_net_wifi_channel:"
+        ;;
+    set-retronas-net-wifi-hwmode)
+        OLDVALUE=${OLDWIFIHWMODE}
+        DATASET=()
+        PATTERN="retronas_net_wifi_hwmode:"
+        ;;
     *)
+        echo "Menu not supported"
         PAUSE
         EXIT_CANCEL
         ;;
@@ -76,7 +127,7 @@ rn_input_confirm() {
             [ ${#DATASET[@]} -eq 0 ] && DATASET=($(ls -lad "${NEWVALUE}" 2>/dev/null | awk '{print $9}'))
 
             echo ${DATASET[*]} | grep -qF ${NEWVALUE}
-            if  [ $? -eq 0 ]
+            if [ $? -eq 0 ] || [ ${#DATASET[@]} -eq 0 ]
             then
                 CLEAR
                 source $_CONFIG
