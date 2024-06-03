@@ -17,8 +17,13 @@
 
     - templates:
       - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
+      - { name: "hostapd-dnsmasq.conf",     sub: "", dest: "/etc/dnsmasq.d/retro/", force: no, mode: "0640" }
       - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
       - { name: "update-wifi-passwd.sh",    sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
+
+    - paths:
+      - { name: "dnsmasq.d",       dest: "/etc",              state: "directory", mode: "0755" }
+      - { name: "retro",           dest: "/etc/dnsmasq.d",    state: "directory", mode: "0755" }
 
 
   tasks:
@@ -29,6 +34,15 @@
     ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
 
   - name: "{{ my_name }} - templates"
     ansible.builtin.template:

@@ -21,11 +21,23 @@
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - stop hostapd if running, wireless is used for access to modern network"
+  - name: "{{ my_name }} - stop hostapd if running"
     ansible.builtin.service:
       name: hostapd-retronas.service
       state: stopped
       enabled: false
+      force: true
+
+  - name: "{{ my_name }} - remove hostapd dnsmasq configuration"
+    file:
+      path: /etc/dnsmasq.d/retro/hostapd-dnsmasq.conf
+      state: absent
+
+  - name: "{{ my_name }} - restart dnsmasq"
+    ansible.builtin.service:
+      name: dnsmasq.service
+      state: restarted
+      enabled: true
       force: true
 
   - name: "{{ my_name }} - start firewalld"

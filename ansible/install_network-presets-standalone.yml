@@ -28,9 +28,16 @@
       enabled: false
       force: true
 
+  - name: "{{ my_name }} - restart dnsmasq"
+    ansible.builtin.service:
+      name: dnsmasq.service
+      state: restarted
+      enabled: true
+      force: true
+
   - name: "{{ my_name }} - start hostapd"
     ansible.builtin.service:
-      name: hostapd-retro.service
+      name: hostapd-retronas.service
       state: restarted
       enabled: true
       force: true
