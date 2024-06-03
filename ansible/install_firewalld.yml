@@ -20,6 +20,9 @@
     - packages: 
       - firewalld
 
+    - collections:
+      - { collection: ansible.posix, creates: ansible/posix }
+
     - changed: false
 
   tasks:
@@ -47,6 +50,12 @@
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
     notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - install related ansible collections"
+    ansible.builtin.command:
+      cmd: /usr/bin/ansible-galaxy collection install {{ item.collection }}
+      creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
+    with_items: "{{ collections }}"
 
   - name: "{{ my_name }} - restart"
     ansible.builtin.service:
