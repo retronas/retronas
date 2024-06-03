@@ -1,0 +1,36 @@
+#firewalld
+- ansible.builtin.import_playbook: install_firewalld.yml
+- ansible.builtin.import_playbook: install_firewalld-zones.yml
+
+#dnsmassq
+- ansible.builtin.import_playbook: install_dnsmasq.yml
+- ansible.builtin.import_playbook: install_dnsmasq-retro.yml
+
+#ntp
+- ansible.builtin.import_playbook: install_ntp.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "net-standalone"
+    - my_file: "install_{{ my_name }}"
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - stop hostapd if running, wireless is used for access to modern network"
+    ansible.builtin.service:
+      name: hostapd-retronas.service
+      state: stopped
+      enabled: false
+      force: true
+
+  - name: "{{ my_name }} - start firewalld"
+    ansible.builtin.service:
+      name: firewalld.service
+      state: restarted
+      enabled: true
+      force: true

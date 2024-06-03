@@ -46,6 +46,7 @@
       state: started
       enabled: yes
       daemon_reload: yes
+      force: yes
     with_items: "{{ my_services }}"
 
   handlers:
@@ -54,6 +55,7 @@
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
+      force: yes
     with_items: "{{ my_services }}"
 
 - ansible.builtin.import_playbook: retronas_system_config.yml

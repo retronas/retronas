@@ -29,13 +29,13 @@
             },
             {
                 "index": "03",
-                "title": "automatic",
-                "description": "Automate network setups", 
-                "id":"network-automatic",
+                "title": "presets",
+                "description": "Network preset setups", 
+                "id":"network-presets",
                 "prompt": "",
                 "type": "dialog",
                 "group":"",
-                "command": "network-automatic"
+                "command": "network-presets"
             }
         ]
     }

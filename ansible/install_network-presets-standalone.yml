@@ -1,0 +1,36 @@
+#firewalld
+- ansible.builtin.import_playbook: install_hostapd.yml
+
+#dnsmassq
+- ansible.builtin.import_playbook: install_dnsmasq.yml
+- ansible.builtin.import_playbook: install_dnsmasq-retro.yml
+
+#ntp
+- ansible.builtin.import_playbook: install_ntp.yml
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "net-zoned"
+    - my_file: "install_{{ my_name }}"
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - everything is retro here so disabling the firewalld zoned config"
+    ansible.builtin.service:
+      name:  firewalld.service
+      state: stopped
+      enabled: false
+      force: true
+
+  - name: "{{ my_name }} - start hostapd"
+    ansible.builtin.service:
+      name: hostapd-retro.service
+      state: restarted
+      enabled: true
+      force: true

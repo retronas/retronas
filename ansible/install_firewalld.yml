@@ -48,11 +48,12 @@
     with_items: "{{ templates }}"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - reload"
+  - name: "{{ my_name }} - restart"
     ansible.builtin.service:
       name: "{{ item }}"
-      state: reloaded
+      state: restart
       enabled: yes
+      force: yes
     with_items: "{{ my_services }}"
     when: changed is true
 
@@ -62,6 +63,8 @@
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
+      enabled: yes
+      force: yes
     with_items: "{{ my_services }}"
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
