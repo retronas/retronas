@@ -8,24 +8,47 @@
 #ntp
 - ansible.builtin.import_playbook: install_ntp.yml
 
+#dhpcd
+- ansible.builtin.import_playbook: install_dhcpcd.yml
+
 
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "net-zoned"
-    - my_file: "install_{{ my_name }}"
+    my_name: "net-zoned"
+    my_file: "install_{{ my_name }}"
+
+    templates:
+    - { name: "dhcpcd.conf",         dest: "/etc",  mode: "0640", force: "yes" }
 
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
   - name: "{{ my_name }}  - everything is retro here so disabling the firewalld zoned config"
     ansible.builtin.service:
       name:  firewalld.service
       state: stopped
       enabled: false
+      force: true
+
+  - name: "{{ my_name }} - restart dhcpcd"
+    ansible.builtin.service:
+      name: dhcpcd.service
+      state: restarted
+      enabled: true
       force: true
 
   - name: "{{ my_name }} - restart dnsmasq"

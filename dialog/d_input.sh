@@ -122,6 +122,16 @@ case $MENU_NAME in
         DATASET=()
         PATTERN="retronas_net_wifi_ntp:"
         ;;
+    set-retronas-net-wifi-dns)
+        OLDVALUE=${OLDWIFIDNS}
+        DATASET=()
+        PATTERN="retronas_net_wifi_dns:"
+        ;;
+    set-retronas-net-retro-dns)
+        OLDVALUE=${OLDRETRODNS}
+        DATASET=()
+        PATTERN="retronas_net_retro_dns:"
+        ;;
     *)
         echo "Menu not supported"
         PAUSE

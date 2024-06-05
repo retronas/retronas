@@ -104,6 +104,17 @@
                 "group":"",
                 "command": "set-retronas-net-retro-subnet",
                 "args": ""
+            },
+            {
+                "index":"10",
+                "title": "retro-dns",
+                "description": "Set the dns server for the retro network",
+                "id":"set-retronas-net-retro-dns",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-dns",
+                "args": ""
             }
         ]
     }

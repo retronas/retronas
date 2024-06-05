@@ -66,6 +66,16 @@
                 "type": "install",
                 "group":"",
                 "command": "dnsmasq-retro"
+            },
+            {
+                "index": "07",
+                "title": "dhcpcd",
+                "description": "DHCP client", 
+                "id":"dhcpcd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dhcpcd"
             }
         ]
     }

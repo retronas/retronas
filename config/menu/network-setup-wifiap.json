@@ -81,6 +81,17 @@
                 "group":"",
                 "command": "set-retronas-net-wifi-interface",
                 "args": ""
+            },
+            {
+                "index":"28",
+                "title": "wifi-dns",
+                "description": "Set the dns servers",
+                "id":"set-retronas-net-wifi-dns",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-dns",
+                "args": ""
             }
         ]
     }
