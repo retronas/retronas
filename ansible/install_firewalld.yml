@@ -19,6 +19,7 @@
 
     - packages: 
       - firewalld
+      - python3-firewall
 
     - collections:
       - { collection: ansible.posix, creates: ansible/posix }
