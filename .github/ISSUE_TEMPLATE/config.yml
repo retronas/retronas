@@ -6,6 +6,6 @@ contact_links:
   - name: r/retroNAS
     url: https://www.reddit.com/r/retroNAS/
     about: Community support (not monitored)
-  - name: #retronas
+  - name: retronas
     url: ircs://irc.libera.chat/retronas
-    about: General chatter
+    about: General chatter on Libera IRC
