@@ -1,0 +1,14 @@
+name: "Bug report"
+description: Report problematic behaviour.
+body:
+- type: markdown
+  attributes:
+    value: |
+      If this is a new feature request please use the RetroNAS Discussion area, otherwise please include as much detail as possible about your issue
+- type: textarea
+  attributes:
+    label: Details
+    description: |
+      Any relevant details.
+    placeholder: |
+      Installer (x) ended in with failure message.
