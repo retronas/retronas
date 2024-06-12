@@ -5,7 +5,6 @@
   <service name="dhcp"/>
   <service name="dns"/>
   <service name="ntp"/>
-  <service name="samba"/>
   <service name="mdns"/>
   <protocol value="icmp"/>
   <interface name="{{ retronas_net_retro_interface}}"/>
