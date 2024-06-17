@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone target="%%REJECT%%">
+  <short>retro</short>
+  <description>retro device zone</description>
+  <service name="dhcp"/>
+  <service name="dns"/>
+  <service name="ntp"/>
+  <service name="mdns"/>
+  <protocol value="icmp"/>
+  <interface name="{{ retronas_net_retro_interface}}"/>
+</zone>

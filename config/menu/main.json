@@ -62,17 +62,6 @@
                 "args": ""
             },
             {
-                "index": "06",
-                "title": "OnDevice",
-                "description": "On-Device Management Tools",
-                "id":"ondevice",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "ondevice",
-                "args": ""
-            },
-            {
                 "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",

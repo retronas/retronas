@@ -1,0 +1,16 @@
+[Unit]
+Description=Access point and authentication server for retronas
+Documentation=man:hostapd(8)
+After=network.target
+StartLimitIntervalSec=2
+StartLimitBurst=5
+
+[Service]
+Type=forking
+Restart=on-failure
+RestartSec=2
+
+ExecStart=/usr/sbin/hostapd -B -P /run/hostapd-retronas.pid /etc/hostapd/hostapd-retronas.conf
+
+[Install]
+WantedBy=multi-user.target

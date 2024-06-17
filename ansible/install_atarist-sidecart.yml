@@ -89,6 +89,15 @@
       value: "/etc/samba/retronas_atarist.conf"
     notify: "{{ my_name }} - Install changed"
 
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      service: http
+      permanent: true
+      state: enabled
+      immediate: true
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} daemon-reload"

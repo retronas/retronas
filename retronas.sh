@@ -68,26 +68,8 @@ source $_CONFIG
 #
 # MIGRATIONS
 #
-# added retronas_group
-if [ -z "${OLDRNGROUP}" ]
-then
-  grep "retronas_group" ${ANCFG}
-  if [ $? -ne 0 ]
-  then
-    echo "retronas_group: \"${OLDRNUSER}\"" >> ${ANCFG}
-  else
-    sed -i "s/retronas_group:.*/retronas_group: \"${OLDRNUSER}\"/" ${ANCFG}
-  fi
-fi
-
-
-# jq, kept here to handle migration to new menu system
-if [ ! -f /usr/bin/jq ] 
-then
-  CHECK_PACKAGE_CACHE
-  apt-get -y install jq
-  [ $? -ne 0 ] && PAUSE && EXIT_CANCEL
-fi
+bash ${PCHDIR}/update-retronas_vars.sh
+bash ${PCHDIR}/install-jq.sh
 #
 # END MIGRATIONS
 #
@@ -157,17 +139,7 @@ case "${TCHOICE}" in
     ;;
 esac
 
-### Checking for new startup, old installs wont have it
-if [ ! -x /usr/local/bin/retronas ]
-then
-    clear
-    #installing a simple starup script
-    cp /opt/retronas/dist/retronas /usr/local/bin/retronas
-    chmod a+x /usr/local/bin/retronas
-    echo -e "We have upgraded your RetroNAS, you can now run the RetroNAS config tool with the following command:\n\nretronas\n\nThis message will appear only once\n"
-    echo "Press enter to continue"
-    read -s
-fi
+bash ${PCHDIR}/new-startup-file.sh
 
 ### Start RetroNAS
 echo "Running RetroNAS..."

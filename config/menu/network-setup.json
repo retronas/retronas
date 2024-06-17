@@ -1,0 +1,66 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "Setup the network for use when installing the network services",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "retro-net",
+                "description": "Set up the Retro network",
+                "id":"network-setup-retro",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup-retro",
+                "args": ""
+            },
+            {
+                "index":"12",
+                "title": "modern-net",
+                "description": "Set up the Modern network",
+                "id":"network-setup-modern",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup-modern",
+                "args": ""
+            },
+            {
+                "index":"22",
+                "title": "wifi-ap",
+                "description": "Set up the retronas wifi access point",
+                "id":"network-setup-wifiap",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup-wifiap",
+                "args": ""
+            },
+            {
+                "index":"32",
+                "title": "EtherDFS",
+                "description": "Set EtherDFS/ethflopd network interface",
+                "id":"set-etherdfs-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-etherdfs-nic",
+                "args": ""
+            }
+        ]
+    }
+}

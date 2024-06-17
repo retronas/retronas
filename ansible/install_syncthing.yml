@@ -4,6 +4,10 @@
     - my_name: "Syncthing"
     - my_file: "install_syncthing"
 
+    - firewalld_rules:
+      - { zone: retro, service: syncthing }
+      - { zone: retro, service: syncthing-gui }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -54,6 +58,24 @@
 #      xpath: /configuration/options/listenAddress
 #      value: 0.0.0.0:8384
 #    notify: "{{ my_name }} - Restart service"
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('syncthing') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
 
   handlers:
 

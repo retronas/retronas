@@ -31,6 +31,10 @@
       - { section: "global", option: "sync always",               value: "no"}
       - { section: "global", option: "deadtime",                  value: "20"}
 
+    - firewalld_rules:
+      - { zone: "retro", service: "samba" }
+      - { zone: "modern", service: "samba-modern" }
+
     - changed: false
 
   tasks:
@@ -82,6 +86,24 @@
       enabled: yes
     with_items: "{{ my_services }}"
     when: changed is true
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('samba') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
 
   handlers:
 

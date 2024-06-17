@@ -13,6 +13,27 @@
     - google_chrome: /usr/bin/google-chrome
     - chromium: /usr/bin/chromium
 
+    - firewalld_ports:
+      - { zone: "retro", port: 8080, protocol: tcp }
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone }}"
+      port: "{{ item.port }}/{{ item.protocol }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewald_ports }}"
+    when: firewalld_services.stat.exists
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"

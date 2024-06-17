@@ -1,0 +1,121 @@
+{
+    "menu":    
+    {
+        "title": "retronet",
+        "description": "Setup the retro network",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "retro-nic",
+                "description": "Set the interface for the Retro network",
+                "id":"set-retronas-net-retro-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-nic",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "dns1",
+                "description": "Set the primary DNS upstream server",
+                "id":"set-retronas-net-upstream-dns1",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-upstream-dns1",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "dns2",
+                "description": "Set the secondary DNS upstream server",
+                "id":"set-retronas-net-upstream-dns2",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-upstream-dns2",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "dhcp-ntp",
+                "description": "Set ntp server for the retro network",
+                "id":"set-retronas-net-retro-ntp",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-ntp",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "dhcp-iprange",
+                "description": "Set the ip range for the retro network",
+                "id":"set-retronas-net-retro-dhcprange",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-dhcprange",
+                "args": ""
+            },
+            {
+                "index":"07",
+                "title": "dhcp-gateway",
+                "description": "Set the gateway for the retro network",
+                "id":"set-retronas-net-retro-router",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-router",
+                "args": ""
+            },
+            {
+                "index":"08",
+                "title": "retro-ip",
+                "description": "Set the ip address for the retro network",
+                "id":"set-retronas-net-retro-ip",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-ip",
+                "args": ""
+            },
+            {
+                "index":"09",
+                "title": "retro-subnet",
+                "description": "Set the subnet for the retro network",
+                "id":"set-retronas-net-retro-subnet",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-subnet",
+                "args": ""
+            },
+            {
+                "index":"10",
+                "title": "retro-dns",
+                "description": "Set the dns server for the retro network",
+                "id":"set-retronas-net-retro-dns",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-retro-dns",
+                "args": ""
+            }
+        ]
+    }
+}

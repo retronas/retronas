@@ -1,0 +1,10 @@
+[Unit]
+Description=DNS caching server retro. 
+After=network.target
+
+[Service]
+ExecStart=/usr/sbin/dnsmasq -k --conf-dir=/etc/dnsmasq.d/retro --pid-file=/var/run/dnsmasq-retro.pid
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

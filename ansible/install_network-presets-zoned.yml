@@ -1,0 +1,72 @@
+#firewalld
+- ansible.builtin.import_playbook: install_firewalld.yml
+- ansible.builtin.import_playbook: install_firewalld-zones.yml
+
+#dnsmassq
+- ansible.builtin.import_playbook: install_dnsmasq.yml
+- ansible.builtin.import_playbook: install_dnsmasq-retro.yml
+
+#ntp
+- ansible.builtin.import_playbook: install_ntp.yml
+
+#dhcpcd
+- ansible.builtin.import_playbook: install_dhcpcd.yml
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    my_name: "net-standalone"
+    my_file: "install_{{ my_name }}"
+
+    templates:
+    - { name: "dhcpcd.conf",         dest: "/etc",  mode: "0640", force: "yes" }
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - stop hostapd if running"
+    ansible.builtin.service:
+      name: hostapd-retronas.service
+      state: stopped
+      enabled: false
+      force: true
+
+  - name: "{{ my_name }} - remove hostapd dnsmasq configuration"
+    ansible.builtin.file:
+      path: /etc/dnsmasq.d/retro/hostapd-dnsmasq.conf
+      state: absent
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - restart dhcpcd"
+    ansible.builtin.service:
+      name: dhcpcd.service
+      state: restarted
+      enabled: true
+      force: true
+
+  - name: "{{ my_name }} - restart dnsmasq"
+    ansible.builtin.service:
+      name: dnsmasq.service
+      state: restarted
+      enabled: true
+      force: true
+
+  - name: "{{ my_name }} - start firewalld"
+    ansible.builtin.service:
+      name: firewalld.service
+      state: restarted
+      enabled: true
+      force: true

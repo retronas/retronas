@@ -74,13 +74,13 @@
             },
             {
                 "index":"07",
-                "title": "EtherDFS",
-                "description": "Set EtherDFS/ethflopd network interface",
-                "id":"set-etherdfs-nic",
+                "title": "Network",
+                "description": "Configure networking",
+                "id":"network-setup",
                 "prompt": "",
-                "type": "dialog_input",
+                "type": "dialog",
                 "group":"",
-                "command": "set-etherdfs-nic",
+                "command": "network-setup",
                 "args": ""
             },
             {

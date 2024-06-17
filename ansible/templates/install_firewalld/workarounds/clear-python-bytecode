@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -u
+
+#
+# firewalld will not start if corrupted bytecode exists for a dependent library
+
+# normally this is a none issue with standard python apps but for a firewall it is 
+# a fairly bad scenario
+#
+# may be caused by a loss of power to a device
+#
+# clear out all bytecode from the python lib dir
+#
+
+PYTHON_LIBDIRS=(
+    /usr/lib/python*/
+    /usr/local/lib/python*/
+)
+
+for PYTHON_LIBDIR in ${PYTHON_LIBDIRS[@]}
+do
+    find $PYTHON_LIBDIR -type f -regex ".*\.pyc$" -exec rm "{}" \;
+done

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>Samba Modern</short>
+  <description>Only allows 445/tcp</description>
+  <port protocol="tcp" port="445"/>
+</service>
