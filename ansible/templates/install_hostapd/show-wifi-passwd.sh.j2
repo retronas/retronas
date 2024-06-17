@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -u
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+HOSTAPD_CONF=/etc/hostapd/hostapd-retronas.conf
+if [ -f "${HOSTAPD_CONF}" ]
+then
+        CLEAR
+        sed -rn 's/^wpa_passphrase=(.+)/\1/p' $HOSTAPD_CONF
+        PAUSE
+else
+        echo "Config file not found, assuming hostapd is not installed"
+fi

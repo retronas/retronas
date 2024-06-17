@@ -92,6 +92,17 @@
                 "group":"",
                 "command": "set-retronas-net-wifi-dns",
                 "args": ""
+            },
+            {
+                "index":"29",
+                "title": "wifi-show-pwd",
+                "description": "Show the current wifi password",
+                "id":"wifi-show-pw",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "show-wifi-passwd",
+                "args": ""
             }
         ]
     }

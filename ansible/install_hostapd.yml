@@ -7,11 +7,9 @@
     - my_name: "hostapd"
     - my_file: "install_{{ my_name }}"
 
-    # default wifi
-    - retronas_wifi_password: "retronas"
-
-    - packages:
+   - packages:
       - hostapd
+      - pwgen
 
     - my_services: "hostapd-retronas.service"
 
@@ -20,6 +18,7 @@
       - { name: "hostapd-dnsmasq.conf",     sub: "", dest: "/etc/dnsmasq.d/retro/", force: no, mode: "0640" }
       - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
       - { name: "update-wifi-passwd.sh",    sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
+      - { name: "show-wifi-passwd.sh",      sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
 
     - paths:
       - { name: "dnsmasq.d",       dest: "/etc",              state: "directory", mode: "0755" }
@@ -34,6 +33,12 @@
     ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
+
+  - name: "generate password"
+    shell:
+      cmd: pwgen -s 12 1
+    no_log: true
+    register: retronas_wifi_password
 
   - name: "{{ my_name }} - paths"
     file:
