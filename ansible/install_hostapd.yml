@@ -7,7 +7,7 @@
     - my_name: "hostapd"
     - my_file: "install_{{ my_name }}"
 
-   - packages:
+    - packages:
       - hostapd
       - pwgen
 
