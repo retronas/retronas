@@ -754,6 +754,17 @@
                 "group":"",
                 "command": "retroarch_cifs",
                 "args": ""
+            },     
+            {
+                "index": "69",
+                "title": "SeaweedFS",
+                "description": "SeaweedFS for local S3 storage",
+                "id":"seaweedfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "seaweedfs",
+                "args": ""
             }
         ]
     }

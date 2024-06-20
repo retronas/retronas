@@ -1,0 +1,102 @@
+# Dependencies
+
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "seaweedfs"
+    - my_file: "install_{{ my_name }}"
+
+    - systemd_units:
+      - { name: "{{ my_name }}-retronas", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
+    - firewalld_rules:
+      - { zones: retro, service: "{{ my_name }}" }
+      - { zones: modern, service: "{{ my_name }}" }
+
+    - templates:
+      - { name: "{{ my_name }}-retronas.service", dest: "/etc/systemd/system" }
+      - { name: "install_{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+
+    - paths:
+      - { name: "s3", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - paths"
+    ansible.builtin.file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default(retronas_user) }}"
+      group: "{{ item.group|default(retronas_group) }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - Install release"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "{{ retronas_root}}/bin/weed"
+
+  - name: "{{ my_name }} - enable service(s)"
+    ansible.builtin.service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+    notify: "{{ my_name }} - Restart service"
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ my_name }}.xml.j2"
+      dest: /etc/firewalld/services/{{ my_name }}.xml
+      owner: root
+      group: root
+      mode: 0644
+      force: yes
+    when: firewalld_services.stat.exists
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('seaweedfs') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "seaweedfs"
+    module_state: "present"
