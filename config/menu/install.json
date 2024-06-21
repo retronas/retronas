@@ -761,7 +761,7 @@
                 "description": "SeaweedFS for local S3 storage",
                 "id":"seaweedfs",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group":"",
                 "command": "seaweedfs",
                 "args": ""
