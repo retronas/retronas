@@ -50,7 +50,15 @@
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
     notify: "{{ my_name }} - Reload firewalld"
-    
+
+  - name: "{{ my_name }} - Reload firewalld to pickup the new zones"
+    ansible.builtin.service:
+      name: "firewalld"
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      force: yes
+
   #
   # FIREWALL
   #
