@@ -24,7 +24,7 @@ cat << EOD
               |              |              |
               +--------------+--------------+
                              | ssid: retronas
-                             | pass: retronas
+                             | pass:   auto
                              |
 EOD
 
