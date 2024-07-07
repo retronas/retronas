@@ -7,7 +7,9 @@ After=network.target
 
 [Service]
 ExecStart=/usr/sbin/dnsmasq -k --conf-dir=/etc/dnsmasq.d/retro --pid-file=/var/run/dnsmasq-retro.pid
-Restart=always
+RestartSec=5m
+TimeoutStartSec=8s
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

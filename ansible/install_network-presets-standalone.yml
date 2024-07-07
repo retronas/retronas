@@ -27,7 +27,7 @@
 
     connections:
     - { name: "ethernet", ipv4addr: "{{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}", ipv4gw: "{{ retronas_net_retro_router }}", ipv4dns: "{{ retronas_net_retro_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_retro_interface }}", type: "ethernet" }
-    - { name: "wifi", ipv4addr: "{{ retronas_net_wifi_ip }}/{{ retronas_net_wifi_subnet }}", ipv4gw: "{{ retronas_net_wifi_router }}", ipv4dns: "{{ retronas_net_wifi_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_wifi_interface }}"  }
+    - { name: "wifi", ipv4addr: "{{ retronas_net_wifi_ip }}/{{ retronas_net_wifi_subnet }}", ipv4gw: "{{ retronas_net_wifi_router }}", ipv4dns: "{{ retronas_net_wifi_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_wifi_interface }}" }
 
   tasks:
 
