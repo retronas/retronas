@@ -16,7 +16,7 @@
   gather_facts: no
 
   vars:
-    my_name: "net-zoned"
+    my_name: "network-presets-standalone"
     my_file: "install_{{ my_name }}"
 
     templates:
