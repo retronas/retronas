@@ -10,12 +10,10 @@
     - my_services: "NetworkManager.service"
 
     - collections:
-      - { collection: community.general.nmcli, creates: community/general/nmcli }
+      - { collection: community.general, creates: community/general/nmcli }
 
   tasks:
 
-  - name: "{{ my_name }} - install related ansible collections"
-    ansible.builtin.command:
-      cmd: /usr/bin/ansible-galaxy collection install {{ item.collection }}
-      creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
-    with_items: "{{ collections }}"
+  - name: "{{ my_name }} - does nothing"
+    debug:
+      msg: "currently does nothing"
