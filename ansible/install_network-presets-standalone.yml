@@ -1,8 +1,11 @@
+#networkmanager
+- ansible.builtin.import_playbook: install_networkmanager.yml
+
 #firewalld
 - ansible.builtin.import_playbook: install_hostapd.yml
 
 #dnsmassq
-- ansible.builtin.import_playbook: install_dnsmasq.yml
+# IMPORTED IN DNSMASQ-RETRO - ansible.builtin.import_playbook: install_dnsmasq.yml
 - ansible.builtin.import_playbook: install_dnsmasq-retro.yml
 
 #ntp
@@ -22,10 +25,25 @@
     templates:
     - { name: "dhcpcd.conf",         dest: "/etc",  mode: "0640", force: "yes" }
 
+    connections:
+    - { name: "ethernet", ipv4addr: "{{ retronas_net_retro_ip }}}/{{ retronas_net_retro_subnet }}", ipv4gw: "{{ retronas_net_retro_router }}", ipv4dns: "{{ retronas_net_retro_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_retro_interface }}", type: "ethernet" }
+    - { name: "wifi", ipv4addr: "{{ retronas_net_wifi_ip }}/{{ retronas_net_wifi_subnet }}", ipv4gw: "{{ retronas_net_wifi_router }}", ipv4dns: "{{ retronas_net_wifi_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_wifi_interface }}", type: "wifi"  }
+
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: Try nmcli add team - conn_name only & ip4 gw4
+    community.general.nmcli:
+      type: "{{ item.type | default('ethernet') }}"
+      conn_name: "{{ item.name }}"
+      ip4: "{{ item.ip4addr | default(omit) }}"
+      gw4: "{{ item.ipv4gw | default(omit) }}"
+      method4: "{{ item.ipv4method | default('manual') }}"
+      state: present
+    with_items:
+      - '{{ connections }}'
 
   - name: "{{ my_name }} - templates"
     ansible.builtin.template:
@@ -53,7 +71,7 @@
 
   - name: "{{ my_name }} - restart dnsmasq"
     ansible.builtin.service:
-      name: dnsmasq.service
+      name: dnsmasq-retro.service
       state: restarted
       enabled: true
       force: true

@@ -1,0 +1,21 @@
+# Dependencies
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "network manager"
+    - my_file: "install_{{ my_name }}"
+    - my_services: "NetworkManager.service"
+
+    - collections:
+      - { collection: community.general.nmcli, creates: community/general/nmcli }
+
+  tasks:
+
+  - name: "{{ my_name }} - install related ansible collections"
+    ansible.builtin.command:
+      cmd: /usr/bin/ansible-galaxy collection install {{ item.collection }}
+      creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
+    with_items: "{{ collections }}"
