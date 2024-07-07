@@ -1,5 +1,8 @@
 [Unit]
 Description=DNS caching server retro. 
+Requires=network.target
+Wants=nss-lookup.target
+Before=nss-lookup.target
 After=network.target
 
 [Service]
