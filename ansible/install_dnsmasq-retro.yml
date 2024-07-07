@@ -7,7 +7,7 @@
 
   vars:
     - my_name: "dnsmasq-retro"
-    - my_service: dnsmasq
+    - my_service: "{{ my_name }}"
     - my_file: "install_{{ my_name }}"
 
     - templates:
@@ -30,6 +30,10 @@
       - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$", after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'ip_address\=10.99.1.1/24',                                                                           after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'domain_name_servers\=10.99.1.1',                                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
+
+    - my_services:
+      - dhcpcd
+      - "{{ my_name }}"
 
 
   tasks:
@@ -71,7 +75,7 @@
       mode: "{{ item.mode|default('0644') }}"
       force: "{{ item.force|default('yes') }}"
     with_items: "{{ templates }}"
-    notify: "{{ my_name }} - Restart dnsmasq"
+    notify: "{{ my_name }} - Restart services"
 
   - name: "{{ my_name }} - setup dhcpcd"
     lineinfile:
@@ -82,26 +86,19 @@
       line: "{{ item.option }} {{ item.value }}"
     with_items: "{{ net_settings }}"
     when: dhcpcd_check.stat.exists
-    notify: "{{ my_name }} - Restart dhcpcd"
+    notify: "{{ my_name }} - Restart services"
 
   handlers:
 
-  - name: "{{ my_name }} - Restart dhcpcd"
+  - name: "{{ my_name }} - Restart services"
     service:
-      name: "dhcpcd.service"
+      name: "{{ item }}"
       state: restarted
       daemon_reload: yes
       enabled: yes
+    with_items: "{{ my_service }}"
 
-  - name: "{{ my_name }} - Restart dnsmasq"
-    set_fact:
-      install_changed: true
 
-- import_playbook: install_dnsmasq.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
 
 - import_playbook: retronas_system_config.yml
   vars:

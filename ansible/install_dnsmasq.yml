@@ -9,6 +9,9 @@
     - packages:
       - dnsmasq
 
+    - my_services:
+      - dnsmasq
+
     - changed: false
 
   tasks:
@@ -17,7 +20,6 @@
     package:
        name: "{{ packages }}"
        state: latest
-
 
   - name: "{{ my_name }} - restart if imported because handlers will not run"
     service:
