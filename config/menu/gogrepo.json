@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "GOG",
-        "description": "Current OS: \"${OLDGOGOS}\"||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",
+        "description": "Current OS: \"${OLDGOGOS}\"||Current LANG: \"${OLDGOGLANG}||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",
         "id":"gogrepo",
         "prompt": "",
         "type": "menu",
@@ -42,6 +42,17 @@
             },
             {
                 "index":"04",
+                "title": "Select Lang",
+                "description": "Change Language preferences",
+                "id":"gog-lang-input",
+                "prompt": "",
+                "type": "script",
+                "group":"gogrepo",
+                "command": "gogrepo_wrapper",
+                "args": "select-lang"
+            },
+            {
+                "index":"05",
                 "title": "Sync",
                 "description": "Syncronise my games list",
                 "id":"gog-sync-gameslist",
@@ -52,7 +63,7 @@
                 "args": "update-skip-known"
             },
             {
-                "index":"05",
+                "index":"06",
                 "title": "Single",
                 "description": "Download/update a single game",
                 "id":"gog-dl-one-game",
@@ -63,7 +74,7 @@
                 "args": "update-download-single"
             },
             {
-                "index":"06",
+                "index":"07",
                 "title": "All",
                 "description": "Download/update all games",
                 "id":"gog-dl-all-game",
@@ -74,7 +85,7 @@
                 "args": "download-all"
             },
             {
-                "index":"07",
+                "index":"08",
                 "title": "FULL",
                 "description": "Synchronise games list & download/update all games",
                 "id":"gog-dl-full-game",
@@ -180,6 +191,313 @@
                 "type": "",
                 "group":"gogrepo",
                 "command": "TOOL COMMAND",
+                "args": ""
+            }
+        ]
+    },
+    "gogrepo-setuplang": 
+    {
+        "title": "GOG configure Language",
+        "description": "Current Language: ${OLDGOGLANG}||Please set the Language you would like to download GOG games for.",
+        "id":"gogrepo-setuplang",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"en",
+                "title": "English",
+                "description": "",
+                "id":"gogos-en",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "ar",
+                "title": "Arabic",
+                "description": "",
+                "id":"gogos-en",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "bl",
+                "title": "Bulgarian",
+                "description": "",
+                "id":"gogos-bl",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "br",
+                "title": "Brazilian Portuguese",
+                "description": "",
+                "id":"gogos-br",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "cn",
+                "title": "Chinese",
+                "description": "",
+                "id":"gogos-cn",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "cz",
+                "title": "Czech",
+                "description": "",
+                "id":"gogos-cz",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "da",
+                "title": "Danish",
+                "description": "",
+                "id":"gogos-da",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "de",
+                "title": "German",
+                "description": "",
+                "id":"gogos-de",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "es",
+                "title": "Spanish",
+                "description": "",
+                "id":"gogos-es",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "fi",
+                "title": "Finnish",
+                "description": "",
+                "id":"gogos-fi",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "fr",
+                "title": "French",
+                "description": "",
+                "id":"gogos-fr",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "gk",
+                "title": "Greek",
+                "description": "",
+                "id":"gogos-gk",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "hu",
+                "title": "Hungarian",
+                "description": "",
+                "id":"gogos-hu",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "it",
+                "title": "Italian",
+                "description": "",
+                "id":"gogos-it",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "jp",
+                "title": "Japanese",
+                "description": "",
+                "id":"gogos-jp",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "ko",
+                "title": "Korean",
+                "description": "",
+                "id":"gogos-ko",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "nl",
+                "title": "Dutch",
+                "description": "",
+                "id":"gogos-nl",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "no",
+                "title": "Norse",
+                "description": "",
+                "id":"gogos-no",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "pl",
+                "title": "Polish",
+                "description": "",
+                "id":"gogos-pl",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "pt",
+                "title": "Portuguese",
+                "description": "",
+                "id":"gogos-pt",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""
+            },
+            {
+                "index": "ro",
+                "title": "Romanian",
+                "description": "",
+                "id":"gogos-ro",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""                
+            },
+            {
+                "index": "ru",
+                "title": "Russian",
+                "description": "",
+                "id":"gogos-ru",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""                
+            },
+            {
+                "index": "sb",
+                "title": "Serbian",
+                "description": "",
+                "id":"gogos-sb",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""                
+            },
+            {
+                "index": "sk",
+                "title": "Slovak",
+                "description": "",
+                "id":"gogos-sk",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""                
+            },
+            {
+                "index": "sv",
+                "title": "Swedish",
+                "description": "",
+                "id":"gogos-sv",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
+                "args": ""                
+            },
+            {
+                "index": "tr",
+                "title": "Turkish",
+                "description": "",
+                "id":"gogos-tr",
+                "prompt": "",
+                "type": "",
+                "group":"gogrepo",
+                "command": "",
                 "args": ""
             }
         ]
