@@ -22,14 +22,12 @@ rn_gog_chooser() {
     source $_CONFIG
     
     case ${CHOICE} in
-      01)
-        EXIT_OK
+    01)
+      EXIT_OK
       ;;
     02)
-      # login
-      CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
-      PAUSE
+      # auth menu
+      rn_gog_auth
       ;;
     03)
       # OS
@@ -107,6 +105,36 @@ rn_gog_setlang() {
 
 }
 
+rn_gog_auth() {
+  source $_CONFIG
+
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-auth"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-auth"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
+
+  case ${CHOICE} in
+    01)
+      EXIT_OK
+      ;;
+    02)
+      # login
+      CLEAR
+      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
+      PAUSE
+      ;;
+    03)
+      # import cookies
+      CLEAR
+      ${SUCOMMAND} ${SCDIR}/gogrepo_import-cookies.sh
+      PAUSE
+      ;;
+    *)
+      EXIT_CANCEL
+      ;;
+  esac
+
+}
 
 rn_gog_setos() {
   source $_CONFIG

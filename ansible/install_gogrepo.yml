@@ -14,6 +14,7 @@
 
     - scripts:
       - "gogrepo_login.sh" 
+      - "gogrepo_import-cookies.sh"
       - "gogrepo_download.sh"
       - "gogrepo_update.sh"
       - "gogrepo-wrapper.sh"

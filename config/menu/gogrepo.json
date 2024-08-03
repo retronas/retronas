@@ -20,14 +20,14 @@
             },
             {
                 "index":"02",
-                "title": "Login",
-                "description": "Configure GOG credentials",
-                "id":"gog-password-menu",
+                "title": "Authentication",
+                "description": "Configure GOG authentication",
+                "id":"gogrepo-auth",
                 "prompt": "",
-                "type": "script",
+                "type": "dialog",
                 "group":"gogrepo",
-                "command": "gogrepo-wrapper",
-                "args": "login"
+                "command": "gogrepo",
+                "args": "auth-chooser"
             },
             {
                 "index":"03",
@@ -520,6 +520,49 @@
                 "group":"",
                 "command": "EXIT_OK",
                 "args": ""
+            }
+        ]
+    },
+    "gogrepo-auth": 
+    {
+        "title": "GOG Authentication options",
+        "description": "Please choose a option for authtenticaiton||Login can break if GOG change something, cookie import is more reliable",
+        "id":"gogrepo-auth-chooser",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Login",
+                "description": "Configure GOG credentials",
+                "id":"gog-password",
+                "prompt": "",
+                "type": "script",
+                "group":"gogrepo",
+                "command": "gogrepo-wrapper",
+                "args": "login"
+            },
+            {
+                "index":"03",
+                "title": "Import",
+                "description": "Import a cookies file, more reliable than login",
+                "id":"gog-cookies",
+                "prompt": "",
+                "type": "script",
+                "group":"gogrepo",
+                "command": "gogrepo-wrapper",
+                "args": "import-cookies"
             }
         ]
     }

@@ -177,8 +177,9 @@ function gameslist {
 function _usage {
 cat << USAGE
 [ GOGREPO RetroNAS Wrapper ]
-$0 login|select-os|update-skip-known|update-download-single|download-all|update-download
+$0 login|import-cookies|select-os|select-lang|update-skip-known|update-download-single|download-all|update-download
  login                      log in to gog
+ import-cookies             import a cookies file in LWP/Mozilla formats
  select-os                  select the operating systems you want to target
  select-lang                select the language you want to target
  update-skip-known          update all metadata
@@ -195,9 +196,16 @@ case $1 in
         # login
         login
         ;;
+    import-cookies)
+        # import cookies
+        import_cookies
+        ;;
     update-skip-known)
         # sync games list
         update -os ${OLDGOGOS}
+        ;;
+    select-auth)
+        select_auth
         ;;
     select-os)
         select_os
