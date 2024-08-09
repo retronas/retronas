@@ -62,7 +62,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/mister/' + item.1.name + '/' + item.0.mister + '\";' ] }}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/mister/' + item.1.name + '/' + item.0.mister + '\";' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
@@ -73,6 +73,7 @@
     shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
+    changed_when: false
 
   - name: "{{ my_name }} - create custom save directories"
     ansible.builtin.file:
