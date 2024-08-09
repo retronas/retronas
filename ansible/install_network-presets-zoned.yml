@@ -92,3 +92,15 @@
       state: restarted
       enabled: true
       force: true
+
+# alt preset removed
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-standalone"
+    module_state: "absent"
+
+# this preset added
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-zoned"
+    module_state: "present"
