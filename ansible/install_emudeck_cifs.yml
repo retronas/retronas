@@ -68,7 +68,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/emudeck/' + item.1.name + '/' + item.0.emudeck + ';' ] }}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/emudeck/' + item.1.name + '/' + item.0.emudeck + ';' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
@@ -79,6 +79,7 @@
     ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
+    changed_when: false
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"

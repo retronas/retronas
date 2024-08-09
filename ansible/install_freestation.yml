@@ -50,7 +50,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/{{ my_name }}/' + item.1.name + '/' + item.0.freestation + ';' ] }}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/{{ my_name }}/' + item.1.name + '/' + item.0.freestation + ';' ] }}"
     loop: "{{ system_map|product(top_level_paths)|list }}"
     when:
       - item.1.enabled is true
@@ -70,6 +70,7 @@
     ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
+    changed_when: false
     notify: "{{ my_name }} - Install Changed"
 
   - name: "{{ my_name }} - configure includes file"

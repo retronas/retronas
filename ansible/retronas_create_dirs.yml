@@ -4,6 +4,13 @@
 - name: "{{ my_name }} - Load RetroNAS config"
   ansible.builtin.include_vars: retronas_vars.yml
 
+- name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
+  ansible.builtin.shell:
+    cmd: find "{{ retronas_path }}/{{ item }}" -xtype l -exec rm "{}" \;
+  loop: [ "roms", "bios", "saves", "savestates", "savestates" ]
+  when: retronas_path is defined
+  changed_when: false
+
 - name: "{{ my_name }} - build layout list (set fact)"
   ansible.builtin.set_fact:
     path_list: "{{ path_list|default([]) + [ retronas_path + '/' + item.1.name + '/' + item.0.src if item.1.systems is true else '' ] }}"
@@ -17,6 +24,7 @@
   become: yes
   become_user: "{{ retronas_user }}"
   when: path_list is defined
+  changed_when: False
 
 - name: "{{ my_name }} - build systems directory layout (set fact)"
   ansible.builtin.set_fact:
@@ -30,3 +38,4 @@
   ansible.builtin.shell:
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined
+  changed_when: False
