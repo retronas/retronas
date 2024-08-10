@@ -39,3 +39,14 @@
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined
   changed_when: False
+
+- name: "{{ my_name }} - add top level directory info"
+  ansible.builtin.copy:
+    dest: "{{ retronas_path }}/{{ item }}/dir.txt"
+    content: |
+      this folder structure is the responsiblity of the user to populate
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    mode: "0644"
+  loop: [ "roms", "bios", "saves", "savestates" ]
+  when: retronas_path is defined
