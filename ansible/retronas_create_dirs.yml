@@ -4,11 +4,18 @@
 - name: "{{ my_name }} - Load RetroNAS config"
   ansible.builtin.include_vars: retronas_vars.yml
 
+- name: "{{ my_name }} - stat top level paths"
+  ansible.builtin.stat:
+    path: "{{ retronas_path }}/{{ item }}"
+  loop: [ "roms", "bios", "saves", "savestates" ]
+  register: tl_paths
+
 - name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
   ansible.builtin.shell:
-    cmd: find "{{ retronas_path }}/{{ item }}" -xtype l -exec rm "{}" \; | echo 0
-  loop: [ "roms", "bios", "saves", "savestates" ]
-  when: retronas_path is defined
+    cmd: find "{{ item.stat.path }}" -xtype l -exec rm "{}" \; | echo 0
+  loop: "{{ tl_paths.results }}"
+  when: tl_paths is defined and
+        item.stat.exists is true
   changed_when: false
 
 - name: "{{ my_name }} - build layout list (set fact)"
@@ -42,11 +49,12 @@
 
 - name: "{{ my_name }} - add top level directory info"
   ansible.builtin.copy:
-    dest: "{{ retronas_path }}/{{ item }}/dir.txt"
+    dest: "{{ item.stat.path }}/dir.txt"
     content: |
       this folder structure is the responsiblity of the user to populate
     owner: "{{ retronas_user }}"
     group: "{{ retronas_group }}"
     mode: "0644"
-  loop: [ "roms", "bios", "saves", "savestates" ]
-  when: retronas_path is defined
+  loop: "{{ tl_paths.results }}"
+  when: tl_paths is defined and
+        item.stat.exists is true
