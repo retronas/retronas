@@ -6,7 +6,7 @@
 
 - name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
   ansible.builtin.shell:
-    cmd: find "{{ retronas_path }}/{{ item }}" -xtype l -exec rm "{}" \;
+    cmd: find "{{ retronas_path }}/{{ item }}" -xtype l -exec rm "{}" \; | echo 0
   loop: [ "roms", "bios", "saves", "savestates" ]
   when: retronas_path is defined
   changed_when: false
