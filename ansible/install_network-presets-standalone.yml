@@ -26,15 +26,22 @@
     templates:
     - { name: "dhcpcd.conf",         dest: "/etc",  mode: "0640", force: "yes" }
 
-
     connections:
     - { name: "ethernet", state: "absent" }
     - { name: "wifi-retronas", state: "absent" }
+
+    my_packages:
+      - pwgen
 
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ packages }}"
+       state: latest
 
   - name: "{{ my_name }} - generate password"
     shell:
@@ -42,9 +49,6 @@
     no_log: true
     changed_when: False
     register: retronas_wifi_password
-
-  - debug:
-      msg: "{{ retronas_net_wifi_ssid }}"
 
   - name: "{{ my_name }} - generate unique ssid"
     shell:
@@ -54,7 +58,7 @@
     changed_when: False
     when: retronas_net_wifi_ssid == ""
 
-  - name: "config connections"
+  - name: "{{ my_name }} - config connections"
     community.general.nmcli:
       type: "{{ item.type | default('ethernet') }}"
       conn_name: "{{ item.name }}"
@@ -69,7 +73,7 @@
     with_items:
       - '{{ connections }}'
 
-  - name: "config ethernet"
+  - name: "{{ my_name }} - config ethernet"
     community.general.nmcli:
       type: "ethernet"
       conn_name: "ethernet"
@@ -81,7 +85,7 @@
       state: "present"
       autoconnect: true
 
-  - name: "configure wifi ap"
+  - name: "{{ my_name }} - configure wifi ap"
     community.general.nmcli:
       type: "wifi"
       conn_name: "wifi-retronas"
