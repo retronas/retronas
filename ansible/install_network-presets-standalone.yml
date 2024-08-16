@@ -40,7 +40,7 @@
 
   - name: "{{ my_name }} - Install packages"
     ansible.builtin.package:
-       name: "{{ packages }}"
+       name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - generate password"
