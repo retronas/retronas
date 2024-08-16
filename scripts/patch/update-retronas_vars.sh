@@ -5,6 +5,12 @@ source $_CONFIG
 source ${LIBDIR}/common.sh
 export ANDCFG=${ANDIR}/retronas_vars.yml.default
 
+# check for CR on last line
+if ! tail -n1 ${ANDCFG} | egrep -l $'\r'\$
+then
+  echo "\r" >> ${ANCFG}
+fi
+
 update_config() {
   local CHECK=$1
   local MATCH=$2

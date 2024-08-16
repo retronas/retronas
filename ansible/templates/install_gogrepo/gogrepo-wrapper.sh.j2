@@ -23,7 +23,9 @@ GAMELIST=()
 ## New install
 # GOG Operating System
 [ -z "$OLDGOGOS" ] && OLDGOGOS="none"
+[ -z "$OLDGOGLANG" ] && OLDGOGLANG="none"
 NEWGOGOS="windows"
+NEWGOGLANG="en"
 
 
 ## Make the main directory
@@ -65,6 +67,38 @@ function get_os_list {
     )
 }
 
+function get_lang_list {
+    LANG_LIST=(
+        "ar"
+        "bl"
+        "br"
+        "cn"
+        "cz"
+        "da"
+        "de"
+        "en"
+        "es"
+        "fi"
+        "fr"
+        "gk"
+        "hu"
+        "it"
+        "jp"
+        "ko"
+        "nl"
+        "no"
+        "pl"
+        "pt"
+        "ro"
+        "ru"
+        "sb"
+        "sk"
+        "sv"
+        "tr"
+        "quit"
+    )
+}
+
 function get_games_list {
     GAME_LIST=$(grep "'title':" $GOGMAN | awk -F "'" '{print $4}' | sort)
 }
@@ -97,6 +131,34 @@ function select_os {
     fi
 }
 
+function select_lang {
+    header "Select the language you would like to use..."
+    get_lang_list
+
+    PS3="Enter a number (current: ${OLDGOGLANG}): "
+    select KEY in "${LANG_LIST[@]}"
+    do
+        if [ ! -z "${KEY}" ]
+        then
+            if [ "${KEY}" != "quit" ]
+            then
+                NEWGOGLANG="${KEY}"
+            fi
+            break
+        else
+            echo "Invalid option"
+        fi
+    done
+
+    if [ ! -z "$NEWGOGLANG" ]
+    then
+        echo "Updating GOG settings to $NEWGOGLANG"
+        # update gog setting
+        sed -i '/retronas_gog_lang:/d' "${ANCFG}"
+        echo "retronas_gog_lang: \"${NEWGOGLANG}\"" >> "${ANCFG}"
+    fi
+}
+
 function gameslist {
     PS3="Enter a number: "
     get_games_list
@@ -115,9 +177,11 @@ function gameslist {
 function _usage {
 cat << USAGE
 [ GOGREPO RetroNAS Wrapper ]
-$0 login|select-os|update-skip-known|update-download-single|download-all|update-download
+$0 login|import-cookies|select-os|select-lang|update-skip-known|update-download-single|download-all|update-download
  login                      log in to gog
+ import-cookies             import a cookies file in LWP/Mozilla formats
  select-os                  select the operating systems you want to target
+ select-lang                select the language you want to target
  update-skip-known          update all metadata
  update-download-single     update and download a single title
  download-all               download all know titles
@@ -132,12 +196,22 @@ case $1 in
         # login
         login
         ;;
+    import-cookies)
+        # import cookies
+        import_cookies
+        ;;
     update-skip-known)
         # sync games list
         update -os ${OLDGOGOS}
         ;;
+    select-auth)
+        select_auth
+        ;;
     select-os)
         select_os
+        ;;
+    select-lang)
+        select_lang
         ;;
     update-download-single)
         # download 1 game

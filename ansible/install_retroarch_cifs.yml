@@ -27,7 +27,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../roms/' + item.src + ' \"' + retronas_path + '/retroarch/' + item.retroarch + '\";' ]}}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/retroarch/' + item.retroarch + '\";' ]}}"
     loop: "{{ system_map }}"
     when:
       - item.retroarch | length > 0
@@ -36,6 +36,7 @@
     ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
+    changed_when: false
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"

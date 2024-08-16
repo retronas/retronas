@@ -36,7 +36,7 @@
 
   - name: "{{ my_name }} - build layout list (set fact)"
     ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sf ../roms/' + item.src + ' ' + retronas_path + '/emuelec/' + item.emuelec + ';' ] }}"
+      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' ' + retronas_path + '/emuelec/' + item.emuelec + ';' ] }}"
     loop: "{{ system_map }}"
     when:
       - item.emuelec | length > 0
@@ -45,6 +45,7 @@
     ansible.builtin.shell:
       cmd: "{{ path_list|join('') }}"
     when: path_list is defined
+    changed_when: false
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - build internal hacks directory layout"

@@ -14,7 +14,7 @@ do
   esac
 done
 
-MYURL="http://$(ip -4 -br a | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}')/3ds"
+MYURL="http://$(ip -4 -br a | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)/3ds"
 umask 002
 
 generate_qr () {
