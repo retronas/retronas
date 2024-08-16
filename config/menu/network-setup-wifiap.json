@@ -99,9 +99,9 @@
                 "description": "Show the current wifi password",
                 "id":"wifi-show-pw",
                 "prompt": "",
-                "type": "script",
+                "type": "script-static",
                 "group":"",
-                "command": "show-wifi-passwd",
+                "command": "wifi-show-passwd",
                 "args": ""
             }
         ]

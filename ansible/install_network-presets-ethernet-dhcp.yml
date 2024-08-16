@@ -1,0 +1,61 @@
+#networkmanager
+- ansible.builtin.import_playbook: install_networkmanager.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    my_name: "network-presets-standalone-ethernet-dhcp"
+    my_file: "install_{{ my_name }}"
+
+    connections:
+    - { name: "ethernet", state: "absent" }  # remove it first because modules are a pain some times
+    - { name: "wifi-retronas", state: "absent" }
+    - { name: "ethernet", ipv4method: "auto", ifname: "{{ retronas_net_retro_interface }}", type: "ethernet" }
+
+
+    disable_services:
+      - dhcpcd
+      - dnsmasq-retro
+      - firewalld
+      - hostapd-retronas
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "config connections"
+    community.general.nmcli:
+      type: "{{ item.type | default('ethernet') }}"
+      conn_name: "{{ item.name }}"
+      ip4: "{{ item.ipv4addr | default(omit) }}"
+      gw4: "{{ item.ipv4gw | default(omit) }}"
+      dns4: "{{ item.ipv4dns | default(omit) }}"
+      method4: "{{ item.ipv4method | default('manual') }}"
+      ifname: "{{ item.ifname | default(omit) }}"
+      route_metric4: "{{ item.metric | default(omit) }}"
+      state: "{{ item.state| default('present') }}"
+      autoconnect: true
+    with_items:
+      - '{{ connections }}'
+
+  - name: "{{ my_name }} - back to dhcp, turn off our services"
+    ansible.builtin.service:
+      name:  "{{ item }}.service"
+      state: stopped
+      enabled: false
+      force: true
+    loop: "{{ disable_services }}"
+
+
+# alt presets removed
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-standalone"
+    module_state: "absent"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-zoned"
+    module_state: "absent"

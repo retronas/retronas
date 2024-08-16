@@ -17,8 +17,6 @@
       - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
       - { name: "hostapd-dnsmasq.conf",     sub: "", dest: "/etc/dnsmasq.d/retro/", force: no, mode: "0640" }
       - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
-      - { name: "update-wifi-passwd.sh",    sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
-      - { name: "show-wifi-passwd.sh",      sub: "", dest: "/opt/retronas/scripts", mode: "0750" }
 
     - paths:
       - { name: "dnsmasq.d",       dest: "/etc",              state: "directory", mode: "0755" }
@@ -26,7 +24,7 @@
 
 
   tasks:
-  - name: "{{ my_name }}  - Load RetroNAS config"
+  - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install packages"
@@ -34,11 +32,27 @@
        name: "{{ packages }}"
        state: latest
 
-  - name: "generate password"
+  - name: "{{ my_name }} - generate password"
     shell:
       cmd: pwgen -s 12 1
     no_log: true
     register: retronas_wifi_password
+
+  - name: "{{ my_name }} - generate unique ssid"
+    shell:
+      cmd: echo "retronas-$(pwgen 8 -A -0 -B 1)"
+    no_log: true
+    register: retronas_net_wifi_ssid
+    when: retronas_net_wifi_ssid == ""
+
+  - name: "{{ my_name }} - update wifi ssid config"
+    lineinfile:
+      path: /opt/retronas/ansible/retronas_vars.yml
+      line: '^retronas_net_wifi_ssid: "retronas-{{ retronas_net_wifi_ssid }}"'
+    when: retronas_net_wifi_ssid is defined
+
+  - name: "{{ my_name }}  - Re-read RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - paths"
     file:

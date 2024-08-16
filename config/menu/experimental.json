@@ -54,7 +54,7 @@
             {
                 "index": "05",
                 "title": "Network",
-                "description": "highly experimental!",
+                "description": "Network presets (highly experimental!)",
                 "id":"network",
                 "prompt": "",
                 "type": "dialog",

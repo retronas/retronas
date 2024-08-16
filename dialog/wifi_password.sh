@@ -26,7 +26,7 @@ rn_wifi_password() {
     if [ "${PASS_ONE}" == "${PASS_TWO}" ]
     then
       CLEAR
-      /opt/retronas/scripts/update-wifi-passwd.sh "${PASS_ONE}"
+      /opt/retronas/scripts/static/wifi-update-passwd.sh "${PASS_ONE}"
       PAUSE
     else
       RN_LOG "Passwords do not match"

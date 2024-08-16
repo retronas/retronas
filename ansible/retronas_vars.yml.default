@@ -14,9 +14,9 @@ retronas_etherdfs_interface: "eth0"
 retronas_net_upstream_dns1: "8.8.8.8"
 retronas_net_upstream_dns2: "8.8.4.4"
 retronas_net_wifi_interface: "wlan0"
-retronas_net_wifi_ssid: retronas
+retronas_net_wifi_ssid: ""
 retronas_net_wifi_channel: 6
-retronas_net_wifi_hwmode: g
+retronas_net_wifi_hwmode: bg
 retronas_net_wifi_countrycode: AU
 retronas_net_wifi_ip: "10.99.2.1"
 retronas_net_wifi_subnet: "23"

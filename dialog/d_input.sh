@@ -84,7 +84,7 @@ case $MENU_NAME in
         ;;
     set-retronas-net-wifi-hwmode)
         OLDVALUE=${OLDWIFIHWMODE}
-        DATASET=()
+        DATASET=(a bg)
         PATTERN="retronas_net_wifi_hwmode:"
         ;;
     set-retronas-net-retro-ip)
