@@ -52,17 +52,24 @@
     with_items:
       - '{{ connections }}'
 
-  - name: "{{ my_name }} - stop hostapd if running"
-    ansible.builtin.service:
-      name: hostapd-retronas.service
-      state: stopped
-      enabled: false
-      force: true
+  - name: "{{ my_name }} - check hostapd is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/hostapd.service
+    register: hostapd_installed
 
   - name: "{{ my_name }} - remove hostapd dnsmasq configuration"
     ansible.builtin.file:
       path: /etc/dnsmasq.d/retro/hostapd-dnsmasq.conf
       state: absent
+    when: hostapd_installed.stat.exists is true
+
+  - name: "{{ my_name }} - stop hostapd"
+    ansible.builtin.service:
+      name: hostapd-retronas.service
+      state: stopped
+      enabled: false
+      force: true
+    when: hostapd_installed.stat.exists is true
 
   - name: "{{ my_name }} - templates"
     ansible.builtin.template:
@@ -93,13 +100,6 @@
       name: firewalld.service
       state: restarted
       enabled: true
-      force: true
-
-  - name: "{{ my_name }} - stop hostapd"
-    ansible.builtin.service:
-      name: hostapd-retronas.service
-      state: stopped
-      enabled: false
       force: true
 
 # alt preset removed
