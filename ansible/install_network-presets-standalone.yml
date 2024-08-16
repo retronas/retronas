@@ -116,12 +116,18 @@
       force: "{{ item.force|default('yes') }}"
     loop: "{{ templates }}"
 
+  - name: "{{ my_name }} - check firewalld is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/firewalld.service
+    register: firewalld_installed
+
   - name: "{{ my_name }}  - everything is retro here so disabling the firewalld zoned config"
     ansible.builtin.service:
       name:  firewalld.service
       state: stopped
       enabled: false
       force: true
+    when: firewalld_installed.stat.exists is true
 
   - name: "{{ my_name }} - restart dhcpcd"
     ansible.builtin.service:
@@ -130,10 +136,16 @@
       enabled: true
       force: true
 
+  - name: "{{ my_name }} - check hostapd is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/hostapd.service
+    register: hostapd_installed
+
   - name: "{{ my_name }} - remove hostapd dnsmasq configuration"
     ansible.builtin.file:
       path: /etc/dnsmasq.d/retro/hostapd-dnsmasq.conf
       state: absent
+    when: hostapd_installed.stat.exists is true
 
   - name: "{{ my_name }} - restart dnsmasq"
     ansible.builtin.service:
@@ -148,7 +160,7 @@
       state: stopped
       enabled: false
       force: true
-
+    when: hostapd_installed.stat.exists is true
 
 # alt preset removed
 - ansible.builtin.import_playbook: retronas_system_config.yml

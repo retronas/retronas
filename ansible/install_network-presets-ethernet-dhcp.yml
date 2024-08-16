@@ -40,14 +40,20 @@
     with_items:
       - '{{ connections }}'
 
+  - name: "{{ my_name }} - check which services is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/{{ item }}.service
+    loop: "{{ disable_services }}"
+    register: services_installed
+
   - name: "{{ my_name }} - back to dhcp, turn off our services"
     ansible.builtin.service:
-      name:  "{{ item }}.service"
+      name:  "{{ item.item }}"
       state: stopped
       enabled: false
       force: true
-    loop: "{{ disable_services }}"
-
+    loop: "{{ services_installed.results }}"
+    when: item.stat.exists is true
 
 # alt presets removed
 - ansible.builtin.import_playbook: retronas_system_config.yml
