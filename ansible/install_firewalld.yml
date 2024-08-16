@@ -61,7 +61,7 @@
   - name: "{{ my_name }} - restart"
     ansible.builtin.service:
       name: "{{ item }}"
-      state: restart
+      state: restarted
       enabled: yes
       force: yes
     with_items: "{{ my_services }}"
