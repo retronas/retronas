@@ -11,15 +11,14 @@
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "dhcp-retro.conf",          sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
-      - { name: "dhcp-static-leases.conf",  sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp-retro-ethernet.conf", sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp-retro-wifi.conf",     sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
       - { name: "dhcp.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
       - { name: "dns.conf",                 sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no } 
       - { name: "dnsmasq.conf",             sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
       - { name: "interfaces.conf",          sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
       - { name: "ipv6.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
       - { name: "dnsmasq-retro.service",    sub: "",      dest: "/etc/systemd/system"}
-
 
     - paths:
       - { name: "dnsmasq.d",                dest: "/etc",                 state: "directory", mode: "0755" }
@@ -28,7 +27,7 @@
 
     - net_settings:
       - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$",    after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "interface",  value: "{{ retronas_net_wifi_interface }}",  match_regex: "^interface {{ retronas_net_wifi_interface }}$",      after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
+      #- { option: "interface",  value: "{{ retronas_net_wifi_interface }}",  match_regex: "^interface {{ retronas_net_wifi_interface }}$",      after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'ip_address\={{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}',                               after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'domain_name_servers\={{ retronas_net_retro_dns }}',                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
 
@@ -40,15 +39,6 @@
   tasks:
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - checking for dhcpcd"
-    stat:
-      path: "/etc/dhcpcd.conf"
-    register: dhcpcd_check
-
-  - name: "{{ my_name }} - checking for dhcpcd support"
-    meta: end_play
-    when: dhcpcd_check.stat.exists == false
 
   - name: "{{ my_name }} - mask default dnsmasq service" 
     service:
@@ -78,6 +68,11 @@
     with_items: "{{ templates }}"
     notify: "{{ my_name }} - Restart services"
 
+  - name: "{{ my_name }} - checking for dhcpcd"
+    stat:
+      path: "/etc/dhcpcd.conf"
+    register: dhcpcd_check
+
   - name: "{{ my_name }} - setup dhcpcd"
     lineinfile:
       path: "{{ item.dest }}"
@@ -98,8 +93,6 @@
       daemon_reload: yes
       enabled: yes
     with_items: "{{ my_service }}"
-
-
 
 - import_playbook: retronas_system_config.yml
   vars:
