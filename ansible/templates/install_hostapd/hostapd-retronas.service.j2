@@ -11,7 +11,7 @@ After=sys-subsystem-net-devices-{{ retronas_net_wifi_interface }}.device
 [Service]
 Type=forking
 ExecStart=/usr/sbin/hostapd -B -P /run/hostapd-retronas.pid /etc/hostapd/hostapd-retronas.conf
-RestartSec=5m
+RestartSec=10s
 TimeoutStartSec=8s
 Restart=on-failure
 

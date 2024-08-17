@@ -2,12 +2,11 @@
 Description=DNS caching server retro. 
 Requires=network.target
 Wants=nss-lookup.target
-Before=nss-lookup.target
 After=network.target
 
 [Service]
 ExecStart=/usr/sbin/dnsmasq -k --conf-dir=/etc/dnsmasq.d/retro --pid-file=/var/run/dnsmasq-retro.pid
-RestartSec=5m
+RestartSec=10s
 TimeoutStartSec=8s
 Restart=on-failure
 
