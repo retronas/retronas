@@ -15,7 +15,7 @@ source ${LIBDIR}/common.sh
 #        echo "SSID: $SSID PASS:$PASS"
 #fi
 
-NMWIFIAP_CONF=/etc/NetworkManager/system-connections/wifi-retronas.conf
+NMWIFIAP_CONF=/etc/NetworkManager/system-connections/wifi-retronas.nmconnection
 if [ -f "${NMWIFIAP_CONF}" ]
 then
         CLEAR
