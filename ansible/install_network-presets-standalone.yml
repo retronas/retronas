@@ -161,11 +161,11 @@
     when: hostapd_installed.stat.exists is true
 
   - name: "{{ my_name }} - restart dnsmasq"
-      ansible.builtin.service:
-        name: dnsmasq-retro.service
-        state: restarted
-        enabled: true
-        force: true
+    ansible.builtin.service:
+      name: dnsmasq-retro.service
+      state: restarted
+      enabled: true
+      force: true
 
 # alt preset removed
 - ansible.builtin.import_playbook: retronas_system_config.yml
