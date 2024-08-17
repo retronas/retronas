@@ -11,25 +11,25 @@
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "dhcp-retro.conf",          sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "dhcp-static-leases.conf",  sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "dhcp.conf",                sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "dns.conf",                 sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no } 
-      - { name: "dnsmasq.conf",             sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "interfaces.conf",          sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "ipv6.conf",                sub: "retro", dest: "/etc/{{ my_service }}.d/retro", force: no }
-      - { name: "dnsmasq-retro.service",    sub: "", dest: "/etc/systemd/system"}
+      - { name: "dhcp-retro.conf",          sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp-static-leases.conf",  sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dns.conf",                 sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no } 
+      - { name: "dnsmasq.conf",             sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "interfaces.conf",          sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "ipv6.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dnsmasq-retro.service",    sub: "",      dest: "/etc/systemd/system"}
 
 
     - paths:
-      - { name: "{{ my_service }}.d",       dest: "/etc",                       state: "directory", mode: "0755" }
-      - { name: "retro",                    dest: "/etc/{{ my_service }}.d",    state: "directory", mode: "0755" }
+      - { name: "dnsmasq.d",                dest: "/etc",                 state: "directory", mode: "0755" }
+      - { name: "retro",                    dest: "/etc/dnsmasq.d",       state: "directory", mode: "0755" }
 
 
     - net_settings:
-      - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$", after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "static",     value: 'ip_address\=10.99.1.1/24',                                                                           after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
-      - { option: "static",     value: 'domain_name_servers\=10.99.1.1',                                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$",    after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'ip_address\={{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}',                               after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'domain_name_servers\={{ retronas_net_retro_dns }}',                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
 
     - my_services:
       - dhcpcd
