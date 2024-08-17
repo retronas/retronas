@@ -13,7 +13,7 @@
 - ansible.builtin.import_playbook: install_ntp.yml
 
 #dhpcd
-- ansible.builtin.import_playbook: install_dhcpcd.yml
+#- ansible.builtin.import_playbook: install_dhcpcd.yml
 
 
 - hosts: localhost
@@ -128,12 +128,18 @@
       force: true
     when: firewalld_installed.stat.exists is true
 
+  - name: "{{ my_name }} - check dhcpcd is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/dhcpcd.service
+    register: dhcpcd_installed
+
   - name: "{{ my_name }} - restart dhcpcd"
     ansible.builtin.service:
       name: dhcpcd.service
-      state: restarted
-      enabled: true
+      state: stopped
+      enabled: false
       force: true
+    when: dhcpcd_installed.stat.exists is true
 
   - name: "{{ my_name }} - check hostapd is installed"
     ansible.builtin.stat:
@@ -146,13 +152,6 @@
       state: absent
     when: hostapd_installed.stat.exists is true
 
-  - name: "{{ my_name }} - restart dnsmasq"
-    ansible.builtin.service:
-      name: dnsmasq-retro.service
-      state: restarted
-      enabled: true
-      force: true
-
   - name: "{{ my_name }} - stop hostapd"
     ansible.builtin.service:
       name: hostapd-retronas.service
@@ -160,6 +159,13 @@
       enabled: false
       force: true
     when: hostapd_installed.stat.exists is true
+
+ - name: "{{ my_name }} - restart dnsmasq"
+    ansible.builtin.service:
+      name: dnsmasq-retro.service
+      state: restarted
+      enabled: true
+      force: true
 
 # alt preset removed
 - ansible.builtin.import_playbook: retronas_system_config.yml

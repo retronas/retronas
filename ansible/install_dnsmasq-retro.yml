@@ -28,6 +28,7 @@
 
     - net_settings:
       - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$",    after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "interface",  value: "{{ retronas_net_wifi_interface }}",  match_regex: "^interface {{ retronas_net_wifi_interface }}$",      after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'ip_address\={{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}',                               after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
       - { option: "static",     value: 'domain_name_servers\={{ retronas_net_retro_dns }}',                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
 
