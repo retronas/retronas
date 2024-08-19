@@ -18,61 +18,18 @@
                 "command": "EXIT_OK"
             },
             {
-                "index":"22",
-                "title": "wifi-cc",
-                "description": "Set the wifi country code",
-                "id":"set-retronas_net_wifi_countrycode",
+                "index":"02",
+                "title": "wifi-show-pwd",
+                "description": "Show the current wifi password",
+                "id":"wifi-show-pw",
                 "prompt": "",
-                "type": "dialog_input",
+                "type": "script-static",
                 "group":"",
-                "command": "set-retronas_net_wifi_countrycode",
+                "command": "wifi-show-passwd",
                 "args": ""
             },
             {
-                "index":"23",
-                "title": "wifi-hwmode",
-                "description": "Set the wifi hardware mode",
-                "id":"set-retronas-net-wifi-hwmode",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-retronas-net-wifi-hwmode",
-                "args": ""
-            },
-            {
-                "index":"24",
-                "title": "wifi-channel",
-                "description": "Set the wifi channel",
-                "id":"set-retronas-net-wifi-channel",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-retronas-net-wifi-channel",
-                "args": ""
-            },
-            {
-                "index":"25",
-                "title": "wifi-ssid",
-                "description": "Set the wifi ssid",
-                "id":"set-retronas-net-wifi-ssid",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-retronas-net-wifi-ssid",
-                "args": ""
-            },
-            {
-                "index":"26",
-                "title": "wifi-passwd",
-                "description": "Configure wifi password",
-                "id":"wifi-password",
-                "prompt": "",
-                "type": "modal",
-                "group":"",
-                "command": "wifi_password"
-            },
-            {
-                "index":"27",
+                "index":"03",
                 "title": "wifi-nic",
                 "description": "Set the wifi interface",
                 "id":"set-retronas-net-wifi-interface",
@@ -83,7 +40,72 @@
                 "args": ""
             },
             {
-                "index":"28",
+                "index":"04",
+                "title": "wifi-ssid",
+                "description": "Set the wifi ssid",
+                "id":"set-retronas-net-wifi-ssid",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-ssid",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "wifi-cc",
+                "description": "Set the wifi country code",
+                "id":"set-retronas_net_wifi_countrycode",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas_net_wifi-countrycode",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "wifi-hwmode",
+                "description": "Set the wifi hardware mode",
+                "id":"set-retronas-net-wifi-hwmode",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-hwmode",
+                "args": ""
+            },
+            {
+                "index":"07",
+                "title": "wifi-ip",
+                "description": "Set the ip address for the wifi network",
+                "id":"set-retronas-net-wifi-ip",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-ip",
+                "args": ""
+            },
+            {
+                "index":"08",
+                "title": "wifi-channel",
+                "description": "Set the wifi channel",
+                "id":"set-retronas-net-wifi-channel",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-channel",
+                "args": ""
+            },
+            {
+                "index":"09",
+                "title": "wifi-passwd",
+                "description": "Configure wifi password",
+                "id":"wifi-password",
+                "prompt": "",
+                "type": "modal",
+                "group":"",
+                "command": "wifi_password"
+            },
+            {
+                "index":"10",
                 "title": "wifi-dns",
                 "description": "Set the dns servers",
                 "id":"set-retronas-net-wifi-dns",
@@ -94,14 +116,58 @@
                 "args": ""
             },
             {
-                "index":"29",
-                "title": "wifi-show-pwd",
-                "description": "Show the current wifi password",
-                "id":"wifi-show-pw",
+                "index":"11",
+                "title": "wifi-dhcprange",
+                "description": "Set the ip range for the wifi network",
+                "id":"set-retronas-net-wifi-dhcprange",
                 "prompt": "",
-                "type": "script-static",
+                "type": "dialog_input",
                 "group":"",
-                "command": "wifi-show-passwd",
+                "command": "set-retronas-net-wifi-dhcprange",
+                "args": ""
+            },
+            {
+                "index":"12",
+                "title": "wifi-gateway",
+                "description": "Set the gateway for the wifi network",
+                "id":"set-retronas-net-wifi-router",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-router",
+                "args": ""
+            },
+            {
+                "index":"13",
+                "title": "wifi-subnet",
+                "description": "Set the subnet for the wifi network",
+                "id":"set-retronas-net-wifi-subnet",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-subnet",
+                "args": ""
+            },
+            {
+                "index":"14",
+                "title": "wifi-ntp",
+                "description": "Set the subnet for the wifi network",
+                "id":"set-retronas-net-wifi-ntp",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-ntp",
+                "args": ""
+            },
+            {
+                "index":"15",
+                "title": "wifi-dhcprange",
+                "description": "Set the DHCP range for the wifi network",
+                "id":"set-retronas-net-wifi-dhcprange",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-wifi-dhcprange",
                 "args": ""
             }
         ]

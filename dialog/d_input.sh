@@ -27,20 +27,20 @@ case $MENU_NAME in
         DATASET=($(awk -F':' '{print $1}' /etc/group  | paste -d" " -s))
         PATTERN="retronas_group:"
         ;;
-    set-retronas-net-retro-nic)
-        OLDVALUE=${OLDRETROIF}
-        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
-        PATTERN="retronas_net_retro_interface:"
-        ;;
     set-retronas-net-modern-nic)
         OLDVALUE=${OLDMODERNIF}
         DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
         PATTERN="retronas_net_modern_interface:"
         ;;
-    set-retronas_net_wifi_countrycode)
-        OLDVALUE=${OLDWIFICC}
-        DATASET=(AE AR AT AU BG BH BM BO BR CA CH CL CN CO CR CS CY CZ DE DK DO DZ EC EE EG ES FI FR GB GR GT HK HN ID IE IL IN IS IT JM JO JP3 KE KR KW KW LB LI LI LK LT LT LU MA MA MU MX MX NL NO NZ NZ OM PA PA PE PH PK PL PL PR PR PT QA RO RU RU SA SG SI SI SK SK SV TH TH TN TR TT TW UA US UY UY VE VN ZA)
-        PATTERN="retronas_net_wifi_countrycode:"
+    set-retronas-net-retro-nic)
+        OLDVALUE=${OLDRETROIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_retro_interface:"
+        ;;
+    set-retronas-net-retro-dns)
+        OLDVALUE=${OLDRETRODNS}
+        DATASET=()
+        PATTERN="retronas_net_retro_dns:"
         ;;
     set-retronas-net-retro-dhcprange)
         OLDVALUE=${OLDRETRODHCP}
@@ -57,6 +57,16 @@ case $MENU_NAME in
         DATASET=()
         PATTERN="retronas_net_retro_ntp:"
         ;;
+    set-retronas-net-retro-ip)
+        OLDVALUE=${OLDRETROIP}
+        DATASET=()
+        PATTERN="retronas_net_retro_ip:"
+        ;;
+    set-retronas-net-retro-subnet)
+        OLDVALUE=${OLDRETROSUBNET}
+        DATASET=()
+        PATTERN="retronas_net_retro_subnet:"
+        ;;
     set-retronas-net-upstream-dns1)
         OLDVALUE=${OLDUPDNS1}
         DATASET=()
@@ -66,6 +76,11 @@ case $MENU_NAME in
         OLDVALUE=${OLDUPDNS2}
         DATASET=()
         PATTERN="retronas_net_upstream_dns2:"
+        ;;
+    set-retronas_net_wifi_countrycode)
+        OLDVALUE=${OLDWIFICC}
+        DATASET=(AE AR AT AU BG BH BM BO BR CA CH CL CN CO CR CS CY CZ DE DK DO DZ EC EE EG ES FI FR GB GR GT HK HN ID IE IL IN IS IT JM JO JP3 KE KR KW KW LB LI LI LK LT LT LU MA MA MU MX MX NL NO NZ NZ OM PA PA PE PH PK PL PL PR PR PT QA RO RU RU SA SG SI SI SK SK SV TH TH TN TR TT TW UA US UY UY VE VN ZA)
+        PATTERN="retronas_net_wifi_countrycode:"
         ;;
     set-retronas-net-wifi-interface)
         OLDVALUE=${OLDWIFIINT}
@@ -86,16 +101,6 @@ case $MENU_NAME in
         OLDVALUE=${OLDWIFIHWMODE}
         DATASET=(a bg)
         PATTERN="retronas_net_wifi_hwmode:"
-        ;;
-    set-retronas-net-retro-ip)
-        OLDVALUE=${OLDRETROIP}
-        DATASET=()
-        PATTERN="retronas_net_retro_ip:"
-        ;;
-    set-retronas-net-retro-subnet)
-        OLDVALUE=${OLDRETROSUBNET}
-        DATASET=()
-        PATTERN="retronas_net_retro_subnet:"
         ;;
     set-retronas-net-wifi-ip)
         OLDVALUE=${OLDWIFIIP}
@@ -126,11 +131,6 @@ case $MENU_NAME in
         OLDVALUE=${OLDWIFIDNS}
         DATASET=()
         PATTERN="retronas_net_wifi_dns:"
-        ;;
-    set-retronas-net-retro-dns)
-        OLDVALUE=${OLDRETRODNS}
-        DATASET=()
-        PATTERN="retronas_net_retro_dns:"
         ;;
     *)
         echo "Menu not supported"
