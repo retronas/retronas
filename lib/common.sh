@@ -364,7 +364,7 @@ RN_INSTALL_EXECUTE() {
 ###############################################################################
 
 #
-# Serivce status formatting
+# Service status formatting
 #
 RN_SERVICE_STATUS() {
     source $_CONFIG
