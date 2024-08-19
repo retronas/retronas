@@ -38,6 +38,16 @@
                 "command": "dnsmasq"
             },
             {
+                "index": "04",
+                "title": "hostapd",
+                "description": "hostapd", 
+                "id":"hostapd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hostapd"
+            },
+            {
                 "index": "05",
                 "title": "firewalld-zoning",
                 "description": "retro (eth0)/modern (wlan0) zone", 
