@@ -50,6 +50,17 @@
                 "group":"",
                 "command": "3ds_qr",
                 "args": "-f"
+            },
+            {
+                "index":"05",
+                "title": "Interface",
+                "description": "Select target interface to listen on",
+                "id":"retronas_net_3dsqr_interface",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-3dsqr-interface",
+                "args": ""
             }
         ]
     }

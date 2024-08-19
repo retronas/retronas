@@ -7,6 +7,11 @@ CLEAR
 
 ### this needs to be smarter oneday
 case $MENU_NAME in
+    set-retronas-net-3dsqr-interface)
+        OLDVALUE=${OLD3DSIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_3dsqr_interface:"
+        ;;
     set-etherdfs-nic)
         OLDVALUE=${OLDETHERDFSIF}
         DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
