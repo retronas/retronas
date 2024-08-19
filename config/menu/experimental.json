@@ -50,6 +50,16 @@
                 "group":"",
                 "command": "atarist-sidecart",
                 "args": ""
+            },
+            {
+                "index": "05",
+                "title": "Network",
+                "description": "Network presets (highly experimental!)",
+                "id":"network",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network"
             }
         ]
     }

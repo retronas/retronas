@@ -1,0 +1,19 @@
+[Unit]
+Description=Access point and authentication server for retronas
+Documentation=man:hostapd(8)
+Requires=network.target
+After=network.target
+StartLimitIntervalSec=2
+StartLimitBurst=5
+BindsTo=sys-subsystem-net-devices-{{ retronas_net_wifi_interface }}.device
+After=sys-subsystem-net-devices-{{ retronas_net_wifi_interface }}.device
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/hostapd -B -P /run/hostapd-retronas.pid /etc/hostapd/hostapd-retronas.conf
+RestartSec=10s
+TimeoutStartSec=8s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

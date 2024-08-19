@@ -1,0 +1,115 @@
+#networkmanager
+- ansible.builtin.import_playbook: install_networkmanager.yml
+
+#firewalld
+- ansible.builtin.import_playbook: install_firewalld.yml
+- ansible.builtin.import_playbook: install_firewalld-zones.yml
+
+#dnsmasq
+# IMPORTED IN DNSMASQ-RETRO - ansible.builtin.import_playbook: install_dnsmasq.yml
+- ansible.builtin.import_playbook: install_dnsmasq-retro.yml
+
+#ntp
+- ansible.builtin.import_playbook: install_ntp.yml
+
+#dhcpcd
+- ansible.builtin.import_playbook: install_dhcpcd.yml
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    my_name: "network-presets-zoned"
+    my_file: "install_{{ my_name }}"
+
+    templates:
+    - { name: "dhcpcd.conf",         dest: "/etc",  mode: "0640", force: "yes" }
+
+    connections:
+    - { name: "ethernet", state: "absent" }  # remove it first because modules are a pain some times
+    - { name: "wifi-retronas", state: "absent" }
+    - { name: "ethernet", ipv4addr: "{{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}", ipv4dns: "{{ retronas_net_retro_dns }}", ipv4method: "manual", ifname: "{{ retronas_net_retro_interface }}", type: "ethernet", ipv4never_default4: true }
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "config connections"
+    community.general.nmcli:
+      type: "{{ item.type | default('ethernet') }}"
+      conn_name: "{{ item.name }}"
+      ip4: "{{ item.ipv4addr | default(omit) }}"
+      gw4: "{{ item.ipv4gw | default(omit) }}"
+      never_default4: "{{ item.ipv4never_default4 | default(omit) }}"
+      dns4: "{{ item.ipv4dns | default(omit) }}"
+      method4: "{{ item.ipv4method | default('manual') }}"
+      ifname: "{{ item.ifname | default(omit) }}"
+      route_metric4: "{{ item.metric | default(omit) }}"
+      state: "{{ item.state| default('present') }}"
+      autoconnect: true
+    with_items:
+      - '{{ connections }}'
+
+  - name: "{{ my_name }} - check hostapd is installed"
+    ansible.builtin.stat:
+      path: /usr/lib/systemd/system/hostapd.service
+    register: hostapd_installed
+
+  - name: "{{ my_name }} - remove hostapd dnsmasq configuration"
+    ansible.builtin.file:
+      path: /etc/dnsmasq.d/retro/hostapd-dnsmasq.conf
+      state: absent
+    when: hostapd_installed.stat.exists is true
+
+  - name: "{{ my_name }} - stop hostapd"
+    ansible.builtin.service:
+      name: hostapd-retronas.service
+      state: stopped
+      enabled: false
+      force: true
+    when: hostapd_installed.stat.exists is true
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - restart dhcpcd"
+    ansible.builtin.service:
+      name: dhcpcd.service
+      state: restarted
+      enabled: true
+      force: true
+
+  - name: "{{ my_name }} - restart dnsmasq"
+    ansible.builtin.service:
+      name: dnsmasq-retro.service
+      state: restarted
+      enabled: true
+      force: true
+
+  - name: "{{ my_name }} - start firewalld"
+    ansible.builtin.service:
+      name: firewalld.service
+      state: restarted
+      enabled: true
+      force: true
+
+# alt preset removed
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-standalone"
+    module_state: "absent"
+
+# this preset added
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "network-presets-zoned"
+    module_state: "present"

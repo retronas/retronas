@@ -14,7 +14,7 @@ SELECT_BRANCH() {
     git fetch --prune origin &> /dev/null
 
     PS3="Please select a branch ($OLDRNBRANCH): "
-    BRANCHES="$(git branch --remotes | awk -F'\/' '!/HEAD/{print $2}' ) exit"
+    BRANCHES="$(git branch --remotes | awk -F'/' '!/HEAD/{print $2}' ) exit"
     select BRANCH in $BRANCHES
     do  
 
@@ -29,6 +29,8 @@ SELECT_BRANCH() {
             git clean -d -f
             git reset --hard
             git checkout $BRANCH 1>/dev/null
+            echo "Changed branched to $BRANCH, please restart RetroNAS (press CTRL-C key combination)"
+            PAUSE
         fi
         exit
         ;;

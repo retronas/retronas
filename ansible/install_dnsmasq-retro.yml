@@ -1,0 +1,100 @@
+# Dependencies
+- import_playbook: install_ntp.yml
+- import_playbook: install_dnsmasq.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "dnsmasq-retro"
+    - my_service: "{{ my_name }}"
+    - my_file: "install_{{ my_name }}"
+
+    - templates:
+      - { name: "dhcp-retro-ethernet.conf", sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp-retro-wifi.conf",     sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dhcp.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dns.conf",                 sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no } 
+      - { name: "dnsmasq.conf",             sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "interfaces.conf",          sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "ipv6.conf",                sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
+      - { name: "dnsmasq-retro.service",    sub: "",      dest: "/etc/systemd/system"}
+
+    - paths:
+      - { name: "dnsmasq.d",                dest: "/etc",                 state: "directory", mode: "0755" }
+      - { name: "retro",                    dest: "/etc/dnsmasq.d",       state: "directory", mode: "0755" }
+
+
+    - net_settings:
+      - { option: "interface",  value: "{{ retronas_net_retro_interface }}",  match_regex: "^interface {{ retronas_net_retro_interface }}$",    after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
+      #- { option: "interface",  value: "{{ retronas_net_wifi_interface }}",  match_regex: "^interface {{ retronas_net_wifi_interface }}$",      after_regex: "",                                               state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'ip_address\={{ retronas_net_retro_ip }}/{{ retronas_net_retro_subnet }}',                               after_regex: "^interface {{ retronas_net_retro_interface }}$", state: "present", dest: "/etc/dhcpcd.conf" }
+      - { option: "static",     value: 'domain_name_servers\={{ retronas_net_retro_dns }}',                                                     after_regex: "^interface ip_address=.+$",                      state: "present", dest: "/etc/dhcpcd.conf" }
+
+    - my_services:
+      - dhcpcd
+      - "{{ my_name }}"
+
+
+  tasks:
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - mask default dnsmasq service" 
+    service:
+      name: "dnsmasq"
+      state: stopped
+      daemon_reload: yes
+      enabled: no
+      masked: yes
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    template:
+      src: "templates/{{ my_file }}/{{ item.sub }}/{{ item.name }}"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart services"
+
+  - name: "{{ my_name }} - checking for dhcpcd"
+    stat:
+      path: "/etc/dhcpcd.conf"
+    register: dhcpcd_check
+
+  - name: "{{ my_name }} - setup dhcpcd"
+    lineinfile:
+      path: "{{ item.dest }}"
+      search_string: "{{ item.match_regex | default('^$') }}"
+      insertbefore: "{{ item.before_regex | default(omit) }}"
+      insertafter: "{{ item.after_regex | default(omit) }}"
+      line: "{{ item.option }} {{ item.value }}"
+    with_items: "{{ net_settings }}"
+    when: dhcpcd_check.stat.exists
+    notify: "{{ my_name }} - Restart services"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart services"
+    service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+    with_items: "{{ my_service }}"
+
+- import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "dnsmasq-retro"
+    module_state: "present"
