@@ -434,7 +434,7 @@ RN_SYSTEMD() {
 #
 # JOURNAL follow
 #
-RN_SYSTEMD_START() {
+RN_JOURNAL_FOLLOW() {
     journalctl --follow -u "${1}"
 }
 
