@@ -2,8 +2,8 @@
   gather_facts: yes
 
   vars:
-    - my_name: "rascsi"
-    - my_file: "install_rascsi"
+    - my_name: "piscsi"
+    - my_file: "install_piscsi"
 
     - my_packages:
       - bridge-utils
@@ -44,7 +44,7 @@
 
     - systemd_units:
       - { name: "rsyslog", type: 'service', state: "restarted", enabled: "yes", restart: "yes", instance: "no" }
-      - { name: "rascsi", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+      - { name: "piscsi", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
   tasks:
 
@@ -79,12 +79,12 @@
   - name: "{{ my_name }} - build source"
     command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "{{ retronas_root }}/bin/RASCSI/rascsi"
+      creates: "{{ retronas_root }}/bin/piscsi/piscsi"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - password file"
     copy:
-      dest: /etc/rascsi_passwd
+      dest: /etc/piscsi_passwd
       content: retronas
       mode: 0600
       owner: root
@@ -115,5 +115,5 @@
 
 - import_playbook: retronas_system_config.yml
   vars:
-    module_name: "rascsi"
+    module_name: "piscsi"
     module_state: "present"
