@@ -148,7 +148,6 @@ rn_input() {
     local MENU_NAME="${1}"
     READ_MENU_TDESC "${MENU_NAME}"
     DLG_INPUTBOX "${MENU_TNAME}" "${MENU_BLURB}" "${OLDVALUE}"
-
     export NEWVALUE="${CHOICE}"
 
     if [ ! -z $NEWVALUE ]
@@ -156,7 +155,7 @@ rn_input() {
         COMPARE_VALUES "${NEWVALUE}" "${OLDVALUE}"
         if [ $CONFIRM -eq 1 ] 
         then
-            rn_input_confirm ${NEWVALUE}
+            rn_input_confirm
         else
             rn_input $MENU_NAME
         fi
@@ -166,6 +165,10 @@ rn_input() {
 
 rn_input_confirm() {
     unset CHOICE
+    # hacky fix for menu fix
+    [ $MENU_NAME == "update-user" ] && OLDRNUSER=$NEWVALUE
+    [ $MENU_NAME == "update-group" ] && OLDRNGROUP=$NEWVALUE
+
     local MENU_PARENT=${MENU_NAME}
     local MENU_NAME="${MENU_NAME}-confirm"
     READ_MENU_TDESC "${MENU_NAME}"
