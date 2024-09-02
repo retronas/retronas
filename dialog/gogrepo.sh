@@ -22,45 +22,50 @@ rn_gog_chooser() {
     source $_CONFIG
     
     case ${CHOICE} in
-      01)
-        EXIT_OK
+    01)
+      EXIT_OK
       ;;
     02)
-      # login
-      CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
-      PAUSE
+      # auth menu
+      rn_gog_auth
       ;;
     03)
       # OS
       rn_gog_setos
       ;;
     04)
-      # sync games list
-      CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS}
-      PAUSE
+      # LANG
+      rn_gog_setlang
       ;;
     05)
-      # download 1 game
-      rn_gog_gameslist
-      rn_gog_game
-      GOGGAME=$( cat ${TDIR}/rn_gog_game )
+      # sync games list
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME}
-      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       PAUSE
       ;;
     06)
+      # download 1 game
+      rn_gog_gameslist
+      rn_gog_game
+      if [ $? -eq 0 ]
+      then
+        GOGGAME=$( cat ${TDIR}/rn_gog_game )
+        CLEAR
+        ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME} -lang ${OLDGOGLANG}
+        ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
+        PAUSE
+      fi
+      ;;
+    07)
       # download all games
       CLEAR
       ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
-    07)
+    08)
       # sync and download
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${GOGOS}
+      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
@@ -71,18 +76,78 @@ rn_gog_chooser() {
     unset CHOICE
   done
 
+}
+
+
+rn_gog_setlang() {
+  source $_CONFIG
+
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-setuplang"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-setuplang"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
+
+
+  case ${CHOICE} in
+    01)
+      EXIT_OK
+      ;;
+    ${CHOICE} )
+      NEWLANG="${CHOICE}"
+      ;;
+    *)
+      EXIT_CANCEL
+      ;;
+    esac
+
+    sed -i '/retronas_gog_lang:/d' "${ANCFG}"
+    echo "retronas_gog_lang: \"${NEWLANG}\"" >> "${ANCFG}"
+
+}
+
+rn_gog_auth() {
+  source $_CONFIG
+
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-auth"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-auth"
+  DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
+
+  case ${CHOICE} in
+    01)
+      EXIT_OK
+      ;;
+    02)
+      # login
+      CLEAR
+      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
+      PAUSE
+      ;;
+    03)
+      # import cookies
+      CLEAR
+      ${SUCOMMAND} ${SCDIR}/gogrepo_import-cookies.sh
+      PAUSE
+      ;;
+    *)
+      EXIT_CANCEL
+      ;;
+  esac
 
 }
 
 rn_gog_setos() {
   source $_CONFIG
 
-  local MENU_NAME=gogrepo-setupos
-  READ_MENU_JSON "${MENU_NAME}"
-  READ_MENU_TDESC "${MENU_NAME}"
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-setupos"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-setupos"
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
   case ${CHOICE} in
+    01)
+      EXIT_OK
+      ;;
     02)
       NEWOS="windows"
       ;;
@@ -117,16 +182,23 @@ rn_gog_setos() {
 rn_gog_gameslist() {
   rm ${TDIR}/rn_gog_gameslist 2>/dev/null
   RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
-  grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
-  do
-    echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
-  done
+  if [ ! -f ${RNUDIR}/.gogrepo/gog-manifest.dat ]
+  then
+    echo "GOG Manifest not found, you'll need to login/sync first"
+    PAUSE
+    echo 1
+  else
+    grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
+    do
+      echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
+    done
+  fi
 }
 
 rn_gog_game() {
-  local MENU_NAME=gogrepo-gamechooser
-  READ_MENU_JSON "${MENU_NAME}"
-  READ_MENU_TDESC "${MENU_NAME}"
+  local MENU_NAME=gogrepo
+  READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-gamechooser"
+  READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-gamechooser"
 
   MENU_ARRAY=$(cat ${TDIR}/rn_gog_gameslist)
 
@@ -139,6 +211,5 @@ rn_gog_game() {
     2> ${TDIR}/rn_gog_game
 
 }
-
 
 rn_gog_chooser

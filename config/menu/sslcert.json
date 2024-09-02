@@ -1,0 +1,34 @@
+{
+    "menu": 
+    {
+        "title": "SSL Certificate",
+        "description": "Manage the SSL Certificate",
+        "id":"sslcert",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Generate",
+                "description": "Generate a self-signed certificate",
+                "id":"sslcert",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "sslcert",
+                "args": ""
+            }
+        ]
+    }
+}

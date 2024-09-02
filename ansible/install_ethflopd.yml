@@ -1,0 +1,79 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "ethflopd"
+    - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - make
+      - automake
+      - autoconf
+      - gcc
+      - g++
+      - git
+      - build-essential
+      - coreutils
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install build tools"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - create MS-DOS directory"
+    ansible.builtin.file:
+      path: "{{ retronas_path }}/dos"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      mode: "0775"
+      state: directory
+
+  - name: "{{ my_name }} - Generate install scripts"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Install from source code"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "{{ retronas_root }}/bin/{{ my_name }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - create startup service"
+    ansible.builtin.template:
+      src: templates/{{ my_file }}/{{ my_name }}.service.j2
+      dest: /usr/lib/systemd/system/{{ my_name }}.service
+      owner: root
+      group: root
+      mode: 0644
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup service"
+    ansible.builtin.service:
+      name: "{{ my_name }}.service"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
+
+  handlers:
+
+  - ansible.builtin.name: "{{ my_name }} - Restart service"
+    service:
+      name: "{{ my_name }}.service"
+      state: restarted
+      daemon_reload: yes
+
+    
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "ethflopd"
+    module_state: "present"

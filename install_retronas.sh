@@ -2,7 +2,7 @@
 
 set -u
 
-GITREPO='https://github.com/danmons/retronas.git'
+GITREPO='https://github.com/retronas/retronas.git'
 FORCE=0
 TARGET=/opt/retronas/
 

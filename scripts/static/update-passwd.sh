@@ -35,6 +35,7 @@ X11VNC=$(which x11vnc)
 if [ ! -z "${X11VNC}" ]
 then
     sudo $X11VNC -storepasswd "${PASSWD}" /etc/vncpasswd_retronas
+    sudo -u $USERNAME $X11VNC -storepasswd "${PASSWD}" /home/$USERNAME/vncpasswd_retronas
 fi
 
 if [ -f /opt/retronas/bin/RASCSI/rascsi ]

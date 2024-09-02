@@ -5,7 +5,7 @@
           RetroNAS is a compilation of existing opensource products. 
 
               RetroNAS is made available under the MIT license
-            https://github.com/danmons/retronas/blob/main/LICENSE
+            https://github.com/retronas/retronas/blob/main/LICENSE
 
 Due to the nature of retro computing, many of the tools and protocols used in 
 this project are COMPLETELY INSECURE. It is at the users behest which tools
@@ -31,8 +31,15 @@ responsiblity to secure your infrastructure.
 The services RetroNAS installs will attempt to run as unprivileged user accounts 
 where possible, but the RetroNAS installer scripts themselves all run as root
 (the "Adminstrator" account in Linux). These have the power to dramatically 
-change and break working systems, so please ensure you either review the code 
-first, or run this only on a system dedicated to the purpose.
+change and break working systems, so please ensure you undeerstand the consequence
+of the code you are about to run, i.e code review etc but the onus is on you.
+RetroNAS provides automatic compilation, installation and configuration of many
+third party tools these tools may be vulnerable to supply chain attacks of which 
+we have no control over at installation time. If a project is shown to have been 
+exploited we may remove or modify installation support at any time. It is your
+responsibility to ensure the options you are selecting for installation are as 
+per the third party project authors intent and the onus is on said authors to 
+secure their products.
 
        If you are UNSURE if ANY of the ABOVE statements apply to you. 
 
@@ -44,7 +51,7 @@ first, or run this only on a system dedicated to the purpose.
        The RetroNAS team may in turn use this enquiry to revise support 
                  documentation for the benefit of the project
 
-                     https://github.com/danmons/retronas
+                     https://github.com/retronas/retronas
 
               The RetroNAS team are retro computing ENTHUSIASTS 
 

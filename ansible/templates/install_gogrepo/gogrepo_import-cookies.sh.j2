@@ -1,0 +1,38 @@
+#!/bin/bash
+echo ""
+echo "Importing GOG Cookies"
+echo ""
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+## If this is run as root, switch to our RetroNAS user
+## Manifests and cookies stored in ~/.gogrepo
+DROP_ROOT
+CLEAR
+
+GOGREPODIR=$HOME/.gogrepo
+
+FILES=(
+    gog-cookies.dat
+    cookies-gog-com.txt
+)
+
+[ ! -f $GOGREPODIR ] && mkdir -p $GOGREPODIR 2>/dev/null
+cd $GOGREPODIR
+
+for FILE in ${FILES[@]}
+do
+    COOKIES="${OLDRNPATH}/config/${FILE}"
+    echo -n "Looking for $COOKIES"
+    if [ -f "${COOKIES}" ]
+    then
+        echo "... Found, importing into ${GOGREPODIR}"
+        mv -f "${COOKIES}" "${GOGREPODIR}/gog-cookies.dat"
+        chmod 640 "${GOGREPODIR}/gog-cookies.dat"
+        break
+    else
+        echo "... Not Found"
+    fi
+done

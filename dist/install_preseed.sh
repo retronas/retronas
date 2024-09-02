@@ -10,7 +10,7 @@
 if [ ! -f /opt/retronas/retronas_deployed ] && [ ! -f /opt/retronas/retronas_running ]
 then
     touch /opt/retronas/retronas_running
-    /usr/bin/curl -so /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
+    /usr/bin/curl -so /tmp/install_retronas.sh https://raw.githubusercontent.com/retronas/retronas/main/install_retronas.sh
     /usr/bin/chmod a+x /tmp/install_retronas.sh
     /tmp/install_retronas.sh
 

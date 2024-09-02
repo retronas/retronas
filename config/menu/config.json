@@ -1,0 +1,295 @@
+{
+    "menu": 
+    {
+        "title": "Configuration",
+        "description": "Please select a configuration||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
+        "id":"config",
+        "prompt": "Change",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu",
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Username",
+                "description": "Configure RetroNAS user",
+                "id":"update-user",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "update-user",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Password",
+                "description": "Configure RetroNAS password",
+                "id":"update-password",
+                "prompt": "",
+                "type": "modal",
+                "group":"",
+                "command": "retronas_password"
+            },
+            {
+                "index":"04",
+                "title": "Group",
+                "description": "Configure RetroNAS group",
+                "id":"update-group",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "update-group",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Data Directory",
+                "description": "Configure RetroNAS top level directory",
+                "id":"set-top-level-dir",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-top-level-dir",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Permissions",
+                "description": "Fix ALL on-disk permissions",
+                "id":"permissions",
+                "prompt": "Run",
+                "type": "modal",
+                "group":"",
+                "command": "retronas_fixperms",
+                "args": ""
+            },
+            {
+                "index":"07",
+                "title": "Network",
+                "description": "Configure networking",
+                "id":"network-setup",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup",
+                "args": ""
+            },
+            {
+                "index":"08",
+                "title": "Profiles",
+                "description": "Install a preconfigured profile",
+                "id":"profiles",
+                "prompt": "",
+                "type": "modal",
+                "group":"",
+                "command": "profiles",
+                "args": ""
+            }
+        ]
+    },
+    "update-user": 
+    {
+        "title": "Update User",
+        "description": "Please enter the username for all RetroNAS services to run as||This will normally default to \"pi\" on Raspberry Pi OS Install||It is recommended you leave it as default unless you know what you are doing.",
+        "id":"update-user-menu",
+        "prompt": "Update",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Username",
+                "description": "",
+                "id":"update-user",
+                "prompt": "",
+                "type": "input:input",
+                "group":"retronas",
+                "command": "update-username",
+                "args": ""
+            }
+        ]
+    },
+    "update-user-confirm": 
+    {
+        "title": "Confirm User",
+        "description": "Do you want to save this setting?|New RetroNAS user: \"${NEWVALUE}\"",
+        "id":"update-user-confirm-menu",
+        "prompt": "Confirm",
+        "type": "dialog-yn",
+        "items": []
+    },
+    "update-group": 
+    {
+        "title": "Update Group",
+        "description": "Please enter the group for all RetroNAS services to run as||This will normally default to \"pi\" on Raspberry Pi OS Install||It is recommended you leave it as default unless you know what you are doing.",
+        "id":"update-group-menu",
+        "prompt": "Update",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Group",
+                "description": "",
+                "id":"update-group",
+                "prompt": "",
+                "type": "input:input",
+                "group":"retronas",
+                "command": "update-group",
+                "args": ""
+            }
+        ]
+    },
+    "update-group-confirm": 
+    {
+        "title": "Confirm Group",
+        "description": "Do you want to save this setting?|New RetroNAS group: \"${NEWVALUE}\"",
+        "id":"update-group-confirm-menu",
+        "prompt": "Confirm",
+        "type": "dialog-yn",
+        "items": []
+    },
+    "update-password": 
+    {
+        "title": "Update Password",
+        "description": "If you are having problems with CIFS/SMB/Appletalk shares, you can reset their password here, this will also update your user password||Passwords entered here will be echoed to the backend processes||Use the up/down arrows to navigate form fields",
+        "id":"update-password-menu",
+        "prompt": "Update",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Update Password",
+                "description": "Update the user Systems/Samba password",
+                "id":"update-password",
+                "prompt": "",
+                "type": "input:password",
+                "group":"retronas",
+                "command": "TOOL COMMAND",
+                "args": ""
+            }
+        ]
+    },
+    "set-top-level-dir": 
+    {
+        "title": "Set Top Level Directory",
+        "description": "Please type in the RetroNAS top level directory",
+        "id":"set-top-level-dir-menu",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Directory Name",
+                "description": "Set top Level Dir",
+                "id":"set-top-level-dir",
+                "prompt": "",
+                "type": "input:input",
+                "group":"retronas",
+                "command": "TOOL COMMAND",
+                "args": ""
+            }
+        ]
+    },
+    "set-top-level-dir-confirm": 
+    {
+        "title": "Confirm EtherDFS NIC",
+        "description": "Do you want to save this setting?|New RetroNAS top level directory: \"${NEWVALUE}\"",
+        "id":"set-top-level-dir-confirm",
+        "prompt": "Confirm",
+        "type": "dialog-yn",
+        "items": []
+    },
+    "set-etherdfs-nic": 
+    {
+        "title": "Set EtherDFS NIC",
+        "description": "Please enter the interface name for EtherDFS to bind to.||Normally this is something like eth0 for wired Ethernet.||If EtherDFS is installed, you will need to re-run the installer to apply the change.",
+        "id":"set-etherdfs-nic-menu",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Set Device",
+                "description": "Set EtherDFS device",
+                "id":"set-etherdfs-nic",
+                "prompt": "",
+                "type": "input:input",
+                "group":"etherdfs",
+                "command": "TOOL COMMAND",
+                "args": ""
+            }
+        ]
+    },
+    "set-etherdfs-nic-confirm": 
+    {
+        "title": "Confirm EtherDFS NIC",
+        "description": "Do you want to save this setting?|New EtherDFS interface: \"${NEWVALUE}\"",
+        "id":"set-etherdfs-nic-confirm",
+        "prompt": "Confirm",
+        "type": "dialog-yn",
+        "items": []
+    }
+}

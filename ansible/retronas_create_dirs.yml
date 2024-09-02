@@ -1,32 +1,60 @@
 - name: "{{ my_name }} - Include systems map"
-  include_vars: "retronas_systems.yml"
+  ansible.builtin.include_vars: "retronas_systems.yml"
 
 - name: "{{ my_name }} - Load RetroNAS config"
-  include_vars: retronas_vars.yml
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- name: "{{ my_name }} - stat top level paths"
+  ansible.builtin.stat:
+    path: "{{ retronas_path }}/{{ item }}"
+  loop: [ "roms", "bios", "saves", "savestates" ]
+  register: tl_paths
+
+- name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
+  ansible.builtin.shell:
+    cmd: find "{{ item.stat.path }}" -xtype l -exec rm "{}" \; | echo 0
+  loop: "{{ tl_paths.results }}"
+  when: tl_paths is defined and
+        item.stat.exists is true
+  changed_when: false
 
 - name: "{{ my_name }} - build layout list (set fact)"
-  set_fact:
-    path_list: "{{ path_list|default([]) }} + [ '{{ retronas_path }}/{{ item.1.name }}/{{ item.0.src if item.1.systems is true }}' ]"
+  ansible.builtin.set_fact:
+    path_list: "{{ path_list|default([]) + [ retronas_path + '/' + item.1.name + '/' + item.0.src if item.1.systems is true else '' ] }}"
   no_log: yes
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when: item.1.enabled is true
 
 - name: "{{ my_name }} - build layout"
-  shell:
+  ansible.builtin.shell:
     cmd: mkdir -p {{ path_list|flatten|join(' ') }}
   become: yes
   become_user: "{{ retronas_user }}"
   when: path_list is defined
+  changed_when: False
 
 - name: "{{ my_name }} - build systems directory layout (set fact)"
-  set_fact:
-    link_list: "{{ link_list|default([]) }} + ['ln -sf {{ retronas_path }}/{{ item.1.name|lower }}/{{ item.0.src }} {{ retronas_path }}/{{ item.1.name }}/{{ item.0.dest }};' ]"
+  ansible.builtin.set_fact:
+    link_list: "{{ link_list|default([]) + [ 'ln -sfT ' + retronas_path  + '/' + item.1.name|lower + '/' + item.0.src + ' ' + retronas_path  + '/' +  item.1.name + '/' + item.0.dest + ';' ] }}"
   loop: "{{ system_links|product(top_level_paths)|list }}"
   when:
     - item.1.enabled is true
     - item.1.systems is true
 
 - name: "{{ my_name }} - build systems directory layout"
-  shell:
+  ansible.builtin.shell:
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined
+  changed_when: False
+
+- name: "{{ my_name }} - add top level directory info"
+  ansible.builtin.copy:
+    dest: "{{ item.stat.path }}/dir.txt"
+    content: |
+      this folder structure is the responsiblity of the user to populate
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    mode: "0644"
+  loop: "{{ tl_paths.results }}"
+  when: tl_paths is defined and
+        item.stat.exists is true

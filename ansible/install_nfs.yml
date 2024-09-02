@@ -9,34 +9,39 @@
       - nfs-common
       - nfs-kernel-server
 
+    - firewalld_rules:
+      - { zone: retro, service: nfs }
+      - { zone: modern, service: nfs }
+
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - retrieve {{ retronas_user }} user info"
-    getent:
+    ansible.builtin.getent:
       database: passwd
       key: "{{ retronas_user }}"
 
-  - set_fact:
+  - ansible.builtin.set_fact:
       retronas_user_id: "{{ getent_passwd[retronas_user][1] }}"
 
   - name: "{{ my_name }} - retrieve {{ retronas_group }} group info"
-    getent:
+    ansible.builtin.getent:
       database: group
       key: "{{ retronas_group }}"
 
-  - set_fact:
+  - ansible.builtin.set_fact:
       retronas_group_id: "{{ getent_group[retronas_group][1] }}"
 
   - name: "{{ my_name }} - enable NFS v2 v3 v4"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/default.j2"
       dest: /etc/default/nfs-kernel-server
       owner: root
@@ -45,7 +50,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable NFS exports"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/exports.j2"
       dest: /etc/exports
       owner: root
@@ -54,23 +59,41 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
     with_items:
       - nfs-kernel-server
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('nfs') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items:
       - nfs-kernel-server
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "nfs"
     module_state: "present"

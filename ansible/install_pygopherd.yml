@@ -11,15 +11,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    apt:
+    ansible.builtin.apt:
        name: "{{ my_packages }}" 
        state: latest
 
   - name: "{{ my_name }} - install script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -27,13 +27,13 @@
       mode: '0750'
 
   - name: "{{ my_name }} - build source"
-    command:
+    ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "opt/pygopherd/bin/pygopherd"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - install config"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_name }}.conf.j2"
       dest: "{{ retronas_root }}/etc/{{ my_name }}.conf"
       owner: root
@@ -42,7 +42,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - install service"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
       dest: "/usr/lib/systemd/system/{{ my_name }}.service"
       owner: root
@@ -50,17 +50,34 @@
       mode: '0644'
     notify: "{{ my_name }} - Restart service"
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      port: 70/tcp
+      permanent: true
+      state: enabled
+      immediate: true
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
     with_items:
       - "{{ my_name }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "pygopherd"
     module_state: "present"

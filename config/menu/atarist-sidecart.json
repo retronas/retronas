@@ -1,0 +1,67 @@
+{
+    "menu": 
+    {
+        "title": "Atari ST Sidecart",
+        "description": "Manage Sidecart support",
+        "id":"sidecart",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install sidecart support",
+                "id":"sidecart-install",
+                "prompt": "",
+                "type": "install",
+                "group":"sidecart",
+                "command": "atarist-sidecart",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Update DB",
+                "description": "Update the local floppy DB",
+                "id":"sidecart-db",
+                "prompt": "",
+                "type": "script",
+                "group":"sidecart",
+                "command": "atarist-sidecart-updatedb",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Update ROMS",
+                "description": "Update ROM listing",
+                "id":"sidecart-roms",
+                "prompt": "",
+                "type": "script",
+                "group":"sidecart",
+                "command": "atarist-sidecart-generate-roms",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Mirror",
+                "description": "Build a local mirror",
+                "id":"sidecart-mirror",
+                "prompt": "",
+                "type": "script",
+                "group":"sidecart",
+                "command": "atarist-sidecart-mirrordb",
+                "args": ""
+            }
+        ]
+    }
+}

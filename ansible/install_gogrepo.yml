@@ -14,6 +14,7 @@
 
     - scripts:
       - "gogrepo_login.sh" 
+      - "gogrepo_import-cookies.sh"
       - "gogrepo_download.sh"
       - "gogrepo_update.sh"
       - "gogrepo-wrapper.sh"
@@ -21,15 +22,15 @@
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - create GOG dir"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -39,18 +40,18 @@
       - gog
 
   - name: "{{ my_name }} - download gogrepo+patches (sairuk)"
-    shell:
+    ansible.builtin.shell:
       chdir: "{{ retronas_root }}/bin"
       cmd: "git clone https://github.com/sairuk/gogrepo.git"
       creates: "{{ retronas_root }}/bin/gogrepo"
 
   - name: "{{ my_name }} - update gogrepo"
-    shell: 
+    ansible.builtin.shell: 
       chdir: "{{ retronas_root }}/bin/gogrepo"
       cmd: "git pull"
 
   - name: "{{ my_name }} - scripts"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ item }}.j2"
       dest: "{{ retronas_root }}/scripts/{{ item }}"
       owner: root
@@ -58,7 +59,7 @@
       mode: 0755
     with_items: "{{ scripts }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "gogrepo"
     module_state: "present"

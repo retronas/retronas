@@ -1,42 +1,64 @@
+---
 - hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     - my_name: "tftpd-hpa"
     - my_file: "install_tftpd-hpa"
+
+    - firewalld_rules:
+      - { zone: "retro", service: "tftp" }
+
   tasks:
+    - name: "{{ my_name }}  - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }}  - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    - name: "{{ my_name }}  - install from repos"
+      ansible.builtin.apt:
+        name: tftpd-hpa
+        state: latest
 
-  - name: "{{ my_name }}  - install from repos"
-    apt:
-       name: tftpd-hpa
-       state: latest
+    - name: "{{ my_name }} - configure retro shares"
+      ansible.builtin.template:
+        src: templates/{{ my_file }}/tftpd-hpa.j2
+        dest: /etc/default/tftpd-hpa
+        owner: root
+        group: root
+        mode: '0644'
+      notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - configure retro shares"
-    template:
-      src: templates/{{ my_file }}/tftpd-hpa.j2
-      dest: /etc/default/tftpd-hpa
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+    - name: "{{ my_name }} - enable startup services"
+      ansible.builtin.service:
+        name: tftpd-hpa
+        state: started
+        enabled: true
 
-  - name: "{{ my_name }} - enable startup services"
-    service:
-      name: tftpd-hpa
-      state: started
-      enabled: yes
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('tftp') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: tftpd-hpa
       state: restarted
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "tftpd-hpa"
     module_state: "present"

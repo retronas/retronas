@@ -25,21 +25,30 @@
       - { section: "global", option: "client ntlmv2 auth",        value: "yes"}
       - { section: "global", option: "unix extensions",           value: "no"}
       - { section: "global", option: "allow insecure wide links", value: "yes"}
+      - { section: "global", option: "socket options",            value: "TCP_NODELAY IPTOS_LOWDELAY SO_KEEPALIVE"}
+      - { section: "global", option: "strict locking",            value: "no"}
+      - { section: "global", option: "strict sync",               value: "no"}
+      - { section: "global", option: "sync always",               value: "no"}
+      - { section: "global", option: "deadtime",                  value: "1560"}
+
+    - firewalld_rules:
+      - { zone: "retro", service: "samba" }
+      - { zone: "modern", service: "samba-modern" }
 
     - changed: false
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - configure samba config"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
@@ -47,7 +56,7 @@
     with_items: "{{ config_opts }}"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: retronas
       option: "include"
@@ -55,7 +64,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: templates/install_samba/retronas.conf.j2
       dest: /etc/samba/retronas.conf
       owner: root
@@ -64,29 +73,47 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
     with_items: "{{ my_services }}"
 
   - name: "{{ my_name }} - restart if imported because handlers will not run"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       enabled: yes
     with_items: "{{ my_services }}"
     when: changed is true
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('samba') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "samba"
     module_state: "present"

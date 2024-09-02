@@ -134,8 +134,21 @@ GET_LANG() {
 # export the data for use in dialogs
 #
 READ_MENU_TDESC() {
-    local MENU_TITLE="${1:-main}"
-    local MENU_TDESC_DATA=$(<${RNJSON} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
+    export MENU_TITLE="$1"
+    export MENU="$2"
+
+    # handle submenus
+    [ -z "$MENU" ] && MENU="menu"
+
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        local MENU_TDESC_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\" | \"\(.title);\(.description)\"")
+    elif [ -f ${RNJSONOLD} ]
+    then
+        local MENU_TDESC_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU_TITLE}\" | \"\(.title);\(.description)\"")
+    else
+        local MENU_TDESC_DATA=$(<${RNJSON}/main.json jq -r ".menu | \"\(.title);\(.description)\"")    
+    fi
     local IFS=$'\n'
 
     export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
@@ -148,8 +161,21 @@ READ_MENU_TDESC() {
 # export the data for use in dialogs
 #
 READ_MENU_JSON() {
-    local MENU_TITLE="${1:-main}"
-    export MENU_DATA=$(<${RNJSON} jq -r ".dialog.\"${MENU_TITLE}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+    local MENU_TITLE="${1}"
+    local MENU="${2}"
+
+    # handle submenus
+    [ -z "$MENU" ] && MENU="menu"
+
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+    elif [ -f ${RNJSONOLD} ]
+    then
+        export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+    else
+        export MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | \"\(.index)|\(.title)|\(.description);\"")
+    fi
 }
 
 #
@@ -158,15 +184,25 @@ READ_MENU_JSON() {
 # command is a colon separated list of actions taken by helper functions
 #
 READ_MENU_COMMAND() {
-    local MENU_NAME=$1
+    local MENU_NAME="$1"
     local MENU_CHOICE=$2
 
     cd "${RNDIR}"
 
-    MENU_DATA=$(<${RNJSON} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    if [ -f ${RNJSON}/${MENU_TITLE}.json ]
+    then
+        MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
+    elif [ -f ${RNJSONOLD} ]
+    then
+        MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.${MENU_NAME}.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)\"")
+    else
+        MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
+    fi
 
     local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
     local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
+    local MENU_ARGS=$(echo -e "${MENU_DATA}" | cut -d"|" -f3-)
+
 
     CLEAR
     if [ ! -z "${MENU_SELECT}" ] && [ "${MENU_SELECT}" != "null" ]
@@ -191,7 +227,7 @@ READ_MENU_COMMAND() {
                 EXEC_SCRIPT "f-${MENU_SELECT}"
                 ;;
             script)
-                EXEC_SCRIPT $MENU_SELECT
+                EXEC_SCRIPT $MENU_SELECT $MENU_ARGS
                 ;;
             script-static)
                 EXEC_SCRIPT "s-${MENU_SELECT}"
@@ -199,11 +235,23 @@ READ_MENU_COMMAND() {
             service_status)
                 RN_SYSTEMD_STATUS "${MENU_SELECT}"
                 ;;
+            service_enable_start)
+                RN_SYSTEMD_ENABLE "${MENU_SELECT}"
+                RN_SYSTEMD_START "${MENU_SELECT}"
+                ;;
             service_start)
                 RN_SYSTEMD_START "${MENU_SELECT}"
                 ;;
+            service_start_follow)
+                RN_SYSTEMD_START "${MENU_SELECT}"
+                RN_JOURNAL_FOLLOW "${MENU_SELECT}"
+                ;;
             service_restart)
                 RN_SYSTEMD_RESTART "${MENU_SELECT}"
+                ;;
+            service_disable_stop)
+                RN_SYSTEMD_DISABLE "${MENU_SELECT}"
+                RN_SYSTEMD_STOP "${MENU_SELECT}"
                 ;;
             service_stop)
                 RN_SYSTEMD_STOP "${MENU_SELECT}"
@@ -316,7 +364,7 @@ RN_INSTALL_EXECUTE() {
 ###############################################################################
 
 #
-# Serivce status formatting
+# Service status formatting
 #
 RN_SERVICE_STATUS() {
     source $_CONFIG
@@ -337,11 +385,17 @@ RN_SYSTEMD_STATUS() {
 }
 
 #
-# SYSTEMD start/enable
+# SYSTEMD enable
+#
+RN_SYSTEMD_ENABLE() {
+    RN_SYSTEMD "${1}" "enable"
+}
+
+#
+# SYSTEMD start
 #
 RN_SYSTEMD_START() {
-    RN_SYSTEMD "${1}" "enable"
-    RN_SYSTEMD "${1}" "restart"
+    RN_SYSTEMD "${1}" "start"
 }
 
 #
@@ -352,10 +406,16 @@ RN_SYSTEMD_RESTART() {
 }
 
 #
-# SYSTEMD stop/disable
+# SYSTEMD disable
+#
+RN_SYSTEMD_DISABLE() {
+    RN_SYSTEMD "${1}" "disable"
+}
+
+#
+# SYSTEMD stop
 #
 RN_SYSTEMD_STOP() {
-    RN_SYSTEMD "${1}" "disable"
     RN_SYSTEMD "${1}" "stop"
 }
 
@@ -369,6 +429,13 @@ RN_SYSTEMD() {
 
     RN_SERVICE_STATUS "${SC} ${COMMAND} ${SERVICE}"
 
+}
+
+#
+# JOURNAL follow
+#
+RN_JOURNAL_FOLLOW() {
+    journalctl --follow -u "${1}"
 }
 
 #

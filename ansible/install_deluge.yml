@@ -1,0 +1,129 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "Deluge"
+    - my_file: "install_deluge"
+
+    - my_packages:
+      - geoip-bin
+      - geoip-database
+      - deluged
+      - deluge-web
+      - deluge-console
+
+    - systemd_units:
+      - { name: "deluged",    type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+      - { name: "deluge-web", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
+    - dirs:
+      - /var/lib/deluged
+      - /var/lib/deluged/config
+      - "{{ retronas_path }}/bittorrent"
+      - "{{ retronas_path }}/bittorrent/torrents"
+      - "{{ retronas_path }}/bittorrent/auto-add"
+      - "{{ retronas_path }}/bittorrent/downloading"
+      - "{{ retronas_path }}/bittorrent/complete"
+
+    - templates:
+      - { file: "autoadd.conf",      path: "/var/lib/deluged/config/autoadd.conf" }
+      - { file: "default_deluged",   path: "/etc/default/deluged" }
+      - { file: "core.conf",         path: "/var/lib/deluged/config/core.conf" }
+      - { file: "auth",              path: "/var/lib/deluged/config/auth" }
+      - { file: "upgrade_deluge.sh", path: "{{ retronas_root }}/scripts/upgrade_deluge.sh", mode: "0755" }
+
+    - firewall_ports:
+      - { zone: retro, port: "8112", protocol: "tcp" }
+      - { zone: modern, port: "8112", protocol: "tcp" }
+      - { zone: retro, port: "58846", protocol: "tcp" }
+      - { zone: modern, port: "58846", protocol: "tcp" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - install deluge from repos"
+    ansible.builtin.apt:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - create dirs"
+    ansible.builtin.file:
+      path: "{{ item }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "0775"
+      state: directory
+    with_items: "{{ dirs }}"
+
+  - name: "{{ my_name }} - add templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.file }}.j2"
+      dest: "{{ item.path }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: "{{ item.mode|default('0644') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} -remove legacy deluged startup file"
+    file:
+      path: "/etc/init.d/deluged"
+      state: absent
+
+  - name: "{{ my_name }} - create startup service(s)"
+    ansible.builtin.template:
+      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+      dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_user }}"
+      mode: 0644
+    with_items: "{{ systemd_units }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable service(s)"
+    ansible.builtin.service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+    when:
+      - item.instance == 'no'
+    notify: "{{ my_name }} - Restart service"
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone }}"
+      port: "{{ item.port }}/{{ item.protocol }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewall_ports }}"
+    when: firewalld_services.stat.exists
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item.name }}.{{ item.type }}"
+      state: restarted
+      daemon_reload: yes
+    with_items: "{{ systemd_units }}"
+    when: 
+      - item.restart == 'yes'
+      - item.instance == 'no'
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "bittorrent"
+    module_state: "present"

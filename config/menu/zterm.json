@@ -1,0 +1,121 @@
+{
+    "menu": 
+    {
+        "title": "zterm",
+        "description": "Please select an option",
+        "id":"zterm-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install zterm application",
+                "id":"zterm",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "zterm",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Serial Device",
+                "description": "Create/Edit Serial Device",
+                "id":"zterm-edit-serial",
+                "prompt": "",
+                "type": "form",
+                "group":"",
+                "command": "zterm_edit",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Start",
+                "description": "Start zterm device",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "zterm",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Stop",
+                "description": "Stop zterm device",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "zterm",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Status",
+                "description": "Query zterm device",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "zterm",
+                "args": ""
+            }
+        ]
+    },
+    "zterm-edit": 
+    {
+        "title": "zterm Device Config",
+        "description": "set zterm device",
+        "id":"zterm-edit-menu",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Edit",
+                "description": "Edit Device",
+                "id":"zterm-edit-serial-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"zterm",
+                "command": "TOOL COMMAND",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Speed",
+                "description": "Baud Rate",
+                "id":"zterm-edit-speed-input",
+                "prompt": "",
+                "type": "input:input",
+                "group":"zterm",
+                "command": "TOOL COMMAND",
+                "args": ""
+            }
+        ]
+    }
+}

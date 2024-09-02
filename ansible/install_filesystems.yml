@@ -15,17 +15,21 @@
       - nfs-common
       - e2fsprogs
       - dosfstools
-      - curlftpfs
+      #- curlftpfs
       - sshfs
+      - udisks2
+      - udisks2-btrfs
+      - udisks2-lvm2
+      - udisks2-zram
 
   tasks:
 
   - name: "{{ my_name }} - install packages"
-    apt:
+    ansible.builtin.apt:
       name: "{{ my_packages }}"
       state: latest
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "filesystems"
     module_state: "present"

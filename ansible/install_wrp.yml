@@ -1,0 +1,110 @@
+---
+# Dependencies
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "wrp"
+    - my_file: "install_{{ my_name }}"
+
+    - my_packages:
+      - chromium
+
+    - google_chrome: /usr/bin/google-chrome
+    - chromium: /usr/bin/chromium
+
+    - firewalld_ports:
+      - { zone: "retro", port: 8080, protocol: tcp }
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone }}"
+      port: "{{ item.port }}/{{ item.protocol }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewald_ports }}"
+    when: firewalld_services.stat.exists
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - check architecture"
+    ansible.builtin.shell:
+      cmd: dpkg --print-architecture | head -n1
+    register: architecture
+
+  - name: "{{ my_name }} - check google-chrome"
+    ansible.builtin.stat:
+      path: "{{ google_chrome }}"
+    register: google_chrome_check
+
+  - name: "{{ my_name }} - Install dependencies"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+    when: google_chrome_check.stat.exists is false
+
+  - name: "{{ my_name }} - fake google-chrome"
+    ansible.builtin.file:
+       src: "{{ chromium }}"
+       dest: "{{ google_chrome }}"
+       state: link
+    when: google_chrome_check.stat.exists is false
+
+  - name: "{{ my_name }} - Prepare installer script"
+    ansible.builtin.template:
+      src: templates/{{ my_file }}/{{ my_file }}.sh.j2
+      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "{{ my_name }} - Run installer"
+    ansible.builtin.shell:
+      cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+      chdir: "{{ retronas_root }}/scripts"
+      executable: /bin/bash
+
+  - name: "{{ my_name }} - create startup service"
+    ansible.builtin.template:
+      src: templates/{{ my_file }}/{{ my_name }}.service.j2
+      dest: /usr/lib/systemd/system/{{ my_name }}.service
+      owner: root
+      group: root
+      mode: 0644
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup service"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+    with_items:
+      - "{{ my_name }}"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "wrp"
+    module_state: "present"

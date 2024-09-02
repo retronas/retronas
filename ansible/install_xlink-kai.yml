@@ -1,73 +1,121 @@
+---
 - hosts: localhost
   gather_facts: no
+  become: yes
 
-  # https://repo.teamxlink.co.uk/
+  # https://dist.teamxlink.co.uk/
 
   vars:
     - my_name: "xlink-kai"
     - my_file: "install_xlink-kai"
-    - my_key: "/usr/share/keyrings/teamxlink.asc"
-    - my_repo: "https://repo.teamxlink.co.uk/debian"
+    - my_keyrings: "/etc/apt/keyrings"
+    - my_key: "{{ my_keyrings }}/teamxlink.gpg"
+    - my_repo: "https://dist.teamxlink.co.uk/linux/debian"
 
-    - packages: 
-        - "xlinkkai"
+    - prerequisite_packages: 
+        - ca-certificates
+        - gnupg
+        - curl
+
+    - packages:
+        - xlinkkai
+
+    - firewalld_ports:
+      - { zone: "modern", port: 30000, protocol: udp }
+      - { zone: "retro", port: 34522, protocol: tcp }
+      - { zone: "modern", port: 34522, protocol: tcp }
+
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
-    
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - clean up old key"
+    ansible.builtin.shell: "rm -f /usr/share/keyrings/teamxlink.asc"
+
   - name: "{{ my_name }} - Install prerequisite packages"
-    package:
-      name: "{{ item }}"
+    ansible.builtin.package:
+      name: "{{ prerequisite_packages }}"
       update_cache: yes
-    with_items:
-      - curl
+
+  - name: "{{ my_name }} - Create key dir"
+    ansible.builtin.file:
+      path: "{{ my_keyrings }}"
+      mode: 0755
+      owner: root
+      group: root
+      state: directory
 
   - name: "{{ my_name }} - Add teamxlink key"
-    shell:
-        cmd: "curl {{ my_repo }}/KEY.asc --create-dirs -o {{ my_key }}"
-        creates: "/usr/share/keyrings/teamxlink.asc"
+    ansible.builtin.shell:
+        cmd: "curl -fsSL {{ my_repo }}/gpg | gpg --dearmor -o {{ my_key }}"
+        creates: "{{ my_key }}"
+
+  - name: "{{ my_name }} - Fix perms on file"
+    ansible.builtin.file:
+      path: "{{ my_key }}"
+      mode: 0755
+      owner: root
+      group: root
 
   - name: "{{ my_name }} - Add teamxlink repository"
-    copy:
+    ansible.builtin.copy:
       dest: "/etc/apt/sources.list.d/teamxlink.list"
       content: |
-        deb [signed-by={{ my_key }}] {{ my_repo }}/ /
+        deb [signed-by={{ my_key }}] {{ my_repo }}/static/deb/release/ /
 
   - name: "{{ my_name }} - Install packages"
-    package:
+    ansible.builtin.package:
       name: "{{ packages }}"
       update_cache: yes
 
   - name: "{{ my_name }} - check for arm build"
-    stat:
+    ansible.builtin.stat:
       path: "/usr/bin/kaiengine_arm"
     register: arm_build
 
   - name: "{{ my_name }} - link arm build"
-    file:
+    ansible.builtin.file:
       src: "/usr/bin/kaiengine_arm"
       dest: "/usr/bin/kaiengine"
     when: arm_build.stat.exists is true
 
-  - name: "{{ my_name }} - Create systemd service"
-    template:
+  - name: "{{  my_name }} - Create systemd service"
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
       dest: "/etc/systemd/system/{{ my_name }}.service"
     notify: "{{ my_name }} - Restart service(s)"
 
   - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
-    file:
+    ansible.builtin.file:
       path: "/etc/kaiengine.conf"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_user }}"
       mode: '0640'
     notify: "{{ my_name }} - Restart service(s)"
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone }}"
+      port: "{{ item.port }}/{{ item.protocol }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_ports }}"
+    when: firewalld_services.stat.exists
+
   handlers:
   - name: "{{ my_name }} - Restart service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -75,7 +123,7 @@
     with_items:
       - "{{ my_name }}.service"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "xlink-kai"
     module_state: "present"

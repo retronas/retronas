@@ -11,13 +11,13 @@
     include_vars: retronas_vars.yml
     
   - name: "{{ my_name }} - install packages"
-    apt:
+    ansible.builtin.apt:
        name: "{{ item }}"
        state: latest
     with_items:
       - aria2
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "aria2"
     module_state: "present"

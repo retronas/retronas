@@ -1,0 +1,78 @@
+{
+    "menu": 
+    {
+        "title": "deluge",
+        "description": "bitorrent server/client",
+        "id":"deluge-menu",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install deluge application",
+                "id":"deluge",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "deluge",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Start",
+                "description": "Start daemon",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "deluge*",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Stop",
+                "description": "Stop daemon",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "deluge*",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Status",
+                "description": "Query daemon",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "deluge*",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Upgrade",
+                "description": "Upgrade to packages from debian testing",
+                "id":"deluge",
+                "prompt": "Upgrade",
+                "type": "script",
+                "group":"",
+                "command": "upgrade_deluge",
+                "args": ""
+            }
+        ]
+    }
+}

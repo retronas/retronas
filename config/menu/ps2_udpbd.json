@@ -1,0 +1,89 @@
+{
+    "menu": 
+    {
+        "title": "udpbd",
+        "description": "Install the UPDDB service for PS2",
+        "id":"ps2-udpbd",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install udpbd support",
+                "id":"ps2-udpbd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ps2_udpbd",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Enable",
+                "description": "Enable and Start service",
+                "id":"",
+                "prompt": "",
+                "type": "service_enable_start",
+                "group":"",
+                "command": "ps2_udpbd.service",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Disable",
+                "description": "Disable and stop service",
+                "id":"",
+                "prompt": "",
+                "type": "service_disable_stop",
+                "group":"",
+                "command": "ps2_udpbd.service",
+                "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Status",
+                "description": "Query service",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "ps2_udpbd.service",
+                "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Restart",
+                "description": "Restart service",
+                "id":"",
+                "prompt": "",
+                "type": "service_restart",
+                "group":"",
+                "command": "ps2_udpbd.service",
+                "args": ""
+            },
+            {
+                "index":"07",
+                "title": "Select",
+                "description": " Block Device (requires service restart)",
+                "id":"",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "udpbd_manager",
+                "args": ""
+            }
+        ]
+    }
+}

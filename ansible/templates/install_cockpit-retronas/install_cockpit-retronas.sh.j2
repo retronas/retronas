@@ -18,6 +18,8 @@ function get_github {
 
     cd $RNTMP
     git clone https://github.com/${ACCOUNT}/${REPO}.git $FOLDER
+    cd $FOLDER
+    git checkout menu-changes
 
 }
 
@@ -31,7 +33,7 @@ function get_retronas {
     for PACKAGE in ${PACKAGES}
     do
         FOLDER=$(echo ${PACKAGE} | sed 's/^cockpit-//')
-        get_github danmons $PACKAGE $FOLDER
+        get_github retronas $PACKAGE $FOLDER
         [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
         cd "${RNTMP}/${FOLDER}"
 

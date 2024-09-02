@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/orgs/retronas/discussions
+    about: For questions, feature requests etc.
+  - name: "#retronas"
+    url: https://libera.chat/guides/connect
+    about: General chatter on Libera IRC
+  - name: r/retroNAS
+    url: https://www.reddit.com/r/retroNAS/
+    about: Community support (not monitored)

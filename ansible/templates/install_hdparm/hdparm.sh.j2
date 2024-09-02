@@ -6,6 +6,17 @@
 TRIES=0
 RANDSECTOR=1
 
+error() {
+  >&2 echo "$1"
+}
+
+log() {
+  echo "$1"
+}
+
+# check for config file
+[ ! -f {{ retronas_path }}/config/hdparm-manager-drive ] && error "Failed to find config file" && exit 1
+
 function set_sector() {
   local MAXSECTOR=$1
   RANDSECTOR=$(shuf -i 1-${MAXSECTOR} -n 1 2>&1)
@@ -16,7 +27,7 @@ function set_sector() {
        
   if [ $? -ne 0 ]
   then
-    echo "Failed to determine randsec at $MAXSECTOR ($TRIES/$RETRY)"
+    error "Failed to determine randsec at $MAXSECTOR ($TRIES/$RETRY)"
     [ $TRIES -eq 3 ] && RANDSECTOR=1 && exit
     MAXSECTOR=$((${MAXSECTOR}/2))
     TRIES=$((${TRIES}+1))
@@ -27,27 +38,27 @@ function set_sector() {
 
 # list the drives that need to be punished
 NOSLEEP=(
-  /dev/sda
+  $(cat {{ retronas_path }}/config/hdparm-manager-drive)
 )
 
 # REQUIREMENTS
 REQFAIL=0
-[ $REQFAIL -ne 0 ] && echo "Failed requiements, check previous messages" && exit $REQFAIL
+[ $REQFAIL -ne 0 ] && error "Failed requiements, check previous messages" && exit $REQFAIL
 
 for DISK in ${NOSLEEP[@]}
 do
-        [ ! -r $DISK ] && echo "$DISK is not readable, exiting" && exit 1
+        [ ! -r $DISK ] && error "$DISK is not readable, exiting" && exit 1
         BLOCKDEV=$(echo $DISK | sed 's/\/dev\///')
         MAXSECTOR=$(cat /sys/class/block/${BLOCKDEV}/size)
-        [ -z $MAXSECTOR ] && echo "Cannot obtain MAXSECTORS from $DISK, exiting" && exit 1
+        [ -z $MAXSECTOR ] && error "Cannot obtain MAXSECTORS from $DISK, exiting" && exit 1
         
         set_sector $MAXSECTOR
 
         if [ ! -z "${RANDSECTOR}" ]
         then
-          echo "Reading ${RANDSECTOR} (max:${MAXSECTOR}) from ${DISK}"
+          log "Reading ${RANDSECTOR} (max:${MAXSECTOR}) from ${DISK}"
           hdparm --read-sector $RANDSECTOR $DISK &>/dev/null
         else
-          echo "Failed to obtain a random sector is the drive available?" 
+          error "Failed to obtain a random sector is the drive available?" 
         fi
 done

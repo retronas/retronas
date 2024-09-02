@@ -1,5 +1,5 @@
 # Dependencies
-- import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_romdir.yml
 
 - hosts: localhost
   gather_facts: no
@@ -10,13 +10,13 @@
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Build OpenPS2Loader layout"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item }}"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -32,8 +32,18 @@
       - "VMC"
     notify: "{{ my_name }} - Install Samba"
 
+  - name: "{{ my_name }} - check old pops dir"
+    ansible.builtin.stat:
+      path: "{{ retronas_path }}/ps2/OpenPS2Loader/POPS"
+    register: old_pops
+
+  - name: "{{ my_name }} - rename old pops dir"
+    ansible.builtin.shell:
+      cmd: "mv {{ retronas_path }}/ps2/OpenPS2Loader/POPS {{ retronas_path }}/ps2/OpenPS2Loader/POPS-OLD"
+    when: old_pops.stat.isdir is true
+
   - name: "{{ my_name }} - build symlinks"
-    file:
+    ansible.builtin.file:
       src: "../../roms/{{ item.src }}"
       dest: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item.ops2l }}"
       state: link
@@ -43,7 +53,7 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
-    ini_file:
+    ansible.builtin.ini_file:
       path: /etc/samba/smb.conf
       section: ps2
       option: "include"
@@ -51,8 +61,8 @@
     notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
-      src: "templates/{{ my_file }}/retronas_ps2.conf.j2"
+    ansible.builtin.template:
+      src: "templates/{{  my_file }}/retronas_ps2.conf.j2"
       dest: /etc/samba/retronas_ps2.conf
       owner: root
       group: root
@@ -62,16 +72,16 @@
   handlers:
 
   - name: "{{ my_name }} - Install Samba"
-    set_fact:
+    ansible.builtin.set_fact:
       install_changed: true
 
-- import_playbook: install_samba.yml
+- ansible.builtin.import_playbook: install_samba.yml
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "ps2_openps2loader"
     module_state: "present"

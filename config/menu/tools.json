@@ -1,0 +1,137 @@
+{
+    "menu": 
+    {
+        "title": "Tools",
+        "description": "Please select an option to install",
+        "id":"tools",
+        "prompt": "Run",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "GOG",
+                "description": "Download your GOG installers and extras",
+                "id":"gogrepo-menu",
+                "prompt": "Open",
+                "type": "modal",
+                "group":"",
+                "command": "gogrepo",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "3DS QR code",
+                "description": "Nintendo 3DS FBI homebrew",
+                "id":"3ds_qr",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "3ds_qr",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "ROM import",
+                "description": "Import roms via Smokemonster SMDBs",
+                "id":"romimport",
+                "prompt": "Open",
+                "type": "dialog",
+                "group":"",
+                "command": "romimport",
+                "args": ""
+            },
+            {
+                "index": "05",
+                "title": "uCON64",
+                "description": "Multipurpose Swiss Army Knife Backup/Copier tool", 
+                "id":"ucon64",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "ucon64"
+            },
+            {
+                "index": "06",
+                "title": "extract-xiso",
+                "description": "XISO Tool", 
+                "id":"extract-xiso",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "extract-xiso"
+            },
+            {
+                "index": "07",
+                "title": "hdl-dump",
+                "description": "Sony PS2 HDD Game management", 
+                "id":"hdldump",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hdldump"
+            },
+            {
+                "index": "08",
+                "title": "NBD client",
+                "description": "Network Block Device Client", 
+                "id":"nbd-client",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "nbd-client"
+            },
+            {
+                "index": "09",
+                "title": "pfsshell/pfsfuse",
+                "description": "PS2 HDD filesystem tools", 
+                "id":"pfsshell",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "pfsshell"
+            },
+            {
+                "index": "10",
+                "title": "cue2pops",
+                "description": "Convert PS1 images for use with POPS", 
+                "id":"cue2pops",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "cue2pops"
+            },
+            {
+                "index": "11",
+                "title": "pi1541",
+                "description": "Setup a pi1541 SD card", 
+                "id":"pi1541",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "pi1541"
+            },
+            {
+                "index":"99",
+                "title": "Local Module",
+                "description": "Run local playbooks",
+                "id":"run-local-module",
+                "prompt": "Run",
+                "type": "script-static",
+                "group":"",
+                "command": "run-local-module",
+                "args": ""
+            }
+        ]
+    }
+}

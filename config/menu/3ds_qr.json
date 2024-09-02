@@ -1,0 +1,67 @@
+{
+    "menu": 
+    {
+        "title": "3DS QR Codes",
+        "description": "Nintendo 3DS FBI homebrew",
+        "id":"3DS QR Codes",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install Generator",
+                "id":"3ds_qr_codes",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "3ds_qr_codes",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Generate",
+                "description": "Generate QR Codes",
+                "id":"3ds_qr",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "3ds_qr",
+                "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Regenerate",
+                "description": "Regenerate all QR codes",
+                "id":"3ds_qr_flush",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "3ds_qr",
+                "args": "-f"
+            },
+            {
+                "index":"05",
+                "title": "Interface",
+                "description": "Select target interface to listen on",
+                "id":"retronas_net_3dsqr_interface",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-retronas-net-3dsqr-interface",
+                "args": ""
+            }
+        ]
+    }
+}

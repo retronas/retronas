@@ -3,91 +3,125 @@
 
   vars:
     - my_name: "lighttpd"
+    - my_file: "install_{{ my_name }}"
 
+    - packages:
+      - { name: "nginx", state: "absent" }
+      - { name: "{{ my_name }}", state: "latest" }
 
     - config_settings_absent:
       - { section: null, option: "server.document-root"}
       - { section: null, option: "server.username"}
       - { section: null, option: "server.groupname"}
 
+    - templates:
+      - { name: "99-retronas.conf", dest: "/etc/{{ my_name }}/conf-available", mode: "0640"}
+
+    - conf_enable:
+      - "99-retronas.conf"
+
+    - systemd_units:
+      - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - install from repos"
-    package:
-       name: lighttpd
-       state: latest
+  - name: "{{ my_name }} - manage packages"
+    ansible.builtin.package:
+       name: "{{ item.name }}"
+       state: "{{ item.state }}"
+    with_items: "{{ packages }}"
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure main config"
-    ini_file:
-      path: /etc/lighttpd/lighttpd.conf
+    ansible.builtin.ini_file:
+      path: /etc/{{ my_name }}/{{ my_name }}.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
       state: absent
     with_items: "{{ config_settings_absent }}"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - configure retro shares"
-    template:
-      src: templates/install_lighttpd/99-retronas.conf.j2
-      dest: /etc/lighttpd/conf-available/99-retronas.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
 
-  - name: "{{ my_name }} - enable retro shares"
-    file:
-      src: /etc/lighttpd/conf-available/99-retronas.conf
-      dest: /etc/lighttpd/conf-enabled/99-retronas.conf
-      owner: root
-      group: root
-      state: link
+  - name: "{{ my_name }} - enable conf"
+    ansible.builtin.file:
+      src: /etc/{{ my_name }}/conf-available/{{ item }}
+      dest: /etc/{{ my_name }}/conf-enabled/{{ item }}
+      state: "link"
+    with_items: "{{ conf_enable }}"
 
   - name: "{{ my_name }} - set logfile permissions"
-    file:
-      path: /var/log/lighttpd
+    ansible.builtin.file:
+      path: /var/log/{{ my_name }}
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       recurse: yes
 
   - name: "{{ my_name }} - set run dir permissions"
-    file:
-      path: /var/run/lighttpd
+    ansible.builtin.file:
+      path: /var/run/{{ my_name }}
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
       state: directory
       recurse: yes
 
   - name: "{{ my_name }} - configure server.errorlog"
-    ini_file:
-      path: /etc/lighttpd/lighttpd.conf
+    ansible.builtin.ini_file:
+      path: /etc/{{ my_name }}/{{ my_name }}.conf
       section: null
       option: server.errorlog
       state: absent
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
-      name: "{{ item }}"
-      state: started
-      enabled: yes
+    ansible.builtin.service:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+      enabled: "{{ item.enabled }}"
+    with_items: "{{ systemd_units }}"
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      service: "{{ item }}"
+      permanent: true
+      state: enabled
+      immediate: true
     with_items:
-      - lighttpd
+      - http
+      - https
+    when: firewalld_services.stat.exists
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
-      name: "{{ item }}"
+    ansible.builtin.service:
+      name: "{{ item.name }}"
       state: restarted
-    with_items:
-      - lighttpd
+    with_items: "{{ systemd_units }}"
+    when: item.restart == "yes"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "lighttpd"
     module_state: "present"

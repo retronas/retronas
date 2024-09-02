@@ -1,5 +1,5 @@
 # Dependencies
-- import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_romdir.yml
 
 - hosts: localhost
   gather_facts: no
@@ -18,20 +18,24 @@
       - g++
       - build-essential
 
+    - templates:
+      - { name: "{{ my_name }}-check.sh", dest: "{{ retronas_root }}/bin/{{ my_name }}", mode: "0755"}
+      - { name: "{{ my_name }}.cron", dest: "/etc/cron.d" }
+
   tasks:
   - name: "{{ my_name }} - Include systems map"
-    include_vars: "retronas_systems.yml"
+    ansible.builtin.include_vars: "retronas_systems.yml"
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install build tools"
-    package:
+    ansible.builtin.package:
        name: "{{ packages }}"
        state: latest
 
   - name: "{{ my_name }} - install path"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_root }}/bin/{{ my_name }}/"
       owner: "root"
       group: "root"
@@ -40,7 +44,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - bin path"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_root }}/bin/{{ my_name }}/bin"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -49,7 +53,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - build top level"
-    file:
+    ansible.builtin.file:
       path: "{{ retronas_path }}/ps4"
       owner: "{{ retronas_user }}"
       group: "{{ retronas_group }}"
@@ -58,14 +62,14 @@
     notify: "{{ my_name }} - Restart service"
       
   - name: "{{ my_name }} - build layout"
-    file:
+    ansible.builtin.file:
       src: "{{ retronas_path }}/roms/sony/playstation4/pkg"
       dest: "{{ retronas_path }}/ps4/{{ my_name }}"
       state: link
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Copy in config"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/config.ini.j2"
       dest: "{{ retronas_root }}/bin/{{ my_name }}/config.ini"
       owner: "{{ retronas_user }}"
@@ -74,7 +78,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Generate {{ my_file }} script"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
       dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       owner: root
@@ -82,12 +86,22 @@
       mode: 0755
 
   - name: "{{ my_name }} - Install from source code"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root }}/bin/{{ my_name }}/hb-store-cdn-cli-server"
 
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
   - name: "{{ my_name }} - create startup service(s)"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
       dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
       owner: root
@@ -98,7 +112,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -110,7 +124,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -121,7 +135,7 @@
       - item.instance == 'no'
 
   - name: "{{ my_name }} - Remove npm and dependency hell"
-    apt:
+    ansible.builtin.apt:
        name:  "npm"
        state: absent
        autoremove: yes
@@ -129,7 +143,7 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
@@ -140,7 +154,7 @@
       - item.instance == 'no'
 
   - name: "{{ my_name }} - Restart instances"
-    service:
+    ansible.builtin.service:
       name: "{{ item.1.name }}{{ item.0.dest }}.{{ item.1.type }}"
       state: restarted
       daemon_reload: yes
@@ -151,7 +165,24 @@
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
 
-- import_playbook: retronas_system_config.yml
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      port: 6449/tcp
+      permanent: true
+      state: enabled
+      immediate: true
+    when: firewalld_services.stat.exists
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "hb-store-cdn"
     module_state: "present"

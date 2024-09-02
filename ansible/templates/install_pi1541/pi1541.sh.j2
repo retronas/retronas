@@ -1,0 +1,197 @@
+#!/bin/bash
+#
+# PI1541 installer
+#
+
+set -u
+
+clear
+
+TMPFILES={{ retronas_path }}/pi1541
+TARGET=/mnt/pi1541
+
+MOUNT_DRIVE() {
+	echo "Mounting drive /dev/$1 at $TARGET"
+	MNTPOINT=$(mount | grep $1 | awk '{print $3}')
+	if [ ! -z "${MNTPOINT}" ]
+	then
+		echo "Drive already mounted at $MNTPOINT, wont mount"
+	else
+		echo "Drive not mounted, will mount to $TARGET"
+		mkdir -p $TARGET
+		mount -t vfat /dev/$1 $TARGET
+		[ $? -eq 0 ] && echo "  Done"
+	fi
+}
+
+INSTALL_PI1541() {
+	local ARCHIVE=Pi1541.zip
+	cd $TMPFILES
+
+	echo "Pi1541 software"
+	if [ ! -f $TMPFILES/$ARCHIVE ]
+	then
+		echo " $ARCHIVE not found downloading to $TMPFILES"
+		curl -sO https://cbm-pi1541.firebaseapp.com/$ARCHIVE
+	fi
+	
+	echo " Installing $ARCHIVE to $TARGET"
+	unzip -qq -o $ARCHIVE
+	cp -R Pi1541/* $TARGET/
+	[ $? -eq 0 ] && echo "  Done"
+	rm -rf Pi1541/
+}
+
+INSTALL_FIRMWARE() {
+	local ARCHIVE=1.20180919.zip
+	cd $TMPFILES
+
+	echo "RPI firmware"
+	if [ ! -f $TMPFILES/$ARCHIVE ]
+	then
+		echo " $ARCHIVE not found downloading to $TMPFILES"
+		curl -sLO https://github.com/raspberrypi/firmware/archive/$ARCHIVE
+		[ $? -eq 0 ] && echo "  Done"
+	fi
+
+	echo " Installing required RPI firmware to $TARGET"
+	unzip -qq -o -j $ARCHIVE firmware-*/boot/{bootcode.bin,fixup.dat,start.elf} -d $TARGET/
+	[ $? -eq 0 ] && echo "  Done"
+}
+
+INSTALL_ROM() {
+	local ARCHIVE=vice-tmp.zip
+	cd $TMPFILES
+
+	echo "Drive firmware and font files"
+	if [ ! -f $TMPFILES/$ARCHIVE ]
+	then
+		echo " $ARCHIVE not found downloading to $TMPFILES"
+		curl -sL -o $ARCHIVE https://sourceforge.net/projects/vice-emu/files/latest/download
+		[ $? -eq 0 ] && echo "  Done"
+	fi
+
+	echo " Installing drive rom"
+	unzip -qq -o -j $ARCHIVE "*/DRIVES/dos1541" -d $TARGET/
+	[ $? -eq 0 ] && echo "  Done"
+
+	echo " Installing CBM font"
+	unzip -qq -o -j $ARCHIVE "*/C64/chargen" -d $TARGET/
+	[ $? -eq 0 ] && echo "  Done"
+}
+
+CONFIG_OPTIONB() {
+	    read -p "Configure cable Option B support? [y/N]: " ANSWER
+
+	    case $ANSWER in
+	      y|Y)
+		  	sed -i -r 's/\/\/(splitIECLines)/\1/' $TARGET/options.txt
+			[ $? -eq 0 ] && echo "  Done"
+            ;;
+	      *)  
+            INSTALL_ROMS
+            ;;
+        esac
+}
+
+INSTALL_ROMS() {
+        SYSTEMS=(
+            commodore64 
+            commodore128 
+            commodore16 
+            commodoreplus4 
+            vic20 
+            exit
+        )
+
+    echo "Select a system to copy roms for to the $TARGET"
+
+    select SYSTEM in "${SYSTEMS[@]}"
+    do  
+        [ $SYSTEM == "exit" ] && echo "Exiting..." && CLEANUP
+        ROMPATH="{{ retronas_path }}/roms/commodore/$SYSTEM"
+
+        echo "$(df -h | grep "$TARGET" | awk '{print $1, "has", $4, "free"}') $(du -hs $ROMPATH | awk '{print $1, "is required"}')"
+	    read -p "Continue? [y/N]: " ANSWER
+
+	    case $ANSWER in
+	      y|Y)
+            if [ ! -z "$SYSTEM" ]
+            then
+                ROMSYS="$TARGET/1541/$SYSTEM"
+                echo "Copying roms from $ROMPATH"
+                [ ! -d "$ROMSYS" ] && mkdir -p "$ROMSYS"
+                cp -R "$ROMPATH/"* "$ROMSYS"
+				[ $? -eq 0 ] && echo "  Done"
+                INSTALL_ROMS
+
+            fi
+            ;;
+	      *)  
+            INSTALL_ROMS
+            ;;
+        esac
+    done
+}
+
+CLEANUP() {
+	echo "Unmounting $TARGET"
+	umount $TARGET
+	rmdir $TARGET
+
+	exit 0
+}
+
+SELECT_DRIVE() {
+	FAT32DEVS=($(lsblk -f -r | grep -v boot | awk '/FAT32/{print $1}' ) exit)
+
+
+	{# this workaround is for broken bash array count support in jinja #}
+	if [ {{ ['${','#FAT32DEVS[@]}']|join('') }} -le 1 ]
+	then
+		echo "No available FAT32 drives found, insert one and run this script again"
+		sleep 3
+		exit 1
+	fi
+
+	echo "Available FAT32 devices:"
+	select DRIVE in "${FAT32DEVS[@]}"
+	do
+	    [ $DRIVE == "exit" ] && echo "Exiting..." && exit 0
+	    
+	    read -p "($DRIVE) Are you sure? [y/N]: " ANSWER
+
+	    case $ANSWER in
+	      y|Y)
+		if [ ! -z "$DRIVE" ]
+		then
+			MOUNT_DRIVE $DRIVE
+			INSTALL_FIRMWARE
+			INSTALL_PI1541
+			INSTALL_ROM
+			CONFIG_OPTIONB
+			INSTALL_ROMS
+			CLEANUP
+		fi
+		exit
+		;;
+	      *)  
+		SELECT_DRIVE $1
+		;;
+	    esac
+	done
+}
+
+
+cat << TITLE
+*********************************************
+*
+* Pi1541 installer
+*
+* You will be prompted for a drive to setup
+* for use with Pi1541
+*
+*********************************************
+TITLE
+
+SELECT_DRIVE

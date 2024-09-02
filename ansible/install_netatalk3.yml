@@ -25,19 +25,35 @@
 
   tasks:
 
-  - name: "{{ my_name }}  - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - check if  netatalk package is available"
+    ansible.builtin.shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    register: result
+    failed_when:
+      - result.rc >= 2
+
+  - name: "{{ my_name }} - set fact if netatalk is not present"
+    ansible.builtin.set_fact:
+      no_netatalk: true
+    when: result.rc == 1
+
+  - name: "{{ my_name }} - end play if no netatalk package"
+    ansible.builtin.meta: end_play
+    when: no_netatalk is true
 
   - name: "{{ my_name }}  - unhold netatalk package"
-    shell: "/usr/bin/apt-mark unhold netatalk"
+    ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
+    when: result.rc == 0
 
   - name: "{{ my_name }}  - install from repos"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }}  - configure"
-    ini_file: 
+    ansible.builtin.ini_file: 
       dest: /etc/netatalk/afp.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
@@ -46,7 +62,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - configure retro shares"
-    template:
+    ansible.builtin.template:
       src: "templates/{{ my_file }}/retronas.conf.j2"
       dest: /etc/netatalk/retronas.conf
       owner: root
@@ -55,7 +71,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup services"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -64,12 +80,13 @@
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
     with_items: "{{ my_services }}"
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "netatalk3"
     module_state: "present"
+  when: no_netatalk is undefined

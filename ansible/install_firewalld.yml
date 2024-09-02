@@ -1,0 +1,83 @@
+# Dependencies
+
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "firewalld"
+    - my_file: "install_{{ my_name }}"
+    - my_services: "firewalld.service"
+
+    - templates:
+      - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
+      - { name: "override.conf",            sub: "workarounds", dest: "/etc/systemd/system" }
+
+    - paths:
+      - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
+      - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
+
+    - packages: 
+      - firewalld
+      - python3-firewall
+
+    - collections:
+      - { collection: ansible.posix, creates: ansible/posix }
+
+    - changed: false
+
+  tasks:
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - paths"
+    ansible.builtin.file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - install related ansible collections"
+    ansible.builtin.command:
+      cmd: /usr/bin/ansible-galaxy collection install {{ item.collection }}
+      creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
+    with_items: "{{ collections }}"
+
+  - name: "{{ my_name }} - restart"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+      force: yes
+    with_items: "{{ my_services }}"
+    when: changed is true
+
+  handlers:
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      force: yes
+    with_items: "{{ my_services }}"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "firewalld"
+    module_state: "present"

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+SRCDIR="{{ retronas_root }}/src"
+BINDIR="{{ retronas_root }}/bin"
+APPNAME=ethflopd
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading ethflopd source..."
+curl -L -o ${APPNAME}.zip https://sourceforge.net/projects/ethflop/files/latest/download
+unzip ${APPNAME}.zip -d ${APPNAME}
+
+cd ${APPNAME}
+make
+
+echo "Moving binary to bindir..."
+mv -vf ${APPNAME} "${BINDIR}"/
+
+echo "Setting binary sticky bit..."
+chmod -v u+s "${BINDIR}"/${APPNAME}
+
+echo "Cleaning up..."
+
+rm -rf "${SRCDIR}"
+
+echo 'All done!'
+

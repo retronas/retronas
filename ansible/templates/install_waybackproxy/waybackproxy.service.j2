@@ -1,0 +1,15 @@
+[Unit]
+Description=WaybackProxy
+Documentation=https://github.com/richardg867/WaybackProxy
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/{{ my_name }}/
+ExecStart=/usr/bin/python3 /opt/{{ my_name }}/{{ my_name }}.py
+TimeoutStopSec=10
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

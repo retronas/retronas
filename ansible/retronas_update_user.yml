@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: "Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
+
+    - name: "update user"
+      ansible.builtin.user:
+        user: "{{ retronas_user }}"
+        groups: "disk"
+        append: true

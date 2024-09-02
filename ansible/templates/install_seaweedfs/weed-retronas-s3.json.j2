@@ -1,0 +1,22 @@
+{
+  "identities": [
+    {
+      "name": "retronas",
+      "credentials": [
+        {
+          "accessKey": "{{ retronas_s3_access_key.stdout }}",
+          "secretKey": "{{ retronas_s3_secret_key.stdout }}"
+        }
+      ],
+      "actions": [
+        "Admin",
+        "Read",
+        "ReadAcp",
+        "List",
+        "Tagging",
+        "Write",
+        "WriteAcp"
+      ]
+    }
+  ]
+}

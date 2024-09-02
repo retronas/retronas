@@ -1,0 +1,126 @@
+# Dependencies
+- ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_nginx.yml
+- ansible.builtin.import_playbook: install_samba.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    my_name: "atarist-sidecart"
+    my_file: "install_{{ my_name }}"
+    base_path: "{{ retronas_path }}/atarist"
+    script_url: "https://raw.githubusercontent.com/diegoparrilla/atarist-sidecart-raspberry-pico/main/roms/update_json"
+    script_dest: "{{ retronas_root }}/bin/{{ my_name }}-generate-roms.sh"
+
+    packages:
+      - python3-boto3
+
+    paths:
+      - { name: "bin",      dest: "{{ retronas_root }}" }
+      - { name: "atarist",  dest: "{{ retronas_path }}" }
+      - { name: "sidecart", dest: "{{ base_path }}" }
+      - { name: "db",       dest: "{{ base_path }}/sidecart" }
+
+    links:
+      - { src: "{{ retronas_path }}/roms/atari/st/cart", dest: "{{ base_path }}/roms" }
+      - { src: "{{ retronas_path }}/roms/atari/st/flop", dest: "{{ base_path }}/floppies" }
+
+    templates:
+      - { name: "retronas_atarist.conf", dest: "/etc/samba" }
+      - { name: "{{ my_name }}-updatedb.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_name }}-mirrordb.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_name }}-generate-roms.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "99-retronas-sidecart.conf", dest: "/etc/nginx/sites-available" }
+      - { name: "index.html", dest: "{{ base_path }}/sidecart", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - paths"
+    ansible.builtin.file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('retronas') }}"
+      group: "{{ item.group|default('retronas') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - symlinks"
+    ansible.builtin.file:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      state: "link"
+    with_items: "{{ links }}"
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+    notify: 
+      - "{{ my_name }} daemon-reload"
+      - "{{ my_name }} - Install changed"
+
+  - name: "{{ my_name }} - get update script"
+    ansible.builtin.shell: curl -kLso "{{ script_dest }}" {{ script_url }}
+
+  - name: "{{ my_name }} - make script executable"
+    file:
+      path: "{{ script_dest }}"
+      mode: '0755'
+
+  - name: "{{ my_name }} - configure includes file"
+    ansible.builtin.ini_file:
+      path: /etc/samba/smb.conf
+      section: atarist
+      option: "include"
+      value: "/etc/samba/retronas_atarist.conf"
+    notify: "{{ my_name }} - Install changed"
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      service: http
+      permanent: true
+      state: enabled
+      immediate: true
+    when: firewalld_services.stat.exists
+
+  handlers:
+
+  - name: "{{ my_name }} daemon-reload"
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: "{{ my_name }} - Install changed"
+    ansible.builtin.set_fact:
+      install_changed: true
+
+- ansible.builtin.import_playbook: install_nginx.yml
+  vars:
+    site_enable: 99-retronas-sidecart.conf
+  when: install_changed is defined and
+        install_changed is true
+
+- ansible.builtin.import_playbook: install_samba.yml
+  vars:
+    changed: "{{ install_changed }}"
+  when: install_changed is defined and
+        install_changed is true
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "atarist-sidecart"
+    module_state: "present"

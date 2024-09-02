@@ -1,5 +1,6 @@
+---
 # Dependencies
-- import_playbook: install_dotnetcore6.yml
+- ansible.builtin.import_playbook: install_dotnetcore6.yml
 
 - hosts: localhost
   gather_facts: no
@@ -15,18 +16,21 @@
       - ffmpeg
       - coreutils
 
+    - firewalld_ports:
+      - { zone: "retro", port: 8080, protocol: tcp }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
-    include_vars: retronas_vars.yml
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - name: "{{ my_name }} - Install dependencies"
-    package:
+    ansible.builtin.package:
        name: "{{ my_packages }}"
        state: latest
 
   - name: "{{ my_name }} - Prepare installer script"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/install_webone.sh.j2
       dest: "{{ retronas_root }}/scripts/install_webone.sh"
       owner: root
@@ -34,14 +38,14 @@
       mode: 0755
 
   - name: "{{ my_name }} - Run installer"
-    shell:
+    ansible.builtin.shell:
       cmd: "./{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
       creates: "{{ retronas_root }}/bin/webone/webone"
 
   - name: "{{ my_name }} - create startup service"
-    template:
+    ansible.builtin.template:
       src: templates/{{ my_file }}/webone.service.j2
       dest: /usr/lib/systemd/system/webone.service
       owner: root
@@ -50,7 +54,7 @@
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
@@ -58,17 +62,35 @@
     with_items:
       - webone
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone }}"
+      port: "{{ item.port }}/{{ item.protocol }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewald_ports }}"
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item }}"
       state: restarted
       daemon_reload: yes
     with_items:
       - webone
 
-- import_playbook: retronas_system_config.yml
+- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "webone"
     module_state: "present"

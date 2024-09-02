@@ -1,0 +1,72 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "Install networking using pre-selected modes of operation",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "preview-zoned",
+                "description": "Preview the zoned network diagram", 
+                "id":"network-example-presets-zoned",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "network-example-presets-zoned"
+            },
+            {
+                "index": "03",
+                "title": "preview-standalone",
+                "description": "Preview the standalone network diagram", 
+                "id":"network-example-presets-standalone",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "network-example-presets-standalone"
+            },
+            {
+                "index": "04",
+                "title": "net-ethernet-dhcp",
+                "description": "Install the ethernet dhcp network configuration", 
+                "id":"network-presets-ethernet-dhcp",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "network-presets-ethernet-dhcp"
+            },
+            {
+                "index": "05",
+                "title": "net-zoned",
+                "description": "Install the zoned preset network configuration", 
+                "id":"network-presets-zoned",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "network-presets-zoned"
+            },
+            {
+                "index": "06",
+                "title": "net-standalone",
+                "description": "Install the zoned preset network configuration", 
+                "id":"network-presets-standalone",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "network-presets-standalone"
+            }
+        ]
+    }
+}
