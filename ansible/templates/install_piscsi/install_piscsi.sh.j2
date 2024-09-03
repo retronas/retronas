@@ -22,8 +22,8 @@ function _log {
 REQFAIL=0
 [ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
 
-grep -Eqq "^Raspberry.*" /proc/device-tree/model
-if [ $? -ne 0 ]
+if `grep -Eqq "^Raspberry.*" /proc/device-tree/model`
+then
 	# X64 remote access build flags
 	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
 	_log "Unsupported OS, only for RPI"
@@ -41,10 +41,9 @@ else
 	cd ${SRCDIR}/${APP}
 	git clean -d -f
     git reset --hard
-	git checkout master
+	git checkout main
 	git pull
 fi
-
 
 LATEST=$(git tag | tail -n1)
 git checkout $LATEST
@@ -65,27 +64,27 @@ case $CONNECT_TYPE in
 esac
 
 # PATCH MAKEFILE
-git apply -3 {{ retronas_root }}/src/rascsi_retronas_patch.diff
+#git apply -3 {{ retronas_root }}/src/piscsi_retronas_patch.diff
 
-# BUILD STANDALONE
-cd ${SRCDIR}/${APP}/src/raspberrypi
+# BUILD
+#BUILD_DIR=${SRCDIR}/${APP}/src/raspberrypi
+BUILD_DIR=${SRCDIR}/${APP}/cpp/
+
+cd ${BUILD_DIR}
 make clean
 make all CONNECT_TYPE=${CONNECT_TYPE_BUILD} -j$(nproc)
 
-#RESTORE MAKEFILE
-git apply -3 -R {{ retronas_root }}/src/rascsi_retronas_patch.diff
-
 # Copy BINs
-if [ -f /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/rascsi ]
+if [ -f ${BUILD_DIR}/bin/piscsi ]
 then
 
 	[ ! -d "${OUTDIR}" ] && mkdir -p "${OUTDIR}"
 
-	SERVICE=rascsi.service
+	SERVICE=piscsi.service
 	STARTED=$(systemctl show $SERVICE --full --property SubState --value)
 	[ $STARTED == "running" ] && systemctl stop $SERVICE
 
-	cp /opt/retronas/src/${APP}/src/raspberrypi/bin/${CONNECT_TYPE}/* "${OUTDIR}/"
+	cp -f ${BUILD_DIR}/bin/* "${OUTDIR}/"
 	systemctl restart $SERVICE
 
 fi

@@ -9,8 +9,7 @@
       - bridge-utils
       - build-essential
       - disktype
-      - gcc-9
-      - g++-9
+      - clang
       - genisoimage
       - git
       - libev-dev
@@ -31,14 +30,24 @@
       - python3-wheel
       - unar
       - unzip
+      - ca-certificates
+      - hfsutils
+      - dosfstools
+      - kpartx
+      - unzip
+      - unar 
+      - disktype
+      - gettext
+      - rsyslog
 
     - paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
-      - { name: "{{ my_name }}", dest: "/home/{{ retronas_user }}", state: "link" }
+      - { name: "src", dest: "{{ retronas_root }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
+      - { name: "{{ my_name }}", src: "{{ retronas_path }}/{{ my_name }}", dest: "/home/{{ retronas_user }}", state: "link" }
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-      - { name: "{{ my_file }}_fullspec.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_file }}_standard.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_name }}_retronas_patch.diff", dest: "{{ retronas_root }}/src"}
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system"}
 
@@ -59,6 +68,7 @@
 
   - name: "{{ my_name }} - paths"
     file:
+      src: "{{ item.src | default(omit) }}"
       dest: "{{ item.dest }}/{{ item.name }}"
       owner: "{{ item.owner|default('root') }}"
       group: "{{ item.group|default('root') }}"
@@ -78,13 +88,13 @@
 
   - name: "{{ my_name }} - build source"
     command:
-      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      creates: "{{ retronas_root }}/bin/piscsi/piscsi"
+      cmd: "{{ retronas_root }}/scripts/install_{{ my_name }}.sh"
+      creates: "{{ retronas_root }}/bin/{{ my_name }}/{{ my_name }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - password file"
     copy:
-      dest: /etc/piscsi_passwd
+      dest: /etc/{{ my_name }}_passwd
       content: retronas
       mode: 0600
       owner: root

@@ -35,7 +35,7 @@
                 "prompt": "Build",
                 "type": "script",
                 "group":"",
-                "command": "install_piscsi"
+                "command": "install_piscsi_standard"
             },
             {
                 "index":"04",
@@ -45,7 +45,7 @@
                 "prompt": "Install",
                 "type": "script",
                 "group":"",
-                "command": "install_piscsi_fullspec"
+                "command": "install_piscsi"
             },
             {
                 "index":"05",

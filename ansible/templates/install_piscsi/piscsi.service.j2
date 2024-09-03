@@ -1,13 +1,13 @@
 [Unit]
-Description=rascsi
+Description=piscsi
 After=multi-user.target
 
 [Service]
 Type=simple
 Restart=always
-WorkingDirectory={{ retronas_root }}/bin/RASCSI
-Environment=PATH=$PATH:{{ retronas_root }}/bin/RASCSI
-ExecStart={{ retronas_root }}/bin/RASCSI/rascsi -F /home/{{ retronas_user }}/rascsi -P /etc/rascsi_passwd
+WorkingDirectory={{ retronas_root }}/bin/piscsi
+Environment=PATH=$PATH:{{ retronas_root }}/bin/piscsi
+ExecStart={{ retronas_root }}/bin/piscsi/piscsi -F /home/{{ retronas_user }}/piscsi -P /etc/piscsi_passwd
 TimeoutStartSec=0
 RemainAfterExit=yes
 
