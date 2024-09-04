@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -u
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+
+APP=piscsi
+REPO=https://github.com/PiSCSI/${APP}.git
+SRCDIR={{ retronas_root }}/src/
+RPI=0
+CONNECT_TYPE=${1:-fullspec}
+OUTDIR={{ retronas_root }}/bin/${APP}
+
+function _log {
+        echo "$1"
+}
+
+### REQUIREMENTS
+REQFAIL=0
+[ $REQFAIL -ne 0 ] && _log "Requirements failed, see previous errors" && exit $REQFAIL
+
+if `grep -Eqq "^Raspberry.*" /proc/device-tree/model`
+then
+	# X64 remote access build flags
+	# EXTRA_FLAGS="-DSPDLOG_FMT_EXTERNAL -DFMT_HEADER_ONLY"
+	_log "Unsupported OS, only for RPI"
+	sleep 3
+	exit 1
+fi
+
+[ ! -d $SRCDIR ] && mkdir -p $SRCDIR
+cd $SRCDIR
+
+if [ ! -f ${SRCDIR}/${APP}/.git/config ]
+then
+	git clone $REPO
+else
+	cd ${SRCDIR}/${APP}
+	git clean -d -f
+    git reset --hard
+	git checkout main
+	git pull
+fi
+
+LATEST=$(git tag | tail -n1)
+git checkout $LATEST
+
+# BUILD TYPE
+case $CONNECT_TYPE in
+	fullspec)
+			# FULL SPEC BOARD
+			CONNECT_TYPE_BUILD=FULLSPEC
+			;;
+	standard)
+			# STANDARD BOARD
+			CONNECT_TYPE_BUILD=STANDARD
+			;;
+	*)
+			_log "Please pass a board type fullspec or standard"
+			exit 1
+esac
+
+# PATCH MAKEFILE
+#git apply -3 {{ retronas_root }}/src/piscsi_retronas_patch.diff
+
+# BUILD
+#BUILD_DIR=${SRCDIR}/${APP}/src/raspberrypi
+BUILD_DIR=${SRCDIR}/${APP}/cpp/
+
+cd ${BUILD_DIR}
+make clean
+make all CONNECT_TYPE=${CONNECT_TYPE_BUILD} -j$(nproc)
+
+# Copy BINs
+if [ -f ${BUILD_DIR}/bin/piscsi ]
+then
+
+	[ ! -d "${OUTDIR}" ] && mkdir -p "${OUTDIR}"
+
+	SERVICE=piscsi.service
+	STARTED=$(systemctl show $SERVICE --full --property SubState --value)
+	[ $STARTED == "running" ] && systemctl stop $SERVICE
+
+	cp -f ${BUILD_DIR}/bin/* "${OUTDIR}/"
+	systemctl restart $SERVICE
+
+fi

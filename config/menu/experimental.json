@@ -60,6 +60,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network"
+            },
+            {
+                "index": "06",
+                "title": "piscsi",
+                "description": "PISCSI project",
+                "id":"piscsi",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "piscsi"
             }
         ]
     }

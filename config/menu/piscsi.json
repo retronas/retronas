@@ -1,0 +1,82 @@
+{
+    "menu":
+    {
+        "title": "piscsi",
+        "description": "Please select an option",
+        "id":"piscsi",
+        "prompt": "",
+        "type": "modal",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install piscsi standalone - (builds FULLSPEC)",
+                "id":"piscsi",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "piscsi"
+            },
+            {
+                "index":"03",
+                "title": "Standard",
+                "description": "Build piscsi standalone - STANDARD",
+                "id":"piscsi",
+                "prompt": "Build",
+                "type": "script",
+                "group":"",
+                "command": "install_piscsi_standard"
+            },
+            {
+                "index":"04",
+                "title": "Fullspec",
+                "description": "Build piscsi standalone - FULLSPEC",
+                "id":"piscsi_fullspec",
+                "prompt": "Install",
+                "type": "script",
+                "group":"",
+                "command": "install_piscsi"
+            },
+            {
+                "index":"05",
+                "title": "Start",
+                "description": "Start piscsi",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "piscsi"
+            },
+            {
+                "index":"06",
+                "title": "Stop",
+                "description": "Stop piscsi",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "piscsi"
+            },
+            {
+                "index":"07",
+                "title": "Status",
+                "description": "Query piscsi",
+                "id":"",
+                "prompt": "",
+                "type": "service_status",
+                "group":"",
+                "command": "piscsi"
+            }
+        ]
+    }
+}
