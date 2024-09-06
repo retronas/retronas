@@ -36,6 +36,17 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network-presets"
+            },
+            {
+                "index":"04",
+                "title": "config",
+                "description": "Configure networking",
+                "id":"network-setup",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup",
+                "args": ""
             }
         ]
     }

@@ -49,17 +49,6 @@
                 "group":"",
                 "command": "network-setup-wifiap",
                 "args": ""
-            },
-            {
-                "index":"32",
-                "title": "EtherDFS",
-                "description": "Set EtherDFS/ethflopd network interface",
-                "id":"set-etherdfs-nic",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-etherdfs-nic",
-                "args": ""
             }
         ]
     }

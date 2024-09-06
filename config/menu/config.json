@@ -73,17 +73,6 @@
                 "args": ""
             },
             {
-                "index":"07",
-                "title": "Network",
-                "description": "Configure networking",
-                "id":"network-setup",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "network-setup",
-                "args": ""
-            },
-            {
                 "index":"08",
                 "title": "Profiles",
                 "description": "Install a preconfigured profile",
@@ -92,6 +81,17 @@
                 "type": "modal",
                 "group":"",
                 "command": "profiles",
+                "args": ""
+            },
+            {
+                "index":"09",
+                "title": "EtherDFS",
+                "description": "Set EtherDFS/ethflopd network interface",
+                "id":"set-etherdfs-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-etherdfs-nic",
                 "args": ""
             }
         ]
