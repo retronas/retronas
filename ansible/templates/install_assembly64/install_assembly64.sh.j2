@@ -1,0 +1,54 @@
+#!/bin/bash
+
+ARCH=$(uname -m)
+DLARCH=aarch64
+JAVA_VERS=22.0.2
+
+case $ARCH in
+    x86_64)
+        DLARCH=x64
+        ;;
+    aarch64)
+        DLARCH=aarch64
+        ;;
+    *)
+        DLARCH=x86_64
+esac
+
+[ ! -d /opt/java ] && mkdir -p /opt/java
+cd /tmp
+
+### DEPS
+
+## OPENJDK
+if [ ! -d /opt/java/jdk-${JAVA_VERS} ]
+then
+    OPENJDK="https://download.java.net/java/GA/jdk${JAVA_VERS}/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-${JAVA_VERS}_linux-${DLARCH}_bin.tar.gz"
+    curl -sLk -oopenjdk.tar.gz $OPENJDK
+    tar -xv -f openjdk.tar.gz -C /opt/java
+    rm -f openjdk.tar.gz
+else
+    echo "jdk ${JAVA_VERS} already installed"
+fi
+
+## OPENJFX
+if [ ! -d /opt/java/javafx-sdk-${JAVA_VERS} ]
+then
+    OPENJFX="https://download2.gluonhq.com/openjfx/${JAVA_VERS}/openjfx-${JAVA_VERS}_linux-${DLARCH}_bin-sdk.zip"
+    curl -sLk -oopenjfx.zip $OPENJFX
+    unzip -qq -d /opt/java openjfx.zip
+    rm -f openjfx.zip
+else
+    echo "jfx ${JAVA_VERS} already installed"
+fi
+
+## ASSEMBLY64
+if [ ! -d /opt/assembly64 ]
+then
+    ASSEMBLY="https://assembly64.hackerswithstyle.se/assembly/assembly64-shell.zip"
+    curl -sLk -oassembly64.zip $ASSEMBLY
+    unzip -qq -d /opt assembly64.zip
+    rm -f assembly64.zip
+else
+    echo "assembly64 already installed"
+fi
