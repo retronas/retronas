@@ -4,11 +4,41 @@
 - name: "{{ my_name }} - Load RetroNAS config"
   ansible.builtin.include_vars: retronas_vars.yml
 
+- name: "{{ my_name }} - stat our path"
+  ansible.builtin.stat:
+    path: "{{ retronas_path }}"
+  register: rn_path
+
+- name: "{{ my_name }} - create our base"
+  ansible.builtin.shell:
+    cmd: "mkdir -p {{ rn_path}}"
+  changed_when: false
+  when: rn_path is defined and 
+        rn_path.stat.exists is false
+
+- name: "{{ my_name }} - perms"
+  ansible.builtin.shell:
+    cmd: "chown -R {{ retronas_user }}:{{ retronas_group }} {{ rn_path }}"
+  changed_when: false
+  when: rn_path is defined and 
+        rn_path.stat.exists is false
+
 - name: "{{ my_name }} - stat top level paths"
   ansible.builtin.stat:
     path: "{{ retronas_path }}/{{ item }}"
   loop: [ "roms", "bios", "saves", "savestates" ]
   register: tl_paths
+
+- name: "{{ my_name }} - create our missing paths"
+  ansible.builtin.file:
+    path: "{{ retronas_path }}/{{ item.item }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ tl_paths.results }}"
+  when: tl_paths is defined and
+        item.stat.exists is false
 
 - name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
   ansible.builtin.shell:
