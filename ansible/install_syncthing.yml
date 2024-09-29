@@ -5,8 +5,8 @@
     - my_file: "install_syncthing"
 
     - firewalld_rules:
-      - { zone: retro, service: syncthing }
-      - { zone: retro, service: syncthing-gui }
+      - { zone: modern, service: syncthing }
+      - { zone: modern, service: syncthing-gui }
 
   tasks:
 
