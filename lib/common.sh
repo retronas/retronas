@@ -508,7 +508,7 @@ DLG_MENU() {
 
     local IFS=$'\n'
     local TITLE="$1"
-    local -n MENU_ARRAY=$2
+    MENU_ARRAY=$2
     local MENU_H=$3
     local MENU_BLURB=$4
 
@@ -521,6 +521,7 @@ DLG_MENU() {
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
+    unset MENU_ARRAY
 
 }
 
@@ -593,7 +594,7 @@ DLG_INPUTBOX() {
 DLG_PASSWORD() {
     local IFS=$'\n'
     local TITLE="$1"
-    local -n MENU_ARRAY=$2
+    MENU_ARRAY=$2
     local MENU_H=$3
     local MENU_BLURB=$4
 
@@ -607,6 +608,8 @@ DLG_PASSWORD() {
         --passwordform "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
+    unset MENU_ARRAY
+
 
 }
 
@@ -617,7 +620,7 @@ DLG_PASSWORD() {
 DLG_FORM() {
     local IFS=$'\n'
     local TITLE="$1"
-    local -n MENU_ARRAY=$2
+    MENU_ARRAY=$2
     local MENU_H=$3
     local MENU_BLURB=$4
 
@@ -630,5 +633,6 @@ DLG_FORM() {
         --form "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
+    unset MENU_ARRAY
 
 }
