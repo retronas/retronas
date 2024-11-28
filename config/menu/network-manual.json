@@ -1,0 +1,82 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "Manually install networking tools",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "firewalld",
+                "description": "Basic firewalld", 
+                "id":"firewalld",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "firewalld"
+            },
+            {
+                "index": "03",
+                "title": "dnsmasq",
+                "description": "Basic dnsmasq", 
+                "id":"dnsmasq",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dnsmasq"
+            },
+            {
+                "index": "04",
+                "title": "hostapd",
+                "description": "hostapd", 
+                "id":"hostapd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hostapd"
+            },
+            {
+                "index": "05",
+                "title": "firewalld-zoning",
+                "description": "retro (eth0)/modern (wlan0) zone", 
+                "id":"firewalld-zones",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "firewalld-zones"
+            },
+            {
+                "index": "06",
+                "title": "dnsmasq-retro",
+                "description": "DHCP, DNS support for retro zone", 
+                "id":"dnsmasq-retro",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dnsmasq-retro"
+            },
+            {
+                "index": "07",
+                "title": "dhcpcd",
+                "description": "DHCP client", 
+                "id":"dhcpcd",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "dhcpcd"
+            }
+        ]
+    }
+}

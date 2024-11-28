@@ -129,6 +129,23 @@
       daemon_reload: yes
     with_items: "{{ my_service }}"
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      port: 2121/udp
+      permanent: true
+      state: enabled
+      immediate: true
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"

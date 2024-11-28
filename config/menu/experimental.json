@@ -50,6 +50,36 @@
                 "group":"",
                 "command": "atarist-sidecart",
                 "args": ""
+            },
+            {
+                "index": "05",
+                "title": "Network",
+                "description": "Network presets (highly experimental!)",
+                "id":"network",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network"
+            },
+            {
+                "index": "06",
+                "title": "piscsi",
+                "description": "PISCSI project",
+                "id":"piscsi",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "piscsi"
+            },
+            {
+                "index": "07",
+                "title": "assembly64",
+                "description": "assembly64 project (requires account)",
+                "id":"assembly64",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "assembly64"
             }
         ]
     }

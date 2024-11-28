@@ -4,11 +4,15 @@ body:
 - type: markdown
   attributes:
     value: |
-      If this is a new feature request please use the RetroNAS Discussion area, otherwise please include as much detail as possible about your issue
+      If this is a new feature request please use the RetroNAS Discussion area. 
+      
+      Before raising an issue confirm you are using a supported distribution by checking the wiki and include as much detail as possible about your issue
 - type: textarea
   attributes:
     label: Details
     description: |
-      Any relevant details.
+      Any relevant details, e.g Error message text or screenshot, retronas branch, linux distribution information, ansible version etc.
     placeholder: |
-      Installer (x) ended in with failure message.
+      Installer <RETRONAS INSTALLER ended in with failure message <MESSAGE>, on retronas <BRANCH>. 
+      
+      I am using a supported distribution <DISTRO> <VERSION> with Ansible <VERSION> installed.

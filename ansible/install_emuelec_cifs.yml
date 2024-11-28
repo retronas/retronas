@@ -1,5 +1,6 @@
 # Dependencies
 - ansible.builtin.import_playbook: install_romdir.yml
+- ansible.builtin.import_playbook: install_extradirs.yml
 
 - hosts: localhost
   gather_facts: no

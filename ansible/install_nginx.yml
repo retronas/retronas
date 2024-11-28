@@ -141,6 +141,26 @@
       enabled: "{{ item.enabled }}"
     with_items: "{{ systemd_units }}"
 
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: retro
+      service: "{{ item }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items:
+      - http
+      - https
+    when: firewalld_services.stat.exists
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"

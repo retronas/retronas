@@ -37,3 +37,11 @@ then
     sudo $X11VNC -storepasswd "${PASSWD}" /etc/vncpasswd_retronas
     sudo -u $USERNAME $X11VNC -storepasswd "${PASSWD}" /home/$USERNAME/vncpasswd_retronas
 fi
+
+if [ -f /opt/retronas/bin/RASCSI/rascsi ]
+then
+    RASCSI_PASSWD=/etc/rascsi_passwd
+    touch ${RASCSI_PASSWD}
+    chmod 600 ${RASCSI_PASSWD}
+    echo -e "${PASSWD}" | sudo tee ${RASCSI_PASSWD}
+fi

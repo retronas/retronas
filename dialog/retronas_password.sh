@@ -16,7 +16,16 @@ rn_retronas_password() {
     "Repeat:"   2 10 ""  2 20 20 20
   )
 
-  DLG_PASSWORD "${MENU_TNAME}" "${MENU_ARRAY}" 10 "${MENU_BLURB}"
+  DLG_PASSWORD "${MENU_TNAME}" "${MENU_ARRAY}" 5 "${MENU_BLURB}"
+
+  # if we can't create the sub-window report it and exit
+  echo ${CHOICE[0]} | grep "make sub-window" &> /dev/null
+  if [ $? -eq 0 ]
+  then
+    echo "Failed to create sub-window, if possible resize your terminal window and try again"
+    PAUSE
+    exit
+  fi
 
   PASS_ONE=${CHOICE[0]}
   PASS_TWO=${CHOICE[1]}

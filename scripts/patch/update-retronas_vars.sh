@@ -8,7 +8,7 @@ export ANDCFG=${ANDIR}/retronas_vars.yml.default
 # check for CR on last line
 if ! tail -n1 ${ANDCFG} | egrep -l $'\r'\$
 then
-  echo "\r" >> ${ANCFG}
+  sed -i -e '$a\' ${ANCFG}
 fi
 
 update_config() {

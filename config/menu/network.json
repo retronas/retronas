@@ -1,0 +1,53 @@
+{
+    "menu":    
+    {
+        "title": "network",
+        "description": "HIGHLY EXPERIMENTAL||This menu will allow you to install firewall, dhcp and dns services. You may install these services as vanilla or install the retro/modern zones to provide isolation.||The default net is 10.99.1.0/23 for retro on eth0 while the modern net is connected over wlan0.||Traffic is forwarded from eth0 to wlan0 for internet access",
+        "id":"network",
+        "prompt": "Install",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK"
+            },
+            {
+                "index": "02",
+                "title": "manual",
+                "description": "Tools for manual network setup", 
+                "id":"network-manual",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-manual"
+            },
+            {
+                "index": "03",
+                "title": "presets",
+                "description": "Network preset setups", 
+                "id":"network-presets",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-presets"
+            },
+            {
+                "index":"04",
+                "title": "config",
+                "description": "Configure networking",
+                "id":"network-setup",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "network-setup",
+                "args": ""
+            }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+MODE=${1:-localhost}
+PORT=${2:-60001}
+export DISPLAY=:100
+export JAVA_HOME=/opt/java/jdk-22.0.2
+export JFX_HOME=/opt/java/javafx-sdk-22.0.2
+
+PARENTPID=$(ps -ef | grep -E "xvfb-run.*assembly64.*" | grep -v grep | head -n1 | awk '{print $2}')
+
+cd {{ my_dir }}
+Xvfb $DISPLAY -screen 0 1024x768x16 &
+./assembly64.sh $1 &
+
+# get assembly64 runtime details
+sleep 3
+SESSION=$(ps -ef | grep -E "$PARENTPID.*Xvfb" | head -n1 | awk '{print $9,$16}')
+XDISPLAY=$(echo $SESSION | cut -d' ' -f1 )
+XAUTH=$(echo $SESSION | cut -d' ' -f2 )
+
+/usr/local/bin/x11vnc_wrapper.sh $XDISPLAY $XAUTH $PORT

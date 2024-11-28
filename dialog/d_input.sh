@@ -7,6 +7,11 @@ CLEAR
 
 ### this needs to be smarter oneday
 case $MENU_NAME in
+    set-retronas-net-3dsqr-interface)
+        OLDVALUE=${OLD3DSIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_3dsqr_interface:"
+        ;;
     set-etherdfs-nic)
         OLDVALUE=${OLDETHERDFSIF}
         DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
@@ -27,7 +32,113 @@ case $MENU_NAME in
         DATASET=($(awk -F':' '{print $1}' /etc/group  | paste -d" " -s))
         PATTERN="retronas_group:"
         ;;
+    set-retronas-net-modern-nic)
+        OLDVALUE=${OLDMODERNIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_modern_interface:"
+        ;;
+    set-retronas-net-retro-nic)
+        OLDVALUE=${OLDRETROIF}
+        DATASET=($(ip link show | awk '/^[0-9]/{gsub(/:/,"");print $2}'))
+        PATTERN="retronas_net_retro_interface:"
+        ;;
+    set-retronas-net-retro-dns)
+        OLDVALUE=${OLDRETRODNS}
+        DATASET=()
+        PATTERN="retronas_net_retro_dns:"
+        ;;
+    set-retronas-net-retro-dhcprange)
+        OLDVALUE=${OLDRETRODHCP}
+        DATASET=()
+        PATTERN="retronas_net_retro_dhcprange:"
+        ;;
+    set-retronas-net-retro-router)
+        OLDVALUE=${OLDRETROROUTER}
+        DATASET=()
+        PATTERN="retronas_net_retro_router:"
+        ;;
+    set-retronas-net-retro-ntp)
+        OLDVALUE=${OLDRETRONTP}
+        DATASET=()
+        PATTERN="retronas_net_retro_ntp:"
+        ;;
+    set-retronas-net-retro-ip)
+        OLDVALUE=${OLDRETROIP}
+        DATASET=()
+        PATTERN="retronas_net_retro_ip:"
+        ;;
+    set-retronas-net-retro-subnet)
+        OLDVALUE=${OLDRETROSUBNET}
+        DATASET=()
+        PATTERN="retronas_net_retro_subnet:"
+        ;;
+    set-retronas-net-upstream-dns1)
+        OLDVALUE=${OLDUPDNS1}
+        DATASET=()
+        PATTERN="retronas_net_upstream_dns1:"
+        ;;
+    set-retronas-net-upstream-dns2)
+        OLDVALUE=${OLDUPDNS2}
+        DATASET=()
+        PATTERN="retronas_net_upstream_dns2:"
+        ;;
+    set-retronas_net_wifi_countrycode)
+        OLDVALUE=${OLDWIFICC}
+        DATASET=(AE AR AT AU BG BH BM BO BR CA CH CL CN CO CR CS CY CZ DE DK DO DZ EC EE EG ES FI FR GB GR GT HK HN ID IE IL IN IS IT JM JO JP3 KE KR KW KW LB LI LI LK LT LT LU MA MA MU MX MX NL NO NZ NZ OM PA PA PE PH PK PL PL PR PR PT QA RO RU RU SA SG SI SI SK SK SV TH TH TN TR TT TW UA US UY UY VE VN ZA)
+        PATTERN="retronas_net_wifi_countrycode:"
+        ;;
+    set-retronas-net-wifi-interface)
+        OLDVALUE=${OLDWIFIINT}
+        DATASET=()
+        PATTERN="retronas_net_wifi_interface:"
+        ;;
+    set-retronas-net-wifi-ssid)
+        OLDVALUE=${OLDWIFISSID}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ssid:"
+        ;;
+    set-retronas-net-wifi-channel)
+        OLDVALUE=${OLDWIFICHANNEL}
+        DATASET=()
+        PATTERN="retronas_net_wifi_channel:"
+        ;;
+    set-retronas-net-wifi-hwmode)
+        OLDVALUE=${OLDWIFIHWMODE}
+        DATASET=(a bg)
+        PATTERN="retronas_net_wifi_hwmode:"
+        ;;
+    set-retronas-net-wifi-ip)
+        OLDVALUE=${OLDWIFIIP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ip:"
+        ;;
+    set-retronas-net-wifi-subnet)
+        OLDVALUE=${OLDWIFISUBNET}
+        DATASET=()
+        PATTERN="retronas_net_wifi_subnet:"
+        ;;
+    set-retronas-net-wifi-dhcprange)
+        OLDVALUE=${OLDWIFIDHCP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_dhcprange:"
+        ;;
+    set-retronas-net-wifi-router)
+        OLDVALUE=${OLDWIFIROUTER}
+        DATASET=()
+        PATTERN="retronas_net_wifi_router:"
+        ;;
+    set-retronas-net-wifi-ntp)
+        OLDVALUE=${OLDWIFINTP}
+        DATASET=()
+        PATTERN="retronas_net_wifi_ntp:"
+        ;;
+    set-retronas-net-wifi-dns)
+        OLDVALUE=${OLDWIFIDNS}
+        DATASET=()
+        PATTERN="retronas_net_wifi_dns:"
+        ;;
     *)
+        echo "Menu not supported"
         PAUSE
         EXIT_CANCEL
         ;;
@@ -37,7 +148,6 @@ rn_input() {
     local MENU_NAME="${1}"
     READ_MENU_TDESC "${MENU_NAME}"
     DLG_INPUTBOX "${MENU_TNAME}" "${MENU_BLURB}" "${OLDVALUE}"
-
     export NEWVALUE="${CHOICE}"
 
     if [ ! -z $NEWVALUE ]
@@ -45,7 +155,7 @@ rn_input() {
         COMPARE_VALUES "${NEWVALUE}" "${OLDVALUE}"
         if [ $CONFIRM -eq 1 ] 
         then
-            rn_input_confirm ${NEWVALUE}
+            rn_input_confirm
         else
             rn_input $MENU_NAME
         fi
@@ -55,6 +165,10 @@ rn_input() {
 
 rn_input_confirm() {
     unset CHOICE
+    # hacky fix for menu fix
+    [ $MENU_NAME == "update-user" ] && OLDRNUSER=$NEWVALUE
+    [ $MENU_NAME == "update-group" ] && OLDRNGROUP=$NEWVALUE
+
     local MENU_PARENT=${MENU_NAME}
     local MENU_NAME="${MENU_NAME}-confirm"
     READ_MENU_TDESC "${MENU_NAME}"
@@ -66,7 +180,7 @@ rn_input_confirm() {
             [ ${#DATASET[@]} -eq 0 ] && DATASET=($(ls -lad "${NEWVALUE}" 2>/dev/null | awk '{print $9}'))
 
             echo ${DATASET[*]} | grep -qF ${NEWVALUE}
-            if  [ $? -eq 0 ]
+            if [ $? -eq 0 ] || [ ${#DATASET[@]} -eq 0 ]
             then
                 CLEAR
                 source $_CONFIG

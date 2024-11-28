@@ -6,48 +6,39 @@
     - my_file: "install_{{ my_name }}"
 
     - my_packages:
-      - curlftpfs
+      - curl
+      - build-essential
+      - libglib2.0-dev
+      - libfuse-dev
+      - libcurl4-openssl-dev
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - get primary pkg architecture"
-    ansible.builtin.shell:
-       cmd: dpkg --print-architecture
-    register: architecture
-
-  - name: "{{ my_name }} - Install from repo"
+  - name: "{{ my_name }} - install packages"
     ansible.builtin.apt:
        name: "{{ my_packages }}"
        state: latest
-       default_release: "{{ ansible_distribution_release }}-backports"
-    when: ansible_distribution_major_version is version('12','<=')
 
-  - name: "{{ my_name }} - discover deb"
-    ansible.builtin.shell:
-      cmd: curl -skL http://ftp.debian.org/debian/pool/main/c/curlftpfs/ | grep -oP "href=\"curlftpfs_.+_{{ architecture.stdout }}.deb\">" | sed -r 's/href=\"(curlftpfs_.+_{{ architecture.stdout }}.deb)\">/\1/' | tail -n1
-    register: debfile
-    when: ansible_distribution == "Debian" and 
-          ansible_distribution_major_version is version ('12','>=') and
-          architecture is defined
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
 
-  - name: "{{ my_name }} - download deb"
-    ansible.builtin.shell:
-      chdir: "/tmp"
-      cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/c/curlftpfs/{{ debfile.stdout }} https://mirror.aarnet.edu.au/pub/debian/pool/main/c/curlftpfs/{{ debfile.stdout }}"
-    when: ansible_distribution == "Debian" and 
-          ansible_distribution_major_version is version ('12','>=') and
-          debfile is defined
-
-  - name: "{{ my_name }} - install deb"
-    ansible.builtin.shell:
-      chdir: "/tmp"
-      cmd: "dpkg -i {{ debfile.stdout }}"
-    when: ansible_distribution == "Debian" and 
-          ansible_distribution_major_version is version ('12','>=') and
-          debfile is defined
+  - name: "{{ my_name }} - Install from source code"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "/usr/local/bin/curlftpfs"
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

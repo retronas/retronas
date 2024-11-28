@@ -1,0 +1,15 @@
+[Unit]
+Description=piscsi
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory={{ retronas_root }}/bin/piscsi
+Environment=PATH=$PATH:{{ retronas_root }}/bin/piscsi
+ExecStart={{ retronas_root }}/bin/piscsi/piscsi -F /home/{{ retronas_user }}/piscsi -P /etc/piscsi_passwd
+TimeoutStartSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

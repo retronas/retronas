@@ -5,6 +5,9 @@
     - my_name: "aria2"
     - my_file: "install_aria2"
 
+    - my_packages:
+      - aria2
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -12,10 +15,8 @@
     
   - name: "{{ my_name }} - install packages"
     ansible.builtin.apt:
-       name: "{{ item }}"
+       name: "{{ my_packages }}"
        state: latest
-    with_items:
-      - aria2
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

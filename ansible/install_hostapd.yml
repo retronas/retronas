@@ -1,0 +1,97 @@
+# Dependencies
+
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    - my_name: "hostapd"
+    - my_file: "install_{{ my_name }}"
+
+    - packages:
+      - hostapd
+      - pwgen
+
+    - my_services: "hostapd-retronas.service"
+
+    - templates:
+      - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
+      - { name: "hostapd-dnsmasq.conf",     sub: "", dest: "/etc/dnsmasq.d/retro/", force: no, mode: "0640" }
+      - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
+
+    - paths:
+      - { name: "dnsmasq.d",       dest: "/etc",              state: "directory", mode: "0755" }
+      - { name: "retro",           dest: "/etc/dnsmasq.d",    state: "directory", mode: "0755" }
+
+
+  tasks:
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - generate password"
+    shell:
+      cmd: pwgen -s 12 1
+    no_log: true
+    register: retronas_wifi_password
+
+  - name: "{{ my_name }} - generate unique ssid"
+    shell:
+      cmd: echo "retronas-$(pwgen 8 -A -0 -B 1)"
+    no_log: true
+    register: retronas_net_wifi_ssid
+    when: retronas_net_wifi_ssid == ""
+
+  - name: "{{ my_name }} - update wifi ssid config"
+    lineinfile:
+      path: /opt/retronas/ansible/retronas_vars.yml
+      line: '^retronas_net_wifi_ssid: "retronas-{{ retronas_net_wifi_ssid }}"'
+    when: retronas_net_wifi_ssid is defined
+
+  - name: "{{ my_name }}  - Re-read RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - paths"
+    file:
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0755') }}"
+      state: "{{ item.state|default('directory') }}"
+    with_items: "{{ paths }}"
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - enable"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+      force: yes
+    with_items: "{{ my_services }}"
+
+  handlers:
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: restarted
+      daemon_reload: yes
+      force: yes
+    with_items: "{{ my_services }}"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "hostapd"
+    module_state: "present"

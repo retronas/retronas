@@ -40,6 +40,8 @@
     - packages_ubuntu:
       - libmbedtls14
 
+    - firewalld_rules:
+      - { zones: retro, service: ps3netsrv }
 
   tasks:
 
@@ -99,7 +101,7 @@
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
-      creates: "{{ retronas_root}} /bin/ps3netsrv"
+      creates: "{{ retronas_root}}/bin/ps3netsrv"
 
   - name: "{{ my_name }} - create startup service(s)"
     ansible.builtin.template:
@@ -132,6 +134,24 @@
     with_items: "{{ systemd_units }}"
     when:
       - item.instance == 'no'
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('ps3netsrv') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
 
   handlers:
 
