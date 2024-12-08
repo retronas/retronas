@@ -275,7 +275,7 @@ system_hartung:
 system_homelab:
   - { src: "homelab/homelab", last: "", mister: "Homelab", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "" }
 system_ibm:
-  - { src: "ibm/pcxt", last: "", mister: "PCXT", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "pc", igdb: "", replayfpgaarcade: "", retrodeck: "" }
+  - { src: "ibm/pcxt", last: "", mister: "PCXT", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "pc", igdb: "", replayfpgaarcade: "", retrodeck: "pc" }
 system_infocom:
   - { src: "infocom/zmachine", last: "", mister: "", retropie: "", batocera: "", recalbox: "zmachine", retroarch: "Infocom - Z-Machine", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "zmachine", igdb: "", replayfpgaarcade: "", retrodeck: "zmachine" }
 system_intelligentsoftware:
