@@ -48,7 +48,7 @@ The services RetroNAS installs will attempt to run as unprivileged user accounts
 If you want a modern, secure, open source NAS and have no interest in retro systems, projects like Open Media Vault, TrueNAS, UnRAID or vendor supplied devices like QNAP and Synology NAS devices might be a better fit.
 
 # Tools and Systems
-RetroNAS is intended as a generalised hub for retro activities supporting as many legacy/retro systems as possible. With the intent to support the unsupported inclusion of certain systems and related tools is at the discretion of the project. As a general rule, tooling for systems that are still actively available for retail sale should/will not be added until a reasonable period has passed since retail sale has ended.
+RetroNAS is intended as a generalised hub for retro activities supporting as many legacy/retro systems as possible. With the intent to "support the unsupported" inclusion of certain systems and related tools is at the discretion of the project. As a general rule, tooling for systems that are still actively available for retail sale should/will not be added until a reasonable period has passed since retail sale has ended.
 
 If a system has some sort of network capabilities and an open source service exists to serve that capability, RetroNAS can attempt to integrate it
 
