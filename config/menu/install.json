@@ -765,6 +765,17 @@
                 "group":"",
                 "command": "seaweedfs",
                 "args": ""
+            },
+            {
+                "index": "70",
+                "title": "retrodeck-cifs",
+                "description": "Samba for RetroDeck",
+                "id":"retrodeck-cifs",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "retrodeck_cifs",
+                "args": ""
             }
         ]
     }

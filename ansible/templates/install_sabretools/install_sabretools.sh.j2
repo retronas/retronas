@@ -26,6 +26,7 @@ cat << 'EOST' > /usr/local/bin/sabretools
 #!/bin/bash
 PATH=/opt/sabretools:{{ retronas_root }}/bin/dotnetcore3:{{ retronas_root }}/bin/dotnetcore3/tools:${PATH}
 DOTNET_ROOT={{ retronas_root }}/bin/dotnetcore3
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 dotnet /opt/sabretools/SabreTools.dll $*
 EOST
 

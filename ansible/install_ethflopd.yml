@@ -66,8 +66,8 @@
 
   handlers:
 
-  - ansible.builtin.name: "{{ my_name }} - Restart service"
-    service:
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
       name: "{{ my_name }}.service"
       state: restarted
       daemon_reload: yes
