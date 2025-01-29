@@ -11,6 +11,9 @@
     - templates:
       - { name: "telnet", dest: "/etc/xinetd.d", force: no }
 
+    - firewalld_rules:
+      - { zone: "retro", service: "telnet" }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
