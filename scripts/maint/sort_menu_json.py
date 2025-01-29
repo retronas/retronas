@@ -25,13 +25,13 @@ def main(args):
         back = None
         for item in menu["items"]:
             if item["title"] != "Back":
-                tmp[item["title"]] = item
+                tmp[item["title"].lower()] = item
             else:
                 back = item
      
         # soft the dict
-        tmp_sorted = sorted(tmp.items())
-        tmp_sorted.insert(0, ( "Back", back ))
+        tmp_sorted = sorted(tmp.items() )
+        tmp_sorted.insert(0, ( "back", back ))
         
         for idx, item in enumerate(tmp_sorted):
             entry = item[1]
