@@ -12,11 +12,12 @@
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
     - packages:
-      - git
-      - npm
-      - gcc
-      - g++
-      - build-essential
+      #- git
+      #- npm
+      - libnode108
+      #- gcc
+      #- g++
+      #- build-essential
 
     - templates:
       - { name: "{{ my_name }}-check.sh", dest: "{{ retronas_root }}/bin/{{ my_name }}", mode: "0755"}
@@ -134,11 +135,11 @@
     when:
       - item.instance == 'no'
 
-  - name: "{{ my_name }} - Remove npm and dependency hell"
-    ansible.builtin.apt:
-       name:  "npm"
-       state: absent
-       autoremove: yes
+  #- name: "{{ my_name }} - Remove npm and dependency hell"
+  #  ansible.builtin.apt:
+  #     name:  "npm"
+  #     state: absent
+  #     autoremove: yes
 
   handlers:
 
