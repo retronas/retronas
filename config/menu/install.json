@@ -381,6 +381,17 @@
         "args": ""
       },
       {
+        "index": "71",
+        "title": "Netatalk4",
+        "description": "Apple AFP file sharing TCP/IP only (ALL)",
+        "id": "netatalk4",
+        "prompt": "",
+        "type": "install",
+        "group": "netatalk",
+        "command": "netatalk4",
+        "args": ""
+      },
+      {
         "index": "35",
         "title": "netlink",
         "description": "Sega Saturn Netlink tunneling service",

@@ -1,0 +1,18 @@
+[Unit]
+Description=ATALK for Macintosh clients
+Documentation=man:atlkd.conf(5)
+Documentation=http://netatalk.sourceforge.net/
+After=network.target avahi-daemon.service
+Before=netatalk.service
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart={{ retronas_root }}/bin/netatalk4/sbin/atalkd
+PIDFile=/var/lock/atalkd
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

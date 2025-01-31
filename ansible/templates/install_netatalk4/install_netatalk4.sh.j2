@@ -1,0 +1,44 @@
+#!/bin/bash
+
+## RetroNAS Netatalk-4 install script
+TRKRVER=$(dpkg -l | awk -F'-' '/libtracker-miner/{print $3}')
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/netatalk4"
+mkdir -p "${IDIR}"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf netatalk
+
+# Clone the source code from SourceForge
+git clone https://github.com/netatalk/netatalk.git
+cd netatalk
+git checkout $(git describe --tags --abbrev=0 | grep netatalk-4 | tail -n1)
+
+
+OPTIONS=""
+OPTIONS+=" -Dprefix=${IDIR}"
+OPTIONS+=" -Dwith-appletalk=true"
+OPTIONS+=" -Dwith-init-style=systemd"
+OPTIONS+=" -Dwith-cracklib=true"
+OPTIONS+=" -Dwith-krbV-uam=true"
+OPTIONS+=" -Dwith-pam-config-path=/etc/pam.d"
+OPTIONS+=" -Dwith-dbus-daemon-path=/usr/bin/dbus-daemon"
+OPTIONS+=" -Dwith-dbus-sysconf-path=/etc/dbus-1/system.d"
+
+# spotlight support requires libtracker-miner
+if [ ! -z $TRKRVER ]
+then 
+        [ ! -f /usr/bin/tracker ] && ln -sf /usr/bin/tracker3 /usr/bin/tracker 
+        OPTIONS+=" --with-tracker-pkgconfig-version=$TRKRVER"
+fi
+
+meson setup build $OPTIONS
+meson compile -C build
+sudo meson install -C build
+
