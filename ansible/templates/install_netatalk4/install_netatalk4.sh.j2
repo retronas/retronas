@@ -28,8 +28,9 @@ OPTIONS+=" -Dwith-init-style=systemd"
 OPTIONS+=" -Dwith-cracklib=true"
 OPTIONS+=" -Dwith-krbV-uam=true"
 OPTIONS+=" -Dwith-pam-config-path=/etc/pam.d"
+# as per https://dbus.freedesktop.org/doc/dbus-daemon.1.html
 OPTIONS+=" -Dwith-dbus-daemon-path=/usr/bin/dbus-daemon"
-OPTIONS+=" -Dwith-dbus-sysconf-path=/etc/dbus-1/system.d"
+OPTIONS+=" -Dwith-dbus-sysconf-path=/usr/share/dbus-1/system.d"
 
 # spotlight support requires libtracker-miner
 if [ ! -z $TRKRVER ]

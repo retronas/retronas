@@ -65,7 +65,8 @@
       - { section: "Global", option: "log file", value: "/var/log/afp.log" }
       - { section: "Global", option: "afp listen", value: "0.0.0.0" }
       - { section: "Global", option: "appletalk", value: "yes" }
-      - { section: "Global", option: "legacy icon", value: "yes" }
+      - { section: "Global", option: "spotlight", value: "yes" }
+      - { section: "Global", option: "legacy icon", value: "globe" }
       - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
 
 

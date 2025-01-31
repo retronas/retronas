@@ -84,10 +84,10 @@
             {
                 "index": "08",
                 "title": "Netatalk4",
-                "description": "Apple AFP file sharing TCP/IP only (ALL)",
+                "description": "Apple AFP file sharing / AppleTalk, etc",
                 "id": "netatalk4",
                 "prompt": "",
-                "type": "install",
+                "type": "dialog",
                 "group": "netatalk",
                 "command": "netatalk4",
                 "args": ""
