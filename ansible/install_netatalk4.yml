@@ -50,7 +50,6 @@
       - libtracker-sparql-2.0-dev
       - libtracker-miner-2.0-dev
 
-
     - my_services:
       - avahi-daemon
       - atalkd
@@ -72,9 +71,10 @@
 
     - templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755'}
+
+    - old_services:
       - { name: "atalkd.service", dest: "/etc/systemd/system"}
       - { name: "netatalk.service", dest: "/etc/systemd/system"}
-
 
   tasks:
 
@@ -91,10 +91,33 @@
     ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
     when: result.rc == 0
 
-  - name: "{{ my_name }}  - remove package-based Netatalk"
+  - name: "{{ my_name }} - remove package-based Netatalk"
     ansible.builtin.package:
        name: netatalk
        state: absent
+
+  - name: "{{ my_name }} - remove old service files"
+    ansible.builtin.stat:
+      path: "{{ item.dest }}/{{ item.name }}"
+    loop: "{{ old_services }}"
+    register: old_services_check
+
+  - name: "{{ my_name }} - Stopping existing netatalk service(s) during installation"
+    ansible.builtin.service:
+      name: "{{ item.stat.path }}"
+      state: stopped
+      daemon-reload: yes
+    loop: "{{ old_services_check.results }}"
+    when: old_services_check is defined and
+          item.stat.exists is true
+
+  - name: "{{ my_name }} - Remove old service files"
+    ansible.builtin.file:
+      path: "{{ item.stat.path }}"
+      state: absent
+    loop: "{{ old_services_check.results }}"
+    when: old_services_check is defined and
+          item.stat.exists is true
 
   - name: "{{ my_name }}  - install dependencies"
     ansible.builtin.package:
