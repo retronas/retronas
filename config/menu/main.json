@@ -41,27 +41,6 @@
                 "args": ""
             },
             {
-                "index": "04",
-                "title": "Services",
-                "description": "See if things are OK",
-                "id":"services",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "services"
-            },
-            {
-                "index": "05",
-                "title": "Tools",
-                "description": "Run tools and scripts",
-                "id":"tools",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "tools",
-                "args": ""
-            },
-            {
                 "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",

@@ -96,6 +96,17 @@
                 "args": ""
             },
             {
+                "index": "09",
+                "title": "Bugs",
+                "description": "Troubleshooting/Reporting bugs",
+                "id": "bug",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Bugs.md",
+                "args": ""
+            },
+            {
                 "index": "98",
                 "title": "Ideas",
                 "description": "A list of features/projects that would be suited for inclusion in RetroNAS",

@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "lighttpd",
-        "description": "Install lighttpd",
-        "id":"lighttpd",
+        "title": "samba",
+        "description": "Install samba",
+        "id":"samba",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,12 +21,12 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install lighttpd",
-                "id":"lighttpd",
+                "description": "Install samba",
+                "id":"samba",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "lighttpd",
+                "command": "samba",
                 "args": ""
             },
             {
@@ -37,7 +37,7 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "lighttpd",
+                "command": "smbd",
                 "args": ""
             },
             {
@@ -46,9 +46,9 @@
                 "description": "Query service status",
                 "id":"",
                 "prompt": "",
-                "type":"service_status",
+                "type":"script-static",
                 "group":"",
-                "command": "lighttpd",
+                "command": "service-samba",
                 "args": ""
             },
             {
@@ -59,7 +59,7 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "lighttpd",
+                "command": "smbd",
                 "args": ""
             },
             {
@@ -70,7 +70,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "NEEEDED.md",
+                "command": "Samba.md",
                 "args": ""
             }
         ]

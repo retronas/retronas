@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "lighttpd",
-        "description": "Install lighttpd",
-        "id":"lighttpd",
+        "title": "cockpit",
+        "description": "Install cockpit",
+        "id":"cockpit",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,12 +21,12 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install lighttpd",
-                "id":"lighttpd",
+                "description": "Install cockpit",
+                "id":"cockpit",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "lighttpd",
+                "command": "cockpit-packages",
                 "args": ""
             },
             {
@@ -37,7 +37,7 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "lighttpd",
+                "command": "cockpit",
                 "args": ""
             },
             {
@@ -48,7 +48,7 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "lighttpd",
+                "command": "cockpit",
                 "args": ""
             },
             {
@@ -59,7 +59,7 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "lighttpd",
+                "command": "cockpit",
                 "args": ""
             },
             {
@@ -70,7 +70,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "NEEEDED.md",
+                "command": "Cockpit.md",
                 "args": ""
             }
         ]

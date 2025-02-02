@@ -78,7 +78,7 @@
                 "command": "piscsi"
             },
             {
-                "index":"05",
+                "index":"99",
                 "title": "Documentation",
                 "description": "Read the service documentation",
                 "id":"",

@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "GOG",
-        "description": "Current OS: \"${OLDGOGOS}\"||Current LANG: \"${OLDGOGLANG}||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",
+        "description": "Current OS: \"${OLDGOGOS}\"||Current LANG: \"${OLDGOGLANG}\"||WARNING: There is currently known issues with this tool,|see https://github.com/eddie3/gogrepo/issues/63||Please choose a task",
         "id":"gogrepo",
         "prompt": "",
         "type": "menu",
@@ -19,7 +19,18 @@
                 "args": ""
             },
             {
-                "index":"02",
+                "index": "02",
+                "title": "Install",
+                "description": "Download your GOG game installers",
+                "id": "gogrepo",
+                "prompt": "",
+                "type": "install",
+                "group": "",
+                "command": "gogrepo",
+                "args": ""
+            },
+            {
+                "index":"03",
                 "title": "Authentication",
                 "description": "Configure GOG authentication",
                 "id":"gogrepo-auth",
@@ -30,7 +41,7 @@
                 "args": "auth-chooser"
             },
             {
-                "index":"03",
+                "index":"04",
                 "title": "Select OS",
                 "description": "Change OS preferences",
                 "id":"gog-os-input",
@@ -41,7 +52,7 @@
                 "args": "select-os"
             },
             {
-                "index":"04",
+                "index":"05",
                 "title": "Select Lang",
                 "description": "Change Language preferences",
                 "id":"gog-lang-input",
@@ -52,7 +63,7 @@
                 "args": "select-lang"
             },
             {
-                "index":"05",
+                "index":"06",
                 "title": "Sync",
                 "description": "Syncronise my games list",
                 "id":"gog-sync-gameslist",
@@ -63,7 +74,7 @@
                 "args": "update-skip-known"
             },
             {
-                "index":"06",
+                "index":"07",
                 "title": "Single",
                 "description": "Download/update a single game",
                 "id":"gog-dl-one-game",
@@ -74,7 +85,7 @@
                 "args": "update-download-single"
             },
             {
-                "index":"07",
+                "index":"08",
                 "title": "All",
                 "description": "Download/update all games",
                 "id":"gog-dl-all-game",
@@ -85,7 +96,7 @@
                 "args": "download-all"
             },
             {
-                "index":"08",
+                "index":"09",
                 "title": "FULL",
                 "description": "Synchronise games list & download/update all games",
                 "id":"gog-dl-full-game",
@@ -96,7 +107,7 @@
                 "args": "update-download"
             },
             {
-                "index":"09",
+                "index":"99",
                 "title": "Documentation",
                 "description": "Read the service documentation",
                 "id":"",

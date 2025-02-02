@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "netatalk4",
-        "description": "Install netatalk4",
-        "id":"netatalk4_install",
+        "title": "ps3netsrv",
+        "description": "Install ps3netsrv",
+        "id":"ps3netsrv",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,89 +21,56 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install netatalk4",
-                "id":"netatalk4",
+                "description": "Install ps3netsrv",
+                "id":"ps3netsrv",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "netatalk4",
+                "command": "ps3netsrv",
                 "args": ""
             },
             {
                 "index":"20",
                 "title": "Start",
-                "description": "Start Netatalk service",
+                "description": "Start service",
                 "id":"",
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "netatalk",
+                "command": "ps3netsrv",
                 "args": ""
             },
             {
                 "index":"21",
                 "title": "Status",
-                "description": "Query Netatalk status",
+                "description": "Query service status",
                 "id":"",
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "netatalk",
+                "command": "ps3netsrv",
                 "args": ""
             },
             {
                 "index":"22",
                 "title": "Stop",
-                "description": "Stop the Netatalk service",
+                "description": "Stop the service",
                 "id":"",
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "netatalk",
+                "command": "ps3netsrv",
                 "args": ""
             },
             {
-                "index":"30",
-                "title": "Start",
-                "description": "Start AppleTalk service",
-                "id":"",
-                "prompt": "",
-                "type": "service_start",
-                "group":"",
-                "command": "atalkd",
-                "args": ""
-            },
-            {
-                "index":"31",
-                "title": "Status",
-                "description": "Query AppleTalk status",
-                "id":"",
-                "prompt": "",
-                "type":"service_status",
-                "group":"",
-                "command": "atalkd",
-                "args": ""
-            },
-            {
-                "index":"32",
-                "title": "Stop",
-                "description": "Stop the AppleTalk service",
-                "id":"",
-                "prompt": "",
-                "type": "service_stop",
-                "group":"",
-                "command": "atalkd",
-                "args": ""
-            },
-            {
-                "index":"05",
+                "index":"99",
                 "title": "Documentation",
                 "description": "Read the service documentation",
                 "id":"",
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "Netatalk.md",
+                "command": "ps3netsrv.md",
                 "args": ""
             }
         ]
