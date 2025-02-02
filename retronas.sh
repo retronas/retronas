@@ -84,7 +84,8 @@ export LANG=$(echo $LANG | sed -r 's/(\.| )UTF(-?)8//gi')
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
 then
-  echo -e "User $OLDRNUSER does not exist on this system\n opening the user config dialog"
+  echo -e "The currently configured USER $OLDRNUSER does not exist on this system you will now be prompted to update the config"
+  PAUSE
   cd $DIDIR
   bash d_input.sh update-user
 fi
@@ -93,7 +94,8 @@ fi
 getent group $OLDRNGROUP &>/dev/null
 if [ $? -ne 0 ]
 then
-  echo -e "Group $OLDRNGROUP does not exist on this system\n opening the group config dialog"
+  echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
+  PAUSE
   cd $DIDIR
   bash d_input.sh update-group
 fi
