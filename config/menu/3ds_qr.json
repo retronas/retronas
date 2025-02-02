@@ -61,6 +61,17 @@
                 "group":"",
                 "command": "set-retronas-net-3dsqr-interface",
                 "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "3DS-QR-codes.md",
+                "args": ""
             }
         ]
     }

@@ -775,6 +775,17 @@
         "group": "",
         "command": "zterm",
         "args": ""
+      },
+      {
+        "index": "71",
+        "title": "lynx",
+        "description": "Lynx terminal based web browser",
+        "id": "lynx",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "lynx",
+        "args": ""
       }
     ]
   }

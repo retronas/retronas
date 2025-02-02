@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "fenrir-ode-webserver",
                 "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "Fenrir-ODE-Webserver.md",
+                "args": ""
             }
         ]
     }

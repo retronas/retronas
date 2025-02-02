@@ -94,6 +94,17 @@
                 "group":"gogrepo",
                 "command": "gogrepo-wrapper",
                 "args": "update-download"
+            },
+            {
+                "index":"09",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "gogrepo.md",
+                "args": ""
             }
         ]
     },

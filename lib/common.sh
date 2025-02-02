@@ -259,6 +259,12 @@ READ_MENU_COMMAND() {
             menu)
                 "${MENU_SELECT}"
                 ;;
+            command)
+                bash -c "${MENU_SELECT}"
+                ;;
+            documentation)
+                RN_DOCUMENTATION "${MENU_SELECT}"
+                ;;
             *)
                 echo "Not supported, why are you here?"
                 PAUSE
@@ -354,6 +360,20 @@ RN_INSTALL_EXECUTE() {
     #ansible-playbook -vv "${PLAYBOOK}"
     cd ${DIDIR}
     unset PLAYBOOK
+}
+
+#
+# Run the pandoc/lynx
+#
+RN_DOCUMENTATION() {
+    source $_CONFIG
+    local DOCUMENTATION=$1
+
+    CLEAR
+    /opt/retronas/lib/markup_runner.sh "${DOCUMENTATION}"
+
+    cd ${DIDIR}
+    unset DOCUMENTATION
 }
 
 

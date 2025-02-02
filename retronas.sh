@@ -106,9 +106,19 @@ then
   git config pull.rebase false
   git reset --hard HEAD
   git pull
+
+  if [ -f "${RNDOC}/Ideas.md" ]
+  then
+    echo "Updating local documentation..."
+    cd $RNDOC
+    git pull
+    cd $RNDIR
+  fi
+
 else
-  echo "Skipping script updates, git operations were disabled"
+  echo "Skipping git updates, git operations were disabled"
 fi
+
 
 ### Make sure log dir exists
 [ ! -d $LOGDIR ] && mkdir $LOGDIR && chmod 755 $LOGDIR

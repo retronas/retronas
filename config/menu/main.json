@@ -73,7 +73,7 @@
                 "args": ""
             },
             {
-                "index": "99",
+                "index": "98",
                 "title": "Update",
                 "description": "Update core RetroNAS features",
                 "id":"update",
@@ -81,6 +81,17 @@
                 "type": "dialog",
                 "group":"",
                 "command": "update",
+                "args": ""
+            },
+            {
+                "index": "99",
+                "title": "Documentation",
+                "description": "View project documentation",
+                "id":"documentation",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "doc",
                 "args": ""
             }
         ]

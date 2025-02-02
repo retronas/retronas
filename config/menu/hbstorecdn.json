@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "hb-store-cdn",
                 "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "hb-store-cdn.md",
+                "args": ""
             }
         ]
     }

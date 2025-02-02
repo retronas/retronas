@@ -1,0 +1,26 @@
+# Dependencies
+- ansible.builtin.import_playbook: install_pandoc.yml
+- ansible.builtin.import_playbook: install_lynx.yml
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "retronas_docs"
+    - my_file: "install_retronas_docs"
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Clone local copy of RetroNAS wiki"
+    ansible.builtin.git:
+      repo: https://github.com/retronas/retronas.wiki.git
+      dest: "{{ retronas_root }}/doc"
+      update: no
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "retronas_docs"
+    module_state: "present"
