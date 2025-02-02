@@ -786,6 +786,17 @@
         "group": "",
         "command": "lynx",
         "args": ""
+      },
+      {
+        "index": "72",
+        "title": "documentation",
+        "description": "Install RetroNAS documentation",
+        "id": "documentation",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "doc",
+        "args": ""
       }
     ]
   }
