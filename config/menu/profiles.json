@@ -1,4 +1,4 @@
-{
+    {
     "menu": 
     {
         "title": "Installation Profile(s)",
@@ -19,14 +19,14 @@
                 "args": ""
             },
             {
-                "index":"02",
-                "title": "Login",
-                "description": "Configure GOG credentials",
-                "id":"gog-password-menu",
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
                 "prompt": "",
-                "type": "script",
-                "group":"gogrepo",
-                "command": "gogrepo_login",
+                "type": "documentation",
+                "group":"",
+                "command": "Profiles.md",
                 "args": ""
             }
         ]

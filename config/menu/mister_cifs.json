@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "retronas-mister-dirs.service",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "MiSTer-FPGA.md",
+                "args": ""
             }
         ]
     }

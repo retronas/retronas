@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "open-iscsi",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "iSCSI.md",
+                "args": ""
             }
         ]
     }

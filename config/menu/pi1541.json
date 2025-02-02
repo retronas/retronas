@@ -39,6 +39,17 @@
                 "group":"",
                 "command": "pi1541",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "PI1541.md",
+                "args": ""
             }
         ]
     }

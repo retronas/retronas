@@ -28,6 +28,17 @@
                 "group":"",
                 "command": "romimportsystem",
                 "args": ""
+            },
+            {
+                "index":"05",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "ROM-import.md",
+                "args": ""
             }
         ]
     }

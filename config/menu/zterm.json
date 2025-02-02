@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "zterm",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "zterm.md",
+                "args": ""
             }
         ]
     },

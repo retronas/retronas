@@ -76,6 +76,17 @@
                 "type": "service_status",
                 "group":"",
                 "command": "piscsi"
+            },
+            {
+                "index":"05",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "NEEDED.md",
+                "args": ""
             }
         ]
     }

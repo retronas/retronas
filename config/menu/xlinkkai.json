@@ -61,6 +61,17 @@
                 "group":"",
                 "command": "xlink-kai",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "XLink-Kai.md",
+                "args": ""
             }
         ]
     }
