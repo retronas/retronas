@@ -5,7 +5,7 @@ BINDIR="{{ retronas_root }}/bin"
 echo "Downloading seaweedfs..."
 TARFILE=linux_$(dpkg --print-architecture).tar.gz
 
-RELEASE=$( curl -kLs https://api.github.com/repos/seaweedfs/seaweedfs/releases | jq -r ".[0].assets | map(select(.name | match (\"^${TARFILE}$\")))[] | .browser_download_url" )
+RELEASE=$( curl -kLs https://api.github.com/repos/seaweedfs/seaweedfs/releases | jq -r ".[0].assets | map(select(.name | match (\"^${TARFILE}$\")))[-1] | .browser_download_url" )
 [ -z "$RELEASE" ] && echo "Couldn't get release" && exit 1
 
 echo $RELEASE

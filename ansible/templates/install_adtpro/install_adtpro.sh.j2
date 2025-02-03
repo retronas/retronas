@@ -7,7 +7,7 @@ DLDIR=$(mktemp -d)
 
 
 echo "Downloading adtpro release..."
-RELEASE=$( curl -kLs https://api.github.com/repos/ADTPro/adtpro/releases | jq -r ".[0].assets | map(select(.name | match (\".tar.gz\")))[] | .browser_download_url" )
+RELEASE=$( curl -kLs https://api.github.com/repos/ADTPro/adtpro/releases | jq -r ".[0].assets | map(select(.name | match (\".tar.gz\")))[-1] | .browser_download_url" )
 [ -z "$RELEASE" ] && echo "Couldn't get release file" && exit 1
 
 cd $DLDIR
