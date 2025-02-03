@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "Configuration",
-        "description": "Please select a configuration||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
+        "description": "Please select a configuration||NOTE: changes to these settings may require reinstallation of tools||Current RetroNAS settings| User/Group: \"${OLDRNUSER}\":\"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Branch: \"${OLDRNBRANCH}\"| \"${IPADDMSG}\"",
         "id":"config",
         "prompt": "Change",
         "type": "menu",
@@ -81,17 +81,6 @@
                 "type": "modal",
                 "group":"",
                 "command": "profiles",
-                "args": ""
-            },
-            {
-                "index":"09",
-                "title": "EtherDFS",
-                "description": "Set EtherDFS/ethflopd network interface",
-                "id":"set-etherdfs-nic",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-etherdfs-nic",
                 "args": ""
             }
         ]

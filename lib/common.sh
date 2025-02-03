@@ -493,12 +493,13 @@ DLG_MENUJ() {
     local MENU_BLURB=$3
 
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${MENU_BLURB}${IPADDMSGNO}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \
             --title "${APPNAME} ${TITLE} Menu" \
             --clear \
+            --no-shadow \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     declare -a MENU_ARRAY
@@ -532,12 +533,13 @@ DLG_MENU() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \
             --title "${APPNAME} ${TITLE} Menu" \
             --clear \
+            --no-shadow \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
@@ -553,12 +555,13 @@ DLG_YN() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --defaultno \
     --yesno "${MENU_DESC}" ${MW} ${MH})
 
@@ -575,12 +578,13 @@ DLG_DSELECT() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --dselect "${MENU_BLURB}" ${MW} ${MH})
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
@@ -596,12 +600,13 @@ DLG_INPUTBOX() {
     local MENU_BLURB=$2
     local MENU_INIT=$3
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --inputbox "${MENU_BLURB}" ${MW} ${MH} $MENU_INIT)
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
@@ -618,12 +623,13 @@ DLG_PASSWORD() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
         --backtitle "${APPNAME}" \
         --title "${APPNAME} ${TITLE} Menu" \
         --clear \
+        --no-shadow \
         --insecure \
         --passwordform "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
@@ -644,12 +650,13 @@ DLG_FORM() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
         --backtitle "${APPNAME}" \
         --title "${APPNAME} ${TITLE} Menu" \
         --clear \
+        --no-shadow \
         --form "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))

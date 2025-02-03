@@ -1,7 +1,7 @@
 {
   "menu": {
     "title": "Install",
-    "description": "Please select an option to install",
+    "description": "Please select a module installer",
     "id": "install",
     "prompt": "Install",
     "type": "menu",

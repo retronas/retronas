@@ -30,6 +30,17 @@
                 "args": ""
             },
             {
+                "index":"03",
+                "title": "EtherDFS",
+                "description": "Set EtherDFS/ethflopd network interface",
+                "id":"set-etherdfs-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-etherdfs-nic",
+                "args": ""
+            },
+            {
                 "index":"20",
                 "title": "Start",
                 "description": "Start service",
