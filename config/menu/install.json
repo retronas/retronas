@@ -19,7 +19,7 @@
       },
       {
         "index": "02",
-        "title": "3DS QR codes",
+        "title": "3ds qr codes",
         "description": "Nintendo 3DS FBI Homebrew installer",
         "id": "3ds_qr",
         "prompt": "",
@@ -52,6 +52,17 @@
       },
       {
         "index": "05",
+        "title": "amiga samba",
+        "description": "Samba share for SMBMounter",
+        "id": "smbmounter",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "smbmounter",
+        "args": ""
+      },
+      {
+        "index": "06",
         "title": "amitools",
         "description": "Various tools for using AmigaOS programs on other platforms",
         "id": "amitools",
@@ -62,7 +73,7 @@
         "args": ""
       },
       {
-        "index": "06",
+        "index": "07",
         "title": "analoguepocket-cifs",
         "description": "Samba for Analogue Pocket",
         "id": "analoguepocket-cifs",
@@ -73,7 +84,7 @@
         "args": ""
       },
       {
-        "index": "07",
+        "index": "08",
         "title": "apfs-fuse",
         "description": "Apple File System fuse library",
         "id": "apfs-fuse",
@@ -84,7 +95,7 @@
         "args": ""
       },
       {
-        "index": "08",
+        "index": "09",
         "title": "aria2",
         "description": "lightweight multi-protocol/source cli download utility",
         "id": "aria2",
@@ -95,7 +106,18 @@
         "args": ""
       },
       {
-        "index": "09",
+        "index": "10",
+        "title": "batocera",
+        "description": "Batocera CIFS config",
+        "id": "batocera-cifs",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "batocera_cifs",
+        "args": ""
+      },
+      {
+        "index": "11",
         "title": "cue2pops",
         "description": "Convert PS1 images for use with POPS",
         "id": "cue2pops",
@@ -105,7 +127,7 @@
         "command": "cue2pops"
       },
       {
-        "index": "10",
+        "index": "12",
         "title": "curlftpfs",
         "description": "Mount ftp server as a filesystem",
         "id": "curlftpfs",
@@ -116,8 +138,8 @@
         "args": ""
       },
       {
-        "index": "11",
-        "title": "Deluge",
+        "index": "13",
+        "title": "deluge",
         "description": "Deluge Web BitTorrent Client",
         "id": "deluge",
         "prompt": "",
@@ -127,7 +149,7 @@
         "args": ""
       },
       {
-        "index": "12",
+        "index": "14",
         "title": "dexdrive",
         "description": "Dex Drive block devices",
         "id": "dexdrive",
@@ -138,8 +160,8 @@
         "args": ""
       },
       {
-        "index": "13",
-        "title": "DiscImageCreator",
+        "index": "15",
+        "title": "discimagecreator",
         "description": "Disc Image Creator",
         "id": "disc-image-creator",
         "prompt": "",
@@ -149,7 +171,7 @@
         "args": ""
       },
       {
-        "index": "14",
+        "index": "16",
         "title": "documentation",
         "description": "Install RetroNAS documentation",
         "id": "documentation",
@@ -160,7 +182,7 @@
         "args": ""
       },
       {
-        "index": "15",
+        "index": "17",
         "title": "dreampi",
         "description": "dialup solution for dreamcast",
         "id": "dreampi",
@@ -171,7 +193,7 @@
         "args": ""
       },
       {
-        "index": "16",
+        "index": "18",
         "title": "emudeck-cifs",
         "description": "Samba for EmuDeck",
         "id": "emudeck-cifs",
@@ -182,9 +204,20 @@
         "args": ""
       },
       {
-        "index": "17",
-        "title": "EtherDFS",
-        "description": "lightweight layer 2 network file sharing for DOS",
+        "index": "19",
+        "title": "emuelec",
+        "description": "EmuElec CIFS config",
+        "id": "emuelec-cifs",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "emuelec_cifs",
+        "args": ""
+      },
+      {
+        "index": "20",
+        "title": "etherdfs",
+        "description": "EtherDFS a lightweight layer 2 network file sharing for DOS",
         "id": "etherdfs",
         "prompt": "",
         "type": "dialog",
@@ -193,7 +226,7 @@
         "args": ""
       },
       {
-        "index": "18",
+        "index": "21",
         "title": "ethflopd",
         "description": "lightweight layer 2 network floppy emulator for DOS",
         "id": "ethflopd",
@@ -204,7 +237,7 @@
         "args": ""
       },
       {
-        "index": "19",
+        "index": "22",
         "title": "extract-xiso",
         "description": "XISO Tool",
         "id": "extract-xiso",
@@ -214,7 +247,7 @@
         "command": "extract-xiso"
       },
       {
-        "index": "20",
+        "index": "23",
         "title": "far2l",
         "description": "far2l File Manager",
         "id": "far2l",
@@ -225,7 +258,7 @@
         "args": ""
       },
       {
-        "index": "21",
+        "index": "24",
         "title": "fenrir-ode-webserver",
         "description": "Fenrir-ODE Webserver",
         "id": "fenrir-ode-webserver",
@@ -236,8 +269,8 @@
         "args": ""
       },
       {
-        "index": "22",
-        "title": "FSP server",
+        "index": "25",
+        "title": "fsp",
         "description": "Nintendo GameCube + Swiss FSP server",
         "id": "fsp",
         "prompt": "",
@@ -247,7 +280,7 @@
         "args": ""
       },
       {
-        "index": "23",
+        "index": "26",
         "title": "gogrepo",
         "description": "Download your GOG game installers",
         "id": "gogrepo",
@@ -258,7 +291,7 @@
         "args": ""
       },
       {
-        "index": "24",
+        "index": "27",
         "title": "hb-store-cdn",
         "description": "Ps4 Homebrew Store CDN",
         "id": "hbstorecdn",
@@ -269,7 +302,7 @@
         "args": ""
       },
       {
-        "index": "25",
+        "index": "28",
         "title": "hdl-dump",
         "description": "Sony PS2 HDD Game management",
         "id": "hdldump",
@@ -279,7 +312,7 @@
         "command": "hdldump"
       },
       {
-        "index": "26",
+        "index": "29",
         "title": "hdparm",
         "description": "Manage hdd standby mode",
         "id": "hdparm",
@@ -290,7 +323,7 @@
         "args": ""
       },
       {
-        "index": "27",
+        "index": "30",
         "title": "kermit",
         "description": "kermit (server mode)",
         "id": "kermit",
@@ -301,7 +334,7 @@
         "args": ""
       },
       {
-        "index": "28",
+        "index": "31",
         "title": "laptop-ao",
         "description": "Disable hibernate/monitoring of laptop lid",
         "id": "laptop-ao",
@@ -312,7 +345,7 @@
         "args": ""
       },
       {
-        "index": "29",
+        "index": "32",
         "title": "lighttpd",
         "description": "HTTP/Web server",
         "id": "lighttpd",
@@ -323,7 +356,7 @@
         "args": ""
       },
       {
-        "index": "30",
+        "index": "33",
         "title": "linux-gadgets",
         "description": "Manage Linux OTG Gadgets",
         "id": "linux_gadgets",
@@ -334,9 +367,9 @@
         "args": ""
       },
       {
-        "index": "31",
-        "title": "Local Module",
-        "description": "Run local playbooks",
+        "index": "34",
+        "title": "local-module",
+        "description": "Run local ansible playbooks",
         "id": "run-local-module",
         "prompt": "Run",
         "type": "script-static",
@@ -345,7 +378,7 @@
         "args": ""
       },
       {
-        "index": "32",
+        "index": "35",
         "title": "lynx",
         "description": "Lynx terminal based web browser",
         "id": "lynx",
@@ -356,7 +389,7 @@
         "args": ""
       },
       {
-        "index": "33",
+        "index": "36",
         "title": "macproxy",
         "description": "Proxy for retro computers",
         "id": "macproxy",
@@ -367,7 +400,7 @@
         "args": ""
       },
       {
-        "index": "34",
+        "index": "37",
         "title": "mc",
         "description": "Midnight Commander (Norton clone)",
         "id": "mc",
@@ -378,7 +411,7 @@
         "args": ""
       },
       {
-        "index": "35",
+        "index": "38",
         "title": "megatools",
         "description": "command line client application for Mega",
         "id": "megatools",
@@ -389,7 +422,7 @@
         "args": ""
       },
       {
-        "index": "36",
+        "index": "39",
         "title": "minicom",
         "description": "minicom terminal",
         "id": "minicom",
@@ -400,8 +433,19 @@
         "args": ""
       },
       {
-        "index": "37",
-        "title": "NABU",
+        "index": "40",
+        "title": "mister",
+        "description": "MiSTer FPGA CIFS config",
+        "id": "mister_cifs",
+        "prompt": "",
+        "type": "dialog",
+        "group": "samba",
+        "command": "mister_cifs",
+        "args": ""
+      },
+      {
+        "index": "41",
+        "title": "nabu",
         "description": "NABU Internet Adapter",
         "id": "nabu",
         "prompt": "",
@@ -411,8 +455,8 @@
         "args": ""
       },
       {
-        "index": "38",
-        "title": "NBD client",
+        "index": "42",
+        "title": "nbd client",
         "description": "Network Block Device Client",
         "id": "nbd-client",
         "prompt": "",
@@ -421,8 +465,8 @@
         "command": "nbd-client"
       },
       {
-        "index": "39",
-        "title": "Netatalk2",
+        "index": "43",
+        "title": "netatalk2",
         "description": "AppleTalk and AppleShare file sharing (System6/OS8+)",
         "id": "netatalk2x",
         "prompt": "",
@@ -432,8 +476,8 @@
         "args": ""
       },
       {
-        "index": "40",
-        "title": "Netatalk3",
+        "index": "44",
+        "title": "netatalk3",
         "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)",
         "id": "netatalk3",
         "prompt": "",
@@ -443,7 +487,7 @@
         "args": ""
       },
       {
-        "index": "41",
+        "index": "45",
         "title": "netlink",
         "description": "Sega Saturn Netlink tunneling service",
         "id": "netlink",
@@ -454,8 +498,8 @@
         "args": ""
       },
       {
-        "index": "42",
-        "title": "NFS",
+        "index": "46",
+        "title": "nfs",
         "description": "NFS versions 2, 3 and 4",
         "id": "nfs",
         "prompt": "",
@@ -465,7 +509,7 @@
         "args": ""
       },
       {
-        "index": "43",
+        "index": "47",
         "title": "nginx",
         "description": "Install nginx with directory listing enabled",
         "id": "nginx",
@@ -476,7 +520,7 @@
         "args": ""
       },
       {
-        "index": "44",
+        "index": "48",
         "title": "ntp",
         "description": "Network Time Protocol Server",
         "id": "ntp",
@@ -487,7 +531,7 @@
         "args": ""
       },
       {
-        "index": "45",
+        "index": "49",
         "title": "open-iscsi",
         "description": "iSCSI support",
         "id": "open_iscsi",
@@ -498,8 +542,8 @@
         "args": ""
       },
       {
-        "index": "46",
-        "title": "OpenSSH",
+        "index": "50",
+        "title": "openssh",
         "description": "SSH/SFTP/SCP Secure Shell command line and file transfer",
         "id": "openssh",
         "prompt": "",
@@ -509,7 +553,7 @@
         "args": ""
       },
       {
-        "index": "47",
+        "index": "51",
         "title": "pfsshell/pfsfuse",
         "description": "PS2 HDD filesystem tools",
         "id": "pfsshell",
@@ -519,7 +563,7 @@
         "command": "pfsshell"
       },
       {
-        "index": "48",
+        "index": "52",
         "title": "pi1541",
         "description": "Setup a pi1541 SD card",
         "id": "pi1541",
@@ -529,8 +573,8 @@
         "command": "pi1541"
       },
       {
-        "index": "49",
-        "title": "PlayStation 3",
+        "index": "53",
+        "title": "playStation 3",
         "description": "ps3netsrv for CFW/HEN + webMAN-MOD",
         "id": "",
         "prompt": "ps3netsrv",
@@ -540,8 +584,8 @@
         "args": ""
       },
       {
-        "index": "50",
-        "title": "ProFTPd",
+        "index": "54",
+        "title": "proftpd",
         "description": "FTP, File Transfer Protocol file sharing",
         "id": "proftpd",
         "prompt": "",
@@ -551,7 +595,18 @@
         "args": ""
       },
       {
-        "index": "51",
+        "index": "55",
+        "title": "ps2",
+        "description": "OpenPS2Loader SMB config",
+        "id": "ps2_openps2loader",
+        "prompt": "",
+        "type": "install",
+        "group": "samba",
+        "command": "ps2_openps2loader",
+        "args": ""
+      },
+      {
+        "index": "56",
         "title": "pygopherd",
         "description": "Gopher protocol server",
         "id": "pygopherd",
@@ -562,7 +617,18 @@
         "args": ""
       },
       {
-        "index": "52",
+        "index": "57",
+        "title": "recalbox",
+        "description": "Recalbox CIFS config",
+        "id": "recalbox-cifs",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "recalbox_cifs",
+        "args": ""
+      },
+      {
+        "index": "58",
         "title": "redumper",
         "description": "Redumper project",
         "id": "redumper",
@@ -573,7 +639,18 @@
         "args": ""
       },
       {
-        "index": "53",
+        "index": "59",
+        "title": "retroarch",
+        "description": "RetroArch Based Systems CIFS config",
+        "id": "retroarch-cifs",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "retroarch_cifs",
+        "args": ""
+      },
+      {
+        "index": "60",
         "title": "retrodeck-cifs",
         "description": "Samba for RetroDeck",
         "id": "retrodeck-cifs",
@@ -584,8 +661,8 @@
         "args": ""
       },
       {
-        "index": "54",
-        "title": "ROM import",
+        "index": "61",
+        "title": "rom import",
         "description": "Import roms via Smokemonster SMDBs",
         "id": "romimport",
         "prompt": "Open",
@@ -595,8 +672,8 @@
         "args": ""
       },
       {
-        "index": "55",
-        "title": "SabreTools",
+        "index": "62",
+        "title": "sabretools",
         "description": "Dat Manager (x86_64 only)",
         "id": "sabretools",
         "prompt": "",
@@ -606,8 +683,8 @@
         "args": ""
       },
       {
-        "index": "56",
-        "title": "Samba",
+        "index": "63",
+        "title": "samba",
         "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing",
         "id": "samba",
         "prompt": "",
@@ -617,96 +694,8 @@
         "args": ""
       },
       {
-        "index": "57",
-        "title": "Samba for Amiga",
-        "description": "Samba share for SMBMounter",
-        "id": "smbmounter",
-        "prompt": "",
-        "type": "install",
-        "group": "",
-        "command": "smbmounter",
-        "args": ""
-      },
-      {
-        "index": "58",
-        "title": "Samba for Batocera",
-        "description": "Batocera CIFS config",
-        "id": "batocera-cifs",
-        "prompt": "",
-        "type": "install",
-        "group": "",
-        "command": "batocera_cifs",
-        "args": ""
-      },
-      {
-        "index": "59",
-        "title": "Samba for EmuElec",
-        "description": "EmuElec CIFS config",
-        "id": "emuelec-cifs",
-        "prompt": "",
-        "type": "install",
-        "group": "",
-        "command": "emuelec_cifs",
-        "args": ""
-      },
-      {
-        "index": "60",
-        "title": "Samba for MiSTer",
-        "description": "MiSTer FPGA CIFS config",
-        "id": "mister_cifs",
-        "prompt": "",
-        "type": "dialog",
-        "group": "samba",
-        "command": "mister_cifs",
-        "args": ""
-      },
-      {
-        "index": "61",
-        "title": "Samba for PS2",
-        "description": "OpenPS2Loader SMB config",
-        "id": "ps2_openps2loader",
-        "prompt": "",
-        "type": "install",
-        "group": "samba",
-        "command": "ps2_openps2loader",
-        "args": ""
-      },
-      {
-        "index": "62",
-        "title": "Samba for Recalbox",
-        "description": "Recalbox CIFS config",
-        "id": "recalbox-cifs",
-        "prompt": "",
-        "type": "install",
-        "group": "",
-        "command": "recalbox_cifs",
-        "args": ""
-      },
-      {
-        "index": "63",
-        "title": "Samba for RetroArch",
-        "description": "RetroArch Based Systems CIFS config",
-        "id": "retroarch-cifs",
-        "prompt": "",
-        "type": "install",
-        "group": "",
-        "command": "retroarch_cifs",
-        "args": ""
-      },
-      {
         "index": "64",
-        "title": "Samba for X360",
-        "description": "Microsoft XBox360 SMB config",
-        "id": "xbox360",
-        "prompt": "",
-        "type": "install",
-        "group": "samba",
-        "command": "xbox360",
-        "args": ""
-      },
-      {
-        "index": "65",
-        "title": "SeaweedFS",
+        "title": "seaweedfs",
         "description": "SeaweedFS for local S3 storage",
         "id": "seaweedfs",
         "prompt": "",
@@ -716,7 +705,7 @@
         "args": ""
       },
       {
-        "index": "66",
+        "index": "65",
         "title": "sslcert",
         "description": "Manage a self-signed ssl certificate",
         "id": "sslcert",
@@ -727,8 +716,8 @@
         "args": ""
       },
       {
-        "index": "67",
-        "title": "Syncthing",
+        "index": "66",
+        "title": "syncthing",
         "description": "File sync tool",
         "id": "syncthing",
         "prompt": "",
@@ -738,7 +727,7 @@
         "args": ""
       },
       {
-        "index": "68",
+        "index": "67",
         "title": "tcpser",
         "description": "Hayes modem emulator",
         "id": "tcpser",
@@ -749,8 +738,8 @@
         "args": ""
       },
       {
-        "index": "69",
-        "title": "Telnet",
+        "index": "68",
+        "title": "telnet",
         "description": "unencrypted remote access shell",
         "id": "telnet",
         "prompt": "",
@@ -760,7 +749,7 @@
         "args": ""
       },
       {
-        "index": "70",
+        "index": "69",
         "title": "tftpd-hpa",
         "description": "TFTP, Trivial File Transfer Protocol file sharing",
         "id": "tftpd-hpa",
@@ -771,8 +760,8 @@
         "args": ""
       },
       {
-        "index": "71",
-        "title": "TNFS",
+        "index": "70",
+        "title": "tnfs",
         "description": "Atari 8-bit and ZX Spectrum",
         "id": "tnfs",
         "prompt": "",
@@ -782,8 +771,19 @@
         "args": ""
       },
       {
+        "index": "71",
+        "title": "troubleshooting",
+        "description": "Troubleshooting tools, iperf3, tcpdump, ethtool, smarttools, etc",
+        "id": "troubleshooting",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "troubleshooting",
+        "args": ""
+      },
+      {
         "index": "72",
-        "title": "uCON64",
+        "title": "ucon64",
         "description": "Multipurpose Swiss Army Knife Backup/Copier tool",
         "id": "ucon64",
         "prompt": "",
@@ -793,7 +793,7 @@
       },
       {
         "index": "73",
-        "title": "WaybackProxy",
+        "title": "waybackproxy",
         "description": "Retrocomputer web proxy for Wayback and OOcities",
         "id": "waybackproxy",
         "prompt": "",
@@ -804,7 +804,7 @@
       },
       {
         "index": "74",
-        "title": "WebOne",
+        "title": "webone",
         "description": "HTTP 1.x proxy for a HTTP 2.x world",
         "id": "webone",
         "prompt": "",
@@ -826,6 +826,17 @@
       },
       {
         "index": "76",
+        "title": "x360",
+        "description": "Microsoft XBox360 SMB config",
+        "id": "xbox360",
+        "prompt": "",
+        "type": "install",
+        "group": "samba",
+        "command": "xbox360",
+        "args": ""
+      },
+      {
+        "index": "77",
         "title": "xboxmanager",
         "description": "Experimental xbox manager (cockpit)",
         "id": "xboxmanager",
@@ -836,7 +847,7 @@
         "args": ""
       },
       {
-        "index": "77",
+        "index": "78",
         "title": "xlink-kai",
         "description": "XLink Kai Gaming Network",
         "id": "xlinkkai",
@@ -847,7 +858,7 @@
         "args": ""
       },
       {
-        "index": "78",
+        "index": "79",
         "title": "ytree",
         "description": "Ytree File Manager (Xtree clone)",
         "id": "ytree",
@@ -858,7 +869,7 @@
         "args": ""
       },
       {
-        "index": "79",
+        "index": "80",
         "title": "zterm",
         "description": "Zmodem transfer suite",
         "id": "zterm",
