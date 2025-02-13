@@ -9,6 +9,7 @@ source ${LIBDIR}/common.sh
 
 DISABLE_GITOPS=0
 CF="$ANCFG"
+TCHOICE=""
 
 #
 # CHECK we are running as ROOT
@@ -25,7 +26,7 @@ _usage() {
   exit 0
 }
 
-OPTSTRING="hdgt:"
+OPTSTRING="hdgvat:"
 while getopts $OPTSTRING ARG
 do
   case $ARG in
@@ -37,6 +38,12 @@ do
       ;;
     t)
       TCHOICE=${"":-OPTARG}
+      ;;
+    v)
+      TCHOICE=vt100
+      ;;
+    a)
+      TICHOICE="ASK"
       ;;
     d)
       # redisplay agreement
@@ -127,7 +134,7 @@ fi
 
 ### Set term emulation,
 RNSECONDS=3
-if [ -z $TCHOICE ]
+if [ "${TICHOICE}" == "ASK" ]
 then
   CLEAR
   echo
