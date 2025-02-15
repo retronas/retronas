@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -x
+
+PAT_ARM="linux.arm64_.*tar.gz"
+PAT_X86="linux.x86_64.tar.gz"
+DEST=/opt/retro-aim-server
+DESTFILE=retro-aim-server.tar.gz
+
+case $(uname -m) in
+	aarch64)
+		PAT=$PAT_ARM
+	;;
+	x86_64)
+		PAT=$PAT_X86
+	;;
+	*)
+	echo "Unknown architecture $(uname -m)"
+esac
+
+RELEASE=$( curl -kLs https://api.github.com/repos/mk6i/retro-aim-server/releases | jq -r ".[0].assets | map(select(.name | match (\"${PAT}\")))[-1] | .browser_download_url" )
+
+if [ ! -z $RELEASE ]
+then
+	curl -JLo $TMPDIR/$DESTFILE "${RELEASE}"
+fi
+
+[ ! -d $DEST ] && mkdir -p $DEST
+
+if [ -f $TMPDIR/$DESTFILE ]
+then
+	tar -xvf $TMPDIR/$DESTFILE -C $DEST --strip=1
+fi
+
+chown -R {{ retronas_user }}:{{ retronas_group }} $DEST
+chmod +x $DEST/retro_aim_server

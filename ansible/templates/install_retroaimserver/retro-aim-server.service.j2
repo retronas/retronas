@@ -1,0 +1,17 @@
+[Unit]
+Description=retro-aim-server
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+User={{ retronas_user }}
+WorkingDirectory=/opt/retro-aim-server
+ExecStart=/opt/retro-aim-server/retro_aim_server
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+[Install]
+WantedBy=multi-user.target

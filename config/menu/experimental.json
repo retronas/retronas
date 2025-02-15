@@ -91,6 +91,17 @@
                 "group": "netatalk",
                 "command": "netatalk4",
                 "args": ""
+            },
+            {
+                "index": "09",
+                "title": "RAS",
+                "description": "Retro AIM/ICQ Server",
+                "id": "retroaimserver",
+                "prompt": "",
+                "type": "dialog",
+                "group": "retroaimserver",
+                "command": "retroaimserver",
+                "args": ""
             }
         ]
     }
