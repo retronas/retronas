@@ -31,29 +31,7 @@
             },
             {
                 "index": "03",
-                "title": "UDPBD",
-                "description": "PS2 block device service",
-                "id":"ps2_udpbd",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "ps2_udpbd",
-                "args": ""
-            },
-            {
-                "index": "04",
-                "title": "Sidecart",
-                "description": "Atari ST sidecart support",
-                "id":"sidecart",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "atarist-sidecart",
-                "args": ""
-            },
-            {
-                "index": "05",
-                "title": "Network",
+                "title": "network",
                 "description": "Network presets (highly experimental!)",
                 "id":"network",
                 "prompt": "",
@@ -62,28 +40,8 @@
                 "command": "network"
             },
             {
-                "index": "06",
-                "title": "piscsi",
-                "description": "PISCSI project",
-                "id":"piscsi",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "piscsi"
-            },
-            {
-                "index": "07",
-                "title": "assembly64",
-                "description": "assembly64 project (requires account)",
-                "id":"assembly64",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "assembly64"
-            },
-            {
-                "index": "08",
-                "title": "Netatalk4",
+                "index": "04",
+                "title": "netatalk4",
                 "description": "Apple AFP file sharing / AppleTalk, etc",
                 "id": "netatalk4",
                 "prompt": "",
@@ -93,8 +51,8 @@
                 "args": ""
             },
             {
-                "index": "09",
-                "title": "RAS",
+                "index": "05",
+                "title": "ras",
                 "description": "Retro AIM/ICQ Server",
                 "id": "retroaimserver",
                 "prompt": "",

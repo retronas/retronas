@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "RAS",
-        "description": "Install Retro Aim Server",
+        "description": "Install Retro Aim Server||You must have configured your retro network interface address in the Network menu before installing this service",
         "id":"retroaimserver",
         "prompt": "",
         "type": "menu",

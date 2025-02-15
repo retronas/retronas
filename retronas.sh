@@ -23,6 +23,8 @@ _usage() {
   echo "-g disable git operations"
   echo "-l show license"
   echo "-t terminal choice (current|vterm)"
+  echo "-v run in vt100 mode"
+  echo "-a ask for terminal selection at statup"
   exit 0
 }
 

@@ -169,7 +169,7 @@ READ_MENU_JSON() {
 
     if [ -f ${RNJSON}/${MENU_TITLE}.json ]
     then
-        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description)|\(.type)\"")
     elif [ -f ${RNJSONOLD} ]
     then
         export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
@@ -492,7 +492,6 @@ DLG_MENUJ() {
     local MENU_H=$2
     local MENU_BLURB=$3
 
-
     local MENU_DESC="${MENU_BLURB}${IPADDMSGNO}"
 
     DIALOG=(dialog \
@@ -505,12 +504,12 @@ DLG_MENUJ() {
     declare -a MENU_ARRAY
     while IFS=";" read -r ITEM
     do
-
         INDEX=$(echo $ITEM    | cut -d"|" -f1 | tr -d "\n" | sed 's/\s$//') 
         TITLE=$(echo $ITEM    | cut -d"|" -f2 | tr -d "\n" | sed 's/\s$//') 
         DESC=$(echo $ITEM     | cut -d"|" -f3 | tr -d "\n" | sed 's/\s$//') 
-        #COMMAND=$(echo $ITEM | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
+        TYPE=$(echo $ITEM     | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
 
+        [ "${TYPE}"  == "dialog" ] && DESC="${DESC} >>"
         MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
 
 
