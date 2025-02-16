@@ -1,0 +1,72 @@
+[General]
+        Import_FILEBONE.NA = true
+        MassUpload         = true
+
+[Import_FILEBONE.NA]
+
+        ; filename of filebone.na
+
+        filename = retronas.na
+
+        ; root directory to create file paths under.  when a new filebone echo
+        ; is found, mUtil will create a file using "root_dir" + areatag.  So
+        ; for example if root is "c:\mystic\filebase\" and the areatag is
+        ; MYSTICBBS it will create "c:\mystic\filebase\MYSTICBBS".  This root
+        ; directory MUST exist.
+
+        root_dir = /data/retronas/roms
+
+        ; Use echotag for base description and FTP name
+
+        use_echotag = false
+
+        ; Convert tags to lower case for filebase base filename/dir
+        ; True or 1 for yes, false or 0 for no
+
+        lowercase_filename = false
+
+        ; Default values when creating a new file base
+
+        dispfile     =
+        template     = ansiflst
+        acs_list     =
+        acs_ftp      =
+        acs_download =
+        acs_upload   =
+        acs_hatch    =
+        acs_sysop    = s255
+
+        ; true/false type values 0=false 1=true (newscan 2=forced)
+        ; true/false type values 0=false 1=true (newscan 2=forced)
+
+        new_scan      = 1
+        free_files    = 0
+        show_uploader = 1
+        anon_ftp      = 0
+
+[MassUpload]
+
+        ; this function searches all configured file directories for new
+        ; files and will upload them into the BBS.  It will attempt to
+        ; import FILE_ID.DIZ using the configured archivers if the option
+        ; is enabled.
+
+        ; Name to save has the uploader
+
+        uploader_name = RetroNAS
+
+        ; Import FILE_ID.DIZ?  1=yes
+
+        import_fileid = 1
+
+        ; Rename filenames that are longer than the maximum allowed length
+        length_rename = false
+
+        ; No description string used when no FILE_ID.DIZ is imported.
+
+        no_description = No Description
+
+        ; Ignore list one file mask per line (allows * and ? wildcards)
+
+        ignore = files.bbs
+        ;ignore = *.readme

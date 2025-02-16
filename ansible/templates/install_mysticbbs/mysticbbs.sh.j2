@@ -2,6 +2,7 @@
 
 
 MODE=${1:-config}
+FA_CREATED=retronas.filesareas_done
 
 cd /opt/mysticbbs
 
@@ -9,6 +10,22 @@ case $MODE in
     local)
         ./mystic -l
        ;;
+    filearea)
+        if [ -f $FA_CREATED ]
+        then
+            echo "File areas for RetroNAS have already been imported, running this again will result in duplicate fileareas"
+            echo "If you are sure, remove the file $FA_CREATED and run this option again"
+            exit
+        fi
+
+        if [ -f retronas.ini ]
+        then
+            [ -f retronas.na ] && mv retronas.na retronas.na.$(date +'%s')
+            python3 create_filebone_na.py > retronas.na
+            ./mutil retronas.ini
+            touch $FA_CREATED
+        fi
+        ;;
     *)
         ./mystic -cfg
         ;;
