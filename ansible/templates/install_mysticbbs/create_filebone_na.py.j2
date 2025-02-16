@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# 
+# https://git.shipoclu.com/moon/enigma-bbs/src/commit/60369ea378be82cd76ba954577b9bd34dec919a3/core/oputil/oputil_file_base.js
+# https://web.archive.org/web/20060507083451/http://www.filegate.net/info/filegate.zxx
+#
 
 import os, yaml
 
@@ -24,7 +28,7 @@ def main():
                 if item["pretty_name"] != "":
                     d = item["src"]
                     n = item["pretty_name"]
-                    print(f"Area {d}  0     !      {n}")
+                    print(f"Area {d}  0     !      RTNS: {n}")
     print("%")
     print("% End of RetroNAS Fileecho List")
 
