@@ -60,6 +60,17 @@
                 "group": "retroaimserver",
                 "command": "retroaimserver",
                 "args": ""
+            },
+            {
+                "index": "06",
+                "title": "mystic",
+                "description": "Mystic BBS",
+                "id": "mysticbbs",
+                "prompt": "",
+                "type": "dialog",
+                "group": "mysticbbs",
+                "command": "mysticbbs",
+                "args": ""
             }
         ]
     }

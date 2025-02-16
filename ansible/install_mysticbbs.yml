@@ -1,0 +1,55 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "mysticbbs"
+    - my_file: "install_mysticbbs"
+
+    - my_packages:
+      - p7zip-full
+      - p7zip-rar
+      - screen
+
+    - templates:
+      - { name: "mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "install_mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "mysticbbs-mis.service", dest: "/etc/systemd/system" }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Enable non-free repo for p7zip-rar"
+    ansible.builtin.apt_repository:
+      repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
+      state: present
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - install mysticbbs"
+    ansible.builtin.command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+      creates: "/opt/mysticbbs"
+
+  - name: "{{ my_name }} - daemon-reload"
+    ansible.builtin.command:
+      cmd: "systemctl daemon-reload"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "mysticbbs"
+    module_state: "present"

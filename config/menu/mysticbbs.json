@@ -1,0 +1,100 @@
+{
+    "menu": 
+    {
+        "title": "Mystic BBS",
+        "description": "Install Mystic BBS||NOTE: BBS software configuration is a manual experience, after installation create user in local mode, configure your system. Once configuration is complete start the server",
+        "id":"mysticbbs",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install Mystic BBS",
+                "id":"mysticbbs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "mysticbbs",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Local",
+                "description": "Run Mystic BBS local mode",
+                "id":"mysticbbs",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "mysticbbs",
+                "args": "local"
+            },
+            {
+                "index":"04",
+                "title": "Config",
+                "description": "Mystic BBS configuration",
+                "id":"mysticbbs",
+                "prompt": "",
+                "type": "script",
+                "group":"",
+                "command": "mysticbbs",
+                "args": "config"
+            },
+            {
+                "index":"20",
+                "title": "Start",
+                "description": "Start mis service",
+                "id":"",
+                "prompt": "",
+                "type": "service_enable_start",
+                "group":"",
+                "command": "mysticbbs-mis",
+                "args": ""
+            },
+            {
+                "index":"21",
+                "title": "Status",
+                "description": "Query service status",
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "mysticbbs-mis",
+                "args": ""
+            },
+            {
+                "index":"22",
+                "title": "Stop",
+                "description": "Stop the service",
+                "id":"",
+                "prompt": "",
+                "type": "service_disable_stop",
+                "group":"",
+                "command": "mysticbbs-mis",
+                "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "mysticbbs.md",
+                "args": ""
+            }
+        ]
+    }
+}

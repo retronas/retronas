@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+MODE=${1:-config}
+
+cd /opt/mysticbbs
+
+case $MODE in
+    local)
+        ./mystic -l
+       ;;
+    *)
+        ./mystic -cfg
+        ;;
+esac
