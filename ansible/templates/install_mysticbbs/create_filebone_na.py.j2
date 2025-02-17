@@ -9,15 +9,18 @@
 #
 ## based on 
 # - lastcallers.py : (CC No-By)2019-2034 Dallas Makerspace, Some Rights Reserved : Authors: Dwight Spencer (denzuko) <denzuko@dallasmakerspace.org>
-# -  mystic_library.php : netsurge : mysphp14.zip
+# - mystic_library.php : netsurge : mysphp14.zip
 
 import os, yaml
 from struct import Struct
 
 RN_SYSTEMS="{{ retronas_root }}/ansible/retronas_systems.yml"
-fbase_t = Struct("I ? 40s 60s 40s 30s 40s 20s 30s 30s 30s 30s 30s 30s 60s 54?")
-BYTES=640
+RN_BASE="{{ retronas_path }}/roms/"
 
+# NOTE: this is not a comprehensive intepretation of the data, just enough for what we need
+fbase_t = Struct("I 60s ? 60s ? 61s ? 175s ? 61s ? 80s ? 8s ? ? 123s")
+
+BYTES=640
 
 ignored = [
     'system_map', 
@@ -37,14 +40,15 @@ def yaml_data():
     return data
 
 
-def filebone(data={}, fa=[]):
+def filebone(data={}, fa={}):
     # output the filebone.na format
     print("% File Echo                   Description")
     print("%")
     for item in data:
         d = item["src"]
         n = item["pretty_name"]
-        if n not in fa:
+        ad = os.path.join(RN_BASE,d)
+        if ad not in fa.values():
             print(f"Area {d}  0     !      RTNS: {n}")
     print("%")
     print("% End of RetroNAS Fileecho List")
@@ -56,8 +60,7 @@ def fileareas(dat="fbases.dat"):
     if not os.path.exists(dat):
         return []
 
-    fileareas_mystic = []
-    fileareas = []
+    fileareas = {}
 
     filesize = os.stat(dat).st_size
     records = int(filesize / BYTES)
@@ -68,13 +71,10 @@ def fileareas(dat="fbases.dat"):
 
     for record in range(1, records):
         filearea = fbase_t.unpack_from(ba[record])
-        fname = filearea[3].decode().rstrip('\x00')
-        fileareas_mystic.append(fname)
-
-    # fix fileareas
-    for area in fileareas_mystic:
-        pieces = area.split(":")
-        fileareas.append(pieces[-1].replace("_"," ").lstrip())
+        fname = filearea[3].decode().strip('\x00')[1:]
+        fname = fname.split(":")[-1].replace("_", " ").lstrip()
+        fpath = filearea[11].decode().strip('\x00')[:-1]
+        fileareas[fname] = fpath
 
     return fileareas
 
