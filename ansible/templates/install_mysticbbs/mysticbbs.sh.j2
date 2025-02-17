@@ -4,6 +4,8 @@
 MODE=${1:-config}
 FA_CREATED=retronas.filesareas_done
 
+[ ! -f /opt/mysticbbs/mystic ] && echo "Mystic is not installed" && exit 1
+
 cd /opt/mysticbbs
 
 case $MODE in
@@ -11,20 +13,24 @@ case $MODE in
         ./mystic -l
        ;;
     filearea)
-        if [ -f $FA_CREATED ]
-        then
-            echo "File areas for RetroNAS have already been imported, running this again will result in duplicate fileareas"
-            echo "If you are sure, remove the file $FA_CREATED and run this option again"
-            exit
-        fi
+        #if [ -f $FA_CREATED ]
+        #then
+        #    echo "File areas for RetroNAS have already been imported, running this again will result in duplicate fileareas"
+        #    echo "If you are sure, remove the file $FA_CREATED and run this option again"
+        #    exit
+        #fi
 
-        if [ -f retronas.ini ]
+        if [ -f retronas_create_fileareas.ini ]
         then
             [ -f retronas.na ] && mv retronas.na retronas.na.$(date +'%s')
             python3 create_filebone_na.py > retronas.na
-            ./mutil retronas.ini
+            ./mutil retronas_create_fileareas.ini
+            rm retronas.na
             touch $FA_CREATED
         fi
+        ;;
+    upload)
+        ./mutil retronas_massupload.ini
         ;;
     *)
         ./mystic -cfg

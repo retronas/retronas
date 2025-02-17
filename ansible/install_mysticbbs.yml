@@ -14,8 +14,9 @@
       - { name: "mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
       - { name: "install_mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
       - { name: "mysticbbs-mis.service", dest: "/etc/systemd/system", force: "yes" }
-      - { name: "retronas.ini", dest: "/opt/mysticbbs" }
-      - { name: "create_filebone_na.py", dest: "/opt/mysticbbs" }
+      - { name: "retronas_create_fileareas.ini", dest: "/opt/mysticbbs", force: "yes" }
+      - { name: "retronas_massupload.ini", dest: "/opt/mysticbbs", force: "yes" }
+      - { name: "create_filebone_na.py", dest: "/opt/mysticbbs", force: "yes" }
 
   tasks:
 
