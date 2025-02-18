@@ -1,0 +1,29 @@
+#!/bin/bash
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+DROP_ROOT
+
+MODE=${1:-config}
+SESSION=mtcp-netdrive
+
+[ ! -f /opt/mtcp-netdrive/netdrive ] && echo "mTCP Netdrive is not installed" && exit 1
+
+cd /opt/mtcp-netdrive/
+
+case $MODE in
+    console)
+        $SUCOMMAND /usr/bin/screen -x $SESSION
+        ;;
+    start)
+        $SUCOMMAND /usr/bin/screen -dmS $SESSION ./netdrive -log_file /opt/mtcp-netdrive/log.txt serve -image_dir /data/retronas/roms/microsoft/dos/
+        ;;
+    stop)
+        $SUCOMMAND /usr/bin/screen -S $SESSION -X stuff "quit^M"
+        ;;
+    *)
+        exit
+        ;;
+esac

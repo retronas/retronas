@@ -1,0 +1,38 @@
+#!/bin/bash
+
+VERSION=${1:-2025-01-10}
+
+ARCBIN=https://www.brutman.com/mTCP/download/mTCP_NetDrive_server-bin_${VERSION}.zip
+DEST=/opt/mtcp-netdrive
+LZIP=mtcp.zip
+
+# download
+if [ ! -f ${TMPDIR}/${LZIP} ]
+then
+	curl -JLo${TMPDIR}/${LZIP} "${ARCBIN}"
+fi
+
+# extract
+if [ -f ${TMPDIR}/${LZIP} ]
+then
+    unzip -j -d $DEST ${TMPDIR}/${LZIP}
+fi
+
+case $(uname -m) in
+	aarch64)
+		BIN=netdrive_linux_arm64
+	;;
+	x86_64)
+		BIN=netdrive_linux_amd64
+	;;
+	*)
+	echo "Unknown architecture $(uname -m)"
+esac
+
+if [ -f "${DEST}/${BIN}" ]
+then
+    chmod +x "${DEST}/${BIN}"
+    ln -sf "${DEST}/${BIN}"  "${DEST}/netdrive"
+fi
+
+chown -R {{ retronas_user }}:{{ retronas_group }} $DEST

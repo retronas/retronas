@@ -1,0 +1,101 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "mtcp-netdrive"
+    - my_file: "install_mtcp-netdrive"
+
+    - my_packages:
+      - p7zip-full
+      - p7zip-rar
+      - screen
+
+    - templates:
+      - { name: "install_mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
+      - { name: "mtcp-netdrive.service", dest: "/etc/systemd/system", force: "yes" }
+      - { name: "mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
+
+
+    - firewalld_rules:
+      - { zones: retro, service: mtcp-netdrive }
+
+    - my_services:
+      - mtcp-netdrive
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Enable non-free repo for p7zip-rar"
+    ansible.builtin.apt_repository:
+      repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
+      state: present
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - mtcp-netdrive dir"
+    ansible.builtin.file:
+      path: "/opt/mtcp-netdrive"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - install mtcp-netdrive"
+    ansible.builtin.command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+
+  - name: "{{ my_name }} - enable startup services"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+      daemon-reload: yes
+    with_items: "{{ my_services }}"
+
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - Generate firewall service"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/mtcp-netdrive.xml.j2"
+      dest: "/etc/firewalld/services/mtcp-netdrive.xml"
+      owner: root
+      group: root
+      mode: 0644
+    when: firewalld_services.stat.exists
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('mtcp-netdrive') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
+
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "mtcp-netdrive"
+    module_state: "present"

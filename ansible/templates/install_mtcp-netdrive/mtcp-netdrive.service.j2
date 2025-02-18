@@ -1,0 +1,17 @@
+[Unit]
+Description=mTCP Netdrive
+Requires=network.target
+After=network.target
+
+[Service]
+Type=forking
+User={{ retronas_user }}
+WorkingDirectory=/opt/mtcp-netdrive
+ExecStart={{ retronas_root }}/scripts/mtcp-netdrive.sh start
+ExecStop={{ retronas_root }}/scripts/mtcp-netdrive.sh stop
+# only because somewhere in the chain screen decides to report failure
+SuccessExitStatus=1
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
