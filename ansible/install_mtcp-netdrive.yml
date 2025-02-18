@@ -6,9 +6,9 @@
     - my_file: "install_mtcp-netdrive"
 
     - my_packages:
-      - p7zip-full
-      - p7zip-rar
       - screen
+      - curl
+      - unzip
 
     - templates:
       - { name: "install_mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
@@ -26,11 +26,6 @@
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Enable non-free repo for p7zip-rar"
-    ansible.builtin.apt_repository:
-      repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
-      state: present
 
   - name: "{{ my_name }} - Install packages"
     ansible.builtin.package:
