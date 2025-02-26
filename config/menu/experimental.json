@@ -60,28 +60,6 @@
                 "group": "retroaimserver",
                 "command": "retroaimserver",
                 "args": ""
-            },
-            {
-                "index": "06",
-                "title": "mystic",
-                "description": "Mystic BBS",
-                "id": "mysticbbs",
-                "prompt": "",
-                "type": "dialog",
-                "group": "mysticbbs",
-                "command": "mysticbbs",
-                "args": ""
-            },
-            {
-                "index": "07",
-                "title": "netdrive",
-                "description": "mTCP Netdrive",
-                "id": "mtcp-netdrive",
-                "prompt": "",
-                "type": "dialog",
-                "group": "mtcp-netdrive",
-                "command": "mtcp-netdrive",
-                "args": ""
             }
         ]
     }

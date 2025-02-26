@@ -455,6 +455,17 @@
       },
       {
         "index": "42",
+        "title": "mystic",
+        "description": "Mystic BBS",
+        "id": "mysticbbs",
+        "prompt": "",
+        "type": "dialog",
+        "group": "mysticbbs",
+        "command": "mysticbbs",
+        "args": ""
+      },
+      {
+        "index": "43",
         "title": "nabu",
         "description": "NABU Internet Adapter",
         "id": "nabu",
@@ -465,7 +476,7 @@
         "args": ""
       },
       {
-        "index": "43",
+        "index": "44",
         "title": "nbd client",
         "description": "Network Block Device Client",
         "id": "nbd-client",
@@ -475,7 +486,7 @@
         "command": "nbd-client"
       },
       {
-        "index": "44",
+        "index": "45",
         "title": "netatalk2",
         "description": "AppleTalk and AppleShare file sharing (System6/OS8+)",
         "id": "netatalk2x",
@@ -486,7 +497,7 @@
         "args": ""
       },
       {
-        "index": "45",
+        "index": "46",
         "title": "netatalk3",
         "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)",
         "id": "netatalk3",
@@ -497,7 +508,18 @@
         "args": ""
       },
       {
-        "index": "46",
+        "index": "47",
+        "title": "netdrive",
+        "description": "mTCP Netdrive",
+        "id": "mtcp-netdrive",
+        "prompt": "",
+        "type": "dialog",
+        "group": "mtcp-netdrive",
+        "command": "mtcp-netdrive",
+        "args": ""
+      },
+      {
+        "index": "48",
         "title": "netlink",
         "description": "Sega Saturn Netlink tunneling service",
         "id": "netlink",
@@ -508,7 +530,7 @@
         "args": ""
       },
       {
-        "index": "47",
+        "index": "49",
         "title": "nfs",
         "description": "NFS versions 2, 3 and 4",
         "id": "nfs",
@@ -519,7 +541,7 @@
         "args": ""
       },
       {
-        "index": "48",
+        "index": "50",
         "title": "nginx",
         "description": "Install nginx with directory listing enabled",
         "id": "nginx",
@@ -530,7 +552,7 @@
         "args": ""
       },
       {
-        "index": "49",
+        "index": "51",
         "title": "ntp",
         "description": "Network Time Protocol Server",
         "id": "ntp",
@@ -541,7 +563,7 @@
         "args": ""
       },
       {
-        "index": "50",
+        "index": "52",
         "title": "open-iscsi",
         "description": "iSCSI support",
         "id": "open_iscsi",
@@ -552,7 +574,7 @@
         "args": ""
       },
       {
-        "index": "51",
+        "index": "53",
         "title": "openssh",
         "description": "SSH/SFTP/SCP Secure Shell command line and file transfer",
         "id": "openssh",
@@ -563,7 +585,7 @@
         "args": ""
       },
       {
-        "index": "52",
+        "index": "54",
         "title": "pfsshell/pfsfuse",
         "description": "PS2 HDD filesystem tools",
         "id": "pfsshell",
@@ -573,7 +595,7 @@
         "command": "pfsshell"
       },
       {
-        "index": "53",
+        "index": "55",
         "title": "pi1541",
         "description": "Setup a pi1541 SD card",
         "id": "pi1541",
@@ -583,7 +605,7 @@
         "command": "pi1541"
       },
       {
-        "index": "54",
+        "index": "56",
         "title": "piscsi",
         "description": "PISCSI project",
         "id": "piscsi",
@@ -593,7 +615,7 @@
         "command": "piscsi"
       },
       {
-        "index": "55",
+        "index": "57",
         "title": "playStation 3",
         "description": "ps3netsrv for CFW/HEN + webMAN-MOD",
         "id": "",
@@ -604,7 +626,7 @@
         "args": ""
       },
       {
-        "index": "56",
+        "index": "58",
         "title": "proftpd",
         "description": "FTP, File Transfer Protocol file sharing",
         "id": "proftpd",
@@ -615,7 +637,7 @@
         "args": ""
       },
       {
-        "index": "57",
+        "index": "59",
         "title": "ps2",
         "description": "OpenPS2Loader SMB config",
         "id": "ps2_openps2loader",
@@ -626,7 +648,7 @@
         "args": ""
       },
       {
-        "index": "58",
+        "index": "60",
         "title": "pygopherd",
         "description": "Gopher protocol server",
         "id": "pygopherd",
@@ -637,7 +659,7 @@
         "args": ""
       },
       {
-        "index": "59",
+        "index": "61",
         "title": "recalbox",
         "description": "Recalbox CIFS config",
         "id": "recalbox-cifs",
@@ -648,7 +670,7 @@
         "args": ""
       },
       {
-        "index": "60",
+        "index": "62",
         "title": "redumper",
         "description": "Redumper project",
         "id": "redumper",
@@ -659,7 +681,7 @@
         "args": ""
       },
       {
-        "index": "61",
+        "index": "63",
         "title": "retroarch",
         "description": "RetroArch Based Systems CIFS config",
         "id": "retroarch-cifs",
@@ -670,7 +692,7 @@
         "args": ""
       },
       {
-        "index": "62",
+        "index": "64",
         "title": "retrodeck-cifs",
         "description": "Samba for RetroDeck",
         "id": "retrodeck-cifs",
@@ -681,7 +703,7 @@
         "args": ""
       },
       {
-        "index": "63",
+        "index": "65",
         "title": "rom import",
         "description": "Import roms via Smokemonster SMDBs",
         "id": "romimport",
@@ -692,7 +714,7 @@
         "args": ""
       },
       {
-        "index": "64",
+        "index": "66",
         "title": "sabretools",
         "description": "Dat Manager (x86_64 only)",
         "id": "sabretools",
@@ -703,7 +725,7 @@
         "args": ""
       },
       {
-        "index": "65",
+        "index": "67",
         "title": "samba",
         "description": "LANMan, NTLMv1/v2, NetBIOS, SMB1/2/3, CIFS file sharing",
         "id": "samba",
@@ -714,7 +736,7 @@
         "args": ""
       },
       {
-        "index": "66",
+        "index": "68",
         "title": "seaweedfs",
         "description": "SeaweedFS for local S3 storage",
         "id": "seaweedfs",
@@ -725,7 +747,7 @@
         "args": ""
       },
       {
-        "index": "67",
+        "index": "69",
         "title": "sidecart",
         "description": "Atari ST sidecart support",
         "id": "sidecart",
@@ -736,7 +758,7 @@
         "args": ""
       },
       {
-        "index": "68",
+        "index": "70",
         "title": "sslcert",
         "description": "Manage a self-signed ssl certificate",
         "id": "sslcert",
@@ -747,7 +769,7 @@
         "args": ""
       },
       {
-        "index": "69",
+        "index": "71",
         "title": "syncthing",
         "description": "File sync tool",
         "id": "syncthing",
@@ -758,7 +780,7 @@
         "args": ""
       },
       {
-        "index": "70",
+        "index": "72",
         "title": "tcpser",
         "description": "Hayes modem emulator",
         "id": "tcpser",
@@ -769,7 +791,7 @@
         "args": ""
       },
       {
-        "index": "71",
+        "index": "73",
         "title": "telnet",
         "description": "unencrypted remote access shell",
         "id": "telnet",
@@ -780,7 +802,7 @@
         "args": ""
       },
       {
-        "index": "72",
+        "index": "74",
         "title": "tftpd-hpa",
         "description": "TFTP, Trivial File Transfer Protocol file sharing",
         "id": "tftpd-hpa",
@@ -791,7 +813,7 @@
         "args": ""
       },
       {
-        "index": "73",
+        "index": "75",
         "title": "tnfs",
         "description": "Atari 8-bit and ZX Spectrum",
         "id": "tnfs",
@@ -802,7 +824,7 @@
         "args": ""
       },
       {
-        "index": "74",
+        "index": "76",
         "title": "troubleshooting",
         "description": "Troubleshooting tools, iperf3, tcpdump, ethtool, smarttools, etc",
         "id": "troubleshooting",
@@ -813,7 +835,7 @@
         "args": ""
       },
       {
-        "index": "75",
+        "index": "77",
         "title": "ucon64",
         "description": "Multipurpose Swiss Army Knife Backup/Copier tool",
         "id": "ucon64",
@@ -823,7 +845,7 @@
         "command": "ucon64"
       },
       {
-        "index": "76",
+        "index": "78",
         "title": "udpbd",
         "description": "PS2 block device service",
         "id": "ps2_udpbd",
@@ -834,7 +856,7 @@
         "args": ""
       },
       {
-        "index": "77",
+        "index": "79",
         "title": "waybackproxy",
         "description": "Retrocomputer web proxy for Wayback and OOcities",
         "id": "waybackproxy",
@@ -845,7 +867,7 @@
         "args": ""
       },
       {
-        "index": "78",
+        "index": "80",
         "title": "webone",
         "description": "HTTP 1.x proxy for a HTTP 2.x world",
         "id": "webone",
@@ -856,7 +878,7 @@
         "args": ""
       },
       {
-        "index": "79",
+        "index": "81",
         "title": "wrp",
         "description": "Proxy for retro computers, uses image maps",
         "id": "wrp",
@@ -867,7 +889,7 @@
         "args": ""
       },
       {
-        "index": "80",
+        "index": "82",
         "title": "x360",
         "description": "Microsoft XBox360 SMB config",
         "id": "xbox360",
@@ -878,7 +900,7 @@
         "args": ""
       },
       {
-        "index": "81",
+        "index": "83",
         "title": "xboxmanager",
         "description": "Experimental xbox manager (cockpit)",
         "id": "xboxmanager",
@@ -889,7 +911,7 @@
         "args": ""
       },
       {
-        "index": "82",
+        "index": "84",
         "title": "xlink-kai",
         "description": "XLink Kai Gaming Network",
         "id": "xlinkkai",
@@ -900,7 +922,7 @@
         "args": ""
       },
       {
-        "index": "83",
+        "index": "85",
         "title": "ytree",
         "description": "Ytree File Manager (Xtree clone)",
         "id": "ytree",
@@ -911,7 +933,7 @@
         "args": ""
       },
       {
-        "index": "84",
+        "index": "86",
         "title": "zterm",
         "description": "Zmodem transfer suite",
         "id": "zterm",
