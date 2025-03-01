@@ -38,28 +38,6 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network"
-            },
-            {
-                "index": "04",
-                "title": "netatalk4",
-                "description": "Apple AFP file sharing / AppleTalk, etc",
-                "id": "netatalk4",
-                "prompt": "",
-                "type": "dialog",
-                "group": "netatalk",
-                "command": "netatalk4",
-                "args": ""
-            },
-            {
-                "index": "05",
-                "title": "ras",
-                "description": "Retro AIM/ICQ Server",
-                "id": "retroaimserver",
-                "prompt": "",
-                "type": "dialog",
-                "group": "retroaimserver",
-                "command": "retroaimserver",
-                "args": ""
             }
         ]
     }
