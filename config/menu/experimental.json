@@ -38,6 +38,17 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network"
+            },
+            {
+              "index": "04",
+              "title": "xbox",
+              "description": "Microsoft XBOX SMB config, for use w/Project Stella",
+              "id": "xbox",
+              "prompt": "",
+              "type": "install",
+              "group": "samba",
+              "command": "xbox",
+              "args": ""
             }
         ]
     }
