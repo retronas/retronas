@@ -42,7 +42,7 @@
             {
               "index": "04",
               "title": "xbox",
-              "description": "Microsoft XBOX SMB config, for use w/Project Stella",
+              "description": "Microsoft XBOX SMB config, for use w/Project Stellar",
               "id": "xbox",
               "prompt": "",
               "type": "install",
