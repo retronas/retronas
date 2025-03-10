@@ -12,6 +12,8 @@ rsn_pairwise=CCMP
 wpa_passphrase={{ retronas_wifi_password.stdout }}
 ieee80211d=1
 ieee80211n=1
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
 
 # attempts to fix disassociation of c64 wifi
 disassoc_low_ack=0 
