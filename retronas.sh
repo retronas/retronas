@@ -89,6 +89,9 @@ source $_CONFIG
 ### LANG UTF-8 patch (this probably needs more testing)
 export LANG=$(echo $LANG | sed -r 's/(\.| )UTF(-?)8//gi')
 
+### DIALOG display patch for NCURSES UTF-8, might cause other issues with other tools
+export NCURSES_NO_UTF8_ACS=1
+
 ### check default user exists
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
