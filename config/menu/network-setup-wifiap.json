@@ -158,17 +158,6 @@
                 "group":"",
                 "command": "set-retronas-net-wifi-ntp",
                 "args": ""
-            },
-            {
-                "index":"15",
-                "title": "wifi-dhcprange",
-                "description": "Set the DHCP range for the wifi network",
-                "id":"set-retronas-net-wifi-dhcprange",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-retronas-net-wifi-dhcprange",
-                "args": ""
             }
         ]
     }

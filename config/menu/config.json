@@ -31,16 +31,6 @@
             },
             {
                 "index":"03",
-                "title": "Password",
-                "description": "Configure RetroNAS password",
-                "id":"update-password",
-                "prompt": "",
-                "type": "modal",
-                "group":"",
-                "command": "retronas_password"
-            },
-            {
-                "index":"04",
                 "title": "Group",
                 "description": "Configure RetroNAS group",
                 "id":"update-group",
@@ -49,6 +39,16 @@
                 "group":"",
                 "command": "update-group",
                 "args": ""
+            },
+            {
+                "index":"04",
+                "title": "Password",
+                "description": "Configure RetroNAS password",
+                "id":"update-password",
+                "prompt": "",
+                "type": "modal",
+                "group":"",
+                "command": "retronas_password"
             },
             {
                 "index":"05",
