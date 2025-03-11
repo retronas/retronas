@@ -82,7 +82,7 @@ case $MENU_NAME in
         DATASET=()
         PATTERN="retronas_net_upstream_dns2:"
         ;;
-    set-retronas_net_wifi_countrycode)
+    set-retronas-net-wifi-countrycode)
         OLDVALUE=${OLDWIFICC}
         DATASET=(AE AR AT AU BG BH BM BO BR CA CH CL CN CO CR CS CY CZ DE DK DO DZ EC EE EG ES FI FR GB GR GT HK HN ID IE IL IN IS IT JM JO JP3 KE KR KW KW LB LI LI LK LT LT LU MA MA MU MX MX NL NO NZ NZ OM PA PA PE PH PK PL PL PR PR PT QA RO RU RU SA SG SI SI SK SK SV TH TH TN TR TT TW UA US UY UY VE VN ZA)
         PATTERN="retronas_net_wifi_countrycode:"
