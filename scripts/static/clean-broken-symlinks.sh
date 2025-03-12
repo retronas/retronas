@@ -10,7 +10,7 @@ echo "Running Checks"
 [ $OLDRNPATH == "/" ] && exit 1
 [ ! -d $OLDRNPATH ] && echo "Path not found: $OLDRNPATH" && exit 1
 
-echo "Starting scan"
+echo "Starting scan for path: $OLDRNPATH"
 find "$OLDRNPATH" -xtype l -exec rm "{}" \;
 
 echo "Done"
