@@ -82,6 +82,17 @@
                 "group":"",
                 "command": "git-switch-branch",
                 "args": ""
+            },
+            {
+                "index":"08",
+                "title": "Clean",
+                "description": "Clean up broken symlinks",
+                "id":"clean-broken-symlinks",
+                "prompt": "Run",
+                "type": "script-static",
+                "group":"",
+                "command": "clean-broken-symlinks",
+                "args": ""
             }
         ]
     }
