@@ -26,24 +26,27 @@ rn_gog_chooser() {
       EXIT_OK
       ;;
     02)
+      READ_MENU_COMMAND ${MENU_NAME} ${CHOICE} 
+      ;;
+    03)
       # auth menu
       rn_gog_auth
       ;;
-    03)
+    04)
       # OS
       rn_gog_setos
       ;;
-    04)
+    05)
       # LANG
       rn_gog_setlang
       ;;
-    05)
+    06)
       # sync games list
       CLEAR
       ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       PAUSE
       ;;
-    06)
+    07)
       # download 1 game
       rn_gog_gameslist
       rn_gog_game
@@ -56,13 +59,13 @@ rn_gog_chooser() {
         PAUSE
       fi
       ;;
-    07)
+    08)
       # download all games
       CLEAR
       ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
-    08)
+    09)
       # sync and download
       CLEAR
       ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -lang ${OLDGOGLANG}

@@ -4,7 +4,7 @@ set -u
 
 GITREPO='https://github.com/retronas/retronas.git'
 FORCE=0
-TARGET=/opt/retronas/
+TARGET=/opt/retronas
 
 MYID=$( whoami )
 
@@ -42,7 +42,7 @@ done
 
 # handle existing installations
 [ -f ${TARGET}/.git/config ] && [ $FORCE -eq 0 ] && echo "Existing installation pass -f to overwrite" && exit 1
-[ -f ${TARGET}/.git/config ] && [ $FORCE -eq 1 ] && echo "Installation exists, -f passed, removing" && rm -rf "${TARGET}"
+[ -f ${TARGET}/.git/config ] && [ $FORCE -eq 1 ] && echo "Installation exists, -f passed, removing" && rm -rf "${TARGET}/"
 
 
 echo
@@ -51,7 +51,7 @@ apt update
 
 echo
 echo "Installing necessary tools..."
-apt install -y ansible git dialog jq
+apt install -y ansible git dialog jq pandoc lynx
 
 if [ ! -f ${TARGET}/.git/config ]
 then
@@ -63,6 +63,13 @@ then
 
   if [ $? -eq 0 ]
   then
+
+    # docs
+    if [ ! -f ${TARGET}/doc/.git/config ]
+    then
+      echo "Downloading RetroNAS documentation ...from ${GITREPO}"
+      git clone https://github.com/retronas/retronas.wiki.git  ${TARGET}/doc
+    fi
 
     #installing a simple starup script
     cp /opt/retronas/dist/retronas /usr/local/bin/retronas

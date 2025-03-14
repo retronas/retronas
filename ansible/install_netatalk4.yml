@@ -1,0 +1,189 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "Netatalk4"
+    - my_file: "install_netatalk4"
+
+    - my_packages:
+      - avahi-daemon
+      - build-essential
+      - meson
+      - ninja-build
+      - bison
+      - flex
+      - libevent-dev
+      - libssl-dev
+      - libgcrypt-dev
+      - libkrb5-dev
+      - libpam0g-dev
+      - libwrap0-dev
+      - libdb-dev
+      - libtdb-dev
+      - libavahi-client-dev
+      - libacl1-dev
+      - libldap2-dev
+      - libcrack2-dev
+      - systemtap-sdt-dev
+      - libdbus-1-dev
+      - libdbus-glib-1-dev
+      - libglib2.0-dev
+      - libio-socket-inet6-perl
+      - tracker
+      - cmark
+      - libcmark-dev
+      - libtirpc3
+      - libtirpc-dev
+      - po4a
+      - libmptcpwrap0
+
+    - packages_debian:
+        debian11:
+          - libmysqlclient-dev
+          - libtracker-sparql-2.0-dev
+        debian12:
+          - default-libmysqlclient-dev
+          - libtracker-sparql-3.0-dev
+
+    - packages_ubuntu:
+      - libmysqlclient-dev
+      - libtracker-sparql-2.0-dev
+      - libtracker-miner-2.0-dev
+
+    - my_services:
+      - avahi-daemon
+      - atalkd
+      - netatalk
+
+    - config_settings:
+      - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
+      - { section: "Global", option: "hostname", value: "retroafp" }
+      - { section: "Global", option: "mimic model", value: "PowerMac" }
+      - { section: "Global", option: "zeroconf", value: "yes" }
+      - { section: "Global", option: "log level", value: "info" }
+      - { section: "Global", option: "log file", value: "/var/log/afp.log" }
+      - { section: "Global", option: "afp listen", value: "0.0.0.0" }
+      - { section: "Global", option: "appletalk", value: "yes" }
+      - { section: "Global", option: "spotlight", value: "yes" }
+      - { section: "Global", option: "legacy icon", value: "globe" }
+      - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
+
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755'}
+
+    - old_services:
+      - { name: "atalkd.service", dest: "/etc/systemd/system"}
+      - { name: "netatalk.service", dest: "/etc/systemd/system"}
+
+  tasks:
+
+  - name: "{{ my_name }}  - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }}  - check if netatalk package is available"
+    ansible.builtin.shell: "/usr/bin/apt-cache search netatalk | grep netatalk"
+    register: result
+    failed_when:
+      - result.rc >= 2
+
+  - name: "{{ my_name }} - unhold netatalk package"
+    ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
+    when: result.rc == 0
+
+  - name: "{{ my_name }} - remove package-based Netatalk"
+    ansible.builtin.package:
+       name: netatalk
+       state: absent
+
+  - name: "{{ my_name }} - remove old service files"
+    ansible.builtin.stat:
+      path: "{{ item.dest }}/{{ item.name }}"
+    loop: "{{ old_services }}"
+    register: old_services_check
+
+  - name: "{{ my_name }} - Stopping existing netatalk service(s) during installation"
+    ansible.builtin.service:
+      name: "{{ item.stat.path }}"
+      state: stopped
+      daemon-reload: yes
+    loop: "{{ old_services_check.results }}"
+    when: old_services_check is defined and
+          item.stat.exists is true
+
+  - name: "{{ my_name }} - Remove old service files"
+    ansible.builtin.file:
+      path: "{{ item.stat.path }}"
+      state: absent
+    loop: "{{ old_services_check.results }}"
+    when: old_services_check is defined and
+          item.stat.exists is true
+
+  - name: "{{ my_name }}  - install dependencies"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - Install build tools (debian)"
+    ansible.builtin.package:
+       name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
+       state: latest
+    when: ansible_distribution == 'Debian'
+
+  - name: "{{ my_name }} - Install build tools (ubuntu)"
+    ansible.builtin.package:  
+       name: "{{ packages_ubuntu }}"
+       state: latest
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+    with_items: "{{ templates }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - install from source"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+
+  - name: "{{ my_name }} - configure"
+    ansible.builtin.ini_file: 
+      dest: /opt/retronas/bin/netatalk4/etc/afp.conf
+      section: "{{ item.section }}"
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items: "{{ config_settings }}"
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - configure retro shares"
+    ansible.builtin.template: 
+      src: "templates/{{ my_file }}/retronas.conf.j2"
+      dest: /opt/retronas/bin/netatalk4/etc/retronas.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - enable startup services"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    with_items: "{{ my_services }}"
+
+  handlers:
+
+  - name: "{{ my_name }} - Restart service"
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: restarted
+      daemon-reload: yes
+    with_items: "{{ my_services }}"
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "netatalk4"
+    module_state: "present"

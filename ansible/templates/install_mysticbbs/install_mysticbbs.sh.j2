@@ -1,0 +1,58 @@
+#!/bin/bash
+
+DEST=/opt/mysticbbs
+TMPDEST=/tmp/mysticbbs
+DESTFILE=mysticbbs
+DL=""
+EXT=""
+
+# version locked because auto upgrade cannot be tested atm
+# `install auto overwrite` overwrites key configuration, like filebases, general config etc
+
+if [ -f /opt/mysticbbs/mystic.dat ]
+then
+	echo "Upgrading Mystic is a manual process once installed, exiting otherwise your bbs could be wiped"
+	exit
+fi
+
+case $(uname -m) in
+	aarch64)
+		DL=https://www.mysticbbs.com/downloads/mys112a48_p64.zip
+	;;
+	x86_64)
+		DL=https://www.mysticbbs.com/downloads/mys112a48_l64.rar
+	;;
+	*)
+	echo "Unknown architecture $(uname -m)"
+esac
+
+
+if [ ! -z "${DL}" ]
+then
+	EXT="${DL##*.}"
+	DESTFILE="${DESTFILE}.${EXT}"
+	if [ ! -f $TMPDIR/$DESTFILE ]
+	then
+		curl -JLo $TMPDIR/$DESTFILE "${DL}"
+	fi
+fi
+
+[ ! -d $DEST ] && mkdir -p $DEST
+
+if [ -f $TMPDIR/$DESTFILE ]
+then
+	7z x -o${TMPDEST} -y "${TMPDIR}/${DESTFILE}"
+fi
+
+chown -R retronas:retronas $DEST
+chmod +x $TMPDEST/install $TMPDEST/upgrade
+
+cd $TMPDEST
+./install auto $DEST overwrite
+rm -f $TMPDIR/$DESTFILE
+
+if [ -f /opt/mysticbbs/mutil ]
+then
+	{{ retronas_root }}/scripts/mysticbbs.sh filearea
+	{{ retronas_root }}/scripts/mysticbbs.sh upload
+fi

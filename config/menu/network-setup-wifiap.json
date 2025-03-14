@@ -54,11 +54,11 @@
                 "index":"05",
                 "title": "wifi-cc",
                 "description": "Set the wifi country code",
-                "id":"set-retronas_net_wifi_countrycode",
+                "id":"set-retronas-net-wifi-countrycode",
                 "prompt": "",
                 "type": "dialog_input",
                 "group":"",
-                "command": "set-retronas_net_wifi-countrycode",
+                "command": "set-retronas-net-wifi-countrycode",
                 "args": ""
             },
             {
@@ -157,17 +157,6 @@
                 "type": "dialog_input",
                 "group":"",
                 "command": "set-retronas-net-wifi-ntp",
-                "args": ""
-            },
-            {
-                "index":"15",
-                "title": "wifi-dhcprange",
-                "description": "Set the DHCP range for the wifi network",
-                "id":"set-retronas-net-wifi-dhcprange",
-                "prompt": "",
-                "type": "dialog_input",
-                "group":"",
-                "command": "set-retronas-net-wifi-dhcprange",
                 "args": ""
             }
         ]

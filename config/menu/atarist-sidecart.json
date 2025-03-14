@@ -61,6 +61,17 @@
                 "group":"sidecart",
                 "command": "atarist-sidecart-mirrordb",
                 "args": ""
+            },
+            {
+                "index":"06",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "Sidecart.md",
+                "args": ""
             }
         ]
     }

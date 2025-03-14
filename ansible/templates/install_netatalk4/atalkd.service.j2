@@ -1,0 +1,18 @@
+[Unit]
+Description=Netatalk Appletalk service
+Documentation=man:atalkd.conf(5)
+Documentation=https://netatalk.io/
+After=network.target avahi-daemon.service
+Before=netatalk.service
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart={{ retronas_root }}/bin/netatalk4/sbin/atalkd
+PIDFile=/var/lock/atalkd
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

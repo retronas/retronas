@@ -1,23 +1,28 @@
 #!/bin/bash
 
-
 TMPFILES=$(mktemp -d)
 
 declare -A VERSIONS=(
-    ['x86_64']='x64',
-    ['aarch64']='arm64',
-    ['arm']='arm',
-)
+    ['x86_64']='x64'
+    ['aarch64']='arm64'
+    ['arm']='arm'
+)   
 
 BINDIR=/opt/nabu
 ARCH=$(uname -m)
+ARCHIVE=linux-${VERSIONS[$ARCH]}.zip
 
 [ ! -d $BINDIR ] && mkdir -p $BINDIR
 
 cd $TMPFILES
-curl -O http://cloud.nabu.ca/linux-$}VERSIONS[$ARCH]}.zip
+curl -O http://cloud.nabu.ca/${ARCHIVE}
 
-unzip $ARCHIVE -d $BINDIR
-rm -f $ARCHIVE
+if [ -f ${ARCHIVE} ]
+then
 
-chmod +x $BINDIR/NABU-Internet-Adapter*
+     unzip -j $ARCHIVE -d $BINDIR
+     rm -f $ARCHIVE
+     chmod +x $BINDIR/NABU-Internet-Adapter*
+     chown -R {{ retronas_user }}:{{ retronas_group }} $BINDIR
+
+fi

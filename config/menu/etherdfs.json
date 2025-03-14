@@ -1,0 +1,89 @@
+{
+    "menu": 
+    {
+        "title": "etherdfs",
+        "description": "Install etherdfs",
+        "id":"etherdfs",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Install",
+                "description": "Install etherdfs",
+                "id":"etherdfs",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "etherdfs",
+                "args": ""
+            },
+            {
+                "index":"03",
+                "title": "EtherDFS",
+                "description": "Set EtherDFS/ethflopd network interface",
+                "id":"set-etherdfs-nic",
+                "prompt": "",
+                "type": "dialog_input",
+                "group":"",
+                "command": "set-etherdfs-nic",
+                "args": ""
+            },
+            {
+                "index":"20",
+                "title": "Start",
+                "description": "Start service",
+                "id":"",
+                "prompt": "",
+                "type": "service_start",
+                "group":"",
+                "command": "etherdfs",
+                "args": ""
+            },
+            {
+                "index":"21",
+                "title": "Status",
+                "description": "Query service status",
+                "id":"",
+                "prompt": "",
+                "type":"service_status",
+                "group":"",
+                "command": "etherdfs",
+                "args": ""
+            },
+            {
+                "index":"22",
+                "title": "Stop",
+                "description": "Stop the service",
+                "id":"",
+                "prompt": "",
+                "type": "service_stop",
+                "group":"",
+                "command": "etherdfs",
+                "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "EtherDFS.md",
+                "args": ""
+            }
+        ]
+    }
+}

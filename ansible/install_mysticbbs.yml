@@ -1,0 +1,95 @@
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    - my_name: "mysticbbs"
+    - my_file: "install_mysticbbs"
+
+    - my_packages:
+      - p7zip-full
+      - p7zip-rar
+      - screen
+
+    - templates:
+      - { name: "mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
+      - { name: "install_mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
+      - { name: "mysticbbs-mis.service", dest: "/etc/systemd/system", force: "yes" }
+      - { name: "retronas_create_fileareas.ini", dest: "/opt/mysticbbs", force: "yes" }
+      - { name: "retronas_massupload.ini", dest: "/opt/mysticbbs", force: "yes" }
+      - { name: "create_filebone_na.py", dest: "/opt/mysticbbs", force: "yes" }
+
+    - firewalld_rules:
+      - { zones: retro, service: mysticbbs }
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Enable non-free repo for p7zip-rar"
+    ansible.builtin.apt_repository:
+      repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
+      state: present
+
+  - name: "{{ my_name }} - Install packages"
+    ansible.builtin.package:
+       name: "{{ my_packages }}"
+       state: latest
+
+  - name: "{{ my_name }} - mysticbbs dir"
+    ansible.builtin.file:
+      path: "/opt/mysticbbs"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: directory
+
+  - name: "{{ my_name }} - templates"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/{{ item.name }}.j2"
+      dest: "{{ item.dest }}/{{ item.name }}"
+      owner: "{{ item.owner|default('root') }}"
+      group: "{{ item.group|default('root') }}"
+      mode: "{{ item.mode|default('0644') }}"
+      force: "{{ item.force|default('yes') }}"
+    with_items: "{{ templates }}"
+
+  - name: "{{ my_name }} - install mysticbbs"
+    ansible.builtin.command:
+      cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
+
+  - name: "{{ my_name }} - daemon-reload"
+    ansible.builtin.command:
+      cmd: "systemctl daemon-reload"
+
+  #
+  # FIREWALL
+  #
+  - name: "{{ my_name }} - checking firewall rule"
+    ansible.builtin.stat:
+      path: /etc/firewalld/services
+    register: firewalld_services
+
+  - name: "{{ my_name }} - Generate firewall service"
+    ansible.builtin.template:
+      src: "templates/{{ my_file }}/mysticbbs.xml.j2"
+      dest: "/etc/firewalld/services/mysticbbs.xml"
+      owner: root
+      group: root
+      mode: 0644
+    when: firewalld_services.stat.exists
+
+  - name: "{{ my_name }} - enable firewall rule"
+    ansible.posix.firewalld:
+      zone: "{{ item.zone | default('retro') }}"
+      service: "{{ item.service | default('mysticbbs') }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewalld_rules }}"
+    when: firewalld_services.stat.exists
+
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "mysticbbs"
+    module_state: "present"

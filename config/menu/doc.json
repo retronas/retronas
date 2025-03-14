@@ -1,0 +1,133 @@
+{
+    "menu": 
+    {
+        "title": "Documentation",
+        "description": "Project documentation||Documentation will open in the Lynx browser \\(press Q to quit browser\\), documentation is an optional installation",
+        "id":"documentation",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index": "02",
+                "title": "README",
+                "description": "Readme file",
+                "id": "readme",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "README",
+                "args": ""
+            },
+            {
+                "index": "03",
+                "title": "SECURIY",
+                "description": "SECURITY warning",
+                "id": "security",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "SECURITY-WARNING.md",
+                "args": ""
+            },
+            {
+                "index": "04",
+                "title": "Generic Roms Folder",
+                "description": "Information on RetroNAS generic file structure",
+                "id": "generic-roms-folder",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Generic-ROMs-folder.md",
+                "args": ""
+            },
+            {
+                "index": "05",
+                "title": "Supported Clients",
+                "description": "Information on RetroNAS supported clients",
+                "id": "supported-clients",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Supported-clients.md",
+                "args": ""
+            },
+            {
+                "index": "06",
+                "title": "Supported Configurations",
+                "description": "Information on RetroNAS supported configurations",
+                "id": "supported-configurations",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Supported-Configurations.md",
+                "args": ""
+            },
+            {
+                "index": "07",
+                "title": "Testing",
+                "description": "Information on RetroNAS supported configurations",
+                "id": "testing-retronas",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Testing-RetroNAS.md",
+                "args": ""
+            },
+            {
+                "index": "08",
+                "title": "Structure",
+                "description": "RetroNAS structure",
+                "id": "structure-retronas",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Structure.md",
+                "args": ""
+            },
+            {
+                "index": "09",
+                "title": "Bugs",
+                "description": "Troubleshooting/Reporting bugs",
+                "id": "bug",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Bugs.md",
+                "args": ""
+            },
+            {
+                "index": "98",
+                "title": "Ideas",
+                "description": "A list of features/projects that would be suited for inclusion in RetroNAS",
+                "id": "ideas",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Ideas.md",
+                "args": ""
+            },
+            {
+                "index": "99",
+                "title": "Notices",
+                "description": "Major project change notices",
+                "id": "notices",
+                "prompt": "",
+                "type": "documentation",
+                "group": "",
+                "command": "Notices.md",
+                "args": ""
+            }
+        ]
+    }
+}

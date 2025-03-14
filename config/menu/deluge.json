@@ -72,6 +72,17 @@
                 "group":"",
                 "command": "upgrade_deluge",
                 "args": ""
+            },
+            {
+                "index":"07",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "BitTorrent.md",
+                "args": ""
             }
         ]
     }

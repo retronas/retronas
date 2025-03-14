@@ -9,6 +9,7 @@ source ${LIBDIR}/common.sh
 
 DISABLE_GITOPS=0
 CF="$ANCFG"
+TCHOICE=""
 
 #
 # CHECK we are running as ROOT
@@ -22,10 +23,12 @@ _usage() {
   echo "-g disable git operations"
   echo "-l show license"
   echo "-t terminal choice (current|vterm)"
+  echo "-v run in vt100 mode"
+  echo "-a ask for terminal selection at statup"
   exit 0
 }
 
-OPTSTRING="hdgt:"
+OPTSTRING="hdgvat:"
 while getopts $OPTSTRING ARG
 do
   case $ARG in
@@ -37,6 +40,12 @@ do
       ;;
     t)
       TCHOICE=${"":-OPTARG}
+      ;;
+    v)
+      TCHOICE=vt100
+      ;;
+    a)
+      TICHOICE="ASK"
       ;;
     d)
       # redisplay agreement
@@ -80,11 +89,15 @@ source $_CONFIG
 ### LANG UTF-8 patch (this probably needs more testing)
 export LANG=$(echo $LANG | sed -r 's/(\.| )UTF(-?)8//gi')
 
+### DIALOG display patch for NCURSES UTF-8, might cause other issues with other tools
+export NCURSES_NO_UTF8_ACS=1
+
 ### check default user exists
 id $OLDRNUSER &>/dev/null
 if [ $? -ne 0 ]
 then
-  echo -e "User $OLDRNUSER does not exist on this system\n opening the user config dialog"
+  echo -e "The currently configured USER $OLDRNUSER does not exist on this system you will now be prompted to update the config"
+  PAUSE
   cd $DIDIR
   bash d_input.sh update-user
 fi
@@ -93,7 +106,8 @@ fi
 getent group $OLDRNGROUP &>/dev/null
 if [ $? -ne 0 ]
 then
-  echo -e "Group $OLDRNGROUP does not exist on this system\n opening the group config dialog"
+  echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
+  PAUSE
   cd $DIDIR
   bash d_input.sh update-group
 fi
@@ -106,16 +120,26 @@ then
   git config pull.rebase false
   git reset --hard HEAD
   git pull
+
+  if [ -f "${RNDOC}/Ideas.md" ]
+  then
+    echo "Updating local documentation..."
+    cd $RNDOC
+    git pull
+    cd $RNDIR
+  fi
+
 else
-  echo "Skipping script updates, git operations were disabled"
+  echo "Skipping git updates, git operations were disabled"
 fi
+
 
 ### Make sure log dir exists
 [ ! -d $LOGDIR ] && mkdir $LOGDIR && chmod 755 $LOGDIR
 
 ### Set term emulation,
 RNSECONDS=3
-if [ -z $TCHOICE ]
+if [ "${TICHOICE}" == "ASK" ]
 then
   CLEAR
   echo

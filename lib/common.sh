@@ -169,7 +169,7 @@ READ_MENU_JSON() {
 
     if [ -f ${RNJSON}/${MENU_TITLE}.json ]
     then
-        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
+        export MENU_DATA=$(<${RNJSON}/${MENU_TITLE}.json jq -r ".\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description)|\(.type)\"")
     elif [ -f ${RNJSONOLD} ]
     then
         export MENU_DATA=$(<${RNJSONOLD} jq -r ".dialog.\"${MENU}\".items[] | \"\(.index)|\(.title)|\(.description);\"")
@@ -258,6 +258,12 @@ READ_MENU_COMMAND() {
                 ;;
             menu)
                 "${MENU_SELECT}"
+                ;;
+            command)
+                bash -c "${MENU_SELECT}"
+                ;;
+            documentation)
+                RN_DOCUMENTATION "${MENU_SELECT}"
                 ;;
             *)
                 echo "Not supported, why are you here?"
@@ -354,6 +360,20 @@ RN_INSTALL_EXECUTE() {
     #ansible-playbook -vv "${PLAYBOOK}"
     cd ${DIDIR}
     unset PLAYBOOK
+}
+
+#
+# Run the pandoc/lynx
+#
+RN_DOCUMENTATION() {
+    source $_CONFIG
+    local DOCUMENTATION=$1
+
+    CLEAR
+    /opt/retronas/lib/markup_runner.sh "${DOCUMENTATION}"
+
+    cd ${DIDIR}
+    unset DOCUMENTATION
 }
 
 
@@ -472,24 +492,24 @@ DLG_MENUJ() {
     local MENU_H=$2
     local MENU_BLURB=$3
 
-
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${MENU_BLURB}${IPADDMSGNO}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \
             --title "${APPNAME} ${TITLE} Menu" \
             --clear \
+            --no-shadow \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     declare -a MENU_ARRAY
     while IFS=";" read -r ITEM
     do
-
         INDEX=$(echo $ITEM    | cut -d"|" -f1 | tr -d "\n" | sed 's/\s$//') 
         TITLE=$(echo $ITEM    | cut -d"|" -f2 | tr -d "\n" | sed 's/\s$//') 
         DESC=$(echo $ITEM     | cut -d"|" -f3 | tr -d "\n" | sed 's/\s$//') 
-        #COMMAND=$(echo $ITEM | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
+        TYPE=$(echo $ITEM     | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
 
+        [ "${TYPE}"  == "dialog" ] && DESC="${DESC} >>"
         MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
 
 
@@ -512,12 +532,13 @@ DLG_MENU() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \
             --title "${APPNAME} ${TITLE} Menu" \
             --clear \
+            --no-shadow \
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
@@ -533,12 +554,13 @@ DLG_YN() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --defaultno \
     --yesno "${MENU_DESC}" ${MW} ${MH})
 
@@ -555,12 +577,13 @@ DLG_DSELECT() {
     local TITLE="$1"
     local MENU_BLURB=$2
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --dselect "${MENU_BLURB}" ${MW} ${MH})
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
@@ -576,12 +599,13 @@ DLG_INPUTBOX() {
     local MENU_BLURB=$2
     local MENU_INIT=$3
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
     --backtitle "${APPNAME}" \
     --title "${APPNAME} ${TITLE} Menu" \
     --clear \
+    --no-shadow \
     --inputbox "${MENU_BLURB}" ${MW} ${MH} $MENU_INIT)
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
@@ -598,12 +622,13 @@ DLG_PASSWORD() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
         --backtitle "${APPNAME}" \
         --title "${APPNAME} ${TITLE} Menu" \
         --clear \
+        --no-shadow \
         --insecure \
         --passwordform "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
@@ -624,12 +649,13 @@ DLG_FORM() {
     local MENU_H=$3
     local MENU_BLURB=$4
 
-    local MENU_DESC="${IPADDMSG}${MENU_BLURB}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
         --backtitle "${APPNAME}" \
         --title "${APPNAME} ${TITLE} Menu" \
         --clear \
+        --no-shadow \
         --form "\n$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))

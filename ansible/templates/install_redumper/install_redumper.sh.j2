@@ -28,7 +28,7 @@ dl_install() {
 get_x86_64() {
     ORG=superg
     REPO=redumper
-    RELEASE=$(curl -skJL https://api.github.com/repos/${ORG}/${REPO}/releases | jq -r ".[0].assets | map(select(.name | match (\"Linux\")))[] | .browser_download_url" )
+    RELEASE=$(curl -skJL https://api.github.com/repos/${ORG}/${REPO}/releases | jq -r ".[0].assets | map(select(.name | match (\"Linux\")))[-1] | .browser_download_url" )
     dl_install $RELEASE
 }
 

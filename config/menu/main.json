@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "Main",
-        "description": "Please ensure that you have configured your RetroNAS user, group and top level directory in the Global configuration section before installing any tools. Changing any of these options will require tools to be reinstalled.||Current RetroNAS settings| User: \"${OLDRNUSER}\"| Group: \"${OLDRNGROUP}\"| Directory: \"${OLDRNPATH}\"| Git Branch: \"${OLDRNBRANCH}\"|",
+        "description": "Welcome to RetroNAS|-------------------|Providing network storage, utilities and tools for different retro computers and consoles||Configure RetroNAS before installing any tools.\\(see Config menu\\)",
         "id":"main",
         "prompt": "",
         "type": "menu",
@@ -41,27 +41,6 @@
                 "args": ""
             },
             {
-                "index": "04",
-                "title": "Services",
-                "description": "See if things are OK",
-                "id":"services",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "services"
-            },
-            {
-                "index": "05",
-                "title": "Tools",
-                "description": "Run tools and scripts",
-                "id":"tools",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "tools",
-                "args": ""
-            },
-            {
                 "index": "50",
                 "title": "Experimental",
                 "description": "there be dragons here!",
@@ -73,7 +52,7 @@
                 "args": ""
             },
             {
-                "index": "99",
+                "index": "98",
                 "title": "Update",
                 "description": "Update core RetroNAS features",
                 "id":"update",
@@ -81,6 +60,17 @@
                 "type": "dialog",
                 "group":"",
                 "command": "update",
+                "args": ""
+            },
+            {
+                "index": "99",
+                "title": "Documentation",
+                "description": "View project documentation",
+                "id":"documentation",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "doc",
                 "args": ""
             }
         ]

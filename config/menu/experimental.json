@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "EXPERIMENTAL",
-        "description": "WARNING these tools are very EXPERIMENTAL and could break your system or destroy your data!||Do not use these unless you are comfortable with losing everthing",
+        "description": "WARNING these tools are EXPERIMENTAL, may break your system or destroy your data!||Do not use these unless you are comfortable with losing everthing",
         "id":"experimental",
         "prompt": "Install",
         "type": "menu",
@@ -31,29 +31,7 @@
             },
             {
                 "index": "03",
-                "title": "UDPBD",
-                "description": "PS2 block device service",
-                "id":"ps2_udpbd",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "ps2_udpbd",
-                "args": ""
-            },
-            {
-                "index": "04",
-                "title": "Sidecart",
-                "description": "Atari ST sidecart support",
-                "id":"sidecart",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "atarist-sidecart",
-                "args": ""
-            },
-            {
-                "index": "05",
-                "title": "Network",
+                "title": "network",
                 "description": "Network presets (highly experimental!)",
                 "id":"network",
                 "prompt": "",
@@ -62,24 +40,15 @@
                 "command": "network"
             },
             {
-                "index": "06",
-                "title": "piscsi",
-                "description": "PISCSI project",
-                "id":"piscsi",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "piscsi"
-            },
-            {
-                "index": "07",
-                "title": "assembly64",
-                "description": "assembly64 project (requires account)",
-                "id":"assembly64",
-                "prompt": "",
-                "type": "dialog",
-                "group":"",
-                "command": "assembly64"
+              "index": "04",
+              "title": "xbox",
+              "description": "Microsoft XBOX SMB config, for use w/Project Stellar",
+              "id": "xbox",
+              "prompt": "",
+              "type": "install",
+              "group": "samba",
+              "command": "xbox",
+              "args": ""
             }
         ]
     }

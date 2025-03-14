@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+# 
+# sairuk, built with limited scope for RetroNAS deduping filearea creation
+#
+## references
+# https://git.shipoclu.com/moon/enigma-bbs/src/commit/60369ea378be82cd76ba954577b9bd34dec919a3/core/oputil/oputil_file_base.js
+# https://web.archive.org/web/20060507083451/http://www.filegate.net/info/filegate.zxx
+# https://talk.dallasmakerspace.org/t/bbs-utils-reading-mystic-database-files/56722
+#
+## based on 
+# - lastcallers.py : (CC No-By)2019-2034 Dallas Makerspace, Some Rights Reserved : Authors: Dwight Spencer (denzuko) <denzuko@dallasmakerspace.org>
+# - mystic_library.php : netsurge : mysphp14.zip
+
+import os, yaml
+from struct import Struct
+
+RN_SYSTEMS="{{ retronas_root }}/ansible/retronas_systems.yml"
+RN_BASE="{{ retronas_path }}/roms/"
+
+# NOTE: this is not a comprehensive intepretation of the data, just enough for what we need
+fbase_t = Struct("I 60s ? 60s ? 61s ? 175s ? 61s ? 80s ? 8s ? ? 123s")
+
+BYTES=640
+
+ignored = [
+    'system_map', 
+    'system_links',
+    "system_template", 
+]
+
+def yaml_data():
+    data = []
+    ind =  open(RN_SYSTEMS,'r').read()
+    odata = yaml.safe_load(ind)
+    for key in odata.keys():
+        if key not in ignored:
+            for item in odata[key]:
+                if item["pretty_name"] != "":
+                    data.append({"src": item["src"], "pretty_name": item["pretty_name"]})
+    return data
+
+
+def filebone(data={}, fa={}):
+    # output the filebone.na format
+    print("% File Echo                   Description")
+    print("%")
+    for item in data:
+        d = item["src"]
+        n = item["pretty_name"]
+        ad = os.path.join(RN_BASE,d)
+        if ad not in fa.values():
+            print(f"Area {d}  0     !      RTNS: {n}")
+    print("%")
+    print("% End of RetroNAS Fileecho List")
+
+def fileareas(dat="fbases.dat"):
+
+    dat = os.path.join("data",dat)
+
+    if not os.path.exists(dat):
+        return []
+
+    fileareas = {}
+
+    filesize = os.stat(dat).st_size
+    records = int(filesize / BYTES)
+
+    with open(dat, 'rb') as data:
+        by = data.read()
+        ba = [by[i:i+BYTES] for i in range(-1, len(by), BYTES)]
+
+    for record in range(1, records):
+        filearea = fbase_t.unpack_from(ba[record])
+        fname = filearea[3].decode().strip('\x00')[1:]
+        fname = fname.split(":")[-1].replace("_", " ").lstrip()
+        fpath = filearea[11].decode().strip('\x00')[:-1]
+        fileareas[fname] = fpath
+
+    return fileareas
+
+def main(dat="fbases.dat"):
+
+    fa = fileareas()
+    data = yaml_data()
+    filebone(data, fa)
+
+
+if __name__ == "__main__":
+	main()

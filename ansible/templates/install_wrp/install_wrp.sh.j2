@@ -6,7 +6,7 @@ ARCH=$(dpkg --print-architecture | head -n1)
 #    https://github.com/tenox7/wrp/releases/download/4.6.0/wrp-arm64-linux
 
 
-RELEASE=$( curl -kLs https://api.github.com/repos/tenox7/wrp/releases | jq -r ".[0].assets | map(select(.name | match (\"wrp-${ARCH}-linux\")))[] | .browser_download_url" )
+RELEASE=$( curl -kLs https://api.github.com/repos/tenox7/wrp/releases | jq -r ".[0].assets | map(select(.name | match (\"wrp-${ARCH}-linux\")))[-1] | .browser_download_url" )
 
 [ ! -d /opt/wrp ] && mkdir -p /opt/wrp
 cd /opt/wrp

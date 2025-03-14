@@ -44,7 +44,7 @@
     with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - build source"
-    ansible.builtin.command:
+    ansible.builtin.shell:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/dexattach"
 

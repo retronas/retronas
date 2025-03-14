@@ -6,7 +6,7 @@ OUTDIR=/opt/netlink
 
 # clone the repo and switch to the python3 branch
 cd $DPITMP
-SOURCECODE=$( curl -kLs https://api.github.com/repos/eaudunord/Netlink/releases | jq -r ".[0].assets | map(select(.name | match (\"Netlink_Tunnel\")))[] | .browser_download_url" )
+SOURCECODE=$( curl -kLs https://api.github.com/repos/eaudunord/Netlink/releases | jq -r ".[0].assets | map(select(.name | match (\"Netlink_Tunnel\")))[-1] | .browser_download_url" )
 [ -z "$SOURCECODE" ] && echo "Couldn't get source code name" && exit 1
 echo $SOURCECODE
 

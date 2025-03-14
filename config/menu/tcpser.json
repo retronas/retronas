@@ -202,6 +202,17 @@
                 "group":"",
                 "command": "",
                 "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "tcpser.md",
+                "args": ""
             }
         ]
     }

@@ -3,18 +3,21 @@
 SRCDIR="{{ retronas_root }}/src"
 BINDIR="{{ retronas_root }}/bin"
 APPNAME=ethflopd
+VERSION=20240916
 
 echo "Configuring build directories..."
 rm -rf "${SRCDIR}"
-mkdir -p "${SRCDIR}"
+mkdir -p "${SRCDIR}/${APPNAME}"
 cd "${SRCDIR}"
 
 echo "Downloading ethflopd source..."
-curl -L -o ${APPNAME}.zip https://sourceforge.net/projects/ethflop/files/latest/download
-unzip ${APPNAME}.zip -d ${APPNAME}
+curl -L -o ${APPNAME}.tar.gz https://master.dl.sourceforge.net/project/ethflop/ethflopd%20%28server%29/${VERSION}/ethflopd-${VERSION}-src.tar.gz
+tar -xvf ${APPNAME}.tar.gz -C ${APPNAME}
 
 cd ${APPNAME}
-make
+
+[ ! -f Makefile.linux ] && echo "Makefile not found, cannot build" && exit 1
+make -f Makefile.linux
 
 echo "Moving binary to bindir..."
 mv -vf ${APPNAME} "${BINDIR}"/

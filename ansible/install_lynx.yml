@@ -1,0 +1,26 @@
+# Dependencies
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - my_name: "lynx"
+    - my_file: "install_lynx"
+
+    - packages:
+      - lynx
+
+  tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - name: "{{ my_name }} - Install packages"
+    package:
+       name: "{{ packages }}"
+       state: latest
+
+- ansible.builtin.import_playbook: retronas_system_config.yml
+  vars:
+    module_name: "lynx"
+    module_state: "present"

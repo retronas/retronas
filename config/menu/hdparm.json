@@ -83,6 +83,17 @@
                 "group":"",
                 "command": "hdparm-manager-stop-service",
                 "args": ""
+            },
+            {
+                "index":"03",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "NEEDED.md",
+                "args": ""
             }
         ]
     }

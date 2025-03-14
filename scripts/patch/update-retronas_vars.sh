@@ -39,6 +39,11 @@ update_config() {
   fi
 }
 
+ETH_DEV=$(ip -4 -br a | grep -E "^e[nt]" | awk '{print $1}' | head -n1)
+ETH_IP=$(ip -4 -br a show dev $ETH_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
+WL_DEV=$(ip -4 -br a | grep -E "^wl" | awk '{print $1}' | head -n1)
+WL_IP=$(ip -4 -br a show dev $WL_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
+
 #########################################################################################################
 #            |CHECK                  |MATCH                                      |FORCE    |VALUE
 update_config "${OLDRNGROUP}"         "retronas_group"                            1        "${OLDRNUSER}"

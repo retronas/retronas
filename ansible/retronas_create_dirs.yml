@@ -40,14 +40,6 @@
   when: tl_paths is defined and
         item.stat.exists is false
 
-- name: "{{ my_name }} - clean up any broken symlinks from our dir structure"
-  ansible.builtin.shell:
-    cmd: find "{{ item.stat.path }}" -xtype l -exec rm "{}" \; | echo 0
-  loop: "{{ tl_paths.results }}"
-  when: tl_paths is defined and
-        item.stat.exists is true
-  changed_when: false
-
 - name: "{{ my_name }} - build layout list (set fact)"
   ansible.builtin.set_fact:
     path_list: "{{ path_list|default([]) + [ retronas_path + '/' + item.1.name + '/' + item.0.src if item.1.systems is true else '' ] }}"
