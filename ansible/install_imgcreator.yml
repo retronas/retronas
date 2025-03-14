@@ -6,7 +6,7 @@
     - my_file: "install_{{ my_name }}"
 
     - templates:
-      - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      #- { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     - formats:
       - { name: "formats.yml", dest: "{{ retronas_path }}/config", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
