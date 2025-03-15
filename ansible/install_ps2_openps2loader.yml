@@ -1,22 +1,21 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
     - my_name: "PS2 OpenPS2Loader"
     - my_file: "install_ps2_openps2loader"
+    - my_dir: "{{ retronas_path }}/ps2/OpenPS2Loader"
     - module_name: "ps2_openps2loader"
 
     - paths:
-        - { name: "APPS",   dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "ART",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "CFG",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "CHT",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "LNG",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "THM",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
-        - { name: "VMC",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "APPS",   dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "ART",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "CFG",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "CHT",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "LNG",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "THM",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "VMC",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
     - templates:
       - { name: "retronas_ps2.conf", dest: "/etc/samba" }
@@ -30,22 +29,25 @@
     ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
+      name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
       name: retronas.role.paths
 
   - name: "{{ my_name }} - check old pops dir"
     ansible.builtin.stat:
-      path: "{{ retronas_path }}/ps2/OpenPS2Loader/POPS"
+      path: "{{ my_dir }}/POPS"
     register: old_pops
 
   - name: "{{ my_name }} - rename old pops dir"
     ansible.builtin.shell:
-      cmd: "mv {{ retronas_path }}/ps2/OpenPS2Loader/POPS {{ retronas_path }}/ps2/OpenPS2Loader/POPS-OLD"
+      cmd: "mv {{ my_dir }}/POPS {{ my_dir }}/POPS-OLD"
     when: old_pops.stat.isdir is true
 
   - name: "{{ my_name }} - build symlinks"
     ansible.builtin.file:
       src: "../../roms/{{ item.src }}"
-      dest: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item.ops2l }}"
+      dest: "{{ my_dir }}/{{ item.ops2l }}"
       state: link
     with_items: "{{ system_sony }}"
     when:

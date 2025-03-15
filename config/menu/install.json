@@ -486,28 +486,6 @@
         "command": "nbd-client"
       },
       {
-        "index": "45",
-        "title": "netatalk2",
-        "description": "AppleTalk and AppleShare file sharing (System6/OS8+)",
-        "id": "netatalk2x",
-        "prompt": "",
-        "type": "install",
-        "group": "netatalk",
-        "command": "netatalk2x",
-        "args": ""
-      },
-      {
-        "index": "46",
-        "title": "netatalk3",
-        "description": "Apple AFP file sharing TCP/IP only (OSX10.2+)",
-        "id": "netatalk3",
-        "prompt": "",
-        "type": "install",
-        "group": "netatalk",
-        "command": "netatalk3",
-        "args": ""
-      },
-      {
         "index": "47",
         "title": "netatalk4",
         "description": "Apple AFP file sharing / AppleTalk, etc",

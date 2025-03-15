@@ -1,5 +1,4 @@
 # Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
 - ansible.builtin.import_playbook: install_extradirs.yml
 
 - hosts: localhost
@@ -10,7 +9,6 @@
     - my_file: "install_emudeck_cifs"
     - system_key: "emudeck"
     - module_name: "emudeck_cifs"
-
 
     - top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
@@ -43,6 +41,9 @@
 
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
+
+    - ansible.builtin.import_role:
+        name: retronas.role.romdir
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

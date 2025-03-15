@@ -1,6 +1,4 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
@@ -32,6 +30,9 @@
     ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
+      name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
   - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
@@ -54,6 +55,3 @@
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/nabu.sh"
-
-  - ansible.builtin.import_role:
-      name: retronas.role.system-config

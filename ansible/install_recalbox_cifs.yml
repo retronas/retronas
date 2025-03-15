@@ -1,5 +1,4 @@
 # Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
 - ansible.builtin.import_playbook: install_extradirs.yml
 
 - hosts: localhost
@@ -20,6 +19,9 @@
 
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
+
+    - ansible.builtin.import_role:
+        name: retronas.role.romdir
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

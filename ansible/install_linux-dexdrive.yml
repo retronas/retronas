@@ -1,6 +1,4 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
@@ -29,6 +27,9 @@
 
   - name: "{{ my_name }} - Load RetroNAS systems"
     ansible.builtin.include_vars: retronas_systems.yml
+
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
   - ansible.builtin.import_role:
       name: retronas.role.package.latest

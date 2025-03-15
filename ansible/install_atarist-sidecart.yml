@@ -1,10 +1,11 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_nginx.yml
-- ansible.builtin.import_playbook: install_samba.yml
-
+---
 - hosts: localhost
   gather_facts: no
+
+  roles:
+    - retronas.role.romdir
+    - retronas.role.nginx
+    - retronas.role.samba
 
   vars:
     my_name: "atarist-sidecart"
@@ -13,7 +14,6 @@
     script_url: "https://raw.githubusercontent.com/diegoparrilla/atarist-sidecart-raspberry-pico/main/roms/update_json"
     script_dest: "{{ retronas_root }}/bin/{{ my_name }}-generate-roms.sh"
     module_name: "atarist-sidecart"
-    module_state: "present"
 
     packages:
       - python3-boto3
