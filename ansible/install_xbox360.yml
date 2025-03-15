@@ -10,6 +10,7 @@
     - my_file: "install_xbox360"
     - module_name: "xbox360"
     - module_state: "present"
+    - system_key: "xbox360"
 
     - paths:
       - { name: "xbox360", dest: "{{ retronas_path }}" }

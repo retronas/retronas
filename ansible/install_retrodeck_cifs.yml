@@ -8,6 +8,8 @@
   vars:
     - my_name: "retrodeck CIFS"
     - my_file: "install_retrodeck_cifs"
+    - module_name: "retrodeck_cifs"
+    - system_key: "retrodeck"
 
     - top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
@@ -32,90 +34,14 @@
       - { src: 'nintendo/superfamicom', dest: 'snesna' }
 
   tasks:
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
+    - ansible.builtin.import_role:
+        name: retronas.role.samba
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/retrodeck"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
+    - ansible.builtin.import_role:
+        name: retronas.role.samba.system
 
-  - name: "{{ my_name }} - build top level share paths"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/retrodeck/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
-    when: 
-      - item.enabled is true
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/retrodeck/' + item.1.name + '/' + item.0.retrodeck + ';' ] }}"
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.retrodeck | length > 0
-      - item.1.systems is true
-
-  - name: "{{ my_name }} - build systems directory layout"
-    ansible.builtin.shell:
-      cmd: "{{ path_list|join('') }}"
-    when: path_list is defined
-    changed_when: false
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - build internal hacks directory layout"
-    ansible.builtin.file:
-      src: "../../{{ item.1.generic }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/retrodeck/{{ item.1.name }}/{{ item.0.dest }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: retrodeck
-      option: "include"
-      value: "/etc/samba/retronas_retrodeck.conf"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_retrodeck.conf.j2"
-      dest: /etc/samba/retronas_retrodeck.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
-
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "retrodeck_cifs"
-    module_state: "present"
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

@@ -1,4 +1,6 @@
 my_name: "retronas user config setup"
+module_state: "present"
+
 system_user_dirs:
   - config
   - config/modules

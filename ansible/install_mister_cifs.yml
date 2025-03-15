@@ -8,6 +8,8 @@
   vars:
     - my_name: "MiSTer CIFS"
     - my_file: "install_mister_cifs"
+    - module_name: "mister_cifs"
+    - system_key: "mister"
 
     - top_level_paths:
       - { name: "games",      enabled: yes,  generic: "roms",        systems: yes }
@@ -33,46 +35,14 @@
 
   tasks:
 
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
-
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/mister"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
 
-  - name: "{{ my_name }} - build top level share paths"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/mister/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
-    when: 
-      - item.enabled is true
-
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/mister/' + item.1.name + '/' + item.0.mister + '\";' ] }}"
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.mister | length > 0
-      - item.1.systems is true
-
-  - name: "{{ my_name }} - build systems directory layout"
-    shell:
-      cmd: "{{ path_list|join('') }}"
-    when: path_list is defined
-    changed_when: false
+  - ansible.builtin.import_role:
+      name: retronas.role.samba.system
 
   - name: "{{ my_name }} - create custom save directories"
     ansible.builtin.file:
@@ -85,52 +55,21 @@
   - name: "{{ my_name }} - create custom save links"
     ansible.builtin.file:
       src: "../../{{ item.1 }}/{{ item.0.src|lower }}"
-      dest: "{{ retronas_path }}/mister/{{ item.1 }}/{{ item.0.name }}"
+      dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1 }}/{{ item.0.name }}"
       state: link
     with_nested: 
       - "{{ save_overrides }}"
       - ["saves", "savestates"]
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     when: dirs_only is false
-    notify: 
-      - "{{ my_name }} daemon-reload"
-      - "{{ my_name }} - Install Samba"
 
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: mister
-      option: "include"
-      value: "/etc/samba/retronas_mister.conf"
-    when: dirs_only is false
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
   - name: "{{ my_name }} daemon-reload"
     ansible.builtin.systemd:
       daemon_reload: yes
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "mister_cifs"
-    module_state: "present"

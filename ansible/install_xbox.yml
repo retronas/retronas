@@ -10,6 +10,7 @@
     - my_file: "install_xbox"
     - module_name: "xbox"
     - module_state: "present"
+    - system_key: "xbox"
 
     - paths:
       - { name: "xbox", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
