@@ -7,3 +7,5 @@ ansible/retronas_vars.yml
 etc/*
 config/installed.json
 ansible/collections
+
+.fuse*
