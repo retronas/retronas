@@ -6,7 +6,7 @@
 
 - name: "{{ my_name }} - templates"
   ansible.builtin.template:
-    src: "templates/{{ my_file }}/{{ item.name }}.j2"
+    src: "{{ item.name }}.j2"
     dest: "{{ item.dest }}/{{ item.name }}"
     owner: "{{ item.owner|default('root') }}"
     group: "{{ item.group|default('root') }}"
