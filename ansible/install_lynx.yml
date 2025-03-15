@@ -6,6 +6,8 @@
   vars:
     - my_name: "lynx"
     - my_file: "install_lynx"
+    - module_name: "lynx"
+    - module_state: "present"
 
     - packages:
       - lynx
@@ -18,7 +20,5 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "lynx"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

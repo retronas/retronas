@@ -6,6 +6,8 @@
   vars:
     - my_name: "hostapd"
     - my_file: "install_{{ my_name }}"
+    - module_name: "hostapd"
+    - module_state: "present"
 
     - packages:
       - hostapd
@@ -46,30 +48,18 @@
   - name: "{{ my_name }} - update wifi ssid config"
     lineinfile:
       path: /opt/retronas/ansible/retronas_vars.yml
-      line: '^retronas_net_wifi_ssid: "retronas-{{ retronas_net_wifi_ssid }}"'
+      regexp: ^retronas_net_wifi_ssid: ""
+      line: 'retronas_net_wifi_ssid: "{{ retronas_net_wifi_ssid.stdout_lines[0] }}"'
     when: retronas_net_wifi_ssid is defined
 
   - name: "{{ my_name }}  - Re-read RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - paths"
-    file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - enable"
     ansible.builtin.service:
@@ -80,6 +70,9 @@
       force: yes
     with_items: "{{ my_services }}"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
   - name: "{{ my_name }} - Restart service"
     ansible.builtin.service:
@@ -88,8 +81,3 @@
       daemon_reload: yes
       force: yes
     with_items: "{{ my_services }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "hostapd"
-    module_state: "present"

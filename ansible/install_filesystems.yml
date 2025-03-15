@@ -1,10 +1,10 @@
 - hosts: localhost
   gather_facts: no
 
-  role:
-    - retronas.role.filesystems
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "filesystems"
     module_state: "present"
+
+  roles:
+    - retronas.role.filesystems
+    - retronas.role.system-config

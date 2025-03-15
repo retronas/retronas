@@ -4,17 +4,19 @@
   vars:
     - my_name: "litch"
     - my_file: "install_litch"
+    - module_name: "litch"
+    - module_state: "present"
 
-    - my_packages:
+    - packages:
       - python3
       - python3-bs4
       - git
 
-    - scripts:
-      - litch_login
-      - litch_download
-      - litch_download_clean
-      - litch_claim
+    - templates:
+      - { name: "litch_login.sh",          dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "litch_download.sh",       dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "litch_download_clean.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "litch_claim.sh",          dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
 
@@ -43,16 +45,8 @@
       chdir: "{{ retronas_root }}/bin/litch"
       cmd: "git pull"
 
-  - name: "{{ my_name }} - scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ item }}.sh"
-      owner: root
-      group: root
-      mode: 0755
-    with_items: "{{ scripts }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "litch"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

@@ -72,8 +72,7 @@
     with_items: "{{ systemd_units }}"
     notify: "{{ my_name }} daemon-reload" 
 
-  - name: "{{ my_name }} - firewalld"
-    ansible.builtin.import_role:
+  - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
   - ansible.builtin.import_role:

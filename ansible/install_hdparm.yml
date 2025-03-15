@@ -4,6 +4,8 @@
   vars:
     - my_name: "hdparm"
     - my_file: "install_{{ my_name }}"
+    - module_name: "hdparm"
+    - module_state: "present"
 
     - packages:
          - hdparm
@@ -85,6 +87,9 @@
     when:
       - item.enabled == "yes"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
@@ -96,8 +101,3 @@
       - "{{ systemd_units }}"
     when:
       - item.restart == "yes"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "hdparm"
-    module_state: "present"

@@ -31,25 +31,11 @@
 
   tasks:
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-    notify: "{{ my_name }} - Reload firewalld"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Reload firewalld to pickup the new zones"
     ansible.builtin.service:
@@ -67,15 +53,9 @@
       path: /etc/firewalld/services
     register: firewalld_services
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('ssh') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - name: "{{ my_name }} - firewalld"
+    ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
   handlers:
   - name: "{{ my_name }} - Reload firewalld"

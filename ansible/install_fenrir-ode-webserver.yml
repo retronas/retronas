@@ -1,9 +1,12 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
     - my_name: "fenrir-ode-webserver"
     - my_file: "install_fenrir-ode-webserver"
+    - module_name: "fenrir-ode-webserver"
+    - module_state: "present"
 
     - packages:
       - make
@@ -18,6 +21,10 @@
 
     - my_service: "{{ my_name }}.service"
 
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_name }}.service", dest: "/usr/lib/systemd/system" }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -26,13 +33,8 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - copy in build script"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: "root"
-      group: "root"
-      mode: 0750
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - run build tool"
     ansible.builtin.shell:
@@ -45,28 +47,8 @@
       dest: "{{ fenrir_ode_path }}"
       state: link
 
-  - name: "{{ my_name }} - systemd unit file"
-    ansible.builtin.copy:
-      dest: "/usr/lib/systemd/system/{{ my_service }}"
-      content: |
-        [Unit]
-        Description={{ my_name }}
-        After=network.target
-        StartLimitIntervalSec=60
-        StartLimitBurst=4
-
-        [Service]
-        User={{ retronas_user }}
-        ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port {{ fenrir_ode_port }}
-        Restart=on-failure
-        RestartSec=5
-
-        [Install]
-        WantedBy=multi-user.target
-      owner: "root"
-      group: "root"
-      mode: "0644"
-    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
   - name: "{{ my_name }} - Restart service"
@@ -76,8 +58,3 @@
       enabled: yes
       daemon_reload: yes
     with_items: "{{ my_service }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "fenrir-ode-webserver"
-    module_state: "present"

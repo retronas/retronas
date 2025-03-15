@@ -27,6 +27,18 @@
       - .FSP_OK_MKDIR
       - .FSP_OK_RENAME
 
+    - paths:
+      - { name: "fsp", dest: "{{ retronas_root }}/bin/" }
+      - { name: "etc", dest: "{{ retronas_root }}/bin/fsp/" }
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_service }}.conf", dest: "{{ retronas_root }}/bin/fsp/etc" }
+      - { name: "fspd.service", dest: "/usr/lib/systemd/system/" }
+
+    - firewalld_ports:
+      - { port: 2121, protocol: udp }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -36,7 +48,10 @@
     ansible.builtin.include_vars: retronas_systems.yml
 
   - ansible.builtin.import_role:
-      name: retronas.role.package.latestt
+      name: retronas.role.package.latest
+
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
   - name: "{{ my_name }} - check systemd unit folder"
     ansible.builtin.file:
@@ -68,27 +83,14 @@
       item.fspd | length > 0
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - Generate install scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     #args:
       #creates: "{{ retronas_root}} /bin/fsp"
     notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - Generate config file"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_service }}.conf.j2"
-      dest: "{{ retronas_root }}/bin/fsp/etc/{{ my_service }}.conf"
-      owner: root
-      group: root
-      mode: 0755 
 
   - name: "{{ my_name }} - Set write permissions top level"
     ansible.builtin.copy:
@@ -110,15 +112,6 @@
       mode: 0644
     with_items: "{{ swiss_rw }}"
 
-  - name: "{{ my_name }} - create startup service"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/fspd.service.j2
-      dest: /usr/lib/systemd/system/fspd.service
-      owner: root
-      group: root
-      mode: 0644
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable startup service"
     ansible.builtin.service:
       name: "{{ item }}"
@@ -127,22 +120,8 @@
       daemon_reload: yes
     with_items: "{{ my_service }}"
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: retro
-      port: 2121/udp
-      permanent: true
-      state: enabled
-      immediate: true
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
   handlers:
 

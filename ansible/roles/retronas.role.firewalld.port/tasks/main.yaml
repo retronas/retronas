@@ -6,13 +6,24 @@
     path: /etc/firewalld/services
   register: firewalld_services
 
-- name: "{{ my_name }} - enable firewall rule"
+- name: "{{ my_name }} - enable firewall rule (port)"
   ansible.posix.firewalld:
     zone: "{{ item.zone | default('retro') }}"
     port: "{{ item.port }}/{{ item.protocol }}"
     permanent: "{{ item.permanent | default('true') }}"
     state: "{{ item.state | default('enabled') }}"
     immediate: true
-  loop: "{{ firewalld.ports }}"
-  when: firewalld.ports is defined and
+  loop: "{{ firewalld_ports }}"
+  when: firewalld_ports is defined and
+        firewalld_services.stat.exists
+
+- name: "{{ my_name }} - enable firewall rule (service)"
+  ansible.posix.firewalld:
+    zone: "{{ item.zone | default('retro') }}"
+    service: "{{ item.service | default('ssh') }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  with_items: "{{ firewalld_rules }}"
+  when: firewalld_rules is defined and
         firewalld_services.stat.exists
