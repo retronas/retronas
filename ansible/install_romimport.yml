@@ -4,7 +4,7 @@
     - my_name: "ROM Import"
     - my_file: "install_romimport"
     
-    - my_packages:
+    - packages:
       - python3
       - git
 
@@ -16,10 +16,8 @@
   - name: "{{ my_name }} - Load RetroNAS Systems"
     ansible.builtin.include_vars: retronas_systems.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - build top level"
     ansible.builtin.file:

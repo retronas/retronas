@@ -9,7 +9,7 @@
     - my_file: "install_fsp"
     - my_service: "fspd"
 
-    - my_packages:
+    - packages:
       - python3
       - python-is-python3
       - build-essential
@@ -35,10 +35,8 @@
   - name: "{{ my_name }} - Load RetroNAS systems"
     ansible.builtin.include_vars: retronas_systems.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latestt
 
   - name: "{{ my_name }} - check systemd unit folder"
     ansible.builtin.file:

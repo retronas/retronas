@@ -5,6 +5,29 @@
     - my_name: "Netatalk2"
     - my_file: "install_netatalk2"
 
+    - packages:
+        - libacl1
+        - libattr1
+        - libavahi-client3
+        - libavahi-common3
+        - libc6
+        - libcomerr2
+        - libcrack2
+        - libcups2
+        - libdb5.3
+        - libgcrypt20
+        - libgssapi-krb5-2
+        - libk5crypto3
+        - libkrb5-3
+        - libldap-2.4-2
+        - libpam0g
+        - libpam-modules
+        - libwrap0
+        - netbase
+        - perl
+        - aria2
+        - avahi-daemon
+
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
@@ -13,32 +36,8 @@
   - name: "{{ my_name }}  - unhold netatalk package"
     ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
 
-  - name: "{{ my_name }}  - install dependencies"
-    ansible.builtin.apt:
-       name: "{{ item }}"
-       state: latest
-    with_items:
-       - libacl1
-       - libattr1
-       - libavahi-client3
-       - libavahi-common3
-       - libc6
-       - libcomerr2
-       - libcrack2
-       - libcups2
-       - libdb5.3
-       - libgcrypt20
-       - libgssapi-krb5-2
-       - libk5crypto3
-       - libkrb5-3
-       - libldap-2.4-2
-       - libpam0g
-       - libpam-modules
-       - libwrap0
-       - netbase
-       - perl
-       - aria2
-       - avahi-daemon
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - download package for arm64"
     ansible.builtin.shell:

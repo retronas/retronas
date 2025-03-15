@@ -30,10 +30,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
     ansible.builtin.user:
@@ -48,15 +46,8 @@
       state: "{{ item.state|default('link') }}"
     with_items: "{{ links }}"
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"

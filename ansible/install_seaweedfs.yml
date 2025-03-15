@@ -28,10 +28,8 @@
 
   tasks:
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "generate access key"
     shell:

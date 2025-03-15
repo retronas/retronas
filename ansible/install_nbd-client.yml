@@ -4,15 +4,16 @@
     - my_name: "nbd-client"
     - my_file: "install_nbd-client"
 
+    - packages:
+        - nbd-client
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - install from repos"
-    ansible.builtin.package:
-       name: nbd-client
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - enable ndb kernel module"
     ansible.builtin.template:

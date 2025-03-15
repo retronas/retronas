@@ -1,0 +1,12 @@
+my_name: "curlftpfs"
+my_file: "install_{{ my_name }}"
+
+my_packages:
+  - curl
+  - build-essential
+  - libglib2.0-dev
+  - libfuse-dev
+  - libcurl4-openssl-dev
+
+templates:
+  - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}

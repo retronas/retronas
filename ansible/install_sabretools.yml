@@ -12,7 +12,7 @@
     - my_name: "SabreTools"
     - my_file: "install_sabretools"
 
-    - my_packages:
+    - packages:
       - git
       - coreutils
       - unzip
@@ -32,10 +32,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.apt:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Prepare installer script"
     ansible.builtin.template:

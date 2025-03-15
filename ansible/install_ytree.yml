@@ -6,7 +6,7 @@
     - my_name: "ytree"
     - my_file: "install_{{ my_name }}"
 
-    - my_packages:
+    - packages:
       - build-essential
       - libreadline-dev
       - gcc
@@ -19,10 +19,8 @@
   - name: "{{ my_name }} - Load RetroNAS systems"
     ansible.builtin.include_vars: retronas_systems.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - check systemd unit folder"
     ansible.builtin.file:

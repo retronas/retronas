@@ -1,9 +1,9 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_cockpit.yml
-- ansible.builtin.import_playbook: install_cockpit-packages.yml
-
 - hosts: localhost
   gather_facts: no
+
+- roles:
+    - retronas.role.filesystems
+    - retronas.role.cockpit
 
   vars:
     - my_name: "retronas"

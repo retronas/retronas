@@ -15,10 +15,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install packages"
-    package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

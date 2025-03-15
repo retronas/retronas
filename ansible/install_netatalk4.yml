@@ -5,7 +5,7 @@
     - my_name: "Netatalk4"
     - my_file: "install_netatalk4"
 
-    - my_packages:
+    - packages:
       - avahi-daemon
       - build-essential
       - meson
@@ -119,10 +119,8 @@
     when: old_services_check is defined and
           item.stat.exists is true
 
-  - name: "{{ my_name }}  - install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Install build tools (debian)"
     ansible.builtin.package:

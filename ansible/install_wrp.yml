@@ -7,7 +7,7 @@
     - my_name: "wrp"
     - my_file: "install_{{ my_name }}"
 
-    - my_packages:
+    - packages:
       - chromium
 
     - google_chrome: /usr/bin/google-chrome
@@ -31,10 +31,8 @@
       path: "{{ google_chrome }}"
     register: google_chrome_check
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
     when: google_chrome_check.stat.exists is false
 
   - name: "{{ my_name }} - fake google-chrome"

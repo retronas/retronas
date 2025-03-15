@@ -5,7 +5,7 @@
     - my_name: "hdparm"
     - my_file: "install_{{ my_name }}"
 
-    - my_packages:
+    - packages:
          - hdparm
          - coreutils
 
@@ -30,11 +30,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install from repos"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
-    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - check dir"
     ansible.builtin.file:

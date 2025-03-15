@@ -1,44 +1,9 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_filesystems.yml
-- ansible.builtin.import_playbook: install_cockpit.yml
-
 - hosts: localhost
   gather_facts: no
 
-  vars:
-    - my_name: "cockpit-packages"
-    - my_file: "install_cockpit-packages"
-
-    - package_tools:
-      - lm-sensors
-
-    - package_data:
-      - cockpit-packages.sh
-
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - install prerequisite packages"
-    ansible.builtin.package:
-       name: "{{ package_tools }}"
-       state: latest
-
-  - name: "{{ my_name }} - install cockpit packages inplace"
-    ansible.builtin.copy:
-      src: "templates/{{ my_file }}/{{ item }}.j2"
-      dest: "{{ retronas_root }}/scripts/{{ item }}"
-      owner: root
-      group: root
-      mode: 0750
-    with_items:
-      "{{ package_data }}"
-
-  - name: "{{ my_name }} - get packages"
-    ansible.builtin.command:
-      cmd: "{{ retronas_root }}/scripts/{{ my_name }}.sh"
-
+- roles:
+    - retronas.role.filesystems
+    - retronas.role.cockpit
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

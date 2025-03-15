@@ -1,0 +1,9 @@
+my_name: "x11vnc"
+my_file: "install_{{ my_name }}"
+
+packages:
+  - xvfb
+  - x11vnc
+
+templates:
+  - { name: "x11vnc_wrapper.sh", dest: "/usr/local/bin", mode: "0755"}

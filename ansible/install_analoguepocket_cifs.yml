@@ -113,15 +113,8 @@
 
   handlers:
 
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

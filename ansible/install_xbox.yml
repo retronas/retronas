@@ -8,6 +8,7 @@
   vars:
     - my_name: "xbox"
     - my_file: "install_xbox"
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"

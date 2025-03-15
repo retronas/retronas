@@ -8,15 +8,16 @@
 
     - firewalld_rules:
       - { zone: "retro", service: "tftp" }
+    
+    - packages:
+        tftpd-hpa
 
   tasks:
     - name: "{{ my_name }}  - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - name: "{{ my_name }}  - install from repos"
-      ansible.builtin.apt:
-        name: tftpd-hpa
-        state: latest
+    - ansible.builtin.import_role:
+        name: retronas.role.package.latest
 
     - name: "{{ my_name }} - configure retro shares"
       ansible.builtin.template:

@@ -1,44 +1,8 @@
 - hosts: localhost
   gather_facts: yes
 
-  vars:
-    - my_name: "curlftpfs"
-    - my_file: "install_{{ my_name }}"
-
-    - my_packages:
-      - curl
-      - build-essential
-      - libglib2.0-dev
-      - libfuse-dev
-      - libcurl4-openssl-dev
-
-    - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - install packages"
-    ansible.builtin.apt:
-       name: "{{ my_packages }}"
-       state: latest
-
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-
-  - name: "{{ my_name }} - Install from source code"
-    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-    args:
-      creates: "/usr/local/bin/curlftpfs"
+  roles:
+    - retronas.role.curlftps
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

@@ -5,7 +5,7 @@
     - my_name: "Deluge"
     - my_file: "install_deluge"
 
-    - my_packages:
+    - packages:
       - geoip-bin
       - geoip-database
       - deluged
@@ -43,10 +43,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - install deluge from repos"
-    ansible.builtin.apt:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - create dirs"
     ansible.builtin.file:

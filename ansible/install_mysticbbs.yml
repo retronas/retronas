@@ -5,7 +5,7 @@
     - my_name: "mysticbbs"
     - my_file: "install_mysticbbs"
 
-    - my_packages:
+    - packages:
       - p7zip-full
       - p7zip-rar
       - screen
@@ -31,10 +31,8 @@
       repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
       state: present
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+    name: retronas.role.package.latest
 
   - name: "{{ my_name }} - mysticbbs dir"
     ansible.builtin.file:

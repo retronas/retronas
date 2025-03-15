@@ -6,7 +6,7 @@
     - my_name: "macproxy"
     - my_file: "install_macproxy"
 
-    - my_packages:
+    - packages:
       - python3 
       - python3-venv
       - python3-pip
@@ -16,58 +16,35 @@
 
     - repo: https://github.com/rdmark/macproxy.git
 
+    - firewalld_ports:
+      - { port: 5000, protocol: tcp }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - clone repo"
     ansible.builtin.git:
       repo: "{{ repo }}"
       dest: /opt/{{ my_name }}
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-    notify: "{{ my_name }} Restart Services"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: retro
-      port: 5000/tcp
-      permanent: true
-      state: enabled
-      immediate: true
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
   handlers:
   - name: "{{ my_name }} Restart Services"
     ansible.builtin.service:
-      name: "{{ item }}"
+      name: "{{ my_name }}.service"
       state: started
       enabled: yes
       daemon_reload: yes
-    with_items:
-      - "{{ my_name }}.service"
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

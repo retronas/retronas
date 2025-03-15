@@ -13,10 +13,8 @@
 
   tasks:
 
-  - name: "{{ my_name }} - Install packages"
-    package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - restart if imported because handlers will not run"
     service:

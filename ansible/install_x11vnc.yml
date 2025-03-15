@@ -4,39 +4,8 @@
 - hosts: localhost
   gather_facts: no
 
-  vars:
-    - my_name: "x11vnc"
-    - my_file: "install_{{ my_name }}"
-
-    - packages:
-      - xvfb
-      - x11vnc
-
-    - templates:
-      - { name: "x11vnc_wrapper.sh", dest: "/usr/local/bin", mode: "0755"}
-  
-  tasks:
-
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
-
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  roles:
+    - retronas.roles.x11vnc
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

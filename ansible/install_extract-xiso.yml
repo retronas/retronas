@@ -5,7 +5,7 @@
     - my_name: "extract-xiso"
     - my_file: "install_extract-xiso"
 
-    - my_packages: 
+    - packages: 
       - make
       - gcc
       - coreutils
@@ -16,10 +16,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Generate scripts"
     ansible.builtin.template:

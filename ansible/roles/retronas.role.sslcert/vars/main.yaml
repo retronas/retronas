@@ -1,0 +1,7 @@
+my_name: "sslcert"
+my_file: "install_{{ my_name }}"
+my_cert: /etc/ssl/private/retronas.crt
+my_key: /etc/ssl/private/retronas.key
+
+packages:
+  - { name: "openssl", state: "latest" }

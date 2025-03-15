@@ -4,7 +4,7 @@
   vars:
     - my_name: "ProFTPd"
 
-    - my_packages:
+    - packages:
        - avahi-daemon
        - proftpd-core
 
@@ -17,10 +17,8 @@
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }}  - install from repos"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - remove  mod_unique_id.c"
     ansible.builtin.ini_file:

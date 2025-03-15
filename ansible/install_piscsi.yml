@@ -5,7 +5,7 @@
     - my_name: "piscsi"
     - my_file: "install_piscsi"
 
-    - my_packages:
+    - packages:
       - bridge-utils
       - build-essential
       - disktype
@@ -61,30 +61,14 @@
     include_vars: retronas_vars.yml
 
   # libpcap can conflict with libpcap from backport (tcpdump etc)
-  - name: "{{ my_name }} - Install build tools"
-    apt:
-       name: "{{ my_packages }}" 
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - paths"
-    file:
-      src: "{{ item.src | default(omit) }}"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - build source"
     command:

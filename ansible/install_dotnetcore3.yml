@@ -1,61 +1,8 @@
 - hosts: localhost
   gather_facts: no
 
-  vars:
-    - my_name: "DotNet Core 3.X SDK"
-    - my_file: "install_dotnetcore3"
-
-    - my_packages:
-      - wget
-      - curl
-      - aria2
-      - coreutils
-
-    - srcdir: "{{ retronas_root }}/src/{{ my_file }}"
-    - version: 3.1.415
-    - arch: x64
-
-  tasks:
-
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
-
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
-
-  - name: "{{ my_name }} - clean up old installs"
-    ansible.builtin.file:
-      path: "{{ srcdir }}"
-      force: yes
-      state: absent
-
-  - name: "{{ my_name }} - create build dirs"
-    ansible.builtin.file:
-      path: "{{ srcdir }}"
-      owner: root
-      group: root
-      mode: 0755
-      state: directory
-
-  - name: "{{ my_name }} - Download SDK installer"
-    ansible.builtin.get_url:
-      url: https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
-      dest: "{{ srcdir }}"
-      owner: root
-      group: root
-      mode: 0755
-
-  - name: "{{ my_name }} - Install DotNet SDK"
-    ansible.builtin.shell:
-      cmd: "./dotnet-install.sh --version {{ version }} 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-      chdir: "{{ srcdir }}"
-      executable: /bin/bash
-    environment:
-      DOTNET_ROOT: "{{ retronas_root }}/bin/dotnetcore3"
-      DOTNET_INSTALL_DIR: "{{ retronas_root }}/bin/dotnetcore3"
-      TMPDIR: "{{ srcdir }}"
+  roles:
+    - retronas.role.dotnetcore3
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

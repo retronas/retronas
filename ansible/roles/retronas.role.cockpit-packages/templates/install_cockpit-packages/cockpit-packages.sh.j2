@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# Clone down additional Cockpit Packages
+#
+
+set -u
+
+RNTMP=/tmp/rn_cpack
+COCKPIT=/usr/share/cockpit
+
+# clean up old stuff
+[ -d "${RNTMP}" ] && rm -Rf "${RNTMP}/"
+
+# make out temp dir
+[ ! -d ${RNTMP} ] && mkdir ${RNTMP}
+
+function get_github {
+
+    local ACCOUNT=$1
+    local REPO=$2
+    local FOLDER=$3
+
+    if [ ! -d "${RNTMP}/${FOLDER}" ]
+    then
+        cd ${RNTMP}
+        git clone https://github.com/${ACCOUNT}/${REPO}.git $FOLDER
+    else
+        cd ${RNTMP}/${FOLDER}
+        git pull
+    fi
+
+    cd ${RNTMP}/${FOLDER}
+
+    RELEASE=$(git tag | tail -n1)
+    [ ! -z "${RELEASE}" ] && git checkout $RELEASE
+
+}
+
+function install_package {
+
+    local FOLDER=$1
+
+    [ ! -d "${RNTMP}/${FOLDER}" ] && echo "Can't find my temp dir man, boooo!" && exit 1
+    
+    cp -R "${RNTMP}/${FOLDER}" "${COCKPIT}/"
+
+}
+
+
+### there'll be a better way to approach this
+function get_45drives {
+
+    PACKAGES=(
+        "cockpit-navigator|navigator"
+        #"cockpit-zfs-manager|zfs"
+        #"cockpit-file-sharing|file-sharing"
+    )
+
+    for ITEM in ${PACKAGES[@]}
+    do
+        PACKAGE=$(echo ${ITEM} | cut -d '|' -f1)
+        FOLDER=$(echo ${ITEM} | cut -d'|' -f2)
+        get_github 45Drives $PACKAGE $FOLDER
+        install_package $FOLDER/$FOLDER
+    done
+
+}
+
+### get sensors
+function get_sensors {
+
+    PACKAGE=cockpit-sensors-plugin
+    FOLDER=$(echo ${PACKAGE} | sed -r 's/^cockpit-(.+)-plugin/\1/' )
+    get_github JamesGKent $PACKAGE $FOLDER
+    install_package $FOLDER
+
+}
+
+
+get_45drives
+get_sensors
+
+# clean up
+[ -d "${RNTMP}" ] && rm -Rf "${RNTMP}/"

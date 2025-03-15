@@ -1,0 +1,5 @@
+- name: "{{ my_name }} - Restart service"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  with_items: "{{ my_services }}"

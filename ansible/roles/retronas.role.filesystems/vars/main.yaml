@@ -1,0 +1,19 @@
+my_name: "RetroNAS filesystems"
+my_file: "install_filesystems"
+
+my_packages:
+  - btrfs-progs
+  - ntfs-3g
+  - exfatprogs
+  - exfat-fuse
+  - hfsplus
+  - xfsprogs
+  - nfs-common
+  - e2fsprogs
+  - dosfstools
+  #- curlftpfs
+  - sshfs
+  - udisks2
+  - udisks2-btrfs
+  - udisks2-lvm2
+  - udisks2-zram

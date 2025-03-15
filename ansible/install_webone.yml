@@ -9,7 +9,7 @@
     - my_name: "WebOne proxy"
     - my_file: "install_webone"
 
-    - my_packages:
+    - packages:
       - git
       - imagemagick-6.q16
       - imagemagick-6-common
@@ -24,10 +24,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Prepare installer script"
     ansible.builtin.template:

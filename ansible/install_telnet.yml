@@ -14,19 +14,18 @@
     - firewalld_rules:
       - { zone: "retro", service: "telnet" }
 
+    - packages:
+         - telnet
+         - telnetd
+         - xinetd
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install from repos"
-    ansible.builtin.apt:
-       name:
-         - telnet
-         - telnetd
-         - xinetd
-       state: latest
-    notify: "{{ my_name }} - Restart services"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Enable startup services"
     ansible.builtin.service:

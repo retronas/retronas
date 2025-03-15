@@ -1,0 +1,12 @@
+my_name: "Cockpit"
+my_file: "install_cockpit"
+my_service: "cockpit"
+
+my_packages:
+  - cockpit
+  - cockpit-storaged
+  - cockpit-networkmanager
+
+firewalld_rules:
+  - { zone: "retro" }
+  - { zone: "modern" }

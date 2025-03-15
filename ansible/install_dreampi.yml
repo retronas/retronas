@@ -6,7 +6,7 @@
     - my_name: "dreampi"
     - my_file: "install_dreampi"
 
-    - my_packages:
+    - packages:
       - git
       - dnsmasq 
       - dnsutils 
@@ -45,30 +45,14 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"   
+  - ansible.builtin.import_role:
+      name: retronas.role.paths 
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-    notify: "{{ my_name }} Restart Services"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Run installer"
     ansible.builtin.shell:

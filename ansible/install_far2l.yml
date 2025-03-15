@@ -5,7 +5,7 @@
     - my_name: "far2l"
     - my_file: "install_{{ my_name }}"
 
-    - my_packages:
+    - packages:
       - gawk 
       - m4
       - libpcre3-dev 
@@ -29,10 +29,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Generate scripts"
     ansible.builtin.template:
