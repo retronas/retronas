@@ -1,7 +1,7 @@
 my_name: "curlftpfs"
 my_file: "install_{{ my_name }}"
 
-my_packages:
+packages:
   - curl
   - build-essential
   - libglib2.0-dev

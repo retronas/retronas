@@ -5,6 +5,8 @@
   vars:
     - my_name: "dreampi"
     - my_file: "install_dreampi"
+    - module_name: "dreampi"
+    - module_state: "present"
 
     - packages:
       - git
@@ -71,6 +73,9 @@
     with_items: "{{ systemd_patches }}"
     notify: "{{ my_name }} Restart Services"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
   - name: "{{ my_name }} Restart Services"
     ansible.builtin.service:
@@ -80,8 +85,3 @@
       daemon_reload: yes
     with_items:
       - "{{ my_name }}.service"
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "dreampi"
-    module_state: "present"

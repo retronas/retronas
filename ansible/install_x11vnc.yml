@@ -5,7 +5,7 @@
   gather_facts: no
 
   roles:
-    - retronas.roles.x11vnc
+    - retronas.role.x11vnc
 
 - ansible.builtin.import_playbook: retronas_system_config.yml
   vars:

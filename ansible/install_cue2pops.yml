@@ -4,14 +4,19 @@
   vars:
     - my_name: "cue2pops"
     - my_file: "install_cue2pops"
+    - module_name: "cue2pops"
+    - module_state: "present"
 
-    - my_packages:
+    - packages:
       - git
       - coreutils
       - make
       - gcc
       - g++
       - build-essential
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
 
@@ -21,13 +26,8 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Prepare installer script"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ my_file }}.sh.j2
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Run installer"
     ansible.builtin.shell:
@@ -35,7 +35,5 @@
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "cue2pops"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

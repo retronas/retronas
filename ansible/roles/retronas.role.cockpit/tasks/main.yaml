@@ -3,7 +3,7 @@
 
 - name: "{{ my_name }} - Install from repo"
   ansible.builtin.apt:
-      name: "{{ my_packages }}"
+      name: "{{ packages }}"
       state: latest
       default_release: "{{ ansible_distribution_release }}-backports"
   notify: "{{ my_name }} - Restart service"

@@ -4,4 +4,4 @@ my_cert: /etc/ssl/private/retronas.crt
 my_key: /etc/ssl/private/retronas.key
 
 packages:
-  - { name: "openssl", state: "latest" }
+  - "openssl"

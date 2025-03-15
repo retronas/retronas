@@ -1,6 +1,5 @@
 - ansible.builtin.import_role:
     name: retronas.role.package.latest
 
-- name: "{{ my_name }} - templates"
-  ansible.builtin.import_role:
-    - name: retronas.role.templates
+- ansible.builtin.import_role:
+    name: retronas.role.templates

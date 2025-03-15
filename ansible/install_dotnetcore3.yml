@@ -1,10 +1,9 @@
 - hosts: localhost
   gather_facts: no
-
-  roles:
-    - retronas.role.dotnetcore3
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "dotnetcore3"
     module_state: "present"
+
+  roles:
+    - retronas.role.dotnetcore3
+    - retronas.role.system-config

@@ -1,6 +1,5 @@
 # Dependencies
 - ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_nginx.yml
 
 - hosts: localhost
   gather_facts: no
@@ -9,6 +8,8 @@
     - my_name: "3DS QR Codes"
     - my_file: "install_3ds_qr_codes"
     - rom_path: "{{ retronas_path }}/3ds"
+    - module_name: "3ds_qr_codes"
+    - module_state: "present"
 
     - dirs:
       - cia
@@ -18,6 +19,9 @@
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
+
+  -  ansible.builtin.import_role:
+      name: retronas.role.nginx
 
   - name: "{{ my_name }} - configure 3DS directory"
     ansible.builtin.file:
@@ -53,7 +57,5 @@
       group: root
       mode: '0755'
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "3ds_qr_codes"
-    module_state: "present"
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config

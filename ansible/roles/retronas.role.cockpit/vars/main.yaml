@@ -2,7 +2,7 @@ my_name: "Cockpit"
 my_file: "install_cockpit"
 my_service: "cockpit"
 
-my_packages:
+packages:
   - cockpit
   - cockpit-storaged
   - cockpit-networkmanager

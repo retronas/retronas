@@ -1,7 +1,7 @@
 my_name: "RetroNAS filesystems"
 my_file: "install_filesystems"
 
-my_packages:
+packages:
   - btrfs-progs
   - ntfs-3g
   - exfatprogs

@@ -1,0 +1,6 @@
+- name: "{{ my_name }} - Restart service"
+  ansible.builtin.service:
+    name: "{{ item.name }}"
+    state: restarted
+  with_items: "{{ systemd_units }}"
+  when: item.restart == "yes"

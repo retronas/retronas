@@ -1,10 +1,10 @@
 - hosts: localhost
   gather_facts: yes
 
-  roles:
-    - retronas.role.curlftps
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "curlftpfs"
     module_state: "present"
+
+  roles:
+    - retronas.role.curlftps
+    - retronas.role.system-config

@@ -1,9 +1,9 @@
 - name: "{{ my_name }} - paths"
   ansible.builtin.file:
-    dest: "{{ item.dest }}/{{ item.name }}"
+    dest: "{{ item.dest + '/' | default(omit) }}{{ item.name }}"
     owner: "{{ item.owner|default('root') }}"
     group: "{{ item.group|default('root') }}"
     mode: "{{ item.mode|default('0755') }}"
     state: "{{ item.state|default('directory') }}"
-  with_items: "{{ paths }}"
+  loop: "{{ paths }}"
   when: paths is defined

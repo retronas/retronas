@@ -8,6 +8,8 @@
   vars:
     - my_name: "retronas_docs"
     - my_file: "install_retronas_docs"
+    - module_name: "retronas_docs"
+    - module_state: "present"
 
   tasks:
 
@@ -20,7 +22,5 @@
       dest: "{{ retronas_root }}/doc"
       update: no
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "retronas_docs"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

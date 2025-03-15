@@ -1,6 +1,5 @@
 # Dependencies
 - ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_x11vnc.yml
 
 - hosts: localhost
   gather_facts: no
@@ -9,6 +8,8 @@
     - my_name: "adtpro"
     - my_file: "install_{{ my_name }}"
     - my_dir: /opt/adtpro
+    - module_name: "adtpro"
+    - module_state: "present"
 
     - systemd_units:
       - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -39,12 +40,15 @@
     ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
+      name: retronas.role.x11vnc
+
+  - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
   - ansible.builtin.import_role:
       name: retronas.role.paths
 
-  -  ansible.builtin.import_role:
+  - ansible.builtin.import_role:
       name: retronas.role.templates
 
   - name: "{{ my_name }} - disks symlink"
@@ -72,12 +76,10 @@
     ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
     - name: "{{ my_name }} daemon-reload"
       ansible.builtin.systemd:
         daemon_reload: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "adtpro"
-    module_state: "present"

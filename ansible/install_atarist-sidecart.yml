@@ -12,6 +12,8 @@
     base_path: "{{ retronas_path }}/atarist"
     script_url: "https://raw.githubusercontent.com/diegoparrilla/atarist-sidecart-raspberry-pico/main/roms/update_json"
     script_dest: "{{ retronas_root }}/bin/{{ my_name }}-generate-roms.sh"
+    module_name: "atarist-sidecart"
+    module_state: "present"
 
     packages:
       - python3-boto3
@@ -54,15 +56,8 @@
       state: "link"
     with_items: "{{ links }}"
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: 
       - "{{ my_name }} daemon-reload"
       - "{{ my_name }} - Install changed"
@@ -92,6 +87,9 @@
       immediate: true
     when: firewalld_services.stat.exists
 
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
 
   - name: "{{ my_name }} daemon-reload"
@@ -102,19 +100,14 @@
     ansible.builtin.set_fact:
       install_changed: true
 
-- ansible.builtin.import_playbook: install_nginx.yml
+- ansible.builtin.import_playbook: retronas.role.samba
   vars:
     site_enable: 99-retronas-sidecart.conf
   when: install_changed is defined and
         install_changed is true
 
-- ansible.builtin.import_playbook: install_samba.yml
+- ansible.builtin.import_role: retronas.role.samba
   vars:
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "atarist-sidecart"
-    module_state: "present"

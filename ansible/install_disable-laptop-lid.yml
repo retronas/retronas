@@ -4,30 +4,30 @@
   vars:
     - my_name: "Disable Laptop Lid"
     - my_file: "install_disable-laptop-lid"
-    - my_path: "/etc/systemd/logind.conf.d"
     - service: "systemd-logind.service"
+    - module_name: "disable-laptop-lid"
+    - module_state: "present"
+
+    - paths:
+      - { name: "logind.conf.d", dest: "/etc/systemd/",                state: "directory", mode: "0755"}
+
+    - templates:
+      - { name: "retronas.conf", dest: "/etc/systemd/logind.conf.d", mode: "0755"}
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - create directory"
-    ansible.builtin.file:
-      path: "{{ my_path }}"
-      owner: 'root'
-      group: 'root'
-      mode: '0755'
-      state: directory
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - install config"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/retronas.conf.j2
-      dest: "{{ my_path }}/retronas.conf"
-      owner: 'root'
-      group: 'root'
-      mode: '0644'
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: "{{ my_name }} - Restart service"
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -35,8 +35,3 @@
     ansible.builtin.service:
       name: "{{ service }}"
       state: restarted
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "disable-laptop-lid"
-    module_state: "present"

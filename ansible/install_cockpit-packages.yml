@@ -1,11 +1,11 @@
 - hosts: localhost
   gather_facts: no
 
-- roles:
-    - retronas.role.filesystems
-    - retronas.role.cockpit
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "cockpit-packages"
     module_state: "present"
+
+  roles:
+    - retronas.role.filesystems
+    - retronas.role.cockpit
+    - retronas.role.system-config

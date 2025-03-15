@@ -1,7 +1,7 @@
 my_name: "DotNet Core 3.X SDK"
 my_file: "install_dotnetcore3"
 
-my_packages:
+packages:
   - wget
   - curl
   - aria2
