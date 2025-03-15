@@ -5,12 +5,17 @@
   vars:
     - my_name: "tftpd-hpa"
     - my_file: "install_tftpd-hpa"
+    - module_name: "tftpd-hpa"
+    - module_state: "present"
 
     - firewalld_rules:
       - { zone: "retro", service: "tftp" }
     
     - packages:
         tftpd-hpa
+
+    - templates:
+      - { name: "tftpd-hpa", dest: "/etc/default" }
 
   tasks:
     - name: "{{ my_name }}  - Load RetroNAS config"
@@ -19,14 +24,8 @@
     - ansible.builtin.import_role:
         name: retronas.role.package.latest
 
-    - name: "{{ my_name }} - configure retro shares"
-      ansible.builtin.template:
-        src: templates/{{ my_file }}/tftpd-hpa.j2
-        dest: /etc/default/tftpd-hpa
-        owner: root
-        group: root
-        mode: '0644'
-      notify: "{{ my_name }} - Restart service"
+    - ansible.builtin.import_role:
+        name: retronas.role.templates
 
     - name: "{{ my_name }} - enable startup services"
       ansible.builtin.service:
@@ -34,23 +33,11 @@
         state: started
         enabled: true
 
-    #
-    # FIREWALL
-    #
-    - name: "{{ my_name }} - checking firewall rule"
-      ansible.builtin.stat:
-        path: /etc/firewalld/services
-      register: firewalld_services
+    - ansible.builtin.import_role:
+        name: retronas.role.firewalld.port
 
-    - name: "{{ my_name }} - enable firewall rule"
-      ansible.posix.firewalld:
-        zone: "{{ item.zone | default('retro') }}"
-        service: "{{ item.service | default('tftp') }}"
-        permanent: true
-        state: enabled
-        immediate: true
-      with_items: "{{ firewalld_rules }}"
-      when: firewalld_services.stat.exists
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config
 
   handlers:
 
@@ -58,8 +45,3 @@
     ansible.builtin.service:
       name: tftpd-hpa
       state: restarted
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "tftpd-hpa"
-    module_state: "present"

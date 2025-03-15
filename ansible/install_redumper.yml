@@ -4,6 +4,8 @@
   vars:
     - my_name: "redumper"
     - my_file: "install_{{ my_name }}"
+    - module_name: "redumper"
+    - module_state: "present"
 
     - packages:
       - unzip
@@ -13,8 +15,8 @@
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
-    - name: "{{ my_name }} - Load RetroNAS config"
-      ansible.builtin.include_vars: retronas_vars.yml
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
@@ -22,8 +24,5 @@
   - ansible.builtin.import_role:
       name: retronas.role.templates
 
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "redumper"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

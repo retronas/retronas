@@ -8,6 +8,11 @@
   vars:
     - my_name: "smbmounter"
     - my_file: "install_{{ my_name }}"
+    - module_name: "smbmounter"
+    - module_state: "present"
+
+    - templates:
+      - { name: "retronas_{{ my_name }}.conf", dest: "/etc/samba" }
 
   tasks:
 
@@ -17,6 +22,9 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
+
   - name: "{{ my_name }} - link romdir"
     ansible.builtin.file:
       src: "{{ retronas_path }}/roms/commodore/amiga"
@@ -25,7 +33,6 @@
       group: "{{ retronas_group }}"
       state: link
       mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ansible.builtin.ini_file:
@@ -33,30 +40,9 @@
       section: "amiga"
       option: "include"
       value: "/etc/samba/retronas_amiga.conf"
-    notify: "{{ my_name }} - Install Samba"
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_{{ my_name }}.conf.j2"
-      dest: /etc/samba/retronas_amiga.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "recalbox_cifs"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

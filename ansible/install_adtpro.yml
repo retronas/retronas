@@ -20,9 +20,9 @@
       - x11vnc
 
     - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-      - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no}
-      - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755"}
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no }
+      - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755" }
 
     - paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}

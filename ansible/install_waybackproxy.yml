@@ -8,16 +8,16 @@
     - my_name: "waybackproxy"
     - my_file: "install_{{ my_name }}"
     - my_dir: "/opt/{{ my_name }}"
+    - module_name: "waybackproxy"
+    - module_state: "present"
 
     - systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "no", restart: "yes", instance: "no" }
 
-    - scripts:
-      - { name: "install_waybackproxy.sh", dest: "{{ retronas_root }}/scripts" }
-
     - templates:
       - { name: "config.json", dest: "{{ my_dir }}" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
+      - { name: "install_waybackproxy.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     - packages:
       - git
@@ -36,67 +36,22 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - paths"
-    file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - scripts"
-    template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ scripts }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install"
     shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "/opt/{{ my_name }}/{{ my_name }}.py"
 
-  - name: "{{ my_name }} - templates"
-    template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - create startup service(s) instance"
-    template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /usr/lib/systemd/system/{{ item.name }}@.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} - Restart service" 
-
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone }}"
-      port: "{{ item.port }}/{{ item.protocol }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewald_ports }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -105,8 +60,3 @@
       name: "{{ my_name }}.service"
       state: restarted
       daemon_reload: yes
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "waybackproxy"
-    module_state: "present"

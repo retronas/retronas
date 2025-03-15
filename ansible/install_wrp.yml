@@ -1,17 +1,22 @@
 ---
-# Dependencies
 - hosts: localhost
   gather_facts: no
 
   vars:
     - my_name: "wrp"
     - my_file: "install_{{ my_name }}"
+    - module_name: "wrp"
+    - module_state: "present"
 
     - packages:
       - chromium
 
     - google_chrome: /usr/bin/google-chrome
     - chromium: /usr/bin/chromium
+
+    - templates:
+      - { name: "{{ my_file }}.sh",       dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_name }}.service",  dest: "/usr/lib/systemd/system" }
 
     - firewalld_ports:
       - { zone: "retro", port: 8080, protocol: tcp }
@@ -42,13 +47,8 @@
        state: link
     when: google_chrome_check.stat.exists is false
 
-  - name: "{{ my_name }} - Prepare installer script"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ my_file }}.sh.j2
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Run installer"
     ansible.builtin.shell:
@@ -56,53 +56,23 @@
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
 
-  - name: "{{ my_name }} - create startup service"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ my_name }}.service.j2
-      dest: /usr/lib/systemd/system/{{ my_name }}.service
-      owner: root
-      group: root
-      mode: 0644
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable startup service"
     ansible.builtin.service:
-      name: "{{ item }}"
+      name: "{{ my_name }}"
       state: started
       enabled: yes
       daemon_reload: yes
-    with_items:
-      - "{{ my_name }}"
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone }}"
-      port: "{{ item.port }}/{{ item.protocol }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewald_ports }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
     ansible.builtin.service:
-      name: "{{ item }}"
+      name: "{{ my_name }}"
       state: restarted
       daemon_reload: yes
-    with_items:
-      - "{{ my_name }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "wrp"
-    module_state: "present"

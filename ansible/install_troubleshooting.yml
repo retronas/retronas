@@ -4,6 +4,8 @@
   vars:
     - my_name: "troubleshooting"
     - my_file: "install_troubleshooting"
+    - module_name: "troubleshooting"
+    - module_state: "present"
 
     - packages:
       - ioping
@@ -30,7 +32,5 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "troubleshooting"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
