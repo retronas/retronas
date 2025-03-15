@@ -4,6 +4,8 @@
   vars:
     - my_name: "netlink"
     - my_file: "install_netlink"
+    - module_name: "netlink"
+    - module_state: "present"
 
     - packages:
       - curl
@@ -62,6 +64,9 @@
   - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
   - name: "{{ my_name }} Restart Services"
     ansible.builtin.service:
@@ -71,8 +76,3 @@
       daemon_reload: yes
     with_items:
       - "{{ my_name }}.service"
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "netlink"
-    module_state: "present"

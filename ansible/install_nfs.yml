@@ -4,15 +4,20 @@
   vars:
     - my_name: "NFS"
     - my_file: "install_nfs"
+    - module_name: "nfs"
+    - module_state: "present"
 
-    - my_packages:
+    - packages:
       - nfs-common
       - nfs-kernel-server
+
+    - templates:
+      - { name: "nfs-kernel-server", dest: "/etc/default" }
+      - { name: "exports", dest: "/etc/" }
 
     - firewalld_rules:
       - { zone: retro, service: nfs }
       - { zone: modern, service: nfs }
-
 
   tasks:
 
@@ -38,23 +43,8 @@
   - ansible.builtin.set_fact:
       retronas_group_id: "{{ getent_group[retronas_group][1] }}"
 
-  - name: "{{ my_name }} - enable NFS v2 v3 v4"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/default.j2"
-      dest: /etc/default/nfs-kernel-server
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - enable NFS exports"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/exports.j2"
-      dest: /etc/exports
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - enable startup services"
     ansible.builtin.service:
@@ -64,23 +54,11 @@
     with_items:
       - nfs-kernel-server
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('nfs') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -90,8 +68,3 @@
       state: restarted
     with_items:
       - nfs-kernel-server
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "nfs"
-    module_state: "present"

@@ -3,6 +3,8 @@
   vars:
     - my_name: "megatools"
     - my_file: "install_megatools"
+    - module_name: "megatools"
+    - module_state: "present"
 
     - packages:
       - build-essential 
@@ -15,6 +17,9 @@
       - meson
       - ninja-build
 
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
@@ -23,20 +28,13 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - install script"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: '0750'
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - build source"
     ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/megatools"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "megatools"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

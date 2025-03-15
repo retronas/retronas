@@ -4,8 +4,10 @@
   vars:
     - my_name: "mc"
     - my_file: "install_mc"
+    - module_name: "mc"
+    - module_state: "present"
 
-    - my_packages:
+    - packages:
       - mc
 
   tasks:
@@ -19,7 +21,5 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "mc"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

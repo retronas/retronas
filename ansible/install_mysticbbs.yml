@@ -4,11 +4,16 @@
   vars:
     - my_name: "mysticbbs"
     - my_file: "install_mysticbbs"
+    - module_name: "mysticbbs"
+    - module_state: "present"
 
     - packages:
       - p7zip-full
       - p7zip-rar
       - screen
+
+    - paths:
+      - { name: "{{ my_name }}", dest: "/opt", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
     - templates:
       - { name: "mysticbbs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
@@ -32,24 +37,13 @@
       state: present
 
   - ansible.builtin.import_role:
-    name: retronas.role.package.latest
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - mysticbbs dir"
-    ansible.builtin.file:
-      path: "/opt/mysticbbs"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - install mysticbbs"
     ansible.builtin.command:
@@ -76,18 +70,8 @@
       mode: 0644
     when: firewalld_services.stat.exists
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('mysticbbs') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "mysticbbs"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

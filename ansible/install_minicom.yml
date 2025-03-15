@@ -8,6 +8,8 @@
     - my_name: "minicom"
     - my_file: "install_{{ my_name }}"
     - my_dir: ""
+    - module_name: "minicom"
+    - module_state: "present"
 
     - systemd_units:
       #- { name: "minicom", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -38,24 +40,11 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - script links" 
     ansible.builtin.file:
@@ -70,7 +59,5 @@
       groups: dialout
       append: yes
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "minicom"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

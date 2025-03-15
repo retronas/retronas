@@ -5,6 +5,8 @@
   vars:
     - my_name: "macproxy"
     - my_file: "install_macproxy"
+    - module_name: "macproxy"
+    - module_state: "present"
 
     - packages:
       - python3 
@@ -38,6 +40,9 @@
   - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
   - name: "{{ my_name }} Restart Services"
     ansible.builtin.service:
@@ -45,8 +50,3 @@
       state: started
       enabled: yes
       daemon_reload: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "macproxy"
-    module_state: "present"

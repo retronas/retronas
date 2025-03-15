@@ -5,6 +5,8 @@
     - my_name: "ntp"
     - my_service: "openntpd"
     - my_file: "install_ntp"
+    - module_name: "ntp"
+    - module_state: "present"
 
     - packages:
       - openntpd
@@ -36,6 +38,8 @@
       line: "listen on *"
     notify: "{{ my_name }} - Restart service"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -45,8 +49,3 @@
       state: restarted
       daemon_reload: yes
       enabled: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "ntp"
-    module_state: "present"

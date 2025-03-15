@@ -8,6 +8,8 @@
     - my_name: "nabu"
     - my_file: "install_{{ my_name }}"
     - my_dir: /opt/nabu
+    - module_name: "nabu"
+    - module_state: "present"
 
     - systemd_units:
       - { name: "nabu", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
@@ -54,7 +56,5 @@
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/nabu.sh"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "nabu"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
