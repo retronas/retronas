@@ -3,10 +3,10 @@
   gather_facts: no
 
   vars:
-    - my_name: "RetroArch Based Systems CIFS"
-    - my_file: "install_retroarch_cifs"
-    - module_name: "retroarch_cifs"
-    - system_key: "retroarch"
+    my_name: "RetroArch Based Systems CIFS"
+    my_file: "install_retroarch_cifs"
+    module_name: "retroarch_cifs"
+    system_key: "retroarch"
 
   tasks:
     - name: "{{ my_name }} - Load RetroNAS config"

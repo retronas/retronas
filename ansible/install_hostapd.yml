@@ -1,25 +1,24 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: false
 
   vars:
-    - my_name: "hostapd"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "hostapd"
+    my_name: "hostapd"
+    my_file: "install_{{ my_name }}"
+    module_name: "hostapd"
 
-    - packages:
+    packages:
       - hostapd
       - pwgen
 
-    - my_services: "hostapd-retronas.service"
+    my_services: "hostapd-retronas.service"
 
-    - templates:
+    templates:
       - { name: "hostapd-retronas.conf",    sub: "", dest: "/etc/{{ my_name }}", force: no, mode: "0640" }
       - { name: "hostapd-dnsmasq.conf",     sub: "", dest: "/etc/dnsmasq.d/retro/", force: no, mode: "0640" }
       - { name: "hostapd-retronas.service", sub: "", dest: "/etc/systemd/system" }
 
-    - paths:
+    paths:
       - { name: "dnsmasq.d",       dest: "/etc",              state: "directory", mode: "0755" }
       - { name: "retro",           dest: "/etc/dnsmasq.d",    state: "directory", mode: "0755" }
 

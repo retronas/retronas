@@ -1,16 +1,14 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "EmuElec CIFS"
-    - my_file: "install_emuelec_cifs"
-    - module_name: "emuelec_cifs"
-    - system_key: "emuelec"
+    my_name: "EmuElec CIFS"
+    my_file: "install_emuelec_cifs"
+    module_name: "emuelec_cifs"
+    system_key: "emuelec"
 
-    - internal_symlinks:
+    internal_symlinks:
       - { src: 'nintendo/famicom', dest: 'nesh' }
       - { src: 'nintendo/gameboyadvance', dest: 'gbah' }
       - { src: 'nintendo/gameboy', dest: 'gbh' }
@@ -25,6 +23,9 @@
 
     - ansible.builtin.import_role:
       name: retronas.role.romdir
+
+    - ansible.builtin.import_role:
+      name: retronas.role.extradirs
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

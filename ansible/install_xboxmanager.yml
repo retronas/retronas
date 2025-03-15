@@ -11,16 +11,16 @@
     - retronas.role.curlftpfs
 
   vars:
-    - my_name: "xboxmanager"
-    - my_file: "install_xboxmanager"
-    - my_path: "/opt"
-    - module_name: "xboxmanager"
+    my_name: "xboxmanager"
+    my_file: "install_xboxmanager"
+    my_path: "/opt"
+    module_name: "xboxmanager"
 
-    - paths:
+    paths:
       - { name: "device-mounts",  dest: "{{ retronas_path }}",                owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "xbox",           dest: "{{ retronas_path }}/device-mounts",  owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "xboxmanager.cfg", dest: "/opt/xboxmanager", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
   tasks:

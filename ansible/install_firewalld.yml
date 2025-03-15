@@ -1,28 +1,26 @@
-# Dependencies
-
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "firewalld"
-    - my_file: "install_{{ my_name }}"
-    - my_services: "firewalld.service"
-    - module_name: "firewalld"
+    my_name: "firewalld"
+    my_file: "install_{{ my_name }}"
+    my_services: "firewalld.service"
+    module_name: "firewalld"
 
-    - templates:
+    templates:
       - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }
       - { name: "override.conf",            sub: "workarounds", dest: "/etc/systemd/system" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}",               dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_name }}.service.d",     dest: "/etc/systemd/system/",  state: "directory", mode: "0750" }
 
-    - packages: 
+    packages: 
       - firewalld
       - python3-firewall
 
-    - collections:
+    collections:
       - { collection: ansible.posix, creates: ansible/posix }
 
   tasks:

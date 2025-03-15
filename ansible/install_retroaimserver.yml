@@ -1,28 +1,27 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "retroaimserver"
-    - my_file: "install_retroaimserver"
-    - my_dir: "/opt/retro-aim-server"
-    - module_name: "retroaimserver"
+    my_name: "retroaimserver"
+    my_file: "install_retroaimserver"
+    my_dir: "/opt/retro-aim-server"
+    module_name: "retroaimserver"
 
-    - systemd_units:
+    systemd_units:
       - { name: "retro-aim-server", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - curl
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh",         dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "retro-aim-server.service", dest: "/etc/systemd/system/" }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zones: retro, service: retroaimserver }
 
-    - settings_env:
+    settings_env:
       - { regex: "^export OSCAR_HOST=.*", line: "export OSCAR_HOST={{ retronas_net_retro_ip }}" }
       - { regex: "^export DISABLE_AUTH=true", line: "export DISABLE_AUTH=false" }
 

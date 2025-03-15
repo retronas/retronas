@@ -3,12 +3,12 @@
   gather_facts: no
 
   vars:
-    - my_name: "PS2 OpenPS2Loader"
-    - my_file: "install_ps2_openps2loader"
-    - my_dir: "{{ retronas_path }}/ps2/OpenPS2Loader"
-    - module_name: "ps2_openps2loader"
+    my_name: "PS2 OpenPS2Loader"
+    my_file: "install_ps2_openps2loader"
+    my_dir: "{{ retronas_path }}/ps2/OpenPS2Loader"
+    module_name: "ps2_openps2loader"
 
-    - paths:
+    paths:
         - { name: "APPS",   dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
         - { name: "ART",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
         - { name: "CFG",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
@@ -17,7 +17,7 @@
         - { name: "THM",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
         - { name: "VMC",    dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "retronas_ps2.conf", dest: "/etc/samba" }
 
   tasks:

@@ -1,11 +1,12 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "megatools"
-    - my_file: "install_megatools"
-    - module_name: "megatools"
+    my_name: "megatools"
+    my_file: "install_megatools"
+    module_name: "megatools"
 
-    - packages:
+    packages:
       - build-essential 
       - libglib2.0-dev
       - libssl-dev
@@ -16,7 +17,7 @@
       - meson
       - ninja-build
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

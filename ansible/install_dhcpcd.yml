@@ -3,14 +3,14 @@
   gather_facts: no
 
   vars:
-    - my_name: "dhcpcd"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "dhcpcd"
+    my_name: "dhcpcd"
+    my_file: "install_{{ my_name }}"
+    module_name: "dhcpcd"
 
-    - packages:
+    packages:
       - dhcpcd
 
-    - changed: false
+    changed: false
 
   tasks:
 

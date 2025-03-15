@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "pfsshell"
-    - my_file: "install_pfsshell"
-    - module_name: "pfsshell"
+    my_name: "pfsshell"
+    my_file: "install_pfsshell"
+    module_name: "pfsshell"
 
-    - packages:
+    packages:
       - make
       - gcc
       - coreutils

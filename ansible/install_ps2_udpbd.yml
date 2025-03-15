@@ -3,25 +3,25 @@
   gather_facts: no
 
   vars:
-    - my_name: "ps2_udpbd"
-    - my_file: "install_ps2_udpbd"
-    - module_name: "ps2_udpbd"
-    - append_user_group: "disk"
+    my_name: "ps2_udpbd"
+    my_file: "install_ps2_udpbd"
+    module_name: "ps2_udpbd"
+    append_user_group: "disk"
 
-    - systemd_units:
+    systemd_units:
       - { name: "ps2_udpbd", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
-    - packages:
+    packages:
       - make
       - gcc
       - g++
       - git
       - build-essential
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "udpbd_manager.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }

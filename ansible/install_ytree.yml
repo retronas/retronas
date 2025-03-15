@@ -3,16 +3,16 @@
   gather_facts: no
 
   vars:
-    - my_name: "ytree"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "ytree"
+    my_name: "ytree"
+    my_file: "install_{{ my_name }}"
+    module_name: "ytree"
 
-    - packages:
+    packages:
       - build-essential
       - libreadline-dev
       - gcc
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:

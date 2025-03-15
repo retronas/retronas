@@ -1,20 +1,21 @@
+----
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "hdparm"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "hdparm"
+    my_name: "hdparm"
+    my_file: "install_{{ my_name }}"
+    module_name: "hdparm"
 
-    - packages:
+    packages:
          - hdparm
          - coreutils
 
-    - scripts:
+    scripts:
       - "{{ my_name }}.sh"
       - "{{ my_name }}-manager.sh"
 
-    - symlinks:
+    symlinks:
       - hdparm-manager-disable-apm
       - hdparm-manager-disable-standby
       - hdparm-manager-start-service
@@ -22,7 +23,7 @@
       - hdparm-manager-stop-service
       - hdparm-manager-drive-selector
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: "timer", state: "stopped", instance: "no", enabled: "no", restart: "no" }
       - { name: "{{ my_name }}", type: "service", state: "stopped", instance: "no", enabled: "no", restart: "no" }
 

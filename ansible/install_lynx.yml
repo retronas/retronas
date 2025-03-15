@@ -1,14 +1,13 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "lynx"
-    - my_file: "install_lynx"
-    - module_name: "lynx"
+    my_name: "lynx"
+    my_file: "install_lynx"
+    module_name: "lynx"
 
-    - packages:
+    packages:
       - lynx
 
   tasks:

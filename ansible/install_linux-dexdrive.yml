@@ -3,21 +3,21 @@
   gather_facts: no
 
   vars:
-    - my_name: "linux-dexdrive"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "linux-dexdrive"
+    my_name: "linux-dexdrive"
+    my_file: "install_{{ my_name }}"
+    module_name: "linux-dexdrive"
 
-    - packages:
+    packages:
       - git 
       - build-essential
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh",   dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "makefile.patch",     dest: "/tmp" }
       - { name: "dexdrive_dumper.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
   tasks:

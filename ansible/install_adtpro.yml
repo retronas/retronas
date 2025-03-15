@@ -3,29 +3,29 @@
   gather_facts: no
 
   vars:
-    - my_name: "adtpro"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: /opt/adtpro
-    - module_name: "adtpro"
+    my_name: "adtpro"
+    my_file: "install_{{ my_name }}"
+    my_dir: /opt/adtpro
+    module_name: "adtpro"
 
-    - systemd_units:
+    systemd_units:
       - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
-    - packages:
+    packages:
       - default-jre
       - xvfb
       - x11vnc
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no }
       - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 60000, protocol: tcp }
 
   tasks:

@@ -1,14 +1,15 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "nbd-client"
-    - my_file: "install_nbd-client"
-    - module_name: "nbd-client"
+    my_name: "nbd-client"
+    my_file: "install_nbd-client"
+    module_name: "nbd-client"
 
-    - packages:
+    packages:
         - nbd-client
 
-    - templates:
+    templates:
       - { name: "nbd.conf", dest: "/etc/modules-load.d/" }
 
   tasks:

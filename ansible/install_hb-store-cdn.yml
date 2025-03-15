@@ -3,14 +3,14 @@
   gather_facts: no
 
   vars:
-    - my_name: hb-store-cdn
-    - my_file: "install_{{ my_name }}"
-    - module_name: "hb-store-cdn"
+    my_name: hb-store-cdn
+    my_file: "install_{{ my_name }}"
+    module_name: "hb-store-cdn"
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       #- git
       #- npm
       - libnode108
@@ -18,19 +18,19 @@
       #- g++
       #- build-essential
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}",    dest: "{{ retronas_root }}/bin",                state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "bin",              dest: "{{ retronas_root }}/bin/{{ my_name }}",  state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "ps4",              dest: "{{ retronas_path }}",                    state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "{{ my_name }}-check.sh", dest: "{{ retronas_root }}/bin/{{ my_name }}", mode: "0755"}
       - { name: "{{ my_name }}.cron", dest: "/etc/cron.d" }
       - { name: "config.ini", dest: "{{ retronas_root }}/bin/{{ my_name }}" }
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/usr/lib/systemd/system" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 6449, protocol: "tcp" }
 
   tasks:

@@ -3,16 +3,16 @@
   gather_facts: no
 
   vars:
-    - my_name: "ucon64"
-    - my_file: "install_ucon64"
-    - module_name: "ucon64"
+    my_name: "ucon64"
+    my_file: "install_ucon64"
+    module_name: "ucon64"
 
-    - packages:
+    packages:
       - make
       - gcc
       - coreutils
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:

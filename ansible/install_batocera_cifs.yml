@@ -1,37 +1,37 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Batocera CIFS"
-    - my_file: "install_batocera_cifs"
-    - module_name: "batocera_cifs"
-    - system_key: "batocera"
+    my_name: "Batocera CIFS"
+    my_file: "install_batocera_cifs"
+    module_name: "batocera_cifs"
+    system_key: "batocera"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "ROMS",   enabled: yes,  generic: "roms",   systems: yes }
       - { name: "SAVES",  enabled: yes,  generic: "saves",  systems: yes }
       - { name: "BIOS",   enabled: yes,  generic: "bios",   systems: yes }
 
-    - internal_symlinks:
+    internal_symlinks:
       - { src: 'sega/megadrive', dest: 'msu-md' }
 
   tasks:
 
-    - name: "{{ my_name }} - Load RetroNAS config"
-      ansible.builtin.include_vars: retronas_vars.yml
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
+  - ansible.builtin.import_role:
+    name: retronas.role.extradirs
 
-    - ansible.builtin.import_role:
-        name: retronas.role.samba.system
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
 
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
+  - ansible.builtin.import_role:
+      name: retronas.role.samba.system
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

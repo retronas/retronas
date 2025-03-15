@@ -1,30 +1,28 @@
 ---
-# Dependencies
-
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "waybackproxy"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: "/opt/{{ my_name }}"
-    - module_name: "waybackproxy"
+    my_name: "waybackproxy"
+    my_file: "install_{{ my_name }}"
+    my_dir: "/opt/{{ my_name }}"
+    module_name: "waybackproxy"
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "no", restart: "yes", instance: "no" }
 
-    - templates:
+    templates:
       - { name: "config.json", dest: "{{ my_dir }}" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
       - { name: "install_waybackproxy.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
-    - packages:
+    packages:
       - git
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { zone: "retro", port: 8888, protocol: tcp }
 
   tasks:

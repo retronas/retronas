@@ -1,17 +1,18 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "litch"
-    - my_file: "install_litch"
-    - module_name: "litch"
+    my_name: "litch"
+    my_file: "install_litch"
+    module_name: "litch"
 
-    - packages:
+    packages:
       - python3
       - python3-bs4
       - git
 
-    - templates:
+    templates:
       - { name: "litch_login.sh",          dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "litch_download.sh",       dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "litch_download_clean.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}

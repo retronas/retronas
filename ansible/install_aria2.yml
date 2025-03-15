@@ -1,13 +1,14 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "aria2"
-    - my_file: "install_aria2"
-    - module_name: "aria2"
-    - module_state: "present"
+    my_name: "aria2"
+    my_file: "install_aria2"
+    module_name: "aria2"
+    module_state: "present"
 
-    - packages:
+    packages:
       - aria2
 
   tasks:

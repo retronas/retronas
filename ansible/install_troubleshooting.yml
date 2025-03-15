@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "troubleshooting"
-    - my_file: "install_troubleshooting"
-    - module_name: "troubleshooting"
+    my_name: "troubleshooting"
+    my_file: "install_troubleshooting"
+    module_name: "troubleshooting"
 
-    - packages:
+    packages:
       - ioping
       - iotop
       - iperf3

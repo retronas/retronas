@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "apfs-fuse"
-    - my_file: "install_apfs-fuse"
-    - module_name: "apfs-fuse"
+    my_name: "apfs-fuse"
+    my_file: "install_apfs-fuse"
+    module_name: "apfs-fuse"
 
-    - packages:
+    packages:
       - git
       - fuse 
       - libfuse3-dev 
@@ -17,7 +18,7 @@
       - libattr1-dev 
       - zlib1g-dev
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

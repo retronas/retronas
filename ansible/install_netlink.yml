@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "netlink"
-    - my_file: "install_netlink"
-    - module_name: "netlink"
+    my_name: "netlink"
+    my_file: "install_netlink"
+    module_name: "netlink"
 
-    - packages:
+    packages:
       - curl
       - unzip
       - dnsmasq 
@@ -20,16 +21,16 @@
       - wvdial 
       - python3-pip
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
       - { name: "{{ my_name }}.conf", dest: "/etc/dnsmasq.d" }
       - { name: "{{ my_name }}.patch", dest: "/tmp" }
 
-    - paths:
+    paths:
       - { name: "dnsmasq.d", dest: "/etc" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { zone: modern, port: 65432, protocol: tcp }
       - { zone: modern, port: 20001, protocol: udp }
       - { zone: modern, port: 20002, protocol: udp }

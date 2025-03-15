@@ -4,6 +4,9 @@
   roles:
     - retronas.role.sslcert
   
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "sslcert"
+
+  tasks:
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

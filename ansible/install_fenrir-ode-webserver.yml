@@ -3,24 +3,24 @@
   gather_facts: no
 
   vars:
-    - my_name: "fenrir-ode-webserver"
-    - my_file: "install_fenrir-ode-webserver"
-    - module_name: "fenrir-ode-webserver"
+    my_name: "fenrir-ode-webserver"
+    my_file: "install_fenrir-ode-webserver"
+    module_name: "fenrir-ode-webserver"
 
-    - packages:
+    packages:
       - make
       - gcc
       - g++
       - coreutils
       - cmake
 
-    - fenrir_ode_path: "{{ retronas_path }}/fenrir-ode-webserver"
-    - fenrir_ode_port: "31994"
-    - fenrir_ode_bin: "/usr/local/bin/FenrirServer"
+    fenrir_ode_path: "{{ retronas_path }}/fenrir-ode-webserver"
+    fenrir_ode_port: "31994"
+    fenrir_ode_bin: "/usr/local/bin/FenrirServer"
 
-    - my_service: "{{ my_name }}.service"
+    my_service: "{{ my_name }}.service"
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/usr/lib/systemd/system" }
 

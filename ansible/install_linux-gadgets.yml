@@ -3,14 +3,14 @@
   gather_facts: no
 
   vars:
-    - my_name: "linux-gadgets"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "linux-gadgets"
+    my_name: "linux-gadgets"
+    my_file: "install_{{ my_name }}"
+    module_name: "linux-gadgets"
 
-    - templates:
+    templates:
       - { name: "gadget-mass-storage-manage.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
-    - paths:
+    paths:
       - { name: "images", dest: "{{ retronas_path }}", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}"}
 
   tasks:

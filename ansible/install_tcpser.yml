@@ -1,22 +1,23 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "tcpser"
-    - my_file: "install_tcpser"
-    - module_name: "tcpser"
-    - append_user_group: "dialout"
+    my_name: "tcpser"
+    my_file: "install_tcpser"
+    module_name: "tcpser"
+    append_user_group: "dialout"
 
-    - packages:
+    packages:
       - make
       - gcc
       - coreutils
       - git
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_root }}/etc" }
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "tcpser@.service", dest: "/usr/lib/systemd/system" }
 

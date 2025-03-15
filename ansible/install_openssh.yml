@@ -1,16 +1,17 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "OpenSSH"
-    - module_name: "openssh"
+    my_name: "OpenSSH"
+    module_name: "openssh"
 
-    - packages:
+    packages:
          - openssh-client
          - openssh-server
          - openssh-sftp-server
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: retro, service: ssh }
       - { zone: modern, service: ssh }
 

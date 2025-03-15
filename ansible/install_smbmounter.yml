@@ -1,15 +1,13 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "smbmounter"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "smbmounter"
+    my_name: "smbmounter"
+    my_file: "install_{{ my_name }}"
+    module_name: "smbmounter"
 
-    - templates:
+    templates:
       - { name: "retronas_{{ my_name }}.conf", dest: "/etc/samba" }
 
   tasks:
@@ -22,6 +20,9 @@
 
   - ansible.builtin.import_role:
       name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
+    name: retronas.role.extradirs
 
   - ansible.builtin.import_role:
       name: retronas.role.samba

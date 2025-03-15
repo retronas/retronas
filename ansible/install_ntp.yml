@@ -1,16 +1,17 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "ntp"
-    - my_service: "openntpd"
-    - my_file: "install_ntp"
-    - module_name: "ntp"
+    my_name: "ntp"
+    my_service: "openntpd"
+    my_file: "install_ntp"
+    module_name: "ntp"
 
-    - packages:
+    packages:
       - openntpd
 
-    - remove_packages:
+    remove_packages:
       - ntp
 
   tasks:

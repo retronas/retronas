@@ -1,20 +1,21 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "ProFTPd"
-    - my_file: "install_proftpd"
-    - module_name: "proftpd"
+    my_name: "ProFTPd"
+    my_file: "install_proftpd"
+    module_name: "proftpd"
 
-    - packages:
+    packages:
        - avahi-daemon
        - proftpd-core
 
-    - templates:
+    templates:
       - { name: "retronas.conf", dest: "/etc/proftpd/conf.d" }
       - { name: "ftp.service", dest: "/etc/avahi/services" }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { name: ftp, zone: retro }
       - { name: ftp, zone: modern }
 

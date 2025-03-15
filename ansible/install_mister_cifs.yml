@@ -1,33 +1,30 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "MiSTer CIFS"
-    - my_file: "install_mister_cifs"
-    - module_name: "mister_cifs"
-    - system_key: "mister"
+    my_name: "MiSTer CIFS"
+    my_file: "install_mister_cifs"
+    module_name: "mister_cifs"
+    system_key: "mister"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "games",      enabled: yes,  generic: "roms",        systems: yes }
       - { name: "saves",      enabled: yes,  generic: "saves",       systems: yes }
       - { name: "savestates", enabled: yes,  generic: "savestates",  systems: yes }
       - { name: "BIOS",       enabled: yes,  generic: "bios",        systems: yes }
       - { name: "wallpapers", enabled: yes,  generic: "wallpapers",  systems: no  }
 
-    - save_overrides:
+    save_overrides:
       - { name: "GAMEBOY2P", src: "nintendo/gameboy2p" }
       - { name: "GBA2P", src: "nintendo/gameboyadvance2p" }
 
-    - templates:
+    templates:
       - { name: "retronas_mister.conf", dest: "/etc/samba" }
       - { name: "retronas-mister-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-mister-dirs.timer", dest: "/etc/systemd/system" }
 
-    - systemd_units:
+    systemd_units:
       - { name: "retronas-mister-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
       - { name: "retronas-mister-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
@@ -37,6 +34,12 @@
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
+
+  - ansible.builtin.import_role:
+    name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
+    name: retronas.role.extradirs
 
   - ansible.builtin.import_role:
       name: retronas.role.samba

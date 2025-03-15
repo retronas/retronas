@@ -1,18 +1,18 @@
-# Dependencies
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "dnsmasq"
-    - my_file: "install_{{ my_name }}"
+    my_name: "dnsmasq"
+    my_file: "install_{{ my_name }}"
 
-    - packages:
+    packages:
       - dnsmasq
 
-    - my_services:
+    my_services:
       - dnsmasq
 
-    - changed: false
+    changed: false
 
   tasks:
 

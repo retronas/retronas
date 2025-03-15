@@ -1,19 +1,20 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "affstools"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "affstools"
+    my_name: "affstools"
+    my_file: "install_{{ my_name }}"
+    module_name: "affstools"
 
-    - packages:
+    packages:
       - make
       - autoconf
       - gcc
       - curl
       - build-essential
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

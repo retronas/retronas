@@ -3,15 +3,15 @@
   gather_facts: no
 
   vars:
-    - my_name: "XBox360"
-    - my_file: "install_xbox360"
-    - module_name: "xbox360"
-    - system_key: "xbox360"
+    my_name: "XBox360"
+    my_file: "install_xbox360"
+    module_name: "xbox360"
+    system_key: "xbox360"
 
-    - paths:
+    paths:
       - { name: "xbox360", dest: "{{ retronas_path }}" }
 
-    - templates:
+    templates:
       - { name: "retronas_xbox360.conf", dest: "/etc/samba" }
 
   tasks:

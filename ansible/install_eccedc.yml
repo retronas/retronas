@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "EccEDC"
-    - my_file: "install_eccedc"
-    - module_name: "eccedc"
+    my_name: "EccEDC"
+    my_file: "install_eccedc"
+    module_name: "eccedc"
 
-    - packages:
+    packages:
       - coreutils
       - make
       - gcc
@@ -15,7 +16,7 @@
       - build-essential
       - unzip
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

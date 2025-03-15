@@ -1,21 +1,19 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "EmuDeck CIFS"
-    - my_file: "install_emudeck_cifs"
-    - system_key: "emudeck"
-    - module_name: "emudeck_cifs"
+    my_name: "EmuDeck CIFS"
+    my_file: "install_emudeck_cifs"
+    system_key: "emudeck"
+    module_name: "emudeck_cifs"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
     #  - { name: "saves",  enabled: yes,  generic: "saves",  systems: yes }
       - { name: "bios",   enabled: yes,  generic: "bios",   systems: yes }
 
-    - internal_symlinks:
+    internal_symlinks:
       - { src: 'commodore/amiga', dest: 'ags' }
       - { src: 'commodore/amiga', dest: 'amiga600' }
       - { src: 'atari/jaguar', dest: 'atarijaguarcd' }
@@ -44,6 +42,9 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
+
+    - ansible.builtin.import_role:
+      name: retronas.role.extradirs
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

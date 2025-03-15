@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "Netatalk4"
-    - my_file: "install_netatalk4"
-    - module_name: "netatalk4"
+    my_name: "Netatalk4"
+    my_file: "install_netatalk4"
+    module_name: "netatalk4"
 
-    - packages:
+    packages:
       - avahi-daemon
       - build-essential
       - meson
@@ -38,7 +39,7 @@
       - po4a
       - libmptcpwrap0
 
-    - packages_debian:
+    packages_debian:
         debian11:
           - libmysqlclient-dev
           - libtracker-sparql-2.0-dev
@@ -46,17 +47,17 @@
           - default-libmysqlclient-dev
           - libtracker-sparql-3.0-dev
 
-    - packages_ubuntu:
+    packages_ubuntu:
       - libmysqlclient-dev
       - libtracker-sparql-2.0-dev
       - libtracker-miner-2.0-dev
 
-    - my_services:
+    my_services:
       - avahi-daemon
       - atalkd
       - netatalk
 
-    - config_settings:
+    config_settings:
       - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
       - { section: "Global", option: "hostname", value: "retroafp" }
       - { section: "Global", option: "mimic model", value: "PowerMac" }
@@ -69,15 +70,15 @@
       - { section: "Global", option: "legacy icon", value: "globe" }
       - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
 
-    - paths:
+    paths:
       - { name: "netatalk4", dest: "/opt/retronas/bin", mode: '0755'  }
       - { name: "etc", dest: "/opt/retronas/bin/netatalk4", mode: '0755'  }
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755' }
       - { name: "retronas.conf", dest: "/opt/retronas/bin/netatalk4/etc" }
 
-    - old_services:
+    old_services:
       - { name: "atalkd.service", dest: "/etc/systemd/system"}
       - { name: "netatalk.service", dest: "/etc/systemd/system"}
 

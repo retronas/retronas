@@ -3,12 +3,12 @@
   gather_facts: no
 
   vars:
-    - my_name: "FSP for Swiss"
-    - my_file: "install_fsp"
-    - my_service: "fspd"
-    - module_name: "fsp"
+    my_name: "FSP for Swiss"
+    my_file: "install_fsp"
+    my_service: "fspd"
+    module_name: "fsp"
 
-    - packages:
+    packages:
       - python3
       - python-is-python3
       - build-essential
@@ -16,13 +16,13 @@
       - gcc
       - scons
 
-    - swiss_rw:
+    swiss_rw:
       - .FSP_OK_ADD
       - .FSP_OK_DEL
       - .FSP_OK_MKDIR
       - .FSP_OK_RENAME
 
-    - paths:
+    paths:
       - { name: "fsp",      dest: "{{ retronas_root }}/bin/" }
       - { name: "etc",      dest: "{{ retronas_root }}/bin/fsp/" }
       - { name: "gamecube", dest: "{{ retronas_path }}" }
@@ -30,12 +30,12 @@
       - { name: "swiss",    dest: "{{ retronas_path }}/gamecube/swiss" }   # ????
       - { name: "tmp",      dest: "{{ retronas_path }}/gamecube/swiss" }
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_service }}.conf", dest: "{{ retronas_root }}/bin/fsp/etc" }
       - { name: "fspd.service", dest: "/usr/lib/systemd/system/" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 2121, protocol: udp }
 
   tasks:

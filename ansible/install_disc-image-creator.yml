@@ -6,11 +6,11 @@
   gather_facts: no
 
   vars:
-    - my_name: "Disc Image Creator"
-    - my_file: "install_disc-image-creator"
-    - module_name: "disc-image-creator"
+    my_name: "Disc Image Creator"
+    my_file: "install_disc-image-creator"
+    module_name: "disc-image-creator"
 
-    - packages:
+    packages:
       - git
       - coreutils
       - make
@@ -20,7 +20,7 @@
       - build-essential
       - unzip
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: "0755"}
 
   tasks:

@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "piscsi"
-    - my_file: "install_piscsi"
-    - module_name: "piscsi"
+    my_name: "piscsi"
+    my_file: "install_piscsi"
+    module_name: "piscsi"
 
-    - packages:
+    packages:
       - bridge-utils
       - build-essential
       - disktype
@@ -41,18 +42,18 @@
       - gettext
       - rsyslog
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
       - { name: "src", dest: "{{ retronas_root }}", owner: "{{ retronas_user }}", group: '{{ retronas_group }}' }
       - { name: "{{ my_name }}", src: "{{ retronas_path }}/{{ my_name }}", dest: "/home/{{ retronas_user }}", state: "link" }
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_file }}_standard.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "{{ my_name }}_retronas_patch.diff", dest: "{{ retronas_root }}/src"}
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system"}
 
-    - systemd_units:
+    systemd_units:
       - { name: "rsyslog", type: 'service', state: "restarted", enabled: "yes", restart: "yes", instance: "no" }
       - { name: "piscsi", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 

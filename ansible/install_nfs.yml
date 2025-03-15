@@ -1,20 +1,21 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "NFS"
-    - my_file: "install_nfs"
-    - module_name: "nfs"
+    my_name: "NFS"
+    my_file: "install_nfs"
+    module_name: "nfs"
 
-    - packages:
+    packages:
       - nfs-common
       - nfs-kernel-server
 
-    - templates:
+    templates:
       - { name: "nfs-kernel-server", dest: "/etc/default" }
       - { name: "exports", dest: "/etc/" }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: retro, service: nfs }
       - { zone: modern, service: nfs }
 

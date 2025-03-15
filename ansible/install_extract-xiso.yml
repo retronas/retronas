@@ -2,17 +2,17 @@
   gather_facts: no
 
   vars:
-    - my_name: "extract-xiso"
-    - my_file: "install_extract-xiso"
-    - module_name: "extract-xiso"
+    my_name: "extract-xiso"
+    my_file: "install_extract-xiso"
+    module_name: "extract-xiso"
 
-    - packages: 
+    packages: 
       - make
       - gcc
       - coreutils
       - cmake
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:

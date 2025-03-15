@@ -1,14 +1,15 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "Syncthing"
-    - my_file: "install_syncthing"
-    - module_name: "syncthing"
+    my_name: "Syncthing"
+    my_file: "install_syncthing"
+    module_name: "syncthing"
 
-    - packages:
+    packages:
         - syncthing
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: modern, service: syncthing }
       - { zone: modern, service: syncthing-gui }
 

@@ -1,16 +1,17 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Disable Laptop Lid"
-    - my_file: "install_disable-laptop-lid"
-    - service: "systemd-logind.service"
-    - module_name: "disable-laptop-lid"
+    my_name: "Disable Laptop Lid"
+    my_file: "install_disable-laptop-lid"
+    service: "systemd-logind.service"
+    module_name: "disable-laptop-lid"
 
-    - paths:
+    paths:
       - { name: "logind.conf.d", dest: "/etc/systemd/",                state: "directory", mode: "0755"}
 
-    - templates:
+    templates:
       - { name: "retronas.conf", dest: "/etc/systemd/logind.conf.d", mode: "0755"}
 
   tasks:

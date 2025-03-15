@@ -4,6 +4,9 @@
   roles:
     - retronas.role.samba
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
   vars:
     module_name: "samba"
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

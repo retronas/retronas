@@ -2,22 +2,22 @@
   gather_facts: no
 
   vars:
-    - my_name: "Deluge"
-    - my_file: "install_deluge"
-    - module_name: "bittorrent"
+    my_name: "Deluge"
+    my_file: "install_deluge"
+    module_name: "bittorrent"
 
-    - packages:
+    packages:
       - geoip-bin
       - geoip-database
       - deluged
       - deluge-web
       - deluge-console
 
-    - systemd_units:
+    systemd_units:
       - { name: "deluged",    type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
       - { name: "deluge-web", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - paths:
+    paths:
       - { name: "deluged",      dest: "/var/lib",                       owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "config",       dest: "/var/lib/deluged",               owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "bittorrent",   dest: "{{ retronas_path }}",            owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
@@ -26,7 +26,7 @@
       - { name: "downloading",  dest: "{{ retronas_path }}/bittorrent", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "complete",     dest: "{{ retronas_path }}/bittorrent", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "autoadd.conf",       dest: "/var/lib/deluged/config" }
       - { name: "deluged",            dest: "/etc/default" }
       - { name: "core.conf",          dest: "/var/lib/deluged/config" }
@@ -35,7 +35,7 @@
       - { name: "deluged.service",    dest: '/usr/lib/systemd/system' }
       - { name: "deluge-web.service", dest: '/usr/lib/systemd/system' }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { zone: retro, port: "8112", protocol: "tcp" }
       - { zone: modern, port: "8112", protocol: "tcp" }
       - { zone: retro, port: "58846", protocol: "tcp" }

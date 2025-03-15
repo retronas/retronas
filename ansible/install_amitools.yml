@@ -1,16 +1,17 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "amitools"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "amitools"
+    my_name: "amitools"
+    my_file: "install_{{ my_name }}"
+    module_name: "amitools"
 
-    - packages:
+    packages:
       - python3
       - python3-pip
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

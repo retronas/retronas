@@ -1,20 +1,20 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "open-iscsi"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "open-iscsi"
+    my_name: "open-iscsi"
+    my_file: "install_{{ my_name }}"
+    module_name: "open-iscsi"
 
-    - packages:
+    packages:
         - open-iscsi
 
-    - my_services:
+    my_services:
         - open-iscsi
 
-    - templates:
+    templates:
       - { name: "iscsi-manager-target-login.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
-    
 
   tasks:
 

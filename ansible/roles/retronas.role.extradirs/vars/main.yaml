@@ -1,0 +1,9 @@
+my_name: "Generic Extra dir(s)"
+my_file: "install_romdir"
+module_name: "extradirs"
+
+top_level_paths:
+  - { name: "saves",      enabled: yes, systems: yes }
+  - { name: "savestates", enabled: yes, systems: yes }
+  - { name: "bios",       enabled: yes, systems: yes }
+  - { name: "wallpapers", enabled: yes, systems: no }

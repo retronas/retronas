@@ -3,26 +3,26 @@
   gather_facts: no
 
   vars:
-    - my_name: "assembly64"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: /opt/{{ my_name }}
-    - module_name: "assembly64"
-    - module_state: "present"
+    my_name: "assembly64"
+    my_file: "install_{{ my_name }}"
+    my_dir: /opt/{{ my_name }}
+    module_name: "assembly64"
+    module_state: "present"
 
-    - packages:
+    packages:
       - xvfb
       - x11vnc
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}_retronas.sh", dest: "/opt/{{ my_name }}", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system", mode: "0644" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 66000, protocol: tcp}
 
   tasks:

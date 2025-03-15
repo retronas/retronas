@@ -1,30 +1,29 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "seaweedfs"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "seaweedfs"
+    my_name: "seaweedfs"
+    my_file: "install_{{ my_name }}"
+    module_name: "seaweedfs"
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}-retronas", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - pwgen
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zones: retro, service: "{{ my_name }}" }
       - { zones: modern, service: "{{ my_name }}" }
 
-    - templates:
+    templates:
       - { name: "{{ my_name }}-retronas.service", dest: "/etc/systemd/system" }
       - { name: "install_{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "seaweedfs-credentials.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "weed-retronas-s3.json", dest: "{{ retronas_root }}/bin", mode: "0640", force: no }
 
-    - paths:
+    paths:
       - { name: "s3", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
   tasks:

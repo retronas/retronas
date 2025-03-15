@@ -1,28 +1,29 @@
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "mtcp-netdrive"
-    - my_file: "install_mtcp-netdrive"
-    - module_name: "mtcp-netdrive"
+    my_name: "mtcp-netdrive"
+    my_file: "install_mtcp-netdrive"
+    module_name: "mtcp-netdrive"
 
-    - packages:
+    packages:
       - screen
       - curl
       - unzip
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "install_mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
       - { name: "mtcp-netdrive.service", dest: "/etc/systemd/system", force: "yes" }
       - { name: "mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zones: retro, service: mtcp-netdrive }
 
-    - my_services:
+    my_services:
       - mtcp-netdrive
 
   tasks:

@@ -2,11 +2,11 @@
   gather_facts: no
 
   vars:
-    - my_name: "far2l"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "far2l"
+    my_name: "far2l"
+    my_file: "install_{{ my_name }}"
+    module_name: "far2l"
 
-    - packages:
+    packages:
       - gawk 
       - m4
       - libpcre3-dev 
@@ -24,7 +24,7 @@
       - gcc
       - git
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:

@@ -1,27 +1,24 @@
 ---
-# Dependencies
-- ansible.builtin.import_playbook: install_dotnetcore6.yml
-
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "WebOne proxy"
-    - my_file: "install_webone"
-    - module_name: "webone"
+    my_name: "WebOne proxy"
+    my_file: "install_webone"
+    module_name: "webone"
 
-    - packages:
+    packages:
       - git
       - imagemagick-6.q16
       - imagemagick-6-common
       - ffmpeg
       - coreutils
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "webone.service", dest: "/usr/lib/systemd/system" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { zone: "retro", port: 8080, protocol: tcp }
 
   tasks:
@@ -32,6 +29,9 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
     notify: "{{ my_name }} - Restart service"
+
+  - ansible.builtin.import_role:
+      name: retronas.role.dotnetcore6
 
   - ansible.builtin.import_role:
       name: retronas.role.templates

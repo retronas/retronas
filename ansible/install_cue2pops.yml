@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "cue2pops"
-    - my_file: "install_cue2pops"
-    - module_name: "cue2pops"
+    my_name: "cue2pops"
+    my_file: "install_cue2pops"
+    module_name: "cue2pops"
 
-    - packages:
+    packages:
       - git
       - coreutils
       - make
@@ -14,7 +15,7 @@
       - g++
       - build-essential
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

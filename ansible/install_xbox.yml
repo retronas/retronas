@@ -3,15 +3,15 @@
   gather_facts: no
 
   vars:
-    - my_name: "xbox"
-    - my_file: "install_xbox"
-    - module_name: "xbox"
-    - system_key: "xbox"
+    my_name: "xbox"
+    my_file: "install_xbox"
+    module_name: "xbox"
+    system_key: "xbox"
 
-    - paths:
+    paths:
       - { name: "xbox", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "retronas_xbox.conf", dest: "/etc/samba/"  }
 
   tasks:

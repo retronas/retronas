@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "DVDAuth"
-    - my_file: "install_dvdauth"
-    - module_name: "dvdauth"
+    my_name: "DVDAuth"
+    my_file: "install_dvdauth"
+    module_name: "dvdauth"
 
-    - packages:
+    packages:
       - git
       - coreutils
       - make
@@ -17,7 +18,7 @@
       - unzip
       - util-linux
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

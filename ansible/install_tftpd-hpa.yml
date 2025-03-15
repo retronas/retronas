@@ -3,17 +3,17 @@
   gather_facts: false
 
   vars:
-    - my_name: "tftpd-hpa"
-    - my_file: "install_tftpd-hpa"
-    - module_name: "tftpd-hpa"
+    my_name: "tftpd-hpa"
+    my_file: "install_tftpd-hpa"
+    module_name: "tftpd-hpa"
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: "retro", service: "tftp" }
     
-    - packages:
+    packages:
         tftpd-hpa
 
-    - templates:
+    templates:
       - { name: "tftpd-hpa", dest: "/etc/default" }
 
   tasks:

@@ -1,23 +1,24 @@
+---
 - hosts: localhost
   gather_facts: no
 
 
   vars:
-    - my_name: "macproxy"
-    - my_file: "install_macproxy"
-    - module_name: "macproxy"
+    my_name: "macproxy"
+    my_file: "install_macproxy"
+    module_name: "macproxy"
 
-    - packages:
+    packages:
       - python3 
       - python3-venv
       - python3-pip
 
-    - templates:
+    templates:
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
 
-    - repo: https://github.com/rdmark/macproxy.git
+    repo: https://github.com/rdmark/macproxy.git
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 5000, protocol: tcp }
 
   tasks:

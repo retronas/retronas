@@ -2,18 +2,18 @@
   gather_facts: no
 
   vars:
-    - my_name: "gogrepo"
-    - my_file: "install_gogrepo"
-    - module_name: "gogrepo"
+    my_name: "gogrepo"
+    my_file: "install_gogrepo"
+    module_name: "gogrepo"
 
-    - packages:
+    packages:
       - python3
       - python-is-python3
       - python3-html5lib
       - git
       - sudo
 
-    - templates:
+    templates:
       - { name: "gogrepo_login.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "gogrepo_import-cookies.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
       - { name: "gogrepo_download.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}

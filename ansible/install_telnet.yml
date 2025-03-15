@@ -1,21 +1,22 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Telnet"
-    - my_file: "install_telnet"
-    - module_name: "telnet"
+    my_name: "Telnet"
+    my_file: "install_telnet"
+    module_name: "telnet"
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: "retro", service: "telnet" }
 
-    - templates:
+    templates:
       - { name: "telnet", dest: "/etc/xinetd.d", force: no }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: "retro", service: "telnet" }
 
-    - packages:
+    packages:
          - telnet
          - telnetd
          - xinetd

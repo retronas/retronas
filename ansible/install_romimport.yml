@@ -1,18 +1,19 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "ROM Import"
-    - my_file: "install_romimport"
-    - module_name: "romimport"
+    my_name: "ROM Import"
+    my_file: "install_romimport"
+    module_name: "romimport"
     
-    - packages:
+    packages:
       - python3
       - git
 
-    - paths:
+    paths:
       - { name: "romimport", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - templates:
+    templates:
       - { name: "romimport.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

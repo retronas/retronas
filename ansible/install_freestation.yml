@@ -6,18 +6,18 @@
   gather_facts: no
 
   vars:
-    - my_name: "freestation"
-    - my_file: "install_{{ my_name }}"
+    my_name: "freestation"
+    my_file: "install_{{ my_name }}"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "games",      enabled: yes,  generic: "roms",        systems: yes }
       - { name: "bios",       enabled: yes,  generic: "bios",        systems: yes }
 
-    - templates:
+    templates:
       - { name: "retronas_freestation_cifs.conf", name_dest: "retronas_freestation.conf", dest: "/etc/samba"}
       - { name: "retronas_freestation_nfs.conf",  name_dest: "retronas_freestation.conf", dest: "/etc/exports.d"}
 
-    - paths:
+    paths:
       - { name: "exports.d", dest: "/etc",                state: "directory", mode: "0755"}
 
   tasks:

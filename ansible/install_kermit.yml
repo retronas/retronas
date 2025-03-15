@@ -1,22 +1,23 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "kermit"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "kermit"
+    my_name: "kermit"
+    my_file: "install_{{ my_name }}"
+    module_name: "kermit"
 
-    - packages:
+    packages:
       - ckermit
 
-    - systemd_units:
+    systemd_units:
       - { name: "iksd.socket", enabled: yes, state: 'restarted' }
 
-    - templates:
+    templates:
       - { name: "iksd@.service", dest: "/etc/systemd/system" }
       - { name: "iksd.socket", dest: "/etc/systemd/system" }
 
-    - firewalld_ports:
+    firewalld_ports:
       - { port: 1649, protocol: tcp }
 
   tasks:

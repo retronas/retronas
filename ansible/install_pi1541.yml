@@ -3,15 +3,15 @@
   gather_facts: no
 
   vars:
-    - my_name: "pi1541"
-    - my_file: "install_{{ my_name }}"
-    - module_name: "pi1541"
+    my_name: "pi1541"
+    my_file: "install_{{ my_name }}"
+    module_name: "pi1541"
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
       - { name: "{{ my_name }}", dest: "/mnt" }
 
-    - templates:
+    templates:
       - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:

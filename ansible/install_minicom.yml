@@ -3,27 +3,27 @@
   gather_facts: no
 
   vars:
-    - my_name: "minicom"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: ""
-    - module_name: "minicom"
-    - append_user_group: "dialout"
+    my_name: "minicom"
+    my_file: "install_{{ my_name }}"
+    my_dir: ""
+    module_name: "minicom"
+    append_user_group: "dialout"
 
-    - systemd_units:
+    systemd_units:
       #- { name: "minicom", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
-    - packages:
+    packages:
       - minicom
       - lrzsz
 
-    - templates:
+    templates:
       - { name: "minirc.dfl", dest: "/etc/minicom", mode: "0644", owner: "{{ retronas_user }}", group: "{{ retronas_user }}", force: no }
       - { name: "minicom.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
-    - script_links:
+    script_links:
       - { dest: "minicom-config.sh", src: "minicom.sh" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/etc", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_user }}" }
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_user }}"}
 

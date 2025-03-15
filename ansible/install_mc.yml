@@ -1,12 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "mc"
-    - my_file: "install_mc"
-    - module_name: "mc"
+    my_name: "mc"
+    my_file: "install_mc"
+    module_name: "mc"
 
-    - packages:
+    packages:
       - mc
 
   tasks:

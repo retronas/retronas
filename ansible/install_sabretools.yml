@@ -3,18 +3,18 @@
   gather_facts: yes
 
   vars:
-    - my_name: "SabreTools"
-    - my_file: "install_sabretools"
-    - module_name: "sabretools"
+    my_name: "SabreTools"
+    my_file: "install_sabretools"
+    module_name: "sabretools"
 
-    - packages:
+    packages:
       - git
       - coreutils
       - unzip
 
-    - my_arch: "x86_64"
+    my_arch: "x86_64"
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
