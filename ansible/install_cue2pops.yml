@@ -5,7 +5,6 @@
     - my_name: "cue2pops"
     - my_file: "install_cue2pops"
     - module_name: "cue2pops"
-    - module_state: "present"
 
     - packages:
       - git

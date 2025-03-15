@@ -5,7 +5,6 @@
     - my_name: "zterm"
     - my_file: "install_{{ my_name }}"
     - module_name: "zterm"
-    - module_state: "present"
     - append_user_group: dialout
 
     - systemd_units:

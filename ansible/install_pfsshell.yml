@@ -5,7 +5,6 @@
     - my_name: "pfsshell"
     - my_file: "install_pfsshell"
     - module_name: "pfsshell"
-    - module_state: "present"
 
     - packages:
       - make

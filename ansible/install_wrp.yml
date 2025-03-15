@@ -6,7 +6,6 @@
     - my_name: "wrp"
     - my_file: "install_{{ my_name }}"
     - module_name: "wrp"
-    - module_state: "present"
 
     - packages:
       - chromium

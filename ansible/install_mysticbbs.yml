@@ -5,7 +5,6 @@
     - my_name: "mysticbbs"
     - my_file: "install_mysticbbs"
     - module_name: "mysticbbs"
-    - module_state: "present"
 
     - packages:
       - p7zip-full

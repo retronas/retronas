@@ -8,7 +8,6 @@
     - my_name: hb-store-cdn
     - my_file: "install_{{ my_name }}"
     - module_name: "hb-store-cdn"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }

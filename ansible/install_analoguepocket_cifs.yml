@@ -8,6 +8,8 @@
   vars:
     - my_name: "analoguepocket CIFS"
     - my_file: "install_analoguepocket_cifs"
+    - module_name: "analoguepocket_cifs"
+    - system_key: "analoguepocket"
 
     - top_level_paths:
       - { name: "Assets",       enabled: yes,  generic: "roms",   systems: yes }

@@ -6,7 +6,6 @@
     - my_file: "install_disable-laptop-lid"
     - service: "systemd-logind.service"
     - module_name: "disable-laptop-lid"
-    - module_state: "present"
 
     - paths:
       - { name: "logind.conf.d", dest: "/etc/systemd/",                state: "directory", mode: "0755"}

@@ -9,7 +9,7 @@
     - my_file: "install_{{ my_name }}"
     - my_dir: ""
     - module_name: "minicom"
-    - module_state: "present"
+    - append_user_group: "dialout"
 
     - systemd_units:
       #- { name: "minicom", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -46,18 +46,15 @@
   - ansible.builtin.import_role:
       name: retronas.role.templates
 
+  - ansible.builtin.import_role:
+      name: retronas.role.update-user
+
   - name: "{{ my_name }} - script links" 
     ansible.builtin.file:
       dest: "{{ retronas_root }}/scripts/{{ item.dest }}"
       src: "{{ retronas_root }}/scripts/{{ item.src }}"
       state: link
     with_items: "{{ script_links }}"
-
-  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
-    ansible.builtin.user:
-      name: "{{ retronas_user }}"
-      groups: dialout
-      append: yes
 
   - ansible.builtin.import_role:
       name: retronas.role.system-config

@@ -8,7 +8,6 @@
     - my_name: "PS2 OpenPS2Loader"
     - my_file: "install_ps2_openps2loader"
     - module_name: "ps2_openps2loader"
-    - module_state: "present"
 
     - paths:
         - { name: "APPS",   dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }

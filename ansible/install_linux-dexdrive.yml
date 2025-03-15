@@ -8,7 +8,6 @@
     - my_name: "linux-dexdrive"
     - my_file: "install_{{ my_name }}"
     - module_name: "linux-dexdrive"
-    - module_state: "present"
 
     - packages:
       - git 

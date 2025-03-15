@@ -5,7 +5,6 @@
     - my_name: "Netatalk4"
     - my_file: "install_netatalk4"
     - module_name: "netatalk4"
-    - module_state: "present"
 
     - packages:
       - avahi-daemon

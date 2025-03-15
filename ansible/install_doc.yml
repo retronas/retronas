@@ -8,7 +8,6 @@
     - my_name: "retronas_docs"
     - my_file: "install_retronas_docs"
     - module_name: "retronas_docs"
-    - module_state: "present"
 
     - packages:
         - git

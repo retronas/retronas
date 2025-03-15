@@ -6,7 +6,6 @@
     - my_name: "macproxy"
     - my_file: "install_macproxy"
     - module_name: "macproxy"
-    - module_state: "present"
 
     - packages:
       - python3 

@@ -8,7 +8,6 @@
     - my_name: "pi1541"
     - my_file: "install_{{ my_name }}"
     - module_name: "pi1541"
-    - module_state: "present"
 
     - paths:
       - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }

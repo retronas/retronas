@@ -6,7 +6,6 @@
     - my_name: "TNFS Atari 8-bit and ZX Spectrum"
     - my_file: "install_tnfs"
     - module_name: "tnfs"
-    - module_state: "present"
 
     - packages:
       -  build-essential

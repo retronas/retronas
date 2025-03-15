@@ -5,7 +5,6 @@
     - my_name: "hdparm"
     - my_file: "install_{{ my_name }}"
     - module_name: "hdparm"
-    - module_state: "present"
 
     - packages:
          - hdparm

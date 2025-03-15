@@ -5,7 +5,6 @@
     - my_name: "apfs-fuse"
     - my_file: "install_apfs-fuse"
     - module_name: "apfs-fuse"
-    - module_state: "present"
 
     - packages:
       - git

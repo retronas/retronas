@@ -5,7 +5,6 @@
     - my_name: "NFS"
     - my_file: "install_nfs"
     - module_name: "nfs"
-    - module_state: "present"
 
     - packages:
       - nfs-common

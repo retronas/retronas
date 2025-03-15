@@ -4,7 +4,6 @@
     - my_name: "megatools"
     - my_file: "install_megatools"
     - module_name: "megatools"
-    - module_state: "present"
 
     - packages:
       - build-essential 

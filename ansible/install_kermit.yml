@@ -5,7 +5,6 @@
     - my_name: "kermit"
     - my_file: "install_{{ my_name }}"
     - module_name: "kermit"
-    - module_state: "present"
 
     - packages:
       - ckermit

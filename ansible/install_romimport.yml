@@ -4,7 +4,6 @@
     - my_name: "ROM Import"
     - my_file: "install_romimport"
     - module_name: "romimport"
-    - module_state: "present"
     
     - packages:
       - python3

@@ -6,7 +6,6 @@
     - my_name: "fenrir-ode-webserver"
     - my_file: "install_fenrir-ode-webserver"
     - module_name: "fenrir-ode-webserver"
-    - module_state: "present"
 
     - packages:
       - make

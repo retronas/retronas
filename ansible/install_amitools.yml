@@ -5,7 +5,6 @@
     - my_name: "amitools"
     - my_file: "install_{{ my_name }}"
     - module_name: "amitools"
-    - module_state: "present"
 
     - packages:
       - python3

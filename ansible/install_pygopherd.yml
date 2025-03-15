@@ -5,7 +5,6 @@
     - my_name: "pygopherd"
     - my_file: "install_pygopherd"
     - module_name: "pygopherd"
-    - module_state: "present"
 
     - packages:
       - python3

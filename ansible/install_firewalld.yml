@@ -9,7 +9,6 @@
     - my_file: "install_{{ my_name }}"
     - my_services: "firewalld.service"
     - module_name: "firewalld"
-    - module_state: "present"
 
     - templates:
       - { name: "clear-python-bytecode",    sub: "workarounds", dest: "/usr/local/sbin",              mode: '0750' }

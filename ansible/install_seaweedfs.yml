@@ -7,7 +7,6 @@
     - my_name: "seaweedfs"
     - my_file: "install_{{ my_name }}"
     - module_name: "seaweedfs"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "{{ my_name }}-retronas", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }

@@ -9,7 +9,6 @@
     - my_name: "smbmounter"
     - my_file: "install_{{ my_name }}"
     - module_name: "smbmounter"
-    - module_state: "present"
 
     - templates:
       - { name: "retronas_{{ my_name }}.conf", dest: "/etc/samba" }

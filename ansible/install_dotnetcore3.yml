@@ -1,9 +1,0 @@
-- hosts: localhost
-  gather_facts: no
-  vars:
-    module_name: "dotnetcore3"
-    module_state: "present"
-
-  roles:
-    - retronas.role.dotnetcore3
-    - retronas.role.system-config

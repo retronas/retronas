@@ -5,7 +5,6 @@
     - my_name: "Deluge"
     - my_file: "install_deluge"
     - module_name: "bittorrent"
-    - module_state: "present"
 
     - packages:
       - geoip-bin

@@ -9,7 +9,6 @@
     - my_file: "install_{{ my_name }}"
     - my_dir: /opt/adtpro
     - module_name: "adtpro"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }

@@ -6,7 +6,6 @@
     - my_name: "dhcpcd"
     - my_file: "install_{{ my_name }}"
     - module_name: "dhcpcd"
-    - module_state: "present"
 
     - packages:
       - dhcpcd

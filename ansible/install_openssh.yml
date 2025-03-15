@@ -4,7 +4,6 @@
   vars:
     - my_name: "OpenSSH"
     - module_name: "openssh"
-    - module_state: "present"
 
     - packages:
          - openssh-client

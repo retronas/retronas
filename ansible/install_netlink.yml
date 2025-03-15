@@ -5,7 +5,6 @@
     - my_name: "netlink"
     - my_file: "install_netlink"
     - module_name: "netlink"
-    - module_state: "present"
 
     - packages:
       - curl

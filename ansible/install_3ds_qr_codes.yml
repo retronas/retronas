@@ -9,7 +9,6 @@
     - my_file: "install_3ds_qr_codes"
     - rom_path: "{{ retronas_path }}/3ds"
     - module_name: "3ds_qr_codes"
-    - module_state: "present"
 
     - dirs:
       - cia

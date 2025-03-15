@@ -9,7 +9,6 @@
     - my_name: "xbox"
     - my_file: "install_xbox"
     - module_name: "xbox"
-    - module_state: "present"
     - system_key: "xbox"
 
     - paths:

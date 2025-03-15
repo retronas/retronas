@@ -4,7 +4,6 @@
     - my_name: "Syncthing"
     - my_file: "install_syncthing"
     - module_name: "syncthing"
-    - module_state: "present"
 
     - packages:
         - syncthing

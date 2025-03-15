@@ -5,7 +5,6 @@
     - my_name: "hdldump"
     - my_file: "install_{{ my_name }}"
     - module_name: "hdldump"
-    - module_state: "present"
 
     - packages:
       - make

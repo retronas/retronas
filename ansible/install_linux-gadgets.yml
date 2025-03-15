@@ -6,7 +6,6 @@
     - my_name: "linux-gadgets"
     - my_file: "install_{{ my_name }}"
     - module_name: "linux-gadgets"
-    - module_state: "present"
 
     - templates:
       - { name: "gadget-mass-storage-manage.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}

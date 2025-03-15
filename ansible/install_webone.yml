@@ -9,7 +9,6 @@
     - my_name: "WebOne proxy"
     - my_file: "install_webone"
     - module_name: "webone"
-    - module_state: "present"
 
     - packages:
       - git

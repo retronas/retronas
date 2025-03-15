@@ -5,7 +5,6 @@
     - my_name: "DVDAuth"
     - my_file: "install_dvdauth"
     - module_name: "dvdauth"
-    - module_state: "present"
 
     - packages:
       - git

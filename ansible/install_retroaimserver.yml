@@ -8,7 +8,6 @@
     - my_file: "install_retroaimserver"
     - my_dir: "/opt/retro-aim-server"
     - module_name: "retroaimserver"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "retro-aim-server", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }

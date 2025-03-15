@@ -9,7 +9,6 @@
     - my_name: "EmuElec CIFS"
     - my_file: "install_emuelec_cifs"
     - module_name: "emuelec_cifs"
-    - module_state: "present"
     - system_key: "emuelec"
 
     - internal_symlinks:

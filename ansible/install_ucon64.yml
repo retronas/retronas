@@ -6,7 +6,6 @@
     - my_name: "ucon64"
     - my_file: "install_ucon64"
     - module_name: "ucon64"
-    - module_state: "present"
 
     - packages:
       - make

@@ -6,7 +6,6 @@
     - my_name: "SabreTools"
     - my_file: "install_sabretools"
     - module_name: "sabretools"
-    - module_state: "present"
 
     - packages:
       - git

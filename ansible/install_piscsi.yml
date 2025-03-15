@@ -5,8 +5,6 @@
     - my_name: "piscsi"
     - my_file: "install_piscsi"
     - module_name: "piscsi"
-    - module_state: "present"
-
 
     - packages:
       - bridge-utils

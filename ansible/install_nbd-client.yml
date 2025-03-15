@@ -4,7 +4,6 @@
     - my_name: "nbd-client"
     - my_file: "install_nbd-client"
     - module_name: "nbd-client"
-    - module_state: "present"
 
     - packages:
         - nbd-client

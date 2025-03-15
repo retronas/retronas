@@ -7,7 +7,6 @@
     - my_name: "hostapd"
     - my_file: "install_{{ my_name }}"
     - module_name: "hostapd"
-    - module_state: "present"
 
     - packages:
       - hostapd

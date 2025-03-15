@@ -8,7 +8,6 @@
     - my_name: "ps3netsrv"
     - my_file: "install_ps3netsrv"
     - module_name: "ps3netsrv"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }

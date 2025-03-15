@@ -3,7 +3,6 @@
 
   vars:
     module_name: "curlftpfs"
-    module_state: "present"
 
   roles:
     - retronas.role.curlftpfs

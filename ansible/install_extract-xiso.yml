@@ -5,7 +5,6 @@
     - my_name: "extract-xiso"
     - my_file: "install_extract-xiso"
     - module_name: "extract-xiso"
-    - module_state: "present"
 
     - packages: 
       - make

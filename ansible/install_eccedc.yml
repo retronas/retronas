@@ -5,7 +5,6 @@
     - my_name: "EccEDC"
     - my_file: "install_eccedc"
     - module_name: "eccedc"
-    - module_state: "present"
 
     - packages:
       - coreutils

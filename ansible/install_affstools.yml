@@ -5,7 +5,6 @@
     - my_name: "affstools"
     - my_file: "install_{{ my_name }}"
     - module_name: "affstools"
-    - module_state: "present"
 
     - packages:
       - make

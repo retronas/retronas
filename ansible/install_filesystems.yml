@@ -3,7 +3,6 @@
 
   vars:
     module_name: "filesystems"
-    module_state: "present"
 
   roles:
     - retronas.role.filesystems

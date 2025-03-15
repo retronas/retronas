@@ -9,7 +9,6 @@
     - my_file: "install_{{ my_name }}"
     - my_dir: /opt/nabu
     - module_name: "nabu"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "nabu", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }

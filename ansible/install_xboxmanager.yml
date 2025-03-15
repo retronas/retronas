@@ -15,7 +15,6 @@
     - my_file: "install_xboxmanager"
     - my_path: "/opt"
     - module_name: "xboxmanager"
-    - module_state: "present"    
 
     - paths:
       - { name: "device-mounts",  dest: "{{ retronas_path }}",                owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }

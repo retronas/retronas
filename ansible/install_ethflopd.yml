@@ -5,7 +5,6 @@
     - my_name: "ethflopd"
     - my_file: "install_{{ my_name }}"
     - module_name: "ethflopd"
-    - module_state: "present"
 
     - packages:
       - make

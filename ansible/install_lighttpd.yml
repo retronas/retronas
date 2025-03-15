@@ -5,7 +5,6 @@
     - my_name: "lighttpd"
     - my_file: "install_{{ my_name }}"
     - module_name: "lighttpd"
-    - module_state: "present"
 
     - packages:
       - { name: "nginx", state: "absent" }

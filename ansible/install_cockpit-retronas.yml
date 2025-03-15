@@ -6,7 +6,6 @@
     my_file: "install_cockpit-retronas"
     package_dir: "/usr/share/cockpit"
     module_name: "cockpit-retronas"
-    module_state: "present"
 
   tasks:
 

@@ -5,7 +5,6 @@
     - my_name: "gogrepo"
     - my_file: "install_gogrepo"
     - module_name: "gogrepo"
-    - module_state: "present"
 
     - packages:
       - python3

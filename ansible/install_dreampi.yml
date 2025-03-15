@@ -6,7 +6,6 @@
     - my_name: "dreampi"
     - my_file: "install_dreampi"
     - module_name: "dreampi"
-    - module_state: "present"
 
     - packages:
       - git

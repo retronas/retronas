@@ -9,7 +9,6 @@
     - my_name: "Disc Image Creator"
     - my_file: "install_disc-image-creator"
     - module_name: "disc-image-creator"
-    - module_state: "present"
 
     - packages:
       - git

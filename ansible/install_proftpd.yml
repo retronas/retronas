@@ -5,7 +5,6 @@
     - my_name: "ProFTPd"
     - my_file: "install_proftpd"
     - module_name: "proftpd"
-    - module_state: "present"
 
     - packages:
        - avahi-daemon

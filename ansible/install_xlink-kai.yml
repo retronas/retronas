@@ -12,7 +12,6 @@
     - my_key: "{{ my_keyrings }}/teamxlink.gpg"
     - my_repo: "https://dist.teamxlink.co.uk/linux/debian"
     - module_name: "xlink-kai"
-    - module_state: "present"
 
     - prerequisite_packages: 
         - ca-certificates

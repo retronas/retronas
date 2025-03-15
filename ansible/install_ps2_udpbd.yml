@@ -8,7 +8,6 @@
     - my_name: "ps2_udpbd"
     - my_file: "install_ps2_udpbd"
     - module_name: "ps2_udpbd"
-    - module_state: "present"
     - append_user_group: "disk"
 
     - systemd_units:

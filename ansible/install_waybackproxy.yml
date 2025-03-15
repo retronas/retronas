@@ -9,7 +9,6 @@
     - my_file: "install_{{ my_name }}"
     - my_dir: "/opt/{{ my_name }}"
     - module_name: "waybackproxy"
-    - module_state: "present"
 
     - systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "no", restart: "yes", instance: "no" }

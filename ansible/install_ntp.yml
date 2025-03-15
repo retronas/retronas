@@ -6,7 +6,6 @@
     - my_service: "openntpd"
     - my_file: "install_ntp"
     - module_name: "ntp"
-    - module_state: "present"
 
     - packages:
       - openntpd

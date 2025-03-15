@@ -7,7 +7,6 @@
     - my_name: "lynx"
     - my_file: "install_lynx"
     - module_name: "lynx"
-    - module_state: "present"
 
     - packages:
       - lynx
