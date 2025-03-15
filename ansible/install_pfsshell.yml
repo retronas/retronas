@@ -4,6 +4,8 @@
   vars:
     - my_name: "pfsshell"
     - my_file: "install_pfsshell"
+    - module_name: "pfsshell"
+    - module_state: "present"
 
     - packages:
       - make
@@ -34,7 +36,5 @@
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/pfsfuse"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "pfsshell"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

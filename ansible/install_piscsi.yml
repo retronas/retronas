@@ -4,6 +4,9 @@
   vars:
     - my_name: "piscsi"
     - my_file: "install_piscsi"
+    - module_name: "piscsi"
+    - module_state: "present"
+
 
     - packages:
       - bridge-utils
@@ -71,13 +74,13 @@
       name: retronas.role.templates
 
   - name: "{{ my_name }} - build source"
-    command:
+    ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/install_{{ my_name }}.sh"
       creates: "{{ retronas_root }}/bin/{{ my_name }}/{{ my_name }}"
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - password file"
-    copy:
+    ansible.builtin.copy:
       dest: /etc/{{ my_name }}_passwd
       content: retronas
       mode: 0600
@@ -85,7 +88,7 @@
       group: root
 
   - name: "{{ my_name }} - enable service(s)"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: "{{ item.state }}"
       enabled: "{{ item.enabled }}"
@@ -95,10 +98,13 @@
       - item.instance == 'no'
     notify: "{{ my_name }} - Restart service"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
-    service:
+    ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
       state: restarted
       daemon_reload: yes
@@ -106,8 +112,3 @@
     when: 
       - item.restart == 'yes'
       - item.instance == 'no'
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "piscsi"
-    module_state: "present"

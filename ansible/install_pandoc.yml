@@ -6,6 +6,8 @@
   vars:
     - my_name: "pandoc"
     - my_file: "install_pandoc"
+    - module_name: "pandoc"
+    - module_state: "present"
 
     - packages:
       - pandoc
@@ -18,7 +20,5 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "pandoc"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

@@ -7,6 +7,8 @@
   vars:
     - my_name: "ps3netsrv"
     - my_file: "install_ps3netsrv"
+    - module_name: "ps3netsrv"
+    - module_state: "present"
 
     - systemd_units:
       - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
@@ -39,6 +41,11 @@
 
     - packages_ubuntu:
       - libmbedtls14
+
+    - templates:
+      - { name: "ps3netsrv.service",        dest: "/usr/lib/systemd/system" }
+      - { name: "ps3netsrv-perms.service",  dest: "/usr/lib/systemd/system" }
+      - { name: "ps3netsrv-perms.timer",    dest: "/usr/lib/systemd/system" }
 
     - firewalld_rules:
       - { zones: retro, service: ps3netsrv }
@@ -88,30 +95,14 @@
     when:
       - item.ps3netsrv | length > 0
 
-  - name: "{{ my_name }} - Generate {{ my_file }} script"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}}/bin/ps3netsrv"
 
-  - name: "{{ my_name }} - create startup service(s)"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items:
-      "{{ systemd_units }}"
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable service(s)"
     ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
@@ -123,33 +114,11 @@
       - item.instance == 'no'
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - enable service(s)"
-    ansible.builtin.service:
-      name: "{{ item.name }}.{{ item.type }}"
-      state: "{{ item.state }}"
-      enabled: "{{ item.enabled }}"
-      daemon_reload: yes
-    with_items: "{{ systemd_units }}"
-    when:
-      - item.instance == 'no'
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('ps3netsrv') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -174,8 +143,3 @@
     when: 
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "ps3netsrv"
-    module_state: "present"

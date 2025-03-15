@@ -1,6 +1,6 @@
 my_name: "Samba"
 
-my_packages:
+packages:
   - avahi-daemon
   - samba
   - samba-vfs-modules

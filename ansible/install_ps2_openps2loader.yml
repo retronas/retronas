@@ -7,6 +7,21 @@
   vars:
     - my_name: "PS2 OpenPS2Loader"
     - my_file: "install_ps2_openps2loader"
+    - module_name: "ps2_openps2loader"
+    - module_state: "present"
+
+    - paths:
+        - { name: "APPS",   dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "ART",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "CFG",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "CHT",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "LNG",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "THM",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+        - { name: "VMC",    dest: "{{ retronas_path }}/ps2/OpenPS2Loader", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    - templates:
+      - { name: "retronas_ps2.conf", dest: "/etc/samba" }
+
   tasks:
 
   - name: "{{ my_name }} - Include systems map"
@@ -15,22 +30,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Build OpenPS2Loader layout"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/ps2/OpenPS2Loader/{{ item }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      - "APPS"
-      - "ART"
-      - "CFG"
-      - "CHT"
-      - "LNG"
-      - "THM"
-      - "VMC"
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
   - name: "{{ my_name }} - check old pops dir"
     ansible.builtin.stat:
@@ -50,7 +51,6 @@
     with_items: "{{ system_sony }}"
     when:
       - item.ops2l | length > 0
-    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ansible.builtin.ini_file:
@@ -58,30 +58,12 @@
       section: ps2
       option: "include"
       value: "/etc/samba/retronas_ps2.conf"
-    notify: "{{ my_name }} - Install Samba"
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{  my_file }}/retronas_ps2.conf.j2"
-      dest: /etc/samba/retronas_ps2.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-  handlers:
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "ps2_openps2loader"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
