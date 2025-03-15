@@ -11,6 +11,8 @@
     - my_keyrings: "/etc/apt/keyrings"
     - my_key: "{{ my_keyrings }}/teamxlink.gpg"
     - my_repo: "https://dist.teamxlink.co.uk/linux/debian"
+    - module_name: "xlink-kai"
+    - module_state: "present"
 
     - prerequisite_packages: 
         - ca-certificates
@@ -19,6 +21,9 @@
 
     - packages:
         - xlinkkai
+
+    - templates:
+      - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
 
     - firewalld_ports:
       - { zone: "modern", port: 30000, protocol: udp }
@@ -65,10 +70,8 @@
       content: |
         deb [signed-by={{ my_key }}] {{ my_repo }}/static/deb/release/ /
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-      name: "{{ packages }}"
-      update_cache: yes
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - check for arm build"
     ansible.builtin.stat:
@@ -79,12 +82,11 @@
     ansible.builtin.file:
       src: "/usr/bin/kaiengine_arm"
       dest: "/usr/bin/kaiengine"
+      state: link
     when: arm_build.stat.exists is true
 
-  - name: "{{  my_name }} - Create systemd service"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_name }}.service.j2"
-      dest: "/etc/systemd/system/{{ my_name }}.service"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: "{{ my_name }} - Restart service(s)"
 
   - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
@@ -95,35 +97,16 @@
       mode: '0640'
     notify: "{{ my_name }} - Restart service(s)"
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone }}"
-      port: "{{ item.port }}/{{ item.protocol }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_ports }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
   - name: "{{ my_name }} - Restart service(s)"
     ansible.builtin.service:
-      name: "{{ item }}"
+      name: "{{ my_name }}.service"
       state: started
       enabled: yes
       daemon_reload: yes
-    with_items:
-      - "{{ my_name }}.service"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "xlink-kai"
-    module_state: "present"

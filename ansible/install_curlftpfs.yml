@@ -6,5 +6,5 @@
     module_state: "present"
 
   roles:
-    - retronas.role.curlftps
+    - retronas.role.curlftpfs
     - retronas.role.system-config

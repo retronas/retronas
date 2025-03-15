@@ -5,11 +5,16 @@
   vars:
     - my_name: "ytree"
     - my_file: "install_{{ my_name }}"
+    - module_name: "ytree"
+    - module_state: "present"
 
     - packages:
       - build-essential
       - libreadline-dev
       - gcc
+
+    - templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:
 
@@ -22,26 +27,11 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - check systemd unit folder"
-    ansible.builtin.file:
-      path: /usr/lib/systemd/system
-      owner: root
-      group: root
-      mode: 0755
-      state: directory
-
-  - name: "{{ my_name }} - Generate install scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "ytree"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

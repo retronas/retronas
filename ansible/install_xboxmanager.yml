@@ -1,17 +1,28 @@
 ---
 # Dependencies
-- ansible.builtin.import_playbook: install_cockpit.yml
-- ansible.builtin.import_playbook: install_filesystems.yml
 - ansible.builtin.import_playbook: install_extract-xiso.yml
-- ansible.builtin.import_playbook: install_curlftpfs.yml
 
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
+
+  roles:
+    - retronas.role.cockpit
+    - retronas.role.filesystems
+    - retronas.role.curlftpfs
 
   vars:
     - my_name: "xboxmanager"
     - my_file: "install_xboxmanager"
     - my_path: "/opt"
+    - module_name: "xboxmanager"
+    - module_state: "present"    
+
+    - paths:
+      - { name: "device-mounts",  dest: "{{ retronas_path }}",                owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "xbox",           dest: "{{ retronas_path }}/device-mounts",  owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    - templates:
+      - { name: "xboxmanager.cfg", dest: "/opt/xboxmanager", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
   tasks:
 
@@ -26,35 +37,15 @@
       update: yes
       version: "main"
 
-  - name: "{{ my_name }} create device mounts dir"
-    ansible.builtin.file: 
-      path: "{{ retronas_path }}/device-mounts"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      mode: "0755"
-      state: directory
-
-  - name: "{{ my_name }} create device mount xbox dir"
-    ansible.builtin.file: 
-      path: "{{ retronas_path }}/device-mounts/xbox"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      mode: "0755"
-      state: directory
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
   - name: "{{ my_name }} - run installer"
     ansible.builtin.command:
       cmd: "{{ my_path }}/xboxmanager/xboxmanager-install.sh"
 
-  - name: "{{ my_name }} config file"
-    ansible.builtin.template: 
-      src: templates/{{ my_file }}/xboxmanager.cfg.j2
-      dest: /opt/xboxmanager/xboxmanager.cfg
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      mode: '0644'
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "xboxmanager"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
