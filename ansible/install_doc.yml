@@ -1,5 +1,4 @@
 # Dependencies
-- ansible.builtin.import_playbook: install_pandoc.yml
 - ansible.builtin.import_playbook: install_lynx.yml
 
 - hosts: localhost
@@ -10,6 +9,10 @@
     - my_file: "install_retronas_docs"
     - module_name: "retronas_docs"
     - module_state: "present"
+
+    - packages:
+        - git
+        - pandoc
 
   tasks:
 
