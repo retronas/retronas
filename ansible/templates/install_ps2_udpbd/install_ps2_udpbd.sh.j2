@@ -4,6 +4,7 @@ SRCDIR="{{ retronas_root }}/src"
 BINDIR="{{ retronas_root }}/bin"
 REPO="https://gitlab.com/ps2max/udpbd-server.git"
 BASE=$( basename $REPO .git )
+ARCH=$(uname -m)
 
 echo "Configuring build directories..."
 rm -rf "${SRCDIR}"
@@ -14,13 +15,13 @@ echo "Downloading {{ my_name }} source code... from $REPO"
 
 git clone $REPO
 cd $BASE
-make
+make build
 
-if [ -f $BASE ]
+if [ -f build/udpbd-server.${ARCH} ]
 then
     echo "Moving binary to RetroNAS bin dir..."
     mkdir -p "${BINDIR}" 2>/dev/null
-    mv -vf $BASE "${BINDIR}"/
+    mv -vf build/udpbd-server.${ARCH} "${BINDIR}"/udpbd-server
 
     echo "Cleaning up..."
     rm -rf "${SRCDIR}" 

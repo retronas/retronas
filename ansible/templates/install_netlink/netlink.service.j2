@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/opt/netlink
-ExecStart=/usr/bin/python3 /opt/netlink/tunnel.py
+ExecStart=/usr/bin/python3 /opt/netlink/tunnel.py noUpdate
 Restart=on-failure
 RestartSec=30s
 

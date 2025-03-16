@@ -1,5 +1,6 @@
 - name: "{{ my_name }} - paths"
   ansible.builtin.file:
+    src: "{{ item.src | default(omit) }}"
     dest: "{{ item.dest + '/' | default(omit) }}{{ item.name }}"
     owner: "{{ item.owner|default('root') }}"
     group: "{{ item.group|default('root') }}"

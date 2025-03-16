@@ -33,16 +33,16 @@
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
+  - name: "{{ my_name }} - Install"
+    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "/opt/{{ my_name }}/{{ my_name }}.py"
+
   - ansible.builtin.import_role:
       name: retronas.role.paths
 
   - ansible.builtin.import_role:
       name: retronas.role.templates
-
-  - name: "{{ my_name }} - Install"
-    shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-    args:
-      creates: "/opt/{{ my_name }}/{{ my_name }}.py"
 
   - ansible.builtin.import_role:
       name: retronas.role.firewalld.port

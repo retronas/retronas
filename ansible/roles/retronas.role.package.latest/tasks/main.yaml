@@ -2,3 +2,4 @@
   ansible.builtin.package:
       name: "{{ packages }}"
       state: latest
+      update_cache: yes

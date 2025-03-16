@@ -24,5 +24,10 @@
   - ansible.builtin.import_role:
       name: retronas.role.templates
 
+  - name: "{{ my_name }} - Install"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "{{ retronas_root}}/bin/ps3netsrv"
+
   - ansible.builtin.import_role:
       name: retronas.role.system-config

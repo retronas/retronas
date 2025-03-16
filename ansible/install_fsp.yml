@@ -105,6 +105,6 @@
 
   - name: "{{ my_name }} - Restart service"
     ansible.builtin.service:
-      name: "{{ my_service }}""
+      name: "{{ my_service }}"
       state: restarted
       daemon_reload: yes

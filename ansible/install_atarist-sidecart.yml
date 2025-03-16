@@ -50,6 +50,9 @@
     ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
+      name: retronas.role.samba
+
+  - ansible.builtin.import_role:
       name: retronas.role.paths
 
   - ansible.builtin.import_role:
@@ -77,7 +80,7 @@
       option: "include"
       value: "/etc/samba/retronas_atarist.conf"
 
-    ansible.builtin.import_role:
+  - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
   -  ansible.builtin.import_role:

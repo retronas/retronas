@@ -26,6 +26,9 @@
       name: retronas.role.samba
 
   - ansible.builtin.import_role:
+      name: retronas.role.paths
+
+  - ansible.builtin.import_role:
       name: retronas.role.templates
 
   - name: "{{ my_name }} - symlinks"

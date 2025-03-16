@@ -8,5 +8,5 @@
     module_name: "samba"
 
   tasks:
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

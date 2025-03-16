@@ -29,6 +29,7 @@
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when: top_level_paths is defined and
         item.1.enabled is true and
+        item.0[system_key] is defined and
         item.0[system_key] | length > 0 and
         item.1.systems is true
 
@@ -37,6 +38,7 @@
     path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
   loop: "{{ system_map }}"
   when: top_level_paths is not defined and
+        item[system_key] is defined and
         item[system_key] | length > 0
 
 - name: "{{ my_name }} - build systems directory layout"

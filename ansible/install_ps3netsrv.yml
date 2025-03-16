@@ -40,6 +40,7 @@
       - libmbedtls14
 
     templates:
+      - { name: "{{ my_file }}.sh",         dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "ps3netsrv.service",        dest: "/usr/lib/systemd/system" }
       - { name: "ps3netsrv-perms.service",  dest: "/usr/lib/systemd/system" }
       - { name: "ps3netsrv-perms.timer",    dest: "/usr/lib/systemd/system" }

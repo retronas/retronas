@@ -43,7 +43,7 @@ else
 fi
 
 ## ASSEMBLY64
-if [ ! -d /opt/assembly64 ]
+if [ ! -f /opt/assembly64/assembly64.sh ]
 then
     ASSEMBLY="https://assembly64.hackerswithstyle.se/assembly/assembly64-shell.zip"
     curl -sLk -oassembly64.zip $ASSEMBLY

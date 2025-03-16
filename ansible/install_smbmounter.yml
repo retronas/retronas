@@ -6,6 +6,7 @@
     my_name: "smbmounter"
     my_file: "install_{{ my_name }}"
     module_name: "smbmounter"
+    system_key: "smbmounter"
 
     templates:
       - { name: "retronas_{{ my_name }}.conf", dest: "/etc/samba" }
@@ -41,10 +42,12 @@
       path: /etc/samba/smb.conf
       section: "amiga"
       option: "include"
-      value: "/etc/samba/retronas_amiga.conf"
+      value: "/etc/samba/retronas_smbmounter.conf"
+    notify: "restart samba"
 
   - ansible.builtin.import_role:
       name: retronas.role.templates
+    notify: "restart samba"
 
   - ansible.builtin.import_role:
       name: retronas.role.system-config

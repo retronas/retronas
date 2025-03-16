@@ -18,6 +18,12 @@ RELEASE=$(basename "${SOURCECODE}")
 unzip $RELEASE -x "*/winPython/*" "*.bat"
 cp -R Netlink_Tunnel*/* $OUTDIR/
 
+# xband.py is missind the from the 4.4 release
+if [ ! -f $OUTDIR/xband.py ]
+then 
+    curl -o$OUTDIR/xband.py https://raw.githubusercontent.com/eaudunord/Netlink/refs/heads/main/tunnel/xband.py
+fi
+
 # pull python3 requirements from dreampi
 curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
 python3 -m pip install -r requirements.txt
