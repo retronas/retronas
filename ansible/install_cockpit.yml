@@ -9,4 +9,5 @@
     - retronas.role.filesystems
     - retronas.role.apt-backports
     - retronas.role.cockpit
+    - retronas.role.cockpit-packages
     - retronas.role.system-config
