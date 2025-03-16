@@ -46,7 +46,7 @@
       enabled: yes
       force: yes
 
-    ansible.builtin.import_role:
+  - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 
   - ansible.builtin.import_role:

@@ -46,7 +46,7 @@
   - name: "{{ my_name }} - update wifi ssid config"
     lineinfile:
       path: /opt/retronas/ansible/retronas_vars.yml
-      regexp: ^retronas_net_wifi_ssid: ""
+      regexp: ^retronas_net_wifi_ssid\w\s\w\w
       line: 'retronas_net_wifi_ssid: "{{ retronas_net_wifi_ssid.stdout_lines[0] }}"'
     when: retronas_net_wifi_ssid is defined
 

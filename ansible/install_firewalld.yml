@@ -24,6 +24,10 @@
       - { collection: ansible.posix, creates: ansible/posix }
 
   tasks:
+
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
   - ansible.builtin.import_role:
       name: retronas.role.package.latest
 
@@ -40,7 +44,7 @@
       creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
     with_items: "{{ collections }}"
 
- - ansible.builtin.import_role:
+  - ansible.builtin.import_role:
       name: retronas.role.system-config
 
   handlers:
