@@ -1,0 +1,18 @@
+my_name: "NFS"
+my_file: "install_nfs"
+module_name: "nfs"
+
+packages:
+  - nfs-common
+  - nfs-kernel-server
+
+paths:
+  - { name: "exports.d", dest: "/etc" }
+
+templates:
+  - { name: "nfs-kernel-server", dest: "/etc/default" }
+  - { name: "exports", dest: "/etc/" }
+
+firewalld_rules:
+  - { zone: retro, service: nfs }
+  - { zone: modern, service: nfs }

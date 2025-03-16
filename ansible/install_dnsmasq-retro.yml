@@ -9,6 +9,7 @@
     my_name: "dnsmasq-retro"
     my_service: "{{ my_name }}"
     my_file: "install_{{ my_name }}"
+    module_name: "dnsmasq-retro"
 
     templates:
       - { name: "dhcp-retro-ethernet.conf", sub: "retro", dest: "/etc/dnsmasq.d/retro", force: no }
@@ -48,24 +49,11 @@
       enabled: no
       masked: yes
 
-  - name: "{{ my_name }} - paths"
-    file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    template:
-      src: "templates/{{ my_file }}/{{ item.sub }}/{{ item.name }}"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: "{{ my_name }} - Restart services"
 
   - name: "{{ my_name }} - checking for dhcpcd"
@@ -84,6 +72,9 @@
     when: dhcpcd_check.stat.exists
     notify: "{{ my_name }} - Restart services"
 
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
 
   - name: "{{ my_name }} - Restart services"
@@ -93,8 +84,3 @@
       daemon_reload: yes
       enabled: yes
     with_items: "{{ my_service }}"
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "dnsmasq-retro"
-    module_state: "present"

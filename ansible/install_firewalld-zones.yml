@@ -9,6 +9,7 @@
     my_name: "firewalld-zones"
     my_service: firewalld
     my_file: "install_{{ my_name }}"
+    module_name: "firewalld-zones"
 
     templates:
       - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_service }}/policies",                 force: no }
@@ -45,17 +46,12 @@
       enabled: yes
       force: yes
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - firewalld"
     ansible.builtin.import_role:
       name: retronas.role.firewalld.port
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
 
   handlers:
   - name: "{{ my_name }} - Reload firewalld"
@@ -67,8 +63,3 @@
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "firewalld-zones"
-    module_state: "present"

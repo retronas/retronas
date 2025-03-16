@@ -28,7 +28,7 @@
       - { name: "retronas-mister-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
       - { name: "retronas-mister-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
-    - dirs_only: false
+    dirs_only: false
 
   tasks:
 
@@ -36,10 +36,10 @@
     ansible.builtin.include_vars: retronas_vars.yml
 
   - ansible.builtin.import_role:
-    name: retronas.role.romdir
+      name: retronas.role.romdir
 
   - ansible.builtin.import_role:
-    name: retronas.role.extradirs
+      name: retronas.role.extradirs
 
   - ansible.builtin.import_role:
       name: retronas.role.samba

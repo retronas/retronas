@@ -5,6 +5,7 @@
   vars:
     my_name: "dnsmasq"
     my_file: "install_{{ my_name }}"
+    module_name: "dnsmasq"
 
     packages:
       - dnsmasq
@@ -27,8 +28,5 @@
     with_items: "{{ my_services }}"
     when: changed is true
 
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "dnsmasq"
-    module_state: "present"
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config
