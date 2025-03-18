@@ -20,7 +20,7 @@
       - { name: "GBA2P", src: "nintendo/gameboyadvance2p" }
 
     templates:
-      - { name: "retronas_mister.conf", dest: "/etc/samba" }
+    #  - { name: "retronas_mister.conf", dest: "/etc/samba" }
       - { name: "retronas-mister-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-mister-dirs.timer", dest: "/etc/systemd/system" }
 
