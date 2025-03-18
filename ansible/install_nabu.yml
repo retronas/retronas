@@ -1,25 +1,24 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "nabu"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: /opt/nabu
+    my_name: "nabu"
+    my_file: "install_{{ my_name }}"
+    my_dir: /opt/nabu
+    module_name: "nabu"
 
-    - systemd_units:
+    systemd_units:
       - { name: "nabu", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - unzip
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts",  mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
-    - links:
+    links:
       - { dest: "/home/{{ retronas_user }}/NABU Internet Adapter", src: "{{ retronas_path }}/roms/nabu" }
 
   tasks:
@@ -30,10 +29,11 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
     ansible.builtin.user:
@@ -48,22 +48,10 @@
       state: "{{ item.state|default('link') }}"
     with_items: "{{ links }}"
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/nabu.sh"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "nabu"
-    module_state: "present"

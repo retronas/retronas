@@ -1,11 +1,14 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "aria2"
-    - my_file: "install_aria2"
+    my_name: "aria2"
+    my_file: "install_aria2"
+    module_name: "aria2"
+    module_state: "present"
 
-    - my_packages:
+    packages:
       - aria2
 
   tasks:
@@ -13,12 +16,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     include_vars: retronas_vars.yml
     
-  - name: "{{ my_name }} - install packages"
-    ansible.builtin.apt:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "aria2"
-    module_state: "present"
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config

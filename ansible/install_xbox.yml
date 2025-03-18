@@ -1,26 +1,35 @@
 ---
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "xbox"
-    - my_file: "install_xbox"
+    my_name: "xbox"
+    my_file: "install_xbox"
+    module_name: "xbox"
+    system_key: "xbox"
+
+    paths:
+      - { name: "xbox", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    templates:
+      - { name: "retronas_xbox.conf", dest: "/etc/samba/"  }
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - top level directory"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/xbox"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
+
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
+
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - symlinks"
     ansible.builtin.file:
@@ -32,7 +41,6 @@
     with_items:
       - { src: "../roms/microsoft/xbox/games", dest: "games" }
       - { src: "../roms/microsoft/xbox/iso", dest: "iso" }
-    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - configure includes file"
     ansible.builtin.ini_file:
@@ -40,30 +48,6 @@
       section: xbox
       option: "include"
       value: "/etc/samba/retronas_xbox.conf"
-    notify: "{{ my_name }} - Install Samba"
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_xbox.conf.j2"
-      dest: /etc/samba/retronas_xbox.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
-
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "xbox"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

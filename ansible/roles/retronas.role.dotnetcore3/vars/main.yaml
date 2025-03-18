@@ -1,0 +1,12 @@
+my_name: "DotNet Core 3.X SDK"
+my_file: "install_dotnetcore3"
+
+packages:
+  - wget
+  - curl
+  - aria2
+  - coreutils
+
+srcdir: "{{ retronas_root }}/src/{{ my_file }}"
+version: 3.1.415
+arch: x64

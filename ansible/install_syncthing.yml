@@ -1,10 +1,15 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "Syncthing"
-    - my_file: "install_syncthing"
+    my_name: "Syncthing"
+    my_file: "install_syncthing"
+    module_name: "syncthing"
 
-    - firewalld_rules:
+    packages:
+        - syncthing
+
+    firewalld_rules:
       - { zone: modern, service: syncthing }
       - { zone: modern, service: syncthing-gui }
 
@@ -28,11 +33,8 @@
       filename: syncthing
       update_cache: yes
 
-  - name: "{{ my_name }} - Install Syncthing from repo"
-    ansible.builtin.apt:
-       name: syncthing
-       state: latest
-    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Web config http://{{ ansible_default_ipv4.address }}:8384"
     ansible.builtin.ini_file:
@@ -41,7 +43,6 @@
       option: ExecStart
       value: "/usr/bin/syncthing serve --no-browser --no-restart --logflags=0 --gui-address=0.0.0.0:8384"
     notify: "{{ my_name }} - Restart service"
-
 
   - name: "{{ my_name }} - enable startup services"
     ansible.builtin.service:
@@ -52,30 +53,11 @@
     with_items:
       - syncthing@{{ retronas_user }}
 
-#  - name: "{{ my_name }} - Web config http://{{ ansible_default_ipv4.address }}:8384"
-#    xml:
-#      path: /home/{{ retronas_user }}/.config/syncthing/config.xml
-#      xpath: /configuration/options/listenAddress
-#      value: 0.0.0.0:8384
-#    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('syncthing') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -86,9 +68,3 @@
       daemon_reload: yes
     with_items:
       - syncthing@{{ retronas_user }}
-
-    
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "syncthing"
-    module_state: "present"

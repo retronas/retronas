@@ -1,0 +1,34 @@
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- name: "{{ my_name }} - Install from repo"
+  ansible.builtin.apt:
+      name: "{{ packages }}"
+      state: latest
+      default_release: "{{ ansible_distribution_release }}-backports"
+  notify: "{{ my_name }} - Restart service"
+
+- name: "{{ my_name }} - enable startup services"
+  ansible.builtin.service:
+    name: "{{ my_service }}"
+    state: started
+    enabled: yes
+    daemon_reload: yes
+
+#
+# FIREWALL
+#
+- name: "{{ my_name }} - checking firewall rule"
+  ansible.builtin.stat:
+    path: /etc/firewalld/services
+  register: firewalld_services
+
+- name: "{{ my_name }} - enable firewall rule"
+  ansible.posix.firewalld:
+    zone: "{{ item.zone | default('retro') }}"
+    service: "{{ item.service | default('cockpit') }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  with_items: "{{ firewalld_rules }}"
+  when: firewalld_services.stat.exists

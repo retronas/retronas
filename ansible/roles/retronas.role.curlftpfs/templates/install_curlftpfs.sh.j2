@@ -1,0 +1,23 @@
+# curlftpfs
+
+set -u
+
+VERS=${1:-0.9.2}
+APPNAME=curlftpfs-${VERS}
+REPO=https://ixpeering.dl.sourceforge.net/project/curlftpfs/curlftpfs/${VERS}/${APPNAME}.tar.gz?viasf=1
+BUILDPATH={{ retronas_root }}/src
+
+
+[ ! -d ${BUILDPATH} ] && mkdir -p ${BUILDPATH}
+
+cd ${BUILDPATH}
+if $(curl -O $REPO) 
+then
+    tar xvf ${APPNAME}.tar.gz
+    cd ${APPNAME}
+    ./configure
+    make
+    make install
+fi
+
+rm -rf ${BUILDPATH}

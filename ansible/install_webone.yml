@@ -1,22 +1,24 @@
 ---
-# Dependencies
-- ansible.builtin.import_playbook: install_dotnetcore6.yml
-
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "WebOne proxy"
-    - my_file: "install_webone"
+    my_name: "WebOne proxy"
+    my_file: "install_webone"
+    module_name: "webone"
 
-    - my_packages:
+    packages:
       - git
       - imagemagick-6.q16
       - imagemagick-6-common
       - ffmpeg
       - coreutils
 
-    - firewalld_ports:
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "webone.service", dest: "/usr/lib/systemd/system" }
+
+    firewalld_ports:
       - { zone: "retro", port: 8080, protocol: tcp }
 
   tasks:
@@ -24,18 +26,16 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+    notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - Prepare installer script"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/install_webone.sh.j2
-      dest: "{{ retronas_root }}/scripts/install_webone.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.dotnetcore6
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Run installer"
     ansible.builtin.shell:
@@ -43,54 +43,18 @@
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
       creates: "{{ retronas_root }}/bin/webone/webone"
-
-  - name: "{{ my_name }} - create startup service"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/webone.service.j2
-      dest: /usr/lib/systemd/system/webone.service
-      owner: root
-      group: root
-      mode: 0644
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - enable startup service"
-    ansible.builtin.service:
-      name: "{{ item }}"
-      state: started
-      enabled: yes
-      daemon_reload: yes
-    with_items:
-      - webone
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone }}"
-      port: "{{ item.port }}/{{ item.protocol }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewald_ports }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
   - name: "{{ my_name }} - Restart service"
     ansible.builtin.service:
-      name: "{{ item }}"
+      name: webone
       state: restarted
       daemon_reload: yes
-    with_items:
-      - webone
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "webone"
-    module_state: "present"

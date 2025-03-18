@@ -1,0 +1,9 @@
+- name: "Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- name: "update user"
+  ansible.builtin.user:
+    user: "{{ retronas_user }}"
+    groups: "{{ append_user_group }}"
+    append: true
+  when: append_user_group is defined

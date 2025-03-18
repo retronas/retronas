@@ -20,7 +20,7 @@ dl_install() {
     cd $RTMP
     curl -sOJL "${RELEASE}"
     unzip $(basename ${RELEASE})
-    mv redumper*Linux/bin/* $DESTDIR
+    mv redumper*Linux*/bin/* $DESTDIR
     cd ..
     rm -rf $RTMP
 }
@@ -35,7 +35,7 @@ get_x86_64() {
 get_aarch64() {
     URL=https://mameau.com/notes/retronas/redumper/aarch64/
     PATTERN="redumper-build*linux-aarch64.zip"
-    RELEASE=$(curl -skJL $URL | grep -o "$PATTERN" | sort -r | head -n1)
+    RELEASE=$(curl -skJL $URL | sed -rn "s/^.*($PATTERN)\">.*/\1/p" | sort -r | head -n1)
     dl_install $URL/$RELEASE
 }
 

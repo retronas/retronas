@@ -1,0 +1,16 @@
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- ansible.builtin.import_role:
+    name: retronas.role.package.latest
+
+- name: "{{ my_name }} - check self-signed cert"
+  ansible.builtin.stat:
+    path: "{{ my_cert }}"
+  register: self_signed_cert
+
+- name: "{{ my_name }} - create self-signed cert"
+  ansible.builtin.shell:
+    cmd: /usr/bin/openssl req -nodes -new -x509  -keyout {{ my_key }} -out {{ my_cert }} -subj "/C=AU/ST=Sydney/L=retronas/O=retronas/OU=retronas/CN=retronas" -days 3660
+  when: self_signed_cert is defined and
+        self_signed_cert.stat.exists is false

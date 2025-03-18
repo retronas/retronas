@@ -1,19 +1,23 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_cockpit.yml
-- ansible.builtin.import_playbook: install_cockpit-packages.yml
-
+---
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
 
   vars:
-    - my_name: "retronas"
-    - my_file: "install_cockpit-retronas"
-    - package_dir: "/usr/share/cockpit"
+    my_name: "cockpit-retronas"
+    my_file: "install_cockpit-retronas"
+    package_dir: "/usr/share/cockpit"
+    module_name: "cockpit-retronas"
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
+
+  - ansible.builtin.include_role:
+      name: retronas.role.filesystems
+
+  - ansible.builtin.include_role:
+      name: retronas.role.cockpit
 
   - name: "{{ my_name }} - create package directory"
     ansible.builtin.file:
@@ -22,7 +26,6 @@
       group: root
       mode: 0755
       state: directory
-
 
   - name: "{{ my_name }} - Generate scripts"
     ansible.builtin.template:
@@ -36,7 +39,5 @@
     ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "cockpit-retronas"
-    module_state: "present"
+  -  ansible.builtin.include_role:
+      name: retronas.role.system-config

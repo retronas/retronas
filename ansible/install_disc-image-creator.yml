@@ -6,10 +6,11 @@
   gather_facts: no
 
   vars:
-    - my_name: "Disc Image Creator"
-    - my_file: "install_disc-image-creator"
+    my_name: "Disc Image Creator"
+    my_file: "install_disc-image-creator"
+    module_name: "disc-image-creator"
 
-    - my_packages:
+    packages:
       - git
       - coreutils
       - make
@@ -19,23 +20,19 @@
       - build-essential
       - unzip
 
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: "0755"}
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Prepare installer script"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ my_file }}.sh.j2
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Run installer"
     ansible.builtin.shell:
@@ -43,7 +40,5 @@
       chdir: "{{ retronas_root }}/scripts"
       executable: /bin/bash
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "disc-image-creator"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

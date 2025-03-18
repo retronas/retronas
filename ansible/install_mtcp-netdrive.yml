@@ -1,25 +1,29 @@
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "mtcp-netdrive"
-    - my_file: "install_mtcp-netdrive"
+    my_name: "mtcp-netdrive"
+    my_file: "install_mtcp-netdrive"
+    module_name: "mtcp-netdrive"
 
-    - my_packages:
+    packages:
       - screen
       - curl
       - unzip
 
-    - templates:
+    paths:
+      - { name: "{{ my_name }}", dest: "/opt", state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    templates:
       - { name: "install_mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
       - { name: "mtcp-netdrive.service", dest: "/etc/systemd/system", force: "yes" }
       - { name: "mtcp-netdrive.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: "yes" }
 
-
-    - firewalld_rules:
+    firewalld_rules:
       - { zones: retro, service: mtcp-netdrive }
 
-    - my_services:
+    my_services:
       - mtcp-netdrive
 
   tasks:
@@ -27,27 +31,14 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - mtcp-netdrive dir"
-    ansible.builtin.file:
-      path: "/opt/mtcp-netdrive"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - install mtcp-netdrive"
     ansible.builtin.command:
@@ -79,18 +70,8 @@
       mode: 0644
     when: firewalld_services.stat.exists
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('mtcp-netdrive') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "mtcp-netdrive"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

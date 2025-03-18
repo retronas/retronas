@@ -1,0 +1,5 @@
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+    
+- ansible.builtin.import_role:
+    name: retronas.role.package.latest

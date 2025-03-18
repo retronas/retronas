@@ -1,38 +1,33 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "redumper"
-    - my_file: "install_{{ my_name }}"
+    my_name: "redumper"
+    my_file: "install_{{ my_name }}"
+    module_name: "redumper"
 
-    - packages:
+    packages:
       - unzip
       - jq
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
-    - name: "{{ my_name }} - Load RetroNAS config"
-      ansible.builtin.include_vars: retronas_vars.yml
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
 
-    - name: "{{ my_name }} - Install dependencies"
-      ansible.builtin.package:
-        name: "{{ packages }}"
-        state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-    - name: "{{ my_name }} - templates"
-      ansible.builtin.template:
-        src: "templates/{{ my_file }}/{{ item.name }}.j2"
-        dest: "{{ item.dest }}/{{ item.name }}"
-        owner: "{{ item.owner|default('root') }}"
-        group: "{{ item.group|default('root') }}"
-        mode: "{{ item.mode|default('0644') }}"
-        force: "{{ item.force|default('yes') }}"
-      with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
+  - name: "{{ my_name }} - Install"
+    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+    args:
+      creates: "{{ retronas_root}}/bin/ps3netsrv"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "redumper"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

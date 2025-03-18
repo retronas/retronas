@@ -1,0 +1,46 @@
+- name: "{{ my_name }} - Create retronas user system dirs"
+  ansible.builtin.file:
+    path: "{{ retronas_path }}/{{ item }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: directory
+    mode: "0755"
+  with_items: "{{ system_user_dirs }}"
+
+- name: "{{ my_name }} - Log General Entry"
+  ansible.builtin.ini_file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    section: "general"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items: "{{ general_options }}"
+  when: general_options is defined
+
+- name: "{{ my_name }} - Log Platform info"
+  ansible.builtin.ini_file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    section: "platform"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items: "{{ platform_info }}"
+  when: platform_info is defined
+
+- name: "{{ my_name }} - Log Package Entry"
+  ansible.builtin.ini_file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    section: "package"
+    option: "{{ module_name }}"
+    value: "{{ module_state }}"
+    state: "{{ module_state }}"
+  when: module_name is defined and 
+        module_state is defined
+
+- name: "{{ my_name }} - fix config perms"
+  ansible.builtin.file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: file
+    mode: "0644"

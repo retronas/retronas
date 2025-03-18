@@ -2,39 +2,34 @@
   gather_facts: no
 
   vars:
-    - my_name: "extract-xiso"
-    - my_file: "install_extract-xiso"
+    my_name: "extract-xiso"
+    my_file: "install_extract-xiso"
+    module_name: "extract-xiso"
 
-    - my_packages: 
+    packages: 
       - make
       - gcc
       - coreutils
       - cmake
+
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Generate scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - build source"
     ansible.builtin.command:
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/extract-xiso"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "extract-xiso"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

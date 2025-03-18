@@ -1,23 +1,23 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "linux-dexdrive"
-    - my_file: "install_{{ my_name }}"
+    my_name: "linux-dexdrive"
+    my_file: "install_{{ my_name }}"
+    module_name: "linux-dexdrive"
 
-    - my_packages:
+    packages:
       - git 
       - build-essential
 
-    - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
-      - { name: "makefile.patch", dest: "/tmp" }
+    templates:
+      - { name: "{{ my_file }}.sh",   dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "makefile.patch",     dest: "/tmp" }
       - { name: "dexdrive_dumper.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
   tasks:
@@ -28,20 +28,15 @@
   - name: "{{ my_name }} - Load RetroNAS systems"
     ansible.builtin.include_vars: retronas_systems.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} daemon-reload" 
 
   - name: "{{ my_name }} - build source"
     ansible.builtin.shell:
@@ -60,22 +55,10 @@
       group: "disk"
       append: yes
 
-  - name: "{{ my_name }} - create startup service(s) instance"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /etc/systemd/system/{{ item.name }}.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} daemon-reload" 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
   - name: "{{ my_name }} daemon-reload"
     ansible.builtin.systemd:
       daemon_reload: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "linux-dexdrive"
-    module_state: "present"

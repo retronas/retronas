@@ -1,19 +1,21 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "hdparm"
-    - my_file: "install_{{ my_name }}"
+    my_name: "hdparm"
+    my_file: "install_{{ my_name }}"
+    module_name: "hdparm"
 
-    - my_packages:
+    packages:
          - hdparm
          - coreutils
 
-    - scripts:
+    scripts:
       - "{{ my_name }}.sh"
       - "{{ my_name }}-manager.sh"
 
-    - symlinks:
+    symlinks:
       - hdparm-manager-disable-apm
       - hdparm-manager-disable-standby
       - hdparm-manager-start-service
@@ -21,7 +23,7 @@
       - hdparm-manager-stop-service
       - hdparm-manager-drive-selector
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}", type: "timer", state: "stopped", instance: "no", enabled: "no", restart: "no" }
       - { name: "{{ my_name }}", type: "service", state: "stopped", instance: "no", enabled: "no", restart: "no" }
 
@@ -30,11 +32,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install from repos"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
-    notify: "{{ my_name }} - Restart service"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - check dir"
     ansible.builtin.file:
@@ -88,6 +87,9 @@
     when:
       - item.enabled == "yes"
 
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
   handlers:
 
   - name: "{{ my_name }} - Restart service"
@@ -99,8 +101,3 @@
       - "{{ systemd_units }}"
     when:
       - item.restart == "yes"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "hdparm"
-    module_state: "present"

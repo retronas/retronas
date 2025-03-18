@@ -1,0 +1,7 @@
+my_name: "Apt Backports"
+my_file: "install_apt-backports"
+
+packages:
+  - gnupg
+  - aria2
+  - curl

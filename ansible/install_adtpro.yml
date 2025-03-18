@@ -1,31 +1,32 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_x11vnc.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "adtpro"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: /opt/adtpro
+    my_name: "adtpro"
+    my_file: "install_{{ my_name }}"
+    my_dir: /opt/adtpro
+    module_name: "adtpro"
 
-    - systemd_units:
+    systemd_units:
       - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
-    - packages:
+    packages:
       - default-jre
       - xvfb
       - x11vnc
 
-    - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
-      - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no}
-      - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755"}
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "ADTPro.properties", dest: "{{ my_dir }}", force: no }
+      - { name: "adtpro_retronas.sh", dest: "{{ my_dir }}",  mode: "0755" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
+
+    firewalld_ports:
+      - { port: 60000, protocol: tcp }
 
   tasks:
 
@@ -35,35 +36,26 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.x11vnc
+
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - disks symlink"
     ansible.builtin.file:
       src: "roms/apple/appleii"
       dest: "{{ retronas_path }}/{{ my_name }}"
       state: "link"
-
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
 
   - name: "{{ my_name }} - Install"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
@@ -80,29 +72,13 @@
     with_items: "{{ systemd_units }}"
     notify: "{{ my_name }} daemon-reload" 
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: retro
-      port: 60000/tcp
-      permanent: true
-      state: enabled
-      immediate: true
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
     - name: "{{ my_name }} daemon-reload"
       ansible.builtin.systemd:
         daemon_reload: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "adtpro"
-    module_state: "present"

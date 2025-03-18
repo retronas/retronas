@@ -5,7 +5,7 @@
     - my_name: "Netatalk3"
     - my_file: "install_netatalk3"
 
-    - my_packages:
+    - packages:
       - avahi-daemon
       - build-essential
       - libevent-dev
@@ -80,10 +80,8 @@
        name: netatalk
        state: absent
 
-  - name: "{{ my_name }}  - install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Install build tools (debian)"
     ansible.builtin.package:

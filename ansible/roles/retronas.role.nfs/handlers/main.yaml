@@ -1,0 +1,6 @@
+- name: "{{ my_name }} - Restart service"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - nfs-kernel-server

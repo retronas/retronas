@@ -1,37 +1,35 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "seaweedfs"
-    - my_file: "install_{{ my_name }}"
+    my_name: "seaweedfs"
+    my_file: "install_{{ my_name }}"
+    module_name: "seaweedfs"
 
-    - systemd_units:
+    systemd_units:
       - { name: "{{ my_name }}-retronas", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - pwgen
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zones: retro, service: "{{ my_name }}" }
       - { zones: modern, service: "{{ my_name }}" }
 
-    - templates:
+    templates:
       - { name: "{{ my_name }}-retronas.service", dest: "/etc/systemd/system" }
       - { name: "install_{{ my_name }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "seaweedfs-credentials.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "weed-retronas-s3.json", dest: "{{ retronas_root }}/bin", mode: "0640", force: no }
 
-    - paths:
+    paths:
       - { name: "s3", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
   tasks:
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "generate access key"
     shell:
@@ -48,24 +46,11 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default(retronas_user) }}"
-      group: "{{ item.group|default(retronas_group) }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Install release"
@@ -100,15 +85,11 @@
       force: yes
     when: firewalld_services.stat.exists
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('seaweedfs') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -118,8 +99,3 @@
       state: restarted
       daemon_reload: yes
     with_items: "{{ systemd_units }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "seaweedfs"
-    module_state: "present"

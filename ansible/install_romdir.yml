@@ -1,18 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Generic ROM dir"
-    - my_file: "install_romdir"
-
-    - top_level_paths:
-      - { name: "roms", enabled: yes, systems: yes }
+    module_name: "romdir"
 
   tasks:
-    - name: "{{ my_name }}"
-      ansible.builtin.import_tasks: retronas_create_dirs.yml
+    - ansible.builtin.import_role:
+        name: retronas.role.romdir
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "romdir"
-    module_state: "present"
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

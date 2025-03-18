@@ -1,0 +1,24 @@
+my_name: "nginx"
+my_file: "install_{{ my_name }}"
+
+nginx_sites_available: "/etc/{{ my_name }}/sites-available"
+nginx_sites_enabled: "/etc/{{ my_name }}/sites-enabled"
+
+paths:
+- { name: "www", dest: "/{{ retronas_path }}" }
+
+packages:
+- { name: "lighttpd", state: "absent" }
+- { name: "{{ my_name }}", state: "latest" }
+
+templates:
+- { name: "10-retronas.conf",         dest: "{{ nginx_sites_available }}",  mode: "0640", enable: "yes" }
+- { name: "99-retronas-files.conf",   dest: "{{ nginx_sites_available }}",  mode: "0640", enable: "yes" }
+
+sites_disable:
+- "default"
+
+systemd_units:
+- { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
+site_enable: ""

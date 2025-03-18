@@ -1,0 +1,20 @@
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- ansible.builtin.import_role:
+    name: retronas.role.package.latest
+
+- name: "{{ my_name }} - templates"
+  ansible.builtin.template:
+    src: "{{ item.name }}.j2"
+    dest: "{{ item.dest }}/{{ item.name }}"
+    owner: "{{ item.owner|default('root') }}"
+    group: "{{ item.group|default('root') }}"
+    mode: "{{ item.mode|default('0644') }}"
+    force: "{{ item.force|default('yes') }}"
+  with_items: "{{ templates }}"
+
+- name: "{{ my_name }} - Install from source code"
+  ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
+  args:
+    creates: "/usr/local/bin/curlftpfs"
