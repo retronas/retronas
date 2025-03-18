@@ -1,3 +1,10 @@
+- name: "{{ my_name }} - Gather required facts"
+  ansible.builtin.setup:
+    gather_subset:
+      - date_time
+      - architecture
+      - default_ipv4
+
 - name: "{{ my_name }} - Create retronas user system dirs"
   ansible.builtin.file:
     path: "{{ retronas_path }}/{{ item }}"
