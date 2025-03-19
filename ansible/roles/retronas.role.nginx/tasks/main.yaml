@@ -6,7 +6,7 @@
     name: retronas.role.sslcert
 
 - ansible.builtin.import_role:
-    name: retronas.role.packages.latest
+    name: retronas.role.package.latest
   notify: "restart nginx"
 
 - ansible.builtin.import_role:
