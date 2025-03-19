@@ -23,7 +23,7 @@
       #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
     firewalld_ports:
-      - { port: 66000, protocol: tcp}
+      - { port: "66000", protocol: tcp}
 
   tasks:
 

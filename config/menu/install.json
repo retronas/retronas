@@ -504,7 +504,7 @@
         "prompt": "",
         "type": "dialog",
         "group": "netatalk",
-        "command": "netatalk4",
+        "command": "netatalk",
         "args": ""
       },
       {

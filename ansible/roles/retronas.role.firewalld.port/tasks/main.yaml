@@ -6,6 +6,12 @@
     path: /etc/firewalld/services
   register: firewalld_services
 
+- name: "{{ my_name }} - reload to pick up any new config"
+  ansible.builtin.service:
+    name: "firewalld"
+    state: reloaded
+  when: firewalld_services.stat.exists
+
 - name: "{{ my_name }} - enable firewall rule (port)"
   ansible.posix.firewalld:
     zone: "{{ item.zone | default('retro') }}"

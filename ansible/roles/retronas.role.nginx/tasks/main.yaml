@@ -5,8 +5,11 @@
 - ansible.builtin.import_role:
     name: retronas.role.sslcert
 
-- ansible.builtin.import_role:
-    name: retronas.role.package.latest
+- name: "{{ my_name }} - manage packages"
+  ansible.builtin.package:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+  with_items: "{{ packages }}"
   notify: "restart nginx"
 
 - ansible.builtin.import_role:
