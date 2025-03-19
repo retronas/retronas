@@ -7,7 +7,7 @@
       name: "{{ item.name }}"
       state: "{{ item.state }}"
   with_items: "{{ packages }}"
-  notify: "{{ my_name }} - Restart service"
+  notify: "restart nginx"
 
 - ansible.builtin.import_role:
     name: retronas.role.paths
