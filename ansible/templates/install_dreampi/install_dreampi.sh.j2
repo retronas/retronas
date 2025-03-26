@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 # based on https://github.com/Kazade/dreampi/issues/17
 
 DPITMP=$(mktemp -d)
@@ -18,11 +21,17 @@ apt-get --fix-missing -y install
 # install dependancies
 dpkg -i arm/*.deb
 
-
-
 # pull python3 requirements
 curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
-python3 -m pip install -r requirements.txt
+if [ ! -f /usr/lib/python3*/EXTERNALLY-MANAGED ]
+    python3 -m pip install -r requirements.txt
+else
+    apt-get install -y python3-serial python3-sh python3-iptables python3-miniupnpc
+    # there are no system packages for this so ignore warning
+    python3 -m pip install http-server-base --break-system-packages
+fi
+
+http-server-base
 
 # install dreampi
 mkdir /usr/local/share/dreampi
