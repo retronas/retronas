@@ -24,6 +24,7 @@ dpkg -i arm/*.deb
 # pull python3 requirements
 curl -O https://raw.githubusercontent.com/sairuk/dreampi/master/requirements.txt
 if [ ! -f /usr/lib/python3*/EXTERNALLY-MANAGED ]
+then
     python3 -m pip install -r requirements.txt
 else
     apt-get install -y python3-serial python3-sh python3-iptables python3-miniupnpc
@@ -31,14 +32,12 @@ else
     python3 -m pip install http-server-base --break-system-packages
 fi
 
-http-server-base
-
 # install dreampi
-mkdir /usr/local/share/dreampi
-cp *.py dial-tone.wav /usr/local/share/dreampi
-ln -s /usr/local/share/dreampi/dreampi.py /usr/local/bin/dreampi
+[ ! -d /usr/local/share/dreampi ] && mkdir /usr/local/share/dreampi
+cp -f *.py dial-tone.wav /usr/local/share/dreampi
+ln -sf /usr/local/share/dreampi/dreampi.py /usr/local/bin/dreampi
 chown -R root:root /usr/local/share/dreampi/
 
 # create startup scripts
-cp etc/init.d/dreampi /etc/init.d/
-cp etc/systemd/system/dreampi.service /etc/systemd/system/
+cp -f etc/init.d/dreampi /etc/init.d/
+cp -f etc/systemd/system/dreampi.service /etc/systemd/system/
