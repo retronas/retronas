@@ -85,6 +85,9 @@
       force: yes
     when: firewalld_services.stat.exists
 
+  - ansible.builtin.shell:
+      cmd: 'sleep 10'
+
   - ansible.builtin.import_role:
       name: retronas.role.firewalld.port
 

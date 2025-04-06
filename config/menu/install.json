@@ -693,7 +693,7 @@
       },
       {
         "index": "64",
-        "title": "retroarch",
+        "title": "retroarch-cifs",
         "description": "RetroArch Based Systems CIFS config",
         "id": "retroarch-cifs",
         "prompt": "",

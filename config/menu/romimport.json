@@ -8,18 +8,27 @@
         "type": "menu",
         "items": [
             {
-                "index":"01",
-                "title": "Import All",
-                "description": "Run for all systems",
-                "id":"romimport-all",
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
                 "prompt": "",
-                "type": "script",
+                "type": "menu",
                 "group":"",
-                "command": "romimport",
-                "args": ""
+                "command": "EXIT_OK"
             },
             {
                 "index":"02",
+                "title": "Install",
+                "description": "Install",
+                "id":"romimport",
+                "prompt": "Install",
+                "type": "install",
+                "group":"",
+                "command": "romimport"
+            },
+            {
+                "index":"04",
                 "title": "Import By System",
                 "description": "Import a Specific System",
                 "id":"romimportsystem",
