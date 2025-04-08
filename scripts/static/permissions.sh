@@ -3,12 +3,22 @@
 # This should mimic the old dialog and let the user select a folder
 #
 #set -x
+set -u
 
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
 
-PROCDIR="${OLDRNPATH}/${1}"
+PROCSUB=${1:-all}
+
+case $PROCSUB in
+  all)
+    PROCDIR="${OLDRNPATH}"
+    ;;
+  *)
+    PROCDIR="${OLDRNPATH}/${PROCSUB}"
+    ;;
+esac
 
 echo "Processing: ${PROCDIR}"
 
