@@ -11,12 +11,12 @@
       - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
     packages:
-      #- git
-      #- npm
+      - git
+      - npm
       - libnode108
-      #- gcc
-      #- g++
-      #- build-essential
+      - gcc
+      - g++
+      - build-essential
 
     paths:
       - { name: "{{ my_name }}",    dest: "{{ retronas_root }}/bin",                state: "directory", mode: "0755", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
