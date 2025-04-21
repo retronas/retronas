@@ -48,7 +48,7 @@
 
 - name: "{{ my_name }} - www dirs"
   ansible.builtin.file:
-    path: "/data/retronas/www/{{ item.path }}"
+    path: "{{ retronas_path }}/www/{{ item.path }}"
     owner: "{{ retronas_user }}"
     group: "{{ retronas_group }}"
     mode: "{{ item.mode|default('0750') }}"
@@ -60,7 +60,7 @@
 - name: "{{ my_name }} - www files"
   ansible.builtin.template:
     src: "{{ item.src }}"
-    dest: "/data/retronas/www/{{ item.path }}"
+    dest: "{{ retronas_path }}/www/{{ item.path }}"
     owner: "{{ retronas_user }}"
     group: "{{ retronas_group }}"
     mode: "{{ item.mode|default('0644') }}"
