@@ -151,9 +151,10 @@ READ_MENU_TDESC() {
     fi
     local IFS=$'\n'
 
-    export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
+    IFS=";" read -r -a PIECES <<< ${MENU_TDESC_DATA}
+    export MENU_TNAME=${PIECES[0]}
     # eval ... yes i'm so terribly sorry
-    export MENU_BLURB=$(eval "echo $(echo $MENU_TDESC_DATA | cut -d";" -f2- | sed 's/|/\\\\n/g')")
+    export MENU_BLURB=$(eval "echo $(echo ${PIECES[@]:1} | sed 's/|/\\\\n/g')" )
 }
 
 #
@@ -199,10 +200,10 @@ READ_MENU_COMMAND() {
         MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
     fi
 
-    local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
-    local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
-    local MENU_ARGS=$(echo -e "${MENU_DATA}" | cut -d"|" -f3-)
-
+    IFS="|" read -r -a PIECES <<< ${MENU_DATA}
+    local MENU_TYPE=${PIECES[0]}
+    local MENU_SELECT=${PIECES[1]}
+    local MENU_ARGS=${PIECES[@]:2}
 
     CLEAR
     if [ ! -z "${MENU_SELECT}" ] && [ "${MENU_SELECT}" != "null" ]
@@ -512,9 +513,7 @@ DLG_MENUJ() {
 
         [ "${TYPE}"  == "dialog" ] && DESC="${DESC} >>"
         MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
-
-
-    done < <(echo "${MENU_DATA[@]}")
+    done
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
     unset MENU_ARRAY
