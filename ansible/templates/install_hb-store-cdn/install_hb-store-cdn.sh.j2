@@ -7,51 +7,51 @@ REPO=https://github.com/Gkiokan/hb-store-cdn-cli-server.git
 
 
 # Use the binary release
-RELEASE=$( curl -kLs https://api.github.com/repos/Gkiokan/hb-store-cdn-cli-server/releases | jq -r ".[0].assets | map(select(.name | match (\"hb-store-cdn-cli-server-linux\")))[] | .browser_download_url" )
+#RELEASE=$( curl -kLs https://api.github.com/repos/Gkiokan/hb-store-cdn-cli-server/releases | jq -r ".[0].assets | map(select(.name | match (\"hb-store-cdn-cli-server-linux\")))[] | .browser_download_url" )
+#
+#if [ ! -z "${RELEASE}" ]
+#then
+#    DEST="${BINDIR}/hb-store-cdn-cli-server"
+#    curl -JLo"${DEST}" "${RELEASE}"
+#    chmod +x "${DEST}"
+#fi
 
-if [ ! -z "${RELEASE}" ]
-then
-    DEST="${BINDIR}/hb-store-cdn-cli-server"
-    curl -JLo"${DEST}" "${RELEASE}"
-    chmod +x "${DEST}"
-fi
+[ ! -x /usr/bin/npm ] && echo "npm could not be found" && exit 1
 
-#[ ! -x /usr/bin/npm ] && echo "npm could not be found" && exit 1
-#
-#echo "Configuring build directories..."
-#rm -rf "${SRCDIR}"
-#mkdir -p "${SRCDIR}"
-#cd "${SRCDIR}"
-#
-#echo "Cloning ..."
-#git clone $REPO $APPNAME
-#cd $APPNAME
-#
-#echo "Install Dependencies"
-#npm install
-#npm install pkg
-#
-#echo "Set arch (default x86_64)"
-#MACH=$(uname -m)
-#case $MACH in
-#    aarch64|arm*)
-#        ARCH=linux-arm
-#        ;;
-#    *)
-#        ARCH=linux
-#        ;;
-#esac
-#
-#echo "Building"
-#npm run build:$ARCH
-#
-#echo "Moving binary to RetroNAS bin dir..."
-#mkdir -p "${BINDIR}" 2>/dev/null
-#chmod +x release/hb-store-cdn-cli-server
-#mv -vf release/hb-store-cdn-cli-server "${BINDIR}"/
-#
-#echo "Cleaning up..."
-#rm -rf "${SRCDIR}"
-#
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
 
+echo "Cloning ..."
+git clone $REPO $APPNAME
+cd $APPNAME
+
+echo "Install Dependencies"
+npm install
+npm install pkg -g
+
+echo "Set arch (default x86_64)"
+MACH=$(uname -m)
+case $MACH in
+    aarch64|arm*)
+        ARCH=linux-arm
+        ;;
+    *)
+        ARCH=linux
+        ;;
+esac
+
+echo "Building"
+npm run build:$ARCH
+
+echo "Moving binary to RetroNAS bin dir..."
+mkdir -p "${BINDIR}" 2>/dev/null
+chmod +x release/hb-store-cdn-cli-server
+mv -vf release/hb-store-cdn-cli-server "${BINDIR}"/
+
+echo "Cleaning up..."
+rm -rf "${SRCDIR}"
+
+chown -R {{ retronas_user }}:{{ retronas_group }}  "${BINDIR"/
 echo "All done!"

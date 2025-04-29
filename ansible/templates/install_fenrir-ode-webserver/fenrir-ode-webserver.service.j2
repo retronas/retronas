@@ -1,0 +1,14 @@
+[Unit]
+Description={{ my_name }}
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+User={{ retronas_user }}
+ExecStart={{ fenrir_ode_bin }} --dir "{{ fenrir_ode_path }}" --port {{ fenrir_ode_port }}
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

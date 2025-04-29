@@ -1,129 +1,39 @@
-# Dependencies
-- import_playbook: install_romdir.yml
-- import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "analoguepocket CIFS"
-    - my_file: "install_analoguepocket_cifs"
+    my_name: "analoguepocket CIFS"
+    my_file: "install_analoguepocket_cifs"
+    module_name: "analoguepocket_cifs"
+    system_key: "analoguepocket"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "Assets",       enabled: yes,  generic: "roms",   systems: yes }
       - { name: "Cores",        enabled: yes,  generic: "",       systems: no }
       - { name: "Platforms",    enabled: yes,  generic: "",       systems: no }
       - { name: "Presets",      enabled: yes,  generic: "",       systems: no }
       - { name: "Saves",        enabled: yes,  generic: "",       systems: no }
 
-    #- internal_symlinks:
+    #internal_symlinks:
     #  - { src: '', dest: '' }
 
   tasks:
 
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
-
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/analoguepocket"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
-  - name: "{{ my_name }} - build top level share paths"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/analoguepocket/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
-    when: 
-      - item.enabled is true
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.extradirs
 
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ retronas_path + '/analoguepocket/' + item.1.name + '/' + item.0.analoguepocket if item.1.systems is true else ';' ] }}"
-    no_log: yes
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.analoguepocket | length > 0
-      - item.1.systems is true
+  - ansible.builtin.import_role:
+      name: retronas.role.samba
 
-  - name: "{{ my_name }} - build layout"
-    ansible.builtin.shell:
-      cmd: mkdir -p {{ path_list|flatten|join(' ') }}
-    become: yes
-    become_user: "{{ retronas_user }}"
-    when: path_list is defined
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.samba.system
 
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list_links: "{{ path_list_links|default([]) + [ 'ln -sfT ../../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/analoguepocket/' + item.1.name + '/' + item.0.analoguepocket + '/common;' ] }}"
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.analoguepocket | length > 0
-      - item.1.systems is true
-
-  - name: "{{ my_name }} - build systems directory layout"
-    ansible.builtin.shell:
-      cmd: "{{ path_list_links|join('') }}"
-    when: path_list_links is defined
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - build internal hacks directory layout"
-    ansible.builtin.file:
-      src: "../roms/{{ item.src }}"
-      dest: "{{ retronas_path }}/analoguepocket/{{ item.dest }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    with_items:
-      - "{{ internal_symlinks }}"
-    when: internal_symlinks is defined
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: analoguepocket
-      option: "include"
-      value: "/etc/samba/retronas_analoguepocket.conf"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_analoguepocket.conf.j2"
-      dest: /etc/samba/retronas_analoguepocket.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
-
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "analoguepocket_cifs"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

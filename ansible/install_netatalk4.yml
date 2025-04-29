@@ -1,11 +1,13 @@
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "Netatalk4"
-    - my_file: "install_netatalk4"
+    my_name: "Netatalk4"
+    my_file: "install_netatalk4"
+    module_name: "netatalk4"
 
-    - my_packages:
+    packages:
       - avahi-daemon
       - build-essential
       - meson
@@ -37,7 +39,7 @@
       - po4a
       - libmptcpwrap0
 
-    - packages_debian:
+    packages_debian:
         debian11:
           - libmysqlclient-dev
           - libtracker-sparql-2.0-dev
@@ -45,17 +47,17 @@
           - default-libmysqlclient-dev
           - libtracker-sparql-3.0-dev
 
-    - packages_ubuntu:
+    packages_ubuntu:
       - libmysqlclient-dev
       - libtracker-sparql-2.0-dev
       - libtracker-miner-2.0-dev
 
-    - my_services:
+    my_services:
       - avahi-daemon
       - atalkd
       - netatalk
 
-    - config_settings:
+    config_settings:
       - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
       - { section: "Global", option: "hostname", value: "retroafp" }
       - { section: "Global", option: "mimic model", value: "PowerMac" }
@@ -68,11 +70,15 @@
       - { section: "Global", option: "legacy icon", value: "globe" }
       - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
 
+    paths:
+      - { name: "netatalk4", dest: "/opt/retronas/bin", mode: '0755'  }
+      - { name: "etc", dest: "/opt/retronas/bin/netatalk4", mode: '0755'  }
 
-    - templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755'}
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755' }
+      - { name: "retronas.conf", dest: "/opt/retronas/bin/netatalk4/etc" }
 
-    - old_services:
+    old_services:
       - { name: "atalkd.service", dest: "/etc/systemd/system"}
       - { name: "netatalk.service", dest: "/etc/systemd/system"}
 
@@ -119,10 +125,8 @@
     when: old_services_check is defined and
           item.stat.exists is true
 
-  - name: "{{ my_name }}  - install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - Install build tools (debian)"
     ansible.builtin.package:
@@ -136,14 +140,11 @@
        state: latest
     when: ansible_distribution == 'Ubuntu'
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - install from source"
@@ -158,21 +159,15 @@
     with_items: "{{ config_settings }}"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template: 
-      src: "templates/{{ my_file }}/retronas.conf.j2"
-      dest: /opt/retronas/bin/netatalk4/etc/retronas.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable startup services"
     ansible.builtin.service:
       name: "{{ item }}"
       state: started
       enabled: yes
     with_items: "{{ my_services }}"
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -182,8 +177,3 @@
       state: restarted
       daemon-reload: yes
     with_items: "{{ my_services }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "netatalk4"
-    module_state: "present"

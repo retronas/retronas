@@ -1,20 +1,19 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "EmuDeck CIFS"
-    - my_file: "install_emudeck_cifs"
+    my_name: "EmuDeck CIFS"
+    my_file: "install_emudeck_cifs"
+    system_key: "emudeck"
+    module_name: "emudeck_cifs"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
     #  - { name: "saves",  enabled: yes,  generic: "saves",  systems: yes }
       - { name: "bios",   enabled: yes,  generic: "bios",   systems: yes }
 
-    - internal_symlinks:
+    internal_symlinks:
       - { src: 'commodore/amiga', dest: 'ags' }
       - { src: 'commodore/amiga', dest: 'amiga600' }
       - { src: 'atari/jaguar', dest: 'atarijaguarcd' }
@@ -38,90 +37,20 @@
 
   tasks:
 
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
+    - ansible.builtin.import_role:
+        name: retronas.role.romdir
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/emudeck"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
+    - ansible.builtin.import_role:
+        name: retronas.role.extradirs
 
-  - name: "{{ my_name }} - build top level share paths"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/emudeck/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items:
-      "{{ top_level_paths }}"
-    when: 
-      - item.enabled is true
-    notify: "{{ my_name }} - Install Samba"
+    - ansible.builtin.import_role:
+        name: retronas.role.samba
 
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/emudeck/' + item.1.name + '/' + item.0.emudeck + ';' ] }}"
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.emudeck | length > 0
-      - item.1.systems is true
+    - ansible.builtin.import_role:
+        name: retronas.role.samba.system
 
-  - name: "{{ my_name }} - build systems directory layout"
-    ansible.builtin.shell:
-      cmd: "{{ path_list|join('') }}"
-    when: path_list is defined
-    changed_when: false
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - build internal hacks directory layout"
-    ansible.builtin.file:
-      src: "../../{{ item.1.generic }}/{{ item.0.src }}"
-      dest: "{{ retronas_path }}/emudeck/{{ item.1.name }}/{{ item.0.dest }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: link
-    loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: emudeck
-      option: "include"
-      value: "/etc/samba/retronas_emudeck.conf"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_emudeck.conf.j2"
-      dest: /etc/samba/retronas_emudeck.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
-
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "emudeck_cifs"
-    module_state: "present"
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

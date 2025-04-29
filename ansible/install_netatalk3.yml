@@ -5,7 +5,7 @@
     - my_name: "Netatalk3"
     - my_file: "install_netatalk3"
 
-    - my_packages:
+    - packages:
        - avahi-daemon
        - netatalk
 
@@ -47,10 +47,8 @@
     ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
     when: result.rc == 0
 
-  - name: "{{ my_name }}  - install from repos"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }}  - configure"
     ansible.builtin.ini_file: 

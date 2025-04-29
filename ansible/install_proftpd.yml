@@ -1,26 +1,34 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "ProFTPd"
+    my_name: "ProFTPd"
+    my_file: "install_proftpd"
+    module_name: "proftpd"
 
-    - my_packages:
+    packages:
        - avahi-daemon
        - proftpd-core
 
-    - firewalld_rules:
-      - { zone: retro }
-      - { zone: modern }
+    templates:
+      - { name: "retronas.conf", dest: "/etc/proftpd/conf.d" }
+      - { name: "ftp.service", dest: "/etc/avahi/services" }
+
+    firewalld_rules:
+      - { name: ftp, zone: retro }
+      - { name: ftp, zone: modern }
 
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }}  - install from repos"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - remove  mod_unique_id.c"
     ansible.builtin.ini_file:
@@ -30,47 +38,17 @@
       state: absent
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: templates/install_proftpd/retronas.conf.j2
-      dest: /etc/proftpd/conf.d/retronas.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - configure avahi"
-    ansible.builtin.template:
-      src: templates/install_proftpd/ftp.service.j2
-      dest: /etc/avahi/services/ftp.service
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable startup services"
     ansible.builtin.service:
       name: proftpd
       state: started
       enabled: yes
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('ftp') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -81,8 +59,3 @@
     with_items:
       - avahi-daemon
       - proftpd
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "proftpd"
-    module_state: "present"

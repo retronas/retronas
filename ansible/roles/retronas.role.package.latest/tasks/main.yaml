@@ -1,0 +1,6 @@
+- name: "{{ my_name }} - Install packages"
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  become: yes

@@ -2,8 +2,6 @@
 
 set -u
 
-RN_BIN=/usr/local/bin/
-
 APP=pfsshell
 REPO=https://github.com/ps2homebrew/${APP}.git
 OUTPATH=/tmp
@@ -29,15 +27,10 @@ fi
 
 cd ${OUTPATH}/${APP}
 
- mkdir build
- cd build
- meson -Denable_pfsfuse=true ..
- ninja
-
-mv ${OUTPATH}/${APP}/build/pfsshell $RN_BIN/
-mv ${OUTPATH}/${APP}/build/pfsfuse $RN_BIN/
-mv ${OUTPATH}/${APP}/build/libps2hdd.so $RN_BIN/
-
+git submodule update --remote
+meson setup -Denable_pfsfuse=true build
+ninja -C build
+ninja -C build install
 
 # CLEAN UP
 rm -Rf ${OUTPATH}/${APP}

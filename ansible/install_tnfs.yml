@@ -3,13 +3,19 @@
   gather_facts: no
 
   vars:
-    - my_name: "TNFS Atari 8-bit and ZX Spectrum"
-    - my_file: "install_tnfs"
+    my_name: "TNFS Atari 8-bit and ZX Spectrum"
+    my_file: "install_tnfs"
+    module_name: "tnfs"
 
-    - my_packages:
+    packages:
       -  build-essential
 
-    - firewalld_ports:
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "tnfsd.service", dest: "/usr/lib/systemd/system" }
+
+
+    firewalld_ports:
       - { zone: "retro", port: 16384, protocol: tcp }
       - { zone: "retro", port: 16384, protocol: udp }
   
@@ -18,32 +24,17 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Generate install scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     #args:
       #creates: "{{ retronas_root}}/bin/tnfs"
-    notify: "{{ my_name }} - Restart service"
-
-  - name: "{{ my_name }} - create startup service"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/tnfsd.service.j2
-      dest: /usr/lib/systemd/system/tnfsd.service
-      owner: root
-      group: root
-      mode: 0644
     notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable startup service"
@@ -55,23 +46,11 @@
     with_items:
       - tnfsd
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone }}"
-      port: "{{ item.port }}/{{ item.protocol }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewald_ports }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -82,8 +61,3 @@
       daemon_reload: yes
     with_items:
       - tnfsd
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "tnfs"
-    module_state: "present"

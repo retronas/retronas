@@ -1,25 +1,27 @@
-# Dependencies
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "dnsmasq"
-    - my_file: "install_{{ my_name }}"
+    my_name: "dnsmasq"
+    my_file: "install_{{ my_name }}"
+    module_name: "dnsmasq"
 
-    - packages:
+    packages:
       - dnsmasq
 
-    - my_services:
+    my_services:
       - dnsmasq
 
-    - changed: false
+    changed: false
 
   tasks:
 
-  - name: "{{ my_name }} - Install dnsmasq from repos"
-    package:
-       name: "{{ packages }}"
-       state: latest
+  - name: "{{ my_name }} - Load RetroNAS config"
+    ansible.builtin.include_vars: retronas_vars.yml
+
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - restart if imported because handlers will not run"
     service:
@@ -29,8 +31,5 @@
     with_items: "{{ my_services }}"
     when: changed is true
 
-
-- import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "dnsmasq"
-    module_state: "present"
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config

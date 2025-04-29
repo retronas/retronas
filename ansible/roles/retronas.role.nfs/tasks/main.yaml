@@ -1,0 +1,35 @@
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- ansible.builtin.import_role:
+    name: retronas.role.package.latest
+
+- name: "{{ my_name }} - retrieve {{ retronas_user }} user info"
+  ansible.builtin.getent:
+    database: passwd
+    key: "{{ retronas_user }}"
+
+- ansible.builtin.set_fact:
+    retronas_user_id: "{{ getent_passwd[retronas_user][1] }}"
+
+- name: "{{ my_name }} - retrieve {{ retronas_group }} group info"
+  ansible.builtin.getent:
+    database: group
+    key: "{{ retronas_group }}"
+
+- ansible.builtin.set_fact:
+    retronas_group_id: "{{ getent_group[retronas_group][1] }}"
+
+- ansible.builtin.import_role:
+    name: retronas.role.templates
+
+- name: "{{ my_name }} - enable startup services"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - nfs-kernel-server
+
+- ansible.builtin.import_role:
+    name: retronas.role.firewalld.port

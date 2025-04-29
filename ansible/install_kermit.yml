@@ -1,39 +1,35 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "kermit"
-    - my_file: "install_{{ my_name }}"
+    my_name: "kermit"
+    my_file: "install_{{ my_name }}"
+    module_name: "kermit"
 
-    - packages:
+    packages:
       - ckermit
 
-    - systemd_units:
+    systemd_units:
       - { name: "iksd.socket", enabled: yes, state: 'restarted' }
 
-    - templates:
+    templates:
       - { name: "iksd@.service", dest: "/etc/systemd/system" }
       - { name: "iksd.socket", dest: "/etc/systemd/system" }
+
+    firewalld_ports:
+      - { port: 1649, protocol: tcp }
 
   tasks:
 
   - name: "{{ my_name }}  - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }}  - install from repos"
-    ansible.builtin.package: 
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - manage startup services"
     ansible.builtin.service:
@@ -43,24 +39,8 @@
       daemon_reload: true
     with_items: "{{ systemd_units }}"
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: retro
-      port: 1649/tcp
-      permanent: true
-      state: enabled
-      immediate: true
-    when: firewalld_services.stat.exists
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "kermit"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

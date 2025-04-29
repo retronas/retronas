@@ -5,7 +5,7 @@ set -u
 RN_BIN=/usr/local/bin/
 
 APP=megatools
-REPO=https://megous.com/git/${APP}
+REPO=https://xff.cz/git/${APP}
 OUTPATH=/tmp
 
 function _log {
@@ -30,15 +30,14 @@ fi
 cd ${OUTPATH}/${APP}
 
 # patch for old debian glib
-sed -i 's/g_memdup2/g_memdup/g' lib/mega.c
+#sed -i 's/g_memdup2/g_memdup/g' lib/mega.c
 #
 
-mkdir build
-cd build
-meson ..
-ninja
+meson setup build
+ninja -C build
+ninja -C build install
 
-mv ${OUTPATH}/${APP}/build/megatools $RN_BIN/
+#mv ${OUTPATH}/${APP}/build/megatools $RN_BIN/
 
 # CLEAN UP
 rm -Rf ${OUTPATH}/${APP}

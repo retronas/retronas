@@ -2,32 +2,31 @@
   gather_facts: no
 
   vars:
-    - my_name: "gogrepo"
-    - my_file: "install_gogrepo"
+    my_name: "gogrepo"
+    my_file: "install_gogrepo"
+    module_name: "gogrepo"
 
-    - my_packages:
+    packages:
       - python3
       - python-is-python3
       - python3-html5lib
       - git
       - sudo
 
-    - scripts:
-      - "gogrepo_login.sh" 
-      - "gogrepo_import-cookies.sh"
-      - "gogrepo_download.sh"
-      - "gogrepo_update.sh"
-      - "gogrepo-wrapper.sh"
+    templates:
+      - { name: "gogrepo_login.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "gogrepo_import-cookies.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "gogrepo_download.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "gogrepo_update.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "gogrepo-wrapper.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - install dependencies"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - create GOG dir"
     ansible.builtin.file:
@@ -50,16 +49,8 @@
       chdir: "{{ retronas_root }}/bin/gogrepo"
       cmd: "git pull"
 
-  - name: "{{ my_name }} - scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item }}.j2"
-      dest: "{{ retronas_root }}/scripts/{{ item }}"
-      owner: root
-      group: root
-      mode: 0755
-    with_items: "{{ scripts }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "gogrepo"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

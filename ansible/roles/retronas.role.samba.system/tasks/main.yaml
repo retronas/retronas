@@ -1,0 +1,85 @@
+- name: "{{ my_name }} - Include systems map"
+  ansible.builtin.include_vars: "retronas_systems.yml"
+
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- name: "{{ my_name }} - build top level"
+  ansible.builtin.file:
+    path: "{{ retronas_path }}/{{ system_key }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: directory
+    mode: "0775"
+
+- name: "{{ my_name }} - build top level share paths"
+  ansible.builtin.file:
+    path: "{{ retronas_path }}/{{ system_key }}/{{ item.name }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: directory
+    mode: "0775"
+  loop: "{{ top_level_paths }}"
+  when: top_level_paths is defined and
+        item.enabled is true
+
+- name: "{{ my_name }} - build layout list (set fact) (top level paths)"
+  ansible.builtin.set_fact:
+    path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
+  loop: "{{ system_map|product(top_level_paths)|list }}"
+  when: top_level_paths is defined and
+        item.1.enabled is true and
+        item.0[system_key] is defined and
+        item.0[system_key] | length > 0 and
+        item.1.systems is true
+
+- name: "{{ my_name }} - build layout list (set fact)"
+  ansible.builtin.set_fact:
+    path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
+  loop: "{{ system_map }}"
+  when: top_level_paths is not defined and
+        item[system_key] is defined and
+        item[system_key] | length > 0
+
+- name: "{{ my_name }} - build systems directory layout"
+  ansible.builtin.shell:
+    cmd: "{{ path_list|join('') }}"
+  when: path_list is defined
+  changed_when: false
+
+- name: "{{ my_name }} - build internal directory layout with top level paths"
+  ansible.builtin.file:
+    src: "../../{{ item.1.generic }}/{{ item.0.src }}"
+    dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1.name }}/{{ item.0.dest }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: link
+  loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
+  when: internal_symlinks is defined and
+        top_level_path is defined
+
+- name: "{{ my_name }} - build internal directory layout"
+  ansible.builtin.file:
+    src: "../roms/{{ item.src }}"
+    dest: "{{ retronas_path }}/{{ system_key }}/{{ item.dest }}"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: link
+  loop: "{{ internal_symlinks }}"
+  when: internal_symlinks is defined and
+        top_level_path is not defined
+
+- name: "{{ my_name }} - configure includes file"
+  ansible.builtin.ini_file:
+    path: /etc/samba/smb.conf
+    section: "{{ system_key }}"
+    option: "include"
+    value: "/etc/samba/retronas_{{ system_key }}.conf"
+
+- name: "{{ my_name }} - configure retro shares"
+  ansible.builtin.template:
+    src: "retronas_system.conf.j2"
+    dest: /etc/samba/retronas_{{ system_key }}.conf
+    owner: root
+    group: root
+    mode: '0644'

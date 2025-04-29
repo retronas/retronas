@@ -1,11 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "pfsshell"
-    - my_file: "install_pfsshell"
+    my_name: "pfsshell"
+    my_file: "install_pfsshell"
+    module_name: "pfsshell"
 
-    - my_packages:
+    packages:
       - make
       - gcc
       - coreutils
@@ -18,10 +20,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - install script"
     ansible.builtin.template:
@@ -36,7 +36,5 @@
       cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       creates: "/usr/local/bin/pfsfuse"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "pfsshell"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

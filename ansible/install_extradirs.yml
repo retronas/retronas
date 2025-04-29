@@ -1,21 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Generic Extra dir(s)"
-    - my_file: "install_romdir"
-
-    - top_level_paths:
-      - { name: "saves",      enabled: yes, systems: yes }
-      - { name: "savestates", enabled: yes, systems: yes }
-      - { name: "bios",       enabled: yes, systems: yes }
-      - { name: "wallpapers", enabled: yes, systems: no }
+    module_name: "extradirs"
 
   tasks:
-    - name: "{{ my_name }}"
-      ansible.builtin.import_tasks: retronas_create_dirs.yml
+    - ansible.builtin.import_role:
+        name: retronas.role.extradirs
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "extradirs"
-    module_state: "present"
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

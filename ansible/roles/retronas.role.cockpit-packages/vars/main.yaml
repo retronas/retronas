@@ -1,0 +1,8 @@
+my_name: "cockpit-packages"
+my_file: "install_cockpit-packages"
+
+package_tools:
+  - lm-sensors
+
+package_data:
+  - cockpit-packages.sh

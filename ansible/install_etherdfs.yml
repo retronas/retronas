@@ -2,10 +2,11 @@
   gather_facts: no
 
   vars:
-    - my_name: "EtherDFS"
-    - my_file: "install_etherdfs"
+    my_name: "EtherDFS"
+    my_file: "install_etherdfs"
+    module_name: "etherdfs"
 
-    - my_packages:
+    packages:
       - make
       - automake
       - autoconf
@@ -15,31 +16,28 @@
       - build-essential
       - coreutils
 
+    paths:
+      - { name: "dos", dest: "{{ retronas_path }}", state: "directory", owner: "{{ retronas_user }}", group: "{{ retronas_group }}", mode: "0755" }
+
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "etherdfs.service", dest: "/usr/lib/systemd/system/" }
+      - { name: "retronas_dos.conf", dest: "/etc/samba/" }
+
+
   tasks:
 
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - create MS-DOS directory"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/dos"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      mode: "0775"
-      state: directory
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - Generate install scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
@@ -47,14 +45,13 @@
       creates: "{{ retronas_root }}/bin/ethersrv"
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - create startup service"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/etherdfs.service.j2
-      dest: /usr/lib/systemd/system/etherdfs.service
-      owner: root
-      group: root
-      mode: 0644
-    notify: "{{ my_name }} - Restart service"
+  - name: "{{ my_name }} - configure includes file"
+    ansible.builtin.ini_file:
+      path: /etc/samba/smb.conf
+      section: dos
+      option: "include"
+      value: "/etc/samba/retronas_dos.conf"
+    notify: "{{ my_name }} - Install Samba"
 
   - name: "{{ my_name }} - enable startup service"
     ansible.builtin.service:
@@ -65,22 +62,15 @@
     with_items:
       - etherdfs
 
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: dos
-      option: "include"
-      value: "/etc/samba/retronas_dos.conf"
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role: 
+      name: retronas.role.samba
+    vars:
+      changed: "{{ install_changed }}"
+    when: install_changed is defined and
+          install_changed is true
 
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{  my_file }}/retronas_dos.conf.j2"
-      dest: /etc/samba/retronas_dos.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -96,13 +86,3 @@
     set_fact:
       install_changed: true
 
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-    
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "etherdfs"
-    module_state: "present"

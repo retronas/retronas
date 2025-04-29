@@ -1,95 +1,34 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_extradirs.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "Recalbox CIFS"
-    - my_file: "install_recalbox_cifs"
-    - rompath: "{{ retronas_path }}/recalbox"
+    my_name: "Recalbox CIFS"
+    my_file: "install_recalbox_cifs"
+    module_name: "recalbox_cifs"
+    system_key: "recalbox"
 
-    - top_level_paths:
+    top_level_paths:
       - { name: "ROMS",  enabled: yes,  generic: "roms",  systems: yes }
       - { name: "SAVES", enabled: yes,  generic: "saves", systems: yes  }
       - { name: "BIOS",  enabled: yes,  generic: "bios",  systems: yes  }
 
   tasks:
 
-  - name: "{{ my_name }} - Include systems map"
-    ansible.builtin.include_vars: "retronas_systems.yml"
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
+    - ansible.builtin.import_role:
+        name: retronas.role.romdir
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ rompath }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    notify: "{{ my_name }} - Install Samba"
+    - ansible.builtin.import_role:
+        name: retronas.role.extradirs
 
-  - name: "{{ my_name }} - build top level share paths"
-    ansible.builtin.file:
-      path: "{{ rompath }}/{{ item.name }}"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
-    with_items: "{{ top_level_paths }}"
-    when: 
-      - item.enabled is true
-    notify: "{{ my_name }} - Install Samba"
+    - ansible.builtin.import_role:
+        name: retronas.role.samba
 
-  - name: "{{ my_name }} - build layout list (set fact)"
-    ansible.builtin.set_fact:
-      path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' ' + retronas_path + '/recalbox/' + item.1.name + '/' + item.0.recalbox + ';' ] }}"
-    loop: "{{ system_map|product(top_level_paths)|list }}"
-    when:
-      - item.1.enabled is true
-      - item.0.recalbox | length > 0
-      - item.1.systems is true
+    - ansible.builtin.import_role:
+        name: retronas.role.samba.system
 
-  - name: "{{ my_name }} - build systems directory layout"
-    ansible.builtin.shell:
-      cmd: "{{ path_list|join('') }}"
-    when: path_list is defined
-    changed_when: false
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure includes file"
-    ansible.builtin.ini_file:
-      path: /etc/samba/smb.conf
-      section: recalbox
-      option: "include"
-      value: "/etc/samba/retronas_recalbox.conf"
-    notify: "{{ my_name }} - Install Samba"
-
-  - name: "{{ my_name }} - configure retro shares"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/retronas_recalbox.conf.j2"
-      dest: /etc/samba/retronas_recalbox.conf
-      owner: root
-      group: root
-      mode: '0644'
-    notify: "{{ my_name }} - Install Samba"
-
-  handlers:
-
-  - name: "{{ my_name }} - Install Samba"
-    ansible.builtin.set_fact:
-      install_changed: true
-
-- ansible.builtin.import_playbook: install_samba.yml
-  vars:
-    changed: "{{ install_changed }}"
-  when: install_changed is defined and
-        install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "recalbox_cifs"
-    module_state: "present"
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

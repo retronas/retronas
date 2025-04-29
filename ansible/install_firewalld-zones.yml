@@ -6,24 +6,25 @@
   gather_facts: no
 
   vars:
-    - my_name: "firewalld-zones"
-    - my_service: firewalld
-    - my_file: "install_{{ my_name }}"
+    my_name: "firewalld-zones"
+    my_service: firewalld
+    my_file: "install_{{ my_name }}"
+    module_name: "firewalld-zones"
 
-    - templates:
+    templates:
       - { name: "retro_to_modern.xml",      sub: "policies",    dest: "/etc/{{ my_service }}/policies",                 force: no }
       - { name: "samba-modern.xml",         sub: "services",    dest: "/etc/{{ my_service }}/services",                 force: no }
       - { name: "ps3netsrv.xml",            sub: "services",    dest: "/etc/{{ my_service }}/services",                 force: no }
       - { name: "modern.xml",               sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no }
       - { name: "retro.xml",                sub: "zones",       dest: "/etc/{{ my_service }}/zones",                    force: no } 
 
-    - paths:
+    paths:
       - { name: "{{ my_service }}",               dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}/policies",      dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}/services",      dest: "/etc",                  state: "directory", mode: "0750" }
       - { name: "{{ my_service }}/zones",         dest: "/etc",                  state: "directory", mode: "0750" }
 
-    - firewalld_rules:
+    firewalld_rules:
       - { zone: "retro", service: "ssh" }
       - { zone: "modern", service: "ssh" }
       - { zone: "retro", service: "cockpit" }
@@ -31,25 +32,11 @@
 
   tasks:
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.sub | default('') }}/{{ item.name }}"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-    notify: "{{ my_name }} - Reload firewalld"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Reload firewalld to pickup the new zones"
     ansible.builtin.service:
@@ -59,23 +46,12 @@
       enabled: yes
       force: yes
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('ssh') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
+
 
   handlers:
   - name: "{{ my_name }} - Reload firewalld"
@@ -87,8 +63,3 @@
     changed: "{{ install_changed }}"
   when: install_changed is defined and
         install_changed is true
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "firewalld-zones"
-    module_state: "present"

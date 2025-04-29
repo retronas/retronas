@@ -1,0 +1,18 @@
+- name: "{{ my_name }} - install prerequisite packages"
+  ansible.builtin.package:
+      name: "{{ package_tools }}"
+      state: latest
+
+- name: "{{ my_name }} - install cockpit packages inplace"
+  ansible.builtin.copy:
+    src: "templates/{{ my_file }}/{{ item }}.j2"
+    dest: "{{ retronas_root }}/scripts/{{ item }}"
+    owner: root
+    group: root
+    mode: 0750
+  with_items:
+    "{{ package_data }}"
+
+- name: "{{ my_name }} - get packages"
+  ansible.builtin.command:
+    cmd: "{{ retronas_root }}/scripts/{{ my_name }}.sh"

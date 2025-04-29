@@ -62,10 +62,8 @@
        name: netatalk
        state: absent
 
-  - name: "{{ my_name }}  - install dependencies"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
   - name: "{{ my_name }} - create install script"
     ansible.builtin.template:

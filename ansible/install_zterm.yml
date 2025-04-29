@@ -2,18 +2,24 @@
 - hosts: localhost
 
   vars:
-    - my_name: "zterm"
-    - my_file: "install_{{ my_name }}"
+    my_name: "zterm"
+    my_file: "install_{{ my_name }}"
+    module_name: "zterm"
+    append_user_group: dialout
 
-    - systemd_units:
+    systemd_units:
       - { name: "zterm", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - make
       - cmake
       - git
       - build-essential
       - lrzsz
+
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "zterm.service", dest: "/usr/lib/systemd/system" }
 
   tasks:
 
@@ -23,41 +29,21 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Generate {{ my_file }} script"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
-    ansible.builtin.user:
-      name: "{{ retronas_user }}"
-      groups: dialout
-      append: yes
+  - ansible.builtin.import_role:
+      name: retronas.role.update-user
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} /opt/zterm/zterm"
 
-  - name: "{{ my_name }} - create startup service(s)"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /usr/lib/systemd/system/{{ item.name }}.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items:
-      "{{ systemd_units }}"
-    notify: "{{ my_name }} - Restart service"
-
   - name: "{{ my_name }} - enable service(s)"
     ansible.builtin.service:
       name: "{{ item.name }}.{{ item.type }}"
@@ -70,16 +56,8 @@
       - item.instance == 'no'
     notify: "{{ my_name }} - Restart service"
 
-  - name: "{{ my_name }} - enable service(s)"
-    ansible.builtin.service:
-      name: "{{ item.name }}.{{ item.type }}"
-      state: "{{ item.state }}"
-      enabled: "{{ item.enabled }}"
-      daemon_reload: yes
-    with_items:
-      "{{ systemd_units }}"
-    when:
-      - item.instance == 'no'
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -105,8 +83,3 @@
     when: 
       - item.1.restart == 'yes'
       - item.1.instance == 'yes'
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "zterm"
-    module_state: "present"

@@ -1,30 +1,29 @@
-# Dependencies
-- ansible.builtin.import_playbook: install_romdir.yml
-- ansible.builtin.import_playbook: install_x11vnc.yml
-
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "assembly64"
-    - my_file: "install_{{ my_name }}"
-    - my_dir: /opt/{{ my_name }}
+    my_name: "assembly64"
+    my_file: "install_{{ my_name }}"
+    my_dir: /opt/{{ my_name }}
+    module_name: "assembly64"
+    module_state: "present"
 
-    - systemd_units:
-      - { name: "{{ my_name }}", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
-
-    - packages:
+    packages:
       - xvfb
       - x11vnc
 
-    - templates:
+    templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}_retronas.sh", dest: "/opt/{{ my_name }}", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system", mode: "0644" }
 
-    - paths:
+    paths:
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       #- { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
+
+    firewalld_ports:
+      - { port: "66000", protocol: tcp}
 
   tasks:
 
@@ -34,19 +33,18 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
-  - name: "{{ my_name }} - paths"
-    ansible.builtin.file:
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0755') }}"
-      state: "{{ item.state|default('directory') }}"
-    with_items: "{{ paths }}"
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
+
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
+
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} daemon-reload" 
 
   - name: "{{ my_name }} - disks symlink"
     ansible.builtin.file:
@@ -54,55 +52,22 @@
       dest: "{{ retronas_path }}/{{ my_name }}"
       state: "link"
 
-  - name: "{{ my_name }} - templates"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.j2"
-      dest: "{{ item.dest }}/{{ item.name }}"
-      owner: "{{ item.owner|default('root') }}"
-      group: "{{ item.group|default('root') }}"
-      mode: "{{ item.mode|default('0644') }}"
-      force: "{{ item.force|default('yes') }}"
-    with_items: "{{ templates }}"
-
   - name: "{{ my_name }} - Install"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ retronas_root}} {{ my_dir }}/{{ my_file }}.sh"
 
-  - name: "{{ my_name }} - create startup service(s) instance"
-    ansible.builtin.template:
-      src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-      dest: /usr/lib/systemd/system/{{ item.name }}@.{{ item.type }}
-      owner: root
-      group: root
-      mode: 0644
-    with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} daemon-reload" 
+  - ansible.builtin.import_role:
+      name: retronas.role.x11vnc
 
+  - name: "{{ my_name }} - firewalld"
+    ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
 
-  #
-  # FIREWALL
-  #
-  - name: "{{ my_name }} - checking firewall rule"
-    ansible.builtin.stat:
-      path: /etc/firewalld/services
-    register: firewalld_services
-
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: retro
-      port: 66000/tcp
-      permanent: true
-      state: enabled
-      immediate: true
-    when: firewalld_services.stat.exists
+  -  ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
     - name: "{{ my_name }} daemon-reload"
       ansible.builtin.systemd:
         daemon_reload: yes
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "assembly64"
-    module_state: "present"

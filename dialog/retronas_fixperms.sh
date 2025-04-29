@@ -8,7 +8,7 @@ source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
 rn_get_dirs() {
-  COUNT=2
+  COUNT=3
   cd "${OLDRNPATH}"
   find . -maxdepth 1 -type d | sed 's#^\./##g' | grep -v ^\.$ | sort | while read PATHITEM
   do
@@ -22,6 +22,7 @@ rn_fix_perms() {
 
   local MENU_ARRAY=(
     1 "Back"
+    all "ALL"
     $(rn_get_dirs)
   )
 

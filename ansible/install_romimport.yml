@@ -1,12 +1,20 @@
+---
 - hosts: localhost
 
   vars:
-    - my_name: "ROM Import"
-    - my_file: "install_romimport"
+    my_name: "ROM Import"
+    my_file: "install_romimport"
+    module_name: "romimport"
     
-    - my_packages:
+    packages:
       - python3
       - git
+
+    paths:
+      - { name: "romimport", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
+    templates:
+      - { name: "romimport.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
 
   tasks:
 
@@ -16,26 +24,14 @@
   - name: "{{ my_name }} - Load RetroNAS Systems"
     ansible.builtin.include_vars: retronas_systems.yml
 
-  - name: "{{ my_name }} - Install build tools"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - build top level"
-    ansible.builtin.file:
-      path: "{{ retronas_path }}/romimport"
-      owner: "{{ retronas_user }}"
-      group: "{{ retronas_group }}"
-      state: directory
-      mode: "0775"
+  - ansible.builtin.import_role:
+      name: retronas.role.paths
 
-  - name: "{{ my_name }} - Generate scripts"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/romimport.sh.j2"
-      dest: "{{ retronas_root }}/scripts/romimport.sh"
-      owner: root
-      group: root
-      mode: "0755"
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "git clone https://github.com/frederic-mahe/Hardware-Target-Game-Database.git"
@@ -48,7 +44,5 @@
     args:
       chdir: "{{ retronas_root}}/bin"
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "romimport"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

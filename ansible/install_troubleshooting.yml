@@ -1,11 +1,13 @@
+---
 - hosts: localhost
   gather_facts: no
 
   vars:
-    - my_name: "troubleshooting"
-    - my_file: "install_troubleshooting"
+    my_name: "troubleshooting"
+    my_file: "install_troubleshooting"
+    module_name: "troubleshooting"
 
-    - my_packages:
+    packages:
       - ioping
       - iotop
       - iperf3
@@ -27,12 +29,8 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ my_packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "troubleshooting"
-    module_state: "present"
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config

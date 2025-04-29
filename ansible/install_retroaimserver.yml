@@ -1,23 +1,27 @@
-# Dependencies
-
+---
 - hosts: localhost
   gather_facts: yes
 
   vars:
-    - my_name: "retroaimserver"
-    - my_file: "install_retroaimserver"
-    - my_dir: "/opt/retro-aim-server"
+    my_name: "retroaimserver"
+    my_file: "install_retroaimserver"
+    my_dir: "/opt/retro-aim-server"
+    module_name: "retroaimserver"
 
-    - systemd_units:
+    systemd_units:
       - { name: "retro-aim-server", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
-    - packages:
+    packages:
       - curl
 
-    - firewalld_rules:
+    templates:
+      - { name: "{{ my_file }}.sh",         dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "retro-aim-server.service", dest: "/etc/systemd/system/" }
+
+    firewalld_rules:
       - { zones: retro, service: retroaimserver }
 
-    - settings_env:
+    settings_env:
       - { regex: "^export OSCAR_HOST=.*", line: "export OSCAR_HOST={{ retronas_net_retro_ip }}" }
       - { regex: "^export DISABLE_AUTH=true", line: "export DISABLE_AUTH=false" }
 
@@ -26,33 +30,17 @@
   - name: "{{ my_name }} - Load RetroNAS config"
     ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Install packages"
-    ansible.builtin.package:
-       name: "{{ packages }}"
-       state: latest
+  - ansible.builtin.import_role:
+      name: retronas.role.package.latest
 
-  - name: "{{ my_name }} - Generate {{ my_file }} script"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ my_file }}.sh.j2"
-      dest: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
-      owner: root
-      group: root
-      mode: 0755
+  - ansible.builtin.import_role:
+      name: retronas.role.templates
+    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - Install from source code"
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
     args:
       creates: "{{ my_dir }}/retro_aim_server"
-
-  - name: "{{ my_name }} - service file"
-    ansible.builtin.template:
-      src: "templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2"
-      dest: "/etc/systemd/system/{{ item.name }}.{{ item.type }}"
-      owner: root
-      group: root
-      mode: 0644
-    with_items: "{{ systemd_units }}"
-    notify: "{{ my_name }} - Restart service"
 
   - name: "{{ my_name }} - enable service(s)"
     ansible.builtin.service:
@@ -87,15 +75,11 @@
       mode: 0644
     when: firewalld_services.stat.exists
 
-  - name: "{{ my_name }} - enable firewall rule"
-    ansible.posix.firewalld:
-      zone: "{{ item.zone | default('retro') }}"
-      service: "{{ item.service | default('retroaimserver') }}"
-      permanent: true
-      state: enabled
-      immediate: true
-    with_items: "{{ firewalld_rules }}"
-    when: firewalld_services.stat.exists
+  - ansible.builtin.import_role:
+      name: retronas.role.firewalld.port
+
+  - ansible.builtin.import_role:
+      name: retronas.role.system-config
 
   handlers:
 
@@ -105,8 +89,3 @@
       state: restarted
       daemon_reload: yes
     with_items: "{{ systemd_units }}"
-
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "retroaimserver"
-    module_state: "present"
