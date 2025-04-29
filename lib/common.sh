@@ -502,12 +502,13 @@ DLG_MENUJ() {
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     declare -a MENU_ARRAY
-    while IFS=";" read -r ITEM
+    for ITEM in ${MENU_DATA[@]}
     do
-        INDEX=$(echo $ITEM    | cut -d"|" -f1 | tr -d "\n" | sed 's/\s$//') 
-        TITLE=$(echo $ITEM    | cut -d"|" -f2 | tr -d "\n" | sed 's/\s$//') 
-        DESC=$(echo $ITEM     | cut -d"|" -f3 | tr -d "\n" | sed 's/\s$//') 
-        TYPE=$(echo $ITEM     | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
+        IFS="|" read -r -a PIECES <<< $ITEM
+        INDEX=${PIECES[0]}
+        TITLE=${PIECES[1]}
+        DESC=${PIECES[2]}
+        TYPE=${PIECES[3]}
 
         [ "${TYPE}"  == "dialog" ] && DESC="${DESC} >>"
         MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
