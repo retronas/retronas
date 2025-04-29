@@ -10,3 +10,4 @@ COMMIT=$(git log --oneline --pretty="format:%h" | grep -B1 $MAIN | head -n1)
 TESTING=$(git log origin/testing --oneline -n1 --pretty="format:%h")
 
 git log --oneline --pretty="format:%s [%an]" --ancestry-path ${COMMIT}..${TESTING}
+git log --oneline --pretty="format:%s [%an]" ${COMMIT} -n1
