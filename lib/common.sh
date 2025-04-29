@@ -475,7 +475,6 @@ RN_DIRECT_STATUS() {
 }
 
 
-
 ###############################################################################
 #
 # DIALOG builder functions
@@ -493,7 +492,7 @@ DLG_MENUJ() {
     local MENU_H=$2
     local MENU_BLURB=$3
 
-    local MENU_DESC="${MENU_BLURB}${IPADDMSGNO}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \

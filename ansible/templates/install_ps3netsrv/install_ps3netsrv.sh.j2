@@ -22,7 +22,7 @@ echo $SOURCECODE
 #curl -OJL "https://github.com/${SOURCECODE}"
 curl -OJL "${SOURCECODE}"
 unzip ps3netsrv*.zip
-cd ps3netsrv*/ps3netsrv
+cd ps3netsrv*/src
 meson buildrelease --buildtype=release
 ninja -C buildrelease
 
