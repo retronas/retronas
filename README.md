@@ -54,8 +54,7 @@ If a system has some sort of network capabilities and an open source service exi
 
 Some of the projects/protocols include are:
 * Samba 4.X - LANMan (NTLMv1, NTLMv2), NetBIOS, CIFS, SMB
-* Netatalk 2.X - Older AppleShare over AppleTalk (and TCP/IP too)
-* Netatalk 3.X - More modern AFP / Apple Filing Protocol over TCP/IP only
+* Netatalk 4.X - AFP / Apple Filing Protocol over AppleTalk and TCP/IP
 * EtherDFS - layer 2 file sharing for MS-DOS
 * FTP - Common file transfer protocol
 * TFTP - Lightweight trivial file transfer protocol
