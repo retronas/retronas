@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "Update",
-        "description": "Please select a tool to update",
+        "description": "Please select an option",
         "id":"update",
         "prompt": "Update",
         "type": "menu",
