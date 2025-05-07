@@ -385,12 +385,11 @@ RN_DOCUMENTATION() {
 # Service status formatting
 #
 RN_SERVICE_STATUS() {
-    source $_CONFIG
     local CMD="$1"
 
     CLEAR
     echo "${CMD}"
-    echo ; $CMD ; echo
+    echo ; eval $CMD ; echo
     #PAUSE
 }
 
@@ -441,7 +440,6 @@ RN_SYSTEMD_STOP() {
 # SYSTEMD
 #
 RN_SYSTEMD() {
-    source $_CONFIG
     local SERVICE="$1"
     local COMMAND="${2:-status}"
 
