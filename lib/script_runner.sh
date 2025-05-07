@@ -19,37 +19,36 @@ VALUE="${2:-}"
 X_SANITIZE=1
 
 # check for static type
-TYPE=$(echo $KEY | cut -c1-2)
+TYPE=${KEY::2}
+SCRIPT=${KEY:2}
 case ${TYPE} in
     s-)
         # STATIC
         SCDIR="${SCDIR}/static"
-        SCRIPT=$( echo $KEY | cut -c3-)
         ;;
     m-)
         # MODAL
         SCDIR="${DIDIR}"
-        SCRIPT=$( echo $KEY | cut -c3-)
         ;;
     i-)
         # DIALOG (input)
         SCDIR="${DIDIR}"
         SCRIPT="d_input"
         X_SANITIZE=0
-        VALUE=$( echo $KEY | cut -c3-)
+        VALUE=${KEY:2}
         ;;
     d-)
         # DIALOGS (auto run)
         SCDIR="${DIDIR}"
         SCRIPT="d_menu"
         X_SANITIZE=0
-        VALUE=$( echo $KEY | cut -c3-)
+        VALUE=${KEY:2}
         ;;
     f-)
         # FORMS
         SCDIR="${DIDIR}"
         PARTS=($(echo "${KEY}" | sed 's/\// /g'))
-        SCRIPT="$(echo ${PARTS[0]} | cut -c3- )"
+        SCRIPT=${PARTS[0]:2}
         X_SANITIZE=0
         VALUE="${PARTS[1]}"
         ;;
@@ -58,7 +57,7 @@ case ${TYPE} in
         SCDIR="${DIDIR}"
         SCRIPT="d_yn"
         X_SANITIZE=0
-        VALUE=$( echo $KEY | cut -c3-)
+        VALUE=${KEY:2}
         ;;
     *)
         # EVERYTHING ELSE

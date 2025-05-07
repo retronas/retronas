@@ -2,9 +2,6 @@
 
 set -u
 
-_CONFIG=/opt/retronas/config/retronas.cfg
-source $_CONFIG
-
 export SC="systemctl --no-pager --full"
 
 ###############################################################################
@@ -661,3 +658,5 @@ DLG_FORM() {
     unset MENU_ARRAY
 
 }
+
+set +u
