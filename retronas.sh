@@ -55,30 +55,28 @@ do
       # display license
       cat $RNDIR/LICENSE
       ;;
+    *)
+      _usage
+      ;;
   esac
 done
 
 #### DO NOT TOUCH THE SYSTEM UNTIL USER AGREES TO DISCLAIMER
-bash $DIDIR/disclaimer.sh
-[ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && EXIT_CANCEL
-
+if [ ! -f $AGREEMENT ]
+then
+  bash $DIDIR/disclaimer.sh
+  [ $? -ne 0 ] && echo "User did not accept terms of use, exiting" && EXIT_CANCEL
+fi
 
 ### ANSIBLE_VARS
 cd $RNDIR
-if [ -f "${ANCFG}" ]
-then
-  echo "Config file exists, not creating it"
-else
-  echo "Config file missing, creating it"
-  cp "${ANCFG}.default" "${ANCFG}"
-fi
-source $_CONFIG
-
+[ -f "${ANCFG}" ] && cp "${ANCFG}.default" "${ANCFG}"
 #
 # MIGRATIONS
 #
-bash ${PCHDIR}/update-retronas_vars.sh
 bash ${PCHDIR}/install-jq.sh
+bash ${PCHDIR}/update-retronas_vars.sh
+bash ${PCHDIR}/new-startup-file.sh
 #
 # END MIGRATIONS
 #
@@ -92,29 +90,9 @@ export LANG=$(echo $LANG | sed -r 's/(\.| )UTF(-?)8//gi')
 ### DIALOG display patch for NCURSES UTF-8, might cause other issues with other tools
 export NCURSES_NO_UTF8_ACS=1
 
-### check default user exists
-id $OLDRNUSER &>/dev/null
-if [ $? -ne 0 ]
-then
-  echo -e "The currently configured USER $OLDRNUSER does not exist on this system you will now be prompted to update the config"
-  PAUSE
-  cd $DIDIR
-  bash d_input.sh update-user
-fi
-
-### check default group exists
-getent group $OLDRNGROUP &>/dev/null
-if [ $? -ne 0 ]
-then
-  echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
-  PAUSE
-  cd $DIDIR
-  bash d_input.sh update-group
-fi
-
 
 ### Manage install through git
-if [ $DISABLE_GITOPS -eq 0 ] && [ ! -f ${USER_CONFIG}/disable_gitops ]
+if [ $DISABLE_GITOPS -eq 0 ] && [ ! -f ${USER_CONFIG}/disable_gitops ] && [ -f ${RNDIR}/.git/config ]
 then
   echo "Fetching latest RetroNAS scripts..."
   git config pull.rebase false
@@ -126,9 +104,8 @@ then
     echo "Updating local documentation..."
     cd $RNDOC
     git pull
-    cd $RNDIR
+    cd -
   fi
-
 else
   echo "Skipping git updates, git operations were disabled"
 fi
@@ -149,8 +126,6 @@ then
   echo "2) vt100 (best for telnet and retro computers)"
   echo
   read -r $TCHOICE -t 5 -n 1 -p "Please choose: "
-else
-  echo "We already know your TERM so moving on"
 fi
 
 case "${TCHOICE}" in
@@ -163,9 +138,24 @@ case "${TCHOICE}" in
     ;;
 esac
 
-bash ${PCHDIR}/new-startup-file.sh
-
 ### Start RetroNAS
 echo "Running RetroNAS..."
 cd $DIDIR
+
+### check default user exists
+if ! id $OLDRNUSER &>/dev/null
+then
+  echo -e "The currently configured USER $OLDRNUSER does not exist on this system you will now be prompted to update the config"
+  PAUSE
+  bash d_input.sh update-user
+fi
+
+### check default group exists
+if ! getent group $OLDRNGROUP &>/dev/null
+then
+  echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
+  PAUSE
+  bash d_input.sh update-group
+fi
+
 bash d_menu.sh main
