@@ -41,5 +41,12 @@ fi
 
 meson setup build $OPTIONS
 meson compile -C build
-sudo meson install -C build
 
+if [ $? -eq 0 ]
+then
+  sudo meson install -C build
+  exit(0)
+fi
+
+echo "Build failed! exiting"
+exit(1)
