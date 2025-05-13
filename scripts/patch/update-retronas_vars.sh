@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
@@ -19,10 +20,10 @@ update_config() {
 
   if [ -z "${CHECK}" ]
   then
-    if ! grep "${MATCH}" ${ANCFG} > /dev/null
+    if ! awk "/^${MATCH}/" ${ANCFG} &>/dev/null
     then
       # look up defaults
-      if grep "${MATCH}" ${ANDCFG} > /dev/null
+      if awk "/^${MATCH}/" ${ANDCFG} &>/dev/null
       then
         VALUE=$(awk "/^${MATCH}:/{gsub(/\"/,\"\");print \$2}" ${ANDCFG} )
         echo "${MATCH}: \"${VALUE}\"" >> ${ANCFG}
@@ -39,10 +40,10 @@ update_config() {
   fi
 }
 
-ETH_DEV=$(ip -4 -br a | grep -E "^e[nt]" | awk '{print $1}' | head -n1)
-ETH_IP=$(ip -4 -br a show dev $ETH_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
-WL_DEV=$(ip -4 -br a | grep -E "^wl" | awk '{print $1}' | head -n1)
-WL_IP=$(ip -4 -br a show dev $WL_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
+ETH_DEV=$(ip -4 -br a | awk '/^e[nt]/{print $1}' | head -n1)
+[ ! -z $ETH_DEV ] && ETH_IP=$(ip -4 -br a show dev $ETH_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
+WL_DEV=$(ip -4 -br a | awk '/^wl/{print $1}' | head -n1)
+[ ! -z $WL_DEV ] && WL_IP=$(ip -4 -br a show dev $WL_DEV | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
 
 #########################################################################################################
 #            |CHECK                  |MATCH                                      |FORCE    |VALUE

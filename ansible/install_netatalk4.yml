@@ -38,6 +38,7 @@
       - libtirpc-dev
       - po4a
       - libmptcpwrap0
+      - libiniparser-dev
 
     packages_debian:
         debian11:

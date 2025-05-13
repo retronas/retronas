@@ -2,9 +2,6 @@
 
 set -u
 
-_CONFIG=/opt/retronas/config/retronas.cfg
-source $_CONFIG
-
 export SC="systemctl --no-pager --full"
 
 ###############################################################################
@@ -151,9 +148,10 @@ READ_MENU_TDESC() {
     fi
     local IFS=$'\n'
 
-    export MENU_TNAME=$(echo $MENU_TDESC_DATA | cut -d";" -f1)
+    IFS=";" read -r -a PIECES <<< ${MENU_TDESC_DATA}
+    export MENU_TNAME=${PIECES[0]}
     # eval ... yes i'm so terribly sorry
-    export MENU_BLURB=$(eval "echo $(echo $MENU_TDESC_DATA | cut -d";" -f2- | sed 's/|/\\\\n/g')")
+    export MENU_BLURB=$(eval "echo $(echo ${PIECES[@]:1} | sed 's/|/\\\\n/g')" )
 }
 
 #
@@ -199,10 +197,10 @@ READ_MENU_COMMAND() {
         MENU_DATA=$(<${RNJSON}/main.json jq -r ".menu.items[] | select(.index == \"${MENU_CHOICE}\") | \"\(.type)|\(.command)|\(.args)\"")
     fi
 
-    local MENU_TYPE=$(echo -e "${MENU_DATA}" | cut -d"|" -f1)
-    local MENU_SELECT=$(echo -e "${MENU_DATA}" | cut -d"|" -f2)
-    local MENU_ARGS=$(echo -e "${MENU_DATA}" | cut -d"|" -f3-)
-
+    IFS="|" read -r -a PIECES <<< ${MENU_DATA}
+    local MENU_TYPE=${PIECES[0]}
+    local MENU_SELECT=${PIECES[1]}
+    local MENU_ARGS=${PIECES[@]:2}
 
     CLEAR
     if [ ! -z "${MENU_SELECT}" ] && [ "${MENU_SELECT}" != "null" ]
@@ -387,12 +385,11 @@ RN_DOCUMENTATION() {
 # Service status formatting
 #
 RN_SERVICE_STATUS() {
-    source $_CONFIG
     local CMD="$1"
 
     CLEAR
     echo "${CMD}"
-    echo ; $CMD ; echo
+    echo ; eval $CMD ; echo
     #PAUSE
 }
 
@@ -443,7 +440,6 @@ RN_SYSTEMD_STOP() {
 # SYSTEMD
 #
 RN_SYSTEMD() {
-    source $_CONFIG
     local SERVICE="$1"
     local COMMAND="${2:-status}"
 
@@ -474,7 +470,6 @@ RN_DIRECT_STATUS() {
 }
 
 
-
 ###############################################################################
 #
 # DIALOG builder functions
@@ -492,7 +487,7 @@ DLG_MENUJ() {
     local MENU_H=$2
     local MENU_BLURB=$3
 
-    local MENU_DESC="${MENU_BLURB}${IPADDMSGNO}"
+    local MENU_DESC="${IPADDMSGNO}${MENU_BLURB}"
 
     DIALOG=(dialog \
             --backtitle "${APPNAME}" \
@@ -502,18 +497,17 @@ DLG_MENUJ() {
             --menu "$MENU_DESC" ${MW} ${MH} ${MENU_H})
 
     declare -a MENU_ARRAY
-    while IFS=";" read -r ITEM
+    for ITEM in ${MENU_DATA[@]}
     do
-        INDEX=$(echo $ITEM    | cut -d"|" -f1 | tr -d "\n" | sed 's/\s$//') 
-        TITLE=$(echo $ITEM    | cut -d"|" -f2 | tr -d "\n" | sed 's/\s$//') 
-        DESC=$(echo $ITEM     | cut -d"|" -f3 | tr -d "\n" | sed 's/\s$//') 
-        TYPE=$(echo $ITEM     | cut -d"|" -f4 | tr -d "\n" | sed 's/\s$//')
+        IFS="|" read -r -a PIECES <<< $ITEM
+        INDEX=${PIECES[0]}
+        TITLE=${PIECES[1]}
+        DESC=${PIECES[2]}
+        TYPE=${PIECES[3]}
 
         [ "${TYPE}"  == "dialog" ] && DESC="${DESC} >>"
         MENU_ARRAY+=(${INDEX} "${TITLE} - ${DESC}")
-
-
-    done < <(echo "${MENU_DATA[@]}")
+    done
 
     export CHOICE=$("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty)
     unset MENU_ARRAY
@@ -662,3 +656,5 @@ DLG_FORM() {
     unset MENU_ARRAY
 
 }
+
+set +u

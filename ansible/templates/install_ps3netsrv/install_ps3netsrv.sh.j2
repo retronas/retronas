@@ -22,15 +22,22 @@ echo $SOURCECODE
 #curl -OJL "https://github.com/${SOURCECODE}"
 curl -OJL "${SOURCECODE}"
 unzip ps3netsrv*.zip
-cd ps3netsrv*/ps3netsrv
+cd ps3netsrv*/src
 meson buildrelease --buildtype=release
 ninja -C buildrelease
 
-echo "Moving binary to RetroNAS bin dir..."
-mkdir -p "${BINDIR}" 2>/dev/null
-mv -vf buildrelease/ps3netsrv "${BINDIR}"/
+if [ $? -eq 0 ]
+then
+  echo "Moving binary to RetroNAS bin dir..."
+  mkdir -p "${BINDIR}" 2>/dev/null
+  mv -vf buildrelease/ps3netsrv "${BINDIR}"/
 
-echo "Cleaning up..."
-rm -rf "${SRCDIR}"
+  echo "Cleaning up..."
+  rm -rf "${SRCDIR}"
 
-echo "All done!"
+  echo "All done!"
+  exit(0)
+fi
+
+echo "Build failed! exiting"
+exit(1)

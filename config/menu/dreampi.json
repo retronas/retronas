@@ -21,7 +21,7 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install dreampi",
+                "description": "Install dreampi (Kazade version)",
                 "id":"dreampi",
                 "prompt": "",
                 "type": "install",

@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "EXPERIMENTAL",
-        "description": "WARNING these tools are EXPERIMENTAL, may break your system or destroy your data!||Do not use these unless you are comfortable with losing everthing",
+        "description": "WARNING these tools are EXPERIMENTAL, may break your system or destroy your data!||Do not use these unless you are comfortable with losing everything",
         "id":"experimental",
         "prompt": "Install",
         "type": "menu",
