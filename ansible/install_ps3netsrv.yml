@@ -82,7 +82,7 @@
       state: directory
       mode: "0775"
     notify: "{{ my_name }} - Restart service"
-      
+
   - name: "{{ my_name }} - build layout"
     ansible.builtin.file:
       src: "../../roms/{{ item.src }}"

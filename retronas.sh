@@ -70,7 +70,7 @@ fi
 
 ### ANSIBLE_VARS
 cd $RNDIR
-[ -f "${ANCFG}" ] && cp "${ANCFG}.default" "${ANCFG}"
+[ ! -f "${ANCFG}" ] && cp "${ANCFG}.default" "${ANCFG}"
 #
 # MIGRATIONS
 #

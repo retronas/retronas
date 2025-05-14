@@ -100,8 +100,8 @@
 
   - name: "{{ my_name }} - remove package-based Netatalk"
     ansible.builtin.package:
-       name: netatalk
-       state: absent
+      name: netatalk
+      state: absent
 
   - name: "{{ my_name }} - remove old service files"
     ansible.builtin.stat:
@@ -131,15 +131,18 @@
 
   - name: "{{ my_name }} - Install build tools (debian)"
     ansible.builtin.package:
-       name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
-       state: latest
+      name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
+      state: latest
     when: ansible_distribution == 'Debian'
 
   - name: "{{ my_name }} - Install build tools (ubuntu)"
-    ansible.builtin.package:  
-       name: "{{ packages_ubuntu }}"
-       state: latest
+    ansible.builtin.package:
+      name: "{{ packages_ubuntu }}"
+      state: latest
     when: ansible_distribution == 'Ubuntu'
+
+  - ansible.builtin.import_role:
+      name: retronas.role.romdir
 
   - ansible.builtin.import_role:
       name: retronas.role.paths
@@ -152,7 +155,7 @@
     ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
   - name: "{{ my_name }} - configure"
-    ansible.builtin.ini_file: 
+    ansible.builtin.ini_file:
       dest: /opt/retronas/bin/netatalk4/etc/afp.conf
       section: "{{ item.section }}"
       option: "{{ item.option }}"
