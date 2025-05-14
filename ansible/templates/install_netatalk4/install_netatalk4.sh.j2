@@ -24,6 +24,8 @@ git checkout $(git describe --tags --abbrev=0 | grep netatalk-4 | tail -n1)
 OPTIONS=""
 OPTIONS+=" -Dprefix=${IDIR}"
 OPTIONS+=" -Dwith-appletalk=true"
+OPTIONS+=" -Dwith-zeroconf=true"
+OPTIONS+=" -Dwith-spotlight=true"
 OPTIONS+=" -Dwith-init-style=systemd"
 OPTIONS+=" -Dwith-cracklib=true"
 OPTIONS+=" -Dwith-krbV-uam=true"

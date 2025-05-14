@@ -9,36 +9,37 @@
 
     packages:
       - avahi-daemon
-      - build-essential
-      - meson
-      - ninja-build
+      - avahi-utils
       - bison
+      - build-essential
+      - cmark
       - flex
-      - libevent-dev
-      - libssl-dev
-      - libgcrypt-dev
-      - libkrb5-dev
-      - libpam0g-dev
-      - libwrap0-dev
-      - libdb-dev
-      - libtdb-dev
-      - libavahi-client-dev
       - libacl1-dev
-      - libldap2-dev
+      - libavahi-client-dev
+      - libcmark-dev
       - libcrack2-dev
-      - systemtap-sdt-dev
+      - libdb-dev
       - libdbus-1-dev
       - libdbus-glib-1-dev
+      - libevent-dev
+      - libgcrypt-dev
       - libglib2.0-dev
-      - libio-socket-inet6-perl
-      - tracker
-      - cmark
-      - libcmark-dev
-      - libtirpc3
-      - libtirpc-dev
-      - po4a
-      - libmptcpwrap0
       - libiniparser-dev
+      - libio-socket-inet6-perl
+      - libkrb5-dev
+      - libldap2-dev
+      - libmptcpwrap0
+      - libpam0g-dev
+      - libssl-dev
+      - libtdb-dev
+      - libtirpc-dev
+      - libtirpc3
+      - libwrap0-dev
+      - meson
+      - ninja-build
+      - po4a
+      - systemtap-sdt-dev
+      - tracker
 
     packages_debian:
         debian11:
@@ -58,7 +59,7 @@
       - atalkd
       - netatalk
 
-    config_settings:
+    afp_settings:
       - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
       - { section: "Global", option: "hostname", value: "retroafp" }
       - { section: "Global", option: "mimic model", value: "PowerMac" }
@@ -69,7 +70,11 @@
       - { section: "Global", option: "appletalk", value: "yes" }
       - { section: "Global", option: "spotlight", value: "yes" }
       - { section: "Global", option: "legacy icon", value: "globe" }
-      - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
+    #  - { section: "Global", option: "include", value: "/opt/retronas/bin/netatalk4/etc/retronas.conf" }
+      - { section: "retronas", option: "path", value: "{{ retronas_path }}" }
+      - { section: "retronas", option: "rwlist", value: "{{ retronas_user }}" }
+      - { section: "retronas", option: "rolist", value: "guest" }
+      - { section: "retronas", option: "follow symlinks", value: "yes" }
 
     paths:
       - { name: "netatalk4", dest: "/opt/retronas/bin", mode: '0755'  }
@@ -77,7 +82,7 @@
 
     templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755' }
-      - { name: "retronas.conf", dest: "/opt/retronas/bin/netatalk4/etc" }
+    #  - { name: "retronas.conf", dest: "/opt/retronas/bin/netatalk4/etc" }
 
     old_services:
       - { name: "atalkd.service", dest: "/etc/systemd/system"}
@@ -160,8 +165,14 @@
       section: "{{ item.section }}"
       option: "{{ item.option }}"
       value: "{{ item.value }}"
-    with_items: "{{ config_settings }}"
+    with_items: "{{ afp_settings }}"
     notify: "{{ my_name }} - Restart service"
+
+  - name: "{{ my_name }} - atalkd"
+    ansible.builtin.lineinfile:
+      path: /opt/retronas/bin/netatalk4/etc/atalkd.conf
+      regexp: "^{{ ansible_default_ipv4.interface }}.*"
+      line: "{{ ansible_default_ipv4.interface }} -router -phase 2 -net 1 -zone \"retroafp\""
 
   - name: "{{ my_name }} - enable startup services"
     ansible.builtin.service:
