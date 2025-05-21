@@ -12,7 +12,7 @@ rn_get_dirs() {
   cd "${OLDRNPATH}"
   find . -maxdepth 1 -type d | sed 's#^\./##g' | grep -v ^\.$ | sort | while read PATHITEM
   do
-    echo "${PATHITEM}" "${PATHITEM}"
+    printf "%s\n%s\n" "${PATHITEM}" "${PATHITEM}"
     COUNT=$((${COUNT}+1))
   done
 }
