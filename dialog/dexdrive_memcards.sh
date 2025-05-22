@@ -7,9 +7,6 @@ source $_CONFIG
 source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
-## If this is run as root, switch to our RetroNAS user
-## Manifests and cookies stored in ~/.gogrepo
-DROP_ROOT
 CLEAR
 
 DEXEXT="*.mc*"

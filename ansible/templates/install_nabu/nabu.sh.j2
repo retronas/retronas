@@ -11,7 +11,4 @@ cd $BINDIR
 LIB=libdl.so
 [ ! -f ${LIB} ] && ln -s /lib/x86_64-linux-gnu/${LIB}.2 ${LIB}
 
-
-DROP_ROOT
-
-$SUCOMMAND ./$BIN
+DROP_ROOT "./$BIN"

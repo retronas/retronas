@@ -16,7 +16,6 @@ rn_menu() {
 
 }
 
-DROP_ROOT
 CLEAR
 
 while true

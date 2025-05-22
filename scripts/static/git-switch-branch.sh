@@ -14,8 +14,7 @@ SELECT_BRANCH() {
     git fetch --prune origin &> /dev/null
 
     PS3="Please select a branch ($OLDRNBRANCH): "
-    BRANCHES="$(git branch --remotes | awk -F'/' '!/HEAD/{print $2}' ) exit"
-    select BRANCH in $BRANCHES
+    select BRANCH in $(git branch --remotes | awk -F'/' '!/HEAD/{print $2}' ) exit
     do  
 
     [ $BRANCH == "exit" ] && echo "Exiting..." && exit 0
@@ -40,5 +39,5 @@ SELECT_BRANCH() {
     esac
     done
 }
-DROP_ROOT
+
 SELECT_BRANCH

@@ -76,6 +76,5 @@ rn_tcpser_write_envfile() {
 
 }
 
-DROP_ROOT
 rn_tcpser_edit
 

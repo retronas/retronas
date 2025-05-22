@@ -5,13 +5,12 @@ source ${LIBDIR}/common.sh
 
 ## If this is run as root, switch to our RetroNAS user
 ## Manifests and cookies stored in ~/.gogrepo
-DROP_ROOT
 CLEAR
 
 ## Script Globals
 RNUDIR=$( getent passwd | grep ^${OLDRNUSER}\: | awk -F ':' '{print $6}' )
 RNUGOGREPO=$RNUDIR/.gogrepo
-GOGREPO="${SUCOMMAND} /opt/retronas/bin/gogrepo/gogrepo.py"
+GOGREPO="/opt/retronas/bin/gogrepo/gogrepo.py"
 GOGDEPO="{{ retronas_path }}/gog"
 GOGMAN=${RNUDIR}/.gogrepo/gog-manifest.dat
 
@@ -40,18 +39,18 @@ function header {
 
 function update {
     header "Refreshing GOG manifest..."
-    $GOGREPO update ${@}
+    DROP_ROOT $GOGREPO update ${@}
 }
 
 function login {
     header "Initiating GOG login"
     header "Have your GOG username and password ready"
-    $GOGREPO login
+    DROP_ROOT $GOGREPO login
 }
 
 function download {
     header "Downloading/updating games..."
-    $GOGREPO download ${@} "${GOGDEPO}"
+    DROP_ROOT $GOGREPO download ${@} "${GOGDEPO}"
 }
 
 function get_os_list {

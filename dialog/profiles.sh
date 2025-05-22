@@ -9,8 +9,6 @@ source ${LIBDIR}/common.sh
 PROFILED="${OLDRNPATH}/config"
 
 cd ${DIDIR}
-
-DROP_ROOT
 CLEAR
 
 if [ ! -d "${PROFILED}" ]

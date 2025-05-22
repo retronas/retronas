@@ -31,5 +31,4 @@ rn_dexdrive_serial_edit() {
 
 }
 
-DROP_ROOT
 rn_dexdrive_serial_edit

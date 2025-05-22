@@ -42,8 +42,8 @@ rn_zterm_write_config() {
     sed -i -r "s#^SPEED.+#SPEED=${DEVSTR}${CHOICE[1]}#" $OUTDIR/zconfig
     sed -i -r "s#^ADDN.*#ADDN=${DEVSTR}${CHOICE[2]}#" $OUTDIR/zconfig
     sed -i -r "s#^Condition.+#ConditionPathExists=${DEVSTR}${CHOICE[0]}#" /usr/lib/systemd/system/zterm.service
-    sudo systemctl daemon-reload
-    sudo systemctl restart zterm.service
+    systemctl daemon-reload
+    systemctl restart zterm.service
   else
     echo "No change" 
     PAUSE
@@ -51,5 +51,4 @@ rn_zterm_write_config() {
   EXIT_OK
 }
 
-DROP_ROOT
 rn_zterm_edit

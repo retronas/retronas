@@ -4,8 +4,6 @@ _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
 
-DROP_ROOT
-
 MODE=${1:-config}
 SESSION=mtcp-netdrive
 
@@ -15,13 +13,13 @@ cd /opt/mtcp-netdrive/
 
 case $MODE in
     console)
-        $SUCOMMAND /usr/bin/screen -x $SESSION
+        DROP_ROOT /usr/bin/screen -x $SESSION
         ;;
     start)
-        $SUCOMMAND /usr/bin/screen -dmS $SESSION ./netdrive -log_file /opt/mtcp-netdrive/log.txt serve -image_dir /data/retronas/roms/microsoft/dos/
+        DROP_ROOT /usr/bin/screen -dmS $SESSION ./netdrive -log_file /opt/mtcp-netdrive/log.txt serve -image_dir /data/retronas/roms/microsoft/dos/
         ;;
     stop)
-        $SUCOMMAND /usr/bin/screen -S $SESSION -X stuff "quit^M"
+        DROP_ROOT /usr/bin/screen -S $SESSION -X stuff "quit^M"
         ;;
     *)
         exit

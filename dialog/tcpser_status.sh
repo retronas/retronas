@@ -24,7 +24,5 @@ rn_tcpser_status() {
 }
 
 
-DROP_ROOT
 CLEAR
-
 rn_tcpser_status "${1}"

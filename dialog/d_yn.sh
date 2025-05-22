@@ -7,7 +7,6 @@ source ${LIBDIR}/common.sh
 MENU_NAME=$1
 cd ${DIDIR}
 
-DROP_ROOT
 CLEAR
 
 rn_dialog_yn() {

@@ -17,7 +17,6 @@ RN_LOG() {
     echo "${1}"
 }
 
-
 ###############################################################################
 #
 # Package
@@ -84,14 +83,8 @@ CONFIRM_VALUE() {
 ###############################################################################
 
 ## If this is run as root, switch to our RetroNAS user
-## Manifests and cookies stored in ~/.gogrepo
 DROP_ROOT() {
-    if [ "${USER}" == "root" ]
-    then
-        export SUCOMMAND="sudo -u ${OLDRNUSER}"
-    else
-        export SUCOMMAND=""
-    fi
+  sudo -u ${OLDRNUSER} -s $*
 }
 
 ### Check if we have the correct privs for op
@@ -560,7 +553,6 @@ DLG_YN() {
 
     "${DIALOG[@]}" 2>&1 >/dev/tty
     export CHOICE=$?
-
 }
 
 #
@@ -581,7 +573,6 @@ DLG_DSELECT() {
     --dselect "${MENU_BLURB}" ${MW} ${MH})
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
-
 }
 
 #
@@ -603,7 +594,6 @@ DLG_INPUTBOX() {
     --inputbox "${MENU_BLURB}" ${MW} ${MH} $MENU_INIT)
 
     export CHOICE=$("${DIALOG[@]}" 2>&1 >/dev/tty)
-
 }
 
 #
@@ -628,8 +618,6 @@ DLG_PASSWORD() {
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
     unset MENU_ARRAY
-
-
 }
 
 
@@ -654,7 +642,6 @@ DLG_FORM() {
 
     export CHOICE=($("${DIALOG[@]}" "${MENU_ARRAY[@]}" 2>&1 >/dev/tty))
     unset MENU_ARRAY
-
 }
 
 set +u

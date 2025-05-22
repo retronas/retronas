@@ -5,9 +5,7 @@ source $_CONFIG
 source ${LIBDIR}/common.sh
 cd ${DIDIR}
 
-## If this is run as root, switch to our RetroNAS user
 ## Manifests and cookies stored in ~/.gogrepo
-DROP_ROOT
 CLEAR
 
 rn_gog_chooser() {
@@ -43,7 +41,7 @@ rn_gog_chooser() {
     06)
       # sync games list
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS} -lang ${OLDGOGLANG}
+      DROP_ROOT ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       PAUSE
       ;;
     07)
@@ -54,22 +52,22 @@ rn_gog_chooser() {
       then
         GOGGAME=$( cat ${TDIR}/rn_gog_game )
         CLEAR
-        ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME} -lang ${OLDGOGLANG}
-        ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
+        DROP_ROOT ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME} -lang ${OLDGOGLANG}
+        DROP_ROOT ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
         PAUSE
       fi
       ;;
     08)
       # download all games
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
+      DROP_ROOT ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
     09)
       # sync and download
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -lang ${OLDGOGLANG}
-      ${SUCOMMAND} ${SCDIR}/gogrepo_download.sh
+      DROP_ROOT ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -lang ${OLDGOGLANG}
+      DROP_ROOT ${SCDIR}/gogrepo_download.sh
       PAUSE
       ;;
     *)
@@ -123,13 +121,13 @@ rn_gog_auth() {
     02)
       # login
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_login.sh
+      DROP_ROOT ${SCDIR}/gogrepo_login.sh
       PAUSE
       ;;
     03)
       # import cookies
       CLEAR
-      ${SUCOMMAND} ${SCDIR}/gogrepo_import-cookies.sh
+      DROP_ROOT ${SCDIR}/gogrepo_import-cookies.sh
       PAUSE
       ;;
     *)

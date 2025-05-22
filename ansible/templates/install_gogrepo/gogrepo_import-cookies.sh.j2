@@ -9,7 +9,6 @@ source ${LIBDIR}/common.sh
 
 ## If this is run as root, switch to our RetroNAS user
 ## Manifests and cookies stored in ~/.gogrepo
-DROP_ROOT
 CLEAR
 
 GOGREPODIR=$HOME/.gogrepo
@@ -28,10 +27,11 @@ do
     echo -n "Looking for $COOKIES"
     if [ -f "${COOKIES}" ]
     then
-        echo "... Found, importing into ${GOGREPODIR}"
-        mv -f "${COOKIES}" "${GOGREPODIR}/gog-cookies.dat"
-        chmod 640 "${GOGREPODIR}/gog-cookies.dat"
-        break
+        DROP_ROOT \
+          echo "... Found, importing into ${GOGREPODIR}"; \
+          mv -f "${COOKIES}" "${GOGREPODIR}/gog-cookies.dat"; \
+          chmod 640 "${GOGREPODIR}/gog-cookies.dat"; \
+          break
     else
         echo "... Not Found"
     fi

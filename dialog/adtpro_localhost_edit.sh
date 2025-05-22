@@ -42,7 +42,7 @@ rn_adtpro_write_config() {
     sed -i -r "s#^SerialIPPort.+#SerialIPPort=${DEVSTR}${CHOICE[1]}#" ${SERVICE_CONFIG}
 
     #sed -i -r "s#^Condition.+#ConditionPathExists=${DEVSTR}${CHOICE[0]}#" /usr/lib/systemd/system/adtpro.service
-    sudo systemctl daemon-reload
+    systemctl daemon-reload
 
     echo "Config file updated, now you can (re)start the service from the Serial menu"
     PAUSE
@@ -53,5 +53,4 @@ rn_adtpro_write_config() {
   EXIT_OK
 }
 
-DROP_ROOT
 rn_adtpro_serial_edit
