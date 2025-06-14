@@ -14,7 +14,16 @@ do
   esac
 done
 
-MYURL="http://$(ip -4 -br a show dev {{ retronas_net_3dsqr_interface }} | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)/3ds"
+MYIP=$(ip -4 -br a show dev {{ retronas_net_3dsqr_interface }} | awk '!/127/{sub(/\/[0-9].+$/, ""); print $3}' | head -n1)
+if [ -z "${MYIP}" ]
+then 
+  echo "Failed to find ip address from interface, fix interface in retronas config"
+  echo "Press any key to continue"
+  read -s
+  exit 1
+fi
+
+MYURL="http://${MYIP}/3ds"
 umask 002
 
 generate_qr () {
