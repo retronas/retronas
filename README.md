@@ -13,7 +13,7 @@ Branches
 - `testing`: new complete work, needs to be tested further
 - `main`: considered stable
 
-Users can opt in/out of these brances using the `Branch` tool available in the Update menu. It is suggested you only opt into the `testing` branch if you wish you provide feedback on new features we consider complete, are having issues with a particular tool or are told in an issue that a fix has been pushed to this branch. Opting into a `feature_name` branch will not receive any support as the work is not considered complete until it has moved to `testing`.
+Users can opt in/out of these branches using the `Branch` tool available in the Update menu. It is suggested you only opt into the `testing` branch if you wish you provide feedback on new features we consider complete, are having issues with a particular tool or are told in an issue that a fix has been pushed to this branch. Opting into a `feature_name` branch will not receive any support as the work is not considered complete until it has moved to `testing`.
 
 Please read the [Wiki](https://github.com/retronas/retronas/wiki) to see what's going on.
 
