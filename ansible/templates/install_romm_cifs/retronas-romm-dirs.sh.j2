@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Set world readable/executable umask
+umask 0022
+
+# Set the install dir
+IDIR="{{ retronas_root }}/bin/romdirflattener"
+
+# make/clean the source build location
+mkdir -p "{{ retronas_root }}/src"
+cd "{{ retronas_root }}/src"
+rm -rf romdirflattener
+
+# Clone the source code from GitHub
+git clone https://github.com/minorOffense/romdirflattener.git romdirflattener
+chmod a+x romdirflattener/flatten-romdir.sh

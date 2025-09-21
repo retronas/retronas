@@ -964,6 +964,17 @@
         "group": "",
         "command": "zterm",
         "args": ""
+      },
+      {
+        "index": "89",
+        "title": "RomM",
+        "description": "RomM CIFS config",
+        "id": "romm_cifs",
+        "prompt": "",
+        "type": "dialog",
+        "group": "samba",
+        "command": "romm_cifs",
+        "args": ""
       }
     ]
   }
