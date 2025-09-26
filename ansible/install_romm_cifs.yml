@@ -33,6 +33,8 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
+      vars:
+        nolink: "{{ nolink }}"
 
     - name: "Import system-config role"
       ansible.builtin.import_role:
