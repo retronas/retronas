@@ -32,7 +32,7 @@
         item.0[system_key] is defined and
         item.0[system_key] | length > 0 and
         item.1.systems is true and
-        nolink is not defined
+        (nolink | default(false)) is not defined
 
 - name: "{{ my_name }} - build layout list (set fact)"
   ansible.builtin.set_fact:
@@ -41,7 +41,7 @@
   when: top_level_paths is not defined and
         item[system_key] is defined and
         item[system_key] | length > 0 and
-        nolink is not defined
+        (nolink | default(false)) is not defined
 
 - name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
@@ -59,7 +59,7 @@
   loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
   when: internal_symlinks is defined and
         top_level_paths is defined and
-        nolink is not defined
+        (nolink | default(false)) is not defined
 
 - name: "{{ my_name }} - build internal directory layout with symlinks"
   ansible.builtin.file:
@@ -71,7 +71,7 @@
   loop: "{{ internal_symlinks }}"
   when: internal_symlinks is defined and
         top_level_paths is not defined and
-        nolink is not defined
+        (nolink | default(false)) is not defined
 
 - name: "{{ my_name }} - configure includes file"
   ansible.builtin.ini_file:
