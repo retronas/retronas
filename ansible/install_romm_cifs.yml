@@ -7,9 +7,10 @@
     my_file: "install_romm_cifs"
     module_name: "romm_cifs"
     system_key: "romm"
+    nolink: true
 
     top_level_paths:
-      - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes , nolink: true }
+      - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
