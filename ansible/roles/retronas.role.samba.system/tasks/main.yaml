@@ -23,31 +23,31 @@
   when: top_level_paths is defined and
         item.enabled is true
 
-# - name: "{{ my_name }} - build layout list (set fact) (top level paths)"
-#   ansible.builtin.set_fact:
-#     path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
-#   loop: "{{ system_map|product(top_level_paths)|list }}"
-#   when: top_level_paths is defined and
-#         item.1.enabled is true and
-#         item.0[system_key] is defined and
-#         item.0[system_key] | length > 0 and
-#         item.1.systems is true and
-#         nolink is not defined
+- name: "{{ my_name }} - build layout list (set fact) (top level paths)"
+  ansible.builtin.set_fact:
+    path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
+  loop: "{{ system_map|product(top_level_paths)|list }}"
+  when: top_level_paths is defined and
+        item.1.enabled is true and
+        item.0[system_key] is defined and
+        item.0[system_key] | length > 0 and
+        item.1.systems is true and
+        nolink is not defined
 
-# - name: "{{ my_name }} - build layout list (set fact)"
-#   ansible.builtin.set_fact:
-#     path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
-#   loop: "{{ system_map }}"
-#   when: top_level_paths is not defined and
-#         item[system_key] is defined and
-#         item[system_key] | length > 0 and
-#         nolink is not defined
+- name: "{{ my_name }} - build layout list (set fact)"
+  ansible.builtin.set_fact:
+    path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
+  loop: "{{ system_map }}"
+  when: top_level_paths is not defined and
+        item[system_key] is defined and
+        item[system_key] | length > 0 and
+        nolink is not defined
 
-# - name: "{{ my_name }} - build systems directory layout (systems)"
-#   ansible.builtin.shell:
-#     cmd: "{{ path_list|join('') }}"
-#   when: path_list is defined
-#   changed_when: false
+- name: "{{ my_name }} - build systems directory layout (systems)"
+  ansible.builtin.shell:
+    cmd: "{{ path_list|join('') }}"
+  when: path_list is defined
+  changed_when: false
 
 - name: "{{ my_name }} - build internal directory layout with top level paths"
   ansible.builtin.file:
@@ -105,3 +105,11 @@
         item[system_key] is defined and
         item[system_key] | length > 0 and
         nolink is true
+
+- name: "Debug nolink variable at the start"
+  ansible.builtin.debug:
+    msg: "nolink is {{ nolink | default('undefined') }}"
+
+- name: "Debug nolink variable before top level paths"
+  ansible.builtin.debug:
+    msg: "nolink before top level paths is {{ nolink | default('undefined') }}"
