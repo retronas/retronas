@@ -31,8 +31,7 @@
         item.1.enabled is true and
         item.0[system_key] is defined and
         item.0[system_key] | length > 0 and
-        item.1.systems is true and
-        nolink is not defined
+        item.1.systems is true
 
 - name: "{{ my_name }} - build layout list (set fact)"
   ansible.builtin.set_fact:
@@ -40,10 +39,9 @@
   loop: "{{ system_map }}"
   when: top_level_paths is not defined and
         item[system_key] is defined and
-        item[system_key] | length > 0 and
-        nolink is not defined
+        item[system_key] | length > 0
 
-- name: "{{ my_name }} - build systems directory layout (systems missing space)"
+- name: "{{ my_name }} - build systems directory layout"
   ansible.builtin.shell:
     cmd: "{{ path_list|join('') }}"
   when: path_list is defined
@@ -58,10 +56,9 @@
     state: link
   loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
   when: internal_symlinks is defined and
-        top_level_paths is defined and
-        nolink is not defined
+        top_level_paths is defined
 
-- name: "{{ my_name }} - build internal directory layout with symlinks"
+- name: "{{ my_name }} - build internal directory layout"
   ansible.builtin.file:
     src: "../roms/{{ item.src }}"
     dest: "{{ retronas_path }}/{{ system_key }}/{{ item.dest }}"
@@ -70,8 +67,7 @@
     state: link
   loop: "{{ internal_symlinks }}"
   when: internal_symlinks is defined and
-        top_level_paths is not defined and
-        nolink is not defined
+        top_level_paths is not defined
 
 - name: "{{ my_name }} - configure includes file"
   ansible.builtin.ini_file:
@@ -87,21 +83,3 @@
     owner: root
     group: root
     mode: '0644'
-
-- name: "{{ my_name }} - build layout list (set fact)"
-  ansible.builtin.set_fact:
-    path_list: "{{ path_list|default([]) + [ \"mkdir -p \" + retronas_path + '/' + system_key + '/' + item[system_key] + \";\" ] }}"
-  loop: "{{ system_map }}"
-  when: top_level_paths is not defined and
-        item[system_key] is defined and
-        item[system_key] | length > 0 and
-        nolink is true
-
-- name: Run flatten-romdir.sh for each src/dest (no top_level)
-  ansible.builtin.shell: "{{ retronas_root }}/src/romdirflattener/flatten-romdir.sh {{ retronas_path }}/{{ item.src }} {{ retronas_path }}/{{ system_key }}/{{ item[system_key] }}"
-  become: true
-  loop: "{{ system_map }}"
-  when: top_level_paths is not defined and
-        item[system_key] is defined and
-        item[system_key] | length > 0 and
-        nolink is true
