@@ -43,7 +43,7 @@
         item[system_key] | length > 0 and
         item.nolink is not defined
 
-- name: "{{ my_name }} - build systems directory layout"
+- name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
     cmd: "{{ path_list|join('') }}"
   when: path_list is defined
@@ -61,7 +61,7 @@
         top_level_paths is defined and
         item.1.nolink is not defined
 
-- name: "{{ my_name }} - build internal directory layout"
+- name: "{{ my_name }} - build internal directory layout with symlinks"
   ansible.builtin.file:
     src: "../roms/{{ item.src }}"
     dest: "{{ retronas_path }}/{{ system_key }}/{{ item.dest }}"

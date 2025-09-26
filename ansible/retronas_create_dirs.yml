@@ -64,7 +64,7 @@
     - item.1.enabled is true
     - item.1.systems is true
 
-- name: "{{ my_name }} - build systems directory layout"
+- name: "{{ my_name }} - build systems directory layout (link list)"
   ansible.builtin.shell:
     cmd: "{{ link_list|join('') }}"
   when: link_list is defined
