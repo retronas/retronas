@@ -43,7 +43,7 @@
         item[system_key] | length > 0 and
         nolink is not defined
 
-- name: "{{ my_name }} - build systems directory layout (systems)"
+- name: "{{ my_name }} - build systems directory layout (systems missing space)"
   ansible.builtin.shell:
     cmd: "{{ path_list|join('') }}"
   when: path_list is defined
