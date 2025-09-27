@@ -1,3 +1,9 @@
+
+- name: "Simplify conditional check for debugging"
+  ansible.builtin.debug:
+    msg: "Simplified condition: nolink is {{ nolink | default(false) }}"
+  when: nolink | default(false)
+
 - name: "{{ my_name }} - Include systems map"
   ansible.builtin.include_vars: "retronas_systems.yml"
 
@@ -105,11 +111,3 @@
         item[system_key] is defined and
         item[system_key] | length > 0 and
         nolink is true
-
-- name: "Debug nolink variable at the start"
-  ansible.builtin.debug:
-    msg: "nolink is {{ nolink | default('undefined') }}"
-
-- name: "Debug nolink variable before top level paths"
-  ansible.builtin.debug:
-    msg: "nolink before top level paths is {{ nolink | default('undefined') }}"
