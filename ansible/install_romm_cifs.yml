@@ -7,11 +7,13 @@
     my_file: "install_romm_cifs"
     module_name: "romm_cifs"
     system_key: "romm"
+    fattenerscript: "retronas-romm-dirs"
 
     top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
+      - { name: "{{ fattenerscript }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-romm-dirs.timer", dest: "/etc/systemd/system" }
 
