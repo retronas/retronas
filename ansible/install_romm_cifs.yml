@@ -7,13 +7,15 @@
     my_file: "install_romm_cifs"
     module_name: "romm_cifs"
     system_key: "romm"
+    script_url: 'https://raw.githubusercontent.com/minorOffense/romdirflattener/refs/heads/main/flatten-romdir.sh'
+    script_dest: "{{ retronas_root }}/bin/flatten-romdir.sh"
     fattenerscript: "retronas-romm-dirs"
 
     top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
-      - { name: "{{ fattenerscript }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-romm-dirs.timer", dest: "/etc/systemd/system" }
 
@@ -25,6 +27,14 @@
 
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
+
+    - name: "{{ my_name }} - get update script"
+      ansible.builtin.shell: curl -kLso "{{ script_dest }}" {{ script_url }}
+
+    - name: "{{ my_name }} - make script executable"
+      file:
+        path: "{{ script_dest }}"
+        mode: '0755'
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
