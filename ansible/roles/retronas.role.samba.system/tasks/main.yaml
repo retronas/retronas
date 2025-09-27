@@ -115,13 +115,8 @@
   ansible.builtin.debug:
     var: path_list
 
-
-- name: "Debug item[system_key]"
-  ansible.builtin.debug:
-    msg: "item[system_key] is {{ item[system_key] }}"
-
 - name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
-    cmd: "{{ path_list|join('') }}"
+    cmd: "{{ path_list|join(';') }}"
   when: path_list is defined
   changed_when: false
