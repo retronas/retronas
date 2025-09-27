@@ -7,7 +7,6 @@
     my_file: "install_romm_cifs"
     module_name: "romm_cifs"
     system_key: "romm"
-    nolink: true
 
     top_level_paths:
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
@@ -34,7 +33,7 @@
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
       vars:
-        nolink: "{{ nolink }}"
+        nolink: true
 
     - name: "Import system-config role"
       ansible.builtin.import_role:
