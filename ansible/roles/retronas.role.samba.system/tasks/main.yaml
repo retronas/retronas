@@ -84,7 +84,7 @@
 
 - name: "{{ my_name }} - build layout nolink list (set fact)"
   ansible.builtin.set_fact:
-    path_list: "{{ path_list|default([]) + [ \"mkdir -p \" + retronas_path + '/' + system_key + '/' + item[system_key] + \";\" ] }}"
+    path_list: "{{ path_list|default([]) + [ 'mkdir -p + retronas_path + '/' + system_key + '/' + item[system_key] + \";' ] }}"
   loop: "{{ system_map }}"
   when: top_level_paths is not defined and
         item[system_key] is defined and
