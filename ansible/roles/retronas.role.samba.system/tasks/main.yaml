@@ -43,13 +43,6 @@
         item[system_key] | length > 0 and
         (nolink | default(false)) == false
 
-- name: "{{ my_name }} - build systems directory layout (systems)"
-  ansible.builtin.shell:
-    cmd: "{{ path_list|join('') }}"
-  when: path_list is defined and
-        (nolink | default(false)) == false 
-  changed_when: false
-
 - name: "{{ my_name }} - build internal directory layout with top level paths"
   ansible.builtin.file:
     src: "../../{{ item.1.generic }}/{{ item.0.src }}"
@@ -89,7 +82,7 @@
     group: root
     mode: '0644'
 
-- name: "{{ my_name }} - build layout list (set fact)"
+- name: "{{ my_name }} - build layout nolink list (set fact)"
   ansible.builtin.set_fact:
     path_list: "{{ path_list|default([]) + [ \"mkdir -p \" + retronas_path + '/' + system_key + '/' + item[system_key] + \";\" ] }}"
   loop: "{{ system_map }}"
@@ -106,3 +99,9 @@
         item[system_key] is defined and
         item[system_key] | length > 0 and
         nolink is true
+
+- name: "{{ my_name }} - build systems directory layout (systems)"
+  ansible.builtin.shell:
+    cmd: "{{ path_list|join('') }}"
+  when: path_list is defined
+  changed_when: false
