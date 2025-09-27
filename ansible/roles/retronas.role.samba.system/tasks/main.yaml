@@ -100,6 +100,10 @@
         item[system_key] | length > 0 and
         nolink is true
 
+- name: Debug path_list value
+  ansible.builtin.debug:
+    var: path_list
+
 - name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
     cmd: "{{ path_list|join('') }}"
