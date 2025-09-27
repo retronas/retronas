@@ -97,10 +97,10 @@
   loop: "{{ system_map|product(top_level_paths)|list }}"
   when: top_level_paths is defined and
         item.1.enabled is true and
-          item.0[system_key] is defined and
-          item.0[system_key] | length > 0 and
-          item.1.systems is true and
-          nolink is true
+        item.0[system_key] is defined and
+        item.0[system_key] | length > 0 and
+        item.1.systems is true and
+        nolink is true
 
 - name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
@@ -108,8 +108,22 @@
   when: path_list is defined
   changed_when: false
 
-- name: "Run flatten-romdir.sh for each src/dest (no top_level)"
+- name: Run flatten-romdir.sh for each src/dest (no top_level)
   ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh --dryrun {{ retronas_path }}/{{ item.src }} {{ retronas_path }}/{{ system_key }}/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
   become: true
   loop: "{{ system_map }}"
-  when: nolink is true
+  when: top_level_paths is not defined and
+        item[system_key] is defined and
+        item[system_key] | length > 0 and
+        nolink is true
+
+- name: Run flatten-romdir.sh for each src/dest (no top_level)
+  ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh --dryrun {{ retronas_path }}/{{ item.0.src }} {{ retronas_path }}/{{ system_key }}/{{ item.0[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
+  become: true
+  loop: "{{ system_map }}"
+  when: top_level_paths is defined and
+        item.1.enabled is true and
+        item.0[system_key] is defined and
+        item.0[system_key] | length > 0 and
+        item.1.systems is true and
+        nolink is true
