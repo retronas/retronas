@@ -28,13 +28,13 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    # - name: "{{ my_name }} - get update script"
-    #   ansible.builtin.shell: curl -kLso "{{ script_dest }}" {{ script_url }}
+    - name: "{{ my_name }} - get update script"
+      ansible.builtin.shell: curl -kLso "{{ script_dest }}" {{ script_url }}
 
-    # - name: "{{ my_name }} - make script executable"
-    #   file:
-    #     path: "{{ script_dest }}"
-    #     mode: '0755'
+    - name: "{{ my_name }} - make script executable"
+      file:
+        path: "{{ script_dest }}"
+        mode: '0755'
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
