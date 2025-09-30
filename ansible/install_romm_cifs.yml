@@ -6,8 +6,7 @@
     my_name: "RomM CIFS"
     my_file: "install_romm_cifs"
     module_name: "romm_cifs"
-    system_key: "igdb"
-    software_key: "romm"
+    system_key: "romm"
     script_url: 'https://raw.githubusercontent.com/minorOffense/romdirflattener/refs/heads/main/flatten-romdir.sh'
     script_dest: "{{ retronas_root }}/bin/flatten-romdir.sh"
     fattenerscript: "retronas-romm-dirs"
@@ -53,7 +52,7 @@
         name: retronas.role.system-config
 
     - name: Run flatten-romdir.sh for each src/dest (no top_level)
-      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ software_key }}/roms/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
+      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
       become: true
       loop: "{{ system_map }}"
       when: top_level_paths is defined and
