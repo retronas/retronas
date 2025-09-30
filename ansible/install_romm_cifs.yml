@@ -74,7 +74,7 @@
       ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
       become: true
       loop: "{{ system_map }}"
-      when: top_level_paths is not defined and
+      when: top_level_paths is defined and
             item[system_key] is defined and
             item[system_key] | length > 0
 
