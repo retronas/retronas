@@ -70,48 +70,13 @@
             item[system_key] is defined and
             item[system_key] | length > 0
 
-    - name: Run flatten-romdir.sh for each src/dest (no top_level)
-      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/{{ item.src }} {{ retronas_path }}/{{ system_key }}/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
-      become: true
-      loop: "{{ system_map }}"
-      when: top_level_paths is not defined and
-            item[system_key] is defined and
-            item[system_key] | length > 0
-
-    - name: Debug when clause conditions (with top_level)
-      ansible.builtin.debug:
-        msg: |
-          DEBUG WHEN CONDITIONS (with top_level):
-          - top_level_paths is defined: {{ top_level_paths is defined }}
-          - item.1.enabled value: {{ item.1.enabled | default('UNDEFINED') }}
-          - item.1.enabled is true: {{ (item.1.enabled | default(false)) == true }}
-          - item.0[{{ system_key }}] is defined: {{ item.0[system_key] is defined }}
-          - item.0[{{ system_key }}] value: {{ item.0[system_key] | default('UNDEFINED') }}
-          - item.0[{{ system_key }}] | length > 0: {{ (item.0[system_key] | default('') | length > 0) }}
-          - item.1.systems value: {{ item.1.systems | default('UNDEFINED') }}
-          - item.1.systems is true: {{ (item.1.systems | default(false)) == true }}
-          - Overall condition result: {{ (top_level_paths is defined and (item.1.enabled | default(false)) == true and item.0[system_key] is defined and (item.0[system_key] | default('') | length > 0) and (item.1.systems | default(false)) == true) }}
-      loop: "{{ system_map }}"
-
-    - name: Debug flatten-romdir.sh arguments (with top_level)
-      ansible.builtin.debug:
-        msg: "DEBUG: flatten-romdir.sh args - Source: {{ retronas_path }}/{{ item.0.src }}, Dest: {{ retronas_path }}/{{ system_key }}/{{ item.0[system_key] }}, System Key: {{ system_key }}, Item.0: {{ item.0 }}, Item.1: {{ item.1 }}"
-      loop: "{{ system_map }}"
-      when: top_level_paths is defined and
-            item.1.enabled is true and
-            item.0[system_key] is defined and
-            item.0[system_key] | length > 0 and
-            item.1.systems is true
-
-    - name: Run flatten-romdir.sh for each src/dest (with top_level)
-      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/{{ item.0.src }} {{ retronas_path }}/{{ system_key }}/{{ item.0[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
-      become: true
-      loop: "{{ system_map }}"
-      when: top_level_paths is defined and
-            item.1.enabled is true and
-            item.0[system_key] is defined and
-            item.0[system_key] | length > 0 and
-            item.1.systems is true
+    # - name: Run flatten-romdir.sh for each src/dest (no top_level)
+    #   ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/{{ item.src }} {{ retronas_path }}/{{ system_key }}/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
+    #   become: true
+    #   loop: "{{ system_map }}"
+    #   when: top_level_paths is not defined and
+    #         item[system_key] is defined and
+    #         item[system_key] | length > 0
 
   handlers:
 
