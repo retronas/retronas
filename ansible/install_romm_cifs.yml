@@ -64,7 +64,7 @@
 
     - name: Debug flatten-romdir.sh arguments (no top_level)
       ansible.builtin.debug:
-        msg: "DEBUG: flatten-romdir.sh args - Source: {{ retronas_path }}/{{ item.src }}, Dest: {{ retronas_path }}/{{ system_key }}/{{ item[system_key] }}, System Key: {{ system_key }}, Item: {{ item }}"
+        msg: "DEBUG: flatten-romdir.sh args - Source: {{ retronas_path }}/roms/{{ item.src }}, Dest: {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }}, System Key: {{ system_key }}, Item: {{ item }}"
       loop: "{{ system_map }}"
       when: top_level_paths is defined and
             item[system_key] is defined and
