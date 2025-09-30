@@ -51,25 +51,6 @@
       ansible.builtin.import_role:
         name: retronas.role.system-config
 
-    # - name: Debug when clause conditions (no top_level)
-    #   ansible.builtin.debug:
-    #     msg: |
-    #       DEBUG WHEN CONDITIONS (no top_level):
-    #       - top_level_paths is defined: {{ top_level_paths is defined }}
-    #       - item[{{ system_key }}] is defined: {{ item[system_key] is defined }}
-    #       - item[{{ system_key }}] value: {{ item[system_key] | default('UNDEFINED') }}
-    #       - item[{{ system_key }}] | length > 0: {{ (item[system_key] | default('') | length > 0) }}
-    #       - Overall condition result: {{ (top_level_paths is not defined and item[system_key] is defined and item[system_key] | length > 0) }}
-    #   loop: "{{ system_map }}"
-
-    # - name: Debug flatten-romdir.sh arguments (no top_level)
-    #   ansible.builtin.debug:
-    #     msg: "DEBUG: flatten-romdir.sh args - Source: {{ retronas_path }}/roms/{{ item.src }}, Dest: {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }}, System Key: {{ system_key }}, Item: {{ item }}"
-    #   loop: "{{ system_map }}"
-    #   when: top_level_paths is defined and
-    #         item[system_key] is defined and
-    #         item[system_key] | length > 0
-
     - name: Run flatten-romdir.sh for each src/dest (no top_level)
       ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }} | tee -a {{ retronas_root }}/log/{{ my_file }}.log"
       become: true
