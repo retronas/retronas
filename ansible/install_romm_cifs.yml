@@ -52,7 +52,7 @@
         name: retronas.role.system-config
 
     - name: Run flatten-romdir.sh for each src/dest (no top_level)
-      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }}
+      ansible.builtin.shell: "{{ retronas_root }}/bin/flatten-romdir.sh {{ retronas_path }}/roms/{{ item.src }} {{ retronas_path }}/{{ system_key }}/roms/{{ item[system_key] }}"
       become: true
       loop: "{{ system_map }}"
       when: top_level_paths is defined and
