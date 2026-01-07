@@ -53,15 +53,6 @@ rn_gog_chooser() {
       # download 1 game
       rn_gog_gameslist
       rn_gog_game
-      if [ $? -eq 0 ]
-      then
-        GOGGAME=$( cat ${TDIR}/rn_gog_game )
-        CLEAR
-        DROP_ROOT ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${GOGGAME} -lang ${OLDGOGLANG}
-        DROP_ROOT ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
-        PAUSE
-      fi
-      rn_gog_game
       ;;
     08)
       # download all games
@@ -221,7 +212,12 @@ rn_gog_game() {
       rn_gog_chooser
       ;;
     ${CHOICE})
-      echo ${CHOICE} > ${TDIR}/rn_gog_game
+      CLEAR
+      DROP_ROOT ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -id ${CHOICE} -lang ${OLDGOGLANG}
+      DROP_ROOT ${SCDIR}/gogrepo_download.sh -id ${CHOICE}
+      PAUSE
+      unset CHOICE
+      rn_gog_game
       ;;
     *)
       rn_gog_chooser
