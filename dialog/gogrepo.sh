@@ -8,6 +8,10 @@ cd ${DIDIR}
 ## Manifests and cookies stored in ~/.gogrepo
 CLEAR
 
+# dumb workaround
+chmod 755 ${SCDIR}
+
+
 rn_gog_chooser() {
 
   local MENU_NAME=gogrepo
@@ -43,6 +47,7 @@ rn_gog_chooser() {
       CLEAR
       DROP_ROOT ${SCDIR}/gogrepo_update.sh -skipknown -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       PAUSE
+      rn_gog_chooser
       ;;
     07)
       # download 1 game
@@ -56,6 +61,7 @@ rn_gog_chooser() {
         DROP_ROOT ${SCDIR}/gogrepo_download.sh -id ${GOGGAME}
         PAUSE
       fi
+      rn_gog_game
       ;;
     08)
       # download all games
@@ -69,6 +75,7 @@ rn_gog_chooser() {
       DROP_ROOT ${SCDIR}/gogrepo_update.sh -os ${OLDGOGOS} -lang ${OLDGOGLANG}
       DROP_ROOT ${SCDIR}/gogrepo_download.sh
       PAUSE
+      rn_gog_chooser
       ;;
     *)
       EXIT_CANCEL
@@ -88,21 +95,21 @@ rn_gog_setlang() {
   READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-setuplang"
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
-
   case ${CHOICE} in
     01)
-      EXIT_OK
+      rn_gog_chooser
       ;;
     ${CHOICE} )
       NEWLANG="${CHOICE}"
+      sed -i '/retronas_gog_lang:/d' "${ANCFG}"
+      echo "retronas_gog_lang: \"${NEWLANG}\"" >> "${ANCFG}"
       ;;
     *)
-      EXIT_CANCEL
+      rn_gog_chooser
       ;;
     esac
 
-    sed -i '/retronas_gog_lang:/d' "${ANCFG}"
-    echo "retronas_gog_lang: \"${NEWLANG}\"" >> "${ANCFG}"
+    rn_gog_chooser
 
 }
 
@@ -115,9 +122,6 @@ rn_gog_auth() {
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
   case ${CHOICE} in
-    01)
-      EXIT_OK
-      ;;
     02)
       # login
       CLEAR
@@ -127,11 +131,11 @@ rn_gog_auth() {
     03)
       # import cookies
       CLEAR
-      DROP_ROOT ${SCDIR}/gogrepo_import-cookies.sh
+      bash ${SCDIR}/gogrepo_import-cookies.sh
       PAUSE
       ;;
     *)
-      EXIT_CANCEL
+      rn_gog_chooser
       ;;
   esac
 
@@ -146,9 +150,6 @@ rn_gog_setos() {
   DLG_MENUJ "${MENU_TNAME}" 10 "${MENU_BLURB}"
 
   case ${CHOICE} in
-    01)
-      EXIT_OK
-      ;;
     02)
       NEWOS="windows"
       ;;
@@ -171,12 +172,16 @@ rn_gog_setos() {
       NEWOS="windows mac linux"
       ;;
     *)
-      EXIT_CANCEL
+      rn_gog_chooser
       ;;
     esac
 
-    sed -i '/retronas_gog_os:/d' "${ANCFG}"
-    echo "retronas_gog_os: \"${NEWOS}\"" >> "${ANCFG}"
+    if [ ! -z $NEWOS ]; then
+      sed -i '/retronas_gog_os:/d' "${ANCFG}"
+      echo "retronas_gog_os: \"${NEWOS}\"" >> "${ANCFG}"
+    fi
+
+    rn_gog_chooser
   
 }
 
@@ -191,7 +196,7 @@ rn_gog_gameslist() {
   else
     grep \'title\'\: ${RNUDIR}/.gogrepo/gog-manifest.dat | awk -F \' '{print $4}' | sort | while read RN_GOG_ID
     do
-      echo -en "${RN_GOG_ID} . " >>${TDIR}/rn_gog_gameslist
+      echo "${RN_GOG_ID}" >>${TDIR}/rn_gog_gameslist
     done
   fi
 }
@@ -201,16 +206,29 @@ rn_gog_game() {
   READ_MENU_JSON "${MENU_NAME}" "${MENU_NAME}-gamechooser"
   READ_MENU_TDESC "${MENU_NAME}" "${MENU_NAME}-gamechooser"
 
-  MENU_ARRAY=$(cat ${TDIR}/rn_gog_gameslist)
+  declare -a MENU_ARRAY
+  mapfile -t PIECES < ${TDIR}/rn_gog_gameslist
+  MENU_ARRAY+=("Back" ".")
+  for PIECE in ${PIECES[@]}
+  do      
+    MENU_ARRAY+=($PIECE ".")
+  done
 
-  dialog \
-    --backtitle "${MENU_TNAME}" \
-    --title "${MENU_TNAME}" \
-    --clear \
-    --menu "${MENU_BLURB}" ${MW} ${MH} 10 \
-    ${MENU_ARRAY[@]} \
-    2> ${TDIR}/rn_gog_game
+  DLG_MENU "${MENU_TNAME}" "${MENU_ARRAY}" 10 "${MENU_BLURB}"
 
+  case ${CHOICE} in
+    Back)
+      rn_gog_chooser
+      ;;
+    ${CHOICE})
+      echo ${CHOICE} > ${TDIR}/rn_gog_game
+      ;;
+    *)
+      rn_gog_chooser
+      ;;
+  esac
+
+  unset MENU_ARRAY
 }
 
 rn_gog_chooser

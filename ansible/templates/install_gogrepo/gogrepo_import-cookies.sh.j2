@@ -3,6 +3,8 @@ echo ""
 echo "Importing GOG Cookies"
 echo ""
 
+set -u
+
 _CONFIG=/opt/retronas/config/retronas.cfg
 source $_CONFIG
 source ${LIBDIR}/common.sh
@@ -11,7 +13,7 @@ source ${LIBDIR}/common.sh
 ## Manifests and cookies stored in ~/.gogrepo
 CLEAR
 
-GOGREPODIR=$HOME/.gogrepo
+GOGREPODIR=/home/{{ retronas_user }}/.gogrepo
 
 FILES=(
     gog-cookies.dat
@@ -36,3 +38,5 @@ do
         echo "... Not Found"
     fi
 done
+
+chown -R {{ retronas_user }}:{{ retronas_group }} ${GOGREPODIR}
