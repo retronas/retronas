@@ -43,7 +43,7 @@
       - ansible.builtin.import_role:
           name: retronas.role.package.latest
         vars:
-          - packages: "{{ packages_build }}"
+          packages: "{{ packages_build }}"
 
       - ansible.builtin.import_role:
           name: retronas.role.templates

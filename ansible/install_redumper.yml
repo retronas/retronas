@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  gather_facts: fasle
+  gather_facts: false
 
   vars:
     my_name: "redumper"
