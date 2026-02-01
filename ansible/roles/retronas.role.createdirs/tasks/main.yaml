@@ -11,7 +11,7 @@
 
 - name: "{{ my_name }} - create our base"
   ansible.builtin.shell:
-    cmd: "mkdir -p {{ rn_path}}"
+    cmd: "mkdir -p {{ rn_path }}"
   changed_when: false
   when: rn_path is defined and 
         rn_path.stat.exists is false

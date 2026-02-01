@@ -24,67 +24,11 @@
     item.enabled is true
 
 - name: "{{ my_name }} - setup directories with symlinks"
-  block:
-    - name: "{{ my_name }} - build layout list (set fact) (top level paths)"
-      ansible.builtin.set_fact:
-        path_list: "{{ path_list|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
-      loop: "{{ system_map|product(top_level_paths)|list }}"
-      when: top_level_paths is defined and
-        item.1.enabled is true and
-        item.0[system_key] is defined and
-        item.0[system_key] | length > 0 and
-        item.1.systems is true
-
-    - name: "{{ my_name }} - build layout list (set fact)"
-      ansible.builtin.set_fact:
-        path_list: "{{ path_list|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
-      loop: "{{ system_map }}"
-      when: top_level_paths is not defined and
-        item[system_key] is defined and
-        item[system_key] | length > 0
-
-    - name: "{{ my_name }} - build internal directory layout with top level paths"
-      ansible.builtin.file:
-        src: "../../{{ item.1.generic }}/{{ item.0.src }}"
-        dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1.name }}/{{ item.0.dest }}"
-        owner: "{{ retronas_user }}"
-        group: "{{ retronas_group }}"
-        state: link
-      loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
-      when: internal_symlinks is defined and
-        top_level_paths is defined
-
-    - name: "{{ my_name }} - build internal directory layout with symlinks"
-      ansible.builtin.file:
-        src: "../roms/{{ item.src }}"
-        dest: "{{ retronas_path }}/{{ system_key }}/{{ item.dest }}"
-        owner: "{{ retronas_user }}"
-        group: "{{ retronas_group }}"
-        state: link
-      loop: "{{ internal_symlinks }}"
-      when: internal_symlinks is defined and
-        top_level_paths is not defined
+  include_tasks: link.yml
   when: nolink is not defined or nolink is false
 
 - name: "{{ my_name }} - setup directories without symlinks"
-  block:
-    - name: "{{ my_name }} - build layout nolink list (set fact)"
-      ansible.builtin.set_fact:
-        path_list: "{{ path_list|default([]) + [ 'mkdir -p ' + retronas_path + '/' + system_key + '/' + item[system_key] + ';' ] }}"
-      loop: "{{ system_map }}"
-      when: top_level_paths is not defined and
-        item[system_key] is defined and
-        item[system_key] | length > 0
-
-    - name: "{{ my_name }} - build layout nolink list (set fact) (top level paths)"
-      ansible.builtin.set_fact:
-        path_list: "{{ path_list|default([]) + [ 'mkdir -p ' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + ';' ] }}"
-      loop: "{{ system_map|product(top_level_paths)|list }}"
-      when: top_level_paths is defined and
-        item.1.enabled is true and
-        item.0[system_key] is defined and
-        item.0[system_key] | length > 0 and
-        item.1.systems is true
+  include_tasks: nolink.yml
   when: nolink is defined and nolink is true
 
 - name: "{{ my_name }} - configure includes file"
@@ -106,4 +50,10 @@
   ansible.builtin.shell:
     cmd: "{{ path_list|join('') }}"
   when: path_list is defined
+  changed_when: false
+
+- name: "{{ my_name }} - build systems directory layout (systems) (top_level)"
+  ansible.builtin.shell:
+    cmd: "{{ path_list_tl|join('') }}"
+  when: path_list_tl is defined
   changed_when: false
