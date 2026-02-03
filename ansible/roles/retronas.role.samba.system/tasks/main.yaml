@@ -48,8 +48,8 @@
 
 - name: "{{ my_name }} - build systems directory layout (systems)"
   ansible.builtin.shell:
-    cmd: "{{ path_list|join('') }}"
-  when: path_list is defined
+    cmd: "{{ path_list_ll|join('') }}"
+  when: path_list_ll is defined
   changed_when: false
 
 - name: "{{ my_name }} - build systems directory layout (systems) (top_level)"
