@@ -3,62 +3,62 @@
   gather_facts: true
 
   vars:
-    - my_name: "Netatalk3"
-    - my_file: "install_netatalk3"
+    my_name: "Netatalk3"
+    my_file: "install_netatalk3"
 
-    - packages:
-        - avahi-daemon
-        - build-essential
-        - libevent-dev
-        - libssl-dev
-        - libgcrypt-dev
-        - libkrb5-dev
-        - libpam0g-dev
-        - libwrap0-dev
-        - libdb-dev
-        - libtdb-dev
-        - libavahi-client-dev
-        - libacl1-dev
-        - libldap2-dev
-        - libcrack2-dev
-        - systemtap-sdt-dev
-        - libdbus-1-dev
-        - libdbus-glib-1-dev
-        - libglib2.0-dev
-        - libio-socket-inet6-perl
-        - tracker
+    packages:
+      - avahi-daemon
+      - build-essential
+      - libevent-dev
+      - libssl-dev
+      - libgcrypt-dev
+      - libkrb5-dev
+      - libpam0g-dev
+      - libwrap0-dev
+      - libdb-dev
+      - libtdb-dev
+      - libavahi-client-dev
+      - libacl1-dev
+      - libldap2-dev
+      - libcrack2-dev
+      - systemtap-sdt-dev
+      - libdbus-1-dev
+      - libdbus-glib-1-dev
+      - libglib2.0-dev
+      - libio-socket-inet6-perl
+      - tracker
 
-    - packages_debian:
-        debian11:
-          - libmysqlclient-dev
-          - libtracker-sparql-2.0-dev
-        debian12:
-          - default-libmysqlclient-dev
-          - libtracker-sparql-3.0-dev
-
-    - packages_ubuntu:
+    packages_debian:
+      debian11:
         - libmysqlclient-dev
         - libtracker-sparql-2.0-dev
-        - libtracker-miner-2.0-dev
+      debian12:
+        - default-libmysqlclient-dev
+        - libtracker-sparql-3.0-dev
+
+    packages_ubuntu:
+      - libmysqlclient-dev
+      - libtracker-sparql-2.0-dev
+      - libtracker-miner-2.0-dev
 
 
-    - my_services:
-        - avahi-daemon
-        - netatalk
+    my_services:
+      - avahi-daemon
+      - netatalk
 
-    - config_settings:
-        - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
-        - { section: "Global", option: "hostname", value: "retroafp" }
-        - { section: "Global", option: "mimic model", value: "PowerMac" }
-        - { section: "Global", option: "zeroconf", value: "yes" }
-        - { section: "Global", option: "log level", value: "info" }
-        - { section: "Global", option: "log file", value: "/var/log/afp.log" }
-        - { section: "Global", option: "afp listen", value: "0.0.0.0" }
-        - { section: "Global", option: "include", value: "/etc/netatalk/retronas.conf" }
+    config_settings:
+      - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
+      - { section: "Global", option: "hostname", value: "retroafp" }
+      - { section: "Global", option: "mimic model", value: "PowerMac" }
+      - { section: "Global", option: "zeroconf", value: "yes" }
+      - { section: "Global", option: "log level", value: "info" }
+      - { section: "Global", option: "log file", value: "/var/log/afp.log" }
+      - { section: "Global", option: "afp listen", value: "0.0.0.0" }
+      - { section: "Global", option: "include", value: "/etc/netatalk/retronas.conf" }
 
-    - templates:
-        - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755'}
-        - { name: "netatalk.service", dest: "/etc/systemd/system"}
+    templates:
+      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts/", mode: '0755'}
+      - { name: "netatalk.service", dest: "/etc/systemd/system"}
 
 
   tasks:

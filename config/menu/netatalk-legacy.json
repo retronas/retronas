@@ -2,7 +2,7 @@
     "menu": 
     {
         "title": "netatalk-legacy",
-        "description": "Install legacy netatalk,",
+        "description": "Install legacy netatalk, NOTE: No longer supported, use Netatalk 4",
         "id":"netatalk_legacy_install",
         "prompt": "",
         "type": "menu",

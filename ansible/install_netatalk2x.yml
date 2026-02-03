@@ -3,45 +3,45 @@
   gather_facts: true
 
   vars:
-    - my_name: "Netatalk2.X"
-    - my_file: "install_netatalk2x"
+    my_name: "Netatalk2.X"
+    my_file: "install_netatalk2x"
 
-    - packages:
-        - avahi-daemon
-        - build-essential
-        - make
-        - automake
-        - autoconf
-        - libdb-dev
-        - libdb++-dev
-        - libavahi-common-dev
-        - libavahi-client-dev
-        - libavahi-core-dev
-        - libdbus-1-dev
-        - libssl-dev
-        - autotools-dev
-        - libtool
-        - libcups2-dev
-        - libavahi-client-dev
-        - libgcrypt20-dev
-        - expect
-        - libltdl-dev
-        - libtool-bin
-        - libevent-dev
+    packages:
+      - avahi-daemon
+      - build-essential
+      - make
+      - automake
+      - autoconf
+      - libdb-dev
+      - libdb++-dev
+      - libavahi-common-dev
+      - libavahi-client-dev
+      - libavahi-core-dev
+      - libdbus-1-dev
+      - libssl-dev
+      - autotools-dev
+      - libtool
+      - libcups2-dev
+      - libavahi-client-dev
+      - libgcrypt20-dev
+      - expect
+      - libltdl-dev
+      - libtool-bin
+      - libevent-dev
 
-    - services:
-        - avahi-daemon
-        - atalkd
-        - afpd
-        - papd
-        - timelord
-        - a2boot
+    services:
+      - avahi-daemon
+      - atalkd
+      - afpd
+      - papd
+      - timelord
+      - a2boot
 
-    - templates:
-        - { name: "afpexpect.sh", dest: "{{ retronas_root }}/bin/netatalk2x/bin", mode: "0754" }
-        - { name: "AppleVolumes.default", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
-        - { name: "afpd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
-        - { name: "atalkd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
+    templates:
+      - { name: "afpexpect.sh", dest: "{{ retronas_root }}/bin/netatalk2x/bin", mode: "0754" }
+      - { name: "AppleVolumes.default", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
+      - { name: "afpd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
+      - { name: "atalkd.conf", dest: "{{ retronas_root }}/bin/netatalk2x/etc/netatalk" }
 
   tasks:
 
