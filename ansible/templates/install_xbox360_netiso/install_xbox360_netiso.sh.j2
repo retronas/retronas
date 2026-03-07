@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ue
+
 ARCH=$(uname -m)
 GH_OWNER=tuxuser
 GH_REPO=netiso-srv
@@ -13,14 +15,22 @@ cd "${DEST_PATH}"
 curl -kLsO "${RELEASE}"
 
 RELEASE_FILE=$( basename ${RELEASE} )
-if [ -f "${RELEASE_FILE}" ]
+if [ ! -z $RELEASE ]
 then
-  unzip "$( basename ${RELEASE_FILE})" -d "_temp"
-  TARGET=$(find -type f -name "netiso-srv")
-  mv $TARGET ${DEST_PATH}
-  chmod +x ${DEST_PATH}/$( basename ${TARGET})
+  if [ -f "${RELEASE_FILE}" ]
+  then
+    unzip "$( basename ${RELEASE_FILE})" -d "_temp"
+    TARGET=$(find -type f -name "netiso-srv")
+    mv $TARGET ${DEST_PATH}
+    chmod +x ${DEST_PATH}/$( basename ${TARGET})
+  else
+    echo "Failed"
+    exit 1
+  fi
 else
-  echo "Failed"
+  echo "Download failed"
   exit 1
 fi
 
+rm -f ${RELEASE_FILE}
+rm -rf ${DEST_PATH}/_temp
