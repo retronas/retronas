@@ -104,6 +104,17 @@
               "group": "",
               "command": "sit",
               "args": ""
+            },
+            {
+                "index": "10",
+                "title": "hfsutils",
+                "description": "Install patched version of hfsutils", 
+                "id":"hfsutils",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "hfsutils",
+                "args": ""
             }
         ]
     }

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -u
+
+## we are using a fork because trixie doesn't have a package
+# see: https://tracker.debian.org/pkg/hfsutils
+
+REPO=hfsutils
+OWNER=jepler
+BRANCH=misc-fixes
+SRCDIR="{{ retronas_root }}/src"
+
+echo "Configuring build directories..."
+rm -rf "${SRCDIR}"
+mkdir -p "${SRCDIR}"
+cd "${SRCDIR}"
+
+echo "Downloading hfsutils source code..."
+git clone https://github.com/$OWNER/$REPO
+cd $REPO
+[ ! -z $BRANCH ] && git checkout $BRANCH
+
+echo "Building libhfs"
+## libhfs
+cd libhfs
+autoconf
+./configure
+make
+
+cd ..
+echo "Building hfsutils"
+## hfsutils
+autoconf
+./configure
+make
+
+echo "Installing hfsutils"
+make install
+
+
+echo "Cleaning up"
+rm -rf $SRCDIR
