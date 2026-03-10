@@ -114,6 +114,7 @@ system_map: "{{
   |union(system_vmlabs)
   |union(system_watara)
   |union(system_zeebo)
+  |union(system_zpa)
 }}"
 
 system_links:
@@ -284,6 +285,7 @@ system_homelab:
   - { src: "homelab/homelab", last: "", mister: "Homelab", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Homelab" }
 system_ibm:
   - { src: "ibm/pcxt", last: "", mister: "PCXT", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "pc", igdb: "", replayfpgaarcade: "", retrodeck: "pc", romm: "", pretty_name: "IBM PCXT" }
+  - { src: "ibm/pcjr", last: "", mister: "PCjr", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "IBM PCjr" }
 system_infocom:
   - { src: "infocom/zmachine", last: "", mister: "", retropie: "", batocera: "", recalbox: "zmachine", retroarch: "Infocom - Z-Machine", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "zmachine", igdb: "", replayfpgaarcade: "", retrodeck: "zmachine", romm: "", pretty_name: "Infocom Zmachine" }
 system_intelligentsoftware:
@@ -475,6 +477,7 @@ system_tandy:
   - { src: "tandy/trs80colorcomputer2", last: "", mister: "CoCo2", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Tandy Color Computer 2" }
   - { src: "tandy/trs80colorcomputer3", last: "", mister: "COCO3", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Tandy Color Computer 3" }
   - { src: "tandy/trs80mc10", last: "", mister: "AliceMC10", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Tandy MC10" }
+  - { src: "tandy/1000", last: "", mister: "Tandy1000", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "Tandy 1000" }
 system_tapwave:
   - { src: "tapwave/zodiac", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "zod", replayfpgaarcade: "", retrodeck: "", romm: "zod", pretty_name: "Tapwave Zodiac" }
 system_tatung:
@@ -540,6 +543,10 @@ system_palm:
   - { src: "palm/palmos", last: "", mister: "", retropie: "", batocera: "", recalbox: "palm", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "palm", igdb: "palm-os", replayfpgaarcade: "", retrodeck: "palm", romm: "palm-os", pretty_name: "Palm OS" }
 system_zeebo:
   - { src: "zeebo/zeebo", last: "", mister: "", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "zeebo", replayfpgaarcade: "", retrodeck: "", romm: "zeebo", pretty_name: "Zeebo" }
+system_zpa:
+  - { src: "zpa/iq151", last: "", mister: "IQ151", retropie: "", batocera: "", recalbox: "", retroarch: "", ops2l: "", ps3netsrv: "", fspd: "", emuelec: "", smdb: "", freestation: "", analoguepocket: "", emudeck: "", igdb: "", replayfpgaarcade: "", retrodeck: "", romm: "", pretty_name: "IQ151" }
+
+
 
 ## ---- General purpose categories ----
 general_distribution:
