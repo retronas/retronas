@@ -15,13 +15,13 @@
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
-      - { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      #- { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-romm-dirs.timer", dest: "/etc/systemd/system" }
 
     systemd_units:
       - { name: "retronas-romm-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
-      - { name: "retronas-romm-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
+      - { name: "retronas-romm-dirs", type: 'timer',   state: "started", enabled: "yes", restart: "no", instance: "no" }
 
   tasks:
 
@@ -46,6 +46,19 @@
         name: retronas.role.samba.system
       vars:
         nolink: true
+
+    - ansible.builtin.import_role:
+        name: retronas.role.templates
+
+    - name: "{{ my_name }} - create startup service(s) instance"
+      ansible.builtin.template:
+        src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+        dest: /etc/systemd/system/{{ item.name }}.{{ item.type }}
+        owner: root
+        group: root
+        mode: 0644
+      with_items: "{{ systemd_units }}"
+      notify: "{{ my_name }} daemon-reload"
 
     - name: "Import system-config role"
       ansible.builtin.import_role:
