@@ -187,7 +187,7 @@ system_acorn:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: atom
   pretty_name: Acorn Atom
 - src: acorn/bbcmicro
   last: ''
@@ -288,7 +288,7 @@ system_amstrad:
   igdb: gx4000
   replayfpgaarcade: ''
   retrodeck: gx4000
-  romm: ''
+  romm: 'amstrad-gx4000'
   pretty_name: Amstrad GX4000
 system_antonic:
 - src: antonic/galaksija
@@ -351,7 +351,7 @@ system_apple:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 'apple'
   pretty_name: Apple 1
 - src: apple/appleii
   last: ''
@@ -431,7 +431,7 @@ system_apple:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 'appleiii'
   pretty_name: Apple III
 - src: apple/macintosh
   last: ''
@@ -471,7 +471,7 @@ system_apple:
   igdb: apple-pippin
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: pippin
   pretty_name: Apple Pippin
 system_arcade:
 - src: arcade
@@ -953,7 +953,7 @@ system_atari:
   igdb: atari8bit
   replayfpgaarcade: ''
   retrodeck: atari800
-  romm: atari8bit
+  romm: atari800
   pretty_name: Atari 8-bit
 - src: atari/jaguar
   last: ''
@@ -1093,7 +1093,7 @@ system_atari:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: atarixe
-  romm: ''
+  romm: atari-xegs
   pretty_name: Atari XE
 system_atmel:
 - src: atmel/uzebox
@@ -1114,7 +1114,7 @@ system_atmel:
   igdb: uzebox
   replayfpgaarcade: ''
   retrodeck: uzebox
-  romm: ''
+  romm: uzebox
   pretty_name: Atmel Uzebox
 system_audiosonic:
 - src: audiosonic
@@ -1197,7 +1197,7 @@ system_bandai:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: sufami-turbo
   pretty_name: Bandai Sumfami
 - src: bandai/wonderswan
   last: ''
@@ -1339,7 +1339,7 @@ system_benesse:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: pocket-challenge-v2
   pretty_name: Benesse Pocket Challenge V2
 system_bitcorporation:
 - src: bitcorporation/gamate
@@ -1402,7 +1402,7 @@ system_camputers:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: camputers-lynx
   pretty_name: Camputers Lynx
 system_casio:
 - src: casio/loopy
@@ -1443,7 +1443,7 @@ system_casio:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: pv1000
-  romm: ''
+  romm: casio-pv-1000
   pretty_name: Casio PV1000
 - src: casio/pv2000
   last: ''
@@ -1463,7 +1463,7 @@ system_casio:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: casio-pv-2000
   pretty_name: Casio PV2000
 system_cdc:
 - src: cdc/cyber70
@@ -1525,7 +1525,7 @@ system_coleco:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: adam
-  romm: ''
+  romm: colecoadam
   pretty_name: Coleco Adam
 system_commodore:
 - src: commodore/amiga
@@ -1706,7 +1706,7 @@ system_commodore:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: c128
   pretty_name: Commodore 128
 - src: commodore/pet
   last: ''
@@ -1849,7 +1849,7 @@ system_dec:
   igdb: pdp-8--1
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: pdp-8--1
+  romm: pdp-8
   pretty_name: DEC PDP-8
 - src: dec/pdp10
   last: ''
@@ -1972,7 +1972,7 @@ system_electronika:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: bk
   pretty_name: Electronika Bk
 system_elektor:
 - src: elektor/tvgc
@@ -1993,7 +1993,7 @@ system_elektor:
   igdb: elektor-tv-games-computer
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: elektor
   pretty_name: ''
 system_emerson:
 - src: emerson/arcadia2001
@@ -2014,7 +2014,7 @@ system_emerson:
   igdb: arcadia-2001
   replayfpgaarcade: ''
   retrodeck: arcadia
-  romm: ''
+  romm: arcadia-2001
   pretty_name: Eemerson Arcadia 2001
 system_entex:
 - src: entex/adventurevision
@@ -2035,7 +2035,7 @@ system_entex:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 'adventure-vision'
   pretty_name: Entex AdventureVision
 system_epoch_co:
 - src: epoch_co/scv
@@ -2116,7 +2116,7 @@ system_epoch_co:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: epoch-game-pocket-computer
   pretty_name: Epoch Co Game Pocket
 system_exidy:
 - src: exidy/sorcerer
@@ -2422,7 +2422,7 @@ system_funtech:
   igdb: super-acan
   replayfpgaarcade: ''
   retrodeck: supracan
-  romm: ''
+  romm: super-acan
   pretty_name: Funtech Super ACan
 system_gamepark:
 - src: gamepark/gp32
@@ -2485,7 +2485,7 @@ system_hartung:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: gmaster
-  romm: ''
+  romm: hartung
   pretty_name: Hartung Game Master
 system_homelab:
 - src: homelab/homelab
@@ -2547,7 +2547,7 @@ system_ibm:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: pc-jr
   pretty_name: IBM PCjr
 system_infocom:
 - src: infocom/zmachine
@@ -2589,7 +2589,7 @@ system_intelligentsoftware:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: enterprise
   pretty_name: Intelligent Software E128
 - src: intelligentsoftware/e64
   last: ''
@@ -2651,7 +2651,7 @@ system_interton:
   igdb: vc-4000
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: vc-4000
+  romm: interton-vc-4000
   pretty_name: Interton VC4000
 system_jupiter:
 - src: jupiter/ace
@@ -2672,7 +2672,7 @@ system_jupiter:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: jupiter-ace
   pretty_name: Jupiter ACE
 system_leapfrog:
 - src: leapfrog/leapster
@@ -2713,7 +2713,7 @@ system_leapfrog:
   igdb: leapster-explorer-slash-leadpad-explorer
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: leapster-explorer-slash-leadpad-explorer
+  romm: leapfrog-explorer
   pretty_name: Leapfrog Explorer
 - src: leapfrog/leaptv
   last: ''
@@ -2754,7 +2754,7 @@ system_magnavox:
   igdb: odyssey--1
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: odyssey--1
+  romm: odyssey
   pretty_name: Magnavox Odyssey
 - src: magnavox/odyssey2
   last: other/magnavox_odyssey2
@@ -2774,7 +2774,7 @@ system_magnavox:
   igdb: odyssey-2-slash-videopac-g7000
   replayfpgaarcade: ''
   retrodeck: odyssey2
-  romm: odyssey-2-slash-videopac-g7000
+  romm: odyssey-2
   pretty_name: Magnavox Odyssey 2
 system_mattel:
 - src: mattel/aquarius
@@ -2795,7 +2795,7 @@ system_mattel:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 'aquarius'
   pretty_name: Mattel Aquarius
 - src: mattel/intellivision
   last: ''
@@ -2936,7 +2936,7 @@ system_microsoft:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: msx2plus
   pretty_name: Microsoft MSX2+
 - src: microsoft/msxturbor
   last: ''
@@ -2956,7 +2956,7 @@ system_microsoft:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: msxturbor
-  romm: ''
+  romm: msx-turbo
   pretty_name: Microsoft MSX Turbo R
 - src: microsoft/xbox
   last: ''
@@ -3116,7 +3116,7 @@ system_microsoft:
   igdb: series-x-s
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: series-x
+  romm: series-x-s
   pretty_name: Microsoft Xbox Series-X
 - src: microsoft/windows
   last: ''
@@ -3277,7 +3277,7 @@ system_milesgordon:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: samcoupe
-  romm: ''
+  romm: sam-coupe
   pretty_name: Miles Gordon Sam Coupe
 system_miltonbradley:
 - src: miltonbradley/microvision
@@ -3298,7 +3298,7 @@ system_miltonbradley:
   igdb: microvision--1
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: microvision--1
+  romm: microvision
   pretty_name: Milton Bradley Microvision
 system_mits:
 - src: mits/altair8800
@@ -3319,7 +3319,7 @@ system_mits:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 'altair-8800'
   pretty_name: MITS Altair 8800
 system_nabu:
 - src: nabu
@@ -3401,7 +3401,7 @@ system_nec:
   igdb: turbografx-16-slash-pc-engine-cd
   replayfpgaarcade: ''
   retrodeck: pcengine
-  romm: turbografx-16-slash-pc-engine-cd
+  romm: ''
   pretty_name: NEC PC-Engine
 - src: nec/pcengine
   last: ''
@@ -3421,7 +3421,7 @@ system_nec:
   igdb: turbografx16--1
   replayfpgaarcade: ''
   retrodeck: tg16
-  romm: turbografx16--1
+  romm: tg16
   pretty_name: ''
 - src: nec/pcenginecd
   last: ''
@@ -3461,7 +3461,7 @@ system_nec:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: turbografx-cd
   pretty_name: ''
 - src: nec/pcengine/supergrafx
   last: ''
@@ -3622,7 +3622,7 @@ system_nintendo:
   igdb: e-reader-slash-card-e-reader
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: e-reader-slash-card-e-reader
   pretty_name: Nintendo eReader
 - src: nintendo/famicom
   last: ''
@@ -3862,7 +3862,7 @@ system_nintendo:
   igdb: 64dd
   replayfpgaarcade: ''
   retrodeck: n64dd
-  romm: nintendo-64dd
+  romm: 64dd
   pretty_name: Nintendo 64DD
 - src: nintendo/pokemini
   last: ''
@@ -4142,7 +4142,7 @@ system_nintendo:
   igdb: super-nes-cd-rom-system
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: nintendo-playstation
+  romm: super-nes-cd-rom-system
   pretty_name: Nintendo PlayStation
 system_nichibutsu:
 - src: nichibutsu/myvision
@@ -4205,7 +4205,7 @@ system_oric:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: atmos
   pretty_name: Oric ATMOS
 - src: oric/tangerine
   last: ''
@@ -4245,7 +4245,7 @@ system_oric:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: oric
   pretty_name: Oric Telestrat
 system_ouya:
 - src: ouya/ouya
@@ -4329,7 +4329,7 @@ system_pelvarazdin:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: orao
   pretty_name: Pelvarazdin Orao
 system_philips:
 - src: philips/cdi
@@ -4390,7 +4390,7 @@ system_philips:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: philips-vg-5000
   pretty_name: Philips VG5000
 system_sega:
 - src: sega/32x
@@ -4471,7 +4471,7 @@ system_sega:
   igdb: dc
   replayfpgaarcade: ''
   retrodeck: dreamcast
-  romm: ''
+  romm: dc
   pretty_name: SEGA Dreamcast
 - src: sega/dreamcast/vmu
   last: ''
@@ -4491,7 +4491,7 @@ system_sega:
   igdb: visual-memory-unit-slash-visual-memory-system
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: visual-memory-unit-slash-visual-memory-system
+  romm: vmu
   pretty_name: SEGA Dreamcast VMU
 - src: sega/gamegear
   last: ''
@@ -4531,7 +4531,7 @@ system_sega:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: hikaru
   pretty_name: SEGA Hikaru
 - src: sega/mastersystem
   last: ''
@@ -4591,7 +4591,7 @@ system_sega:
   igdb: sega-cd-32x
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: segacd32
   pretty_name: SEGA Mega CD + 32x
 - src: sega/megadrive
   last: ''
@@ -4791,7 +4791,7 @@ system_sega:
   igdb: sega-pico
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: sega-pico
   pretty_name: SEGA Pico
 - src: sega/saturn
   last: ''
@@ -4871,7 +4871,7 @@ system_sega:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: sc3000
   pretty_name: SEGA SC-3000
 - src: sega/systemsp
   last: ''
@@ -4911,7 +4911,7 @@ system_sega:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: stv
-  romm: ''
+  romm: stv
   pretty_name: SEGA STV
 - src: sega/lindbergh
   last: ''
@@ -5033,7 +5033,7 @@ system_sinclair:
   igdb: sinclair-zx81
   replayfpgaarcade: ''
   retrodeck: zx81
-  romm: sinclair-zx81
+  romm: zx81
   pretty_name: Sinclair ZX81
 - src: sinclair/zxspectrum
   last: ''
@@ -5436,7 +5436,7 @@ system_sony:
   igdb: ps4--1
   replayfpgaarcade: ''
   retrodeck: ps4
-  romm: ps4--1
+  romm: ps4
   pretty_name: Sony PlayStation 4
 - src: sony/playstation4/pkg
   last: ''
@@ -5516,7 +5516,7 @@ system_sony:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: psp-minis
   pretty_name: Sony PlayStation Portable (Minis)
 - src: sony/playstationportable/psn
   last: ''
@@ -5597,7 +5597,7 @@ system_sord:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: sord-m5
   pretty_name: Sord M5
 system_spectravideo:
 - src: spectravideo/sv328
@@ -5618,7 +5618,7 @@ system_spectravideo:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: spectravideo
-  romm: ''
+  romm: spectravideo
   pretty_name: SpectraVideo SV328
 system_tandy:
 - src: tandy/vis
@@ -5639,7 +5639,7 @@ system_tandy:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: tandy-vis
   pretty_name: Tandy VIS
 - src: tandy/trs80
   last: ''
@@ -5780,7 +5780,7 @@ system_tapwave:
   igdb: zod
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: zod
+  romm: zodiac
   pretty_name: Tapwave Zodiac
 system_tatung:
 - src: tatung/einstein
@@ -6045,7 +6045,7 @@ system_thomson:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: moto
-  romm: ''
+  romm: thomson-to
   pretty_name: Thomson
 - src: thomson/to8
   last: ''
@@ -6168,7 +6168,7 @@ system_tomytronic:
   igdb: tomy-tutor-slash-pyuta-slash-grandstand-tutor
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: tomy-tutor
   pretty_name: TomyTronic Tutor
 system_tsukuda:
 - src: tsukuda/othellomultivision
@@ -6189,7 +6189,7 @@ system_tsukuda:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: multivision
-  romm: ''
+  romm: multivision
   pretty_name: Tsukuda Othello Multivision
 system_umtech:
 - src: umtech/videobrain
@@ -6210,7 +6210,7 @@ system_umtech:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: videobrain
   pretty_name: Umtech VideoBrain
 system_rca:
 - src: rca/studioii
@@ -6231,7 +6231,7 @@ system_rca:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: rca-studio-ii
   pretty_name: RCA Studio II
 system_vmlabs:
 - src: vmlabs/nuon
@@ -6273,7 +6273,7 @@ system_vector:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: 06c
   pretty_name: Vector 06c
 system_videos:
 - src: videos/bdiso
@@ -6335,7 +6335,7 @@ system_videotechnology:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: crvision
-  romm: ''
+  romm: creativision
   pretty_name: VTech CreatiVision
 - src: videotechnology/vtechlaser
   last: other/videotechnology_vtechlaser
@@ -6437,7 +6437,7 @@ system_watara:
   igdb: watara-slash-quickshot-supervision
   replayfpgaarcade: ''
   retrodeck: supervision
-  romm: watara-slash-quickshot-supervision
+  romm: supervision
   pretty_name: Watara Supervision
 - src: watara/supervision8000
   last: ''
@@ -6457,7 +6457,7 @@ system_watara:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: super-vision-8000
   pretty_name: Watara Supervision 800
 system_pinball:
 - src: pinball/fpinball
@@ -6580,7 +6580,7 @@ system_symbian:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: symbian
-  romm: ''
+  romm: symbian
   pretty_name: SymbianOS
 system_palm:
 - src: palm/palmos
@@ -6885,7 +6885,7 @@ general_engines:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: mugen
-  romm: ''
+  romm: mugen
   pretty_name: Mugen
 - src: engine/openbor
   last: ''
@@ -6905,7 +6905,7 @@ general_engines:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: openbor
-  romm: ''
+  romm: openbor
   pretty_name: OpenBOR
 - src: engine/openlara
   last: ''
@@ -7468,7 +7468,7 @@ general_other:
   igdb: arduboy
   replayfpgaarcade: ''
   retrodeck: arduboy
-  romm: ''
+  romm: arduboy
   pretty_name: Arduboy
 - src: other/chip8
   last: ''
@@ -7628,7 +7628,7 @@ general_other:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: scummvm
-  romm: ''
+  romm: scummvm
   pretty_name: ScummVM
 - src: other/searle_multicomp
   last: ''
@@ -7949,7 +7949,7 @@ general_platform:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: j2me
-  romm: ''
+  romm: j2me
   pretty_name: Java
 - src: platform/lcdgames
   last: ''
@@ -9033,7 +9033,7 @@ inactive_unsupported_igdb:
   igdb: psvr
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: playstation-vr
+  romm: psvr
   pretty_name: ''
 - src: sony/psvr2
   last: ''
@@ -9193,7 +9193,7 @@ inactive_unsupported_igdb:
   igdb: plato--1
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: plato--1
+  romm: plato
   pretty_name: ''
 - src: hp2100
   last: ''
@@ -9253,7 +9253,7 @@ inactive_unsupported_igdb:
   igdb: edsac--1
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: edsac--1
+  romm: edsac
   pretty_name: ''
 - src: timeshare
   last: ''
@@ -9354,8 +9354,8 @@ inactive_unsupported_staging:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
-  pretty_name: ''
+  romm: commander-x16
+  pretty_name: 'Commander X16'
 - src: ports/rott
   last: ''
   mister: ''
@@ -9554,8 +9554,8 @@ inactive_unsupported_staging:
   igdb: laseractive
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
-  pretty_name: ''
+  romm: laseractive
+  pretty_name: LaserActive
 system_template:
 - src: ''
   last: ''
