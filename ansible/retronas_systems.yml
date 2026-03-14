@@ -35,12 +35,15 @@ system_map: "{{
   |union(general_other)
   |union(general_platform)
   |union(general_tools)
+  |union(system_abc)
   |union(system_acorn)
   |union(system_amstrad)
   |union(system_antonic)
   |union(system_apf)
+  |union(system_apogee)
   |union(system_apple)
   |union(system_arcade)
+  |union(system_astral)
   |union(system_atari)
   |union(system_atmel)
   |union(system_audiosonic)
@@ -84,6 +87,7 @@ system_map: "{{
   |union(system_jupiter)
   |union(system_leapfrog)
   |union(system_magnavox)
+  |union(system_matra_and_hachetter_ordinateur)
   |union(system_mattel)
   |union(system_microsoft)
   |union(system_milesgordon)
@@ -115,6 +119,7 @@ system_map: "{{
   |union(system_tandy)
   |union(system_tapwave)
   |union(system_tatung)
+  |union(system_technosys_research_labs)
   |union(system_tesla)
   |union(system_texas_instruments)
   |union(system_thomson)
@@ -129,6 +134,7 @@ system_map: "{{
   |union(system_videoton)
   |union(system_vmlabs)
   |union(system_watara)
+  |union(system_worlds_of_wonder)
   |union(system_zeebo)
   |union(system_zpa)
 }}"
@@ -148,6 +154,8 @@ system_links:
   dest: sega/genesis
 - src: interton/vc4000
   dest: audiosonic/1292_advanced_programmable_video_system
+- src: sega/advanced-pico-beena
+  dest: segs/beena
 system_acorn:
 - src: acorn/archimedes
   last: ''
@@ -330,8 +338,29 @@ system_apf:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: apf
   pretty_name: APF MP1000
+system_apogee:
+- src: apogee/bk-01
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: bk-01
+  pretty_name: Apogee BK-01
 system_apple:
 - src: apple/applei
   last: ''
@@ -433,6 +462,26 @@ system_apple:
   retrodeck: ''
   romm: 'appleiii'
   pretty_name: Apple III
+- src: apple/lisa
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: apple-lisa
+  pretty_name: Apple Lisa
 - src: apple/macintosh
   last: ''
   mister: MACPLUS
@@ -471,7 +520,7 @@ system_apple:
   igdb: apple-pippin
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: pippin
+  romm: apple-pippin
   pretty_name: Apple Pippin
 system_arcade:
 - src: arcade
@@ -874,6 +923,27 @@ system_arcade:
   retrodeck: ''
   romm: ''
   pretty_name: PGM2
+system_astral:
+- src: 'astral/2000'
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: astral-2000
+  pretty_name: Astral 2000
 system_atari:
 - src: atari/2600
   last: ''
@@ -1075,6 +1145,26 @@ system_atari:
   retrodeck: ''
   romm: ''
   pretty_name: Atari ST (cart)
+- src: atari/vcs
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: atari-vcs
+  pretty_name: Atari VCS
 - src: atari/xegs
   last: ''
   mister: ''
@@ -1465,6 +1555,66 @@ system_casio:
   retrodeck: ''
   romm: casio-pv-2000
   pretty_name: Casio PV2000
+- src: casio/cfx-9850
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: casio-cfx-9850
+  pretty_name: Casio CFX-9850
+- src: casio/fp-1000
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: casio-fp-1000
+  pretty_name: Casio FP-1000
+- src: casio/pb-1000
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: casio-pb-1000
+  pretty_name: Casio PB-1000
 system_cdc:
 - src: cdc/cyber70
   last: ''
@@ -1951,8 +2101,8 @@ system_eaca:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
-  pretty_name: EACA EG2000
+  romm: colour-genie
+  pretty_name: EACA EG2000 Colour Genie
 system_electronika:
 - src: electronika/bk
   last: other/electronika_bk
@@ -2466,6 +2616,26 @@ system_generalinstrument:
   retrodeck: ''
   romm: ''
   pretty_name: General Instrument AY38500
+- src: generalinstrument/champion-2711
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: champion-2711
+  pretty_name: Champion 2711
 system_hartung:
 - src: hartung/gamemaster
   last: ''
@@ -3321,6 +3491,26 @@ system_mits:
   retrodeck: ''
   romm: 'altair-8800'
   pretty_name: MITS Altair 8800
+- src: mits/altair680
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: altair-680
+  pretty_name: MITS Altair 680
 system_nabu:
 - src: nabu
   last: ''
@@ -4433,6 +4623,26 @@ system_sega:
   retrodeck: atomiswave
   romm: ''
   pretty_name: SEGA Atomiswave
+- src: sega/advanced-pico-beena
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: advanced-pico-beena
+  pretty_name: SEGA Advanced Pico Beena
 - src: sega/chihiro
   last: ''
   mister: ''
@@ -8498,7 +8708,7 @@ general_ports:
   retropie: ''
   batocera: ''
   recalbox: ''
-  retroarch: Jump 'n Bump
+  retroarch: Jump \'n Bump
   ops2l: ''
   ps3netsrv: ''
   fspd: ''
@@ -9515,7 +9725,7 @@ inactive_unsupported_staging:
   replayfpgaarcade: ''
   retrodeck: ''
   romm: ''
-  pretty_name: ''
+  pretty_name: 'Theme Hospital'
 - src: ports/halflife
   last: ''
   mister: ''
@@ -9535,7 +9745,7 @@ inactive_unsupported_staging:
   replayfpgaarcade: ''
   retrodeck: ''
   romm: ''
-  pretty_name: ''
+  pretty_name: 'Half Life'
 - src: other/laseractive
   last: ''
   mister: ''
@@ -9555,7 +9765,91 @@ inactive_unsupported_staging:
   replayfpgaarcade: ''
   retrodeck: ''
   romm: laseractive
-  pretty_name: LaserActive
+  pretty_name: 'LaserActive'
+system_technosys_research_labs:
+- src: technosys_research_labs/aamber-pegasus
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: pegasus
+  pretty_name: 'Aamber Pegasus'
+system_abc:
+- src: abc/80
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: abc-80
+  pretty_name: 'ABC 80'
+system_worlds_of_wonder:
+- src: 'worlds-of-wonder/action-max'
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: action-max
+  pretty_name: WoW Action Max
+system_matra_and_hachetter_ordinateur:
+- src: matra-and-hachetter-ordinateur/alice
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: alice3290
+  pretty_name: 'Alice 32/90'
 system_template:
 - src: ''
   last: ''
