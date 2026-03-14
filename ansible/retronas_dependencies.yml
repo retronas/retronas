@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  become: yes
 
   vars:
     my_name: "RetroNAS dependencies"
