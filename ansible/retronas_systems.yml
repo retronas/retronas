@@ -51,6 +51,7 @@ system_map: "{{
   |union(system_bandai)
   |union(system_bbc)
   |union(system_benesse)
+  |union(system_bgr)
   |union(system_bitcorporation)
   |union(system_cambridge)
   |union(system_camputers)
@@ -59,16 +60,22 @@ system_map: "{{
   |union(system_cdc)
   |union(system_coleco)
   |union(system_commodore)
+  |union(system_compucolor)
+  |union(system_compucorp)
   |union(system_compukit)
+  |union(system_computer_power_and_light)
   |union(system_creatronic)
+  |union(system_cybervision)
   |union(system_dec)
   |union(system_dragon)
   |union(system_eaca)
+  |union(system_ecd)
   |union(system_electronika)
   |union(system_elektor)
   |union(system_emerson)
   |union(system_entex)
   |union(system_epoch_co)
+  |union(system_exelvision)
   |union(system_exidy)
   |union(system_fairchild)
   |union(system_fantasy_console)
@@ -77,6 +84,7 @@ system_map: "{{
   |union(system_funtech)
   |union(system_gamepark)
   |union(system_generalinstrument)
+  |union(system_grey_innovation)
   |union(system_hartung)
   |union(system_homelab)
   |union(system_ibm)
@@ -155,7 +163,7 @@ system_links:
 - src: interton/vc4000
   dest: audiosonic/1292_advanced_programmable_video_system
 - src: sega/advanced-pico-beena
-  dest: segs/beena
+  dest: sega/beena
 system_acorn:
 - src: acorn/archimedes
   last: ''
@@ -2845,6 +2853,26 @@ system_jupiter:
   romm: jupiter-ace
   pretty_name: Jupiter ACE
 system_leapfrog:
+- src: leapfrog/didj
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: didj
+  pretty_name: Leapfrog Didj
 - src: leapfrog/leapster
   last: ''
   mister: ''
@@ -6423,6 +6451,66 @@ system_umtech:
   romm: videobrain
   pretty_name: Umtech VideoBrain
 system_rca:
+- src: rca/cosmac
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: fred-cosmac
+  pretty_name: COSMAC
+- src: rca/cosmacelf
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: COSMAC Elf
+- src: rca/cosmacvip
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: COSMAC VIP
 - src: rca/studioii
   last: ''
   mister: ''
@@ -6729,7 +6817,7 @@ system_capcom:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: cps1
-  romm: ''
+  romm: cps1
   pretty_name: Capcom CPS-1
 - src: capcom/cps2
   last: ''
@@ -6749,7 +6837,7 @@ system_capcom:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: cps2
-  romm: ''
+  romm: cps2
   pretty_name: Capcom CPS-2
 - src: capcom/cps3
   last: ''
@@ -6769,7 +6857,7 @@ system_capcom:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: cps3
-  romm: ''
+  romm: cps3
   pretty_name: Capcom CPS-3
 system_symbian:
 - src: symbian/symbianos
@@ -8041,6 +8129,66 @@ general_platform:
   retrodeck: ''
   romm: browser
   pretty_name: ''
+- src: platform/cpm
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: cpm
+  pretty_name: CP/M
+- src: platform/doja
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: doja
+  pretty_name: DoJa
+- src: platform/dangeros
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: danger-os
+  pretty_name: Danger OS
 - src: platform/evercade
   last: ''
   mister: ''
@@ -8061,6 +8209,26 @@ general_platform:
   retrodeck: ''
   romm: evercade
   pretty_name: Evercade
+- src: platform/exen
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: exen
+  pretty_name: ExEn
 - src: platform/gamemaker
   last: ''
   mister: ''
@@ -9485,6 +9653,90 @@ inactive_unsupported_igdb:
   retrodeck: ''
   romm: call-a-computer
   pretty_name: ''
+system_technosys_research_labs:
+- src: technosys_research_labs/aamber-pegasus
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: pegasus
+  pretty_name: 'Aamber Pegasus'
+system_abc:
+- src: abc/80
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: abc-80
+  pretty_name: 'ABC 80'
+system_worlds_of_wonder:
+- src: 'worlds-of-wonder/action-max'
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: action-max
+  pretty_name: WoW Action Max
+system_matra_and_hachetter_ordinateur:
+- src: matra-and-hachetter-ordinateur/alice
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: alice-3290
+  pretty_name: 'Alice 32/90'
 inactive_unsupported_staging:
 - src: pcv2
   last: ''
@@ -9766,8 +10018,7 @@ inactive_unsupported_staging:
   retrodeck: ''
   romm: laseractive
   pretty_name: 'LaserActive'
-system_technosys_research_labs:
-- src: technosys_research_labs/aamber-pegasus
+- src: other/blacknut
   last: ''
   mister: ''
   retropie: ''
@@ -9785,10 +10036,10 @@ system_technosys_research_labs:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: pegasus
-  pretty_name: 'Aamber Pegasus'
-system_abc:
-- src: abc/80
+  romm: blacknut
+  pretty_name: Blacknut
+system_computer_power_and_light:
+- src: computer_power_and_light/compal80
   last: ''
   mister: ''
   retropie: ''
@@ -9806,10 +10057,10 @@ system_abc:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: abc-80
-  pretty_name: 'ABC 80'
-system_worlds_of_wonder:
-- src: 'worlds-of-wonder/action-max'
+  romm: compal-80
+  pretty_name: Compal 80
+system_compucolor:
+- src: compucolor/compucolor8001
   last: ''
   mister: ''
   retropie: ''
@@ -9827,10 +10078,9 @@ system_worlds_of_wonder:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: action-max
-  pretty_name: WoW Action Max
-system_matra_and_hachetter_ordinateur:
-- src: matra-and-hachetter-ordinateur/alice
+  romm: compucolor-i
+  pretty_name: Compucolor 8001
+- src: compucolor/compucolorii
   last: ''
   mister: ''
   retropie: ''
@@ -9848,8 +10098,110 @@ system_matra_and_hachetter_ordinateur:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: alice3290
-  pretty_name: 'Alice 32/90'
+  romm: compucolor-ii
+  pretty_name: Compucolor II
+system_compucorp:
+- src: compucorp/100-series
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: compucorp-programmable-calculator
+  pretty_name: Compucorp 100 Series Calculator
+- src: compucorp/200-series
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: Compucorp 200 Series Calculator
+- src: compucorp/300-series
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: Compucorp 300 Series Calculator
+- src: compucorp/400-series
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: Compucorp 400 Series Calculator
+system_cybervision:
+- src: cybervision/2001
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: cybervision
+  pretty_name: CyberVision 2001
 system_template:
 - src: ''
   last: ''
@@ -9871,4 +10223,108 @@ system_template:
   retrodeck: ''
   romm: ''
   pretty_name: ''
-
+system_grey_innovation:
+- src: grey_innovation/digiblast
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: digiblast
+  pretty_name: digiBlast
+system_ecd:
+- src: ecd/micromind
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ecd-micromind
+  pretty_name: ECD Micromind
+system_bgr:
+- src: bgr/excalibur64
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: excalibur-64
+  pretty_name: Excalibur 64
+system_exelvision:
+- src: exelvision/exl100
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: exelvision
+  pretty_name: Exelvision EXL100
+system_template:
+- src: ''
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ''
+  pretty_name: ''
