@@ -113,6 +113,7 @@ system_map: "{{
   |union(system_panic)
   |union(system_pelvarazdin)
   |union(system_philips)
+  |union(system_playjam)
   |union(system_pinball)
   |union(system_rca)
   |union(system_sega)
@@ -131,7 +132,7 @@ system_map: "{{
   |union(system_tesla)
   |union(system_texas_instruments)
   |union(system_thomson)
-  |union(system_tiger)
+  |union(system_tigerelectronics)
   |union(system_timetop)
   |union(system_tomytronic)
   |union(system_tsukuda)
@@ -143,6 +144,7 @@ system_map: "{{
   |union(system_vmlabs)
   |union(system_watara)
   |union(system_worlds_of_wonder)
+  |union(system_zapitgames)
   |union(system_zeebo)
   |union(system_zpa)
 }}"
@@ -2049,6 +2051,26 @@ system_dec:
   retrodeck: ''
   romm: pdp11
   pretty_name: DEC PDP-11
+- src: dec/gt40
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gt40
+  pretty_name: DEC GT40
 system_dragon:
 - src: dragon
   last: ''
@@ -2377,7 +2399,7 @@ system_fantasy_console:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: wasm4
-  romm: ''
+  romm: wasm-4
   pretty_name: ''
 - src: fantasyconsole/microw8
   last: ''
@@ -2601,8 +2623,48 @@ system_gamepark:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: gp32
   pretty_name: GamePark GP32
+- src: gamepark/gp2x
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gp2x
+  pretty_name: GamePark GP2X
+- src: gamepark/gp2x-wiz
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gp2x-wiz
+  pretty_name: GamePark GP2X Wiz
 system_generalinstrument:
 - src: generalinstrument/ay38500
   last: other/generalinstrument_ay38500
@@ -6325,7 +6387,7 @@ system_thomson:
   retrodeck: ''
   romm: thomson-mo5
   pretty_name: Thomson MO5
-system_tiger:
+system_tigerelectronics:
 - src: gamecom
   last: ''
   mister: ''
@@ -7828,6 +7890,26 @@ general_other:
   retrodeck: ''
   romm: ''
   pretty_name: ''
+- src: other/galaksija
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: galaksija
+  pretty_name: Galaksija
 - src: other/games
   last: ''
   mister: ''
@@ -8249,6 +8331,26 @@ general_platform:
   retrodeck: ''
   romm: ''
   pretty_name: Gamemaker
+- src: platform/glulx
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: glulx
+  pretty_name: Glulx
 - src: platform/google/stadia
   last: ''
   mister: ''
@@ -8509,6 +8611,26 @@ general_platform:
   retrodeck: ''
   romm: ''
   pretty_name: Powder Toy
+- src: platform/gvm
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gvm
+  pretty_name: GVM
 general_ports:
 - src: ports
   last: ''
@@ -10307,6 +10429,69 @@ system_exelvision:
   retrodeck: ''
   romm: exelvision
   pretty_name: Exelvision EXL100
+system_zapitgames:
+- src: zapitigames/gamewave
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: game-wave
+  pretty_name: Game Wave
+system_playjam:
+- src: playjam/gamestick
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gamestick
+  pretty_name: GameStick
+system_tigertelematics:
+- src: tigertelmatics/gizmondo
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: gizmondo
+  pretty_name: Gizmondo
 system_template:
 - src: ''
   last: ''
