@@ -86,12 +86,18 @@ system_map: "{{
   |union(system_generalinstrument)
   |union(system_grey_innovation)
   |union(system_hartung)
+  |union(system_heathkit)
+  |union(system_hitachi)
   |union(system_homelab)
+  |union(system_hewlettpackard)
   |union(system_ibm)
+  |union(system_iircade)
+  |union(system_imlac)
   |union(system_infocom)
   |union(system_intelligentsoftware)
   |union(system_interact)
   |union(system_interton)
+  |union(system_jolt)
   |union(system_jupiter)
   |union(system_leapfrog)
   |union(system_magnavox)
@@ -101,6 +107,7 @@ system_map: "{{
   |union(system_milesgordon)
   |union(system_miltonbradley)
   |union(system_mits)
+  |union(system_mos)
   |union(system_nabu)
   |union(system_nec)
   |union(system_nichibutsu)
@@ -2789,6 +2796,26 @@ system_ibm:
   retrodeck: ''
   romm: pc-jr
   pretty_name: IBM PCjr
+- src: ibm/5100
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ibm-5100
+  pretty_name: IBM 5100
 system_infocom:
 - src: infocom/zmachine
   last: ''
@@ -2870,7 +2897,7 @@ system_interact:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: ''
-  romm: ''
+  romm: interact-model-one
   pretty_name: Interact Home Computer
 system_interton:
 - src: interton/vc4000
@@ -2893,6 +2920,26 @@ system_interton:
   retrodeck: ''
   romm: interton-vc-4000
   pretty_name: Interton VC4000
+- src: interton/v2000
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: interton-video-2000
+  pretty_name: Interton Video 2000
 system_jupiter:
 - src: jupiter/ace
   last: other/jupiter_ace
@@ -6697,6 +6744,26 @@ system_videotechnology:
   retrodeck: crvision
   romm: creativision
   pretty_name: VTech CreatiVision
+- src: videotechnology/vtechlaser200
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: laser200
+  pretty_name: VTech Laser 200
 - src: videotechnology/vtechlaser
   last: other/videotechnology_vtechlaser
   mister: Laser
@@ -8431,6 +8498,26 @@ general_platform:
   retrodeck: j2me
   romm: j2me
   pretty_name: Java
+- src: platform/kaios
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: kaios
+  pretty_name: KaiOS
 - src: platform/lcdgames
   last: ''
   mister: ''
@@ -9635,26 +9722,6 @@ inactive_unsupported_igdb:
   retrodeck: ''
   romm: ooparts
   pretty_name: ''
-- src: hp3000
-  last: ''
-  mister: ''
-  retropie: ''
-  batocera: ''
-  recalbox: ''
-  retroarch: ''
-  ops2l: ''
-  ps3netsrv: ''
-  fspd: ''
-  emuelec: ''
-  smdb: ''
-  freestation: ''
-  analoguepocket: ''
-  emudeck: ''
-  igdb: hp3000
-  replayfpgaarcade: ''
-  retrodeck: ''
-  romm: hp3000
-  pretty_name: ''
 - src: sol-20
   last: ''
   mister: ''
@@ -9694,26 +9761,6 @@ inactive_unsupported_igdb:
   replayfpgaarcade: ''
   retrodeck: ''
   romm: plato
-  pretty_name: ''
-- src: hp2100
-  last: ''
-  mister: ''
-  retropie: ''
-  batocera: ''
-  recalbox: ''
-  retroarch: ''
-  ops2l: ''
-  ps3netsrv: ''
-  fspd: ''
-  emuelec: ''
-  smdb: ''
-  freestation: ''
-  analoguepocket: ''
-  emudeck: ''
-  igdb: hp2100
-  replayfpgaarcade: ''
-  retrodeck: ''
-  romm: hp2100
   pretty_name: ''
 - src: sdssigma7
   last: ''
@@ -10324,27 +10371,6 @@ system_cybervision:
   retrodeck: ''
   romm: cybervision
   pretty_name: CyberVision 2001
-system_template:
-- src: ''
-  last: ''
-  mister: ''
-  retropie: ''
-  batocera: ''
-  recalbox: ''
-  retroarch: ''
-  ops2l: ''
-  ps3netsrv: ''
-  fspd: ''
-  emuelec: ''
-  smdb: ''
-  freestation: ''
-  analoguepocket: ''
-  emudeck: ''
-  igdb: ''
-  replayfpgaarcade: ''
-  retrodeck: ''
-  romm: ''
-  pretty_name: ''
 system_grey_innovation:
 - src: grey_innovation/digiblast
   last: ''
@@ -10492,6 +10518,213 @@ system_tigertelematics:
   retrodeck: ''
   romm: gizmondo
   pretty_name: Gizmondo
+system_heathkit:
+- src: heathkit/h11
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: heathkit-h11
+  pretty_name: Heathkit H11
+- src: heathkit/h8
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: heathzenith
+  pretty_name: Heath/Zenith H8/H89
+system_hitachi:
+- src: hitachi/s1
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: hitachi-s1
+  pretty_name: Hitachi S1
+system_hewlettpackard:
+- src: hp/hp-9800
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: hp-9800
+  pretty_name: HP 9800
+- src: hp/hp3000
+  last: hp3000
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: hp3000
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: hp3000
+  pretty_name: HP 3000
+- src: hp/hp2100
+  last: hp2100
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: hp2100
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: hp2100
+  pretty_name: HP 2100
+system_iircade:
+- src: iircade
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: iircade
+  pretty_name: iiRcade
+system_imlac:
+- src: imlac/pds1
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: imlac-pds1
+  pretty_name: Imlac PDS-1
+system_jolt:
+- src: jolt
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: jolt
+  pretty_name: Jolt
+system_mos:
+- src: mos/kim1
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: kim-1
+  pretty_name: KIM-1
 system_template:
 - src: ''
   last: ''
