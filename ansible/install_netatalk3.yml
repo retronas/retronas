@@ -42,7 +42,7 @@
 
     - name: "{{ my_name }} - end play if no netatalk package"
       ansible.builtin.meta: end_play
-      when: no_netatalk is true
+      when: no_netatalk is defined and no_netatalk is true
 
     - name: "{{ my_name }}  - unhold netatalk package"
       ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"
