@@ -40,6 +40,7 @@ system_map: "{{
   |union(system_amstrad)
   |union(system_antonic)
   |union(system_apf)
+  |union(system_appliedtechnology)
   |union(system_apogee)
   |union(system_apple)
   |union(system_arcade)
@@ -85,6 +86,7 @@ system_map: "{{
   |union(system_gamepark)
   |union(system_generalinstrument)
   |union(system_grey_innovation)
+  |union(system_grundybusinesssystems)
   |union(system_hartung)
   |union(system_heathkit)
   |union(system_hitachi)
@@ -102,17 +104,24 @@ system_map: "{{
   |union(system_leapfrog)
   |union(system_magnavox)
   |union(system_matra_and_hachetter_ordinateur)
+  |union(system_matsushita)
   |union(system_mattel)
+  |union(system_memotech)
+  |union(system_meraelzab)
   |union(system_microsoft)
   |union(system_milesgordon)
   |union(system_miltonbradley)
   |union(system_mits)
   |union(system_mos)
   |union(system_nabu)
+  |union(system_namco)
   |union(system_nec)
   |union(system_nichibutsu)
   |union(system_nintendo)
   |union(system_nokia)
+  |union(system_northstarcomputers)
+  |union(system_noval)
+  |union(system_ohioscientific)
   |union(system_oric)
   |union(system_ouya)
   |union(system_palm)
@@ -133,6 +142,7 @@ system_map: "{{
   |union(system_spectravideo)
   |union(system_symbian)
   |union(system_tandy)
+  |union(system_tangerinecomputersystems)
   |union(system_tapwave)
   |union(system_tatung)
   |union(system_technosys_research_labs)
@@ -173,6 +183,8 @@ system_links:
   dest: audiosonic/1292_advanced_programmable_video_system
 - src: sega/advanced-pico-beena
   dest: sega/beena
+- src: sega/apple-pippin
+  dest: sega/pippin
 system_acorn:
 - src: acorn/archimedes
   last: ''
@@ -519,6 +531,26 @@ system_apple:
   retrodeck: macintosh
   romm: mac
   pretty_name: Apple Machintosh
+- src: apple/newton
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: newton
+  pretty_name: Apple Newton
 - src: apple/pippin
   last: ''
   mister: ''
@@ -4513,6 +4545,26 @@ system_nokia:
   retrodeck: ngage
   romm: ngage
   pretty_name: Nokia N-Gage
+- src: nokia/n-gage2
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ngage2
+  pretty_name: Nokia N-Gage (Service)
 system_oric:
 - src: oric/atmos
   last: ''
@@ -5020,6 +5072,26 @@ system_sega:
   retrodeck: ''
   romm: ''
   pretty_name: ''
+- src: sega/model1
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: model1
+  pretty_name: SEGA Model 1
 - src: sega/model2
   last: ''
   mister: ''
@@ -5038,7 +5110,7 @@ system_sega:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: model2
-  romm: ''
+  romm: model2
   pretty_name: SEGA Model 2
 - src: sega/model3
   last: ''
@@ -5058,7 +5130,7 @@ system_sega:
   igdb: ''
   replayfpgaarcade: ''
   retrodeck: model3
-  romm: ''
+  romm: model3
   pretty_name: SEGA Model 3
 - src: sega/naomi
   last: ''
@@ -5260,6 +5332,46 @@ system_sega:
   retrodeck: stv
   romm: stv
   pretty_name: SEGA STV
+- src: sega/system16
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: system16
+  pretty_name: SEGA System 16
+- src: sega/system32
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: system32
+  pretty_name: SEGA System 32
 - src: sega/lindbergh
   last: ''
   mister: ''
@@ -5504,6 +5616,26 @@ system_snk:
   retrodeck: neogeo
   romm: neogeoaes
   pretty_name: SNK NEO-GEO
+- src: snk/neogeox
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: neo-geo-x
+  pretty_name: SNK NEO-GEO X
 - src: snk/neogeopocket
   last: ''
   mister: NeoGeoPocket
@@ -8578,6 +8710,46 @@ general_platform:
   retrodeck: ''
   romm: linux
   pretty_name: ''
+- src: platform/maemo
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: maemo
+  pretty_name: Maemo
+- src: platform/meego
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: meego
+  pretty_name: MeeGo
 - src: platform/mobile
   last: ''
   mister: ''
@@ -8598,6 +8770,46 @@ general_platform:
   retrodeck: ''
   romm: mobile
   pretty_name: ''
+- src: platform/mophun
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: mophun
+  pretty_name: Mophun
+- src: platform/mre
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: mre
+  pretty_name: MediaTek MRE
 - src: platform/onlive-game-system
   last: ''
   mister: ''
@@ -8618,6 +8830,26 @@ general_platform:
   retrodeck: ''
   romm: onlive-game-system
   pretty_name: ''
+- src: platform/os2
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: os2
+  pretty_name: IBM OS/2
 - src: platform/plugnplay
   last: ''
   mister: ''
@@ -10725,6 +10957,257 @@ system_mos:
   retrodeck: ''
   romm: kim-1
   pretty_name: KIM-1
+system_matsushita:
+- src: matsushita/jr
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: matsushitapanasonic-jr
+  pretty_name: Matsushita/Panasonic JR
+system_memotech:
+- src: memotech/mtx
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: memotech-mtx
+  pretty_name: Memotech MTX
+- src: memotech/mtx512
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: mtx512
+  pretty_name: Memotech MTX512
+system_meraelzab:
+- src: meraelzab/meritum
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: meritum
+  pretty_name: Mera-Elzab Meritum
+system_appliedtechnology:
+- src: appliedtechnology/microbee
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: microbee
+  pretty_name: Microbee
+system_tangerinecomputersystems:
+- src: tangeringcomputersystems/microtan65
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: microtan-65
+  pretty_name: Microtan 65
+system_nascom:
+- src: nascom/1
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: nascom
+  pretty_name: Nascom 1
+system_grundybusinesssystems:
+- src: grundybusinesssystem/newbrain
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: newbrain
+  pretty_name: NewBrain
+system_northstarcomputers:
+- src: northstarcomputers/northstar
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: northstar
+  pretty_name: NorthStar
+system_noval:
+- src: noval/760
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: noval-760
+  pretty_name: Noval 760
+system_ohioscientific:
+- src: ohioscientific
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: ohio-scientific
+  pretty_name: Ohio Scientific
+system_namco:
+- src: namco/system22
+  last: ''
+  mister: ''
+  retropie: ''
+  batocera: ''
+  recalbox: ''
+  retroarch: ''
+  ops2l: ''
+  ps3netsrv: ''
+  fspd: ''
+  emuelec: ''
+  smdb: ''
+  freestation: ''
+  analoguepocket: ''
+  emudeck: ''
+  igdb: ''
+  replayfpgaarcade: ''
+  retrodeck: ''
+  romm: system-32
+  pretty_name: Namco System 22
 system_template:
 - src: ''
   last: ''
