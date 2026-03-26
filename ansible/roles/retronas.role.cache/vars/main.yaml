@@ -1,0 +1,2 @@
+retronas_cache_file: "{{ retronas_root }}/cache/s1_localhost"
+retronas_systems_file: "{{ retronas_root }}/ansible/retronas_systems.yml"
