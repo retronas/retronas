@@ -78,6 +78,7 @@ bash ${PCHDIR}/git-config.sh
 bash ${PCHDIR}/install-jq.sh
 bash ${PCHDIR}/update-retronas_vars.sh
 bash ${PCHDIR}/new-startup-file.sh
+bash ${PCHDIR}/cache-dir.sh
 #
 # END MIGRATIONS
 #
@@ -156,7 +157,7 @@ if ! getent group $OLDRNGROUP &>/dev/null
 then
   echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
   PAUSE
-  bash d_input.sh update-group
+  bash -c d_input.sh update-group
 fi
 
 bash d_menu.sh main
