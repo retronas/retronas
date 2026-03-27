@@ -6,6 +6,7 @@
     my_name: "ps3netsrv"
     my_file: "install_ps3netsrv"
     module_name: "ps3netsrv"
+    system_key: "ps3netsrv"
 
     systemd_units:
       - { name: "ps3netsrv", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
@@ -66,7 +67,7 @@
 
     - name: "{{ my_name }} - Install build tools (debian)"
       ansible.builtin.package:
-        name: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
+        name: "{{ packages_debian['debian' + ansible_distribution_major_version] }}"
         state: latest
       when: ansible_distribution == 'Debian'
 
@@ -92,9 +93,7 @@
         owner: "{{ retronas_user }}"
         group: "{{ retronas_group }}"
         state: link
-      with_items:
-        - "{{ system_sony }}"
-        - "{{ system_videos }}"
+      loop: "{{ system_map }}"
       when:
         - item.ps3netsrv | length > 0
 

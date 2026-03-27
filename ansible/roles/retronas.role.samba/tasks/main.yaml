@@ -1,8 +1,12 @@
+---
 - name: "{{ my_name }} - Load RetroNAS config"
   ansible.builtin.include_vars: retronas_vars.yml
 
 - ansible.builtin.import_role:
     name: retronas.role.package.latest
+
+- ansible.builtin.import_role:
+    name: retronas.role.templates
 
 - name: "{{ my_name }} - configure samba config"
   ansible.builtin.ini_file:
@@ -10,17 +14,14 @@
     section: "{{ item.section }}"
     option: "{{ item.option }}"
     value: "{{ item.value }}"
-  with_items: "{{ config_opts }}"
-
-- ansible.builtin.import_role:
-    name: retronas.role.templates
+  loop: "{{ config_opts }}"
 
 - name: "{{ my_name }} - restarted/enabled"
   ansible.builtin.service:
     name: "{{ item }}"
     state: restarted
-    enabled: yes
-  with_items: "{{ my_services }}"
+    enabled: true
+  loop: "{{ my_services }}"
 
 - ansible.builtin.import_role:
     name: retronas.role.firewalld.port

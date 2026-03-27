@@ -41,7 +41,7 @@
         name: retronas.role.templates
 
     - name: "{{ my_name }} - Install from project repo"
-      ansible.builtin.git: 
+      ansible.builtin.git:
         repo: "https://github.com/MiSTerOrganize/MiSTerOrganize.git"
         dest: "{{ retronas_path}}/{{ module_name }}"
         single_branch: true

@@ -3,6 +3,8 @@
   ansible.builtin.set_fact:
     path_list_ll: "{{ path_list_ll|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
   loop: "{{ system_map }}"
+  loop_control:
+    label: "{{ item.src }}"
   when: top_level_paths is not defined and
     item[system_key] is defined and
     item[system_key] | length > 0
@@ -15,6 +17,8 @@
     group: "{{ retronas_group }}"
     state: link
   loop: "{{ internal_symlinks }}"
+  loop_control:
+    label: "{{ item.src }}"
   when: internal_symlinks is defined and
     top_level_paths is not defined
 
@@ -22,6 +26,8 @@
   ansible.builtin.set_fact:
     path_list_tl: "{{ path_list_tl|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
   loop: "{{ system_map|product(top_level_paths)|list }}"
+  loop_control:
+    label: "{{ item.0.src }}"
   when: top_level_paths is defined and
     item.1.enabled is true and
     item.0[system_key] is defined and
@@ -36,6 +42,7 @@
     group: "{{ retronas_group }}"
     state: link
   loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
+  loop_control:
+    label: "{{ item.0.src }}"
   when: internal_symlinks is defined and
     top_level_paths is defined
-

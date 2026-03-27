@@ -3,6 +3,8 @@
   ansible.builtin.set_fact:
     path_list_ll: "{{ path_list_ll|default([]) + [ 'mkdir -p ' + retronas_path + '/' + system_key + '/' + item[system_key] + ';' ] }}"
   loop: "{{ system_map }}"
+  loop_control:
+    label: "{{ item[system_key] }}"
   when: top_level_paths is not defined and
     item[system_key] is defined and
     item[system_key] | length > 0
@@ -11,6 +13,8 @@
   ansible.builtin.set_fact:
     path_list_tl: "{{ path_list_tl|default([]) + [ 'mkdir -p ' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + ';' ] }}"
   loop: "{{ system_map|product(top_level_paths)|list }}"
+  loop_control:
+    label: "{{ item.0[system_key] }}"
   when: top_level_paths is defined and
     item.1.enabled is true and
     item.0[system_key] is defined and
