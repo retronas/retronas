@@ -1412,6 +1412,26 @@ system_map:
     retrodeck: ''
     romm: edsac
     pretty_name: Cambridge EDSAC
+  - src: cambridgecomputer/z88
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: z88
+    pretty_name: Cambridge Z88
   - src: camputers/lynx
     last: other/camputers_lynx
     mister: Lynx48
@@ -2770,7 +2790,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: zmachine
-    romm: ''
+    romm: z-machine
     pretty_name: Infocom Zmachine
   - src: intelligentsoftware/e128
     last: ''
@@ -3511,6 +3531,26 @@ system_map:
     retrodeck: ''
     romm: winphone
     pretty_name: Microsoft Windows Phone
+  - src: microsoft/zune
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: zune
+    pretty_name: Microsoft Zune
   - src: milesgordon/samcoupe
     last: other/milesgordon_samcoupe
     mister: SAMCOUPE
@@ -5491,6 +5531,26 @@ system_map:
     retrodeck: ''
     romm: sinclair-ql
     pretty_name: Sinclair QL
+  - src: sinclair/zx80
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: zx80
+    pretty_name: Sinclair ZX80
   - src: sinclair/zx81
     last: ''
     mister: ZX81
@@ -5589,7 +5649,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: zxnext
-    romm: ''
+    romm: zx-spectrum-next
     pretty_name: ''
   - src: vectrex
     last: other/vectrex
@@ -9311,6 +9371,26 @@ system_map:
     retrodeck: ''
     romm: tads
     pretty_name: TADS Interpreter
+  - src: platform/zinc
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: zinc
+    pretty_name: ZiNc Interpreter
   - src: ports
     last: ''
     mister: ''
@@ -11131,6 +11211,46 @@ system_map:
     retrodeck: ''
     romm: wang2200
     pretty_name: Wang 2200
+  - src: ssd/xavixport
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: xavixport
+    pretty_name: XaviXPORT
+  - src: xerox/alto
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: xerox-alto
+    pretty_name: Xerox Alto
 
 system_unsupported:
   - src: dvd-player
