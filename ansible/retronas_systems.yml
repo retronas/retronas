@@ -1612,6 +1612,26 @@ system_map:
     retrodeck: adam
     romm: colecoadam
     pretty_name: Coleco Adam
+  - src: coleco/telstararcade
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: telstar-arcade
+    pretty_name: Coleco Telstar Arcade
   - src: commodore/amiga
     last: ''
     mister: Amiga
@@ -2310,8 +2330,8 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: tic80
-    romm: ''
-    pretty_name: ''
+    romm: tic-80
+    pretty_name: TIC-80
   - src: fantasyconsole/wasm4
     last: ''
     mister: ''
@@ -2759,7 +2779,6 @@ system_map:
     batocera: enterprise
     recalbox: ''
     retroarch: Enterprise - 128
-    ops2l: ''
     ps3netsrv: ''
     fspd: ''
     emuelec: ''
@@ -2772,6 +2791,26 @@ system_map:
     retrodeck: ''
     romm: enterprise
     pretty_name: Intelligent Software E128
+  - src: sri/500
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sri-5001000
+    pretty_name: SRI-500/1000
   - src: intelligentsoftware/e64
     last: ''
     mister: ''
@@ -3370,7 +3409,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: windows-apps
     pretty_name: Microsoft Windows (Installers)
   - src: microsoft/windows/windows3x
     last: ''
@@ -3390,7 +3429,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: windows3x
-    romm: ''
+    romm: win3x
     pretty_name: Microsoft Windows 3x
   - src: microsoft/windows/windows9x
     last: ''
@@ -4670,7 +4709,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: videopac
-    romm: ''
+    romm: videopac-g7400
     pretty_name: Philips Videopac+
   - src: philips/vg5000
     last: ''
@@ -6032,6 +6071,26 @@ system_map:
     retrodeck: ''
     romm: pocketstation
     pretty_name: Sony PocketStation
+  - src: sony/smc777
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: smc-777
+    pretty_name: Sony SMC-777
   - src: sord/m5
     last: other/sord_m5
     mister: Sord M5
@@ -6190,8 +6249,28 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
-    pretty_name: Tandy MC10
+    romm: trs-80-mc-10
+    pretty_name: Tandy TRS-80 MC10
+  - src: tandy/trs80model100
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: trs-80-model-100
+    pretty_name: Tandy TRS-80 Model 100
   - src: tandy/1000
     last: ''
     mister: Tandy1000
@@ -6452,9 +6531,49 @@ system_map:
     retrodeck: ''
     romm: ''
     pretty_name: Tesla PMD85
+  - src: texas_instruments/ti82
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ti-82
+    pretty_name: Texas Instruments TI-82
+  - src: texas_instruments/ti83
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ti-83
+    pretty_name: Texas Instruments TI-83
   - src: texas_instruments/ti99
-    last: other/texasinstruments_ti994a
-    mister: TI-99_4A
+    last: ''
+    mister: ''
     retropie: ''
     batocera: ti99
     recalbox: ti994a
@@ -6471,7 +6590,27 @@ system_map:
     replayfpgaarcade: ''
     retrodeck: ti99
     romm: ti-99
-    pretty_name: Texas Instruments/Ti-99
+    pretty_name: Texas Instruments TI-99
+  - src: texas_instruments/ti994a
+    last: ''
+    mister: TI-99_4A
+    retropie: ''
+    batocera: ''
+    recalbox: ti994a
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ti-994a
+    pretty_name: Texas Instruments TI-99/4A
   - src: thomson/thomson
     last: ''
     mister: ''
@@ -6950,8 +7089,28 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: socrates
     pretty_name: VTech Socrates
+  - src: videotechnology/vflash
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: vflash
+    pretty_name: VTech V.Flash
   - src: videoton/tvcomputer
     last: ''
     mister: ''
@@ -9132,6 +9291,26 @@ system_map:
     retrodeck: ''
     romm: sk-vm
     pretty_name: SK-VM
+  - src: platform/tads
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tads
+    pretty_name: TADS Interpreter
   - src: ports
     last: ''
     mister: ''
@@ -10772,6 +10951,186 @@ system_map:
     retrodeck: ''
     romm: sd-200270290
     pretty_name: Soundic Soundicvision SD-200/270/290
+  - src: taito/type-x
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: type-x
+    pretty_name: Taito Type X
+  - src: taito/x55
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: taito-x-55
+    pretty_name: Taito X-55
+  - src: tektronix/4050
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tektronix-4050
+    pretty_name: Tektronix 4050
+  - src: nvphilipsgloeilampenfabrieken/telespieles2201
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tele-spiel
+    pretty_name: Tele-Spiel ES-2201
+  - src: tikidata/tiki100
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tiki-100
+    pretty_name: Tiki-100
+  - src: timex/sinclair2068
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: timex-sinclair-2068
+    pretty_name: Timex Sinclair 2068
+  - src: fuze/tomahawkf1
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tomahawk-f1
+    pretty_name: Tomahawk F1
+  - src: computerdatasystems/versatile
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: versatile
+    pretty_name: Versatile
+  - src: wang/2200
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: wang2200
+    pretty_name: Wang 2200
 
 system_unsupported:
   - src: dvd-player
@@ -11114,6 +11473,46 @@ system_unsupported:
     retrodeck: ''
     romm: edsac
     pretty_name: ''
+  - src: sri/500
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sri-5001000
+    pretty_name: SRI-500/1000
+  - src: swtpc/6800
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: swtpc-6800
+    pretty_name: SWTPC 6800
   - src: timeshare
     last: ''
     mister: ''
