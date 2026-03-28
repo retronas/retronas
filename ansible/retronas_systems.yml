@@ -27,149 +27,6 @@
 # - retronas-systems-manager.py --add-new-project bestsoftware
 #
 
-#
-# DEPRECATED: Union approach was very slow, will be removed in upcoming commit
-#
-
-#system_map: "{{
-#  []
-#  |union(general_distribution)
-#  |union(general_engines)
-#  |union(general_media)
-#  |union(general_other)
-#  |union(general_platform)
-#  |union(general_tools)
-#  |union(system_abc)
-#  |union(system_acorn)
-#  |union(system_amstrad)
-#  |union(system_antonic)
-#  |union(system_apf)
-#  |union(system_appliedtechnology)
-#  |union(system_apogee)
-#  |union(system_apple)
-#  |union(system_arcade)
-#  |union(system_astral)
-#  |union(system_atari)
-#  |union(system_atmel)
-#  |union(system_audiosonic)
-#  |union(system_bally)
-#  |union(system_bandai)
-#  |union(system_bbc)
-#  |union(system_benesse)
-#  |union(system_bgr)
-#  |union(system_bitcorporation)
-#  |union(system_cambridge)
-#  |union(system_camputers)
-#  |union(system_capcom)
-#  |union(system_casio)
-#  |union(system_cdc)
-#  |union(system_coleco)
-#  |union(system_commodore)
-#  |union(system_compucolor)
-#  |union(system_compucorp)
-#  |union(system_compukit)
-#  |union(system_computer_power_and_light)
-#  |union(system_creatronic)
-#  |union(system_cybervision)
-#  |union(system_dec)
-#  |union(system_dragon)
-#  |union(system_eaca)
-#  |union(system_ecd)
-#  |union(system_electronika)
-#  |union(system_elektor)
-#  |union(system_emerson)
-#  |union(system_entex)
-#  |union(system_epoch_co)
-#  |union(system_exelvision)
-#  |union(system_exidy)
-#  |union(system_fairchild)
-#  |union(system_fantasy_console)
-#  |union(system_ferranti)
-#  |union(system_fujitsu)
-#  |union(system_funtech)
-#  |union(system_gamepark)
-#  |union(system_generalinstrument)
-#  |union(system_grey_innovation)
-#  |union(system_grundybusinesssystems)
-#  |union(system_hartung)
-#  |union(system_heathkit)
-#  |union(system_hitachi)
-#  |union(system_homelab)
-#  |union(system_hewlettpackard)
-#  |union(system_ibm)
-#  |union(system_iircade)
-#  |union(system_imlac)
-#  |union(system_infocom)
-#  |union(system_intelligentsoftware)
-#  |union(system_interact)
-#  |union(system_interton)
-#  |union(system_jolt)
-#  |union(system_jupiter)
-#  |union(system_leapfrog)
-#  |union(system_magnavox)
-#  |union(system_matra_and_hachetter_ordinateur)
-#  |union(system_matsushita)
-#  |union(system_mattel)
-#  |union(system_memotech)
-#  |union(system_meraelzab)
-#  |union(system_microsoft)
-#  |union(system_milesgordon)
-#  |union(system_miltonbradley)
-#  |union(system_mits)
-#  |union(system_mos)
-#  |union(system_nabu)
-#  |union(system_namco)
-#  |union(system_nec)
-#  |union(system_nichibutsu)
-#  |union(system_nintendo)
-#  |union(system_nokia)
-#  |union(system_northstarcomputers)
-#  |union(system_noval)
-#  |union(system_ohioscientific)
-#  |union(system_oric)
-#  |union(system_ouya)
-#  |union(system_palm)
-#  |union(system_panasonic)
-#  |union(system_panic)
-#  |union(system_pelvarazdin)
-#  |union(system_philips)
-#  |union(system_playjam)
-#  |union(system_pinball)
-#  |union(system_rca)
-#  |union(system_sega)
-#  |union(system_sharp)
-#  |union(system_sinclair)
-#  |union(system_smith_engineering)
-#  |union(system_snk)
-#  |union(system_sony)
-#  |union(system_sord)
-#  |union(system_spectravideo)
-#  |union(system_symbian)
-#  |union(system_tandy)
-#  |union(system_tangerinecomputersystems)
-#  |union(system_tapwave)
-#  |union(system_tatung)
-#  |union(system_technosys_research_labs)
-#  |union(system_tesla)
-#  |union(system_texas_instruments)
-#  |union(system_thomson)
-#  |union(system_tigerelectronics)
-#  |union(system_timetop)
-#  |union(system_tomytronic)
-#  |union(system_tsukuda)
-#  |union(system_umtech)
-#  |union(system_vector)
-#  |union(system_videos)
-#  |union(system_videotechnology)
-#  |union(system_videoton)
-#  |union(system_vmlabs)
-#  |union(system_watara)
-#  |union(system_worlds_of_wonder)
-#  |union(system_zapitgames)
-#  |union(system_zeebo)
-#  |union(system_zpa)
-#}}"
-
 system_template:
   - src: ''
     last: ''
@@ -211,6 +68,8 @@ system_links:
     dest: sega/beena
   - src: sega/apple-pippin
     dest: sega/pippin
+  - src: pansonic/3do
+    dest: panasonic/m2
 
 system_map:
   - src: acorn/archimedes
@@ -1493,6 +1352,26 @@ system_map:
     retrodeck: ''
     romm: pocket-challenge-v2
     pretty_name: Benesse Pocket Challenge V2
+  - src: benesse/pocketchallengew
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pocket-challenge-w
+    pretty_name: Benesse Pocket Challenge W
   - src: bitcorporation/gamate
     last: ''
     mister: Gamate
@@ -1531,7 +1410,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: edsac
     pretty_name: Cambridge EDSAC
   - src: camputers/lynx
     last: other/camputers_lynx
@@ -2033,6 +1912,26 @@ system_map:
     retrodeck: ''
     romm: pdp1
     pretty_name: DEC PDP-1
+  - src: dec/pdp7
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pdp-7
+    pretty_name: DEC PDP-7
   - src: dec/pdp8
     last: ''
     mister: ''
@@ -3853,6 +3752,46 @@ system_map:
     retrodeck: ''
     romm: nec-pc-6000-series
     pretty_name: NEC PC6000
+  - src: nec/pc6001
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pc-6001
+    pretty_name: NEC PC6001
+  - src: nec/pc8000
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pc-8000
+    pretty_name: NEC PC8000
   - src: nintendo/3ds
     last: ''
     mister: ''
@@ -4653,6 +4592,26 @@ system_map:
     retrodeck: 3do
     romm: 3do
     pretty_name: Panasonic 3DO
+  - src: panasonic/jungle
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: panasonic-jungle
+    pretty_name: Panasonic Jungle
   - src: pelvarazdin/orao
     last: other/pelvarazdin_orao
     mister: ORAO
@@ -5371,8 +5330,48 @@ system_map:
     igdb: sharp-mz-2200
     replayfpgaarcade: ''
     retrodeck: ''
+    romm: sharp-mz-80k7008001500
+    pretty_name: Sharp MZ 80k/700/800/1500/2000
+  - src: sharp/mzb
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sharp-mz-80b20002500
+    pretty_name: Sharp MZ-80B/2000/2500
+  - src: sharp/mz2200
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
     romm: sharp-mz-2200
-    pretty_name: Sharp MZ
+    pretty_name: Sharp MZ-2200
   - src: sharp/x1
     last: ''
     mister: ''
@@ -5413,6 +5412,26 @@ system_map:
     retrodeck: x68000
     romm: sharp-x68000
     pretty_name: Sharp X68000
+  - src: sharp/zaurus
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sharp-zaurus
+    pretty_name: Sharp Zaurus
   - src: sinclair/ql
     last: ''
     mister: QL
@@ -6513,8 +6532,8 @@ system_map:
     retrodeck: ''
     romm: thomson-mo5
     pretty_name: Thomson MO5
-  - src: gamecom
-    last: ''
+  - src: tiger/gamecom
+    last: gamecom
     mister: ''
     retropie: ''
     batocera: gamecom
@@ -6533,6 +6552,26 @@ system_map:
     retrodeck: gamecom
     romm: game-dot-com
     pretty_name: Tiger Game.com
+  - src: tiger/r-zone
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: r-zone
+    pretty_name: Tiger R-Zone
   - src: timetop/gameking
     last: ''
     mister: ''
@@ -6693,6 +6732,26 @@ system_map:
     retrodeck: ''
     romm: ''
     pretty_name: COSMAC VIP
+  - src: researchmachines/380z
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: research-machines-380z
+    pretty_name: Research Machines 380Z
   - src: rca/studioii
     last: ''
     mister: ''
@@ -6953,6 +7012,26 @@ system_map:
     retrodeck: ''
     romm: super-vision-8000
     pretty_name: Watara Supervision 800
+  - src: pebble
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pebble
+    pretty_name: Pebble Watch
   - src: pinball/fpinball
     last: ''
     mister: ''
@@ -6991,8 +7070,108 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: vpinball
-    romm: ''
+    romm: pinball
     pretty_name: Virtual Pinball
+  - src: plex/arcade
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: plex-arcade
+    pretty_name: Plex Arcade
+  - src: pokitto
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pokitto
+    pretty_name: pokitto
+  - src: polymorphicsystems/poly-88
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: poly-88
+    pretty_name: Poly 88
+  - src: polymorphicsystems/system-8813
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Polymega
+  - src: playmaji/polymega
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: polymega
+    pretty_name: Polymega
   - src: capcom/cps1
     last: ''
     mister: ''
@@ -8773,6 +8952,26 @@ system_map:
     retrodeck: ''
     romm: os2
     pretty_name: IBM OS/2
+  - src: platform/pc-booter
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: pc-booter
+    pretty_name: PC Booter
   - src: platform/plugnplay
     last: ''
     mister: ''
@@ -8873,6 +9072,66 @@ system_map:
     retrodeck: ''
     romm: gvm
     pretty_name: GVM
+  - src: platform/scmp
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: scmp
+    pretty_name: SC/MP
+  - src: platform/signetics2650
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: signetics-2650
+    pretty_name: Signetics 2650
+  - src: platform/skvm
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sk-vm
+    pretty_name: SK-VM
   - src: ports
     last: ''
     mister: ''
@@ -10493,8 +10752,28 @@ system_map:
     retrodeck: ''
     romm: system-32
     pretty_name: Namco System 22
+  - src: soundic/sd2x0
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sd-200270290
+    pretty_name: Soundic Soundicvision SD-200/270/290
 
-systems_unsupported:
+system_unsupported:
   - src: dvd-player
     last: ''
     mister: ''
