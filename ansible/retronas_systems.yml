@@ -62,14 +62,15 @@ system_links:
     dest: sega/segacd
   - src: sega/megadrive
     dest: sega/genesis
-  - src: interton/vc4000
-    dest: audiosonic/1292_advanced_programmable_video_system
-  - src: sega/advanced-pico-beena
-    dest: sega/beena
-  - src: sega/apple-pippin
-    dest: sega/pippin
-  - src: pansonic/3do
-    dest: panasonic/m2
+  # move to romm play
+  #- src: interton/vc4000
+  #  dest: audiosonic/1292_advanced_programmable_video_system
+  #- src: sega/advanced-pico-beena
+  #  dest: sega/beena
+  #- src: sega/apple-pippin
+  #  dest: sega/pippin
+  #- src: pansonic/3do
+  #  dest: panasonic/m2
 
 system_map:
   - src: acorn/archimedes
@@ -1392,6 +1393,66 @@ system_map:
     retrodeck: gamate
     romm: gamate
     pretty_name: Bit Corporation Gamate
+  - src: bitcorporation/bit60
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Bit Corporation Bit-60
+  - src: bitcorporation/bit70
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Bit Corporation Bit-70
+  - src: bitcorporation/bit90
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: bit-90
+    pretty_name: Bit Corporation Bit-90
   - src: cambridge/edsac
     last: other/cambridge_edsac
     mister: EDSAC
@@ -2632,7 +2693,7 @@ system_map:
     retrodeck: ''
     romm: gp2x-wiz
     pretty_name: GamePark GP2X Wiz
-  - src: generalinstrument/ay38500
+  - src: generalinstruments/ay38500
     last: other/generalinstrument_ay38500
     mister: AY-3-8500
     retropie: ''
@@ -2651,8 +2712,8 @@ system_map:
     replayfpgaarcade: ''
     retrodeck: ''
     romm: ''
-    pretty_name: General Instrument AY38500
-  - src: generalinstrument/champion-2711
+    pretty_name: General Instruments AY38500
+  - src: generalinstruments/champion-2711
     last: ''
     mister: ''
     retropie: ''
@@ -2672,6 +2733,66 @@ system_map:
     retrodeck: ''
     romm: champion-2711
     pretty_name: Champion 2711
+  - src: generalinstruments/gimini8600
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: gimini
+    pretty_name: GIMINI 8600
+  - src: generalinstruments/gimini8900
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: GIMINI 8900
+  - src: generalinstruments/gimini8950
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: GIMINI 8950
   - src: hartung/gamemaster
     last: ''
     mister: ''
@@ -9391,6 +9512,46 @@ system_map:
     retrodeck: ''
     romm: zinc
     pretty_name: ZiNc Interpreter
+  - src: platform/gnex
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: gnex
+    pretty_name: GNEX
+  - src: platform/hugo
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: hugo
+    pretty_name: Hugo
   - src: ports
     last: ''
     mister: ''
@@ -11251,6 +11412,126 @@ system_map:
     retrodeck: ''
     romm: xerox-alto
     pretty_name: Xerox Alto
+  - src: transam/triton
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: triton
+    pretty_name: Transam Triton
+  - src: samsung/tizen
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: tizen
+    pretty_name: Samsung Tizen
+  - src: samsung/bada
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: bada
+    pretty_name: Samsung Bada
+  - src: idealcomputer
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ideal-computer
+    pretty_name: Ideal-Computer
+  - src: platform/brew
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: brew
+    pretty_name: BREW
+  - src: brightthings/bubble
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: bubble
+    pretty_name: Bright Things Bubble
 
 system_unsupported:
   - src: dvd-player
