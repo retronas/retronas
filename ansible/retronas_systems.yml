@@ -65,12 +65,6 @@ system_links:
   # move to romm play
   #- src: interton/vc4000
   #  dest: audiosonic/1292_advanced_programmable_video_system
-  #- src: sega/advanced-pico-beena
-  #  dest: sega/beena
-  #- src: sega/apple-pippin
-  #  dest: sega/pippin
-  #- src: pansonic/3do
-  #  dest: panasonic/m2
 
 system_map:
   - src: acorn/archimedes
@@ -1273,6 +1267,26 @@ system_map:
     retrodeck: ''
     romm: playdia
     pretty_name: Bandai Playdia
+  - src: bandai/terebikko
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: terebikko-slash-see-n-say-video-phone
+    pretty_name: Bandai Terebikko
   - src: bandai/swancrystal
     last: ''
     mister: ''
@@ -3052,6 +3066,26 @@ system_map:
     retrodeck: ''
     romm: jupiter-ace
     pretty_name: Jupiter ACE
+  - src: leapfrog/clickstart
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: clickstart
+    pretty_name: Leapfrog ClickStart
   - src: leapfrog/didj
     last: ''
     mister: ''
@@ -4932,7 +4966,7 @@ system_map:
     retrodeck: atomiswave
     romm: ''
     pretty_name: SEGA Atomiswave
-  - src: sega/advanced-pico-beena
+  - src: sega/advancedpicobeena
     last: ''
     mister: ''
     retropie: ''
@@ -11532,6 +11566,126 @@ system_map:
     retrodeck: ''
     romm: bubble
     pretty_name: Bright Things Bubble
+  - src: micronique/hector1
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Hector 1
+  - src: micronique/hector2hr
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Hector 2 HR
+  - src: micronique/hector2hrplus
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Hector 2HR+
+  - src: micronique/hectorhrx
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: hrx
+    pretty_name: Hector HRX
+  - src: micronique/hectormx
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Hector MX
+  - src: superfunfun/sureshothd
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: sure-shot-hd
+    pretty_name: Sure Shot HD
 
 system_unsupported:
   - src: dvd-player
@@ -11553,6 +11707,26 @@ system_unsupported:
     replayfpgaarcade: ''
     retrodeck: ''
     romm: dvd-player
+    pretty_name: ''
+  - src: hd-dvd-player
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: hd-dvd-player
     pretty_name: ''
   - src: blu-ray-player
     last: ''
