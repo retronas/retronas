@@ -62,9 +62,6 @@ system_links:
     dest: sega/segacd
   - src: sega/megadrive
     dest: sega/genesis
-  # move to romm play
-  #- src: interton/vc4000
-  #  dest: audiosonic/1292_advanced_programmable_video_system
 
 system_map:
   - src: acorn/archimedes
