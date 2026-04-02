@@ -6,7 +6,7 @@ import yaml
 import copy
 
 retronas_systems = "../../ansible/retronas_systems.yml"
-ignored = ["system_map"]
+ignored = ["system_links"]
 
 def main(args):
 
@@ -18,7 +18,9 @@ def main(args):
 
     if args.add_new_system or args.add_new_project:
         if args.add_new_system and args.add_new_system not in data.keys():
-            data[f"system_{args.add_new_system}"] = copy.deepcopy(data["system_template"])
+            new = copy.deepcopy(data["system_template"])
+            new[0]['pretty_name'] = args.add_new_system
+            data["system_map"].append(new[0])
 
         if args.add_new_project:
             for key in data.keys():
