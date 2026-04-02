@@ -1,3 +1,7 @@
+---
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
 - name: "{{ my_name }} - Gather required facts"
   ansible.builtin.setup:
     gather_subset:
@@ -34,6 +38,36 @@
   with_items: "{{ platform_info }}"
   when: platform_info is defined
 
+- name: "{{ my_name }} - RetroNAS runtime info - git branch"
+  ansible.builtin.shell:
+    cmd: git rev-parse --abbrev-ref HEAD
+    chdir: "{{ retronas_root }}"
+  register: retronas_git_branch
+
+- name: "{{ my_name }} - RetroNAS runtime info - git commit"
+  ansible.builtin.shell:
+    cmd: git rev-parse HEAD
+    chdir: "{{ retronas_root }}"
+  register: retronas_git_commit
+
+- name: "{{ my_name }} - Log RetroNAS git branch"
+  ansible.builtin.ini_file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    section: "retronas"
+    option: "branch"
+    value: "{{ retronas_git_branch.stdout }}"
+    state: present
+  when: retronas_git_branch is defined
+
+- name: "{{ my_name }} - Log RetroNAS git branch"
+  ansible.builtin.ini_file:
+    path: "{{ retronas_path }}/config/{{ ini_filename }}"
+    section: "retronas"
+    option: "commit"
+    value: "{{ retronas_git_commit.stdout }}"
+    state: present
+  when: retronas_git_commit is defined
+
 - name: "{{ my_name }} - Log Package Entry"
   ansible.builtin.ini_file:
     path: "{{ retronas_path }}/config/{{ ini_filename }}"
@@ -41,7 +75,7 @@
     option: "{{ module_name }}"
     value: "{{ module_state }}"
     state: "{{ module_state }}"
-  when: module_name is defined and 
+  when: module_name is defined and
         module_state is defined
 
 - name: "{{ my_name }} - fix config perms"
