@@ -83,6 +83,10 @@
             item[system_key] is defined and
             item[system_key] | length > 0
 
+    - name: patch up perms
+      ansible.builtin.shell: "chown -R {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/{{ system_key }}"
+      become: true
+
   handlers:
 
     - name: "{{ my_name }} daemon-reload"
