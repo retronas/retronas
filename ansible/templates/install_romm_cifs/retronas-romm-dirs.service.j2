@@ -1,6 +1,5 @@
 [Unit]
 Description=retronas-romm-dirs
-After=multi-user.target
 
 [Service]
 Type=simple
@@ -11,6 +10,3 @@ ExecStartPre=/usr/bin/git pull
 ExecStart=/usr/bin/ansible-playbook {{ my_file }}.yml
 TimeoutStartSec=0
 RemainAfterExit=no
-
-[Install]
-WantedBy=multi-user.target
