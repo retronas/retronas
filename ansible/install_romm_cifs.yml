@@ -55,6 +55,7 @@
         name: retronas.role.samba.system
       vars:
         nolink: true
+        writable: "no"
 
     - ansible.builtin.import_role:
         name: retronas.role.templates
