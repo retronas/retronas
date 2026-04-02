@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /opt/retronas/ansible
+/usr/bin/git reset --hard HEAD
+/usr/bin/git pull
+/usr/bin/ansible-playbook {{ my_file }}.yml
+

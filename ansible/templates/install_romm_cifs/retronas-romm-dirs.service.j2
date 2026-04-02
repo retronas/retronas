@@ -4,9 +4,6 @@ Description=retronas-romm-dirs
 [Service]
 Type=simple
 Restart=no
-WorkingDirectory=/opt/retronas/ansible
-ExecStartPre=/usr/bin/git reset --hard HEAD
-ExecStartPre=/usr/bin/git pull
-ExecStart=/usr/bin/ansible-playbook {{ my_file }}.yml
+ExecStart={{ retronas_root }}/scripts/retronas-romm-dirs.sh
 TimeoutStartSec=0
 RemainAfterExit=no

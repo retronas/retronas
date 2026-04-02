@@ -17,6 +17,7 @@
     templates:
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-romm-dirs.timer", dest: "/etc/systemd/system" }
+      - { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     systemd_units:
       - { name: "retronas-romm-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
