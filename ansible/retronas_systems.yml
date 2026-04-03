@@ -168,7 +168,7 @@ system_map:
     last: ''
     mister: Amstrad PCW
     retropie: ''
-    batocera: ''
+    batocera: pcw
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -1168,7 +1168,7 @@ system_map:
     last: ''
     mister: RX78
     retropie: ''
-    batocera: ''
+    batocera: rx78
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -1568,7 +1568,7 @@ system_map:
     last: ''
     mister: Casio_PV-2000
     retropie: ''
-    batocera: pv1000
+    batocera: pv2000
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -2128,7 +2128,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: dragon64
     recalbox: dragon
     retroarch: ''
     ops2l: ''
@@ -2143,7 +2143,7 @@ system_map:
     replayfpgaarcade: ''
     retrodeck: dragon32
     romm: dragon-32-slash-64
-    pretty_name: Dragon 32
+    pretty_name: Dragon 32/64
   - src: dragon
     last: ''
     mister: ''
@@ -2168,7 +2168,7 @@ system_map:
     last: ''
     mister: eg2000
     retropie: ''
-    batocera: ''
+    batocera: cgenie
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -2188,7 +2188,7 @@ system_map:
     last: other/electronika_bk
     mister: BK0011M
     retropie: ''
-    batocera: ''
+    batocera: bk
     recalbox: bk
     retroarch: ''
     ops2l: ''
@@ -4007,7 +4007,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: pc80
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -4943,6 +4943,26 @@ system_map:
     retrodeck: sega32x
     romm: sega32
     pretty_name: SEGA 32X
+  - src: sega/aicomputer
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: segaai
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: SEGA AI Computer
   - src: sega/atomiswave
     last: ''
     mister: ''
@@ -4967,7 +4987,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: beena
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -5427,7 +5447,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: sc3000
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -5547,7 +5567,7 @@ system_map:
     last: ''
     mister: SharpMZ
     retropie: ''
-    batocera: ''
+    batocera: mz80k
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -5558,16 +5578,16 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: sharp-mz-2200
+    igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
     romm: sharp-mz-80k7008001500
-    pretty_name: Sharp MZ 80k/700/800/1500/2000
+    pretty_name: Sharp MZ 80k/700/800/1500
   - src: sharp/mzb
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: mz2000
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -5598,7 +5618,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: sharp-mz-2200
     replayfpgaarcade: ''
     retrodeck: ''
     romm: sharp-mz-2200
@@ -6367,7 +6387,7 @@ system_map:
     last: ''
     mister: TRS-80
     retropie: ''
-    batocera: ''
+    batocera: trs80
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -6447,7 +6467,7 @@ system_map:
     last: ''
     mister: AliceMC10
     retropie: ''
-    batocera: ''
+    batocera: mc10
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -7327,7 +7347,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: ''
+    batocera: tvc
     recalbox: ''
     retroarch: Videoton - TV-Computer
     ops2l: ''
@@ -7342,7 +7362,7 @@ system_map:
     replayfpgaarcade: ''
     retrodeck: ''
     romm: ''
-    pretty_name: ''
+    pretty_name: Videoton TV-Computer
   - src: watara/supervision
     last: ''
     mister: SuperVision
@@ -7363,11 +7383,11 @@ system_map:
     retrodeck: supervision
     romm: supervision
     pretty_name: Watara Supervision
-  - src: watara/supervision8000
+  - src: bandai/supervision8000
     last: ''
     mister: SuperVision8000
     retropie: ''
-    batocera: ''
+    batocera: sv8000
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -7382,7 +7402,7 @@ system_map:
     replayfpgaarcade: ''
     retrodeck: ''
     romm: super-vision-8000
-    pretty_name: Watara Supervision 800
+    pretty_name: Super Vision 800
   - src: pebble
     last: ''
     mister: ''
@@ -11683,6 +11703,26 @@ system_map:
     retrodeck: ''
     romm: sure-shot-hd
     pretty_name: Sure Shot HD
+  - src: gakken/compactvisiontvboy
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ctvboy
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Compact Vision TV Boy
 
 system_unsupported:
   - src: dvd-player
