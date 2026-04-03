@@ -59,7 +59,7 @@
     state: present
   when: retronas_git_branch is defined
 
-- name: "{{ my_name }} - Log RetroNAS git branch"
+- name: "{{ my_name }} - Log RetroNAS git commit"
   ansible.builtin.ini_file:
     path: "{{ retronas_path }}/config/{{ ini_filename }}"
     section: "retronas"
