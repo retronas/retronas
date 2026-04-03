@@ -1748,7 +1748,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: amiga
+    batocera: ''
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -3173,7 +3173,7 @@ system_map:
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
-    emuelec: odyssey
+    emuelec: ''
     smdb: ''
     freestation: ''
     analoguepocket: ''
@@ -3287,7 +3287,7 @@ system_map:
     last: ''
     mister: MSX
     retropie: ''
-    batocera: msx
+    batocera: ''
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -8147,7 +8147,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: xash3d_fwgs
+    batocera: ''
     recalbox: ''
     retroarch: ''
     ops2l: ''
@@ -8193,7 +8193,7 @@ system_map:
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
-    emuelec: doom
+    emuelec: ''
     smdb: ''
     freestation: doom
     analoguepocket: ''
@@ -8473,7 +8473,7 @@ system_map:
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
-    emuelec: screenshots
+    emuelec: ''
     smdb: ''
     freestation: ''
     analoguepocket: ''
@@ -8613,7 +8613,7 @@ system_map:
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
-    emuelec: games
+    emuelec: ''
     smdb: ''
     freestation: ''
     analoguepocket: ''
