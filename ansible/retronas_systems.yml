@@ -1279,7 +1279,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: terebikko-slash-see-n-say-video-phone
     replayfpgaarcade: ''
     retrodeck: ''
     romm: terebikko-slash-see-n-say-video-phone
@@ -4858,7 +4858,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: panasonic-jungle
     replayfpgaarcade: ''
     retrodeck: ''
     romm: orao
@@ -4998,7 +4998,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: advanced-pico-beena
     replayfpgaarcade: ''
     retrodeck: ''
     romm: advanced-pico-beena
@@ -6938,7 +6938,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: r-zone
     replayfpgaarcade: ''
     retrodeck: ''
     romm: r-zone
@@ -7558,7 +7558,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: polymega
     replayfpgaarcade: ''
     retrodeck: ''
     romm: polymega
@@ -10658,7 +10658,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: digiblast
     replayfpgaarcade: ''
     retrodeck: ''
     romm: digiblast
@@ -10778,7 +10778,7 @@ system_map:
     freestation: ''
     analoguepocket: ''
     emudeck: ''
-    igdb: ''
+    igdb: gizmondo
     replayfpgaarcade: ''
     retrodeck: ''
     romm: gizmondo
