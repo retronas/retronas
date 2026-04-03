@@ -279,17 +279,6 @@
         "args": ""
       },
       {
-        "index": "26",
-        "title": "fenrir-ode-webserver",
-        "description": "Fenrir-ODE Webserver",
-        "id": "fenrir-ode-webserver",
-        "prompt": "",
-        "type": "dialog",
-        "group": "",
-        "command": "fenrirodewebserver",
-        "args": ""
-      },
-      {
         "index": "27",
         "title": "fsp",
         "description": "Nintendo GameCube + Swiss FSP server",
@@ -967,7 +956,7 @@
       },
       {
         "index": "89",
-        "title": "RomM",
+        "title": "romm",
         "description": "RomM CIFS config",
         "id": "romm_cifs",
         "prompt": "",

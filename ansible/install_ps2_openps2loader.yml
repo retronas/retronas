@@ -52,7 +52,7 @@
         src: "../../roms/{{ item.src }}"
         dest: "{{ my_dir }}/{{ item.ops2l }}"
         state: link
-      with_items: "{{ system_sony }}"
+      loop: "{{ system_map }}"
       when:
         - item.ops2l | length > 0
 

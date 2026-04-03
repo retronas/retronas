@@ -1,0 +1,24 @@
+- name: "{{ my_name }} - Gather required facts"
+  ansible.builtin.setup:
+    gather_subset:
+      - date_time
+
+- name: "{{ my_name }} - Check Ansible cache age"
+  ansible.builtin.stat:
+    path: "{{ retronas_cache_file }}"
+  register: ansible_cache_age
+
+- name: "{{ my_name }} - Check retronas_systems age"
+  ansible.builtin.stat:
+    path: "{{ retronas_systems_file }}"
+  register: retronas_system_age
+
+- name: "{{ my_name }} - Remove ansible cache if older than retronas_systems"
+  ansible.builtin.file:
+    path: "{{ retronas_cache_file }}"
+    state: absent
+  become: yes
+  when: 
+    - ansible_cache_age.stat.exists is true
+    - ansible_cache_age.stat.mtime < retronas_system_age.stat.mtime
+

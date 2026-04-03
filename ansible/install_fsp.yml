@@ -62,7 +62,7 @@
         owner: "{{ retronas_user }}"
         group: "{{ retronas_group }}"
         state: link
-      loop: "{{ system_nintendo }}"
+      loop: "{{ system_map }}"
       when:
         item.fspd | length > 0
       notify: "{{ my_name }} - Restart service"

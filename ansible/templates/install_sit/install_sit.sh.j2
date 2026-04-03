@@ -3,7 +3,7 @@
 set -u
 
 RN_BIN=/usr/local/bin/
-SRCDIR="{{ retronas_root }}/src"
+SRCDIR={{ retronas_root }}/src
 REPO=sit
 OWNER=thecloudexpanse
 
@@ -11,6 +11,8 @@ XC=(
   sit
   macbinfilt
 )
+
+[ ! -d $SRCDIR ] && mkdir $SRCDIR
 
 cd $SRCDIR
 git clone https://github.com/${OWNER}/${REPO}

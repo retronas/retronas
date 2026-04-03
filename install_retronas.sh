@@ -51,7 +51,7 @@ apt update
 
 echo
 echo "Installing necessary tools..."
-apt install -y ansible git dialog jq pandoc lynx
+apt install -y ansible git dialog jq pandoc lynx sudo
 
 if [ ! -f ${TARGET}/.git/config ]
 then

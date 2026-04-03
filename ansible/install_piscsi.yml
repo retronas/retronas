@@ -33,7 +33,6 @@
       - unar
       - unzip
       - ca-certificates
-      - hfsutils
       - dosfstools
       - kpartx
       - unzip

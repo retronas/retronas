@@ -8,6 +8,11 @@
     module_name: "xbox360_netiso"
     system_key: "xbox360"
 
+    packages:
+      - unzip
+      - curl
+      - jq
+
     paths:
       - { name: "xbox360", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
@@ -20,6 +25,9 @@
 
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
+
+    - ansible.builtin.import_role:
+        name: retronas.role.package.latest
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir

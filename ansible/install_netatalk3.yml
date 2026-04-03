@@ -3,26 +3,26 @@
   gather_facts: false
 
   vars:
-    - my_name: "Netatalk3"
-    - my_file: "install_netatalk3"
+    my_name: "Netatalk3"
+    my_file: "install_netatalk3"
 
-    - packages:
-        - avahi-daemon
-        - netatalk
+    packages:
+      - avahi-daemon
+      - netatalk
 
-    - my_services:
-        - avahi-daemon
-        - netatalk
+    my_services:
+      - avahi-daemon
+      - netatalk
 
-    - config_settings:
-        - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
-        - { section: "Global", option: "hostname", value: "retroafp" }
-        - { section: "Global", option: "mimic model", value: "PowerMac" }
-        - { section: "Global", option: "zeroconf", value: "yes" }
-        - { section: "Global", option: "log level", value: "info" }
-        - { section: "Global", option: "log file", value: "/var/log/afp.log" }
-        - { section: "Global", option: "afp listen", value: "0.0.0.0" }
-        - { section: "Global", option: "include", value: "/etc/netatalk/retronas.conf" }
+    config_settings:
+      - { section: "Global", option: "uam list", value: "uams_guest.so uams_clrtxt.so uams_dhx.so uams_dhx2.so" }
+      - { section: "Global", option: "hostname", value: "retroafp" }
+      - { section: "Global", option: "mimic model", value: "PowerMac" }
+      - { section: "Global", option: "zeroconf", value: "yes" }
+      - { section: "Global", option: "log level", value: "info" }
+      - { section: "Global", option: "log file", value: "/var/log/afp.log" }
+      - { section: "Global", option: "afp listen", value: "0.0.0.0" }
+      - { section: "Global", option: "include", value: "/etc/netatalk/retronas.conf" }
 
   tasks:
 
@@ -42,7 +42,7 @@
 
     - name: "{{ my_name }} - end play if no netatalk package"
       ansible.builtin.meta: end_play
-      when: no_netatalk is true
+      when: no_netatalk is defined and no_netatalk is true
 
     - name: "{{ my_name }}  - unhold netatalk package"
       ansible.builtin.shell: "/usr/bin/apt-mark unhold netatalk"

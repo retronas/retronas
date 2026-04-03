@@ -1,20 +1,25 @@
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
 
   vars:
-    my_name: "redumper"
-    my_file: "install_{{ my_name }}"
-    module_name: "redumper"
+    my_name: "hfsutils"
+    my_file: "install_hfsutils"
+    module_name: "hfsutils"
 
     packages:
-      - unzip
-      - jq
+      - git
+      - autoconf
+      - build-essential
 
     templates:
-      - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "{{ my_file }}.sh",         dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
   tasks:
+
+    - name: "{{ my_name }} - Include systems map"
+      ansible.builtin.include_vars: "retronas_systems.yml"
+
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
@@ -24,10 +29,8 @@
     - ansible.builtin.import_role:
         name: retronas.role.templates
 
-    - name: "{{ my_name }} - Install"
+    - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-      args:
-        creates: "{{ retronas_root}}/bin/ps3netsrv"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

@@ -1,9 +1,12 @@
+---
 - name: "{{ my_name }} - templates"
   ansible.builtin.template:
-    src: "templates/{{ my_file }}/{{ item.sub + '/' if item.sub is defined else '' }}{{ item.name }}.j2"
-    dest: "{{ item.dest }}/{{ item.name }}"
-    owner: "{{ item.owner|default('root') }}"
-    group: "{{ item.group|default('root') }}"
-    mode: "{{ item.mode|default('0644') }}"
-    force: "{{ item.force|default('yes') }}"
-  with_items: "{{ templates }}"
+    src: "templates/{{ my_file }}/{{ tmpl.sub + '/' if tmpl.sub is defined else '' }}{{ tmpl.name }}.j2"
+    dest: "{{ tmpl.dest }}/{{ tmpl.name }}"
+    owner: "{{ tmpl.owner|default('root') }}"
+    group: "{{ tmpl.group|default('root') }}"
+    mode: "{{ tmpl.mode|default('0644') }}"
+    force: "{{ tmpl.force|default('yes') }}"
+  loop: "{{ templates }}"
+  loop_control:
+    loop_var: "tmpl"

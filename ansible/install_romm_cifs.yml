@@ -15,13 +15,23 @@
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
-      - { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "retronas-romm-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-romm-dirs.timer", dest: "/etc/systemd/system" }
+      - { name: "retronas-romm-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     systemd_units:
       - { name: "retronas-romm-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
-      - { name: "retronas-romm-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
+      - { name: "retronas-romm-dirs", type: 'timer',   state: "started", enabled: "yes", restart: "no", instance: "no" }
+
+    # needs review or be handled in the flatten script  
+    #internal_symlinks:
+    #  - { src: 'sega/advancedpicobeena', dest: 'beena' }
+    #  - { src: 'panasonic/3do', dest: 'panasonic-m2' }
+    #  - { src: 'apple/pippin', dest: 'pippin' }
+    #  - { src: 'interton/vc4000', dest: 'vc-4000' }
+    #  - { src: 'tandy/vis', dest: 'vis' }
+    #  - { src: 'tapwave/zodiac', dest: 'zod' }
+    #    # 'amiga-cd',         # ??
 
   tasks:
 
@@ -46,6 +56,20 @@
         name: retronas.role.samba.system
       vars:
         nolink: true
+        writable: "no"
+
+    - ansible.builtin.import_role:
+        name: retronas.role.templates
+
+    - name: "{{ my_name }} - create startup service(s) instance"
+      ansible.builtin.template:
+        src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
+        dest: /etc/systemd/system/{{ item.name }}.{{ item.type }}
+        owner: root
+        group: root
+        mode: 0644
+      with_items: "{{ systemd_units }}"
+      notify: "{{ my_name }} daemon-reload"
 
     - name: "Import system-config role"
       ansible.builtin.import_role:
@@ -58,6 +82,10 @@
       when: top_level_paths is defined and
             item[system_key] is defined and
             item[system_key] | length > 0
+
+    - name: patch up perms
+      ansible.builtin.shell: "chown -R {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/{{ system_key }}"
+      become: true
 
   handlers:
 

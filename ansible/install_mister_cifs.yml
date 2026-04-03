@@ -20,7 +20,7 @@
       - { name: "GBA2P", src: "nintendo/gameboyadvance2p" }
 
     templates:
-    #  - { name: "retronas_mister.conf", dest: "/etc/samba" }
+      #  - { name: "retronas_mister.conf", dest: "/etc/samba" }
       - { name: "retronas-mister-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-mister-dirs.timer", dest: "/etc/systemd/system" }
 
@@ -29,6 +29,9 @@
       - { name: "retronas-mister-dirs", type: 'timer',   state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
     dirs_only: false
+    savedirs:
+      - "saves"
+      - "savestates"
 
   tasks:
 
@@ -51,18 +54,14 @@
       ansible.builtin.file:
         dest: "{{ retronas_path }}/{{ item.1 }}/{{ item.0.src|lower }}"
         state: directory
-      with_nested:
-        - "{{ save_overrides }}"
-        - ["saves", "savestates"]
+      loop: "{{ save_overrides|product(savedirs)|list }}"
 
     - name: "{{ my_name }} - create custom save links"
       ansible.builtin.file:
         src: "../../{{ item.1 }}/{{ item.0.src|lower }}"
         dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1 }}/{{ item.0.name }}"
         state: link
-      with_nested:
-        - "{{ save_overrides }}"
-        - ["saves", "savestates"]
+      loop: "{{ save_overrides|product(savedirs)|list }}"
 
     - ansible.builtin.import_role:
         name: retronas.role.templates

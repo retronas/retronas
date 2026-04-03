@@ -17,5 +17,5 @@ LASTREL=$(ls -rt flippy_cli_*_linux_${ARCH} | tail -n1)
 if [ ! -z $LASTREL ]
 then
   [ ! -x $LASTREL ] && chmod +x $LASTREL
-  ./$LASTREL {{ retronas_path }}/gamecube/iso
+  ./$LASTREL {{ retronas_path }}/roms/nintendo/gamecube/iso
 fi

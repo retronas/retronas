@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  become: yes
 
   vars:
     my_name: "RetroNAS dependencies"
@@ -16,6 +17,7 @@
       - etc
       - scripts
       - log
+      - cache
 
   tasks:
 
@@ -31,11 +33,6 @@
         state: directory
       with_items: "{{ directories }}"
 
-    - name: "{{ my_name }} - required packages"
-      ansible.builtin.package:
-        name: "{{ packages }}"
-        state: latest
-
     - name: "{{ my_name }} - configure top level share directory"
       ansible.builtin.file:
         path: "{{ retronas_path }}"
@@ -43,3 +40,11 @@
         group: "{{ retronas_user }}"
         mode: 0775
         state: directory
+
+    - ansible.builtin.include_role:
+        name: "{{ role }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.cache
+      loop_control:
+        loop_var: role

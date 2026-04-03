@@ -5,7 +5,6 @@ After=network.target
 
 [Service]
 Type=forking
-User={{ retronas_user }}
 WorkingDirectory=/opt/mtcp-netdrive
 ExecStart={{ retronas_root }}/scripts/mtcp-netdrive.sh start
 ExecStop={{ retronas_root }}/scripts/mtcp-netdrive.sh stop

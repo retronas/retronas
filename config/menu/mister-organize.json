@@ -46,7 +46,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "mister-organize.md",
+                "command": "MiSTer-Organize.md",
                 "args": ""
             }
         ]

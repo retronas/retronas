@@ -5,13 +5,13 @@
   gather_facts: false
 
   vars:
-    - my_name: "retronas_docs"
-    - my_file: "install_retronas_docs"
-    - module_name: "retronas_docs"
+    my_name: "retronas_docs"
+    my_file: "install_retronas_docs"
+    module_name: "retronas_docs"
 
-    - packages:
-        - git
-        - pandoc
+    packages:
+      - git
+      - pandoc
 
   tasks:
 
