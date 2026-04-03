@@ -9969,7 +9969,7 @@ system_map:
     retropie: ''
     batocera: ''
     recalbox: ''
-    retroarch: Jump \'n Bump
+    retroarch: "Jump 'n Bump"
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
