@@ -4,4 +4,4 @@ my_file: "install_romdir"
 module_name: "romdir"
 
 top_level_paths:
-  - { name: "roms", enabled: yes, systems: yes }
+  - { name: "roms", generic: "roms", enabled: yes, systems: yes }

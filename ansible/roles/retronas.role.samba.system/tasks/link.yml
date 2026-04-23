@@ -44,5 +44,7 @@
   loop: "{{ internal_symlinks|product(top_level_paths)|list }}"
   loop_control:
     label: "{{ item.0.src }}"
-  when: internal_symlinks is defined and
-    top_level_paths is defined
+  when:
+    - internal_symlinks is defined
+    - top_level_paths is defined
+    - item.0.systems is true

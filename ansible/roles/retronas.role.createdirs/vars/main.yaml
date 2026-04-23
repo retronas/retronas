@@ -1,0 +1,2 @@
+---
+generic_top_level_dirs: [ "roms", "bios", "saves", "savestates" ]

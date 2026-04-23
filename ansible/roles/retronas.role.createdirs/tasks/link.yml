@@ -1,0 +1,55 @@
+---
+- block:
+  - name: "{{ my_name }} - build layout list (set fact) (links)"
+    ansible.builtin.set_fact:
+      path_list_ll: "{{ path_list_ll|default([]) + [ 'ln -sfT ../roms/' + item.src + ' \"' + retronas_path + '/' + system_key + '/' + item[system_key] + '\";' ] }}"
+    loop: "{{ system_map }}"
+    loop_control:
+      label: "{{ item.src }}"
+    when:
+      - top_level_paths is not defined
+      - item[system_key] is defined
+      - item[system_key] | length > 0
+
+  - name: "{{ my_name }} - build layout list (set fact) (top level paths) (links)"
+    ansible.builtin.set_fact:
+      path_list_tl: "{{ path_list_tl|default([]) + [ 'ln -sfT ../../' + item.1.generic|lower + '/' + item.0.src + ' \"' + retronas_path + '/' + system_key + '/' + item.1.name + '/' + item.0[system_key] + '\";' ] }}"
+    loop: "{{ system_map|product(top_level_paths) }}"
+    loop_control:
+      label: "{{ item.0.src }}"
+    when: top_level_paths is defined and
+      item.1.enabled is true and
+      item.0[system_key] is defined and
+      item.0[system_key] | length > 0 and
+      item.1.systems is true
+
+  - name: "{{ my_name }} - build internal directory layout (top level paths) (links)"
+    ansible.builtin.file:
+      src: "../../{{ item.1.generic }}/{{ item.0.src }}"
+      dest: "{{ retronas_path }}/{{ system_key }}/{{ item.1.name }}/{{ item.0.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: link
+    loop: "{{ internal_symlinks|product(top_level_paths) }}"
+    loop_control:
+      label: "{{ item.0.src }}"
+    when:
+      - internal_symlinks is defined
+      - top_level_paths is defined
+      - item.1.systems is true
+
+  - name: "{{ my_name }} - build internal directory layout (links)"
+    ansible.builtin.file:
+      src: "../roms/{{ item.src }}"
+      dest: "{{ retronas_path }}/{{ system_key }}/{{ item.dest }}"
+      owner: "{{ retronas_user }}"
+      group: "{{ retronas_group }}"
+      state: link
+    loop: "{{ internal_symlinks }}"
+    loop_control:
+      label: "{{ item.src }}"
+    when:
+      - internal_symlinks is defined
+      - top_level_paths is not defined
+
+  when: system_key is defined
