@@ -7,8 +7,9 @@
     my_file: "install_retrodeck_cifs"
     module_name: "retrodeck_cifs"
     system_key: "retrodeck"
+    system_key_dirs: true
 
-    top_level_paths:
+    top_level_paths: &top_level_paths
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
     #  - { name: "saves",  enabled: yes,  generic: "saves",  systems: yes }
       - { name: "bios",   enabled: yes,  generic: "bios",   systems: yes }
@@ -36,9 +37,8 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.extradirs
+      vars:
+        top_level_paths: *top_level_paths
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

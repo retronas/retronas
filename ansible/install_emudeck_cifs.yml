@@ -6,9 +6,10 @@
     my_name: "EmuDeck CIFS"
     my_file: "install_emudeck_cifs"
     system_key: "emudeck"
+    system_key_dirs: true
     module_name: "emudeck_cifs"
 
-    top_level_paths:
+    top_level_paths: &top_level_paths
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
     #  - { name: "saves",  enabled: yes,  generic: "saves",  systems: yes }
       - { name: "bios",   enabled: yes,  generic: "bios",   systems: yes }
@@ -42,9 +43,8 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.extradirs
+      vars:
+        top_level_paths: *top_level_paths
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

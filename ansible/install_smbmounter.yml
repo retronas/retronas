@@ -23,9 +23,6 @@
         name: retronas.role.romdir
 
     - ansible.builtin.import_role:
-        name: retronas.role.extradirs
-
-    - ansible.builtin.import_role:
         name: retronas.role.samba
 
     - name: "{{ my_name }} - link romdir"

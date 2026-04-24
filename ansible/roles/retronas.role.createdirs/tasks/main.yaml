@@ -41,23 +41,28 @@
 
 - set_fact:
     tlpsa: "{{ '{' + tlp | join(',') + '}' }}"
-  when: tlp | length > 1
+  when:
+    - tlp is defined
+    - tlp | length > 1
 
 - set_fact:
     tlpsa: "{{ tlp.0 }}"
-  when: tlp | length == 1
+  when:
+    - tlp is defined
+    - tlp | length == 1
+
+- name: "{{ my_name }} - build min processing list"
+  ansible.builtin.set_fact:
+    system_map_min: "{{ system_map | map(attribute='src') | zip( system_map | map(attribute='src') ) }}"
 
 - block:
   - name: "{{ my_name }} - build min processing list (system_key)"
     ansible.builtin.set_fact:
       system_map_min: "{{ system_map | map(attribute='src') | zip( system_map | map(attribute=system_key) ) }}"
-  when: system_key is defined
-
-- block:
-  - name: "{{ my_name }} - build min processing list"
-    ansible.builtin.set_fact:
-      system_map_min: "{{ system_map | map(attribute='src')|list }}"
-  when: system_key is not defined
+  when:
+    - system_key is defined
+    - system_key_dirs is defined
+    - system_key_dirs is true
 
 - name: "{{ my_name }} - build layout list (set fact)"
   ansible.builtin.set_fact:
@@ -66,6 +71,9 @@
   loop_control:
     loop_var: pl
     label: "{{ pl.0 }}"
+  when:
+    - tlpsa is defined
+    - system_map_min is defined
 
 - name: "{{ my_name }} - build layout"
   ansible.builtin.shell:
@@ -83,6 +91,9 @@
   loop_control:
     loop_var: ll
     label: "{{ ll.0.src }}"
+  when:
+    - system_links is defined
+    - tlp is defined
 
 - name: "{{ my_name }} - build systems directory layout (links)"
   ansible.builtin.shell:
@@ -92,10 +103,6 @@
 
 # src, system_key map
 - block:
-  - name: "{{ my_name }} - build min processing list (system_key)"
-    ansible.builtin.set_fact:
-      system_map_min: "{{ system_map | map(attribute='src') | zip( system_map | map(attribute=system_key) ) }}"
-
   - name: "{{ my_name }} - build top level"
     ansible.builtin.file:
       path: "{{ retronas_path }}/{{ system_key }}"
@@ -103,6 +110,9 @@
       group: "{{ retronas_group }}"
       state: directory
       mode: "0775"
+    when:
+      - system_key_dirs is defined
+      - system_key_dirs is true
 
   - name: "{{ my_name }} - build top level share paths"
     ansible.builtin.file:
@@ -115,6 +125,8 @@
     when:
       - top_level_paths is defined
       - item.enabled is true
+      - system_key_dirs is defined
+      - system_key_dirs is true
 
   - name: "{{ my_name }} - setup directories with symlinks"
     include_tasks: link.yml
@@ -136,16 +148,5 @@
     when: path_list_tl is defined
     changed_when: false
 
-  when: system_key is defined
-
-#- name: "{{ my_name }} - add top level directory info"
-#  ansible.builtin.copy:
-#    dest: "{{ item.stat.path }}/dir.txt"
-#    content: |
-#      this folder structure is the responsiblity of the user to populate
-#    owner: "{{ retronas_user }}"
-#    group: "{{ retronas_group }}"
-#    mode: "0644"
-#  loop: "{{ tl_paths.results }}"
-#  when: tl_paths is defined and
-#        item.stat.exists is true
+  when:
+    - system_key is defined

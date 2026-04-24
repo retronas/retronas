@@ -11,7 +11,7 @@
     script_dest: "{{ retronas_root }}/bin/flatten-romdir.sh"
     fattenerscript: "retronas-romm-dirs"
 
-    top_level_paths:
+    top_level_paths: &top_level_paths
       - { name: "roms",   enabled: yes,  generic: "roms",   systems: yes }
 
     templates:
@@ -48,6 +48,8 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
+      vars:
+        top_level_paths: *top_level_paths
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

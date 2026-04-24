@@ -7,6 +7,7 @@
     my_file: "install_emuelec_cifs"
     module_name: "emuelec_cifs"
     system_key: "emuelec"
+    system_key_dirs: true
 
     internal_symlinks:
       - { src: 'nintendo/famicom', dest: 'nesh' }
@@ -23,9 +24,6 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.extradirs
 
     - ansible.builtin.import_role:
         name: retronas.role.samba

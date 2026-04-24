@@ -41,17 +41,6 @@
                 "args": ""
             },
             {
-                "index":"04",
-                "title": "Extra Dir(s)",
-                "description": "Update extra RetroNAS directories (bios, saves etc)",
-                "id":"extradirs",
-                "prompt": "",
-                "type": "install",
-                "group":"",
-                "command": "extradirs",
-                "args": ""
-            },
-            {
                 "index":"05",
                 "title": "GNU/Linux",
                 "description": "Update GNU/Linux Operating System packages",

@@ -17,11 +17,14 @@
     loop: "{{ system_map|product(top_level_paths) }}"
     loop_control:
       label: "{{ item.0.src }}"
-    when: top_level_paths is defined and
-      item.1.enabled is true and
-      item.0[system_key] is defined and
-      item.0[system_key] | length > 0 and
-      item.1.systems is true
+    when:
+      - top_level_paths is defined
+      - item.1.enabled is true
+      - item.0[system_key] is defined
+      - item.0[system_key] | length > 0
+      - item.1.systems is true
+      - system_key_dirs is defined
+      - system_key_dirs is true
 
   - name: "{{ my_name }} - build internal directory layout (top level paths) (links)"
     ansible.builtin.file:
@@ -37,6 +40,8 @@
       - internal_symlinks is defined
       - top_level_paths is defined
       - item.1.systems is true
+      - system_key_dirs is defined
+      - system_key_dirs is true
 
   - name: "{{ my_name }} - build internal directory layout (links)"
     ansible.builtin.file:

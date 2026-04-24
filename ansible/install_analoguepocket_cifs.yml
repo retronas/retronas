@@ -7,8 +7,9 @@
     my_file: "install_analoguepocket_cifs"
     module_name: "analoguepocket_cifs"
     system_key: "analoguepocket"
+    system_key_dirs: true
 
-    top_level_paths:
+    top_level_paths: &top_level_paths
       - { name: "Assets",       enabled: yes,  generic: "roms",   systems: yes }
       - { name: "Cores",        enabled: yes,  generic: "",       systems: no }
       - { name: "Platforms",    enabled: yes,  generic: "",       systems: no }
@@ -22,9 +23,8 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.extradirs
+      vars:
+        top_level_paths: *top_level_paths
 
     - ansible.builtin.import_role:
         name: retronas.role.samba
