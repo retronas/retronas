@@ -63,6 +63,7 @@
         group: "{{ retronas_group }}"
         state: link
       loop: "{{ system_map }}"
+      become: true
       when:
         item.fspd | length > 0
       notify: "{{ my_name }} - Restart service"
@@ -82,6 +83,7 @@
         owner: "{{ retronas_user }}"
         group: "{{ retronas_group }}"
         mode: 0644
+      become: true
       with_nested:
         - ["swiss", "swiss/swiss"]
         - "{{ swiss_rw }}"
