@@ -1,0 +1,38 @@
+---
+my_name: "Desktop"
+my_file: ""
+module_name: "desktop"
+
+packages:
+  - git
+  - gstreamer1.0-plugins-good
+  - gstreamer1.0-pulseaudio
+  - gstreamer1.0-tools
+  - libopenal1
+  - pulseaudio
+  - ucspi-tcp
+  - xvfb
+  - x11vnc
+  - fluxbox
+  - python3
+  - python3-numpy
+  - python3-websockify
+
+systemd_units:
+  - { name: "desktop", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
+
+templates:
+  - { name: "start_desktop.sh", dest: "{{ retronas_root }}/bin", mode: "0755" }
+  - { name: "desktop.service", dest: "/etc/systemd/system" }
+  - { name: "retronas-menu", dest: "/etc/X11/fluxbox", force: false }
+
+patches:
+  - { name: "webaudio.js", dest: "/opt/novnc/core/", force: true }
+  - { name: "vnc_lite_audio.html", dest: "/opt/novnc/core/", force: true }
+
+config:
+  - { filename: "/etc/pulse/default.pa", option: "load-module module-native-protocol-unix", value: "socket=/tmp/pulseaudio.socket auth-anonymous=1" }
+  - { filename: "/etc/pulse/default.pa", option: "load module module-always-sink", value: "" }
+  - { filename: "/etc/pulse/client.conf", option: "default-server=unix:/tmp/pulseaudio.socket", value: "" }
+  - { filename: "/etc/X11/fluxbox/fluxbox.menu-user", option: "[include] (/etc/X11/fluxbox/retronas-menu)", value: "", before: "[end]", after: "[begin].*" }
+

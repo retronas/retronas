@@ -1,0 +1,13 @@
+[Unit]
+Description=Desktop with FluxBox
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ retronas_user }}
+Group={{ retronas_user }}
+ExecStart={{ retronas_root }}/bin/start_desktop.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

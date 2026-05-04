@@ -1,0 +1,45 @@
+---
+- name: "{{ my_name }} - Load RetroNAS config"
+  ansible.builtin.include_vars: retronas_vars.yml
+
+- ansible.builtin.import_role:
+    name: retronas.role.package.latest
+
+- ansible.builtin.import_role:
+    name: retronas.role.templates
+  notify: "{{ my_name }} - Restart service"
+
+- name: "{{ my_name }} - clone novnc repo"
+  ansible.builtin.git:
+    repo: https://github.com/novnc/noVNC.git
+    dest: "{{ retronas_root }}/bin/novnc"
+
+- name: "{{ my_name }} - patch novnc audio/display"
+  ansible.builtin.template:
+    src: "templates/{{ my_file }}/patches/{{ item.name }}"
+    dest: "{{ item.dest }}"
+    force: "{{ item.force | default(false) }}"
+  loop: "{{ patches }}"
+
+- name: "{{ my_name }} - patch config"
+  ansible.builtin.lineinfile:
+    path: "{{ item.filename }}"
+    regexp: "^{{ item.option }}.*"
+    line: "{{ item.option }} {{ item.value }}"
+    insertbefore: "{{ item.before | default('omit') }}"
+    state: present
+  loop: "{{ config }}"
+
+- name: "{{ my_name }} - enable service(s)"
+  ansible.builtin.service:
+    name: "{{ item.name }}.{{ item.type }}"
+    state: "{{ item.state }}"
+    enabled: "{{ item.enabled }}"
+    daemon_reload: true
+  with_items: "{{ systemd_units }}"
+  when:
+    - item.instance == 'no'
+  notify: "{{ my_name }} - Restart service"
+
+- ansible.builtin.import_role:
+    name: retronas.role.system-config

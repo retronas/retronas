@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eu
+
+NOVNC=/opt/novnc/scripts
+export DISPLAY=:10
+WIDTH=1440
+HEIGHT=900
+COLOUR=16
+
+# start framebuffer server with fluxbox
+/usr/bin/Xvfb $DISPLAY -screen 0 ${WIDTH}x${HEIGHT}x${COLOUR} &
+/usr/bin/startfluxbox &
+
+# vnc
+/usr/bin/x11vnc -bg -forever -shared &
+/opt/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 0.0.0.0:8083 &
+
+# websocket audio
+/usr/bin/pulseaudio --disallow-module-loading -vvvv --disallow-exit --exit-idle-time=-1 &
+tcpserver localhost 5901 gst-launch-1.0 -q pulsesrc server=/tmp/pulseaudio.socket ! audio/x-raw, channels=2, rate=24000 ! cutter ! opusenc ! webmmux ! fdsink fd=1 &
+websockify 0.0.0.0:8081 localhost:5901
