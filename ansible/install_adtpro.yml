@@ -20,7 +20,7 @@
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       # - { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
-    config:
+    desktop_entries:
       - { filename: "/etc/X11/fluxbox/retronas-menu", option: "[exec] (ADTPro) { /opt/adtpro/adtpro_retronas.sh }", value: "", before: "[end]" }
 
   tasks:
@@ -52,15 +52,6 @@
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       args:
         creates: "{{ retronas_root}} {{ my_dir }}/adtpro.sh"
-
-    - name: "{{ my_name }} - desktop entry"
-      ansible.builtin.lineinfile:
-        path: "{{ item.filename }}"
-        regexp: "^{{ item.option }}.*"
-        line: "{{ item.option }} {{ item.value | default(omit) }}"
-        insertbefore: "[end]"
-        state: "{{ item.state | default('present') }}"
-      loop: "{{ config }}"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
