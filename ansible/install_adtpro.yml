@@ -8,13 +8,8 @@
     my_dir: /opt/adtpro
     module_name: "adtpro"
 
-    systemd_units:
-      - { name: "adtpro", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
-
     packages:
       - default-jre
-      - xvfb
-      - x11vnc
 
     templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
@@ -25,8 +20,8 @@
       - { name: "{{ my_name }}", dest: "/opt",                state: "directory", mode: "0755"}
       # - { name: "{{ my_name }}", dest: "{{ retronas_path }}", state: "directory", mode: "0755"}
 
-    firewalld_ports:
-      - { port: 60000, protocol: tcp }
+    config:
+      - { filename: "/etc/X11/fluxbox/retronas-menu", option: "[exec] (ADTPro) { /opt/adtpro/adtpro_retronas.sh }", value: "", before: "[end]" }
 
   tasks:
 
@@ -36,20 +31,16 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.x11vnc
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.desktop
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - disks symlink"
       ansible.builtin.file:
@@ -62,23 +53,14 @@
       args:
         creates: "{{ retronas_root}} {{ my_dir }}/adtpro.sh"
 
-    - name: "{{ my_name }} - create startup service(s) instance"
-      ansible.builtin.template:
-        src: templates/{{ my_file }}/{{ item.name }}.{{ item.type }}.j2
-        dest: /usr/lib/systemd/system/{{ item.name }}@.{{ item.type }}
-        owner: root
-        group: root
-        mode: 0644
-      with_items: "{{ systemd_units }}"
-      notify: "{{ my_name }} daemon-reload"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
+    - name: "{{ my_name }} - desktop entry"
+      ansible.builtin.lineinfile:
+        path: "{{ item.filename }}"
+        regexp: "^{{ item.option }}.*"
+        line: "{{ item.option }} {{ item.value | default(omit) }}"
+        insertbefore: "[end]"
+        state: "{{ item.state | default('present') }}"
+      loop: "{{ config }}"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
-
-  handlers:
-    - name: "{{ my_name }} daemon-reload"
-      ansible.builtin.systemd:
-        daemon_reload: true
