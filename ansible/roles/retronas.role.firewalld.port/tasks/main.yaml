@@ -1,9 +1,10 @@
+---
 #
 # FIREWALL
 #
-- name: "{{ my_name }} - checking firewall rule"
+- name: "{{ my_name }} - checking firewalld is installed"
   ansible.builtin.stat:
-    path: /etc/firewalld/services
+    path: /etc/firewalld/zones/retro.xml
   register: firewalld_services
 
 - name: "{{ my_name }} - reload to pick up any new config"

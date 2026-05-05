@@ -20,7 +20,7 @@
       - firewalld
       - python3-firewall
 
-    collections:
+    acollections:
       - { collection: ansible.posix, creates: ansible/posix }
 
   tasks:
@@ -42,7 +42,7 @@
       ansible.builtin.command:
         cmd: /usr/bin/ansible-galaxy collection install {{ item.collection }}
         creates: /opt/retronas/ansible/collections/ansible_collections/{{ item.creates }}
-      with_items: "{{ collections }}"
+      with_items: "{{ acollections }}"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
