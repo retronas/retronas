@@ -28,7 +28,7 @@ templates:
 
 patches:
   - { name: "webaudio.js", dest: "/opt/novnc/core/", force: true }
-  - { name: "vnc_lite_audio.html", dest: "/opt/novnc/core/", force: true }
+  - { name: "index.html", dest: "/opt/novnc/", force: true }
 
 config:
   - { filename: "/etc/pulse/default.pa", option: "load-module module-native-protocol-unix", value: "socket=/tmp/pulseaudio.socket auth-anonymous=1" }

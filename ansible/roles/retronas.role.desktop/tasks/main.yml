@@ -41,5 +41,15 @@
     - item.instance == 'no'
   notify: "{{ my_name }} - Restart service"
 
+- name: "{{ my_name }} - desktop entry"
+  ansible.builtin.lineinfile:
+    path: "{{ item.filename }}"
+    regexp: "^{{ item.option }}.*"
+    line: "{{ item.option }} {{ item.value | default(omit) }}"
+    insertbefore: "[end]"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ desktop_entries }}"
+  when: desktop_entries is defined
+
 - ansible.builtin.import_role:
     name: retronas.role.system-config
