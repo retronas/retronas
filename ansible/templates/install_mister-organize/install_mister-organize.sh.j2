@@ -45,18 +45,24 @@ find $MISTORG -maxdepth 1 -name "MiSTer_Console*.zip" -exec unzip -jo -d DatRoot
 cd $MISTORG
 rm -f *.zip
 
-# Obtain RomVault for Linux
-RVZIP=RVCmd_V${ROMVAULT}-Linux-${ARCH}.zip
-cd /tmp
-curl -skLO https://www.romvault.com/download/${RVZIP}
-if [ -f ${RVZIP} ]
-then
-  unzip -o ${RVZIP} -d $MISTORG
-  chmod +x ${MISTORG}/RomVaultCmd
-  rm -f $RVZIP
-else
-  echo "Failed to download"
-  exit 1
-fi
+get_rv() {
+  local RVZIP=$1
+  local RVEXEC=$2
+
+  cd /tmp
+  curl -skLO https://www.romvault.com/download/${RVZIP}
+  if [ -f ${RVZIP} ]
+  then
+    unzip -o ${RVZIP} -d $MISTORG
+    chmod +x ${MISTORG}/RomVaultCmd
+    rm -f $RVZIP
+  else
+    echo "Failed to download"
+    exit 1
+  fi
+}
+
+get_rv RVCmd_V${ROMVAULT}-Linux-${ARCH}.zip RomVaultCmd
+get_rv ROMVault_V${ROMVAULT}.zip ROMVault.exe
 
 chown -R {{ retronas_user }}:{{ retronas_group }} {{ retronas_path }}/{{ module_name }}

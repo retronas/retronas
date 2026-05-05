@@ -10,6 +10,7 @@
       - git
       - curl
       - unzip
+      - mono-complete
 
     paths:
       - { name: "mister-organize", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
@@ -18,6 +19,10 @@
     templates:
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755", force: true}
       - { name: "mister-organize.sh", dest: "{{ retronas_root }}/scripts", mode: "0755"}
+      - { name: "mister-organize-gui.sh", dest: "/usr/local/bin", owner: "{{ retronas_user }}", group: "{{ retronas_group }}", mode: "0755" }
+
+    desktop_entries:
+      - { filename: "/etc/X11/fluxbox/retronas-menu", option: "[exec] (ROMVault) { /usr/local/bin/mister-organize-gui.sh }", value: "", before: "[end]" }
 
   tasks:
 
@@ -31,14 +36,16 @@
     - name: "{{ my_name }} - Load RetroNAS Systems"
       ansible.builtin.include_vars: retronas_systems.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.desktop
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Install from project repo"
       ansible.builtin.git:
@@ -52,11 +59,13 @@
     - name: "{{ my_name }} - setup local"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1"
 
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.system-config
+        - retronas.role.samba
+      loop_control:
+        loop_var: "iroles"
 
     - ansible.builtin.import_role:
         name: retronas.role.samba.system
