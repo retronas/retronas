@@ -21,4 +21,8 @@ sites_disable:
 systemd_units:
 - { name: "{{ my_name }}", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
 
+firewalld_rules:
+  - { zone: "retro",  service: "http" }
+  - { zone: "retro",  service: "https" }
+
 site_enable: ""

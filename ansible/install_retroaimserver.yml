@@ -21,6 +21,9 @@
     firewalld_rules:
       - { zones: retro, service: retroaimserver }
 
+    firewalld_templates:
+      - retroaimserver
+
     settings_env:
       - { regex: "^export OSCAR_HOST=.*", line: "export OSCAR_HOST={{ retronas_net_retro_ip }}" }
       - { regex: "^export DISABLE_AUTH=true", line: "export DISABLE_AUTH=false" }
@@ -30,12 +33,15 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} - Restart service"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
@@ -57,26 +63,6 @@
         regexp: "{{ item.regex }}"
         line: "{{ item.line }}"
       with_items: "{{ settings_env }}"
-
-    #
-    # FIREWALL
-    #
-    - name: "{{ my_name }} - checking firewall rule"
-      ansible.builtin.stat:
-        path: /etc/firewalld/services
-      register: firewalld_services
-
-    - name: "{{ my_name }} - Generate firewall service"
-      ansible.builtin.template:
-        src: "templates/{{ my_file }}/retroaimserver.xml.j2"
-        dest: "/etc/firewalld/services/retroaimserver.xml"
-        owner: root
-        group: root
-        mode: 0644
-      when: firewalld_services.stat.exists
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

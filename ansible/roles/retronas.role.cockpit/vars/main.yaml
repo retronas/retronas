@@ -10,3 +10,6 @@ packages:
 firewalld_rules:
   - { zone: "retro" }
   - { zone: "modern" }
+
+firewalld_templates:
+  - cockpit

@@ -26,6 +26,9 @@
     firewalld_rules:
       - { zones: retro, service: mysticbbs }
 
+    firewall_templates:
+      - mysticbbs
+
   tasks:
 
     - name: "{{ my_name }} - Load RetroNAS config"
@@ -36,14 +39,15 @@
         repo: deb http://deb.debian.org/debian/ {{ ansible_distribution_release }} main non-free-firmware non-free
         state: present
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - install mysticbbs"
       ansible.builtin.command:
@@ -52,26 +56,6 @@
     - name: "{{ my_name }} - daemon-reload"
       ansible.builtin.command:
         cmd: "systemctl daemon-reload"
-
-    #
-    # FIREWALL
-    #
-    - name: "{{ my_name }} - checking firewall rule"
-      ansible.builtin.stat:
-        path: /etc/firewalld/services
-      register: firewalld_services
-
-    - name: "{{ my_name }} - Generate firewall service"
-      ansible.builtin.template:
-        src: "templates/{{ my_file }}/mysticbbs.xml.j2"
-        dest: "/etc/firewalld/services/mysticbbs.xml"
-        owner: root
-        group: root
-        mode: 0644
-      when: firewalld_services.stat.exists
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
