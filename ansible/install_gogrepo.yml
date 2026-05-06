@@ -26,8 +26,13 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - create GOG dir"
       ansible.builtin.file:
@@ -49,9 +54,6 @@
       ansible.builtin.shell:
         chdir: "{{ retronas_root }}/bin/gogrepo"
         cmd: "git pull"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

@@ -3,11 +3,12 @@
   gather_facts: false
 
   vars:
-    - my_name: "pandoc"
-    - my_file: "install_pandoc"
+    my_name: "pandoc"
+    my_file: "install_pandoc"
+    module_name: "pandoc"
 
-    - packages:
-        - pandoc
+    packages:
+      - pandoc
 
   tasks:
 
@@ -19,7 +20,10 @@
         name: "{{ packages }}"
         state: latest
 
-- ansible.builtin.import_playbook: retronas_system_config.yml
-  vars:
-    module_name: "pandoc"
-    module_state: "present"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "iroles"

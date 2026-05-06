@@ -41,22 +41,19 @@
 
   tasks:
 
-    - name: "{{ my_name }} - Install packages"
-      ansible.builtin.package:
-        name: "{{ packages }}"
-        state: latest
-
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.paths
+        - retronas.role.samba
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - symlinks"
       ansible.builtin.file:
@@ -79,9 +76,6 @@
         section: atarist
         option: "include"
         value: "/etc/samba/retronas_atarist.conf"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

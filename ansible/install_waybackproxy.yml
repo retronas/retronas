@@ -30,22 +30,20 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Install"
       shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       args:
         creates: "/opt/{{ my_name }}/{{ my_name }}.py"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

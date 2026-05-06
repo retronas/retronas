@@ -69,8 +69,14 @@
       content: |
         deb [signed-by={{ my_key }}] {{ my_repo }}/static/deb/release/ /
 
-  - ansible.builtin.import_role:
-      name: retronas.role.package.latest
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.firewalld.ports
+      loop_control:
+        loop_var: "iroles"
 
   - name: "{{ my_name }} - check for arm build"
     ansible.builtin.stat:
@@ -84,10 +90,6 @@
       state: link
     when: arm_build.stat.exists is true
 
-  - ansible.builtin.import_role:
-      name: retronas.role.templates
-    notify: "{{ my_name }} - Restart service(s)"
-
   - name: "{{ my_name }} - fix config perms for {{ retronas_user }}"
     ansible.builtin.file:
       path: "/etc/kaiengine.conf"
@@ -95,9 +97,6 @@
       group: "{{ retronas_user }}"
       mode: '0640'
     notify: "{{ my_name }} - Restart service(s)"
-
-  - ansible.builtin.import_role:
-      name: retronas.role.firewalld.port
 
   - ansible.builtin.import_role:
       name: retronas.role.system-config

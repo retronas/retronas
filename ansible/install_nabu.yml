@@ -7,6 +7,7 @@
     my_file: "install_{{ my_name }}"
     my_dir: /opt/nabu
     module_name: "nabu"
+    append_user_group: "dialout"
 
     systemd_units:
       - { name: "nabu", type: 'service', state: "started", enabled: "yes", restart: "yes", instance: "no" }
@@ -29,17 +30,15 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - name: "{{ my_name }} - add {{ retronas_user }} to dialout group"
-      ansible.builtin.user:
-        name: "{{ retronas_user }}"
-        group: "dialout"
-        append: true
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.update-user
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - links"
       ansible.builtin.file:
@@ -48,10 +47,10 @@
         state: "{{ item.state|default('link') }}"
       with_items: "{{ links }}"
 
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-
     - name: "{{ my_name }} - Install"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       args:
         creates: "{{ retronas_root}} {{ my_dir }}/nabu.sh"
+    
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

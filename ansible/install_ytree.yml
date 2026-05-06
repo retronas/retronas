@@ -17,20 +17,19 @@
 
   tasks:
 
-  - name: "{{ my_name }} - Load RetroNAS config"
-    ansible.builtin.include_vars: retronas_vars.yml
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
 
-  - name: "{{ my_name }} - Load RetroNAS systems"
-    ansible.builtin.include_vars: retronas_systems.yml
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
-  - ansible.builtin.import_role:
-      name: retronas.role.package.latest
+    - name: "{{ my_name }} - Install from source code"
+      ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
 
-  - ansible.builtin.import_role:
-      name: retronas.role.templates
-
-  - name: "{{ my_name }} - Install from source code"
-    ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
-
-  - ansible.builtin.import_role:
-      name: retronas.role.system-config
+    - ansible.builtin.import_role:
+        name: retronas.role.system-config

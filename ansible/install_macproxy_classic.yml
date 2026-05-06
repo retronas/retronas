@@ -27,22 +27,21 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - clone repo"
       ansible.builtin.git:
         repo: "{{ repo }}"
         dest: /opt/{{ my_name }}
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
-
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
+      notify: "{{ my_name }} Restart Services"
 
   handlers:
     - name: "{{ my_name }} Restart Services"

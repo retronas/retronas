@@ -59,12 +59,6 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
     - name: "{{ my_name }} - Install build tools (debian)"
       ansible.builtin.package:
         name: "{{ packages_debian['debian' + ansible_distribution_major_version] }}"
@@ -76,6 +70,17 @@
         name: "{{ packages_ubuntu }}"
         state: latest
       when: ansible_distribution == 'Ubuntu'
+
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+        - retronas.role.update-user
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - build top level"
       ansible.builtin.file:
@@ -97,9 +102,6 @@
       when:
         - item.ps3netsrv | length > 0
 
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       args:
@@ -115,9 +117,6 @@
       when:
         - item.instance == 'no'
       notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

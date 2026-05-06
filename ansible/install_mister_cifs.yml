@@ -44,11 +44,13 @@
       vars:
         top_level_paths: *top_level_paths
 
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba.system
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.samba
+        - retronas.role.samba.system
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - create custom save directories"
       ansible.builtin.file:
@@ -69,9 +71,3 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
-
-  handlers:
-
-    - name: "{{ my_name }} daemon-reload"
-      ansible.builtin.systemd:
-        daemon_reload: true

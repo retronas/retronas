@@ -6,6 +6,7 @@
     my_name: "linux-dexdrive"
     my_file: "install_{{ my_name }}"
     module_name: "linux-dexdrive"
+    append_user_group: "disk"
 
     packages:
       - git
@@ -28,32 +29,27 @@
     - name: "{{ my_name }} - Load RetroNAS systems"
       ansible.builtin.include_vars: retronas_systems.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} daemon-reload"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.update-user
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - build source"
       ansible.builtin.shell:
         cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
         creates: "/usr/local/bin/dexattach"
+      notify: "{{ my_name }} daemon-reload"
 
     - name: "{{ my_name }} - dexdrive module"
       ansible.builtin.lineinfile:
         path: /etc/modules-load.d/modules.conf
         regex: "^dexdrive$"
         line: "dexdrive"
-
-    - name: "{{ my_name }} - {{ retronas_user }} groups"
-      ansible.builtin.user:
-        name: "{{ retronas_user }}"
-        group: "disk"
-        append: true
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

@@ -27,14 +27,12 @@
       vars:
         top_level_paths: *top_level_paths
 
-    - ansible.builtin.import_role:
-        name: retronas.role.nfs
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba.system
-
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.nfs
+        - retronas.role.samba
+        - retronas.role.samba.system
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "iroles"

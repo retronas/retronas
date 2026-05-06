@@ -20,11 +20,13 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - build source"
       ansible.builtin.command:

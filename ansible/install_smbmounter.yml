@@ -13,17 +13,17 @@
 
   tasks:
 
-    - name: "{{ my_name }} - Include systems map"
-      ansible.builtin.include_vars: "retronas_systems.yml"
-
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.samba
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - link romdir"
       ansible.builtin.file:
@@ -40,11 +40,6 @@
         section: "amiga"
         option: "include"
         value: "/etc/samba/retronas_smbmounter.conf"
-      notify: "restart samba"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "restart samba"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

@@ -35,21 +35,20 @@
 
     - ansible.builtin.import_role:
         name: retronas.role.package.latest
-      notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
       vars:
         packages: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
       when: ansible_distribution == 'Debian'
       notify: "{{ my_name }} - Restart service"
 
-    - ansible.builtin.import_role:
-        name: retronas.role.dotnetcore8
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} - Restart service"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.dotnetcore8
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Run installer"
       ansible.builtin.shell:
@@ -58,9 +57,6 @@
         executable: /bin/bash
         creates: "{{ retronas_root }}/bin/webone/webone"
       notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

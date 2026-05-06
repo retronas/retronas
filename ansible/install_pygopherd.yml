@@ -23,21 +23,20 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} - Restart service"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - build source"
       ansible.builtin.command:
         cmd: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
         creates: "opt/pygopherd/bin/pygopherd"
       notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

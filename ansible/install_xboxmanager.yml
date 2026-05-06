@@ -36,15 +36,17 @@
         update: true
         version: "main"
 
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.paths
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - run installer"
       ansible.builtin.command:
         cmd: "{{ my_path }}/xboxmanager/xboxmanager-install.sh"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

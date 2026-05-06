@@ -6,8 +6,10 @@
     module_name: "romdir"
 
   tasks:
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "iroles"

@@ -28,19 +28,20 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.samba
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - check old pops dir"
       ansible.builtin.stat:
         path: "{{ my_dir }}/POPS"
       register: old_pops
-
-    - debug:
-        msg: "{{ old_pops }}"
 
     - name: "{{ my_name }} - rename old pops dir"
       ansible.builtin.shell:
@@ -64,10 +65,4 @@
         value: "/etc/samba/retronas_ps2.conf"
 
     - ansible.builtin.import_role:
-        name: retronas.role.templates
-
-    - ansible.builtin.import_role:
         name: retronas.role.system-config
-
-    - ansible.builtin.import_role:
-        name: retronas.role.samba

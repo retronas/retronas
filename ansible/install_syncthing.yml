@@ -33,8 +33,13 @@
         filename: syncthing
         update_cache: true
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.system-firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Web config http://{{ ansible_default_ipv4.address }}:8384"
       ansible.builtin.ini_file:
@@ -52,9 +57,6 @@
         daemon_reload: true
       with_items:
         - syncthing@{{ retronas_user }}
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

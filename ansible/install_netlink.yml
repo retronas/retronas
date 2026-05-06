@@ -40,14 +40,15 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Run installer"
       ansible.builtin.shell:
@@ -60,9 +61,6 @@
       ansible.builtin.patch:
         src: /tmp/{{ my_name }}.patch
         dest: /opt/{{ my_name }}/tunnel.py
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

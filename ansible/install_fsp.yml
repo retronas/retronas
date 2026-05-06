@@ -46,14 +46,16 @@
     - name: "{{ my_name }} - Load RetroNAS systems"
       ansible.builtin.include_vars: retronas_systems.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - build layout"
       ansible.builtin.file:
@@ -67,9 +69,6 @@
       when:
         item.fspd | length > 0
       notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
 
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
@@ -94,9 +93,6 @@
         state: started
         enabled: true
         daemon_reload: true
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

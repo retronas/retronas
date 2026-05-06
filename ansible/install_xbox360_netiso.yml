@@ -26,17 +26,15 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.paths
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - symlinks"
       ansible.builtin.file:
@@ -45,7 +43,7 @@
         owner: "{{ retronas_user }}"
         group: "{{ retronas_group }}"
         state: link
-      with_items:
+      loop:
         - { src: "../roms/microsoft/xbox360/games", dest: "games" }
 
     - name: "{{ my_name }} - Install from git repo"

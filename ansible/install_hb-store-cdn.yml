@@ -46,30 +46,29 @@
       ansible.builtin.include_vars: retronas_vars.yml
 
     - ansible.builtin.import_role:
-        name: retronas.role.romdir
-
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
         name: retronas.role.package.latest
       vars:
         packages: "{{ packages_debian['debian' + ansible_distribution_major_version ] }}"
       when: ansible_distribution == 'Debian'
       notify: "{{ my_name }} - Restart service"
 
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.romdir
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.paths
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
+
 
     - name: "{{ my_name }} - build layout"
       ansible.builtin.file:
         src: "{{ retronas_path }}/roms/sony/playstation4/pkg"
         dest: "{{ retronas_path }}/ps4/{{ my_name }}"
         state: link
-      notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
       notify: "{{ my_name }} - Restart service"
 
     - name: "{{ my_name }} - Install from source code"
@@ -99,9 +98,6 @@
         "{{ systemd_units }}"
       when:
         - item.instance == 'no'
-
-    - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

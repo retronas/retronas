@@ -20,25 +20,19 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-      notify: "{{ my_name }} - Restart ssh"
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.firewalld.port
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Enable startup services"
       ansible.builtin.service:
         name: ssh
-        state: started
+        state: restarted
         enabled: true
 
     - ansible.builtin.import_role:
-        name: retronas.role.firewalld.port
-
-    - ansible.builtin.import_role:
         name: retronas.role.system-config
-
-  handlers:
-
-    - name: "{{ my_name }} - Restart ssh"
-      ansible.builtin.service:
-        name: ssh
-        state: restarted

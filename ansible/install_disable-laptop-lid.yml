@@ -19,19 +19,18 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.paths
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.system-config
-
-  handlers:
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.paths
+        - retronas.role.templates
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Restart service"
       ansible.builtin.service:
         name: "{{ service }}"
         state: restarted
+        enabled: true
+        daemon_reload: true

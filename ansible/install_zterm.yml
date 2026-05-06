@@ -29,20 +29,20 @@
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
 
-    - ansible.builtin.import_role:
-        name: retronas.role.package.latest
-
-    - ansible.builtin.import_role:
-        name: retronas.role.templates
-      notify: "{{ my_name }} - Restart service"
-
-    - ansible.builtin.import_role:
-        name: retronas.role.update-user
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.templates
+        - retronas.role.update-user
+      loop_control:
+        loop_var: "iroles"
 
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh 2>&1 | tee {{ retronas_root }}/log/{{ my_file }}.log"
       args:
         creates: "{{ retronas_root}} /opt/zterm/zterm"
+      notify: "{{ my_name }} - Restart service"
 
     - name: "{{ my_name }} - enable service(s)"
       ansible.builtin.service:
