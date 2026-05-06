@@ -2,7 +2,7 @@
 
 ARCH=$(uname -m)
 DLARCH=aarch64
-JAVA_VERS=22.0.2
+JAVA_VERS={{ java_version }}
 
 case $ARCH in
     x86_64)
@@ -20,10 +20,10 @@ cd /tmp
 
 ### DEPS
 
-## OPENJDK
+## OPENJDK https://jdk.java.net/
 if [ ! -d /opt/java/jdk-${JAVA_VERS} ]
 then
-    OPENJDK="https://download.java.net/java/GA/jdk${JAVA_VERS}/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-${JAVA_VERS}_linux-${DLARCH}_bin.tar.gz"
+    OPENJDK="https://download.java.net/java/GA/jdk${JAVA_VERS}/458fda22e4c54d5ba572ab8d2b22eb83/8/GPL/openjdk-${JAVA_VERS}_linux-${DLARCH}_bin.tar.gz"
     curl -sLk -oopenjdk.tar.gz $OPENJDK
     tar -xv -f openjdk.tar.gz -C /opt/java
     rm -f openjdk.tar.gz
@@ -49,6 +49,7 @@ then
     curl -sLk -oassembly64.zip $ASSEMBLY
     unzip -qq -d /opt assembly64.zip
     rm -f assembly64.zip
+    chown -R {{ retronas_user }}:{{ retronas_group }} /opt/assembly64
 else
     echo "assembly64 already installed"
 fi
