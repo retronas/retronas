@@ -37,7 +37,7 @@
         name: "{{ iroles }}"
       loop:
         - retronas.role.package.latest
-        - retronas.role.system-firewalld.port
+        - retronas.role.firewalld.port
       loop_control:
         loop_var: "iroles"
 
@@ -56,7 +56,7 @@
         enabled: true
         daemon_reload: true
       with_items:
-        - syncthing@{{ retronas_user }}
+        - syncthing@retronas
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config
@@ -65,8 +65,10 @@
 
     - name: "{{ my_name }} - Restart service"
       ansible.builtin.service:
-        name: "{{ item }}"
+        name: "{{ services }}"
         state: restarted
         daemon_reload: true
-      with_items:
-        - syncthing@{{ retronas_user }}
+      loop:
+        - syncthing@retronas
+      loop_control:
+        loop_var: services

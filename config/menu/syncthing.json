@@ -37,7 +37,7 @@
                 "prompt": "",
                 "type": "service_start",
                 "group":"",
-                "command": "syncthing",
+                "command": "syncthing@retronas",
                 "args": ""
             },
             {
@@ -48,7 +48,7 @@
                 "prompt": "",
                 "type":"service_status",
                 "group":"",
-                "command": "syncthing",
+                "command": "syncthing@retronas",
                 "args": ""
             },
             {
@@ -59,7 +59,7 @@
                 "prompt": "",
                 "type": "service_stop",
                 "group":"",
-                "command": "syncthing",
+                "command": "syncthing@retronas",
                 "args": ""
             },
             {
