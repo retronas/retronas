@@ -2931,6 +2931,7 @@ system_map:
     batocera: enterprise
     recalbox: ''
     retroarch: Enterprise - 128
+    ops2l: ''
     ps3netsrv: ''
     fspd: ''
     emuelec: ''
