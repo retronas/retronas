@@ -1,0 +1,90 @@
+---
+- hosts: localhost
+  gather_facts: true
+
+  vars:
+    my_name: "netn00t"
+    my_file: "install_netn00t"
+    module_name: "netn00t"
+    service_file_name: "{{ module_name }}.service"
+
+    netn00t_data: "/var/lib/{{ module_name }}"
+    netn00t_port: 8081
+
+    repo_owner: "bluejaywagon"
+
+    systemd_patches:
+      - { unit: "{{ service_file_name }}", line: "ExecStart=/usr/bin/netn00t --data {{ netn00t_data }} --port {{ netn00t_port }}", regex: "^ExecStart=", after: "[Service]" }
+
+    firewalld_ports:
+      - { zone: modern, port: 8081, protocol: tcp }
+
+  tasks:
+
+    - name: "{{ my_name }} - Checking hw platform compatibility"
+      ansible.builtin.debug:
+        msg: "INCOMPATIBLE PLATFORM, only 64-bit platforms (aarch64, x86_64) are supported"
+      when: ansible_architecture not in ['aarch64', 'x86_64']
+
+    - ansible.builtin.meta: end_play
+      when: ansible_architecture not in ['aarch64', 'x86_64']
+
+    - name: "{{ my_name }} - Set architecture string"
+      ansible.builtin.set_fact:
+        netn00t_arch: >-
+          {{ 'linux_arm64'  if ansible_architecture == 'aarch64' else
+            'linux_amd64' }}
+
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
+
+    - name: "{{ my_name }} - Grab latest version"
+      ansible.builtin.uri:
+        url: "https://api.github.com/repos/{{ repo_owner }}/{{ module_name }}/releases/latest"
+        method: GET
+        return_content: true
+      register: gh_web_response
+
+    - name: "{{ my_name }} - Download installer"
+      ansible.builtin.get_url:
+        url: "{{ gh_web_response.json.assets
+          | selectattr('name', 'search', netn00t_arch)
+          | selectattr('name', 'match', '.*\\.deb$')
+          | map(attribute='browser_download_url')
+          | first }}"
+        dest: "/tmp/{{ my_name }}.deb"
+        mode: "0644"
+
+    - name: "{{ my_name }} - Run installer"
+      ansible.builtin.apt:
+        deb: "/tmp/{{ my_name }}.deb"
+      become: true
+
+    - name: "{{ my_name }} - Patch systemd service"
+      ansible.builtin.lineinfile:
+        path: /lib/systemd/system/{{ item.unit }}
+        regex: "{{ item.regex }}"
+        insertafter: "{{ item.after }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items: "{{ systemd_patches }}"
+      become: true
+      notify: "{{ my_name }} Restart Services"
+
+    - ansible.builtin.include_role:
+        name: "{{ retronas_roles }}"
+      loop:
+        - retronas.role.firewalld.port
+        - retronas.role.system-config
+      loop_control:
+        loop_var: "retronas_roles"
+
+  handlers:
+    - name: "{{ my_name }} Restart Services"
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: restarted
+        enabled: true
+        daemon_reload: true
+      with_items:
+        - "{{ service_file_name }}"
