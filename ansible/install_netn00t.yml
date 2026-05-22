@@ -10,17 +10,22 @@
 
     netn00t_data: "/var/lib/{{ module_name }}"
     netn00t_port: 8081
+    netn00t_user: "naomi"
 
     repo_owner: "bluejaywagon"
 
     systemd_patches:
       - { unit: "{{ service_file_name }}", line: "ExecStart=/usr/bin/netn00t --data {{ netn00t_data }} --port {{ netn00t_port }}", regex: "^ExecStart=", after: "[Service]" }
 
+    paths:
+      - { name: "roms",  dest: "{{ retronas_path }}",           owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "sega",  dest: "{{ retronas_path }}/roms",      owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+      - { name: "naomi", dest: "{{ retronas_path }}/roms/sega", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
+
     firewalld_ports:
       - { zone: modern, port: 8081, protocol: tcp }
 
   tasks:
-
     - name: "{{ my_name }} - Checking hw platform compatibility"
       ansible.builtin.debug:
         msg: "INCOMPATIBLE PLATFORM, only 64-bit platforms (aarch64, x86_64) are supported"
@@ -74,10 +79,23 @@
     - ansible.builtin.include_role:
         name: "{{ retronas_roles }}"
       loop:
+        - retronas.role.paths
         - retronas.role.firewalld.port
         - retronas.role.system-config
       loop_control:
         loop_var: "retronas_roles"
+
+    - name: "{{ my_name }} - Write app config with ROM directory"
+      ansible.builtin.template:
+        src: "templates/{{ my_file }}/app.json.j2"
+        dest: "{{ netn00t_data }}/app.json"
+        owner: "{{ netn00t_user }}"
+        group: "{{ netn00t_user }}"
+        mode: "0644"
+      become: true
+      force: false
+      notify: "{{ my_name }} Restart Services"
+
 
   handlers:
     - name: "{{ my_name }} Restart Services"
