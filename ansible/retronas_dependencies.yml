@@ -37,7 +37,7 @@
         path: "{{ retronas_root }}/{{ item }}"
         owner: root
         group: root
-        mode: 2755
+        mode: "2755"
         state: directory
       loop: "{{ directories }}"
 
@@ -46,7 +46,7 @@
         path: "{{ retronas_path }}"
         owner: "{{ retronas_user }}"
         group: "{{ retronas_user }}"
-        mode: 2775
+        mode: "2775"
         state: directory
 
     - ansible.builtin.include_role:
