@@ -85,6 +85,11 @@
       loop_control:
         loop_var: "retronas_roles"
 
+    - name: "{{ my_name }} - Check for existing app config"
+      ansible.builtin.stat:
+        path: "{{ netn00t_data }}/app.json"
+      register: netn00t_app_config
+
     - name: "{{ my_name }} - Write app config with ROM directory"
       ansible.builtin.template:
         src: "templates/{{ my_file }}/app.json.j2"
@@ -93,7 +98,7 @@
         group: "{{ netn00t_user }}"
         mode: "0644"
       become: true
-      force: false
+      when: not netn00t_app_config.stat.exists
       notify: "{{ my_name }} Restart Services"
 
 
