@@ -9,14 +9,14 @@
 
 - name: "{{ my_name }} - discover signing key"
   ansible.builtin.shell:
-    cmd: curl -skL http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/ | grep -oP "href=\"debian-archive-keyring.+.deb\">" | sed -r 's/href=\"(debian-archive.+all.deb)\">/\1/' | tail -n1
+    cmd: curl -skL https://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/ | grep -oP "href=\"debian-archive-keyring.+.deb\">" | sed -r 's/href=\"(debian-archive.+all.deb)\">/\1/' | tail -n1
   register: debian_signing_key
   when: ansible_distribution == "Debian"
 
 - name: "{{ my_name }} - download Debian signing keys"
   ansible.builtin.shell:
     chdir: "/tmp"
-    cmd: "aria2c --allow-overwrite=true http://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }} https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }}"
+    cmd: "aria2c --allow-overwrite=true https://ftp.debian.org/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }} https://mirror.aarnet.edu.au/pub/debian/pool/main/d/debian-archive-keyring/{{ debian_signing_key.stdout }}"
   when: ansible_distribution == "Debian" and
         debian_signing_key is defined
 
@@ -28,7 +28,7 @@
 
 - name: "{{ my_name }} - Configure APT repo"
   ansible.builtin.apt_repository:
-    repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
+    repo: deb https://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free
     state: present
     filename: debian-backports
     update_cache: false
@@ -36,7 +36,7 @@
 
 - name: "{{ my_name }} - Configure APT repo for Ubuntu x86_64"
   ansible.builtin.apt_repository:
-    repo: deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+    repo: deb https://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
     state: present
     filename: "{{ ansible_distribution_release }}-backports"
     update_cache: false
@@ -45,7 +45,7 @@
 
 - name: "{{ my_name }} - Configure APT repo for Ubuntu non x86_64 (ports)"
   ansible.builtin.apt_repository:
-    repo: deb http://ports.ubuntu.com/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+    repo: deb https://ports.ubuntu.com/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
     state: present
     filename: "{{ ansible_distribution_release }}-backports"
     update_cache: false
