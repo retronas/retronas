@@ -31,8 +31,8 @@
             },
             {
                 "index": "03",
-                "title": "Install",
-                "description": "The fun place, for things",
+                "title": "Modules",
+                "description": "The fun place for things (install)",
                 "id":"install",
                 "prompt": "",
                 "type": "dialog",
