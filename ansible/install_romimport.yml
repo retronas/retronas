@@ -27,6 +27,7 @@
     - ansible.builtin.include_role:
         name: "{{ iroles }}"
       loop:
+        - retronas.role.romdir
         - retronas.role.package.latest
         - retronas.role.paths
         - retronas.role.templates
@@ -38,11 +39,8 @@
       args:
         chdir: "{{ retronas_root}}/bin"
         creates: "{{ retronas_root}}/bin/Hardware-Target-Game-Database"
-
-    - name: "{{ my_name }} - set SMBD permissions"
-      ansible.builtin.shell: "chown -R {{ retronas_user}}:{{ retronas_user }} Hardware-Target-Game-Database"
-      args:
-        chdir: "{{ retronas_root}}/bin"
+      become: true
+      become_user: "{{ retronas_user }}"
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

@@ -7,6 +7,7 @@ MANIPULATE=0
 FORCE=0
 XTERMINATE=0
 TARGET=""
+MODE="build"
 
 declare -A SYSTEMS
 
@@ -41,7 +42,7 @@ _usage() {
   exit 0
 }
 
-OPTSTRING="hlt:"
+OPTSTRING="hlt:v"
 while getopts $OPTSTRING ARG
 do
   case $ARG in
@@ -55,6 +56,9 @@ do
     t)
       TARGET=${OPTARG}
       ;;
+    v)
+      MODE="verify"
+      ;;
   esac
 done
 
@@ -64,9 +68,19 @@ run_buildpack() {
   local SMDB="${2}"
   local MSDB="$(basename $(echo $SMDB) .txt)"
 
-  # UNARMED FOR TESTING
   cd "${TDIR}"
   python3 build_pack.py --input_folder "{{retronas_path}}/romimport" --output_folder "${ODIR}" --database "${SMDB}" --file_strategy smart --skip_existing --drop_initial_directory --missing "{{retronas_path}}/romimport/${MSDB}_missing.txt"
+
+}
+
+run_verifypack() {
+  IFS=$'\n'
+  local ODIR="${1}"
+  local SMDB="${2}"
+  local MSDB="$(basename $(echo $SMDB) .txt)"
+
+  cd "${TDIR}"
+  python3 verify_pack.py --folder "{{retronas_path}}/${ODIR}" --database "${SMDB}" --drop_initial_directory --mismatch "{{retronas_path}}/romimport/${MSDB}_mismatch.txt"
 
 }
 
@@ -92,25 +106,32 @@ auditsystem() {
     then 
       echo '------------------------'
       echo "Analysing with ${SMDB}"
-      echo "Outputting to ${ODIR}"
-      run_buildpack "${ODIR}" "${SMDB}"
+      case $MODE in
+        verify)
+          echo "Verify ${ODIR}"
+          run_verifypack "${ODIR}" "${SMDB}"
+          ;;
+        *)
+          echo "Outputting to ${ODIR}"
+          run_buildpack "${ODIR}" "${SMDB}"
+          ;;
+      esac
       echo -e '------------------------\n'
     else
-      echo "Failed to file output directory ${ODIR}"
+      echo "Failed to find output directory ${ODIR}"
     fi
   else 
     _usage
   fi
 }
 
+updateSMDB
 if [ -z "${TARGET}" ]
 then
-  updateSMDB
   for SYSTEM in ${!SYSTEMS[@]}
   do
     auditsystem ${SYSTEM}
   done
 else
-  updateSMDB
   auditsystem ${TARGET}
 fi

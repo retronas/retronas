@@ -1,8 +1,8 @@
 {
     "menu": {
-        "title": "Import ROM by System",
-        "description": "Import a specific system.",
-        "id": "romimportsystem",
+        "title": "Verify ROM by System",
+        "description": "Verify a specific system.",
+        "id": "romverifysystem",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -26,7 +26,7 @@
                 "type": "script",
                 "group": "romimport",
                 "command": "TOOL COMMAND",
-                "args": ""
+                "args": "-v"
             },
             {
                 "index": "03",
