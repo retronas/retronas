@@ -68,7 +68,7 @@
                 "description": "Run directory updater now",
                 "id":"",
                 "prompt": "",
-                "type": "service_start",
+                "type": "service_start_follow",
                 "group":"",
                 "command": "retronas-mister-dirs.service",
                 "args": ""

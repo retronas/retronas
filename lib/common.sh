@@ -444,7 +444,8 @@ RN_SYSTEMD() {
 # JOURNAL follow
 #
 RN_JOURNAL_FOLLOW() {
-    journalctl --follow -u "${1}"
+    journalctl --follow -u "${1}" --since=now | awk "/${1}: Deactivated successfully/{print;exit;};{print;}"
+    PAUSE
 }
 
 #
