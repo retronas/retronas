@@ -2549,7 +2549,7 @@ system_map:
     mister: ''
     retropie: ''
     batocera: vircon32
-    recalbox: ''
+    recalbox: vircon32
     retroarch: Vircon32
     ops2l: ''
     ps3netsrv: ''
@@ -4964,6 +4964,26 @@ system_map:
     retrodeck: cdimono1
     romm: philips-cd-i
     pretty_name: Philips CDI
+  - src: philips/p2000t
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: p2000t
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Philips P2000T
   - src: philips/videopacplus
     last: ''
     mister: ''
@@ -10809,7 +10829,7 @@ system_map:
     mister: ''
     retropie: ''
     batocera: ''
-    recalbox: ''
+    recalbox: exl100
     retroarch: ''
     ops2l: ''
     ps3netsrv: ''
