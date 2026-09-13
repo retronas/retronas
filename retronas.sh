@@ -147,17 +147,13 @@ cd $DIDIR
 ### check default user exists
 if ! id $OLDRNUSER &>/dev/null
 then
-  echo -e "The currently configured USER $OLDRNUSER does not exist on this system you will now be prompted to update the config"
-  PAUSE
   bash d_input.sh update-user
 fi
 
 ### check default group exists
 if ! getent group $OLDRNGROUP &>/dev/null
 then
-  echo -e "The currently configured GROUP $OLDRNGROUP does not exist on this system you will now be prompted to update the config"
-  PAUSE
-  bash -c d_input.sh update-group
+  bash d_input.sh update-group
 fi
 
 bash d_menu.sh main

@@ -1,0 +1,11 @@
+{
+    "menu": 
+    {
+        "title": "Confirm Group",
+        "description": "Confirm change: GROUP will be set to ${NEWVALUE}",
+        "id":"confirm",
+        "prompt": "",
+        "type": "menu",
+        "items": []
+    }
+}

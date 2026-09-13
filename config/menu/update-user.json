@@ -1,0 +1,11 @@
+{
+    "menu": 
+    {
+        "title": "Update User",
+        "description": "The currently configured USER \"${OLDRNUSER}\" does not exist on this system you will now be prompted to enter and existing user",
+        "id":"update-user",
+        "prompt": "",
+        "type": "menu",
+        "items": []
+    }
+}

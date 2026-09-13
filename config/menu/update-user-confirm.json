@@ -1,0 +1,11 @@
+{
+    "menu": 
+    {
+        "title": "Confirm User",
+        "description": "Confirm change: USER will be set to ${NEWVALUE}",
+        "id":"confirm",
+        "prompt": "",
+        "type": "menu",
+        "items": []
+    }
+}

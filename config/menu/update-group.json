@@ -1,0 +1,11 @@
+{
+    "menu": 
+    {
+        "title": "Update Group",
+        "description": "The currently configured GROUP \"${OLDRNGROUP}\" does not exist on this system you will now be prompted to enter an existing group",
+        "id":"update-group",
+        "prompt": "",
+        "type": "menu",
+        "items": []
+    }
+}
