@@ -964,6 +964,94 @@
         "group": "samba",
         "command": "romm_cifs",
         "args": ""
+      },
+      {
+        "index": "91",
+        "title": "xbox",
+        "description": "Microsoft XBOX SMB config, for use w/Project Stellar",
+        "id": "xbox",
+        "prompt": "",
+        "type": "install",
+        "group": "samba",
+        "command": "xbox",
+        "args": ""
+      },
+      {
+        "index": "92",
+        "title": "flippydrive",
+        "description": "Flippydrive Network service",
+        "id": "flippydrive",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "flippydrive",
+        "args": ""
+      },
+      {
+        "index": "93",
+        "title": "x360 netiso",
+        "description": "Xbox360 NetISO service",
+        "id": "xbox360_netiso",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "xbox360_netiso",
+        "args": ""
+      },
+      {
+        "index": "94",
+        "title": "netmount",
+        "description": "DOS NetMount service",
+        "id": "netmount",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "netmount",
+        "args": ""
+      },
+      {
+        "index": "95",
+        "title": "mister-organize",
+        "description": "MiSTer Organize",
+        "id": "mister-organize",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "mister-organize",
+        "args": ""
+      },
+      {
+        "index": "96",
+        "title": "sit",
+        "description": "Create StuffIt archives on Unix systems",
+        "id": "sit",
+        "prompt": "",
+        "type": "install",
+        "group": "",
+        "command": "sit",
+        "args": ""
+      },
+      {
+        "index": "97",
+        "title": "hfsutils",
+        "description": "Install patched version of hfsutils", 
+        "id":"hfsutils",
+        "prompt": "",
+        "type": "install",
+        "group":"",
+        "command": "hfsutils",
+        "args": ""
+      },
+      {
+        "index": "98",
+        "title": "open-oscar-server",
+        "description": "OSCAR Protocol Server",
+        "id": "open-oscar-server",
+        "prompt": "",
+        "type": "dialog",
+        "group": "",
+        "command": "open-oscar-server",
+        "args": ""
       }
     ]
   }
