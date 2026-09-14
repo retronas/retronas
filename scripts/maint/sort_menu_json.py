@@ -12,6 +12,7 @@ def main(args):
 
     tmp = {}
     input_file = args.input
+    zfill = 2
 
     if os.path.exists(input_file):
         data = None
@@ -19,6 +20,8 @@ def main(args):
             data = json.load(f)
 
         menu = data["menu"]
+        if len(menu["items"]) > 90:
+            zfill = 3
         items = []
 
         # grab items and stick them in a temp dict
@@ -35,7 +38,7 @@ def main(args):
         
         for idx, item in enumerate(tmp_sorted):
             entry = item[1]
-            pidx = str(idx + 1).zfill(2)
+            pidx = str(idx + 1).zfill(zfill)
             entry["index"] = pidx
             items.append(entry)
 
