@@ -57,12 +57,11 @@
       loop:
         - retronas.role.romdir
         - retronas.role.package.latest
-        - retronas.role.templates
         - retronas.role.paths
+        - retronas.role.templates
         - retronas.role.firewalld.port
       loop_control:
         loop_var: "iroles"
-
 
     - name: "{{ my_name }} - build layout"
       ansible.builtin.file:
