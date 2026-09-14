@@ -24,6 +24,7 @@
       #  - { name: "retronas_mister.conf", dest: "/etc/samba" }
       - { name: "retronas-mister-dirs.service", dest: "/etc/systemd/system" }
       - { name: "retronas-mister-dirs.timer", dest: "/etc/systemd/system" }
+      - { name: "retronas-mister-dirs.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
 
     systemd_units:
       - { name: "retronas-mister-dirs", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
@@ -96,6 +97,10 @@
     - ansible.builtin.import_role:
         name: retronas.role.templates
       when: dirs_only is false
+
+    - name: "daemon-reload"
+      ansible.builtin.systemd_service:
+        daemon_reload: true
 
     - ansible.builtin.import_role:
         name: retronas.role.system-config

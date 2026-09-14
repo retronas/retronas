@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /opt/retronas/ansible
+
+/usr/bin/git reset --hard HEAD
+/usr/bin/git pull
+/usr/bin/ansible-playbook --extra-vars "dirs_only=true" {{ my_file }}.yml
