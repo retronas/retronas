@@ -3,6 +3,7 @@ Description=retronas-mister-dirs
 After=multi-user.target
 
 [Service]
+Environment=RNSYSTEMD=1
 Type=simple
 Restart=no
 ExecStart=/opt/retronas/scripts/retronas-mister-dirs.sh

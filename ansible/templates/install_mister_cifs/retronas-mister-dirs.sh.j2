@@ -1,7 +1,15 @@
 #!/bin/bash
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
 
 cd /opt/retronas/ansible
 
 /usr/bin/git reset --hard HEAD
 /usr/bin/git pull
 /usr/bin/ansible-playbook --extra-vars "dirs_only=true" {{ my_file }}.yml
+
+if [ -z $RNSYSTEMD ]
+then
+  PAUSE
+fi
