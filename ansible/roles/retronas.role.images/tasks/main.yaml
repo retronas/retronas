@@ -1,0 +1,11 @@
+---
+- name: "Create Images Directory"
+  ansible.builtin.import_role:
+    name: retronas.role.paths
+
+- name: "Touch dummy.img"
+  ansible.builtin.file:
+    path: "{{ images_path }}/dummy.img"
+    owner: "{{ retronas_user }}"
+    group: "{{ retronas_group }}"
+    state: touch
