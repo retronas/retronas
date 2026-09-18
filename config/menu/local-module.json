@@ -27,7 +27,7 @@
                 "type": "script-static",
                 "group":"",
                 "command": "run-local-module",
-                "args": "check"
+                "args": "-C"
             },
             {
                 "index":"03",
