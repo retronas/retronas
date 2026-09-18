@@ -48,7 +48,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "UDPFSD.md",
+                "command": "Local-Module.md",
                 "args": ""
             }
         ]
