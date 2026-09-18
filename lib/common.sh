@@ -221,7 +221,7 @@ READ_MENU_COMMAND() {
                 EXEC_SCRIPT $MENU_SELECT $MENU_ARGS
                 ;;
             script-static)
-                EXEC_SCRIPT "s-${MENU_SELECT}"
+                EXEC_SCRIPT "s-${MENU_SELECT}" $MENU_ARGS
                 ;;
             service_status)
                 RN_SYSTEMD_STATUS "${MENU_SELECT}"
