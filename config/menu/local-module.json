@@ -1,0 +1,56 @@
+{
+    "menu": 
+    {
+        "title": "local-module",
+        "description": "Run a local set of Ansible playbooks on your RetroNAS",
+        "id":"local-module",
+        "prompt": "",
+        "type": "menu",
+        "items": [
+            {
+                "index": "01",
+                "title": "Back",
+                "description": "Return to previous menu", 
+                "id":"",
+                "prompt": "",
+                "type": "menu",
+                "group":"",
+                "command": "EXIT_OK",
+                "args": ""
+            },
+            {
+                "index":"02",
+                "title": "Check",
+                "description": "Check local Ansible Playbooks",
+                "id":"run-local-module",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "run-local-module",
+                "args": "check"
+            },
+            {
+                "index":"03",
+                "title": "Apply",
+                "description": "Apply local Ansible Playbooks",
+                "id":"run-local-module",
+                "prompt": "",
+                "type": "script-static",
+                "group":"",
+                "command": "run-local-module",
+                "args": ""
+            },
+            {
+                "index":"99",
+                "title": "Documentation",
+                "description": "Read the service documentation",
+                "id":"",
+                "prompt": "",
+                "type": "documentation",
+                "group":"",
+                "command": "UDPFSD.md",
+                "args": ""
+            }
+        ]
+    }
+}

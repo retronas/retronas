@@ -402,11 +402,11 @@
         "index": "037",
         "title": "local-module",
         "description": "Run local ansible playbooks",
-        "id": "run-local-module",
+        "id": "local-module",
         "prompt": "Run",
-        "type": "script-static",
+        "type": "dialog",
         "group": "",
-        "command": "run-local-module",
+        "command": "local-module",
         "args": ""
       },
       {
