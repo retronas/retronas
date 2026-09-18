@@ -38,6 +38,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "network"
+            },
+            {
+                "index": "04",
+                "title": "udpfsd",
+                "description": "UDPFSD for PS2",
+                "id":"udpfsd",
+                "prompt": "",
+                "type": "dialog",
+                "group":"",
+                "command": "ps2_udpfsd"
             }
         ]
     }

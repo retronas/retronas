@@ -1,0 +1,18 @@
+[Unit]
+Description=udpfsd for ps2
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+User={{ retronas_user }}
+WorkingDirectory=/opt/udpfsd
+Environment="BLOCK_DEVICE={{ retronas_path }}/images/dummy.img"
+ExecStart=/opt/udpfsd/udpfsd -ro -fsroot {{ retronas_path }}/ps2 -bdpath ${BLOCK_DEVICE}
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+[Install]
+WantedBy=multi-user.target

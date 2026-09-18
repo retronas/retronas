@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+PAT_ARM="udpfsd-linux-arm64-v.*.zip"
+PAT_X86="udpfsd-linux-amd64-v.*.zip"
+DEST=/opt/udpfsd
+DESTFILE=udpfsd.zip
+REPOWNER=pcm720
+REPO=udpfsd
+
+case $(uname -m) in
+	aarch64)
+		PAT=$PAT_ARM
+	;;
+	x86_64)
+		PAT=$PAT_X86
+	;;
+	*)
+	echo "Unknown architecture $(uname -m)"
+esac
+
+RELEASE=$( curl -kLs https://api.github.com/repos/${REPOWNER}/${REPO}/releases | jq -r ".[0].assets | map(select(.name | match (\"${PAT}\")))[-1] | .browser_download_url" )
+
+if [ ! -z $RELEASE ]
+then
+	curl -JLo $TMPDIR/$DESTFILE "${RELEASE}"
+fi
+
+[ ! -d $DEST ] && mkdir -p $DEST
+
+if [ -f $TMPDIR/$DESTFILE ]
+then
+	unzip -o -j $TMPDIR/$DESTFILE -d $DEST
+fi
+
+chown -R {{ retronas_user }}:{{ retronas_group }} $DEST
+chmod +x $DEST/udpfsd

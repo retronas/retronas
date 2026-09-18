@@ -3,28 +3,28 @@
   gather_facts: true
 
   vars:
-    my_name: "ps2_udpbd"
-    my_file: "install_ps2_udpbd"
-    module_name: "ps2_udpbd"
+    my_name: "ps2_udpfsd"
+    my_file: "install_ps2_udpfsd"
+    my_dir: "{{ retronas_path }}/ps2"
+    module_name: "ps2_udpfsd"
     append_user_group: "disk"
 
     systemd_units:
-      - { name: "ps2_udpbd", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
+      - { name: "ps2_udpfsd", type: 'service', state: "stopped", enabled: "no", restart: "no", instance: "no" }
 
     packages:
-      - make
-      - gcc
-      - g++
-      - git
-      - build-essential
+      - unzip
 
     paths:
-      - { name: "{{ my_name }}", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}", mode: "2775" }
+      - { name: "udpfsd", dest: "{{ my_dir }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}", mode: "2775" }
 
     templates:
-      - { name: "udpbd_block_manager.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
+      - { name: "udpfsd_block_manager.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_file }}.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }
       - { name: "{{ my_name }}.service", dest: "/etc/systemd/system" }
+
+    firewalld_ports:
+      - { port: 62966, protocol: udp }
 
   tasks:
 
@@ -47,7 +47,6 @@
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.shell: "{{ retronas_root }}/scripts/{{ my_file }}.sh"
       args:
-        creates: "{{ retronas_root}} /bin/ps2_udpbd"
       notify: "{{ my_name }} - Restart service"
 
     - name: "{{ my_name }} - enable service(s)"

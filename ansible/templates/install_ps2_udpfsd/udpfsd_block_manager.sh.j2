@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -eu
+
+_CONFIG=/opt/retronas/config/retronas.cfg
+source $_CONFIG
+source ${LIBDIR}/common.sh
+
+DEVICE=$(${SCDIR}/select-device.sh)
+
+if [ ! -z $DEVICE ]
+then
+sed -i -r "s#(BLOCK_DEVICE=).*#\1${DEVICE}\"#" /etc/systemd/system/{{ my_name }}.service
+    systemctl daemon-reload
+fi
+

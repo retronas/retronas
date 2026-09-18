@@ -1,9 +1,9 @@
 {
     "menu": 
     {
-        "title": "udpbd",
-        "description": "Install the UPDDB service for PS2",
-        "id":"ps2-udpbd",
+        "title": "udpfsd",
+        "description": "Install the UPDFSD service for PS2",
+        "id":"ps2-udpfsd",
         "prompt": "",
         "type": "menu",
         "items": [
@@ -21,12 +21,12 @@
             {
                 "index":"02",
                 "title": "Install",
-                "description": "Install udpbd support",
-                "id":"ps2-udpbd",
+                "description": "Install udpfsd support",
+                "id":"ps2-udpfsd",
                 "prompt": "",
                 "type": "install",
                 "group":"",
-                "command": "ps2_udpbd",
+                "command": "ps2_udpfsd",
                 "args": ""
             },
             {
@@ -37,7 +37,7 @@
                 "prompt": "",
                 "type": "service_enable_start",
                 "group":"",
-                "command": "ps2_udpbd.service",
+                "command": "ps2_udpfsd.service",
                 "args": ""
             },
             {
@@ -48,7 +48,7 @@
                 "prompt": "",
                 "type": "service_disable_stop",
                 "group":"",
-                "command": "ps2_udpbd.service",
+                "command": "ps2_udpfsd.service",
                 "args": ""
             },
             {
@@ -59,7 +59,7 @@
                 "prompt": "",
                 "type": "service_status",
                 "group":"",
-                "command": "ps2_udpbd.service",
+                "command": "ps2_udpfsd.service",
                 "args": ""
             },
             {
@@ -70,7 +70,7 @@
                 "prompt": "",
                 "type": "service_restart",
                 "group":"",
-                "command": "ps2_udpbd.service",
+                "command": "ps2_udpfsd.service",
                 "args": ""
             },
             {
@@ -81,7 +81,7 @@
                 "prompt": "",
                 "type": "script",
                 "group":"",
-                "command": "udpbd_block_manager",
+                "command": "udpfsd_block_manager",
                 "args": ""
             },
             {
@@ -92,7 +92,7 @@
                 "prompt": "",
                 "type": "documentation",
                 "group":"",
-                "command": "UDPBD.md",
+                "command": "UDPFSD.md",
                 "args": ""
             }
         ]
