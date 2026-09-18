@@ -6,7 +6,7 @@ StartLimitBurst=4
 
 [Service]
 User={{ retronas_user }}
-Environment="BLOCK_DEVICE={{ retronas_path }}/ps2/retronas_udpbd.img"
+Environment="BLOCK_DEVICE={{ retronas_path }}/images/dummy.img"
 ExecStart={{ retronas_root }}/bin/udpbd-server ${BLOCK_DEVICE}
 Restart=on-failure
 RestartSec=1
