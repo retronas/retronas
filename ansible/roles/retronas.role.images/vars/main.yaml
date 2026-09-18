@@ -1,4 +1,10 @@
+my_name: "Image"
+my_file: ""  # required to clear out any play set var
+
 images_path: "{{ retronas_path }}/images"
 
 paths:
   - { name: "images", dest: "{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}", mode: "2775" }
+
+templates:
+  - { name: "select-device.sh", dest: "{{ retronas_root }}/scripts", mode: "0755" }

@@ -3,6 +3,9 @@
   ansible.builtin.import_role:
     name: retronas.role.paths
 
+- ansible.builtin.import_role:
+    name: retronas.role.templates
+
 - name: "Touch dummy.img"
   ansible.builtin.file:
     path: "{{ images_path }}/dummy.img"
