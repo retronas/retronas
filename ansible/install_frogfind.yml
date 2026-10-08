@@ -28,16 +28,23 @@
       loop_control:
         loop_var: "iroles"
 
-
     - name: "{{ my_name }} - Install from source code"
       ansible.builtin.git:
         repo: https://github.com/ActionRetro/FrogFind.git
         dest: "{{ retronas_path }}/www/frogfind"
         clone: true
         update: true
+        force: true
       become: true
       become_user: "{{ retronas_user }}"
       notify: "restart"
+
+    - name: "{{ my_name }} - Update vendor php requirements"
+      ansible.builtin.command: /usr/bin/composer update
+      args:
+        chdir: "{{ retronas_path }}/www/frogfind"
+      become: true
+      become_user: "{{ retronas_user }}"
 
 
   handlers:
