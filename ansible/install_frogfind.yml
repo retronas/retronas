@@ -1,0 +1,47 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    my_name: "Frogfind"
+    my_file: "install_frogfind"
+    module_name: "frogfind"
+
+    packages:
+      - composer
+      - php-xml
+
+    templates:
+      - { name: "99-frogfind.conf", dest: "/etc/nginx/sites-enabled", mode: "0755"}
+
+  tasks:
+
+    - name: "{{ my_name }} - Load RetroNAS config"
+      ansible.builtin.include_vars: retronas_vars.yml
+
+    - ansible.builtin.include_role:
+        name: "{{ iroles }}"
+      loop:
+        - retronas.role.package.latest
+        - retronas.role.nginx
+        - retronas.role.templates
+      loop_control:
+        loop_var: "iroles"
+
+
+    - name: "{{ my_name }} - Install from source code"
+      ansible.builtin.git:
+        repo: https://github.com/ActionRetro/FrogFind.git
+        dest: "{{ retronas_path }}/www/frogfind"
+        clone: true
+        update: true
+      become: true
+      become_user: "{{ retronas_user }}"
+      notify: "restart"
+
+
+  handlers:
+    - name: "restart"
+      ansible.builtin.service:
+        name: "nginx.service"
+        state: restarted

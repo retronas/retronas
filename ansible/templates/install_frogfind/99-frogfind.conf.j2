@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name frogfind.*;
+
+    root /data/retronas/www/frogfind; 
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php-fpm.sock;
+    }
+
+    location / { 
+       index index.php;
+    }
+}
+

@@ -5,7 +5,7 @@ nginx_sites_available: "/etc/{{ my_name }}/sites-available"
 nginx_sites_enabled: "/etc/{{ my_name }}/sites-enabled"
 
 paths:
-- { name: "www", dest: "/{{ retronas_path }}" }
+  - { name: "www", dest: "/{{ retronas_path }}", owner: "{{ retronas_user }}", group: "{{ retronas_group }}" }
 
 packages:
 - { name: "lighttpd", state: "absent" }

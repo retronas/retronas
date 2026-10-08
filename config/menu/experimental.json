@@ -48,6 +48,16 @@
                 "type": "dialog",
                 "group":"",
                 "command": "ps2_udpfsd"
+            },
+            {
+                "index": "05",
+                "title": "frogfind",
+                "description": "Local frogfind instance",
+                "id":"frogfind",
+                "prompt": "",
+                "type": "install",
+                "group":"",
+                "command": "frogfind"
             }
         ]
     }
