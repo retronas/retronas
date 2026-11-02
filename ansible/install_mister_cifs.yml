@@ -41,6 +41,7 @@
       - { src: 'sega/saturn',               dest: 'Saturn_DualSDRAM' }
       - { src: 'sharp/x68000',              dest: 'X68000USERIO2' }
       - { src: 'other/intel_x86',           dest: 'ao486USERIO2' }
+      - { src: 'apple/macintoshlc',         dest: 'MACIICX' }
 
     system_symlinks:
       - { src: '{{ retronas_path }}/{{ system_key }}',           dest: '/media/fat' }

@@ -3950,7 +3950,7 @@ system_map:
     retropie: ''
     batocera: pc88
     recalbox: pc88
-    retroarch: NEC - PC-8001 - PC-8801
+    retroarch: NEC - PC-88
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
@@ -12806,3 +12806,23 @@ system_unsupported:
     retrodeck: ''
     romm: ''
     pretty_name: OpenGOAL
+  - src: teknoparrot
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: teknoparrot
+    pretty_name: TeknoParrot

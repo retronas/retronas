@@ -31,6 +31,7 @@
     #  - { src: 'interton/vc4000', dest: 'vc-4000' }
     #  - { src: 'tandy/vis', dest: 'vis' }
     #  - { src: 'tapwave/zodiac', dest: 'zod' }
+    #  - { src: 'arcade/mame', dest: 'mame-advmame' }
     #    # 'amiga-cd',         # ??
 
   tasks:

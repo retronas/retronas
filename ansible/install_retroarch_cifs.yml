@@ -8,6 +8,9 @@
     module_name: "retroarch_cifs"
     system_key: "retroarch"
 
+
+    # NEC - PC-8001 - PC-8801
+
   tasks:
     - name: "{{ my_name }} - Load RetroNAS config"
       ansible.builtin.include_vars: retronas_vars.yml
