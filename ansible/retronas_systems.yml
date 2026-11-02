@@ -290,7 +290,7 @@ system_map:
     retropie: ''
     batocera: apple2
     recalbox: apple2
-    retroarch: ''
+    retroarch: Apple - II
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
@@ -310,7 +310,7 @@ system_map:
     retropie: ''
     batocera: ''
     recalbox: ''
-    retroarch: Apple - II
+    retroarch: ''
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
@@ -346,7 +346,7 @@ system_map:
     pretty_name: Apple II/GS
   - src: apple/appleiii
     last: ''
-    mister: ''
+    mister: Apple-III
     retropie: ''
     batocera: ''
     recalbox: ''
@@ -464,6 +464,46 @@ system_map:
     retrodeck: ''
     romm: apple-pippin
     pretty_name: Apple Pippin
+  - src: apple/macintoshse30
+    last: ''
+    mister: MACSE30
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Apple Macintosh SE 30
+  - src: apple/macintoshquadra800
+    last: ''
+    mister: MacQuadra800
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Apple Macintosh Quadra 800
   - src: arcade
     last: ''
     mister: ''
@@ -502,8 +542,8 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
-    pretty_name: ''
+    romm: dice
+    pretty_name: Dice
   - src: mame/hbmame
     last: ''
     mister: hbmame
@@ -542,7 +582,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: mame
-    romm: ''
+    romm: mame
     pretty_name: MAME
   - src: mame/mess
     last: ''
@@ -722,7 +762,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: fba
-    romm: ''
+    romm: fba
     pretty_name: Final Burn Alpha
   - src: finalburn/fbneo
     last: ''
@@ -742,7 +782,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: fbneo
-    romm: ''
+    romm: fbneo
     pretty_name: Final Burn NEO
   - src: gaelco
     last: ''
@@ -762,7 +802,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: gaelco
     pretty_name: Gaelco
   - src: snk/mvs
     last: ''
@@ -822,7 +862,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: daphne
-    romm: ''
+    romm: daphne
     pretty_name: Daphne
   - src: laserdisc
     last: ''
@@ -842,7 +882,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: laserdisc
-    romm: ''
+    romm: singe
     pretty_name: LaserDisc
   - src: pgm2
     last: ''
@@ -990,7 +1030,7 @@ system_map:
     retropie: ''
     batocera: jaguarcd
     recalbox: ''
-    retroarch: ''
+    retroarch: Atari - Jaguar CD
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
@@ -1546,7 +1586,7 @@ system_map:
     pretty_name: Camputers Lynx
   - src: casio/loopy
     last: ''
-    mister: ''
+    mister: Loopy
     retropie: ''
     batocera: loopy
     recalbox: ''
@@ -2244,6 +2284,26 @@ system_map:
     retrodeck: ''
     romm: bk
     pretty_name: Electronika Bk
+  - src: electronika/ms-0511
+    last: ''
+    mister: UKNC
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Elektronika MS-0511
   - src: elektor/tvgc
     last: ''
     mister: ''
@@ -2329,7 +2389,7 @@ system_map:
     mister: ''
     retropie: ''
     batocera: cassettevision
-    recalbox: ''
+    recalbox: cassettevision
     retroarch: Epoch - Cassette Vision
     ops2l: ''
     ps3netsrv: ''
@@ -2424,6 +2484,26 @@ system_map:
     retrodeck: channelf
     romm: fairchild-channel-f
     pretty_name: Fairchild Channel F
+  - src: fantasyconsole/gametank
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: gametank
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: GameTank
   - src: fantasyconsole/pico8
     last: ''
     mister: ''
@@ -2626,11 +2706,11 @@ system_map:
     pretty_name: Fujitsu FM-7
   - src: fujitsu/fmtowns
     last: ''
-    mister: ''
+    mister: FM-7
     retropie: ''
     batocera: fmtowns
     recalbox: ''
-    retroarch: ''
+    retroarch: Fujitsu - FM Towns
     ops2l: ''
     ps3netsrv: ''
     fspd: ''
@@ -2646,7 +2726,7 @@ system_map:
     pretty_name: Fujitsu FM Towns
   - src: fujitsu/fmtownsmarty
     last: ''
-    mister: ''
+    mister: Marty
     retropie: ''
     batocera: ''
     recalbox: ''
@@ -2666,7 +2746,7 @@ system_map:
     pretty_name: Fujitsu FM Towns Marty
   - src: funtech/superacan
     last: ''
-    mister: ''
+    mister: SuperAcan
     retropie: ''
     batocera: supracan
     recalbox: ''
@@ -4104,6 +4184,26 @@ system_map:
     retrodeck: ''
     romm: ''
     pretty_name: NeXTcube
+  - src: next/color
+    last: ''
+    mister: NeXT-Color
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: NeXT Color
   - src: nintendo/3ds
     last: ''
     mister: ''
@@ -5082,7 +5182,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: atomiswave
-    romm: ''
+    romm: atomiswave
     pretty_name: SEGA Atomiswave
   - src: sega/advancedpicobeena
     last: ''
@@ -5122,7 +5222,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: chihiro
     pretty_name: SEGA Chihiro
   - src: sega/dreamcast
     last: ''
@@ -5349,7 +5449,7 @@ system_map:
     mister: ''
     retropie: ''
     batocera: ''
-    recalbox: ''
+    recalbox: model1
     retroarch: ''
     ops2l: ''
     ps3netsrv: ''
@@ -5369,7 +5469,7 @@ system_map:
     mister: ''
     retropie: ''
     batocera: model2
-    recalbox: ''
+    recalbox: model2
     retroarch: ''
     ops2l: ''
     ps3netsrv: ''
@@ -5422,7 +5522,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: naomi
-    romm: ''
+    romm: naomi
     pretty_name: SEGA Naomi
   - src: sega/naomi2
     last: ''
@@ -5442,7 +5542,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: naomi2
-    romm: ''
+    romm: naomi2
     pretty_name: SEGA Naomi 2
   - src: sega/naomigd
     last: ''
@@ -5462,8 +5562,8 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: naomigd
-    romm: ''
-    pretty_name: ''
+    romm: naomigd
+    pretty_name: SEGA Naomi GD
   - src: sega/pico
     last: ''
     mister: ''
@@ -5542,7 +5642,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: triforce
-    romm: ''
+    romm: triforce
     pretty_name: SEGA Triforce
   - src: sega/sc3000
     last: ''
@@ -5662,7 +5762,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: lindbergh
     pretty_name: SEGA Lindbergh
   - src: sharp/mz
     last: ''
@@ -7146,7 +7246,7 @@ system_map:
     pretty_name: Tsukuda Othello Multivision
   - src: umtech/videobrain
     last: ''
-    mister: ''
+    mister: VideoBrain
     retropie: ''
     batocera: ''
     recalbox: ''
@@ -8162,7 +8262,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: rpg-maker
     pretty_name: RPG Maker
   - src: engine/smbx
     last: ''
@@ -8308,7 +8408,7 @@ system_map:
     last: ''
     mister: ''
     retropie: ''
-    batocera: gzdoom
+    batocera: uzdoom
     recalbox: doom
     retroarch: DOOM
     ops2l: ''
@@ -8322,7 +8422,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: doom
-    romm: ''
+    romm: doom
     pretty_name: DOOM
   - src: idstuff/doom3
     last: ''
@@ -10362,8 +10462,8 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
-    pretty_name: ''
+    romm: zelda-classic
+    pretty_name: Zelda Classic
   - src: tools/240ptestsuite
     last: ''
     mister: ''
@@ -10462,8 +10562,8 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
-    pretty_name: ''
+    romm: namco2x6
+    pretty_name: namco2x6
   - src: technosys_research_labs/aamber-pegasus
     last: ''
     mister: ''
@@ -10944,6 +11044,26 @@ system_map:
     retrodeck: ''
     romm: heathzenith
     pretty_name: Heath/Zenith H8/H89
+  - src: hitachi/basicmasterjr
+    last: ''
+    mister: BasicMasterJr
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Hitachi BasicMaster Jr
   - src: hitachi/s1
     last: ''
     mister: ''
@@ -11362,7 +11482,7 @@ system_map:
     igdb: ''
     replayfpgaarcade: ''
     retrodeck: ''
-    romm: ''
+    romm: namco3xx
     pretty_name: Namco 357/359
   - src: soundic/sd2x0
     last: ''
@@ -11864,6 +11984,126 @@ system_map:
     retrodeck: ''
     romm: ''
     pretty_name: Compact Vision TV Boy
+  - src: cray/xmp
+    last: ''
+    mister: Cray-XMP
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Cray XMP
+  - src: soyuz/neon
+    last: ''
+    mister: Neon
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Soyuz Neon
+  - src: sgi/indy
+    last: ''
+    mister: SGIIndy
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: SGI Indy
+  - src: sun/2
+    last: ''
+    mister: Sun-2
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Sun 2
+  - src: sun/3
+    last: ''
+    mister: Sun-3
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Sun 3
+  - src: sun/sparcstation
+    last: ''
+    mister: SunSparcStation
+    retropie: ''
+    batocera: ''
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: Sun SparcStation
 
 system_unsupported:
   - src: dvd-player
@@ -12545,4 +12785,24 @@ system_unsupported:
     replayfpgaarcade: ''
     retrodeck: ''
     romm: ''
-    pretty_name: ''
+    pretty_name: Paprium
+  - src: opengoal
+    last: ''
+    mister: ''
+    retropie: ''
+    batocera: opengoal
+    recalbox: ''
+    retroarch: ''
+    ops2l: ''
+    ps3netsrv: ''
+    fspd: ''
+    emuelec: ''
+    smdb: ''
+    freestation: ''
+    analoguepocket: ''
+    emudeck: ''
+    igdb: ''
+    replayfpgaarcade: ''
+    retrodeck: ''
+    romm: ''
+    pretty_name: OpenGOAL
