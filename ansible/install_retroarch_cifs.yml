@@ -8,8 +8,8 @@
     module_name: "retroarch_cifs"
     system_key: "retroarch"
 
-
-    # NEC - PC-8001 - PC-8801
+    internal_symlinks:
+      - { src: 'nec/pc88', dest: 'NEC - PC-8001 - PC-8801' }
 
   tasks:
     - name: "{{ my_name }} - Load RetroNAS config"
@@ -19,6 +19,7 @@
         name: "{{ iroles }}"
       loop:
         - retronas.role.romdir
+        - retronas.role.createdirs
         - retronas.role.samba
         - retronas.role.samba.system
         - retronas.role.system-config

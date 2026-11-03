@@ -22,7 +22,7 @@
     state: directory
     mode: '2775'
   become: true
-  loop: "{{ top_level_paths }}"
+  loop: "{{ top_level_paths|default([]) }}"
   loop_control:
     loop_var: tlpi
   when:
@@ -31,7 +31,7 @@
 # top level dirs that require systems
 - ansible.builtin.set_fact:
     tlp: "{{ tlp|default([]) + [ tlpi.name ] }}"
-  loop: "{{ top_level_paths }}"
+  loop: "{{ top_level_paths|default([]) }}"
   loop_control:
     loop_var: tlpi
   when:
